@@ -1,0 +1,16 @@
+{
+  "checkedAt": "2026-09-24T22:54:28.670Z",
+  "origin": "https://www.python.org",
+  "browser": "153.0.8010.12",
+  "status": "live-archive-and-cached-paint-passed",
+  "capturedAt": "20190701215108",
+  "acquiredMs": 3022,
+  "cachedPage": {
+    "state": "archived",
+    "year": 2019,
+    "elapsedMs": 14,
+    "cached": true,
+    "snapshotUrl": "https://web.archive.org/web/20190701215108id_/https://www.python.org/"
+  },
+  "archiveRequestsDuringCachedVisit": 0
+}

@@ -1,0 +1,21 @@
+import { readdir, cp, mkdir, readFile, writeFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
+import sharp from 'sharp';
+
+await mkdir('docs/images', { recursive: true });
+for (const filename of ['settings.png', 'popup.png']) {
+  const matches = [];
+  for (const dir of await readdir('test-results', { withFileTypes: true })) {
+    if (!dir.isDirectory()) continue;
+    try { await readFile(resolve('test-results', dir.name, filename)); matches.push(resolve('test-results', dir.name, filename)); } catch { /* Only copy the intended screenshots. */ }
+  }
+  if (matches.length !== 1) throw new Error(`Expected exactly one verified ${filename} screenshot`);
+  await cp(matches[0], `docs/images/${filename}`);
+}
+const promo = `<svg xmlns="http://www.w3.org/2000/svg" width="440" height="280" viewBox="0 0 440 280"><rect width="440" height="280" fill="#f7f8f1"/><path d="M28 75H412" stroke="#d8ddce"/><text x="28" y="51" fill="#20281e" font-family="Arial,Helvetica,sans-serif" font-size="35" font-weight="bold" letter-spacing="-2">net19</text><circle cx="116" cy="47" r="4" fill="#83a74d"/><text x="411" y="46" text-anchor="end" fill="#67705f" font-family="monospace" font-size="9" letter-spacing="1">THE WEB. YOUR YEAR.</text><text x="28" y="133" fill="#20281e" font-family="Georgia,serif" font-size="38">Today's web.</text><text x="28" y="178" fill="#607445" font-family="Georgia,serif" font-size="38" font-style="italic">A familiar feeling.</text><rect x="28" y="210" width="80" height="31" rx="4" fill="#d2ed8b"/><text x="68" y="231" text-anchor="middle" fill="#20281e" font-family="Arial,sans-serif" font-size="15" font-weight="bold">2019</text><text x="120" y="230" fill="#67705f" font-family="Arial,sans-serif" font-size="11">Or a year that feels like you.</text></svg>`;
+await writeFile('docs/images/promo.svg', promo);
+await sharp(Buffer.from(promo)).png().toFile('docs/images/promo-440.png');
+const version = JSON.parse(await readFile('package.json', 'utf8')).version;
+await mkdir('downloads', { recursive: true });
+for (const suffix of ['.zip', '.zip.sha256']) await cp(`artifacts/net19-${version}${suffix}`, `downloads/net19-${version}${suffix}`);
+console.log(`Prepared public screenshots, original promotional artwork and net19 ${version} ZIP.`);

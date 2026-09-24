@@ -1,0 +1,34 @@
+{
+  "name": "net19",
+  "version": "0.1.0",
+  "private": true,
+  "description": "The live web, with a little of its past. A local-first Chrome extension.",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "node --import tsx --test tests/*.test.ts",
+    "test:browser": "playwright test",
+    "check": "npm run typecheck && npm test && npm run build && npm run test:browser",
+    "package": "node scripts/package.mjs",
+    "check:archive": "node --import tsx scripts/check-archive.ts"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "css-tree": "^3.1.0",
+    "parse5": "^8.0.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.55.0",
+    "@types/chrome": "^0.1.12",
+    "@types/css-tree": "^2.3.10",
+    "@types/node": "^24.0.0",
+    "esbuild": "^0.25.0",
+    "fflate": "^0.8.3",
+    "sharp": "^0.35.4",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.0"
+  }
+}

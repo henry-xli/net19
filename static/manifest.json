@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "net19",
+  "version": "0.1.0",
+  "description": "Bring archived website colors and typography to today's web. Choose 2007–today, with local caching and a fast loading fallback.",
+  "minimum_chrome_version": "120",
+  "permissions": ["storage", "scripting", "activeTab"],
+  "host_permissions": ["https://archive.org/*", "https://web.archive.org/*"],
+  "optional_host_permissions": ["http://*/*", "https://*/*"],
+  "background": { "service_worker": "background.js", "type": "module" },
+  "action": { "default_popup": "popup.html", "default_title": "net19 · a little of the past", "default_icon": { "16": "icons/16.png", "32": "icons/32.png" } },
+  "icons": { "16": "icons/16.png", "32": "icons/32.png", "48": "icons/48.png", "128": "icons/128.png" },
+  "options_ui": { "page": "options.html", "open_in_tab": true },
+  "incognito": "not_allowed",
+  "content_security_policy": {
+    "extension_pages": "default-src 'self'; script-src 'self'; object-src 'none'; connect-src https://archive.org https://web.archive.org; style-src 'self'; img-src 'self'; base-uri 'none'; frame-src 'none'"
+  }
+}
