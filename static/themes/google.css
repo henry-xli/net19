@@ -1,0 +1,58 @@
+/* net19 handmade theme: Google homepage, 2019. Applies only to www.google.com home/search entry. */
+:root { color-scheme: light !important; }
+html, body { background: #fff !important; color: #222 !important; font-family: arial, sans-serif !important; }
+
+/* Top bar: About / Store on the left, Gmail / Images / apps / Sign in on the right */
+body a.w5hRs, body a.gb_6, #gb a:not(.gb_A) { color: rgba(0,0,0,.87) !important; font: 13px arial, sans-serif !important; }
+#gb a.gb_C svg, #gb a[aria-label*="apps" i] svg { color: #5f6368 !important; fill: #5f6368 !important; }
+#gb a.gb_A, #gb a[href*="ServiceLogin"] {
+  background: #4285f4 !important; color: #fff !important; border: 1px solid #4285f4 !important; border-radius: 4px !important;
+  font: bold 13px arial, sans-serif !important; height: 30px !important; line-height: 28px !important; padding: 0 12px !important;
+  box-shadow: none !important; box-sizing: border-box !important; margin-top: 5px !important; display: inline-flex !important; align-items: center !important;
+}
+
+/* The multicolor logo (Google's own hosted 2019-era asset) instead of the monochrome dark-mode path */
+div:has(> svg[viewBox="0 0 272 92"]), div:has(> img.lnXdpd) {
+  background: url("https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png") center bottom / 272px 92px no-repeat !important;
+  width: 272px !important; height: 92px !important; margin: 0 auto !important;
+}
+div:has(> svg[viewBox="0 0 272 92"]) > svg, img.lnXdpd { visibility: hidden !important; }
+
+/* Search box: 584px pill, thin gray border, shadow on hover/focus */
+form[role="search"] .RNNXgb, form[action="/search"] div:has(> div > textarea[name="q"]):not(:has(center)) {
+  background: #fff !important; border: 1px solid #dfe1e5 !important; border-radius: 24px !important; box-shadow: none !important;
+  height: 44px !important; min-height: 44px !important; max-width: 584px !important; margin: 0 auto !important; box-sizing: border-box !important;
+}
+form[role="search"] .RNNXgb:hover, form[role="search"] .RNNXgb:focus-within { box-shadow: 0 1px 6px rgba(32,33,36,.28) !important; border-color: rgba(223,225,229,0) !important; }
+form[role="search"] .SDkEP, form[role="search"] .fM33ce { background: transparent !important; height: 42px !important; }
+form[role="search"] .A8SBwf { max-width: 584px !important; width: 584px !important; margin: 0 auto !important; }
+textarea[name="q"] { color: rgba(0,0,0,.87) !important; background: transparent !important; font: 16px arial, sans-serif !important; caret-color: #000 !important; }
+textarea[name="q"]::placeholder { color: transparent !important; }
+/* 2019 had a magnifier and a microphone only: no "+", no Lens, no AI Mode */
+form[role="search"] button.UbbAWe, form[role="search"] button[aria-haspopup="menu"],
+form[role="search"] div.etxtjc, form[role="search"] [aria-label*="Search by image" i],
+form[role="search"] button.plR5qb, form[role="search"] [aria-label="AI Mode" i], form[role="search"] a[href*="udm=50"] { display: none !important; }
+form[role="search"] .SDkEP:has(button.UbbAWe)::before {
+  content: ""; flex: none; width: 20px; height: 20px; margin: 0 12px 0 14px; align-self: center;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%239aa0a6' d='M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3E%3C/svg%3E") center / 20px no-repeat;
+}
+form[role="search"] div.fzj3ad svg path:nth-child(1) { fill: #4285f4 !important; }
+form[role="search"] div.fzj3ad svg path:nth-child(2) { fill: #34a853 !important; }
+form[role="search"] div.fzj3ad svg path:nth-child(3) { fill: #fbbc05 !important; }
+form[role="search"] div.fzj3ad svg path:nth-child(4) { fill: #ea4335 !important; }
+form[role="search"] div.fzj3ad svg { color: #4285f4 !important; }
+
+/* Google Search / I'm Feeling Lucky */
+input[name="btnK"], input[name="btnI"] {
+  background: #f8f9fa !important; border: 1px solid #f8f9fa !important; border-radius: 4px !important; color: #3c4043 !important;
+  font: 14px arial, sans-serif !important; height: 36px !important; line-height: 27px !important; padding: 0 16px !important; margin: 11px 4px !important;
+  min-width: 54px !important; box-shadow: none !important;
+}
+input[name="btnK"]:hover, input[name="btnI"]:hover { box-shadow: 0 1px 1px rgba(0,0,0,.1) !important; border-color: #dadce0 !important; color: #202124 !important; }
+a.m5Qfy, #SIvCob a { color: #1a0dab !important; }
+#SIvCob { color: #222 !important; font-size: 13px !important; }
+
+/* Footer: light gray band, gray links */
+div.Ij8KCd, .fbar { background: #f2f2f2 !important; border-top: 1px solid #e4e4e4 !important; }
+div.Ij8KCd a, div.Ij8KCd div, .fbar a { color: #5f6368 !important; font: 14px arial, sans-serif !important; }
+div.g55egf.Z849od { visibility: hidden !important; }

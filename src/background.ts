@@ -2,6 +2,7 @@ import { ArchiveError, WaybackClient } from './archive';
 import { ProfileCache } from './cache';
 import { renderSnapshot } from './render';
 import { WARM_BUDGET_MS, currentYear, isPaused, publicOrigin, settingsFrom, SETTINGS_KEY, type ProfileResult, type Settings } from './shared';
+import { THEMES, themeFor, themeMatches, themedDomains } from './themes';
 import { loadingTarget, navigationKey, navigationRules, releaseRuleId, type PreparedNavigation } from './navigation';
 
 const cache = new ProfileCache(chrome.storage.local);
@@ -108,7 +109,7 @@ function warmPopular(delayMs = 45_000): Promise<void> {
       if ((await chrome.storage.local.get(WARM_KEY))[WARM_KEY] === config.year) return;
       // Visits always come first.
       while (activeJobs > 0 || inflight.size > 0) await pause(2_000);
-      if (isPaused(config, origin) || await cache.read(origin, config.year)) continue;
+      if (isPaused(config, origin) || themeFor(new URL(origin).hostname, config.year) || await cache.read(origin, config.year)) continue;
       const result = await profile(origin);
       if (result.reason === 'unavailable' && ++outages >= 2) return; // archive outage: retry on next start
       if (!result.pack && result.reason === 'paused') return;          // year changed or cache cleared mid-run
@@ -130,18 +131,32 @@ function syncScripts(): Promise<unknown> {
       !/^https?:\/\/(?:web\.)?archive\.org\//.test(p));
     const oldRules = await chrome.declarativeNetRequest.getDynamicRules();
     await chrome.declarativeNetRequest.updateDynamicRules({ removeRuleIds: oldRules.map(r => r.id),
-      addRules: matches.length ? navigationRules(config, await cache.readyOrigins(), chrome.runtime.getURL('loading.html')) : [] });
+      addRules: matches.length ? navigationRules(config, await cache.readyOrigins(), chrome.runtime.getURL('loading.html'), themedDomains(config.year),
+        THEMES.filter(t => t.query && config.year >= t.years[0] && config.year <= t.years[1]).map(t => t.query!)) : [] });
+    // Handmade themes are plain content-script stylesheets: they apply at document_start
+    // with nothing to fetch. Re-registered whenever settings or site pauses change.
+    const themeIds = registered.filter(s => s.id.startsWith('net19-theme-')).map(s => s.id);
+    if (themeIds.length) await chrome.scripting.unregisterContentScripts({ ids: themeIds });
     if (!config.enabled || config.year===currentYear() || !matches.length) {
       if (registered.some(s => s.id === 'net19-start')) await chrome.scripting.unregisterContentScripts({ ids: ['net19-start'] });
       return;
     }
+    const paused = config.disabledHosts.map(h => `*://${h}/*`);
+    const themes = THEMES.filter(theme => (theme.css !== false || theme.js) && config.year >= theme.years[0] && config.year <= theme.years[1]);
+    if (themes.length) await chrome.scripting.registerContentScripts(themes.map((theme): chrome.scripting.RegisteredContentScript => ({
+      id: `net19-theme-${theme.id}`, matches: themeMatches(theme), ...(theme.css !== false ? { css: [`themes/${theme.id}.css`] } : {}),
+      ...(theme.js ? { js: [`themes/${theme.id}.js`] } : {}), runAt: 'document_start' as const, allFrames: false, persistAcrossSessions: true,
+      ...(paused.length ? { excludeMatches: paused } : {}),
+    }) as chrome.scripting.RegisteredContentScript));
     const spec: chrome.scripting.RegisteredContentScript = {
       id: 'net19-start', matches, js: ['content.js'], css: ['gate.css'], runAt: 'document_start',
       allFrames: false, persistAcrossSessions: true,
       excludeMatches: [
         '*://archive.org/*', '*://*.archive.org/*', '*://archive.is/*', '*://archive.today/*', '*://archive.ph/*',
         '*://chromewebstore.google.com/*', '*://localhost/*', '*://*.localhost/*', '*://*.local/*',
-        ...config.disabledHosts.map(h => `*://${h}/*`),
+        ...paused,
+        // Sites with a handmade theme never go through the archive pipeline.
+        ...themedDomains(config.year).flatMap(domain => [`*://${domain}/*`, `*://*.${domain}/*`]),
       ],
     };
     if (registered.some(s => s.id === spec.id)) await chrome.scripting.updateContentScripts([spec]);

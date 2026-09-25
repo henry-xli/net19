@@ -96,3 +96,18 @@ test('role themes come from archived computed styles and keep header text readab
   assert.ok(!theme['header-text'] || ratio(theme['header-text'].color, dark) >= 3);
   for (const paint of Object.values(theme)) for (const value of Object.values(paint ?? {})) assert.ok(!/url\(|[;{}<>]/.test(value));
 });
+
+test('handmade themes ship their files and never overlap the archive pipeline', async () => {
+  const { THEMES, themeFor, themedDomains } = await import('../src/themes');
+  const { existsSync } = await import('node:fs');
+  for (const theme of THEMES) {
+    assert.equal(theme.css !== false, existsSync(`static/themes/${theme.id}.css`), theme.id);
+    if (theme.query) assert.ok(new RegExp(theme.query.pattern).test('https://en.wikipedia.org/wiki/Cat') && !new RegExp(theme.query.pattern).test('https://en.wikipedia.org/wiki/Cat?useskin=vector'));
+    assert.equal(!!theme.js, existsSync(`static/themes/${theme.id}.js`), theme.id);
+  }
+  assert.equal(themeFor('www.youtube.com', 2019)?.id, 'youtube');
+  assert.equal(themeFor('m.youtube.com', 2019)?.id, 'youtube');
+  assert.equal(themeFor('notyoutube.com', 2019), undefined);
+  assert.equal(themeFor('www.youtube.com', 2010), undefined);
+  assert.ok(themedDomains(2019).includes('google.com'));
+});

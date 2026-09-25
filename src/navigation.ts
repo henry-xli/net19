@@ -16,14 +16,22 @@ export function loadingTarget(url: string, extensionUrl: string): string | null 
   return publicOrigin(target) ? target : null;
 }
 
-export function navigationRules(config: Settings, origins: string[], extensionUrl: string): chrome.declarativeNetRequest.Rule[] {
+export function navigationRules(config: Settings, origins: string[], extensionUrl: string, excluded: string[] = [],
+  queries: Array<{ pattern: string; params: Array<[string, string]> }> = []): chrome.declarativeNetRequest.Rule[] {
   if (!config.enabled || config.year === new Date().getFullYear()) return [];
   const rules: chrome.declarativeNetRequest.Rule[] = [{
     id: 1, priority: 1,
     action: { type: 'redirect' as chrome.declarativeNetRequest.RuleActionType, redirect: { regexSubstitution: `${extensionUrl}#\\0` } },
     condition: { regexFilter: PUBLIC_NAVIGATION, resourceTypes: ['main_frame' as chrome.declarativeNetRequest.ResourceType],
-      requestMethods: ['get' as chrome.declarativeNetRequest.RequestMethod], excludedRequestDomains: [...EXCLUDED_DOMAINS, ...config.disabledHosts] },
+      requestMethods: ['get' as chrome.declarativeNetRequest.RequestMethod], excludedRequestDomains: [...EXCLUDED_DOMAINS, ...config.disabledHosts, ...excluded] },
   }];
+  // A theme's URL parameter (e.g. a site's legacy skin). The pattern only matches URLs
+  // without a query, so the redirected URL never matches again.
+  for (const [i, query] of queries.slice(0, 20).entries()) rules.push({ id: 60 + i, priority: 3,
+    action: { type: 'redirect' as chrome.declarativeNetRequest.RuleActionType, redirect: { transform: { queryTransform: {
+      addOrReplaceParams: query.params.map(([key, value]) => ({ key, value })) } } } },
+    condition: { regexFilter: query.pattern, resourceTypes: ['main_frame' as chrome.declarativeNetRequest.ResourceType],
+      requestMethods: ['get' as chrome.declarativeNetRequest.RequestMethod], excludedRequestDomains: config.disabledHosts } });
   for (const [i, origin] of [...new Set(origins.map(canonicalOrigin))].slice(0, 100).entries()) {
     rules.push({ id: 100 + i, priority: 2, action: { type: 'allow' as chrome.declarativeNetRequest.RuleActionType },
       condition: { regexFilter: originFilter(origin), resourceTypes: ['main_frame' as chrome.declarativeNetRequest.ResourceType] } });

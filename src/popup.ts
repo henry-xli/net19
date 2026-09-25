@@ -1,5 +1,6 @@
 import { currentYear, publicOrigin, type PageStatus, type ProfileResult, type Settings } from './shared';
 import { loadingTarget } from './navigation';
+import { themeFor } from './themes';
 import { action, announce, element, send, type State } from './ui';
 
 let state: State;
@@ -38,6 +39,12 @@ function paint(): void {
 
 async function status(): Promise<void> {
   if (!origin || !granted || !state.settings.enabled || pauseSite.checked) return;
+  const theme = themeFor(new URL(origin).hostname, state.settings.year);
+  if (theme) {
+    element('site-state').textContent = `HANDMADE · ${state.settings.year}`;
+    element('site-detail').textContent = `Built-in ${theme.name} theme, applied instantly with no archive lookup. Pausing takes effect on reload.`;
+    return;
+  }
   let page: PageStatus | null = null;
   try { if (tab?.id) page = await chrome.tabs.sendMessage(tab.id, { type: 'PAGE_STATUS' }); } catch { /* Newly granted tabs have no content script yet. */ }
   if (page?.state === 'archived') {
