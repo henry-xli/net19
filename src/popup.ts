@@ -41,15 +41,24 @@ async function status(): Promise<void> {
   let page: PageStatus | null = null;
   try { if (tab?.id) page = await chrome.tabs.sendMessage(tab.id, { type: 'PAGE_STATUS' }); } catch { /* Newly granted tabs have no content script yet. */ }
   if (page?.state === 'archived') {
-    element('site-state').textContent = `${page.mode === 'layout' ? 'LAYOUT' : 'STYLE'} · ${page.year}`;
+    element('site-state').textContent = `${page.mode === 'layout' ? 'LAYOUT' : page.mode === 'theme' ? 'THEME' : 'STYLE'} · ${page.year}`;
     element('site-detail').textContent = `${page.cached ? 'From local storage' : 'From the Wayback Machine'} · ready in ${page.elapsedMs} ms`;
     if (page.snapshotUrl) { const link = element<HTMLAnchorElement>('source'); link.href = page.snapshotUrl; link.hidden = false; }
   } else {
     if (page?.state === 'current') {
       element('site-state').textContent = 'CURRENT STYLE';
-      element('site-detail').textContent = page.reason === 'unmatched-layout' ? 'The archive and this page could not be matched reliably.' :
-        page.reason === 'unreadable-layout' ? 'The archived layout failed the readability check.' :
-          page.reason === 'style-rejected' ? 'Chrome could not install the prepared style.' : 'No usable archive was available for this visit.';
+      // Report the actual cause; a single catch-all message hid which stage failed.
+      const reasons: Record<string, string> = {
+        'unmatched-layout': 'The archived page had too little usable styling to apply.',
+        'unreadable-layout': 'The archived styling failed the readability check on this page.',
+        'style-rejected': 'Chrome could not install the prepared style.',
+        missing: 'The Wayback Machine has no capture of this site for the chosen year or earlier.',
+        unusable: 'Captures exist, but their HTML/CSS could not be read. Retrying in an hour.',
+        unavailable: 'The Wayback Machine did not respond in time. Retrying in a few minutes.',
+        timeout: 'Preparation took longer than the wait limit; it continues in the background for the next visit.',
+        busy: 'Too many sites are being prepared at once.',
+      };
+      element('site-detail').textContent = reasons[page.reason ?? ''] ?? 'No archived styling was applied to this visit.';
       return;
     }
     const cached = await send<ProfileResult | null>('CACHED', { origin });

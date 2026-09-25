@@ -30,7 +30,7 @@ export type StylePack = {
 
 export type ProfileResult = {
   pack?: StylePack;
-  reason?: 'missing' | 'unavailable' | 'busy' | 'paused' | 'current' | 'unsupported';
+  reason?: 'missing' | 'unavailable' | 'unusable' | 'timeout' | 'busy' | 'paused' | 'current' | 'unsupported';
   cached?: boolean;
 };
 
@@ -41,7 +41,7 @@ export type PageStatus = {
   cached?: boolean;
   reason?: string;
   snapshotUrl?: string;
-  mode?: 'layout' | 'styles';
+  mode?: 'layout' | 'styles' | 'theme';
 };
 
 export function currentYear(): number { return new Date().getFullYear(); }

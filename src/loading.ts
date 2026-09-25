@@ -36,9 +36,10 @@ void (async () => {
       detail.textContent = 'Chrome could not continue this navigation. Try Continue, or turn net19 off in the Extensions menu.';
     }
   }
-  skip.addEventListener('click', () => { void finish({ reason: 'unavailable' }); });
+  skip.addEventListener('click', () => { void finish({ reason: 'timeout' }); });
   // The loading page can release itself even if its worker stops or the archive hangs.
-  timer = setTimeout(() => { void finish({ reason: 'unavailable' }); }, config.waitMs);
+  // Preparation keeps running in the worker after release, so the next visit is instant.
+  timer = setTimeout(() => { void finish({ reason: 'timeout' }); }, config.waitMs);
   heartbeat = setInterval(() => { void chrome.runtime.sendMessage({ type: 'LOADING_PING' }).catch(() => undefined); }, 10_000);
   chrome.storage.onChanged.addListener((changes,area)=>{
     if (finished || area!=='local' || !changes[SETTINGS_KEY]) return;

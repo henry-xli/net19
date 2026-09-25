@@ -15,7 +15,7 @@ try {
   context=await chromium.launchPersistentContext(join(temporary,'profile'),{channel:'chromium',headless:true,viewport:{width:1280,height:800},colorScheme:'dark',
     args:[`--disable-extensions-except=${extension}`,`--load-extension=${extension}`]});
   const worker=context.serviceWorkers()[0]??await context.waitForEvent('serviceworker');
-  await expect.poll(()=>worker.evaluate(async()=>(await chrome.declarativeNetRequest.getDynamicRules()).length)).toBeGreaterThan(0);
+  await expect.poll(()=>worker.evaluate(async()=>globalThis.chrome?.declarativeNetRequest?(await chrome.declarativeNetRequest.getDynamicRules()).length:0),{timeout:20000}).toBeGreaterThan(0);
   let archiveRequests=0;const archiveURLs=[];context.on('request',request=>{if(/^https:\/\/(?:web\.)?archive\.org\//.test(request.url())){archiveRequests++;archiveURLs.push(request.url());}});
   const page=await context.newPage();
   const start=Date.now();

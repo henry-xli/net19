@@ -28,6 +28,23 @@ Live checks use `node scripts/check-browser-live.mjs ORIGIN` in a fresh Chromium
 - **Python.org:** a real `20191231233039` capture was downloaded and measured. Inspection uncovered and fixed an insufficient generated-CSS size limit. The subsequent layout failed the readability check and rolled back to current styling.
 - **Hacker News:** one real first visit applied a measured `20191231232500` profile. That run's repeat-visit check reported additional preparation, so it was not a complete pass. A later diagnostic run timed out while waiting for destination navigation. Controlled cache tests pass; a successful real-network repeat-visit run is not claimed here.
 
+### September 2026 reliability rerun
+
+A fresh-profile run of the live check against real Wayback and site responses, before and after the index/asset/theme changes (headless Chromium from a cloud host):
+
+| Site | Before | After |
+| --- | --- | --- |
+| python.org | unreadable-layout | applied, theme, capture 20190630 |
+| news.ycombinator.com | applied (styles) | applied (styles) |
+| github.com | unavailable | applied, theme, capture 20190701 |
+| wikipedia.org | unmatched-layout | applied, theme |
+| bbc.com | unmatched-layout | applied, theme |
+| apple.com, developer.mozilla.org, espn.com | not run | applied, theme |
+| theguardian.com | not run | applied from the 2018 fallback |
+| stackoverflow.com, reddit.com, w3.org, npr.org, cnn.com, nytimes.com | unmatched | still current: the live site served a bot challenge or access-denied page to the headless test browser, so there was nothing to style. Not a pass. |
+
+Every applied result also passed the cached repeat visit with zero archive requests. Most sites land in **theme** mode — era fonts, colors, links, controls, header and footer — rather than a structural reconstruction; this is intentional and is not claimed as pixel fidelity.
+
 ## Supplied Google reference: isolated parser comparison
 
 Separately, the actual [December 29, 2019 reference](https://web.archive.org/web/20191229024955/https://www.google.com/?gws_rd=ssl) was downloaded and passed through the general inert renderer. Its measured model was seeded into a fresh extension profile to isolate parsing/matching from snapshot discovery. The destination was the actual current, anonymous Google homepage in dark mode.

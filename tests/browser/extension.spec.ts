@@ -43,7 +43,7 @@ test.beforeEach(async ({},info)=>{
     await route.abort();
   });
   worker=context.serviceWorkers()[0]??await context.waitForEvent('serviceworker');extensionId=new URL(worker.url()).host;
-  await expect.poll(()=>worker.evaluate(async()=>(await chrome.scripting.getRegisteredContentScripts()).length)).toBe(1);
+  await expect.poll(()=>worker.evaluate(async()=>globalThis.chrome?.scripting?(await chrome.scripting.getRegisteredContentScripts()).length:-1)).toBe(1);
 });
 test.afterEach(async()=>{active=false;await context.close();});
 
@@ -123,9 +123,15 @@ test('archive outage opens the current site once without restarting preparation'
   const count=archiveRequests.length;await page.waitForTimeout(150);expect(archiveRequests).toHaveLength(count);expect(siteRequests).toHaveLength(1);expect((await pageStatus()).state).toBe('current');
 });
 
-test('unrelated live structures keep their original styles and no partial mutations',async()=>{
-  incompatible=true;const page=await context.newPage();await navigate(page);await expect(page.locator('html')).not.toHaveAttribute('data-net19-styled');
-  await expect(page.locator('[data-net19-node],[data-net19-contents],[data-net19-extra],canvas')).toHaveCount(0);expect((await pageStatus()).reason).toBe('unmatched-layout');
+test('unrelated live structures receive only the role theme, with no structural mutations',async()=>{
+  incompatible=true;const page=await context.newPage();await navigate(page);
+  await expect(page.locator('html')).toHaveAttribute('data-net19-styled','2019');
+  // No element-level reconstruction: nothing hidden, re-parented, repositioned or drawn.
+  await expect(page.locator('[data-net19-node],[data-net19-contents],[data-net19-extra],canvas')).toHaveCount(0);
+  expect(await page.locator('[data-net19-role]').count()).toBeGreaterThan(0);
+  expect((await pageStatus()).mode).toBe('theme');
+  // Every themed text element stays readable.
+  expect(await page.evaluate(()=>[...document.querySelectorAll('[data-net19-role]')].every(e=>getComputedStyle(e).visibility!=='hidden'))).toBe(true);
 });
 
 test('continuing during preparation never repaints the current visit when a late archive completes',async()=>{

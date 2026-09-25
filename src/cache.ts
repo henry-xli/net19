@@ -76,7 +76,7 @@ export class ProfileCache {
   }
 
   miss(origin: string, year: number, reason: ProfileResult['reason'], revision = this.generation): Promise<void> {
-    const ttl = reason === 'missing' ? 6 * 60 * 60 * 1000 : 5 * 60 * 1000;
+    const ttl = reason === 'missing' ? 6 * 60 * 60 * 1000 : reason === 'unusable' ? 60 * 60 * 1000 : 5 * 60 * 1000;
     return this.save(profileKey(origin, year), { miss: true, expiresAt: this.now() + ttl, reason }, 'miss', revision);
   }
 

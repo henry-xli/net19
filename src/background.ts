@@ -1,7 +1,7 @@
 import { ArchiveError, WaybackClient } from './archive';
 import { ProfileCache } from './cache';
 import { renderSnapshot } from './render';
-import { currentYear, isPaused, publicOrigin, settingsFrom, SETTINGS_KEY, type ProfileResult, type Settings } from './shared';
+import { WARM_BUDGET_MS, currentYear, isPaused, publicOrigin, settingsFrom, SETTINGS_KEY, type ProfileResult, type Settings } from './shared';
 import { loadingTarget, navigationKey, navigationRules, releaseRuleId, type PreparedNavigation } from './navigation';
 
 const cache = new ProfileCache(chrome.storage.local);
@@ -55,7 +55,9 @@ async function profile(origin: string): Promise<ProfileResult> {
   if (inflight.size >= 100) return { reason: 'busy' };
   const revision = cache.revision();
   const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), config.waitMs - 1000);
+  // Independent of the navigation wait: a slow lookup still completes and is cached, so
+  // a released first visit is followed by an instant second visit.
+  const timer = setTimeout(() => controller.abort(), WARM_BUDGET_MS);
   const promise = (async (): Promise<ProfileResult> => {
     let release: (() => void) | undefined;
     try {
@@ -150,7 +152,7 @@ async function handle(message: unknown, sender: chrome.runtime.MessageSender): P
     if (typeof m.css !== 'string' || m.css.length > 524_288 || !m.css.startsWith('/* net19 generated */\n') || /url\s*\(|@|expression|[<\\]/i.test(m.css)) return false;
     // Only generated selectors from the isolated matcher are accepted. Archive selectors
     // never enter the live document; every rule is inert until this document opts in.
-    if (!m.css.split('\n').slice(1).every(line => /^html\[data-net19-styled\]\[data-net19-session="[a-f0-9-]{36}"\] (?:body|\[data-net19-(?:node="\d+"|replaced|contents|extra|background|layer|icon)\](?: :where\(span,b,strong,em,i,div\)| > :not\(\[data-net19-layer\]\))?|\[role="(?:listbox|option)"\])\{[^{}]*\}$/.test(line))) return false;
+    if (!m.css.split('\n').slice(1).every(line => /^html\[data-net19-styled\]\[data-net19-session="[a-f0-9-]{36}"\](?: (?:body|\[data-net19-(?:node="\d+"|replaced|contents|extra|background|layer|icon|role="(?:surface|text|prose|font|heading|link|button|field|header|header-text|footer)")\](?: :where\(span,b,strong,em,i,div\)| > :not\(\[data-net19-layer\]\))?|\[role="(?:listbox|option)"\]))?\{[^{}]*\}$/.test(line))) return false;
     try { await chrome.scripting.insertCSS({ target: { tabId: sender.tab.id, documentIds: [sender.documentId] }, css: m.css, origin: 'USER' }); return true; }
     catch { return false; }
   }

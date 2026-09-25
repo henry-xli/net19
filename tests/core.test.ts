@@ -78,3 +78,19 @@ test('navigation rules prepare uncached GETs and scope cache bypass to the exact
   assert.equal(loadingTarget('chrome-extension://id/loading.html#https://example.com/path?q=1#part','chrome-extension://id/loading.html'),'https://example.com/path?q=1#part');
   assert.equal(loadingTarget('chrome-extension://id/loading.html#javascript:alert(1)','chrome-extension://id/loading.html'),null);
 });
+
+test('role themes come from archived computed styles and keep header text readable', async () => {
+  const { deriveTheme, themeStrength, ratio } = await import('../src/theme');
+  const { SAMPLE } = await import('./fixtures');
+  const dark = 'rgb(20, 40, 90)';
+  const snapshot = structuredClone(SAMPLE);
+  snapshot.styles.push({ color: 'rgb(30, 30, 30)', 'background-color': dark });
+  snapshot.nodes.push({ descriptor: { kind: 'box', tag: 'div', id: '', classes: [], name: '', type: '', label: '', href: '', children: ['x'] }, box: { x: 0, y: 0, w: 1280, h: 60 }, style: 1, parent: -1 });
+  const theme = deriveTheme(snapshot);
+  assert.ok(themeStrength(theme) >= 2);
+  assert.equal(theme.body?.['font-family'], 'Georgia, serif');
+  assert.equal(theme.header?.['background-color'], dark);
+  // The archived header's own dark text would be unreadable; it is not used.
+  assert.ok(!theme['header-text'] || ratio(theme['header-text'].color, dark) >= 3);
+  for (const paint of Object.values(theme)) for (const value of Object.values(paint ?? {})) assert.ok(!/url\(|[;{}<>]/.test(value));
+});

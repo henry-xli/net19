@@ -49,7 +49,7 @@ export function sanitizeCSS(css: string, inline = false, images = new Map<string
 }
 
 export function readDocument(html: string, original: string): ArchivedDocument | null {
-  if (html.length > 1_500_000) return null;
+  if (html.length > 3_000_000) return null;
   const doc = parseHTML(html, { scriptingEnabled: false });
   const sheets: ArchivedDocument['sheets'] = [], images: ArchivedDocument['images'] = [];
   let title = '', textLength = 0, count = 0, base = original;

@@ -1,26 +1,11 @@
 import { collect } from './collect';
 import { matchSnapshots } from './matcher';
 import { type Paint, type Snapshot, type Box } from './snapshot';
+import { applyTheme, background, deriveTheme, ratio, themeStrength } from './theme';
 
-export type Adaptation = { css: string; matched: number; coverage: number; mode: 'layout'|'styles'; cleanup: () => void; check: () => boolean };
+export type Adaptation = { css: string; matched: number; coverage: number; mode: 'layout'|'styles'|'theme'; cleanup: () => void; check: () => boolean };
 const number = (value: number) => Math.round(value * 10) / 10;
 function declarations(paint: Paint): string { return Object.entries(paint).map(([p, v]) => `${p}:${v} !important`).join(';'); }
-function rgb(value: string): number[] { return value.match(/[\d.]+/g)?.slice(0, 3).map(Number) ?? []; }
-function ratio(a: string, b: string): number {
-  const light = (s: string) => rgb(s).map(v => v / 255).map(v => v <= .04045 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4)
-    .reduce((sum, v, i) => sum + v * [.2126,.7152,.0722][i], 0);
-  const x = light(a), y = light(b); return (Math.max(x, y) + .05) / (Math.min(x, y) + .05);
-}
-function background(node: Element): string {
-  for (let parent: Element | null = node; parent; parent = parent.parentElement) {
-    const style = getComputedStyle(parent);
-    const gradient = style.backgroundImage.match(/rgba?\([^)]+\)/)?.[0];
-    if (gradient) return gradient;
-    const color = style.backgroundColor;
-    if (color !== 'rgba(0, 0, 0, 0)' && color !== 'transparent') return color;
-  }
-  return 'rgb(255, 255, 255)';
-}
 function horizontal(box: Box, parent: Box): string {
   const left = box.x - parent.x, right = parent.w - left - box.w;
   if (box.w > parent.w * .88) return `left:${number(left)}px;right:${number(right)}px;width:auto`;
@@ -32,13 +17,13 @@ function horizontal(box: Box, parent: Box): string {
 export async function adapt(snapshot: Snapshot, session: string, signal: AbortSignal): Promise<Adaptation | null> {
   const live = collect(document, { width: innerWidth, height: innerHeight }, location.href);
   const result = matchSnapshots(snapshot, live.snapshot);
-  // A few coincidentally shared colors/links cannot qualify a page for a historical layout.
-  if (result.matches.length < 5 || result.coverage < .68 || result.liveCoverage < .48) return null;
   const modal = Array.from(document.querySelectorAll('[role="dialog"],dialog[open]')).some(e => e.getBoundingClientRect().height > 0);
   const sensitive = document.querySelector('input[type="password"],input[autocomplete*="cc-"],form[method="post" i]');
-  if (modal || sensitive) return null;
-  const compact = snapshot.compact && live.snapshot.compact && innerWidth >= 768;
   const prefix = `html[data-net19-styled][data-net19-session="${session}"]`;
+  // A few coincidentally shared colors/links cannot qualify a page for a historical layout.
+  // Pages whose DOM no longer corresponds to the capture get the role-based theme instead.
+  if (result.matches.length < 5 || result.coverage < .68 || result.liveCoverage < .48 || modal || sensitive) return themed(snapshot, session, prefix, signal);
+  const compact = snapshot.compact && live.snapshot.compact && innerWidth >= 768;
   const rules: string[] = ['/* net19 generated */'];
   const attributes: Array<[Element,string,string|null]> = [], additions: Element[] = [];
   let disposed = false;
@@ -119,6 +104,9 @@ export async function adapt(snapshot: Snapshot, session: string, signal: AbortSi
       rules.push(`${prefix} [data-net19-contents]{display:contents !important}`);
       rules.push(`${prefix} [data-net19-extra]{display:none !important}`);
     }
+    // Unmatched parts of a partially corresponding page still receive the era's theme.
+    const base = compact ? null : applyTheme(deriveTheme(snapshot), prefix, mark, new Set(mapped.keys()));
+    if (base) rules.push(...base.rules.filter(rule => !rule.startsWith(`${prefix} body{`)));
     const checked: Element[] = [];
     for (const [element, mapping] of mapped) {
       const node = snapshot.nodes[mapping.source], paint = { ...snapshot.styles[node.style] };
@@ -151,12 +139,31 @@ export async function adapt(snapshot: Snapshot, session: string, signal: AbortSi
     rules.push(`${prefix} [role="listbox"]{background-color:${body['background-color']} !important;color:${body.color} !important}`);
     rules.push(`${prefix} [role="option"]{color:${body.color} !important}`);
     return { css: rules.join('\n'), cleanup, matched: result.matches.length, coverage: result.coverage, mode: compact ? 'layout' : 'styles',
-      check: () => checked.map(element => {
+      check: () => (base ? base.verify() : true) && checked.map(element => {
         const box = element.getBoundingClientRect(), style = getComputedStyle(element);
         // Essential matched controls/text must remain present, within the document and legible.
         const valid = box.width > 0 && box.height > 0 && box.right > 0 && box.left < innerWidth && style.visibility !== 'hidden' &&
           (element.matches(':disabled,[aria-disabled="true"]') || ratio(style.color,background(element)) >= 3);
         return valid;
       }).every(Boolean) };
+  } catch { cleanup(); return null; }
+}
+
+export function themed(snapshot: Snapshot, session: string, prefix: string, signal: AbortSignal): Adaptation | null {
+  const theme = deriveTheme(snapshot);
+  if (themeStrength(theme) < 2 || signal.aborted) return null;
+  const attributes: Array<[Element,string,string|null]> = [];
+  let disposed = false;
+  const mark = (node: Element, name: string, value = '') => { attributes.push([node,name,node.getAttribute(name)]); node.setAttribute(name,value); };
+  const cleanup = () => {
+    if (disposed) return; disposed = true;
+    for (const [node,key,old] of attributes.reverse()) { if (old === null) node.removeAttribute(key); else node.setAttribute(key,old); }
+  };
+  signal.addEventListener('abort', cleanup, { once: true });
+  try {
+    mark(document.documentElement, 'data-net19-session', session);
+    const applied = applyTheme(theme, prefix, mark);
+    if (!applied.marked.length) { cleanup(); return null; }
+    return { css: ['/* net19 generated */', ...applied.rules].join('\n'), cleanup, matched: 0, coverage: 0, mode: 'theme', check: applied.verify };
   } catch { cleanup(); return null; }
 }
