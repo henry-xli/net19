@@ -3,7 +3,10 @@ import { mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
 // Every site is a local fixture: nothing reaches the network, and any request to a host that is not listed fails the test.
-const PAGE = (title: string) => `<!doctype html><html><head><title>${title}</title></head><body><header><a href="/">${title}</a></header><main><h1>${title}</h1></main></body></html>`;
+const PAGE = (title: string) => `<!doctype html><html><head><title>${title}</title></head><body style="background:#fff;color:#111"><header><a href="/">${title}</a></header><main><h1>${title}</h1>` +
+  `<div id="bar" style="background:#13233a;color:#fff;width:600px;height:40px">already dark</div>` +
+  `<img id="photo" width="200" height="100" src="/photo.jpg"><img id="logo" width="120" height="30" src="/logo.svg">` +
+  `<dialog id="modal">modal</dialog></main></body></html>`;
 let context: BrowserContext, worker: Worker, extensionId: string, requests: string[], unexpected: string[];
 
 test.beforeEach(async ({}, info) => {
@@ -37,6 +40,24 @@ test('a themed site is styled from its first paint; any other site is left alone
   expect(await other.url()).toBe('https://www.example.com/page');
   expect(requests.filter(url => /archive\.org|archive\.(is|ph|today)/.test(url))).toEqual([]);
   expect(await scripts()).not.toContain('net19-start');
+});
+
+test('the device decides light or dark: a light site is flipped for a dark device, with photos and dark bars kept', async () => {
+  const page = await open('https://www.youtube.com/');   // the fixture has no dark mode of its own; the device is dark
+  const html = page.locator('html');
+  await expect(html).toHaveAttribute('data-net19-mode', 'light');
+  await expect(html).toHaveAttribute('data-net19-flip', '');
+  expect(await html.evaluate(el => getComputedStyle(el).filter)).toContain('invert(1)');
+  expect(await page.locator('#photo').evaluate(el => getComputedStyle(el).filter)).toMatch(/^contrast.*invert\(1\)$/);
+  // Drawn images (SVG logos, small PNG icons) flip with the page, so dark glyphs stay visible.
+  expect(await page.locator('#logo').evaluate(el => getComputedStyle(el).filter)).toBe('none');
+  await expect(page.locator('#bar')).toHaveAttribute('data-net19-keep', '');
+  // Modal dialogs are drawn in the top layer, outside the root's filter, so they carry the filter themselves.
+  await page.locator('#modal').evaluate((el: HTMLDialogElement) => el.showModal());
+  expect(await page.locator('#modal').evaluate(el => getComputedStyle(el).filter)).toContain('invert(1)');
+  await page.emulateMedia({ colorScheme: 'light' });
+  await expect(html).not.toHaveAttribute('data-net19-flip', /.*/);
+  await expect(page.locator('#bar')).not.toHaveAttribute('data-net19-keep', /.*/);
 });
 
 test('Wikipedia opens in its legacy skin', async () => {

@@ -2,7 +2,7 @@
 
 A Chrome extension that shows popular websites as they looked in **2019**.
 
-[Download net19 0.4.0](https://github.com/henry-xli/net19/raw/refs/heads/main/downloads/net19-0.4.0.zip) · [Privacy](PRIVACY.md) · [Architecture](docs/ARCHITECTURE.md) · [Validation](docs/VALIDATION.md)
+[Download net19 0.5.0](https://github.com/henry-xli/net19/raw/refs/heads/main/downloads/net19-0.5.0.zip) · [Privacy](PRIVACY.md) · [Architecture](docs/ARCHITECTURE.md) · [Validation](docs/VALIDATION.md)
 
 ## Install or update
 
@@ -29,7 +29,15 @@ Where a site's 2019 design is essentially today's (Craigslist, Netflix, Best Buy
 
 Each look is a set of styling rules on the site's own design variables. Everything the site draws, including menus, popups and content that loads while scrolling, gets the same palette. The look applies before the first paint.
 
-Every theme has a light and a dark variant and follows the site's own light or dark setting. Sites that had a dark theme in 2019 (YouTube, Twitch, Twitter) use it. The others get a dark version of their 2019 look.
+Your device's light or dark setting decides how every site looks. Sites that had a dark theme in 2019 (YouTube, Twitch, Twitter and others) use their own dark design when they are set to follow the device.
+
+Most sites have no dark mode, and some keep their own setting. When a site shows the other mode, net19 flips the whole themed page so it matches your device:
+
+- menus, pop-ups, dialogs and content that loads later all flip with it;
+- photos, videos, maps and embeds keep their real colors;
+- parts that already suit the mode stay as they are, such as a dark navy header on a dark device.
+
+Brand colors keep their hue but change lightness, so a purple button in light mode becomes a lighter purple in dark mode. Netflix and Spotify's player were dark-only in 2019 and stay dark.
 
 Two sites still serve their older design themselves:
 
@@ -62,4 +70,4 @@ npm run package
 
 - `src/` and `static/` are the source; the themes are in `static/themes/`.
 - `dist/extension/` is the unpacked extension.
-- `artifacts/net19-0.4.0.zip` is the packaged build, with a SHA-256 file beside it.
+- `artifacts/net19-0.5.0.zip` is the packaged build, with a SHA-256 file beside it.

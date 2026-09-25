@@ -7,7 +7,10 @@ net19 is a set of handmade themes and a service worker that registers them. It d
 `src/themes.ts` lists the themes. Each is two bundled files:
 
 - `static/themes/<id>.css`: rules written against `--n19-*` tokens, with light values on `html` and dark values on `html[data-net19-mode="dark"]`, plus the site's own design variables re-pointed at those tokens.
-- `static/themes/<id>.js`: sets `globalThis.net19Theme`, which says how to read the site's own light/dark mode and, optionally, maps the site's current palette colors to 2019 colors.
+- `static/themes/<id>.js`: sets `globalThis.net19Theme`. It says:
+  - how to read the site's own light/dark mode;
+  - optionally, a map from the site's current palette colors to 2019 colors;
+  - optionally, `only: 'dark'` for designs that were dark-only in 2019.
 
 The shared `palette.js` runs after it in the same isolated world. When `<body>` starts (stylesheets in `<head>` are parsed and nothing has painted yet), it:
 
@@ -16,6 +19,22 @@ The shared `palette.js` runs after it in the same isolated world. When `<body>` 
 3. repeats when the site changes mode.
 
 Palette maps are rescanned only on mode changes or new stylesheets, and those rescans are batched. net19's own sheet is disabled while the site's values are read, so the engine never wakes itself.
+
+### Light and dark follow the device
+
+The device's `prefers-color-scheme` decides the mode. When the site's own mode differs, `palette.js` flips the page instead of recoloring it piece by piece:
+
+- `html[data-net19-flip]` gets `filter: invert(1) hue-rotate(180deg) contrast(.88)`.
+- Media gets the exact inverse filter, so it shows its real colors. This covers `img`, `video`, `canvas`, `iframe`, `embed`, `object` and SVG `image`.
+- Top-layer elements get the filter themselves, because they are drawn outside the root's filter. These are modal dialogs, popovers and fullscreen elements.
+- Some elements are marked `data-net19-keep` and turned back whole:
+  - elements with a photo as a CSS background;
+  - opaque bars and panels that already suit the target mode, such as a dark header for a dark device.
+- Translucent scrims (`data-net19-scrim`) get a background color that flips back to their own. Only the scrim itself is recolored, so a dialog sitting on it still flips.
+
+Classification runs once per element in `requestAnimationFrame`, before the frame is painted. It reads style first and layout only for candidates.
+
+On cnn.com, flipping adds about 150–250 ms of main-thread time during load. There is no cost when the site already matches the device.
 
 The looks follow the Web Design Museum's captures of each site (2019 where one exists, otherwise the nearest year), rebuilt by hand as rules for the live pages rather than copied.
 
