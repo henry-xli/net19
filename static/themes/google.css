@@ -33,7 +33,6 @@ html:root, html #gb, html body {
   --kloG3: var(--n19-border) !important; --JclFj: var(--n19-border) !important; --Aqn7xd: var(--n19-border) !important;
   --QWaaaf: var(--n19-border) !important; --vZe0jb: var(--n19-border) !important; --ZEpPmd: var(--n19-border) !important; --nwXobb: var(--n19-border) !important; --KIZPne: var(--n19-border) !important;
 }
-html, body { background: var(--n19-bg) !important; color: var(--n19-text) !important; }
 body, input, textarea, button { font-family: arial, sans-serif !important; }
 
 /* ---- Search box: 2019 shape on every page (home, results, suggestion list) ---- */

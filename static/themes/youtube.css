@@ -35,12 +35,19 @@ ytd-guide-entry-renderer:has(a[title="Shorts"]), ytd-mini-guide-entry-renderer:h
 ytd-browse[page-subtype="home"] ytd-feed-filter-chip-bar-renderer, ytd-browse[page-subtype="home"] #chips-wrapper,
 ytd-search-header-renderer chip-bar-view-model, ytd-search-header-renderer yt-chip-cloud-renderer,
 ytd-rich-section-renderer:has([is-shorts]), ytd-rich-section-renderer:has(grid-shelf-view-model), ytd-reel-shelf-renderer, grid-shelf-view-model { display: none !important; }
+/* The blurred band that sits behind the (now hidden) home chips */
+ytd-browse[page-subtype="home"] #frosted-glass, ytd-app #frosted-glass.with-chipbar { display: none !important; }
+ytd-browse[page-subtype="home"] ytd-rich-grid-renderer > #header:has(ytd-feed-filter-chip-bar-renderer) { display: none !important; }
+/* "Ask YouTube" and other assistant entry points did not exist (also removed by youtube.js when unlabeled) */
+yt-searchbox [aria-label^="Ask" i], #masthead [aria-label^="Ask YouTube" i], [data-net19-hidden] { display: none !important; }
+/* Search and voice buttons: square, flat */
+yt-searchbox button[aria-label="Search" i], #search-icon-legacy { background: var(--n19-button) !important; border: 1px solid var(--n19-button-border) !important; border-radius: 0 2px 2px 0 !important; }
+#voice-search-button, #voice-search-button button { background: transparent !important; }
 /* Other chips (a channel's Latest / Popular / Oldest) become flat text choices */
 .ytChipShapeChip { background: transparent !important; border-radius: 0 !important; color: var(--n19-text-2) !important; text-transform: uppercase !important; font-weight: 500 !important; }
 .ytChipShapeActive { color: var(--n19-text) !important; box-shadow: inset 0 -2px 0 var(--n19-text-2) !important; }
 
-/* Home grid: more, smaller items; no avatars beside titles */
-ytd-rich-grid-renderer { --ytd-rich-grid-items-per-row: 5 !important; --ytd-rich-grid-item-margin: 4px !important; }
+/* Home grid: YouTube decides the number of columns in script; only the avatars beside titles go */
 ytd-rich-item-renderer #avatar-container, ytd-rich-item-renderer yt-decorated-avatar-view-model, ytd-rich-item-renderer .yt-lockup-metadata-view-model__avatar { display: none !important; }
 
 /* Square thumbnails, players and cards */
@@ -55,10 +62,10 @@ ytd-video-renderer #video-title { font-size: 1.8rem !important; font-weight: 400
 ytd-watch-metadata h1 { font-size: 1.8rem !important; font-weight: 400 !important; line-height: 2.6rem !important; }
 
 /* Subscribe: red, uppercase, square */
-ytd-subscribe-button-renderer button, yt-subscribe-button-view-model button, button[aria-label^="Subscribe" i] {
+ytd-subscribe-button-renderer button, yt-subscribe-button-view-model button, #subscribe-button a, #subscribe-button button, :is(a, button)[aria-label^="Subscribe" i] {
   background: var(--n19-subscribe) !important; color: #fff !important; border-radius: 2px !important; text-transform: uppercase !important; font-weight: 500 !important;
 }
-ytd-subscribe-button-renderer[subscribed] button, button[aria-label^="Unsubscribe" i] { background: var(--n19-subscribed) !important; color: var(--n19-subscribed-text) !important; }
+ytd-subscribe-button-renderer[subscribed] button, :is(a, button)[aria-label^="Unsubscribe" i] { background: var(--n19-subscribed) !important; color: var(--n19-subscribed-text) !important; }
 
 /* Watch actions: flat, uppercase labels instead of pills */
 ytd-watch-metadata #actions button, segmented-like-dislike-button-view-model button {

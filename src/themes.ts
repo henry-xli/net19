@@ -15,7 +15,7 @@ export type HandmadeTheme = {
 };
 
 export const THEMES: HandmadeTheme[] = [
-  { id: 'google', name: 'Google', domains: ['google.com'], matches: ['www.google.com', 'google.com'].flatMap(host => ['/', '/?*', '/search*', '/webhp*', '/imghp*'].map(path => `*://${host}${path}`)).concat('*://ogs.google.com/*'), years: [2016, 2020] },
+  { id: 'google', name: 'Google', domains: ['google.com'], matches: ['www.google.com', 'google.com'].flatMap(host => ['/', '/?*', '/search*', '/webhp*', '/imghp*'].map(path => `*://${host}${path}`)), years: [2016, 2020] },
   { id: 'youtube', name: 'YouTube', domains: ['youtube.com'], years: [2018, 2020] },
   { id: 'wikipedia', name: 'Wikipedia', domains: ['wikipedia.org'], years: [2010, 2022],
     query: { pattern: '^https://[a-z-]+\\.wikipedia\\.org/wiki/[^?#]*$', params: [['useskin', 'vector']] } },

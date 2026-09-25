@@ -143,11 +143,12 @@ function syncScripts(): Promise<unknown> {
     }
     const paused = config.disabledHosts.map(h => `*://${h}/*`);
     // Every theme ships a config script (its 2019 palette and how to read the site's own light/dark mode)
-    // followed by the shared palette engine; frames are included so same-site menus and popups match.
+    // followed by the shared palette engine. Top-level pages only: embedded frames (account menus, players,
+    // ads) are transparent overlays drawn by their own origin, and painting them creates visible seams.
     const themes = THEMES.filter(theme => config.year >= theme.years[0] && config.year <= theme.years[1]);
     if (themes.length) await chrome.scripting.registerContentScripts(themes.map((theme): chrome.scripting.RegisteredContentScript => ({
       id: `net19-theme-${theme.id}`, matches: themeMatches(theme), css: [`themes/${theme.id}.css`],
-      js: [`themes/${theme.id}.js`, 'themes/palette.js'], runAt: 'document_start', allFrames: true, persistAcrossSessions: true,
+      js: [`themes/${theme.id}.js`, 'themes/palette.js'], runAt: 'document_start', allFrames: false, persistAcrossSessions: true,
       ...(paused.length ? { excludeMatches: paused } : {}),
     }) as chrome.scripting.RegisteredContentScript));
     const spec: chrome.scripting.RegisteredContentScript = {

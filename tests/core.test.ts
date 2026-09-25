@@ -110,3 +110,25 @@ test('handmade themes ship their files and never overlap the archive pipeline', 
   assert.equal(themeFor('www.youtube.com', 2010), undefined);
   assert.ok(themedDomains(2019).includes('google.com'));
 });
+
+test('theme stylesheets follow the styling-rule contract', async () => {
+  const { readdirSync, readFileSync } = await import('node:fs');
+  for (const file of readdirSync('static/themes').filter(name => name.endsWith('.css'))) {
+    const css = readFileSync(`static/themes/${file}`, 'utf8').replace(/\/\*[\s\S]*?\*\//g, '');
+    // Text is never swapped with generated content: label nesting differs between accounts and layouts.
+    assert.ok(!/content:\s*["'][^"']+["']/.test(css), `${file}: generated text`);
+    // Layout values a site computes in script (grid columns) are not overridden.
+    assert.ok(!/--ytd-rich-grid-items-per-row/.test(css), `${file}: script-computed layout variable`);
+    // The page background is set through the site's own variables or theme tokens, never by painting html/body
+    // outright, which also paints transparent overlays and hides the site's mode from detection.
+    assert.ok(!/(^|})\s*html\s*,\s*body\s*\{[^}]*background/.test(css), `${file}: html/body background`);
+    // Every color decision has a dark counterpart when the theme defines tokens.
+    if (/--n19-[a-z0-9-]+\s*:/.test(css)) assert.ok(/data-net19-mode="dark"/.test(css) || !/html\s*\{\s*--n19/.test(css), `${file}: tokens without a dark variant`);
+  }
+  for (const file of readdirSync('static/themes').filter(name => name.endsWith('.js') && name !== 'palette.js')) {
+    const js = readFileSync(`static/themes/${file}`, 'utf8');
+    assert.ok(/globalThis\.net19Theme\s*=/.test(js), `${file}: no theme config`);
+    // Themes follow the site's own light/dark choice; they never switch it.
+    assert.ok(!/removeAttribute\('dark'\)|classList\.remove\([^)]*dark/i.test(js), `${file}: overrides the site's mode`);
+  }
+});
