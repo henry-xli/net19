@@ -1,4 +1,4 @@
-# Validation of 0.5.0
+# Validation of 0.6.0
 
 ## Automated checks
 
@@ -84,3 +84,22 @@ All 176 screenshots were reviewed by hand. Themes stayed in place after typing a
 A known limit remains: strongly saturated brand colors inside a flipped page lose some saturation. Stanford's cardinal red becomes a darker brick red, for example, because CSS hue rotation clips colors outside sRGB.
 
 About 25 sites answered the cloud browser with a bot check, so only their check page could be driven.
+
+## Side-by-side comparison with 2019
+
+Two kinds of 2019 reference were used:
+
+- the Web Design Museum captures the user uses;
+- offline renders of the Wayback Machine's July 2019 captures, made from the archived HTML, CSS and images.
+
+Each theme was compared against its reference in one side-by-side image. The two pages were placed next to each other at 1280px. The most visible differences were listed, fixed, and the comparison repeated. Each theme went through at least four rounds.
+
+So far this covers these sites:
+
+- YouTube;
+- Google, Bing, Yahoo and Wikipedia;
+- Kelley Blue Book, Rotten Tomatoes and timeanddate;
+- Facebook, LinkedIn and Twitter;
+- CNN, Healthline, PubMed, Stack Overflow and OpenAI.
+
+eBay and Instagram block this test browser, so their updated themes are unconfirmed. The remaining sites are being done the same way.

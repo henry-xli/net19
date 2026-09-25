@@ -1,81 +1,182 @@
-/* net19 handmade theme: YouTube, 2019 (the Polymer layout), in its light and dark themes.
-   Tokens are set per mode; the rules below only use tokens, so both themes get the same 2019 shapes. */
-html { --n19-page: #f9f9f9; --n19-bar: #fff; --n19-rail: #fff; --n19-text: #030303; --n19-text-2: #606060; --n19-hover: rgba(0,0,0,.05);
-  --n19-active: #e5e5e5; --n19-divider: rgba(0,0,0,.1); --n19-field: #fff; --n19-field-border: #ccc; --n19-field-inset: inset 0 1px 2px #eee;
-  --n19-button: #f8f8f8; --n19-button-border: #d3d3d3; --n19-link: #065fd4; --n19-subscribe: #cc0000; --n19-subscribed: #ececec; --n19-subscribed-text: #606060; }
-html[data-net19-mode="dark"] { --n19-page: #181818; --n19-bar: #202020; --n19-rail: #212121; --n19-text: #fff; --n19-text-2: #aaa; --n19-hover: rgba(255,255,255,.1);
-  --n19-active: #383838; --n19-divider: rgba(255,255,255,.1); --n19-field: #121212; --n19-field-border: #303030; --n19-field-inset: inset 0 1px 2px rgba(0,0,0,.3);
-  --n19-button: #323232; --n19-button-border: #303030; --n19-link: #3ea6ff; --n19-subscribe: #cc0000; --n19-subscribed: #303030; --n19-subscribed-text: #aaa; }
+/* net19 handmade theme: YouTube, 2019 as the Web Design Museum shows it ("YouTube in 2019"): a white bar with a square
+   search field and a gray search button, a blue "Sign in" button; a plain guide with a red selected "Home" row and red
+   uppercase section titles; videos in white cards on a light gray page, square thumbnails, blue 13px titles and small
+   gray metadata. The dark variant keeps every shape on dark tokens. */
+html { --n19-page: #f1f1f1; --n19-card: #fff; --n19-card-shadow: 0 1px 2px rgba(0,0,0,.1); --n19-bar: #fff; --n19-bar-border: #e8e8e8;
+  --n19-rail: #fff; --n19-text: #222; --n19-text-2: #767676; --n19-title: #167ac6; --n19-related-title: #222; --n19-red: #e62117;
+  --n19-field: #fff; --n19-field-border: #ccc; --n19-field-inset: inset 0 1px 2px #eee; --n19-button: #f8f8f8; --n19-button-border: #d3d3d3;
+  --n19-button-text: #333; --n19-icon: #909090; --n19-hover: #f1f1f1; --n19-divider: #e2e2e2; --n19-blue: #167ac6; --n19-badge: rgba(0,0,0,.8);
+  --n19-subscribed: #f8f8f8; --n19-subscribed-text: #767676; }
+html[data-net19-mode="dark"] { --n19-page: #121212; --n19-card: #1e1e1e; --n19-card-shadow: 0 1px 2px rgba(0,0,0,.6); --n19-bar: #232323; --n19-bar-border: #333;
+  --n19-rail: #1c1c1c; --n19-text: #eee; --n19-text-2: #999; --n19-title: #5aa9e6; --n19-related-title: #eee; --n19-red: #e62117;
+  --n19-field: #121212; --n19-field-border: #3d3d3d; --n19-field-inset: inset 0 1px 2px rgba(0,0,0,.4); --n19-button: #2b2b2b; --n19-button-border: #3d3d3d;
+  --n19-button-text: #ddd; --n19-icon: #9a9a9a; --n19-hover: #2a2a2a; --n19-divider: #333; --n19-blue: #167ac6; --n19-badge: rgba(0,0,0,.8);
+  --n19-subscribed: #2b2b2b; --n19-subscribed-text: #aaa; }
 
+/* YouTube's own design variables, so menus, dialogs and the suggestion list follow the same palette */
+html:root, html[dark], html ytd-app {
+  --yt-spec-base-background: var(--n19-page) !important; --yt-spec-general-background-a: var(--n19-page) !important;
+  --yt-spec-general-background-b: var(--n19-page) !important; --yt-spec-general-background-c: var(--n19-card) !important;
+  --yt-spec-raised-background: var(--n19-card) !important; --yt-spec-menu-background: var(--n19-card) !important;
+  --yt-spec-brand-background-solid: var(--n19-bar) !important; --yt-spec-brand-background-primary: var(--n19-bar) !important;
+  --yt-spec-text-primary: var(--n19-text) !important; --yt-spec-text-secondary: var(--n19-text-2) !important;
+  --yt-spec-call-to-action: var(--n19-blue) !important; --yt-spec-10-percent-layer: var(--n19-divider) !important;
+  --yt-spec-badge-chip-background: var(--n19-hover) !important;
+}
 ytd-app { background: var(--n19-page) !important; }
 ytd-app, ytd-app input, ytd-app button { font-family: Roboto, Arial, sans-serif !important; }
 
-/* Masthead: flat bar; square search field with a separate gray button */
+/* Masthead: a flat white bar with a hairline */
 #masthead-container #background, ytd-masthead #background, ytd-masthead, #masthead-container { background: var(--n19-bar) !important; }
-#masthead-container { border-bottom: 1px solid var(--n19-divider) !important; }
+#masthead-container { border-bottom: 1px solid var(--n19-bar-border) !important; }
+/* Search: a square field and a separate gray button, 30px tall; no inner icon, no voice button */
+yt-searchbox .ytSearchboxComponentInputContainer { height: 30px !important; align-items: stretch !important; }
 yt-searchbox .ytSearchboxComponentInputBox {
   background: var(--n19-field) !important; border: 1px solid var(--n19-field-border) !important; border-right: none !important;
-  border-radius: 2px 0 0 2px !important; box-shadow: var(--n19-field-inset) !important; margin-left: 0 !important;
+  border-radius: 2px 0 0 2px !important; box-shadow: var(--n19-field-inset) !important; margin-left: 0 !important; padding: 0 6px !important; height: 30px !important;
 }
+yt-searchbox .ytSearchboxComponentInnerSearchIcon { display: none !important; }
+yt-searchbox .ytSearchboxComponentInput { color: var(--n19-text) !important; font-size: 16px !important; }
 yt-searchbox .ytSearchboxComponentSearchButton {
-  background: var(--n19-button) !important; border: 1px solid var(--n19-button-border) !important; border-radius: 0 2px 2px 0 !important; width: 65px !important;
+  background: var(--n19-button) !important; border: 1px solid var(--n19-button-border) !important; border-radius: 0 2px 2px 0 !important;
+  width: 65px !important; height: 30px !important; color: var(--n19-icon) !important;
 }
-yt-searchbox .ytSearchboxComponentInput { color: var(--n19-text) !important; }
-yt-searchbox .ytSearchboxComponentSuggestionsContainer, .sbdd_b { border-radius: 0 0 2px 2px !important; }
+yt-searchbox .ytSearchboxComponentSearchButton .yt-icon-shape { width: 20px !important; height: 20px !important; }
+#voice-search-button { display: none !important; }
+/* Suggestions: a plain square list of text, no pictures */
+yt-searchbox .ytSearchboxComponentSuggestionsContainer, .sbdd_b {
+  background: var(--n19-card) !important; border: 1px solid var(--n19-field-border) !important; border-radius: 0 !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,.2) !important; padding: 4px 0 !important;
+}
+yt-searchbox .ytSearchboxComponentSuggestionsContainer img, yt-searchbox .ytSearchboxComponentSuggestionsContainer yt-image { display: none !important; }
+yt-searchbox .ytSearchboxComponentSuggestionsContainer [role="option"] { min-height: 24px !important; padding-top: 2px !important; padding-bottom: 2px !important; font-size: 15px !important; font-weight: 400 !important; }
+yt-searchbox .ytSearchboxComponentSuggestionsContainer [role="option"] b, yt-searchbox .ytSearchboxComponentSuggestionsContainer [role="option"] strong { font-weight: 500 !important; }
+yt-searchbox .ytSuggestionComponentIcon { display: none !important; }
+yt-searchbox .ytSearchboxComponentSuggestionsContainer [role="option"] { padding-left: 10px !important; }
+/* Right side: flat icons; "Create" is the plain upload-style icon button; Sign in is a small blue button */
+ytd-masthead #buttons :is(button, a).ytSpecButtonShapeNextHost:not([aria-label="Sign in" i]) { background: transparent !important; border: none !important; border-radius: 0 !important; color: var(--n19-icon) !important; }
+ytd-masthead #buttons ytd-button-renderer:has([aria-label^="Create" i]) .ytSpecButtonShapeNextButtonTextContent { display: none !important; }
+ytd-masthead #buttons ytd-button-renderer:has([aria-label^="Create" i]) :is(button, a) { padding: 0 8px !important; }
+ytd-masthead #buttons yt-icon, ytd-masthead #buttons .yt-icon-shape { color: var(--n19-icon) !important; }
+#masthead a[aria-label="Sign in" i] {
+  background: var(--n19-blue) !important; border: 1px solid var(--n19-blue) !important; border-radius: 2px !important; color: #fff !important;
+  height: 28px !important; padding: 0 10px !important; font-size: 12px !important; font-weight: 500 !important; text-transform: none !important;
+}
+#masthead a[aria-label="Sign in" i] .ytSpecButtonShapeNextIcon { display: none !important; }
+#masthead a[aria-label="Sign in" i] * { color: #fff !important; }
+ytd-masthead #avatar-btn img, ytd-masthead #avatar-btn yt-img-shadow { border-radius: 50% !important; }
 
-/* Guide: plain rail, gray selected row, red selected icon */
-#guide-content, tp-yt-app-drawer #contentContainer, ytd-mini-guide-renderer { background: var(--n19-rail) !important; }
-ytd-guide-entry-renderer tp-yt-paper-item, ytd-guide-entry-renderer #endpoint, ytd-mini-guide-entry-renderer #endpoint { border-radius: 0 !important; }
-ytd-guide-entry-renderer[active] tp-yt-paper-item { background: var(--n19-active) !important; }
-ytd-guide-entry-renderer[active] yt-icon, ytd-mini-guide-entry-renderer[active] yt-icon { color: #f00 !important; }
-ytd-guide-section-renderer #guide-section-title { text-transform: uppercase !important; color: var(--n19-text-2) !important; font-size: 1.4rem !important; font-weight: 500 !important; }
+/* Guide: white rail, 13px rows, red selected row with white text, red uppercase section titles */
+#guide-content, tp-yt-app-drawer #contentContainer, #guide-inner-content, ytd-mini-guide-renderer { background: var(--n19-rail) !important; }
+#guide-content { border-right: 1px solid var(--n19-bar-border) !important; }
+ytd-guide-entry-renderer, ytd-guide-entry-renderer #endpoint, ytd-guide-entry-renderer tp-yt-paper-item, ytd-mini-guide-entry-renderer #endpoint { border-radius: 0 !important; }
+ytd-guide-section-renderer #items, ytd-guide-section-renderer { padding-left: 0 !important; padding-right: 0 !important; }
+ytd-guide-entry-renderer { width: 100% !important; margin: 0 !important; }
+ytd-guide-entry-renderer tp-yt-paper-item { min-height: 30px !important; height: 30px !important; padding: 0 24px !important; }
+ytd-guide-entry-renderer tp-yt-paper-item:hover { background: var(--n19-hover) !important; }
+ytd-guide-entry-renderer .title { font-size: 13px !important; font-weight: 400 !important; color: var(--n19-text) !important; line-height: 30px !important; }
+ytd-guide-entry-renderer yt-icon.guide-icon { width: 20px !important; height: 20px !important; margin-right: 18px !important; }
+ytd-guide-entry-renderer yt-icon.guide-icon .yt-icon-shape { color: var(--n19-icon) !important; }
+ytd-guide-entry-renderer yt-img-shadow, ytd-guide-entry-renderer yt-img-shadow img { width: 20px !important; height: 20px !important; }
+ytd-guide-entry-renderer yt-img-shadow { margin-right: 18px !important; }
+ytd-guide-entry-renderer[active] tp-yt-paper-item { background: var(--n19-red) !important; }
+ytd-guide-entry-renderer[active] .title, ytd-guide-entry-renderer[active] .guide-icon, ytd-guide-entry-renderer[active] yt-icon.guide-icon .yt-icon-shape { color: #fff !important; font-weight: 500 !important; }
+ytd-mini-guide-entry-renderer[active] yt-icon { color: var(--n19-red) !important; }
+ytd-guide-section-renderer #guide-section-title, ytd-guide-entry-renderer:has(.arrow-icon:not([hidden])) .title {
+  text-transform: uppercase !important; color: var(--n19-red) !important; font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0 !important;
+}
+ytd-guide-section-renderer h3 { padding: 6px 24px !important; margin: 0 !important; }
+ytd-guide-entry-renderer:has(.arrow-icon:not([hidden])) .guide-icon, ytd-guide-entry-renderer .arrow-icon { display: none !important; }
+ytd-guide-section-renderer { border-bottom: 1px solid var(--n19-divider) !important; padding-top: 8px !important; padding-bottom: 8px !important; }
 ytd-guide-entry-renderer:has(a[title="Shorts"]), ytd-mini-guide-entry-renderer:has(a[title="Shorts"]), ytd-mini-guide-entry-renderer[aria-label="Shorts"] { display: none !important; }
+#footer.ytd-guide-renderer, ytd-guide-renderer #footer { font-size: 11px !important; }
 
 /* 2019 had no feed filter chips and no Shorts */
 ytd-browse[page-subtype="home"] ytd-feed-filter-chip-bar-renderer, ytd-browse[page-subtype="home"] #chips-wrapper,
 ytd-search-header-renderer chip-bar-view-model, ytd-search-header-renderer yt-chip-cloud-renderer,
 ytd-rich-section-renderer:has([is-shorts]), ytd-rich-section-renderer:has(grid-shelf-view-model), ytd-reel-shelf-renderer, grid-shelf-view-model { display: none !important; }
-/* The blurred band that sits behind the (now hidden) home chips */
 ytd-browse[page-subtype="home"] #frosted-glass, ytd-app #frosted-glass.with-chipbar { display: none !important; }
 ytd-browse[page-subtype="home"] ytd-rich-grid-renderer > #header:has(ytd-feed-filter-chip-bar-renderer) { display: none !important; }
 /* "Ask YouTube" and other assistant entry points did not exist (also removed by youtube.js when unlabeled) */
 yt-searchbox [aria-label^="Ask" i], #masthead [aria-label^="Ask YouTube" i], [data-net19-hidden] { display: none !important; }
-/* Search and voice buttons: square, flat */
-yt-searchbox button[aria-label="Search" i], #search-icon-legacy { background: var(--n19-button) !important; border: 1px solid var(--n19-button-border) !important; border-radius: 0 2px 2px 0 !important; }
-#voice-search-button, #voice-search-button button { background: transparent !important; }
 /* Other chips (a channel's Latest / Popular / Oldest) become flat text choices */
 .ytChipShapeChip { background: transparent !important; border-radius: 0 !important; color: var(--n19-text-2) !important; text-transform: uppercase !important; font-weight: 500 !important; }
-.ytChipShapeActive { color: var(--n19-text) !important; box-shadow: inset 0 -2px 0 var(--n19-text-2) !important; }
+.ytChipShapeActive { color: var(--n19-text) !important; box-shadow: inset 0 -2px 0 var(--n19-red) !important; }
 
-/* Home grid: YouTube decides the number of columns in script; only the avatars beside titles go */
-ytd-rich-item-renderer #avatar-container, ytd-rich-item-renderer yt-decorated-avatar-view-model, ytd-rich-item-renderer .yt-lockup-metadata-view-model__avatar { display: none !important; }
+/* Feeds: the grid sits in one white card on the gray page, narrower and denser (YouTube still decides the columns) */
+ytd-rich-grid-renderer { max-width: 900px !important; margin: 0 auto !important; container-type: inline-size; --ytd-rich-grid-row-margin: 18px !important; }
+/* Four small videos to a row, as in 2019, wherever the card is wide enough; the list reflows, nothing is dropped */
+@container (min-width: 700px) {
+  ytd-browse ytd-rich-grid-renderer > #contents > ytd-rich-item-renderer { width: calc(25% - 16px) !important; max-width: none !important; margin: 0 8px 20px !important; }
+}
+ytd-browse ytd-rich-grid-renderer > #contents {
+  background: var(--n19-card) !important; box-shadow: var(--n19-card-shadow) !important; margin-top: 16px !important; padding: 16px 8px 0 !important;
+}
+ytd-rich-item-renderer #avatar-container, ytd-rich-item-renderer yt-decorated-avatar-view-model, ytd-rich-item-renderer .ytLockupMetadataViewModelAvatar,
+ytd-rich-item-renderer .yt-lockup-metadata-view-model__avatar { display: none !important; }
 
-/* Square thumbnails, players and cards */
-ytd-thumbnail, ytd-thumbnail a, ytd-thumbnail img, yt-image img, .yt-core-image, yt-thumbnail-view-model, .ytThumbnailViewModelImage,
-.yt-lockup-view-model__content-image, #movie_player, .html5-video-player, ytd-player, #ytd-player, ytd-playlist-thumbnail,
+/* Video cards: square thumbnails, blue 13px titles, small gray metadata */
+ytd-thumbnail, ytd-thumbnail a, ytd-thumbnail img, yt-image img, .yt-core-image, .ytCoreImageHost, yt-thumbnail-view-model, .ytThumbnailViewModelImage,
+.ytLockupViewModelContentImage, yt-touch-feedback-shape, .ytSpecTouchFeedbackShapeHost, .ytSpecTouchFeedbackShapeHoverEffect, .ytSpecTouchFeedbackShapeStroke, .ytSpecTouchFeedbackShapeFill,
+#movie_player, .html5-video-player, ytd-player, #ytd-player, ytd-playlist-thumbnail, yt-interaction, yt-collection-thumbnail-view-model,
 ytd-watch-metadata #description, ytd-text-inline-expander { border-radius: 0 !important; }
+.ytLockupMetadataViewModelTitle, #video-title, .yt-lockup-metadata-view-model__title {
+  color: var(--n19-title) !important; font-size: 13px !important; line-height: 17px !important; font-weight: 500 !important;
+}
+.ytLockupMetadataViewModelTitle .ytAttributedStringHost { color: inherit !important; }
+.ytLockupMetadataViewModelHeadingReset { margin: 6px 0 2px !important; }
+.ytContentMetadataViewModelMetadataText, .ytContentMetadataViewModelMetadataRow, .ytContentMetadataViewModelMetadataRow a,
+#metadata-line span, #channel-name a, #channel-name yt-formatted-string { color: var(--n19-text-2) !important; font-size: 11px !important; line-height: 15px !important; }
+.ytLockupMetadataViewModelMenuButton { transform: scale(.8); transform-origin: top right; opacity: 0; }
+yt-lockup-view-model:hover .ytLockupMetadataViewModelMenuButton, .ytLockupMetadataViewModelMenuButton:focus-within { opacity: 1; }
+.ytContentMetadataViewModelLeadingIcon { display: none !important; }
+badge-shape.ytBadgeShapeThumbnailBadge, badge-shape.ytBadgeShapeThumbnailDefault {
+  background: var(--n19-badge) !important; border-radius: 2px !important; font-size: 11px !important; font-weight: 500 !important; padding: 0 4px !important; height: 16px !important; line-height: 16px !important;
+}
+/* Search results: in a white card; 18px blue titles, as in 2019 */
+ytd-search ytd-section-list-renderer > #contents > ytd-item-section-renderer { background: var(--n19-card) !important; box-shadow: var(--n19-card-shadow) !important; padding: 12px 16px !important; margin-top: 12px !important; }
+ytd-search :is(ytd-video-renderer #video-title, yt-lockup-view-model .ytLockupMetadataViewModelTitle) { font-size: 18px !important; line-height: 24px !important; font-weight: 400 !important; }
+ytd-search :is(.ytContentMetadataViewModelMetadataText, .ytContentMetadataViewModelMetadataRow, #metadata-line span, #channel-name a) { font-size: 13px !important; line-height: 18px !important; }
 
-/* Titles and metadata */
-#video-title, .yt-lockup-metadata-view-model__title { color: var(--n19-text) !important; font-weight: 500 !important; }
-ytd-video-renderer #video-title { font-size: 1.8rem !important; font-weight: 400 !important; }
-#metadata-line span, .yt-content-metadata-view-model__metadata-text { color: var(--n19-text-2) !important; }
-ytd-watch-metadata h1 { font-size: 1.8rem !important; font-weight: 400 !important; line-height: 2.6rem !important; }
+/* Watch page: title and description in white cards, related videos with dark bold titles */
+ytd-watch-flexy ytd-watch-metadata { background: var(--n19-card) !important; box-shadow: var(--n19-card-shadow) !important; padding: 12px 15px !important; margin-top: 10px !important; }
+ytd-watch-metadata h1 { font-size: 20px !important; font-weight: 400 !important; line-height: 26px !important; color: var(--n19-text) !important; }
+ytd-watch-metadata #description { background: transparent !important; border-top: 1px solid var(--n19-divider) !important; margin-top: 12px !important; }
+ytd-watch-flexy #secondary { background: var(--n19-card) !important; box-shadow: var(--n19-card-shadow) !important; padding: 10px !important; margin-top: 10px !important; }
+ytd-watch-flexy #secondary .ytLockupMetadataViewModelTitle, ytd-watch-flexy #secondary #video-title { color: var(--n19-related-title) !important; }
+ytd-watch-flexy ytd-comments { background: var(--n19-card) !important; box-shadow: var(--n19-card-shadow) !important; padding: 12px 15px !important; margin-top: 10px !important; }
 
 /* Subscribe: red, uppercase, square */
 ytd-subscribe-button-renderer button, yt-subscribe-button-view-model button, #subscribe-button a, #subscribe-button button, :is(a, button)[aria-label^="Subscribe" i] {
-  background: var(--n19-subscribe) !important; color: #fff !important; border-radius: 2px !important; text-transform: uppercase !important; font-weight: 500 !important;
+  background: var(--n19-red) !important; color: #fff !important; border-radius: 2px !important; text-transform: uppercase !important; font-weight: 500 !important;
 }
 ytd-subscribe-button-renderer[subscribed] button, :is(a, button)[aria-label^="Unsubscribe" i] { background: var(--n19-subscribed) !important; color: var(--n19-subscribed-text) !important; }
-
 /* Watch actions: flat, uppercase labels instead of pills */
 ytd-watch-metadata #actions button, segmented-like-dislike-button-view-model button {
   background: transparent !important; border-radius: 0 !important; text-transform: uppercase !important; color: var(--n19-text-2) !important;
 }
-/* Tabs on channel pages */
-yt-tab-shape .yt-tab-shape__tab, yt-tab-shape .ytTabShapeTab { text-transform: uppercase !important; font-weight: 500 !important; color: var(--n19-text-2) !important; }
+/* Tabs on channel pages: uppercase, red underline */
+yt-tab-shape .yt-tab-shape__tab, yt-tab-shape .ytTabShapeTab { text-transform: uppercase !important; font-weight: 500 !important; font-size: 13px !important; color: var(--n19-text-2) !important; }
 yt-tab-shape[aria-selected="true"] .yt-tab-shape__tab, yt-tab-shape[aria-selected="true"] .ytTabShapeTab { color: var(--n19-text) !important; }
-/* Sign in: blue outlined, uppercase; channel banners and header art square */
-#masthead a[href*="accounts.google.com"], #masthead yt-button-shape a[aria-label="Sign in" i] {
-  border: 1px solid var(--n19-link) !important; border-radius: 2px !important; color: var(--n19-link) !important; background: transparent !important; text-transform: uppercase !important; font-weight: 500 !important;
-}
+yt-tab-group-shape .yt-tab-group-shape-wiz__slider, yt-tab-group-shape .ytTabGroupShapeSlider { background: var(--n19-red) !important; }
 yt-page-header-view-model img, yt-image-banner-view-model, yt-image-banner-view-model img, .yt-page-header-view-model__page-header-banner img { border-radius: 0 !important; }
+/* Menus and dialogs: square */
+tp-yt-iron-dropdown #contentWrapper > *, ytd-popup-container tp-yt-paper-dialog, yt-sheet-view-model, ytd-multi-page-menu-renderer { border-radius: 2px !important; }
+/* The guide's sign-in prompt: a small blue button */
+ytd-guide-signin-promo-renderer :is(a, button).ytSpecButtonShapeNextHost { background: var(--n19-blue) !important; border: 1px solid var(--n19-blue) !important; border-radius: 2px !important; color: #fff !important; height: 28px !important; padding: 0 10px !important; font-size: 12px !important; }
+ytd-guide-signin-promo-renderer :is(a, button).ytSpecButtonShapeNextHost * { color: #fff !important; }
+ytd-guide-signin-promo-renderer .ytSpecButtonShapeNextIcon { display: none !important; }
+ytd-guide-signin-promo-renderer #description, ytd-guide-signin-promo-renderer yt-formatted-string { font-size: 13px !important; color: var(--n19-text) !important; }
+/* Search results and the watch page's related list use 2019's small thumbnails: 246px and 168px wide */
+ytd-search ytd-video-renderer ytd-thumbnail[size] { flex: none !important; width: 246px !important; min-width: 246px !important; max-width: 246px !important; }
+ytd-search ytd-video-renderer { --ytd-search-thumbnail-width: 246px; }
+ytd-search .ytLockupViewModelHorizontal > .ytLockupViewModelContentImage { flex: none !important; width: 246px !important; max-width: 246px !important; }
+ytd-search ytd-video-renderer #description-text, ytd-search ytd-video-renderer .metadata-snippet-container { font-size: 13px !important; color: var(--n19-text-2) !important; }
+ytd-search ytd-video-renderer ytd-expandable-metadata-renderer { display: none !important; }
+ytd-search ytd-video-renderer #channel-info { margin: 2px 0 !important; }
+ytd-search ytd-video-renderer #channel-thumbnail { display: none !important; }
+ytd-watch-flexy #secondary .ytLockupViewModelHorizontal > .ytLockupViewModelContentImage, ytd-watch-flexy #secondary ytd-thumbnail[size] { flex: none !important; width: 168px !important; max-width: 168px !important; min-width: 168px !important; }
+ytd-watch-flexy #secondary .ytLockupMetadataViewModelTitle { font-size: 13px !important; font-weight: 500 !important; }
+/* Watch actions: plain icon-and-label buttons, no pill backgrounds */
+ytd-watch-metadata #actions :is(button, a).ytSpecButtonShapeNextHost, ytd-watch-metadata #actions like-button-view-model, ytd-watch-metadata #actions dislike-button-view-model,
+ytd-watch-metadata #actions .ytSegmentedLikeDislikeButtonViewModelSegmentedButtonsWrapper, ytd-watch-metadata #actions yt-button-shape { background: transparent !important; border-radius: 0 !important; }

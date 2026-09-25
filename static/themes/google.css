@@ -1,18 +1,23 @@
-/* net19 handmade theme: Google Search, 2019. Palette tokens are mapped onto Google's own design variables, so every
-   surface Google renders (menus, suggestion lists, results, dialogs) uses the same 2019 palette. A dark variant follows
+/* net19 handmade theme: Google Search, 2019 as Chrome showed it: "Gmail  Images", the apps grid and a small flat blue Sign in
+   at the top right; the multicolor logo higher on the page; a 44px rounded search box with a thin gray border, a gray
+   magnifier and the colored microphone, a shadow only on hover or with suggestions open; flat light-gray "Google Search" and
+   "I'm Feeling Lucky" buttons; a light-gray footer. Results: title first, green URL under it, gray snippet. Palette tokens
+   are mapped onto Google's own design variables, so menus, suggestion lists and dialogs follow; a dark variant follows
    Google's own dark mode, which google.js reads and palette.js marks as html[data-net19-mode]. */
 
 /* ---- 2019 palette: light ---- */
 :root {
   --n19-bg: #fff; --n19-surface: #f8f9fa; --n19-surface-2: #f1f3f4; --n19-text: #222; --n19-text-2: #545454; --n19-text-3: #70757a;
   --n19-link: #1a0dab; --n19-visited: #609; --n19-url: #006621; --n19-accent: #1a73e8; --n19-accent-soft: #e8f0fe; --n19-on-accent: #fff;
-  --n19-border: #dfe1e5; --n19-border-soft: #ebebeb; --n19-shadow: 0 1px 6px rgba(32,33,36,.28); --n19-button: #f8f9fa; --n19-button-text: #3c4043;
+  --n19-border: #dfe1e5; --n19-border-soft: #ebebeb; --n19-shadow: 0 1px 6px rgba(32,33,36,.28); --n19-button: #f2f2f2; --n19-button-text: #5f6368;
+  --n19-button-hover-border: #c6c6c6; --n19-footer: #f2f2f2; --n19-footer-border: #e4e4e4; --n19-footer-text: #5f6368;
 }
 /* ---- the same palette for dark mode (Google's own mode, read by google.js) ---- */
 :root[data-net19-mode="dark"] {
   --n19-bg: #202124; --n19-surface: #303134; --n19-surface-2: #3c4043; --n19-text: #e8eaed; --n19-text-2: #bdc1c6; --n19-text-3: #9aa0a6;
   --n19-link: #8ab4f8; --n19-visited: #c58af9; --n19-url: #81c995; --n19-accent: #8ab4f8; --n19-accent-soft: #394457; --n19-on-accent: #202124;
   --n19-border: #5f6368; --n19-border-soft: #3c4043; --n19-shadow: 0 1px 6px rgba(0,0,0,.6); --n19-button: #303134; --n19-button-text: #e8eaed;
+  --n19-button-hover-border: #5f6368; --n19-footer: #171717; --n19-footer-border: #3c4043; --n19-footer-text: #9aa0a6;
 }
 
 /* ---- Google's own tokens, re-pointed at the palette (names are Google's) ---- */
@@ -37,13 +42,22 @@ body, input, textarea, button { font-family: arial, sans-serif !important; }
 
 /* ---- Search box: 2019 shape on every page (home, results, suggestion list) ---- */
 form[role="search"] .RNNXgb { background: var(--n19-bg) !important; border: 1px solid var(--n19-border) !important; border-radius: 24px !important; box-shadow: none !important; }
-form[role="search"] .RNNXgb:hover, form[role="search"] .RNNXgb:focus-within, form[role="search"] .emcav .RNNXgb { box-shadow: var(--n19-shadow) !important; border-color: transparent !important; }
+form[role="search"] .RNNXgb:hover, form[role="search"] .emcav .RNNXgb { box-shadow: var(--n19-shadow) !important; border-color: transparent !important; }
 form[role="search"] .SDkEP, form[role="search"] .fM33ce, form[role="search"] .dRYYxd { background: transparent !important; }
 form[role="search"] .aajZCb, .UUbT9, .erkvQe { background: var(--n19-bg) !important; box-shadow: var(--n19-shadow) !important; border-radius: 0 0 24px 24px !important; }
 textarea[name="q"], input[name="q"] { color: var(--n19-text) !important; background: transparent !important; font-size: 16px !important; }
 /* 2019 had a microphone only: no "+", Lens or AI Mode controls */
 form[role="search"] button.UbbAWe, form[role="search"] div.etxtjc, form[role="search"] button.plR5qb, form[role="search"] [aria-label="AI Mode" i] { display: none !important; }
 
+/* Homepage: 44px box; the logo sits higher, as in 2019 (a fixed 231px logo block under the 60px bar) */
+form[role="search"] .RNNXgb { height: 44px !important; min-height: 44px !important; }
+form[role="search"] .RNNXgb .SDkEP, form[role="search"] .RNNXgb .dRYYxd, form[role="search"] .RNNXgb .iblpc, form[role="search"] .RNNXgb .a4bIc { height: 44px !important; min-height: 0 !important; }
+form[role="search"] .RNNXgb .ywK6Rd { height: 44px !important; }
+#sI1XGe .naW5gc { margin-top: 87px !important; }
+#sI1XGe { height: 179px !important; max-height: 179px !important; }
+/* the colored microphone */
+form[role="search"] [aria-label="Search by voice"] { background: url("https://www.google.com/images/branding/googlemic/2x/googlemic_color_24dp.png") center / 24px 24px no-repeat !important; }
+form[role="search"] [aria-label="Search by voice"] > svg { visibility: hidden !important; }
 /* Homepage: the multicolor logo, gray buttons */
 div:has(> svg[viewBox="0 0 272 92"]) {
   background: url("https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png") center bottom / 272px 92px no-repeat !important;
@@ -51,9 +65,9 @@ div:has(> svg[viewBox="0 0 272 92"]) {
 div:has(> svg[viewBox="0 0 272 92"]) > svg { visibility: hidden !important; }
 input[name="btnK"], input[name="btnI"] {
   background: var(--n19-button) !important; border: 1px solid var(--n19-button) !important; border-radius: 4px !important; color: var(--n19-button-text) !important;
-  font-size: 14px !important; box-shadow: none !important;
+  font-size: 14px !important; font-family: arial, sans-serif !important; box-shadow: none !important; height: 36px !important; line-height: 27px !important; padding: 0 16px !important; margin: 11px 4px !important;
 }
-input[name="btnK"]:hover, input[name="btnI"]:hover { border-color: var(--n19-border) !important; box-shadow: 0 1px 1px rgba(0,0,0,.1) !important; }
+input[name="btnK"]:hover, input[name="btnI"]:hover { border-color: var(--n19-button-hover-border) !important; color: var(--n19-text) !important; box-shadow: 0 1px 1px rgba(0,0,0,.1) !important; }
 
 /* Results header: the small multicolor logo */
 a#logo svg, #logo img, a[href*="webhp"] svg[viewBox="0 0 272 92"] { visibility: hidden !important; }
@@ -79,11 +93,19 @@ a[href*="udm=50"], a[href*="udm=39"], a[href*="udm=18"], a[href*="udm=14"] { dis
 #search .VwiC3b, #search [data-sncf] { color: var(--n19-text-2) !important; font-size: 14px !important; line-height: 1.58 !important; }
 #rcnt, #center_col, #search, #rhs { background: transparent !important; }
 
-/* Footer */
-.Ij8KCd, #footcnt, .fbar { background: var(--n19-surface-2) !important; border-top: 1px solid var(--n19-border-soft) !important; }
-.Ij8KCd a, .fbar a { color: var(--n19-text-3) !important; }
+/* Footer: #f2f2f2, 40px, gray links; 2019 order "Advertising  Business  About  How Search works" */
+.Ij8KCd, #footcnt, .fbar { background: var(--n19-footer) !important; border-top: 1px solid var(--n19-footer-border) !important; }
+.Ij8KCd a, .fbar a, .Ij8KCd [role="button"], .Ij8KCd [role="button"] * { color: var(--n19-footer-text) !important; font-size: 14px !important; }
+.Ij8KCd .g55egf > a { line-height: 40px !important; height: 40px !important; padding-top: 0 !important; padding-bottom: 0 !important; }
+.Ij8KCd .osh6F { display: flex !important; }
+.Ij8KCd .osh6F > a[href*="/ads"] { order: 1; } .Ij8KCd .osh6F > a[href*="/services"] { order: 2; }
+.Ij8KCd .osh6F > a[href*="about.google"] { order: 3; } .Ij8KCd .osh6F > a[href*="howsearchworks"] { order: 4; }
+/* the links at the top right: near-black 13px */
+#gb a.gb_6, #gb a[href*="mail.google.com"], #gb a[href*="imghp"] { color: var(--n19-text) !important; font-size: 13px !important; }
 
 /* Sign in: the 2019 flat blue button (Google's own geometry is left alone so the bar stays aligned) */
 html { --n19-signin: #4285f4; --n19-signin-text: #fff; }
 html[data-net19-mode="dark"] { --n19-signin: #8ab4f8; --n19-signin-text: #202124; }
-#gb a.gb_A, #gb a[href*="ServiceLogin"] { background: var(--n19-signin) !important; color: var(--n19-signin-text) !important; border-radius: 4px !important; font-weight: 700 !important; }
+#gb a.gb_A, #gb a[href*="ServiceLogin"] { background: var(--n19-signin) !important; color: var(--n19-signin-text) !important; border-radius: 4px !important; font-weight: 700 !important;
+  font-size: 13px !important; height: 30px !important; line-height: 28px !important; min-height: 0 !important; padding: 0 12px !important; box-sizing: border-box !important; border: 1px solid transparent !important; }
+#gb a.gb_A span, #gb a[href*="ServiceLogin"] span { font-size: 13px !important; line-height: 28px !important; padding: 0 !important; }

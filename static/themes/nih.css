@@ -1,30 +1,80 @@
-/* net19 handmade theme: NIH / NCBI / PubMed, 2019: the legacy NCBI look: Arial throughout, a flat NCBI-blue
-   (#336699) header, rust-brown (#985735) section headings, compact bold Arial titles instead of Merriweather, and
-   the rounded blue gradient Search button. Page structure is today's (the 2020 PubMed rebuild), so the theme only
-   moves type, colors and corners. None of these sites has a dark mode; the dark tokens apply only if a page renders dark. */
-html { --n19-font: Arial, Helvetica, sans-serif; --n19-bar: #336699; --n19-head: #985735; --n19-title: #000; --n19-link: #2f4a8b;
-  --n19-btn-from: #6d98c7; --n19-btn-to: #3f6fa2; --n19-btn-border: #2c5a8a; }
-html[data-net19-mode="dark"] { --n19-bar: #22456b; --n19-head: #d79a74; --n19-title: #f0f0f0; --n19-link: #8fb1e6;
-  --n19-btn-from: #4f79a8; --n19-btn-to: #2f5a88; --n19-btn-border: #1f4470; }
+/* net19 handmade theme: NIH / NCBI / PubMed, 2019: the legacy NCBI page: a 1190px column on a #ccc gray page, the thin
+   #369 NCBI bar, a light gray search band with the PubMed logo beside a small field and a bold #47a "Search" button,
+   the "PubMed" introduction in a near-black navy (#141927) box, and plain portlets with rust-brown (#985735) Arial
+   headings on #fafafa bars over dark blue (#14376c) links; Arial 13px throughout, no icons, no rounded cards. None of
+   these sites has a dark mode, so a dark device gets the engine's inverted page; the dark tokens are only a fallback. */
+html { --n19-font: Arial, Helvetica, sans-serif; --n19-page: #ccc; --n19-wrap: #fff; --n19-bar: #369; --n19-band: #d5d5d5; --n19-band-edge: #bbb;
+  --n19-head: #985735; --n19-head-bg: #fafafa; --n19-head-rule: #f7f7f7; --n19-title: #000; --n19-text: #000; --n19-meta: #777; --n19-link: #14376c;
+  --n19-link-2: #00e; --n19-btn: #47a; --n19-intro: #141927; --n19-intro-text: #f7f7f7; --n19-field-border: #999; }
+html[data-net19-mode="dark"] { --n19-page: #222; --n19-wrap: #121212; --n19-bar: #22456b; --n19-band: #2a2a2a; --n19-band-edge: #444;
+  --n19-head: #d79a74; --n19-head-bg: #1c1c1c; --n19-head-rule: #262626; --n19-title: #f0f0f0; --n19-text: #ddd; --n19-meta: #999; --n19-link: #8fb1e6;
+  --n19-link-2: #8fb1e6; --n19-btn: #47a; --n19-intro: #0b0e16; --n19-intro-text: #f0f0f0; --n19-field-border: #555; }
 body, button, input, select, textarea, .usa-button, .usa-banner { font-family: var(--n19-font) !important; }
 h1, h2, h3, h4, .heading-title, .title, .action-title { font-family: var(--n19-font) !important; }
 
-/* Header: the NCBI blue bar (PubMed homepage hero included) */
-header.ncbi-header, .ncbi-header, #ncbi-header { background: var(--n19-bar) !important; }
-#home-page .intro { background: var(--n19-bar) !important; }
-header.ncbi-header .header-button, #account_login { border-radius: 3px !important; }
+/* The page: a centred 1190px white column on gray, as the legacy NCBI "wrap" was */
+body:has(> header.ncbi-header), .site-content:has(> header.ncbi-header) { background-color: var(--n19-page) !important; }
+header.ncbi-header, header.ncbi-header ~ :is(main, #ncbi-footer) { max-width: 1190px !important; width: 100% !important; box-sizing: border-box !important; margin-left: auto !important; margin-right: auto !important;
+  background-color: var(--n19-wrap); box-shadow: 0 0 6px rgba(0,0,0,.35); }
+/* The "official website" banner was added in 2020 */
+section.usa-banner { display: none !important; }
 
-/* PubMed search: the rounded gradient button */
+/* The NCBI bar: thin, #369, a small logo and plain white "Log in" text */
+header.ncbi-header, .ncbi-header, #ncbi-header { background: var(--n19-bar) !important; }
+header.ncbi-header { position: relative !important; top: auto !important; left: auto !important; padding: 0 !important; height: auto !important; }
+header.ncbi-header .usa-grid { max-width: none !important; width: 100% !important; box-sizing: border-box !important; padding: 0 12px !important; margin: 0 !important; }
+header.ncbi-header .usa-width-one-whole { display: flex !important; align-items: center !important; justify-content: space-between !important; min-height: 28px !important; padding: 0 !important; width: 100% !important; max-width: none !important; }
+header.ncbi-header .ncbi-header__logo, header.ncbi-header .ncbi-header__logo a.logo { margin: 0 !important; padding: 0 !important; height: auto !important; width: auto !important; float: none !important; }
+header.ncbi-header .ncbi-header__logo img { height: 20px !important; width: auto !important; margin: 4px 0 !important; }
+header.ncbi-header .ncbi-header__account { margin: 0 0 0 auto !important; padding: 0 !important; float: none !important; order: 2 !important; }
+header.ncbi-header .ncbi-popup-anchor { order: 1 !important; flex: 1 1 auto !important; }
+header.ncbi-header .header-button, #account_login { background: transparent !important; border: none !important; box-shadow: none !important; border-radius: 0 !important;
+  color: #fff !important; font-size: 13px !important; padding: 0 !important; margin: 0 !important; min-height: 0 !important; height: auto !important; text-decoration: underline !important; }
+
+/* The search band: light gray, the logo on the left, a small field and the bold #47a Search button */
+#home-page .intro, #search-page #search-form, main:not(#home-page) > #search-form { background: linear-gradient(#e0e0e0, var(--n19-band)) !important; border-bottom: 1px solid var(--n19-band-edge) !important; color: var(--n19-text) !important; min-height: 0 !important; height: auto !important; }
+#home-page .intro .content-wrap { max-width: none !important; padding: 18px 20px 14px !important; }
+#home-page .intro #search-form { margin: 0 !important; padding: 0 !important; }
+#home-page .intro #search-form .inner-wrap { display: grid !important; grid-template-columns: 200px minmax(0, 620px) !important; column-gap: 20px !important; align-items: center !important; padding: 0 !important; margin: 0 !important; }
+#home-page .intro .pubmed-logo { grid-row: 1 / span 2; margin: 0 !important; padding: 0 !important; }
+#home-page .intro .pubmed-logo img { width: 170px !important; height: auto !important; filter: brightness(.22) !important; }
+#home-page .intro .search-input, #home-page .intro .search-links-wrapper { grid-column: 2; margin: 0 !important; padding: 0 !important; width: auto !important; }
+#search-form .term-input, form.search-form input[type="search"], form.search-form input[type="text"] {
+  border-radius: 0 !important; height: 26px !important; min-height: 26px !important; font-size: 14px !important; padding: 2px 6px !important;
+  border: 1px solid var(--n19-field-border) !important; box-shadow: inset 0 1px 2px rgba(0,0,0,.15) !important; background: #fff !important; color: #000 !important; }
 #search-form button.search-btn, form.search-form button[type="submit"] {
-  background: linear-gradient(var(--n19-btn-from), var(--n19-btn-to)) !important; border: 1px solid var(--n19-btn-border) !important;
-  border-radius: 4px !important; font-weight: 700 !important; box-shadow: 0 1px 1px rgba(0,0,0,.25) !important; color: #fff !important;
-}
-#search-form .term-input, form.search-form input[type="search"], form.search-form input[type="text"] { border-radius: 0 !important; }
+  background: var(--n19-btn) !important; border: none !important; border-radius: 5px !important; font-weight: 700 !important; font-size: 13px !important;
+  height: 24px !important; min-height: 24px !important; padding: 0 8px !important; margin-left: 6px !important; box-shadow: 1px 1px 2px rgba(0,0,0,.4) !important; color: #fff !important; width: auto !important; }
+#search-form button.search-btn * { font-size: 13px !important; font-weight: 700 !important; color: #fff !important; }
+#search-form .form-field { display: flex !important; align-items: center !important; }
+#search-form .search-links a, #search-form .search-input-link { color: var(--n19-link-2) !important; font-size: 13px !important; text-decoration: none !important; }
+/* The introduction in 2019's dark navy box */
+#home-page .intro .website-description { background: var(--n19-intro) !important; color: var(--n19-intro-text) !important; font-size: 14px !important; line-height: 1.5 !important;
+  margin: 16px 0 0 !important; padding: 14px 18px !important; max-width: none !important; }
+#home-page .intro .website-description * { color: var(--n19-intro-text) !important; }
+
+/* Home portlets: no icons, rust headings on light bars, dark blue links */
+#home-page .homepage-actions { max-width: none !important; margin: 0 !important; padding: 16px 12px !important; gap: 0 !important; }
+#home-page .homepage-action { padding: 0 8px !important; box-sizing: border-box !important; }
+#home-page .homepage-action { text-align: left !important; }
+#home-page .homepage-action .action-item { display: none !important; }
+.article-details h2.title, #abstract h2.title, main h2.title, .homepage-action .action-title, .results-amount-container h3 {
+  color: var(--n19-head) !important; font-size: 16px !important; font-weight: 700 !important; }
+#home-page :is(.action-title, h2.title) { background: var(--n19-head-bg) !important; border-top: 3px solid var(--n19-head-rule) !important; border-bottom: 3px solid var(--n19-head-rule) !important;
+  padding: 4px 6px !important; margin: 0 0 6px !important; text-align: left !important; }
+#home-page .homepage-action .action-url { text-align: left !important; padding-left: 6px !important; }
+#home-page a { color: var(--n19-link) !important; font-size: 13px !important; }
+#home-page :is(.description, li, p) { font-size: 13px !important; color: var(--n19-meta); }
+#home-page .border-wrapper { max-width: none !important; border: none !important; margin: 0 !important; padding: 0 20px 20px !important; }
+#home-page .homepage-trending-and-latest { max-width: none !important; }
+#home-page .items-list li { border-color: #e5e5e5 !important; padding-top: 4px !important; padding-bottom: 4px !important; margin: 0 0 8px !important; line-height: 1.4 !important; }
+#home-page .items-list li :is(a, h3) { font-size: 13px !important; line-height: 1.4 !important; margin: 0 !important; font-weight: 400 !important; }
+#home-page .pubmed-updates-section { border-left: none !important; }
+/* Result summaries: dark blue title, black authors, gray journal and dates */
+.docsum-authors, .full-authors, .short-authors { color: var(--n19-text) !important; font-size: 13px !important; }
+:is(.docsum-journal-citation, .docsum-pmid, .citation-part, .date, .docsum-citation) { color: var(--n19-meta) !important; font-size: 12px !important; }
 
 /* Article: compact Arial titles, rust section headings */
 .article-details .heading-title, h1.heading-title { font-size: 20px !important; line-height: 1.3 !important; font-weight: 700 !important; color: var(--n19-title) !important; }
-.article-details h2.title, #abstract h2.title, main h2.title, .homepage-action .action-title, .results-amount-container h3 {
-  color: var(--n19-head) !important; font-size: 17px !important; font-weight: 700 !important;
-}
-.docsum-title { font-family: var(--n19-font) !important; color: var(--n19-link) !important; font-size: 15px !important; }
+.docsum-title { font-family: var(--n19-font) !important; color: var(--n19-link) !important; font-size: 14px !important; font-weight: 400 !important; }
 .usa-button, .button-primary, .usa-button-primary { border-radius: 3px !important; }

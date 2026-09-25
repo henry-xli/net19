@@ -1,11 +1,16 @@
-/* net19 handmade theme: LinkedIn, 2019: dark blue-gray global navigation, rectangular #0073b1 buttons, shadowed
-   2px-radius cards. The dark variant keeps the shapes on LinkedIn's dark surfaces. */
+/* net19 handmade theme: LinkedIn, 2019. Signed out: a white 66px bar with the #0073b1 logo, a gray "Join now" text
+   link and a square-cornered outlined "Sign in" button; the headline "Welcome to your professional community" in
+   thin 56px #2977c9 type over three 80px lines; rectangular 2px-radius buttons; a warm off-white band below.
+   Signed in: dark blue-gray global navigation, rectangular #0073b1 buttons, shadowed 2px-radius cards. The dark
+   variant keeps the shapes on LinkedIn's dark surfaces. */
 html { --n19-canvas: #f3f6f8; --n19-card: #fff; --n19-text: rgba(0,0,0,.9); --n19-text-2: rgba(0,0,0,.6); --n19-blue: #0073b1; --n19-blue-hover: #006097;
   --n19-nav: #283e4a; --n19-nav-text: rgba(255,255,255,.75); --n19-nav-active: #fff; --n19-nav-field: #e1e9ee; --n19-nav-field-text: rgba(0,0,0,.9);
-  --n19-card-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 2px 3px rgba(0,0,0,.2); }
+  --n19-card-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 2px 3px rgba(0,0,0,.2);
+  --n19-guest-bar: #fff; --n19-headline: #2977c9; --n19-band: #faf9f7; --n19-line: rgba(0,0,0,.6); --n19-field-shadow: 0 4px 6px -2px rgba(0,0,0,.15); }
 html[data-net19-mode="dark"] { --n19-canvas: #1b1f23; --n19-card: #1d2226; --n19-text: rgba(255,255,255,.9); --n19-text-2: rgba(255,255,255,.6); --n19-blue: #70b5f9; --n19-blue-hover: #9ccbfa;
   --n19-nav: #1d2226; --n19-nav-text: rgba(255,255,255,.6); --n19-nav-active: #fff; --n19-nav-field: #38434f; --n19-nav-field-text: rgba(255,255,255,.9);
-  --n19-card-shadow: 0 0 0 1px rgba(255,255,255,.12); }
+  --n19-card-shadow: 0 0 0 1px rgba(255,255,255,.12);
+  --n19-guest-bar: #1d2226; --n19-headline: #70b5f9; --n19-band: #1b1f23; --n19-line: rgba(255,255,255,.6); --n19-field-shadow: none; }
 html:root, html .theme--light, html .theme--dark {
   --color-background-canvas: var(--n19-canvas) !important; --color-background-container: var(--n19-card) !important;
   --color-text: var(--n19-text) !important; --color-text-low-emphasis: var(--n19-text-2) !important; --color-brand: var(--n19-blue) !important;
@@ -19,3 +24,30 @@ header.global-nav, #global-nav { background: var(--n19-nav) !important; border-b
 .artdeco-button--primary { background: var(--n19-blue) !important; }
 .artdeco-button--primary:hover { background: var(--n19-blue-hover) !important; }
 .artdeco-card, .feed-shared-update-v2 { border-radius: 2px !important; box-shadow: var(--n19-card-shadow) !important; border: none !important; }
+
+/* Signed-out pages: a plain white bar; the logo at its 2019 size; "Join now" as gray text, then an outlined "Sign in" */
+body > div.sticky:has(> nav.nav) { background: var(--n19-guest-bar) !important; }
+nav.nav { padding-top: 0 !important; padding-bottom: 0 !important; min-height: 66px !important; }
+nav.nav .nav__logo-link icon, nav.nav .nav__logo-link svg { width: 136px !important; height: 34px !important; }
+nav.nav .nav__logo-link svg { color: var(--n19-blue) !important; }
+nav.nav .top-nav-menu a[href*="/top-content"], nav.nav .top-nav-menu a[href*="/games"] { display: none !important; }
+nav.nav .top-nav-menu li:has(> a[href*="/top-content"]), nav.nav .top-nav-menu li:has(> a[href*="/games"]) { display: none !important; }
+nav.nav .nav__cta-container { align-items: center !important; }
+nav.nav :is(.nav__button-secondary, .nav__button-tertiary) { border-radius: 2px !important; font-size: 16px !important; font-weight: 600 !important; min-height: 0 !important; height: 40px !important; line-height: 38px !important; padding: 0 23px !important; box-shadow: none !important; }
+nav.nav .nav__button-tertiary { order: -1 !important; background: transparent !important; color: var(--n19-text-2) !important; border: none !important; padding: 0 12px !important; font-weight: 400 !important; }
+nav.nav .nav__button-tertiary:hover { background: transparent !important; color: var(--n19-text) !important; text-decoration: underline !important; }
+nav.nav .nav__button-secondary { border: 1px solid var(--n19-blue) !important; color: var(--n19-blue) !important; background: transparent !important; margin-left: 12px !important; }
+nav.nav .nav__button-secondary:hover { background: rgba(0,115,177,.1) !important; box-shadow: inset 0 0 0 1px var(--n19-blue) !important; }
+/* The first screen: a thin blue headline in three lines, rectangular sign-in buttons */
+main#main-content > section:first-child:has(> div > .sign-in-form__join-cta-wrapper) { padding-top: 72px !important; }
+main#main-content > section:first-child:has(> div > .sign-in-form__join-cta-wrapper) h1 { font-size: 56px !important; line-height: 80px !important; font-weight: 200 !important; color: var(--n19-headline) !important;
+  max-width: 560px !important; padding-bottom: 40px !important; letter-spacing: normal !important; }
+/* Signed-out buttons everywhere (page, sign-in dialogs, show-more) are square-cornered, as in 2019 */
+:is(.sign-in-form__sign-in-cta, .google-auth-button__placeholder, .btn-md, .btn-sm, .btn-lg, .btn-primary, .btn-secondary, .btn-secondary-emphasis, .btn-tertiary, .show-more-less__button, [class*="sign-in-modal__"][class*="-btn"], [class*="sign-in-modal__"][class*="-cta"]) { border-radius: 2px !important; }
+main#main-content .sign-in-form__sign-in-cta { border: 1px solid var(--n19-blue) !important; color: var(--n19-blue) !important; box-shadow: none !important; background: transparent !important; height: 40px !important; min-height: 0 !important; line-height: 38px !important; padding: 0 !important; }
+main#main-content .linkedin-tc__text { text-align: left !important; }
+main#main-content .sign-in-form__join-cta-wrapper { text-align: left !important; }
+/* The sections below sit on the warm off-white band that followed the first screen in 2019 */
+main#main-content > :is(section, div)::after { background-color: var(--n19-band) !important; }
+main#main-content h2.header { font-weight: 300 !important; color: var(--n19-text) !important; }
+main#main-content :is(.pill, .btn-secondary-emphasis, [class*="pill"]) { border-radius: 2px !important; }

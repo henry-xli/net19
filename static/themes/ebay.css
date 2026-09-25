@@ -1,14 +1,48 @@
-/* net19 handmade theme: eBay, 2019: blue #0654ba search button with square corners, Helvetica Neue, flat tiles. */
-body, body * { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important; }
-body { background: #fff !important; color: #333 !important; }
-#gh-search-btn, #gh-btn, .gh-search-button__button, button.gh-search-button {
-  background: #0654ba !important; border: 1px solid #0654ba !important; border-radius: 0 !important; color: #fff !important; font-size: 16px !important; font-weight: 400 !important;
+/* net19 handmade theme: eBay, 2019 (the Web Design Museum capture): a 30px white top strip of 12px #333 links with a light rule under it;
+   Helvetica Neue in the header; a square search field with a thin #c7c7c7 edge, the "All Categories" box joined to it, and a
+   #0654ba "Search" button with 3px corners and 16px white text; a centered 12px #555 category row between #ddd rules; #0654ba links;
+   flat, square tiles without drop shadows. */
+html { --n19-link: #0654ba; --n19-button: #0654ba; --n19-button-hover: #00509d; --n19-text: #333; --n19-text-2: #555; --n19-field: #fff;
+  --n19-field-edge: #c7c7c7; --n19-rule: #e5e5e5; --n19-nav-rule: #ddd; --n19-header-font: "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif; }
+html[data-net19-mode="dark"] { --n19-link: #6ea2f0; --n19-button: #0654ba; --n19-button-hover: #1b6bd0; --n19-text: #ddd; --n19-text-2: #aaa; --n19-field: #1e1e1e;
+  --n19-field-edge: #555; --n19-rule: #333; --n19-nav-rule: #3a3a3a; --n19-header-font: "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif; }
+
+/* eBay's own design tokens, so buttons, links and menus built from them follow */
+html:root, body {
+  --color-foreground-link-primary: var(--n19-link) !important; --color-foreground-link-visited: var(--n19-link) !important;
+  --color-background-accent: var(--n19-button) !important; --color-foreground-accent: var(--n19-link) !important;
+  --btn-primary-background-color: var(--n19-button) !important; --btn-primary-border-color: var(--n19-button) !important;
 }
-#gh-ac-box2, #gh-ac-box, .gh-search-input__wrap, #gh-f .gh-search__wrap, .gh-search-input { border-radius: 0 !important; border: 2px solid #ccc !important; }
-#gh-cat-box, .gh-search-categories { border-radius: 0 !important; }
-.btn--primary, .fake-btn--primary, button.btn--primary { background: #0654ba !important; border-color: #0654ba !important; border-radius: 3px !important; }
-.btn--secondary, .fake-btn--secondary { border-color: #0654ba !important; color: #0654ba !important; border-radius: 3px !important; }
-.s-item__image-wrapper, .s-item__image, .s-card, .brwrvr__item-card, .vl-card, .hl-card, img, [class*="carousel"] img { border-radius: 0 !important; }
-.s-item__title, .s-item__link { color: #0654ba !important; }
-.s-item__price, .x-price-primary { color: #333 !important; font-weight: 700 !important; }
-.hl-cat-nav, #vl-flyout-nav, .vl-flyout-nav { border-bottom: 1px solid #ddd !important; }
+
+/* Header: Helvetica Neue, the top strip with small links and a light rule */
+#gh, #gh button, #gh input, #gh select, .gh-header, .gh-header :is(button, input, select, a) { font-family: var(--n19-header-font) !important; }
+#gh-top, .gh-nav, .gh-header__top { border-bottom: 1px solid var(--n19-rule) !important; }
+#gh-top :is(a, button, span), .gh-nav :is(a, button, span), .gh-header__top :is(a, button, span) { font-size: 12px !important; }
+#gh-ug a, .gh-identity a, .gh-identity__greeting a { color: var(--n19-link) !important; }
+
+/* Search: a square field with a thin gray edge, the category box joined to it, and a blue 3px-cornered button */
+#gh-ac-box, #gh-ac-box2, .gh-search-input__wrap, .gh-search__wrap, #gh-f .gh-search__wrap {
+  border-radius: 3px 0 0 3px !important; border: 1px solid var(--n19-field-edge) !important; background: var(--n19-field) !important; box-shadow: none !important;
+}
+.gh-search__wrap .gh-search-input__wrap { border: none !important; border-radius: 0 !important; }
+#gh-ac, .gh-search-input { border-radius: 0 !important; font-size: 16px !important; box-shadow: none !important; }
+#gh-cat-box, .gh-search-categories { border-radius: 0 !important; border-left: 1px solid var(--n19-field-edge) !important; font-size: 12px !important; }
+#gh-search-btn, #gh-btn, .gh-search-button__button, button.gh-search-button {
+  background: var(--n19-button) !important; border: 1px solid var(--n19-button) !important; border-radius: 3px !important; color: #fff !important;
+  font-size: 16px !important; font-weight: 400 !important; min-width: 96px !important; box-shadow: none !important;
+}
+#gh-search-btn:hover, #gh-btn:hover, button.gh-search-button:hover { background: var(--n19-button-hover) !important; }
+#gh-as-a, .gh-search__advanced, a[href*="/sch/ebayadvsearch"] { font-size: 11px !important; color: var(--n19-text-2) !important; }
+
+/* Category row: centered 12px #555 links between thin rules */
+.hl-cat-nav, #vl-flyout-nav, .vl-flyout-nav { border-top: 1px solid var(--n19-nav-rule) !important; border-bottom: 1px solid var(--n19-nav-rule) !important; }
+.vl-flyout-nav__container, .vl-flyout-nav ul, .hl-cat-nav ul { justify-content: center !important; }
+.vl-flyout-nav li > a, .vl-flyout-nav li > span > a, .hl-cat-nav li a { font-size: 12px !important; color: var(--n19-text-2) !important; }
+
+/* Buttons: 2019's flatter 3px corners in place of pills */
+.btn--primary, .fake-btn--primary, button.btn--primary { background: var(--n19-button) !important; border-color: var(--n19-button) !important; border-radius: 3px !important; }
+.btn--secondary, .fake-btn--secondary { border-color: var(--n19-button) !important; color: var(--n19-link) !important; border-radius: 3px !important; }
+/* Tiles and listing images: square, flat */
+.s-item__image-wrapper, .s-item__image, .s-card, .brwrvr__item-card, .vl-card, .hl-card, .s-card__media-wrapper, .su-card-container__media { border-radius: 0 !important; box-shadow: none !important; }
+.s-item__title, .s-item__link, .s-card__title { color: var(--n19-link) !important; }
+.s-item__price, .x-price-primary, .s-card__price { color: var(--n19-text) !important; font-weight: 700 !important; }

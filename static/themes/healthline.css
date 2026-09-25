@@ -1,18 +1,57 @@
-/* net19 handmade theme: Healthline, 2019: white header with a hairline rule, dark wordmark, teal (#00a0b0) accents and outlined SUBSCRIBE, Proxima Nova Condensed headlines, square boxes and buttons. Articles themselves are close to today's. */
-html { --n19-header: #fff; --n19-header-text: #231f20; --n19-rule: #e5e5e5; --n19-teal: #00a0b0; --n19-teal-dark: #008a98; }
-html[data-net19-mode="dark"] { --n19-header: #1b1b1b; --n19-header-text: #f2f2f2; --n19-rule: #333; --n19-teal: #1cb8c8; --n19-teal-dark: #00a0b0; }
-/* Header: the black 2020s bar goes back to 2019's white one; the white logo file is shown dark in light mode. */
+/* net19 handmade theme: Healthline, 2019: a 70px white header with a hairline rule, the black wordmark and a plain teal
+   (#01adb9) "SUBSCRIBE"; no announcement bar, trust ticker or "Health should be this easy" hero; a 1100px page with
+   small uppercase teal category labels over bold Proxima Nova Condensed headlines in #231f20; square photos, boxes
+   and buttons. Healthline has no dark mode, so a dark device gets the engine's inverted page. */
+html { --n19-header: #fff; --n19-header-text: #231f20; --n19-rule: #e5e5e5; --n19-teal: #01adb9; --n19-teal-dark: #0098a3; --n19-text: #231f20;
+  --n19-cond: "Proxima Nova Condensed", "Proxima Nova", system-ui, sans-serif; }
+html[data-net19-mode="dark"] { --n19-header: #1b1b1b; --n19-header-text: #f2f2f2; --n19-rule: #333; --n19-teal: #1cb8c8; --n19-teal-dark: #01adb9; --n19-text: #eee; }
+
+/* Things that did not exist in 2019: the partner announcement bar, the scrolling trust ticker, the promotional hero */
+[data-placement="announcementBar"], [data-testid="announcement-bar"], [data-testid="product-hero-listing"],
+[data-testid="page-widgets-list"]:has([data-testid="marquee-track"]) { display: none !important; }
+
+/* Header: 2019's white bar with a hairline; the white logo file is shown dark in light mode */
 #site-header, #site-header header, #site-header header nav { background: var(--n19-header) !important; color: var(--n19-header-text) !important; }
 #site-header { border-bottom: 1px solid var(--n19-rule) !important; box-shadow: none !important; }
+#sticky-nav { box-shadow: none !important; }
 #site-header :is(a, button, span):not(#newsletter-subscription-button, #newsletter-subscription-button *, [aria-haspopup="dialog"]:not([aria-label])) { color: var(--n19-header-text) !important; }
 #site-header svg { color: var(--n19-header-text) !important; }
+#site-header [data-testid="nav-search-button"] svg path { stroke: currentColor !important; }
 #site-header svg :is([fill="#fff"], [fill="#FFF"], [fill="#ffffff"], [fill="white"]) { fill: currentColor !important; }
 #site-header svg :is([stroke="#fff"], [stroke="#FFF"], [stroke="#ffffff"], [stroke="white"]) { stroke: currentColor !important; }
 html:not([data-net19-mode="dark"]) #site-header [data-testid="site-logo"] img,
 html:not([data-net19-mode="dark"]) #site-header:not(:has(header)) :is([data-testid="site-logo"], a[aria-label*="home" i]) svg { filter: invert(1) !important; }
-#site-header :is(#newsletter-subscription-button, button[aria-haspopup="dialog"]:not([aria-label])) { background: transparent !important; border: 1px solid var(--n19-teal) !important; border-radius: 0 !important; }
-#site-header :is(#newsletter-subscription-button, button[aria-haspopup="dialog"]:not([aria-label])), #site-header #newsletter-subscription-button * { color: var(--n19-teal) !important; text-transform: uppercase !important; letter-spacing: .5px !important; }
-/* Buttons and callout boxes were square; the only pill was the "Evidence Based" badge. */
-form button, main form input[type="email"], main button:not([aria-label]) { border-radius: 0 !important; }
-main header:has(> h2), main aside, main div:has(> header > h2) { border-radius: 0 !important; }
-main img { border-radius: 0 !important; }
+#site-header [data-testid="site-logo"] :is(img, svg) { height: 30px !important; width: auto !important; }
+#site-header [role="menubar"] [role="menuitem"], #site-header [data-testid="desktop-nav-bar"] button { font-family: var(--n19-cond) !important; font-weight: 700 !important; font-size: 17px !important; }
+/* SUBSCRIBE: plain teal capitals, no box */
+#site-header :is(#newsletter-subscription-button, button[aria-haspopup="dialog"]:not([aria-label])) { background: transparent !important; border: none !important; border-radius: 0 !important; box-shadow: none !important; }
+#site-header :is(#newsletter-subscription-button, button[aria-haspopup="dialog"]:not([aria-label])), #site-header #newsletter-subscription-button * {
+  color: var(--n19-teal) !important; text-transform: uppercase !important; letter-spacing: .3px !important; font-family: var(--n19-cond) !important; font-weight: 700 !important; font-size: 15px !important; }
+#site-header [data-testid="hamburger"] svg { color: var(--n19-teal) !important; }
+
+/* Home: "Latest stories": the lead story and the list beside it */
+#trending { border-top: 1px solid var(--n19-rule) !important; padding-top: 30px !important; margin-top: -20px !important; }
+#trending h2 { font-family: var(--n19-cond) !important; font-weight: 700 !important; font-size: 24px !important; line-height: 26px !important; text-transform: uppercase !important; color: var(--n19-text) !important; }
+#trending div:has(> svg):has(+ h2) { display: none !important; }
+#trending [data-name="hero-thumbnail"] + div > div > div:first-child, #trending [data-name="trending-thumbnail"] + div > div:first-child {
+  font-family: var(--n19-cond) !important; font-weight: 700 !important; font-size: 12px !important; line-height: 14px !important; text-transform: uppercase !important;
+  color: var(--n19-teal) !important; letter-spacing: 0 !important; margin-bottom: 6px !important; }
+#trending [data-name="hero-thumbnail"] + div a { font-family: var(--n19-cond) !important; font-weight: 700 !important; font-size: 38px !important; line-height: 44px !important; color: var(--n19-text) !important; }
+#trending [data-name="trending-thumbnail"] + div a { font-family: var(--n19-cond) !important; font-weight: 700 !important; font-size: 24px !important; line-height: 28px !important; color: var(--n19-text) !important; }
+#trending [data-name="hero-thumbnail"] + div p { font-size: 16px !important; line-height: 22px !important; color: var(--n19-text) !important; }
+#trending :is(a, h2):hover { text-decoration: none !important; }
+
+/* Section titles and card headlines everywhere: Proxima Nova Condensed, uppercase section titles */
+main h2, #__next h2 { font-family: var(--n19-cond) !important; font-weight: 700 !important; color: var(--n19-text); }
+html[data-net19-home] #__next h2 { text-transform: uppercase !important; font-size: 24px !important; line-height: 28px !important; }
+[data-testid="recommended-reads"] a :is(h3, p, span, div) { font-family: var(--n19-cond) !important; }
+[data-testid^="image-carousel-"] :is(h3, p, span, div), [data-testid^="recommended-reads-article"] :is(h3, p, span, div) { font-family: var(--n19-cond) !important; }
+[role="tab"] { border-radius: 0 !important; font-family: var(--n19-cond) !important; font-weight: 700 !important; text-transform: uppercase !important; }
+[role="tab"][aria-selected="true"] { background: transparent !important; color: var(--n19-text) !important; box-shadow: inset 0 -3px 0 var(--n19-teal) !important; border-color: transparent !important; }
+
+/* Square photos, cards, boxes and buttons; the only pill in 2019 was the "Evidence Based" badge */
+#__next :is(div, a, img, picture, button, input, form, li, span:not([class*="badge" i])) { border-radius: 0 !important; }
+[data-testid="submit-button"] { background: var(--n19-teal) !important; text-transform: uppercase !important; font-family: var(--n19-cond) !important; }
+/* Article pages: headlines in the condensed face, teal links */
+article h1, main h1 { font-family: var(--n19-cond) !important; font-weight: 700 !important; color: var(--n19-text) !important; }
+article a:not([class*="button"]) { color: var(--n19-teal-dark); }

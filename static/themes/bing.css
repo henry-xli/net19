@@ -1,17 +1,51 @@
-/* net19 handmade theme: Bing homepage, 2019: square search box floating over the image of the day, no AI or Copilot rows. */
+/* net19 handmade theme: Bing homepage, 2019: the image of the day filling the window, a row of thin white section links
+   at the top left and Sign in / Rewards / menu at the top right, and the white "Bing" wordmark at the left of a plain square
+   white search box with a thin teal magnifier, a fifth of the way down; no Microsoft logo, no feed below the image. Results
+   pages: a square search box, blue 20px titles with the green address under them, gray snippets, no site icons. */
+html { --n19-title: #001ba0; --n19-url: #006621; --n19-field: #fff; --n19-field-text: #000; --n19-scope: #fff;
+  --n19-sprite: url("https://www.bing.com/sa/simg/hpc26_2x.png"); --n19-snippet: #545454; }
+html[data-net19-mode="dark"] { --n19-title: #8ab4f8; --n19-url: #81c995; --n19-field: #fff; --n19-field-text: #000; --n19-scope: #fff; --n19-snippet: #bdc1c6; }
+
+/* ---- Top bar: section links from the left edge of the search column, thin white 13px; no Microsoft logo ---- */
+#hp_app header#hdr h1.logo_cont { display: none !important; }
+#hp_app header#hdr { transform: translateY(-9px) !important; }
+#hp_app header#hdr #headCont { margin-left: 64px !important; }
+#hp_app header#hdr nav.scope_cont { margin-left: 0 !important; }
+#hp_app header#hdr .scopes li { margin: 0 30px 0 0 !important; padding: 0 !important; }
+#hp_app header#hdr .scopes a, #hp_app header#hdr .scopes li { color: var(--n19-scope) !important; font-size: 13px !important; font-weight: 400 !important;
+  font-family: "Segoe UI", Segoe, Tahoma, Arial, sans-serif !important; text-shadow: 0 0 2px rgba(0,0,0,.5) !important; }
+#hp_app header#hdr .scopes a:hover { text-decoration: underline !important; }
+#hp_app header#hdr .scopes li::after, #hp_app header#hdr .scopes li[class*="selected"]::after { display: none !important; }
+#hp_app header#hdr .identity_wrapper { margin-right: 64px !important; }
+#hp_app #id_h a, #hp_app #id_h span { color: #fff !important; font-size: 13px !important; font-weight: 400 !important; text-shadow: 0 0 2px rgba(0,0,0,.6) !important; }
+
+/* ---- Search: the wordmark and a 548px box, left-aligned under the links ---- */
+#hp_app .sbox_sl { left: 241px !important; margin: 0 !important; width: 548px !important; }
+#hp_app .sbox_sl::before { content: ""; position: absolute; left: -153px; top: -4px; width: 132px; height: 52px;
+  background: var(--n19-sprite) 0 0 / 241px 224px no-repeat; pointer-events: none; }
 #sb_form.sb_form, .sbox_sl #sb_form {
-  border-radius: 0 !important; box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 2px 4px 1px rgba(0,0,0,.18) !important;
-  max-width: 580px !important; height: 46px !important; min-height: 46px !important; border: none !important;
-}
+  border-radius: 0 !important; box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 2px 4px 1px rgba(0,0,0,.18) !important; background: var(--n19-field) !important;
+  width: 548px !important; max-width: 548px !important; height: 46px !important; min-height: 46px !important; border: none !important; }
+#sb_form_q { font-size: 18px !important; font-family: "Segoe UI", Arial, sans-serif !important; color: var(--n19-field-text) !important; padding-left: 12px !important; }
+#hp_app #sb_form #search_icon { width: 29px !important; height: 29px !important; margin: 8px 8px 0 4px !important;
+  background: var(--n19-sprite) -169px -63px / 241px 224px no-repeat !important; }
+#hp_app #sb_form #search_icon > * { visibility: hidden !important; }
 .sbox_sl.centralized { justify-content: flex-start !important; }
-#sb_form_q { font-size: 16px !important; font-family: Arial, sans-serif !important; }
+
+/* ---- Not in 2019: AI and Copilot entry points, the endless feed under the image ---- */
 #aitools, .aitools, #sb_form a[href*="copilot" i], #sb_form [aria-label*="Copilot" i], [id*="copilot" i]:not(body):not(html),
-#b_sydConvCont, .b_hpcopilot, .hp_copilot, #codex, .cib-serp-main { display: none !important; }
-#hp_app header#hdr .scopes a, #hp_app header#hdr .scopes li, #hp_app #id_h a, #hp_app #id_h span { color: #fff !important; font-size: 13px !important; font-weight: 600 !important; text-shadow: 0 0 2px rgba(0,0,0,.6) !important; }
+#b_sydConvCont, .b_hpcopilot, .hp_copilot, #codex, .cib-serp-main, #hp_app #vs_cont > .vs { display: none !important; }
 .mc_caro, #vs_cont .mc_vtvc, #vs_cont .mc_vtvc_con { border-radius: 0 !important; }
-/* Results pages: 2019 blue titles and green URLs, flat result blocks; light and dark */
-html { --n19-title: #001ba0; --n19-url: #006621; }
-html[data-net19-mode="dark"] { --n19-title: #8ab4f8; --n19-url: #81c995; }
-#b_results > li.b_algo h2 a, #b_results > li.b_algo h2 { color: var(--n19-title) !important; font-size: 20px !important; font-family: "Segoe UI", Arial, sans-serif !important; }
-#b_results > li.b_algo cite { color: var(--n19-url) !important; }
+
+/* ---- Results pages: a square search box, blue titles first with the green address under them, gray snippets ---- */
+#b_header .b_searchboxForm { border-radius: 0 !important; box-shadow: 0 0 0 1px rgba(0,0,0,.05), 0 2px 4px 1px rgba(0,0,0,.09) !important; }
+#b_header .b_searchboxForm #sb_search { order: 10 !important; }
+#b_results > li.b_algo { display: flex !important; flex-direction: column !important; }
+#b_results > li.b_algo > h2 { order: -1 !important; margin: 0 0 2px !important; }
+#b_results > li.b_algo h2 a, #b_results > li.b_algo h2 { color: var(--n19-title) !important; font-size: 20px !important; line-height: 24px !important; font-family: "Segoe UI", Arial, sans-serif !important; }
+#b_results > li.b_algo .b_tpcn { margin: 0 !important; height: auto !important; }
+#b_results > li.b_algo .b_tpcn .tpic, #b_results > li.b_algo .b_tpcn .tptt { display: none !important; }
+#b_results > li.b_algo .b_tpcn .tptxt { padding: 0 !important; margin: 0 !important; }
+#b_results > li.b_algo cite { color: var(--n19-url) !important; font-size: 14px !important; }
+#b_results > li.b_algo .b_caption p { color: var(--n19-snippet) !important; font-size: 13px !important; line-height: 20px !important; }
 #b_results > li.b_algo, #b_results > li { border-radius: 0 !important; box-shadow: none !important; }

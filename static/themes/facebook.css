@@ -1,9 +1,16 @@
-/* net19 handmade theme: Facebook, 2019: blue top bar, gray page, small-radius white cards, Helvetica. Facebook had no
-   dark mode in 2019; the dark variant keeps the same shapes and the navy top bar on Facebook's dark surfaces. */
+/* net19 handmade theme: Facebook, 2019. Signed out: a pale blue-gray (#edf0f5) top half with the logo and a bold 24px
+   "Connect with friends..." headline on the left, a white 8px-radius login card on the right (54px square-ish fields,
+   a #1877f2 "Log In" bar, a small blue "Forgot account?" link, a rule, a green "Create New Account" button), and a
+   white footer of small 12px links. Signed in: blue top bar, gray page, small-radius white cards, Helvetica. Facebook
+   had no dark mode in 2019; the dark variant keeps the same shapes on Facebook's dark surfaces. */
 html { --n19-wash: #e9ebee; --n19-card: #fff; --n19-card-2: #f5f6f7; --n19-comment: #f2f3f5; --n19-text: #1d2129; --n19-text-2: #606770; --n19-muted: #90949c;
-  --n19-icon: #606770; --n19-accent: #4267b2; --n19-link: #385898; --n19-divider: #dddfe2; --n19-bar: #4267b2; --n19-bar-border: #29487d; --n19-bar-field: #fff; --n19-bar-field-text: #1d2129; }
+  --n19-icon: #606770; --n19-accent: #4267b2; --n19-link: #385898; --n19-divider: #dddfe2; --n19-bar: #4267b2; --n19-bar-border: #29487d; --n19-bar-field: #fff; --n19-bar-field-text: #1d2129;
+  --n19-land: #edf0f5; --n19-land-card: #fff; --n19-land-field: #fff; --n19-land-line: #dddfe2; --n19-login: #1877f2; --n19-green: #42b72a; --n19-heading: #1c1e21; --n19-foot: #fff; --n19-foot-text: #737373; --n19-foot-link: #385898;
+  --n19-land-shadow: 0 2px 4px rgba(0,0,0,.1), 0 8px 16px rgba(0,0,0,.1); }
 html[data-net19-mode="dark"] { --n19-wash: #18191a; --n19-card: #242526; --n19-card-2: #3a3b3c; --n19-comment: #3a3b3c; --n19-text: #e4e6eb; --n19-text-2: #b0b3b8; --n19-muted: #8a8d91;
-  --n19-icon: #b0b3b8; --n19-accent: #5b7ec2; --n19-link: #8ea8e0; --n19-divider: #3e4042; --n19-bar: #29487d; --n19-bar-border: #1e3560; --n19-bar-field: #3a3b3c; --n19-bar-field-text: #e4e6eb; }
+  --n19-icon: #b0b3b8; --n19-accent: #5b7ec2; --n19-link: #8ea8e0; --n19-divider: #3e4042; --n19-bar: #29487d; --n19-bar-border: #1e3560; --n19-bar-field: #3a3b3c; --n19-bar-field-text: #e4e6eb;
+  --n19-land: #18191a; --n19-land-card: #242526; --n19-land-field: #3a3b3c; --n19-land-line: #3e4042; --n19-login: #2d88ff; --n19-green: #42b72a; --n19-heading: #e4e6eb; --n19-foot: #242526; --n19-foot-text: #8a8d91; --n19-foot-link: #8ea8e0;
+  --n19-land-shadow: 0 2px 4px rgba(0,0,0,.3), 0 8px 16px rgba(0,0,0,.3); }
 html:root, html.__fb-light-mode, html.__fb-dark-mode, html .__fb-light-mode, html .__fb-dark-mode {
   --web-wash: var(--n19-wash) !important; --wash: var(--n19-wash) !important; --surface-background: var(--n19-card) !important;
   --card-background: var(--n19-card) !important; --card-background-flat: var(--n19-card-2) !important; --comment-background: var(--n19-comment) !important;
@@ -21,3 +28,43 @@ div[role="banner"] { background: var(--n19-bar) !important; border-bottom: 1px s
   --secondary-button-background: rgba(0,0,0,.15); --comment-background: var(--n19-bar-field); }
 div[role="banner"] input { background: var(--n19-bar-field) !important; color: var(--n19-bar-field-text) !important; border-radius: 2px !important; }
 div[role="banner"] a[aria-label="Facebook"] svg path { fill: #fff !important; }
+
+/* Signed-out landing page (parts marked by facebook.js): the 2019 two-column layout on a blue-gray band */
+[data-n19-fb="top"] { background: var(--n19-land) !important; min-height: 658px !important; height: auto !important; flex-grow: 0 !important; }
+[data-n19-fb="top"] div { min-height: 0 !important; }
+[data-n19-fb="row"] { justify-content: center !important; align-items: flex-start !important; gap: 39px !important; background: transparent !important; height: auto !important; padding-bottom: 40px !important; }
+[data-n19-fb="rule"], [data-n19-fb="hero"] img, [data-n19-fb="title"], [data-n19-fb="card"] svg[aria-label="Meta logo"] { display: none !important; }
+[data-n19-fb="hero"], [data-n19-fb="login"] { flex: none !important; background: transparent !important; height: auto !important; }
+[data-n19-fb="hero"] { width: 580px !important; padding-top: 96px !important; }
+[data-n19-fb="hero"] div { position: relative !important; align-self: stretch !important; height: auto !important; justify-content: flex-start !important; border-radius: 0 !important; background: transparent !important; padding: 0 !important; margin: 0 !important; width: 100% !important; }
+[data-n19-fb="hero"] svg { width: 60px !important; height: 60px !important; margin: 0 0 22px !important; color: var(--n19-login) !important; fill: var(--n19-login) !important; }
+[data-n19-fb="hero"] span { font: bold 24px/32px Helvetica, Arial, sans-serif !important; --x-lineHeight: 32px; --x---base-line-clamp-line-height: 32px; letter-spacing: normal !important;
+  color: var(--n19-heading) !important; max-width: 460px !important; width: 460px !important; margin: 0 !important; padding: 0 !important; display: block !important; }
+[data-n19-fb="login"] { width: 422px !important; min-width: 0 !important; padding-top: 152px !important; }
+[data-n19-fb="login"] div:not([data-n19-fb="card"], [data-n19-fb="card"] *) { width: 100% !important; height: auto !important; padding: 0 !important; margin: 0 !important; justify-content: flex-start !important; }
+[data-n19-fb="card"] { background: var(--n19-land-card) !important; border-radius: 8px !important; box-shadow: var(--n19-land-shadow) !important; padding: 16px 17px 24px !important; box-sizing: border-box !important; }
+[data-n19-fb="card"] :is(div, form) { min-width: 0 !important; max-width: 100% !important; box-sizing: border-box !important; }
+[data-n19-fb="card"] div:has([role="button"]), [data-n19-fb="card"] div:has(a[href*="/reg/"]) { padding-top: 0 !important; }
+[data-n19-fb="card"] div:has(> a[href*="/reg/"]) { padding: 0 !important; justify-content: center !important; align-items: center !important; }
+[data-n19-fb="card"] div:has(> svg[aria-label="Meta logo"]) { display: none !important; }
+[data-n19-fb="card"] :is(span, label, input, a) { font-family: Helvetica, Arial, sans-serif !important; }
+/* A field is a bordered box around a borderless input and its floating label */
+[data-n19-fb="card"] div:has(> div > input:is([type="text"], [type="password"], [type="email"])) { box-sizing: border-box !important; height: 54px !important; border: 1px solid var(--n19-land-line) !important; border-radius: 6px !important;
+  background: var(--n19-land-field) !important; padding: 0 16px !important; margin-bottom: 8px !important; justify-content: center !important; }
+[data-n19-fb="card"] input { font-size: 17px !important; color: var(--n19-heading) !important; box-shadow: none !important; border: none !important; background: transparent !important; }
+[data-n19-fb="card"] label { color: #90949c !important; font-size: 16px !important; }
+[data-n19-fb="card"] [role="button"] > div, [data-n19-fb="card"] [role="button"] { border-radius: 6px !important; }
+[data-n19-fb="card"] [role="button"] > div:first-child { background: var(--n19-login) !important; height: 48px !important; }
+[data-n19-fb="card"] [role="button"] span { font-size: 20px !important; font-weight: bold !important; color: #fff !important; }
+[data-n19-fb="card"] a[href*="/recover/"] { height: auto !important; margin: 12px 0 0 !important; padding-bottom: 20px !important; border-bottom: 1px solid var(--n19-land-line) !important; border-radius: 0 !important; }
+[data-n19-fb="card"] a[href*="/recover/"] div { border-radius: 0 !important; background: transparent !important; height: auto !important; }
+[data-n19-fb="card"] a[href*="/recover/"] span { font-size: 14px !important; font-weight: 400 !important; color: var(--n19-login) !important; }
+[data-n19-fb="card"] a[href*="/reg/"] { width: auto !important; margin: 28px auto 0 !important; }
+[data-n19-fb="card"] a[href*="/reg/"] > div { background: var(--n19-green) !important; border: none !important; border-radius: 6px !important; height: 48px !important; padding: 0 16px !important; }
+[data-n19-fb="card"] a[href*="/reg/"] span { font-size: 17px !important; font-weight: bold !important; color: #fff !important; }
+/* The white footer: small 12px language list and links in one 1040px column */
+[data-n19-fb="foot"], [data-n19-fb="foot"] > div { background: var(--n19-foot) !important; }
+[data-n19-fb="foot"] [role="main"] > div { max-width: 1040px !important; width: 1040px !important; margin: 0 auto !important; padding-top: 12px !important; }
+[data-n19-fb="foot"] :is(span, a) { font-family: Helvetica, Arial, sans-serif !important; font-size: 12px !important; color: var(--n19-foot-link) !important; }
+[data-n19-fb="foot"] a[href*="meta.ai"] { display: none !important; }
+[data-n19-fb="foot"] div:has(> span > a), [data-n19-fb="foot"] div:has(> span:only-child) { padding-left: 0 !important; padding-right: 10px !important; }

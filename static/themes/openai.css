@@ -1,14 +1,38 @@
-/* net19 handmade theme: OpenAI, 2019: small bold uppercase, widely letter-spaced menu words ("ABOUT  PROGRESS
-   RESOURCES  BLOG"), "LEARN MORE >" style uppercase calls to action, white cards with 4px corners instead of pills
-   and 1rem rounding. The 2019 full-bleed colored section backgrounds are not reproduced (today's pages have no
-   matching structure), so the theme is typographic. OpenAI follows the device's dark mode; both modes are covered. */
-html { --n19-text: #000; --n19-text-2: #555; --n19-rule: #e5e5e5; --n19-card: #fff; }
-html[data-net19-mode="dark"] { --n19-text: #fff; --n19-text-2: #aaa; --n19-rule: #333; --n19-card: #171717; }
+/* net19 handmade theme: OpenAI, 2019: the home page opens on a hot pink (#ff157e) cover: white logo, small bold
+   uppercase menu words spaced wide ("RESEARCH  PRODUCTS …"), a white hairline under the menu, and the latest
+   releases as white cards with 4px corners and a heavy shadow, their titles in white; no "What can I help with?"
+   assistant box. Below it the page is white, with small section labels over a strong rule, uppercase spaced
+   calls to action ("VIEW MORE") and 4px buttons instead of pills. OpenAI follows the device's dark mode; both
+   modes are covered. */
+html { --n19-cover: #ff157e; --n19-cover-text: #fff; --n19-text: #050526; --n19-text-2: #6e6e80; --n19-rule: #050526; --n19-card: #fff;
+  --n19-card-shadow: 0 8px 24px rgba(5,5,38,.28); }
+html[data-net19-mode="dark"] { --n19-cover: #d4105f; --n19-cover-text: #fff; --n19-text: #f7f7f7; --n19-text-2: #aaa; --n19-rule: #f7f7f7; --n19-card: #1c1c1c;
+  --n19-card-shadow: 0 8px 24px rgba(0,0,0,.6); }
 html:root { --radius-md: 4px !important; --radius-lg: 4px !important; --radius-xl: 4px !important; --radius-2xl: 4px !important;
   --cgm-radius-xl: 4px !important; --cgm-radius-2xl: 4px !important; }
 
-/* Menu words */
-.text-nav-header { text-transform: uppercase !important; letter-spacing: .2em !important; font-size: 11px !important; font-weight: 700 !important; }
+/* The assistant prompt that opens today's home page did not exist (openai.js marks it) */
+[data-net19-hidden] { display: none !important; }
+
+/* Menu words: small, bold, uppercase, spaced wide */
+.text-nav-header, header nav ul > li > :is(a, button) { text-transform: uppercase !important; letter-spacing: .2em !important; font-size: 11px !important; font-weight: 700 !important; }
+
+/* 2019's menu sat at the right end of the bar */
+header nav ul { justify-content: flex-end !important; }
+
+/* The pink cover on the home page: header and the release cards (openai.js marks them) */
+html[data-net19-home] header { background: var(--n19-cover) !important; color: var(--n19-cover-text) !important; }
+html[data-net19-home] header > div:first-child { background: var(--n19-cover) !important; box-shadow: inset 0 -1px 0 rgba(255,255,255,.7) !important; }
+html[data-net19-home] header > div:first-child :is(button, a)[class*="rounded-[2.5rem]"] { background: transparent !important; border: 1px solid rgba(255,255,255,.8) !important; }
+html[data-net19-home] header :is(a, button, span, svg):not(#header-mobile-drawer-panel *):not([role="menu"] *) { color: var(--n19-cover-text) !important; }
+html[data-net19-home] header [class*="bg-background"]:not(#header-mobile-drawer-panel):not(#header-mobile-drawer-panel *) { background: transparent !important; }
+[data-net19-cover] { background: var(--n19-cover) !important; color: var(--n19-cover-text) !important; padding: 40px 0 56px !important; margin-top: 0 !important; box-shadow: 0 -64px 0 var(--n19-cover) !important; }
+[data-net19-cover] :is(.text-primary-100, .text-h2, .text-h5, p, span, a) { color: var(--n19-cover-text) !important; }
+[data-net19-cover] .rounded-md { border-radius: 4px !important; background: var(--n19-card) !important; padding: 8px !important; box-shadow: var(--n19-card-shadow) !important; overflow: hidden !important; }
+[data-net19-cover] .rounded-md img, [data-net19-cover] .rounded-md video { border-radius: 0 !important; }
+[data-net19-cover] .absolute.inset-s-0.top-0 { display: none !important; }
+[data-net19-cover] .text-h2 { font-size: 30px !important; line-height: 1.25 !important; font-weight: 400 !important; letter-spacing: 0 !important; }
+[data-net19-cover] .text-h5 { font-size: 15px !important; line-height: 1.35 !important; font-weight: 700 !important; letter-spacing: .01em !important; }
 
 /* Pills become 4px buttons; calls to action are uppercase and spaced */
 [class*="rounded-[2.5rem]"], [class*="rounded-full"].text-cta, a.text-cta, button.text-cta { border-radius: 4px !important; }
@@ -16,6 +40,10 @@ html:root { --radius-md: 4px !important; --radius-lg: 4px !important; --radius-x
 [class*="rounded-[2.5rem]"] { text-transform: uppercase !important; letter-spacing: .12em !important; font-size: 12px !important; font-weight: 700 !important; }
 main [class*="rounded-md"], main [class*="rounded-lg"], main [class*="rounded-xl"], main [class*="rounded-2xl"], main [class*="rounded-3xl"] { border-radius: 4px !important; }
 
-/* Headings: the 2019 site set them lighter and larger-tracked */
+/* Section titles: a small label over a strong rule, as "Recent Releases" and "Latest Updates" were */
+main h2.text-h4 { font-size: 13px !important; font-weight: 400 !important; letter-spacing: 0 !important; }
+main .max-w-container.mb-8.flex.items-baseline { background: linear-gradient(var(--n19-rule), var(--n19-rule)) no-repeat center bottom / calc(100% - 64px) 2px !important; padding-bottom: 12px !important; }
+
+/* Headings: the 2019 site set them lighter */
 main h1, main h2 { font-weight: 400 !important; letter-spacing: -.01em !important; }
-.text-meta { text-transform: uppercase !important; letter-spacing: .12em !important; font-size: 11px !important; color: var(--n19-text-2) !important; }
+.text-meta, main p.flex.flex-wrap.gap-x-3 { text-transform: uppercase !important; letter-spacing: .12em !important; font-size: 11px !important; font-weight: 700 !important; color: var(--n19-text-2); }

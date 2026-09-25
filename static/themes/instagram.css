@@ -1,8 +1,15 @@
-/* net19 handmade theme: Instagram, 2019: light gray page, bordered cards with 3px corners, #3897f0 buttons; no
-   Reels, Threads or Meta AI entry points. The dark variant keeps the same shapes on black. */
+/* net19 handmade theme: Instagram, 2019: a #fafafa page with white boxes in 1px #dbdbdb borders and 1px corners;
+   the login and sign-up boxes with small square-ish #fafafa fields and narrow #3897f0 buttons with 4px corners and
+   14px semibold white text; #003569 links and #3897f0 "Log in"/"Sign up" links; system fonts; no Reels, Threads or
+   Meta AI entry points. The dark variant keeps the same shapes on black. */
 html { --n19-page: 250,250,250; --n19-card: 255,255,255; --n19-text: 38,38,38; --n19-text-2: 142,142,142; --n19-border: 219,219,219; --n19-blue: 56,151,240; --n19-link: 0,55,107; }
 html[data-net19-mode="dark"] { --n19-page: 0,0,0; --n19-card: 18,18,18; --n19-text: 250,250,250; --n19-text-2: 168,168,168; --n19-border: 38,38,38; --n19-blue: 0,149,246; --n19-link: 224,241,255; }
-html:root, html.__ig-light-mode, html.__ig-dark-mode {
+html:root, html.__ig-light-mode, html.__ig-dark-mode, html.__fb-light-mode, html.__fb-dark-mode {
+  --ig-colors-button-primary-background: var(--n19-blue) !important; --ig-colors-button-primary-background--pressed: var(--n19-blue) !important;
+  --ig-colors-button-primary-link-text: var(--n19-blue) !important; --ig-colors-button-primary-link-text--hover: var(--n19-link) !important;
+  --primary-button-background: rgb(var(--n19-blue)) !important; --secondary-button-text: rgb(var(--n19-blue)) !important; --mwp-header-button-color: rgb(var(--n19-blue)) !important;
+  --button-corner-radius-large: 4px !important; --button-corner-radius-medium: 4px !important; --button-corner-radius: 4px !important; --input-border-radius: 3px !important;
+  --modal-border-radius: 4px !important; --igds-dialog-border-radius: 12px !important; --card-corner-radius: 3px !important; --ig-text-input-border-prism: var(--n19-border) !important;
   --ig-primary-background: var(--n19-card) !important; --ig-secondary-background: var(--n19-page) !important; --ig-primary-text: var(--n19-text) !important;
   --ig-secondary-text: var(--n19-text-2) !important; --ig-primary-button: var(--n19-blue) !important; --ig-link: var(--n19-link) !important;
   --ig-separator: var(--n19-border) !important; --ig-elevated-separator: var(--n19-border) !important; --ig-stroke: var(--n19-border) !important;
@@ -11,3 +18,8 @@ body, button, input, textarea { font-family: -apple-system, BlinkMacSystemFont, 
 main[role="main"] { background: rgb(var(--n19-page)) !important; }
 main article { background: rgb(var(--n19-card)) !important; border: 1px solid rgb(var(--n19-border)) !important; border-radius: 3px !important; }
 a[href="/reels/"], a[href*="threads.net"], a[href*="threads.com"], a[href*="/meta_ai"], [aria-label="Meta AI" i] { display: none !important; }
+/* Login form (#loginForm): 2019's small fields and narrow blue button */
+#loginForm input[name="username"], #loginForm input[name="password"], #loginForm input[name="email"], #loginForm input[name="pass"] {
+  background: rgb(var(--n19-page)) !important; font-size: 12px !important; border-radius: 3px !important; }
+#loginForm label:has(input), #loginForm div:has(> input[name]) { background: rgb(var(--n19-page)) !important; border-color: rgb(var(--n19-border)) !important; border-radius: 3px !important; }
+#loginForm button[type="submit"] { background: rgb(var(--n19-blue)) !important; border-radius: 4px !important; font-size: 14px !important; font-weight: 600 !important; color: #fff !important; }

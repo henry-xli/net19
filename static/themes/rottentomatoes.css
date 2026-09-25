@@ -1,12 +1,60 @@
-/* net19 handmade theme: Rotten Tomatoes, 2019: the #fa320a header, gray trending bar and Neusa/Franklin Gothic type are essentially today's look; 2019 used the older #3976dc link blue and squarer corners, and had no aRTi assistant. */
-html { --n19-link: #3976dc; --n19-link-hover: #2a62c0; }
-html[data-net19-mode="dark"] { --n19-link: #6f9ce8; --n19-link-hover: #9dbcf0; }
+/* net19 handmade theme: Rotten Tomatoes, 2019: a 1100px white column on a #eee page under the #fa320a header; a plain white search
+   field with 5px corners ("Search movies, TV, actors, more..."), big bold uppercase 20px Neusa menu links, the translucent gray
+   "Trending on RT" bar; spotlight captions in a translucent white box with a red left rule and dark uppercase titles; uppercase
+   section headings, #343434 text and #2466d4 links; no aRTi assistant and no "New" badges. */
+html { --n19-page: #eee; --n19-column: #fff; --n19-text: #343434; --n19-heading: #1c1c1c; --n19-link: #2466d4; --n19-link-hover: #23527c;
+  --n19-red: #fa320a; --n19-field: #fff; --n19-field-text: #343434; --n19-field-hint: #999; --n19-caption: rgba(255,255,255,.94); --n19-rule: #eee; }
+html[data-net19-mode="dark"] { --n19-page: #161616; --n19-column: #1e1e1e; --n19-text: #ddd; --n19-heading: #eee; --n19-link: #6f9ce8; --n19-link-hover: #9dbcf0;
+  --n19-red: #fa320a; --n19-field: #2a2a2a; --n19-field-text: #eee; --n19-field-hint: #999; --n19-caption: rgba(20,20,20,.85); --n19-rule: #333; }
+
+/* Rotten Tomatoes' own design variables, so menus, dialogs and components in shadow roots follow */
 html:root, body {
   --Foreground-Interactive-Default: var(--n19-link) !important; --Foreground-Interactive-Hover: var(--n19-link-hover) !important;
-  --blueLink: var(--n19-link) !important; --borderRadius: 3px !important;
+  --blueLink: var(--n19-link) !important; --blue: var(--n19-link) !important; --blueHover: var(--n19-link-hover) !important;
+  --grayDark2: var(--n19-text) !important; --borderRadius: 3px !important;
 }
-body { font-family: "Franklin Gothic", "Franklin Gothic FS", -apple-system, BlinkMacSystemFont, "PT Sans", Arial, sans-serif; }
-/* Header search: the 2019 field was a plain white box */
-rt-header input[type="search"], rt-header [slot="search"] input, search-results-nav input { border-radius: 3px !important; }
+body.body { background-color: var(--n19-page) !important; color: var(--n19-text); }
+#main_container { background-color: var(--n19-column) !important; }
+
+/* Header: the #fa320a bar; top links in white, the account link bold and uppercase */
+rt-header { --headerBackgroundColor: var(--n19-red) !important; }
+rt-header > ul[slot="nav-links"] a, rt-header > ul[slot="nav-links"] button { font-weight: 400 !important; font-size: 14px !important; }
+rt-header #masthead-show-login-btn { font-weight: 700 !important; text-transform: uppercase !important; }
+/* Search: a plain white field with 5px corners and dark text; the magnifier sits at the right end */
+rt-header search-results-controls input[slot="search-input"] {
+  background: var(--n19-field) !important; color: var(--n19-field-text) !important; border: none !important; border-radius: 5px !important;
+  padding-left: 12px !important; padding-right: 40px !important; height: 34px !important; font-size: 16px !important; box-shadow: none !important;
+}
+rt-header search-results-controls input[slot="search-input"]::placeholder { color: var(--n19-field-hint) !important; }
+rt-header search-results-controls rt-link[slot="search-submit"] { --textColor: #777 !important; --textColorHover: var(--n19-red) !important; left: auto !important; right: 12px !important; }
+rt-header search-results-controls rt-button[slot="search-clear"] { --textColor: #777 !important; right: 40px !important; }
+/* Menu: 2019's big bold uppercase Neusa links, which wrap to a second row as they did */
+rt-header rt-header-nav { max-width: 500px; white-space: normal !important; }
+rt-header-nav-item > a[slot="link"] { font-size: 20px !important; font-weight: 700 !important; text-transform: uppercase !important; letter-spacing: 0 !important; }
+rt-header-nav-item temporary-display, rt-header-nav-item rt-badge { display: none !important; }
+
+/* Trending bar: the translucent gray strip with the yellow Neusa label */
+.trending-bar { background-color: rgba(0,0,0,.6) !important; }
+
+/* Spotlight: captions in a translucent white box (2019), dark bold uppercase titles; the red left rule stays */
+editorial-spotlight-tile > div[slot="caption"] {
+  margin: -10px !important; padding: 10px 12px !important; min-height: 100px; box-sizing: border-box; background: var(--n19-caption) !important; color: var(--n19-text) !important;
+}
+editorial-spotlight-tile > div[slot="caption"] h2 { color: var(--n19-heading) !important; font-weight: 700 !important; text-transform: uppercase !important; font-size: 21px !important; line-height: 21px !important; }
+editorial-spotlight-tile > div[slot="caption"] p { color: var(--n19-text) !important; font-size: 15px !important; line-height: 18px !important; }
+editorial-spotlight-tile > div[slot="caption"] em { color: inherit !important; }
+
+/* Section headings: uppercase, bold, dark (2019's panel headings) */
+h2 rt-text[context="heading"], .dynamic-poster-list__sponsored-header rt-text, [slot="title"] rt-text[context="heading"] {
+  --fontFamily: var(--fontNeusa) !important; --fontWeight: 700 !important; --textTransform: uppercase !important; --textColor: var(--n19-heading) !important;
+}
+.dynamic-poster-list__header-container a.a--short { text-transform: none !important; font-weight: 400 !important; font-size: 16px !important; color: var(--n19-link) !important; }
+.dynamic-poster-list { border-bottom: 1px solid var(--n19-rule); }
+/* Poster titles in the dark list color, as 2019's movie lists */
+media-info-tile .poster-tile-meta rt-text:not([slot]) { --textColor: var(--n19-text) !important; }
+
+/* Squarer corners than today's rounded controls */
+rt-header search-results-controls input, watchlist-button, rt-button { --borderRadius: 3px; }
+
 /* aRTi (an AI assistant) did not exist in 2019 */
 button.arti-desktop, button[aria-label="Open aRTi"], [slot="arti-desktop"], [slot="arti-mobile"] { display: none !important; }

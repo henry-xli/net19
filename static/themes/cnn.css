@@ -1,11 +1,82 @@
-/* net19 handmade theme: CNN, 2019: black top bar with white section links, bold black headline stacks on white. */
-header .header__container, .header__wrapper-inner, .header__wrapper-outer > div:first-child { background: #0c0c0c !important; }
-header .header__nav-item-link, header .header__nav-item-link *, header .header__container a, header .header__container button, header .header__container svg { color: #fff !important; fill: currentColor !important; }
-header .header__container { height: 50px !important; }
-.container__headline, .container__headline-text, .container__title_url-text, h2.container__title_url-text { color: #0c0c0c !important; font-weight: 700 !important; }
+/* net19 handmade theme: CNN, 2019 as the Web Design Museum shows it: a 40px near-black (#0c0c0c) bar with the red square
+   CNN logo at its left edge, white 15px section links and the menu button at the far right; a red-labelled "TRENDING:"
+   line; a 1100px page of three columns, the lead headline and photo in the wide left column; bold #262626 lead
+   headlines over plain 16px headline lists split by hairlines; section titles on light gray bars. CNN has no dark mode,
+   so a dark device gets the engine's inverted page; the dark tokens are only a fallback. */
+html { --n19-bar: #0c0c0c; --n19-bar-text: #fff; --n19-red: #c00; --n19-text: #262626; --n19-meta: #595959; --n19-rule: #e6e6e6;
+  --n19-title-bar: #f2f2f2; --n19-page: #fff; }
+html[data-net19-mode="dark"] { --n19-bar: #0c0c0c; --n19-bar-text: #fff; --n19-red: #e03030; --n19-text: #e6e6e6; --n19-meta: #aaa; --n19-rule: #333;
+  --n19-title-bar: #222; --n19-page: #121212; }
+
+/* Top bar: 40px, near-black, full width; no gray rule under it */
+nav#pageHeader, nav#pageHeader .header__inner, nav#pageHeader .header__subnav-mount { background: var(--n19-bar) !important; }
+nav#pageHeader, nav#pageHeader .header__container { height: 40px !important; min-height: 40px !important; }
+nav#pageHeader .header__container { max-width: none !important; padding: 0 16px 0 0 !important; position: relative !important; }
+.header__navigation-separator { display: none !important; }
+nav#pageHeader :is(.header__nav-item-link, .header__video-link, .header__audio-link, .header__search-icon, .header__menu-icon, .userAccountButton) { color: var(--n19-bar-text) !important; }
+nav#pageHeader svg { fill: currentColor !important; }
+nav#pageHeader .header__menu-icon svg, nav#pageHeader .header__search-icon svg { color: var(--n19-bar-text) !important; }
+nav#pageHeader .header__menu-icon svg *, nav#pageHeader .header__search-icon svg * { stroke: currentColor; }
+/* The logo is a red 40px square with white letters, flush with the bar's left end */
+nav#pageHeader .brand-logo { order: -2; margin: 0 !important; }
+nav#pageHeader .brand-logo__logo-link { display: flex !important; align-items: center !important; justify-content: center !important;
+  background: var(--n19-red) !important; width: 40px !important; height: 40px !important; padding: 0 !important; }
+nav#pageHeader .brand-logo__logo-link svg { width: 34px !important; height: 17px !important; color: #fff !important; }
+nav#pageHeader .brand-logo__logo-link svg path { fill: #fff !important; }
+/* Section links: white 15px regular type; the menu button moves to the right end, as in 2019 */
+nav#pageHeader .header__nav-item { margin: 0 !important; padding: 0 !important; }
+nav#pageHeader .header__nav-item-link { font-size: 15px !important; font-weight: 400 !important; padding: 0 9px !important; }
+nav#pageHeader .header__nav { margin-left: 8px !important; }
+nav#pageHeader .header__container > .header__left > .header__menu-icon { position: absolute !important; right: 16px !important; top: 4px !important; }
+nav#pageHeader .header__right { padding-right: 40px !important; }
+nav#pageHeader :is(.header__video-link, .header__audio-link) { font-size: 13px !important; font-weight: 700 !important; }
+nav#pageHeader .header__video-link svg, nav#pageHeader .header__video-link::before, nav#pageHeader .header__audio-link svg { display: none !important; }
+nav#pageHeader .header__video-link { margin-right: 16px !important; }
+/* Sign in is plain white text; the red Subscribe button is a 2020s promotion */
+nav#pageHeader .header__subscribe-button { display: none !important; }
+nav#pageHeader .userAccountButton { background: transparent !important; border: none !important; font-size: 13px !important; font-weight: 700 !important; }
+
+/* Dark zones keep light type */
+[class*="zone--t-dark"] { --n19-text: #fff; --n19-title-bar: #262626; --n19-rule: #404040; }
+/* The streaming-subscription promotion band (2024) did not exist; cnn.js marks it */
+[data-net19-promo] { display: none !important; }
+
+/* Page: 1100px wide */
+.layout__wrapper.layout-homepage__wrapper, .layout-homepage .layout__content-wrapper > .layout__wrapper { max-width: 1132px !important; margin: 0 auto !important; padding: 20px 16px 0 !important; }
+/* Trending line: red uppercase labels, regular dark links, gray separators */
+.container_ribbon .container__text-label--type-trending, .container_ribbon .container__text-label { color: var(--n19-red) !important; font-weight: 400 !important; text-transform: uppercase !important; }
+.container_ribbon .container__headline-text { font-size: 15px !important; font-weight: 400 !important; color: var(--n19-text) !important; }
+.container_ribbon .container__item { border-bottom: none !important; }
+.container_ribbon__field-links { border-bottom: none !important; }
+
+/* The first zone: the lead package moves to a wide left column (447px), the two stacks follow (306px each) */
+.zone__items.layout--wide-center { gap: 0 20px !important; }
+.zone__items.layout--wide-center > .stack_condensed { order: -1; flex: 0 0 calc(40.6% - 13px) !important; width: auto !important; max-width: none !important; }
+.zone__items.layout--wide-center > .stack { flex: 1 1 0 !important; width: auto !important; max-width: none !important; min-width: 0 !important; }
+
+/* Headlines: bold #262626 leads, plain 16px list items between hairlines (CNN's own rules are specific, hence the long selectors) */
+.container .container__headline, .container .container__headline-text { color: var(--n19-text) !important; }
+.container .container__title_url-text.container_lead-package__title_url-text, h2.container__title_url-text { color: var(--n19-text) !important; font-size: 40px !important; line-height: 44px !important; font-weight: 500 !important; letter-spacing: -.3px !important; }
 .container__title--emphatic, .container__title--emphatic * { text-transform: none !important; }
-.container__field-links .container__item { border-bottom: 1px solid #e6e6e6 !important; }
+.container .container__field-links > .container__item:first-child .container__headline:is(.container_lead-package__headline, .container_lead-plus-headlines__headline) {
+  font-weight: 700 !important; font-size: 20px !important; line-height: 24px !important; letter-spacing: 0 !important; }
+.container .container__field-links > .container__item:not(:first-child) .container__headline:is(.container_lead-package__headline, .container_lead-plus-headlines__headline),
+.container .container__field-links > .container__item .container__headline:is(.container_list-headlines__headline, .container_list-headlines-with-read-times__headline, .container_grid-3__headline, .container_grid-2__headline, .container_grid-4__headline) {
+  font-size: 16px !important; line-height: 20px !important; font-weight: 400 !important; letter-spacing: 0 !important; }
+.container .container__headline .container__headline-text { font-weight: inherit !important; }
+.container__field-links > .container__item { border-bottom: 1px solid var(--n19-rule) !important; }
+.container_ribbon .container__field-links > .container__item { border-bottom: none !important; }
 .container__headline-text:hover { text-decoration: underline !important; }
-.image__container img, .container__item-media img, .image img { border-radius: 0 !important; }
-/* Section labels were red, uppercase */
-.container__label, .zone__title, .container__title-text { color: #cc0000 !important; text-transform: uppercase !important; }
+.container__item-media img, .image__container img, .image img { border-radius: 0 !important; }
+/* Kicker labels ("Analysis", "Live Updates") in 2019's red */
+.container__text-label:not([class*="ribbon"]) { color: var(--n19-red) !important; font-weight: 400 !important; }
+/* Section titles: bold dark type on a light gray bar */
+.container .container__title-text, .container__title:not(.container__title--emphatic) h2 { color: var(--n19-text) !important; text-transform: none !important; font-size: 17px !important; font-weight: 700 !important; border-left: none !important; padding-left: 0 !important; }
+.container__title:not(.container__title--emphatic) { background: var(--n19-title-bar) !important; border: none !important; padding: 7px 8px !important; margin-bottom: 8px !important; min-height: 0 !important; height: auto !important; }
+.container .container__title:not(.container__title--emphatic) .container__title-text { line-height: 22px !important; margin: 0 !important; }
+.container__title:not(.container__title--emphatic)::before, .container__title:not(.container__title--emphatic)::after { display: none !important; }
+.zone__title, .product-zone__title:not([class*="t-dark"] *) { color: var(--n19-text); }
+.zone--t-light .zone__title-text, .product-zone--t-light .product-zone__title { font-size: 28px !important; font-weight: 700 !important; text-transform: none !important; }
+/* Article pages: the same dark headline type */
+.headline__text, h1.headline__text { color: var(--n19-text) !important; font-weight: 700 !important; }
+.article__content p, .paragraph { color: var(--n19-text) !important; }

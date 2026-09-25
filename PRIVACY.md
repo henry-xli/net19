@@ -1,12 +1,12 @@
 # net19 privacy policy
 
-Effective September 25, 2026. Applies to net19 0.5.0.
+Effective September 25, 2026. Applies to net19 0.6.0.
 
 Net19 restyles 90 popular websites to look as they did in 2019. It has no developer-operated server, account system, analytics, advertisements, remote AI, or telemetry.
 
 ## What leaves your device
 
-Nothing. Net19 makes no network requests of its own. Its themes are stylesheets and small scripts bundled inside the extension. The Google homepage theme shows Google's own hosted logo image, which your browser loads from google.com like any other part of that page.
+Nothing. Net19 makes no network requests of its own. Its themes are stylesheets and small scripts bundled inside the extension. A few themes show a site's own older logo or icon images (Google, Bing, Wikipedia), which your browser loads from that same site like any other part of the page.
 
 Two themes send you to an older version of a site on that site's own servers:
 

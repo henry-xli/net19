@@ -1,19 +1,58 @@
-/* net19 handmade theme: Kelley Blue Book, 2019: #2b5195 blue nav bar with bold white Helvetica/Arial links, Open Sans headings, glossy green (#218809) "Price New/Used" and "My Car's Value" buttons, #0b5eaa links. */
-html { --n19-bar: #2b5195; --n19-green: #218809; --n19-green-dark: #1d6d08; --n19-link: #0b5eaa; --n19-font: "Open Sans", sans-serif; --n19-nav-font: "Helvetica Neue", Helvetica, Arial, sans-serif; }
-html[data-net19-mode="dark"] { --n19-bar: #2b5195; --n19-green: #2a9c0e; --n19-green-dark: #1d6d08; --n19-link: #5ea3e6; --n19-font: "Open Sans", sans-serif; --n19-nav-font: "Helvetica Neue", Helvetica, Arial, sans-serif; }
-/* Global nav (the kbb-global-nav element): brighter 2019 blue, bold Arial links. */
-kbb-global-nav { --base-type-font-heading: var(--n19-nav-font) !important; }
-kbb-global-nav > nav, kbb-global-nav nav[class*="font-heading"] { background: var(--n19-bar) !important; }
-kbb-global-nav nav a, kbb-global-nav nav label, kbb-global-nav nav button { font-family: var(--n19-nav-font) !important; font-weight: 700 !important; letter-spacing: 0 !important; }
-/* Hero entry points: 2019's glossy green buttons with white text. */
-#superheroSection a[data-lean-auto$="entry-point"] {
-  background: linear-gradient(var(--n19-green), var(--n19-green-dark)) !important; border: 1px solid var(--n19-green-dark) !important; border-radius: 3px !important;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.25) !important;
+/* net19 handmade theme: Kelley Blue Book, 2019: a 49px #2b5195 bar with bold white Open Sans links; the homepage hero's "Car Shopping Made Easy"
+   in 34px bold Open Sans over the photo, with glossy green (#229309 to #1c6908) "Price New/Used" and "My Car's Value" buttons; Open Sans
+   bold headings with tight letter-spacing (no Montserrat), #005cb0 links, flat white panels without drop shadows, #f0f2f4 gray bands. */
+html { --n19-bar: #2b5195; --n19-bar-hover: #3a64ad; --n19-menu: #006cd0; --n19-green: #229309; --n19-green-dark: #1c6908; --n19-link: #005cb0;
+  --n19-link-dark: #004691; --n19-text: #333; --n19-text-2: #555; --n19-band: #f0f2f4; --n19-panel: #fff; --n19-edge: #d3d9df;
+  --n19-soft: #edf3f9; --n19-soft-edge: #bec8d3; --n19-hero-box: rgba(0,0,0,.45); --n19-font: "Open Sans", Arial, sans-serif; }
+html[data-net19-mode="dark"] { --n19-bar: #2b5195; --n19-bar-hover: #3a64ad; --n19-menu: #1f5fa8; --n19-green: #2a9c0e; --n19-green-dark: #1c6908; --n19-link: #5ea3e6;
+  --n19-link-dark: #3b82c9; --n19-text: #ddd; --n19-text-2: #aaa; --n19-band: #1d2126; --n19-panel: #16191c; --n19-edge: #3a4048;
+  --n19-soft: #252b33; --n19-soft-edge: #3a4048; --n19-hero-box: rgba(0,0,0,.55); --n19-font: "Open Sans", Arial, sans-serif; }
+
+/* Global bar: 2019's brighter #2b5195, 49px tall, bold Open Sans links with no tracking; menus in the 2019 #006cd0 */
+kbb-global-nav > nav { --base-color-primary-800: var(--n19-bar) !important; --base-type-font-heading: var(--n19-font) !important; background: var(--n19-bar) !important;
+  height: 49px !important; box-shadow: 0 2px 2px 2px rgba(0,0,0,.15) !important; }
+div:has(> kbb-global-nav) { height: auto !important; min-height: 0 !important; }
+kbb-global-nav > nav > div, kbb-global-nav > nav > div > div, kbb-global-nav > nav div[class*="h-[64px]"] { height: 49px !important; }
+kbb-global-nav > nav svg:first-of-type { max-height: 44px !important; }
+kbb-global-nav nav a, kbb-global-nav nav label, kbb-global-nav nav button { font-family: var(--n19-font) !important; letter-spacing: 0 !important; }
+kbb-global-nav nav nav > div > div > a { font-weight: 700 !important; padding-top: 0 !important; padding-bottom: 0 !important; line-height: 49px !important; }
+kbb-global-nav nav nav > div > ul { top: 49px !important; background: var(--n19-menu) !important; }
+kbb-global-nav nav nav > div:hover { background: var(--n19-bar-hover) !important; }
+
+/* Type: Open Sans everywhere, bold headings with 2019's tight tracking, #333 text */
+#content, #content :is(h1, h2, h3, h4, h5, p, span, a, div, button, li, label, input) { font-family: var(--n19-font) !important; }
+#content :is(h2, h3) { font-weight: 700 !important; letter-spacing: -.5px !important; }
+#content h2[class*="css-"]:not(#superheroSection *) { font-size: 28px !important; line-height: 33px !important; letter-spacing: -.7px !important; color: var(--n19-text) !important; }
+#content p[class*="css-"] { color: var(--n19-text-2); }
+
+/* Homepage hero: the 2019 entry point, "Car Shopping Made Easy" in white over the photo on a plain translucent panel */
+#superheroSection [data-lean-auto^="green-monster"] { background: var(--n19-hero-box) !important; border-radius: 0 !important; }
+#superheroSection h1 { font-size: 34px !important; line-height: 40px !important; letter-spacing: -.9px !important; font-weight: 700 !important; margin-bottom: 4px !important; }
+#superheroSection h1::after { display: none !important; }
+#superheroSection h1 + h2 { font-size: 14px !important; line-height: 22px !important; font-weight: 700 !important; letter-spacing: 0 !important; margin-bottom: 14px !important; }
+/* 2019's glossy green buttons, 48px, 20px semibold white text, 4px corners */
+#superheroSection a[data-lean-auto$="entry-point"] > span {
+  background: linear-gradient(var(--n19-green), var(--n19-green-dark)) !important; border: 1px solid var(--n19-green-dark) !important; border-radius: 4px !important;
+  color: #fff !important; font-size: 20px !important; font-weight: 600 !important; letter-spacing: 0 !important;
 }
-#superheroSection a[data-lean-auto$="entry-point"] > span { background: transparent !important; }
-#superheroSection a[data-lean-auto$="entry-point"], #superheroSection a[data-lean-auto$="entry-point"] * { color: #fff !important; font-family: var(--n19-nav-font) !important; font-weight: 700 !important; }
-/* Headings were Open Sans (Montserrat came later). */
-main#content :is(h1, h2, h3, h4) , main#content [class*="css-"]:is(span, a, div, button) { font-family: var(--n19-font) !important; }
-main#content :is(h1, h2, h3) { letter-spacing: 0 !important; }
+#superheroSection a[data-lean-auto$="entry-point"]:hover > span { background: var(--n19-green) !important; }
+/* The third hero button in 2019's pale secondary style (white to #edf3f9, #bec8d3 edge, blue text) */
+#superheroSection a[data-lean-auto="shop-cars-for-sale"] > span {
+  background: linear-gradient(#fff, var(--n19-soft)) !important; border: 1px solid var(--n19-soft-edge) !important; border-radius: 4px !important;
+  color: var(--n19-link) !important; font-size: 20px !important; font-weight: 600 !important;
+}
+#superheroSection button, #superheroSection button span { font-family: var(--n19-font) !important; }
+
+/* Panels: flat and square, no floating drop shadows (2019's content panels sat on the page) */
+#content div[data-lean-auto^="hp-shop-guide-"] { box-shadow: none !important; border: none !important; border-radius: 0 !important; }
+#content div[data-lean-auto^="hp-shop-guide-"] > div:first-child, #content div[data-lean-auto^="hp-shop-guide-"] > div:first-child span { font-size: 20px !important; line-height: 24px !important; font-weight: 700 !important; letter-spacing: -.3px !important; color: var(--n19-link) !important; }
+#content div[class*="css-"][style*="box-shadow"] { box-shadow: none !important; }
+/* Buttons: 4px corners, Open Sans semibold, no letter-spacing */
+#content a[class*="e1uau9z02"] > span, #content button[class*="e1uau9z02"] > span { font-family: var(--n19-font) !important; font-weight: 600 !important; letter-spacing: 0 !important; border-radius: 4px !important; }
+/* Links: 2019's #005cb0 */
+#content a[class*="e1ez57g00"] { color: var(--n19-link) !important; }
+/* Gray bands: 2019's cooler #f0f2f4 */
+#content div[class*="e1ngkdb71"][class*="css-zfugvv"] { background: var(--n19-band) !important; }
+
 /* "Try AI Mode" did not exist in 2019. */
 a[href*="kbb.com/ai-mode"], a[href^="/ai-mode"] { display: none !important; }
