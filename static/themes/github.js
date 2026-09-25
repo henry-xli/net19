@@ -1,18 +1,12 @@
-// net19 handmade theme: GitHub in 2019 was light only. Use GitHub's own light palette.
-(() => {
-  const light = () => {
+// net19 handmade theme: GitHub, 2019 shapes and colors in light and dark. GitHub chooses its palette with
+// html[data-color-mode] (light, dark, or auto following the device) and data-dark-theme / data-light-theme.
+globalThis.net19Theme = {
+  detect() {
     const root = document.documentElement;
-    if (!root) return;
-    if (root.getAttribute('data-color-mode') !== 'light') root.setAttribute('data-color-mode', 'light');
-    if (root.getAttribute('data-light-theme') !== 'light') root.setAttribute('data-light-theme', 'light');
-  };
-  const watch = () => {
-    light();
-    new MutationObserver(light).observe(document.documentElement, { attributes: true, attributeFilter: ['data-color-mode', 'data-light-theme'] });
-  };
-  if (document.documentElement) watch();
-  else new MutationObserver((_, observer) => { if (document.documentElement) { observer.disconnect(); watch(); } }).observe(document, { childList: true });
-  // Turbo navigations can swap the root element's attributes after load.
-  document.addEventListener('turbo:load', light);
-  document.addEventListener('DOMContentLoaded', light);
-})();
+    const mode = root.getAttribute('data-color-mode');
+    const system = matchMedia('(prefers-color-scheme: dark)').matches;
+    const theme = mode === 'dark' || mode === 'auto' && system ? root.getAttribute('data-dark-theme') : root.getAttribute('data-light-theme');
+    return /dark/.test(theme || (mode === 'dark' ? 'dark' : '')) ? 'dark' : 'light';
+  },
+  watch: ['data-color-mode', 'data-light-theme', 'data-dark-theme'],
+};

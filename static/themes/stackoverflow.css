@@ -1,49 +1,25 @@
-/* net19 handmade theme: Stack Overflow, 2019: Arial, orange-topped light bar, blue #0095ff buttons, #e1ecf4 tags, boxed stats. */
-:root, body, body.theme-dark, body.theme-system { color-scheme: light !important; }
-body, body *:not(code):not(pre):not(kbd):not(pre *):not(code *):not(svg):not(path) { font-family: Arial, "Helvetica Neue", Helvetica, sans-serif !important; }
-body { background: #fff !important; color: #242729 !important; font-size: 13px !important; }
-a { color: #07c; }
-
-/* Top bar */
-header.s-topbar { background: #fafafb !important; border-top: 3px solid #f48024 !important; box-shadow: 0 1px 0 rgba(12,13,14,.15) !important; }
-.s-topbar .s-input, .s-topbar input.s-input__search { border-radius: 3px !important; border-color: #bbc0c4 !important; }
-.s-topbar .s-topbar--item, .s-topbar .s-navigation--item { color: #535a60 !important; }
-
-/* Buttons */
-.s-btn__filled, .s-btn__primary, a.s-btn.s-btn__filled, .ws-nowrap.s-btn.s-btn__primary {
+/* net19 handmade theme: Stack Overflow, 2019: Arial, orange-topped top bar, #0095ff buttons with the inner highlight,
+   #e1ecf4 tags, outlined answer counts. Stack Overflow's dark mode keeps the same shapes with dark tokens. */
+html { --n19-bar: #fafafb; --n19-bar-shadow: rgba(12,13,14,.15); --n19-text: #242729; --n19-text-2: #6a737c; --n19-link: #07c; --n19-divider: #e4e6e8;
+  --n19-tag-bg: #e1ecf4; --n19-tag-text: #39739d; --n19-tag-hover: #cee0ed; --n19-nav-selected: #eff0f1; --n19-answered: #5eba7d; }
+html[data-net19-mode="dark"] { --n19-bar: #3d3d3d; --n19-bar-shadow: rgba(0,0,0,.5); --n19-text: #e7e9eb; --n19-text-2: #9fa6ad; --n19-link: #6cbbf7; --n19-divider: #3d3d3d;
+  --n19-tag-bg: #3d4952; --n19-tag-text: #9cc3db; --n19-tag-hover: #465661; --n19-nav-selected: #393939; --n19-answered: #5eba7d; }
+body, input, textarea, button, .s-prose { font-family: Arial, "Helvetica Neue", Helvetica, sans-serif !important; }
+header.s-topbar { background: var(--n19-bar) !important; border-top: 3px solid #f48024 !important; box-shadow: 0 1px 0 var(--n19-bar-shadow) !important; }
+.s-topbar .s-input { border-radius: 3px !important; }
+.s-btn__filled, .s-btn__primary {
   background: #0095ff !important; color: #fff !important; border: 1px solid #07c !important; border-radius: 3px !important;
   box-shadow: inset 0 1px 0 0 rgba(102,191,255,.75) !important; font-weight: 400 !important;
 }
 .s-btn__filled:hover, .s-btn__primary:hover { background: #07c !important; }
-.s-btn__outlined, .s-btn__muted.s-btn__outlined { border-radius: 3px !important; }
-.s-topbar .s-btn__filled { box-shadow: inset 0 1px 0 0 rgba(102,191,255,.75) !important; }
-
-/* Tags */
-.s-tag, .post-tag, a.s-tag, button.s-tag {
-  background: #e1ecf4 !important; color: #39739d !important; border: 1px solid transparent !important; border-radius: 3px !important;
-  font-size: 12px !important; padding: .4em .5em !important; line-height: 1.2 !important;
+.s-btn__outlined, .s-btn { border-radius: 3px !important; }
+.s-tag, .post-tag { background: var(--n19-tag-bg) !important; color: var(--n19-tag-text) !important; border: 1px solid transparent !important; border-radius: 3px !important; font-size: 12px !important; }
+.s-tag:hover, .post-tag:hover { background: var(--n19-tag-hover) !important; }
+#left-sidebar .nav-links .youarehere > a, #left-sidebar a[aria-current="page"], #left-sidebar .s-navigation--item.is-selected {
+  background: var(--n19-nav-selected) !important; color: var(--n19-text) !important; font-weight: 700 !important; border-right: 3px solid #f48024 !important; border-radius: 0 !important;
 }
-.s-tag:hover, .post-tag:hover { background: #cee0ed !important; color: #2c5877 !important; }
-
-/* Left navigation: selected item has a gray fill and an orange right edge */
-#left-sidebar .nav-links .youarehere > a, #left-sidebar .nav-links a[aria-current="page"], #left-sidebar .s-navigation--item.is-selected {
-  background: #eff0f1 !important; color: #242729 !important; font-weight: 700 !important; border-right: 3px solid #f48024 !important; border-radius: 0 !important;
-}
-#left-sidebar a { color: #6a737c !important; }
-
-/* Question lists: 2019 counts in outlined boxes, accepted answers filled green */
-.s-post-summary { border-bottom: 1px solid #e4e6e8 !important; }
-.s-post-summary--content-title a, .s-post-summary--content-title .s-link, .question-hyperlink { color: #07c !important; font-size: 15px !important; font-weight: 400 !important; }
-.s-post-summary--stats-item { color: #6a737c !important; font-size: 13px !important; }
-.s-post-summary--stats-item.has-answers { border: 1px solid #5eba7d !important; color: #5eba7d !important; border-radius: 3px !important; padding: 2px 4px !important; }
-.s-post-summary--stats-item.has-accepted-answer { background: #5eba7d !important; color: #fff !important; border-color: #5eba7d !important; }
+.s-post-summary--content-title a { color: var(--n19-link) !important; font-size: 15px !important; font-weight: 400 !important; }
+.s-post-summary--stats-item.has-answers { border: 1px solid var(--n19-answered) !important; color: var(--n19-answered) !important; border-radius: 3px !important; padding: 2px 4px !important; }
+.s-post-summary--stats-item.has-accepted-answer { background: var(--n19-answered) !important; color: #fff !important; }
 .s-post-summary--stats-item.has-accepted-answer svg { fill: #fff !important; }
-.s-user-card--link a, .s-user-card a { color: #07c !important; }
-
-/* Question page */
-.question-hyperlink, #question-header h1 a { font-size: 20px !important; color: #3b4045 !important; }
-.js-vote-count, .js-vote-count * { color: #6a737c !important; font-size: 20px !important; }
-.js-vote-up-btn, .js-vote-down-btn { border: none !important; background: transparent !important; }
-.s-prose, .s-prose p { font-size: 15px !important; line-height: 1.3 !important; }
-.s-sidebarwidget { border-radius: 0 !important; background: #fff8dc !important; border-color: #efe0a9 !important; }
-.s-sidebarwidget--header { background: #fbf3d5 !important; color: #525960 !important; }
+.s-post-summary { border-bottom-color: var(--n19-divider) !important; }

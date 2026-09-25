@@ -1,20 +1,13 @@
-/* net19 handmade theme: Instagram, 2019: light #fafafa page, white bordered cards with 3px corners, #3897f0 buttons, no Reels or Threads entry points. instagram.js keeps the light palette. */
-:root, html, .__ig-light-mode, .__ig-dark-mode {
-  color-scheme: light !important;
-  --ig-primary-background: 255,255,255 !important;
-  --ig-secondary-background: 250,250,250 !important;
-  --ig-primary-text: 38,38,38 !important;
-  --ig-secondary-text: 142,142,142 !important;
-  --ig-primary-button: 56,151,240 !important;
-  --ig-link: 0,55,107 !important;
-  --ig-separator: 219,219,219 !important;
-  --ig-elevated-separator: 219,219,219 !important;
-  --ig-stroke: 219,219,219 !important;
-  --ig-highlight-background: 239,239,239 !important;
+/* net19 handmade theme: Instagram, 2019: light gray page, bordered cards with 3px corners, #3897f0 buttons; no
+   Reels, Threads or Meta AI entry points. The dark variant keeps the same shapes on black. */
+html { --n19-page: 250,250,250; --n19-card: 255,255,255; --n19-text: 38,38,38; --n19-text-2: 142,142,142; --n19-border: 219,219,219; --n19-blue: 56,151,240; --n19-link: 0,55,107; }
+html[data-net19-mode="dark"] { --n19-page: 0,0,0; --n19-card: 18,18,18; --n19-text: 250,250,250; --n19-text-2: 168,168,168; --n19-border: 38,38,38; --n19-blue: 0,149,246; --n19-link: 224,241,255; }
+html:root, html.__ig-light-mode, html.__ig-dark-mode {
+  --ig-primary-background: var(--n19-card) !important; --ig-secondary-background: var(--n19-page) !important; --ig-primary-text: var(--n19-text) !important;
+  --ig-secondary-text: var(--n19-text-2) !important; --ig-primary-button: var(--n19-blue) !important; --ig-link: var(--n19-link) !important;
+  --ig-separator: var(--n19-border) !important; --ig-elevated-separator: var(--n19-border) !important; --ig-stroke: var(--n19-border) !important;
 }
-body, body * { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-html, body, main[role="main"], section > main { background: #fafafa !important; }
-main article, main article > div { background: #fff !important; border: 1px solid #dbdbdb !important; border-radius: 3px !important; }
-button[type="submit"], div[role="button"]._acan._acap._acas, button._acan._acap._acas { background: #3897f0 !important; border-radius: 4px !important; color: #fff !important; }
-/* Reels, Threads and Meta AI entry points did not exist */
+body, button, input, textarea { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important; }
+main[role="main"] { background: rgb(var(--n19-page)) !important; }
+main article { background: rgb(var(--n19-card)) !important; border: 1px solid rgb(var(--n19-border)) !important; border-radius: 3px !important; }
 a[href="/reels/"], a[href*="threads.net"], a[href*="threads.com"], a[href*="/meta_ai"], [aria-label="Meta AI" i] { display: none !important; }

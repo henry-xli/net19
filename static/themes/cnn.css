@@ -1,5 +1,4 @@
 /* net19 handmade theme: CNN, 2019: black top bar with white section links, bold black headline stacks on white. */
-:root { color-scheme: light !important; }
 header .header__container, .header__wrapper-inner, .header__wrapper-outer > div:first-child { background: #0c0c0c !important; }
 header .header__nav-item-link, header .header__nav-item-link *, header .header__container a, header .header__container button, header .header__container svg { color: #fff !important; fill: currentColor !important; }
 header .header__container { height: 50px !important; }

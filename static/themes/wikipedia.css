@@ -1,0 +1,24 @@
+/* net19 handmade theme: Wikipedia. Articles use Wikipedia's own legacy Vector skin (the 2010-2022 design); this
+   adds a dark variant of that skin for dark-mode devices, keeping its layout, tabs and sidebar. */
+html[data-net19-mode="dark"] body.skin-vector-legacy { --n19-page: #101418; --n19-content: #202122; --n19-text: #eaecf0; --n19-text-2: #a2a9b1;
+  --n19-link: #88a3e8; --n19-link-visited: #a799cd; --n19-new: #fd7865; --n19-border: #54595d; --n19-box: #27292d;
+  background: var(--n19-page) !important; color: var(--n19-text) !important; }
+html[data-net19-mode="dark"] body.skin-vector-legacy #content, html[data-net19-mode="dark"] body.skin-vector-legacy .mw-body {
+  background: var(--n19-content) !important; color: var(--n19-text) !important; border-color: var(--n19-border) !important; }
+html[data-net19-mode="dark"] body.skin-vector-legacy #mw-page-base, html[data-net19-mode="dark"] body.skin-vector-legacy #mw-head-base { background: var(--n19-page) !important; }
+html[data-net19-mode="dark"] body.skin-vector-legacy a { color: var(--n19-link); }
+html[data-net19-mode="dark"] body.skin-vector-legacy a:visited { color: var(--n19-link-visited); }
+html[data-net19-mode="dark"] body.skin-vector-legacy a.new { color: var(--n19-new); }
+html[data-net19-mode="dark"] body.skin-vector-legacy h1, html[data-net19-mode="dark"] body.skin-vector-legacy h2,
+html[data-net19-mode="dark"] body.skin-vector-legacy h3, html[data-net19-mode="dark"] body.skin-vector-legacy .mw-body h1 { color: var(--n19-text) !important; border-color: var(--n19-border) !important; }
+html[data-net19-mode="dark"] body.skin-vector-legacy .vector-menu-tabs li, html[data-net19-mode="dark"] body.skin-vector-legacy .vector-menu-tabs,
+html[data-net19-mode="dark"] body.skin-vector-legacy .vector-menu-tabs li a { background: var(--n19-page) !important; background-image: none !important; }
+html[data-net19-mode="dark"] body.skin-vector-legacy .vector-menu-tabs li.selected, html[data-net19-mode="dark"] body.skin-vector-legacy .vector-menu-tabs li.selected a { background: var(--n19-content) !important; color: var(--n19-text) !important; }
+html[data-net19-mode="dark"] body.skin-vector-legacy #mw-panel .vector-menu-heading, html[data-net19-mode="dark"] body.skin-vector-legacy .vector-menu-heading { color: var(--n19-text-2) !important; }
+html[data-net19-mode="dark"] body.skin-vector-legacy .infobox, html[data-net19-mode="dark"] body.skin-vector-legacy .toc, html[data-net19-mode="dark"] body.skin-vector-legacy #toc,
+html[data-net19-mode="dark"] body.skin-vector-legacy .thumbinner, html[data-net19-mode="dark"] body.skin-vector-legacy .navbox, html[data-net19-mode="dark"] body.skin-vector-legacy .navbox-title,
+html[data-net19-mode="dark"] body.skin-vector-legacy .navbox-group, html[data-net19-mode="dark"] body.skin-vector-legacy .navbox-abovebelow, html[data-net19-mode="dark"] body.skin-vector-legacy table.wikitable,
+html[data-net19-mode="dark"] body.skin-vector-legacy table.wikitable > * > tr > th, html[data-net19-mode="dark"] body.skin-vector-legacy .ambox, html[data-net19-mode="dark"] body.skin-vector-legacy .hatnote {
+  background: var(--n19-box) !important; color: var(--n19-text) !important; border-color: var(--n19-border) !important; }
+html[data-net19-mode="dark"] body.skin-vector-legacy #searchInput, html[data-net19-mode="dark"] body.skin-vector-legacy #simpleSearch { background: var(--n19-box) !important; color: var(--n19-text) !important; border-color: var(--n19-border) !important; }
+html[data-net19-mode="dark"] body.skin-vector-legacy #footer, html[data-net19-mode="dark"] body.skin-vector-legacy #footer li { color: var(--n19-text-2) !important; }

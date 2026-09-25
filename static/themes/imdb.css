@@ -1,21 +1,10 @@
-/* net19 handmade theme: IMDb, 2019 (before the 2020 redesign): light pages, Arial, #136cb2 links, the yellow logo on a black bar, square posters. */
-:root, html, body.ipc-page-background { color-scheme: light !important; }
-body, body * { font-family: Arial, sans-serif; }
-body, .ipc-page-background, .ipc-page-background--base, .ipc-page-background--baseAlt, main, [data-testid="hero-parent"], section[data-testid="hero-parent"] {
-  background: #e3e2dd !important; color: #333 !important;
-}
-.ipc-page-content-container, .ipc-page-section, main > div > section { background: #fff !important; }
-/* Header: black bar, yellow logo */
-#imdbHeader, nav#imdbHeader { background: #121212 !important; }
-#imdbHeader .ipc-button, #imdbHeader a, #imdbHeader label { color: #fff !important; }
-#suggestion-search, #imdbHeader input { background: #fff !important; color: #333 !important; border-radius: 0 !important; }
-/* Title page hero: dark type on light, blue links */
-[data-testid="hero__pageTitle"], h1[data-testid="hero__pageTitle"] *, .hero__primary-text { color: #333 !important; font-weight: 400 !important; }
-[data-testid="hero-parent"] *:not(svg):not(path):not(img):not(button):not(a) { color: #333 !important; }
-a.ipc-link, .ipc-link--base, .ipc-title-link-wrapper h3 { color: #136cb2 !important; }
-.ipc-media, .ipc-media img, .ipc-poster, .ipc-poster img, .ipc-image, .ipc-chip, .ipc-button--core-accent1 { border-radius: 0 !important; }
+/* net19 handmade theme: IMDb, 2019 (before the 2020 redesign): Arial, square posters and chips, yellow action
+   buttons, blue links in light areas. Colors of dark and light areas are left to IMDb, so nothing is re-painted
+   against a background it was not designed for. */
+html { --n19-link: #136cb2; }
+html[data-net19-mode="dark"] { --n19-link: #5799ef; }
+body, button, input { font-family: Arial, sans-serif !important; }
+.ipc-media, .ipc-media img, .ipc-poster, .ipc-poster img, .ipc-image, .ipc-chip, .ipc-button, .ipc-poster-card, .ipc-slate, .ipc-slate img { border-radius: 0 !important; }
 .ipc-button--core-accent1 { background: #f5c518 !important; color: #000 !important; }
-.ipc-rating-star--imdb { color: #f5c518 !important; }
-.ipc-chip { border: 1px solid #ccc !important; background: #f6f6f5 !important; color: #333 !important; }
-footer.imdb-footer { background: #fff !important; color: #333 !important; }
-footer.imdb-footer a { color: #136cb2 !important; }
+#suggestion-search, #imdbHeader input { border-radius: 0 !important; }
+main a.ipc-link:not([class*="onBase"]):not([class*="inherit"]) { color: var(--n19-link) !important; }

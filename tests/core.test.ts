@@ -101,9 +101,8 @@ test('handmade themes ship their files and never overlap the archive pipeline', 
   const { THEMES, themeFor, themedDomains } = await import('../src/themes');
   const { existsSync } = await import('node:fs');
   for (const theme of THEMES) {
-    assert.equal(theme.css !== false, existsSync(`static/themes/${theme.id}.css`), theme.id);
+    assert.ok(existsSync(`static/themes/${theme.id}.css`) && existsSync(`static/themes/${theme.id}.js`), theme.id);
     if (theme.query) assert.ok(new RegExp(theme.query.pattern).test('https://en.wikipedia.org/wiki/Cat') && !new RegExp(theme.query.pattern).test('https://en.wikipedia.org/wiki/Cat?useskin=vector'));
-    assert.equal(!!theme.js, existsSync(`static/themes/${theme.id}.js`), theme.id);
   }
   assert.equal(themeFor('www.youtube.com', 2019)?.id, 'youtube');
   assert.equal(themeFor('m.youtube.com', 2019)?.id, 'youtube');

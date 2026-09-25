@@ -1,43 +1,24 @@
-/* net19 handmade theme: Twitch, early-to-mid 2019 (before the September 2019 rebrand): #6441a4 purple, Helvetica Neue, light theme. */
-:root, .tw-root--theme-light, .tw-root--theme-dark {
-  color-scheme: light !important;
-  --color-background-button-primary-default: #6441a4 !important;
-  --color-background-button-primary-hover: #7d5bbe !important;
-  --color-background-button-primary-active: #4b367c !important;
-  --color-background-button-brand: #6441a4 !important;
-  --color-background-brand: #6441a4 !important;
-  --color-background-accent: #6441a4 !important;
-  --color-text-link: #6441a4 !important;
-  --color-text-link-hover: #7d5bbe !important;
-  --color-text-brand: #6441a4 !important;
-  --color-fill-brand: #6441a4 !important;
-  --color-background-base: #faf9fa !important;
-  --color-background-body: #faf9fa !important;
-  --color-background-alt: #efeef1 !important;
-  --color-border-base: #dad8de !important;
-  --font-base: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
-  --font-display: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
-  --border-radius-medium: 2px !important;
-  --border-radius-large: 2px !important;
+/* net19 handmade theme: Twitch, early 2019: #6441a4 purple, Helvetica Neue, small radii; light and dark themes. */
+html { --n19-page: #faf9fa; --n19-surface: #fff; --n19-rail: #efeef1; --n19-text: #19171c; --n19-text-2: #6a6a6a; --n19-border: #dad8de;
+  --n19-purple: #6441a4; --n19-purple-hover: #7d5bbe; --n19-link: #6441a4; --n19-button-2: #efeef1; --n19-button-2-text: #19171c; }
+html[data-net19-mode="dark"] { --n19-page: #0f0e11; --n19-surface: #19171c; --n19-rail: #19171c; --n19-text: #dad8de; --n19-text-2: #898395; --n19-border: #2c2541;
+  --n19-purple: #6441a4; --n19-purple-hover: #7d5bbe; --n19-link: #b9a3e3; --n19-button-2: #2c2541; --n19-button-2-text: #dad8de; }
+html:root, html.tw-root--theme-light, html.tw-root--theme-dark {
+  --color-background-base: var(--n19-page) !important; --color-background-body: var(--n19-page) !important; --color-background-alt: var(--n19-surface) !important;
+  --color-background-alt-2: var(--n19-rail) !important; --color-border-base: var(--n19-border) !important;
+  --color-text-base: var(--n19-text) !important; --color-text-alt: var(--n19-text-2) !important; --color-text-alt-2: var(--n19-text-2) !important;
+  --color-text-link: var(--n19-link) !important; --color-text-link-hover: var(--n19-purple-hover) !important;
+  --color-background-button-primary-default: var(--n19-purple) !important; --color-background-button-primary-hover: var(--n19-purple-hover) !important;
+  --color-background-button-primary-active: var(--n19-purple) !important; --color-background-button-brand: var(--n19-purple) !important;
+  --color-background-brand: var(--n19-purple) !important; --color-background-accent: var(--n19-purple) !important;
+  --color-fill-brand: var(--n19-purple) !important; --color-text-brand: var(--n19-link) !important;
+  --color-background-button-secondary-default: var(--n19-button-2) !important; --color-text-button-secondary: var(--n19-button-2-text) !important;
+  --border-radius-medium: 2px !important; --border-radius-large: 2px !important;
+  --font-base: "Helvetica Neue", Helvetica, Arial, sans-serif !important; --font-display: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
 }
-body, #root { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important; }
-body *:not(svg):not(path) { font-family: inherit; }
-.navigation-link, h1, h2, h3, h4, [class*="CoreText"] { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important; }
-
-/* Top navigation: white bar, purple glitch mark, a thin divider */
-nav.top-nav .top-nav__menu { background: #fff !important; box-shadow: 0 1px 0 #dad8de !important; }
-nav.top-nav a[aria-label="Twitch Home"] svg, nav.top-nav a[aria-label*="Twitch" i] svg { color: #6441a4 !important; fill: #6441a4 !important; }
-.navigation-link { color: #19171c !important; font-weight: 600 !important; }
-.navigation-link:hover { color: #6441a4 !important; }
-
-/* Buttons: small radius, flat purple */
+body, .navigation-link, [class*="CoreText"], h1, h2, h3, h4, button { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important; }
+nav.top-nav .top-nav__menu { background: var(--n19-surface) !important; box-shadow: 0 1px 0 var(--n19-border) !important; }
+nav.top-nav a[aria-label*="Twitch" i] svg { color: var(--n19-purple) !important; fill: var(--n19-purple) !important; }
+.side-nav { background: var(--n19-rail) !important; }
 button[class*="ScCoreButton"], a[class*="ScCoreButton"] { border-radius: 2px !important; }
-[data-a-target="signup-button"], [data-a-target="follow-button"] { background: #6441a4 !important; color: #fff !important; }
-[data-a-target="login-button"] { background: #efeef1 !important; color: #19171c !important; }
-
-/* Side column: pale gray; channel rows compact */
-.side-nav, .side-nav__overlay-wrapper, .side-bar-contents { background: #efeef1 !important; }
-.side-nav-card__title, .side-nav-card__title * { color: #19171c !important; }
-
-/* Thumbnails and cards: square corners */
-[class*="ScAspectRatio"], [class*="preview-card-image"], .tw-image, img.tw-image, [class*="ScTransformWrapper"], [class*="ScWrapper"] { border-radius: 0 !important; }
+[class*="ScAspectRatio"] img, .tw-image, [class*="preview-card-image"] { border-radius: 0 !important; }

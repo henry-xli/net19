@@ -1,59 +1,51 @@
-/* net19 handmade theme: GitHub, 2019: dark header, gradient buttons, square avatars, orange-topped tabs. github.js selects the light palette. */
-:root { color-scheme: light !important; }
-html, body { --borderRadius-medium: 3px; --borderRadius-default: 3px; --borderRadius-large: 3px; --fgColor-accent: #0366d6; --fgColor-link: #0366d6; }
-body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif !important; font-size: 14px !important; color: #24292e !important; }
-a:not([class*="btn"]):not([class*="Button"]) { color: #0366d6; }
+/* net19 handmade theme: GitHub, 2019: near-black header, gradient buttons with 3px corners, square avatars,
+   orange-topped repository tabs. The 2019 light palette, and a dark variant with the same shapes. */
+html { --n19-header: #24292e; --n19-header-text: #fff; --n19-header-field: rgba(255,255,255,.125); --n19-header-border: #444d56;
+  --n19-bg: #fff; --n19-bg-2: #fafbfc; --n19-bg-3: #f6f8fa; --n19-text: #24292e; --n19-text-2: #586069; --n19-link: #0366d6; --n19-border: #e1e4e8;
+  --n19-btn-from: #fafbfc; --n19-btn-to: #eff3f6; --n19-btn-hover-from: #f0f3f6; --n19-btn-hover-to: #e6ebf1; --n19-btn-border: rgba(27,31,35,.2); --n19-btn-text: #24292e;
+  --n19-primary-from: #34d058; --n19-primary-to: #28a745; --n19-primary-hover-from: #2fcb53; --n19-primary-hover-to: #269f42;
+  --n19-tab-edge: #e36209; --n19-counter: rgba(27,31,35,.08); --n19-field-border: #d1d5da; --n19-field-inset: inset 0 1px 2px rgba(27,31,35,.075); }
+html[data-net19-mode="dark"] { --n19-header: #161b22; --n19-header-text: #f0f6fc; --n19-header-field: rgba(255,255,255,.07); --n19-header-border: #30363d;
+  --n19-bg: #0d1117; --n19-bg-2: #161b22; --n19-bg-3: #161b22; --n19-text: #c9d1d9; --n19-text-2: #8b949e; --n19-link: #58a6ff; --n19-border: #30363d;
+  --n19-btn-from: #2d333b; --n19-btn-to: #22272e; --n19-btn-hover-from: #373e47; --n19-btn-hover-to: #2d333b; --n19-btn-border: rgba(240,246,252,.1); --n19-btn-text: #c9d1d9;
+  --n19-primary-from: #2ea043; --n19-primary-to: #238636; --n19-primary-hover-from: #3fb950; --n19-primary-hover-to: #2ea043;
+  --n19-tab-edge: #f78166; --n19-counter: rgba(110,118,129,.4); --n19-field-border: #30363d; --n19-field-inset: inset 0 1px 0 rgba(0,0,0,.2); }
+html { --borderRadius-small: 3px; --borderRadius-medium: 3px; --borderRadius-default: 3px; --borderRadius-large: 3px; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif !important; }
 
-/* The near-black header on every page */
-.AppHeader, header.Header, .Header, header.HeaderMktg { background: #24292e !important; color: rgba(255,255,255,.7) !important; box-shadow: none !important; border-bottom: none !important; }
-.AppHeader .AppHeader-globalBar { background: #24292e !important; box-shadow: none !important; }
-.AppHeader a, .AppHeader button, .AppHeader .AppHeader-context-item-label, .Header-link, .HeaderMktg a, .HeaderMktg button { color: #fff !important; }
-.AppHeader svg, .Header svg, .HeaderMktg svg { color: #fff !important; fill: currentColor !important; }
-.AppHeader .AppHeader-button, .AppHeader .AppHeader-search-button, .AppHeader button.Button, .AppHeader .AppHeader-searchButton {
-  background: rgba(255,255,255,.125) !important; border: 1px solid #444d56 !important; border-radius: 3px !important; color: #fff !important;
+/* Header on every page */
+.AppHeader, .AppHeader .AppHeader-globalBar, header.HeaderMktg, .Header { background: var(--n19-header) !important; box-shadow: none !important; }
+.AppHeader .AppHeader-globalBar a, .AppHeader .AppHeader-globalBar button, .AppHeader .AppHeader-context-item-label, header.HeaderMktg a, header.HeaderMktg button,
+.AppHeader .AppHeader-globalBar svg, header.HeaderMktg svg { color: var(--n19-header-text) !important; }
+.AppHeader .AppHeader-globalBar .AppHeader-button, .AppHeader .AppHeader-search-button, .AppHeader .AppHeader-searchButton, header.HeaderMktg .header-search-button {
+  background: var(--n19-header-field) !important; border: 1px solid var(--n19-header-border) !important; border-radius: 3px !important;
 }
-.AppHeader .AppHeader-localBar { background: #fafbfc !important; border-bottom: 1px solid #e1e4e8 !important; }
-.AppHeader .AppHeader-localBar a, .AppHeader .AppHeader-localBar span { color: #586069 !important; }
+.AppHeader .AppHeader-localBar { background: var(--n19-bg-2) !important; }
 
-/* Buttons: 3px corners, subtle vertical gradients */
-.btn, .Button--secondary, .Button--invisible:not(.AppHeader *), button[data-variant="default"], a[data-variant="default"] {
-  border-radius: 3px !important; border: 1px solid rgba(27,31,35,.2) !important; color: #24292e !important;
-  background: linear-gradient(-180deg, #fafbfc, #eff3f6 90%) !important; box-shadow: none !important; font-weight: 600 !important;
+/* Buttons */
+.btn:not(.btn-primary):not(.btn-danger), .Button--secondary, button[data-variant="default"], a[data-variant="default"] {
+  background: linear-gradient(-180deg, var(--n19-btn-from), var(--n19-btn-to) 90%) !important; border: 1px solid var(--n19-btn-border) !important;
+  border-radius: 3px !important; color: var(--n19-btn-text) !important; box-shadow: none !important; font-weight: 600 !important;
 }
-.btn:hover, .Button--secondary:hover, button[data-variant="default"]:hover { background: linear-gradient(-180deg, #f0f3f6, #e6ebf1 90%) !important; border-color: rgba(27,31,35,.35) !important; }
+.btn:not(.btn-primary):not(.btn-danger):hover, .Button--secondary:hover, button[data-variant="default"]:hover { background: linear-gradient(-180deg, var(--n19-btn-hover-from), var(--n19-btn-hover-to) 90%) !important; }
 .btn-primary, .Button--primary, button[data-variant="primary"], a[data-variant="primary"] {
-  border-radius: 3px !important; border: 1px solid rgba(27,31,35,.2) !important; color: #fff !important;
-  background: linear-gradient(-180deg, #34d058, #28a745 90%) !important; box-shadow: none !important; font-weight: 600 !important;
+  background: linear-gradient(-180deg, var(--n19-primary-from), var(--n19-primary-to) 90%) !important; border: 1px solid rgba(27,31,35,.2) !important;
+  border-radius: 3px !important; color: #fff !important; box-shadow: none !important; font-weight: 600 !important;
 }
-.btn-primary:hover, .Button--primary:hover, button[data-variant="primary"]:hover { background: linear-gradient(-180deg, #2fcb53, #269f42 90%) !important; border-color: rgba(27,31,35,.5) !important; }
-.btn-primary *, .Button--primary *, button[data-variant="primary"] * { color: #fff !important; }
-.btn-danger, .Button--danger { color: #cb2431 !important; }
+.btn-primary:hover, .Button--primary:hover, button[data-variant="primary"]:hover { background: linear-gradient(-180deg, var(--n19-primary-hover-from), var(--n19-primary-hover-to) 90%) !important; }
 
-/* Square avatars (circular ones arrived in 2020) */
-.avatar, .avatar-user, img.avatar, .avatar-small, img[data-testid="github-avatar"], [class*="Avatar"] img, img[class*="Avatar"] { border-radius: 3px !important; }
+/* Square avatars */
+.avatar, .avatar-user, img.avatar, img[data-testid="github-avatar"], [class*="Avatar"] img, img[class*="Avatar"] { border-radius: 3px !important; }
 
-/* Boxes and form controls */
-.Box, .border.rounded-2, .rounded-2, [class*="Box-sc-"] { border-radius: 3px !important; }
-.Box, .Box-header, .Box-row { border-color: #e1e4e8 !important; }
-.Box-header { background: #f6f8fa !important; }
-.form-control, .FormControl-input, input.form-control, .FormControl-input-wrap, [class*="TextInput-wrapper"] {
-  border-radius: 3px !important; border: 1px solid #d1d5da !important; box-shadow: inset 0 1px 2px rgba(27,31,35,.075) !important; background-color: #fff !important;
-}
-.Counter { background: rgba(27,31,35,.08) !important; color: #586069 !important; border: none !important; }
-.Label, .IssueLabel, .Label--secondary { border-radius: 2px !important; font-weight: 600 !important; }
+/* Boxes, counters, fields */
+.Box, .rounded-2, [class*="Box-sc-"] { border-radius: 3px !important; }
+.Counter { background: var(--n19-counter) !important; }
+.form-control, .FormControl-input, input.form-control, [class*="TextInput-wrapper"] { border-radius: 3px !important; border-color: var(--n19-field-border) !important; box-shadow: var(--n19-field-inset) !important; }
+.Label, .IssueLabel { border-radius: 2px !important; font-weight: 600 !important; }
 
-/* Repository tabs: the selected tab is a white folder tab with an orange top edge */
-.UnderlineNav { box-shadow: inset 0 -1px 0 #e1e4e8 !important; }
-.UnderlineNav-item { border-radius: 3px 3px 0 0 !important; border: 1px solid transparent !important; border-top-width: 3px !important; color: #586069 !important; padding: 7px 15px 8px !important; }
-.UnderlineNav-item.selected, .UnderlineNav-item[aria-current="page"], .UnderlineNav-item[aria-current]:not([aria-current="false"]) {
-  border-color: #e36209 #e1e4e8 transparent !important; background: #fff !important; color: #24292e !important; font-weight: 400 !important;
+/* Repository tabs: the selected one is a folder tab with a colored top edge */
+.UnderlineNav-item { border-radius: 3px 3px 0 0 !important; border: 1px solid transparent !important; border-top-width: 3px !important; padding: 7px 15px 8px !important; }
+.UnderlineNav-item.selected, .UnderlineNav-item[aria-current]:not([aria-current="false"]) {
+  border-color: var(--n19-tab-edge) var(--n19-border) transparent !important; background: var(--n19-bg) !important; color: var(--n19-text) !important;
 }
 .UnderlineNav-item.selected::after, .UnderlineNav-item[aria-current]::after { display: none !important; }
-.UnderlineNav-item .UnderlineNav-octicon, .UnderlineNav-item svg { color: #959da5 !important; }
-
-/* Page and file-list surfaces */
-body, .application-main, main { background: #fff !important; }
-.react-directory-row:hover, .Box-row--hover-gray:hover { background: #f6f8fa !important; }
-.markdown-body { font-size: 16px !important; color: #24292e !important; }
-.markdown-body h1, .markdown-body h2 { border-bottom-color: #eaecef !important; }
-footer.footer, .footer { color: #586069 !important; }

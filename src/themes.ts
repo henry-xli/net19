@@ -1,32 +1,28 @@
-// Handmade themes: hand-written stylesheets (and, where a site needs it, a tiny script that
-// switches the site to its own light palette) recreating a site's 2019 look on its live
-// pages. They ship inside the extension, so they apply at document_start with no archive
+// Handmade themes: styling rules that recreate a site's 2019 look on its live pages, in a light
+// and a dark variant that follow the site's own mode. They ship inside the extension, so they apply at document_start with no archive
 // lookup and no loading page. Sites listed here are never sent through the archive pipeline.
 export type HandmadeTheme = {
   id: string;
   name: string;
   domains: string[];           // registrable domains; www and other subdomains included unless `matches` is set
   matches?: string[];          // narrower URL patterns when only some pages are themed
-  css?: false;                 // themes/<id>.css exists unless false
-  js?: boolean;                // themes/<id>.js exists
-  preferLight?: boolean;       // also report a light prefers-color-scheme to the page's own scripts
+  // Each theme is themes/<id>.css (styling rules on --n19-* tokens, with light and dark values) and
+  // themes/<id>.js (sets globalThis.net19Theme: how to read the site's own mode, and its palette map).
   // Some sites still serve their own 2019-era frontend behind a URL parameter (for example
   // Wikipedia's legacy Vector skin). Matching navigations get the parameter added.
   query?: { pattern: string; params: Array<[string, string]> };
   years: [number, number];     // selected years this look represents
 };
 
-const home = (host: string) => [`*://${host}/`, `*://${host}/?*`, `*://${host}/webhp*`];
-
 export const THEMES: HandmadeTheme[] = [
-  { id: 'google', name: 'Google', domains: ['google.com'], matches: [...home('www.google.com'), ...home('google.com')], years: [2016, 2020] },
-  { id: 'youtube', name: 'YouTube', domains: ['youtube.com'], js: true, years: [2018, 2020] },
-  { id: 'wikipedia', name: 'Wikipedia', domains: ['wikipedia.org'], css: false, years: [2010, 2022],
+  { id: 'google', name: 'Google', domains: ['google.com'], matches: ['www.google.com', 'google.com'].flatMap(host => ['/', '/?*', '/search*', '/webhp*', '/imghp*'].map(path => `*://${host}${path}`)).concat('*://ogs.google.com/*'), years: [2016, 2020] },
+  { id: 'youtube', name: 'YouTube', domains: ['youtube.com'], years: [2018, 2020] },
+  { id: 'wikipedia', name: 'Wikipedia', domains: ['wikipedia.org'], years: [2010, 2022],
     query: { pattern: '^https://[a-z-]+\\.wikipedia\\.org/wiki/[^?#]*$', params: [['useskin', 'vector']] } },
-  { id: 'reddit', name: 'Reddit', domains: ['reddit.com'], js: true, years: [2018, 2020] },
-  { id: 'github', name: 'GitHub', domains: ['github.com'], js: true, years: [2017, 2020] },
-  { id: 'yahoo', name: 'Yahoo', domains: ['yahoo.com'], matches: ['*://www.yahoo.com/*', '*://yahoo.com/*'], js: true, preferLight: true, years: [2017, 2019] },
-  { id: 'twitch', name: 'Twitch', domains: ['twitch.tv'], js: true, preferLight: true, years: [2017, 2019] },
+  { id: 'reddit', name: 'Reddit', domains: ['reddit.com'], years: [2018, 2020] },
+  { id: 'github', name: 'GitHub', domains: ['github.com'], years: [2017, 2020] },
+  { id: 'yahoo', name: 'Yahoo', domains: ['yahoo.com'], matches: ['*://www.yahoo.com/*', '*://yahoo.com/*'], years: [2017, 2019] },
+  { id: 'twitch', name: 'Twitch', domains: ['twitch.tv'], years: [2017, 2019] },
   { id: 'amazon', name: 'Amazon', domains: ['amazon.com'], years: [2016, 2021] },
   { id: 'ebay', name: 'eBay', domains: ['ebay.com'], years: [2017, 2020] },
   { id: 'bing', name: 'Bing', domains: ['bing.com'], years: [2016, 2020] },
@@ -35,10 +31,10 @@ export const THEMES: HandmadeTheme[] = [
   { id: 'nytimes', name: 'The New York Times', domains: ['nytimes.com'], years: [2018, 2021] },
   { id: 'imdb', name: 'IMDb', domains: ['imdb.com'], years: [2016, 2019] },
   { id: 'espn', name: 'ESPN', domains: ['espn.com'], years: [2017, 2021] },
-  { id: 'facebook', name: 'Facebook', domains: ['facebook.com'], js: true, preferLight: true, years: [2016, 2019] },
-  { id: 'instagram', name: 'Instagram', domains: ['instagram.com'], js: true, preferLight: true, years: [2017, 2019] },
+  { id: 'facebook', name: 'Facebook', domains: ['facebook.com'], years: [2016, 2019] },
+  { id: 'instagram', name: 'Instagram', domains: ['instagram.com'], years: [2017, 2019] },
   { id: 'twitter', name: 'Twitter', domains: ['x.com', 'twitter.com'], years: [2019, 2022] },
-  { id: 'linkedin', name: 'LinkedIn', domains: ['linkedin.com'], preferLight: true, years: [2017, 2019] },
+  { id: 'linkedin', name: 'LinkedIn', domains: ['linkedin.com'], years: [2017, 2019] },
 ];
 
 export function themeMatches(theme: HandmadeTheme): string[] {

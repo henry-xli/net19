@@ -1,17 +1,17 @@
 /* net19 handmade theme: Bing homepage, 2019: square search box floating over the image of the day, no AI or Copilot rows. */
-:root { color-scheme: light !important; }
 #sb_form.sb_form, .sbox_sl #sb_form {
   border-radius: 0 !important; box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 2px 4px 1px rgba(0,0,0,.18) !important;
-  max-width: 580px !important; height: 46px !important; min-height: 46px !important; background: #fff !important; border: none !important;
+  max-width: 580px !important; height: 46px !important; min-height: 46px !important; border: none !important;
 }
 .sbox_sl.centralized { justify-content: flex-start !important; }
-#sb_form_q { font-size: 16px !important; font-family: Arial, sans-serif !important; color: #444 !important; }
+#sb_form_q { font-size: 16px !important; font-family: Arial, sans-serif !important; }
 #aitools, .aitools, #sb_form a[href*="copilot" i], #sb_form [aria-label*="Copilot" i], [id*="copilot" i]:not(body):not(html),
 #b_sydConvCont, .b_hpcopilot, .hp_copilot, #codex, .cib-serp-main { display: none !important; }
-header#hdr .scopes a, header#hdr .scopes li, #id_h a, #id_h span { color: #fff !important; font-size: 13px !important; font-weight: 600 !important; text-shadow: 0 0 2px rgba(0,0,0,.6) !important; }
+#hp_app header#hdr .scopes a, #hp_app header#hdr .scopes li, #hp_app #id_h a, #hp_app #id_h span { color: #fff !important; font-size: 13px !important; font-weight: 600 !important; text-shadow: 0 0 2px rgba(0,0,0,.6) !important; }
 .mc_caro, #vs_cont .mc_vtvc, #vs_cont .mc_vtvc_con { border-radius: 0 !important; }
-/* Results pages: white, blue titles, green URLs */
-#b_results > li.b_algo h2 a, #b_results > li.b_algo h2 { color: #001ba0 !important; font-size: 20px !important; font-family: "Segoe UI", Arial, sans-serif !important; }
-#b_results > li.b_algo cite { color: #006621 !important; }
+/* Results pages: 2019 blue titles and green URLs, flat result blocks; light and dark */
+html { --n19-title: #001ba0; --n19-url: #006621; }
+html[data-net19-mode="dark"] { --n19-title: #8ab4f8; --n19-url: #81c995; }
+#b_results > li.b_algo h2 a, #b_results > li.b_algo h2 { color: var(--n19-title) !important; font-size: 20px !important; font-family: "Segoe UI", Arial, sans-serif !important; }
+#b_results > li.b_algo cite { color: var(--n19-url) !important; }
 #b_results > li.b_algo, #b_results > li { border-radius: 0 !important; box-shadow: none !important; }
-body.b_respl, #b_content { background: #fff !important; }

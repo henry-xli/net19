@@ -1,58 +1,90 @@
-/* net19 handmade theme: Google homepage, 2019. Applies only to www.google.com home/search entry. */
-:root { color-scheme: light !important; }
-html, body { background: #fff !important; color: #222 !important; font-family: arial, sans-serif !important; }
+/* net19 handmade theme: Google Search, 2019. Palette tokens are mapped onto Google's own design variables, so every
+   surface Google renders (menus, suggestion lists, results, dialogs) uses the same 2019 palette. A dark variant follows
+   Google's own dark mode, which google.js reads and palette.js marks as html[data-net19-mode]. */
 
-/* Top bar: About / Store on the left, Gmail / Images / apps / Sign in on the right */
-body a.w5hRs, body a.gb_6, #gb a:not(.gb_A) { color: rgba(0,0,0,.87) !important; font: 13px arial, sans-serif !important; }
-#gb a.gb_C svg, #gb a[aria-label*="apps" i] svg { color: #5f6368 !important; fill: #5f6368 !important; }
-#gb a.gb_A, #gb a[href*="ServiceLogin"] {
-  background: #4285f4 !important; color: #fff !important; border: 1px solid #4285f4 !important; border-radius: 4px !important;
-  font: bold 13px arial, sans-serif !important; height: 30px !important; line-height: 28px !important; padding: 0 12px !important;
-  box-shadow: none !important; box-sizing: border-box !important; margin-top: 5px !important; display: inline-flex !important; align-items: center !important;
+/* ---- 2019 palette: light ---- */
+:root {
+  --n19-bg: #fff; --n19-surface: #f8f9fa; --n19-surface-2: #f1f3f4; --n19-text: #222; --n19-text-2: #545454; --n19-text-3: #70757a;
+  --n19-link: #1a0dab; --n19-visited: #609; --n19-url: #006621; --n19-accent: #1a73e8; --n19-accent-soft: #e8f0fe; --n19-on-accent: #fff;
+  --n19-border: #dfe1e5; --n19-border-soft: #ebebeb; --n19-shadow: 0 1px 6px rgba(32,33,36,.28); --n19-button: #f8f9fa; --n19-button-text: #3c4043;
+}
+/* ---- the same palette for dark mode (Google's own mode, read by google.js) ---- */
+:root[data-net19-mode="dark"] {
+  --n19-bg: #202124; --n19-surface: #303134; --n19-surface-2: #3c4043; --n19-text: #e8eaed; --n19-text-2: #bdc1c6; --n19-text-3: #9aa0a6;
+  --n19-link: #8ab4f8; --n19-visited: #c58af9; --n19-url: #81c995; --n19-accent: #8ab4f8; --n19-accent-soft: #394457; --n19-on-accent: #202124;
+  --n19-border: #5f6368; --n19-border-soft: #3c4043; --n19-shadow: 0 1px 6px rgba(0,0,0,.6); --n19-button: #303134; --n19-button-text: #e8eaed;
 }
 
-/* The multicolor logo (Google's own hosted 2019-era asset) instead of the monochrome dark-mode path */
-div:has(> svg[viewBox="0 0 272 92"]), div:has(> img.lnXdpd) {
+/* ---- Google's own tokens, re-pointed at the palette (names are Google's) ---- */
+html:root, html #gb, html body {
+  --xhUGwc: var(--n19-bg) !important; --cIehld: var(--n19-bg) !important; --ZXiaGf: var(--n19-bg) !important; --EpFNW: var(--n19-bg) !important;
+  --YLNNHc: var(--n19-text) !important; --COEmY: var(--n19-text) !important; --bcxd3b: var(--n19-text) !important; --Xqboce: var(--n19-text) !important;
+  --bbQxAb: var(--n19-text-2) !important; --pEa0Bc: var(--n19-text-2) !important; --IXoxUe: var(--n19-text-3) !important; --amnPwe: var(--n19-text-3) !important; --uLz37c: var(--n19-text-3) !important;
+  --JKqx2: var(--n19-link) !important;
+  --TMYS9: var(--n19-accent) !important; --Wmwad: var(--n19-accent) !important; --fuvksc: var(--n19-accent) !important; --lv6yU: var(--n19-accent) !important; --Nsm0ce: var(--n19-accent) !important;
+  --rrJJUc: var(--n19-accent) !important; --TyVYld: var(--n19-accent) !important; --MoaHse: var(--n19-accent) !important; --Ehh4mf: var(--n19-accent) !important; --gJjJk: var(--n19-accent) !important;
+  --ngPXTb: var(--n19-accent) !important; --p9J9c: var(--n19-accent) !important;
+  --VuZXBd: var(--n19-button-text) !important; --xPpiM: var(--n19-button-text) !important; --LMFHUd: var(--n19-button-text) !important; --hwEqod: var(--n19-button-text) !important;
+  --CRMNZd: var(--n19-button-text) !important; --jINu6c: var(--n19-button-text) !important; --vWq1if: var(--n19-button-text) !important; --y01ou: var(--n19-button-text) !important; --VeLyLc: var(--n19-button-text) !important;
+  --BRLwE: var(--n19-accent-soft) !important; --Zia6nf: var(--n19-accent-soft) !important; --jwFC2e: var(--n19-accent-soft) !important;
+  --Ijc2tf: var(--n19-surface) !important; --TSWZIb: var(--n19-surface) !important; --DEeStf: var(--n19-surface) !important; --XKMDxc: var(--n19-surface) !important; --aYn2S: var(--n19-surface) !important;
+  --MV2sG: var(--n19-surface-2) !important; --YaIeMb: var(--n19-surface) !important;
+  --ONhrGd: var(--n19-border) !important; --gS5jXb: var(--n19-border) !important; --mXZkqc: var(--n19-border) !important; --Lm570b: var(--n19-border-soft) !important; --Yi4Nb: var(--n19-border) !important;
+  --kloG3: var(--n19-border) !important; --JclFj: var(--n19-border) !important; --Aqn7xd: var(--n19-border) !important;
+  --QWaaaf: var(--n19-border) !important; --vZe0jb: var(--n19-border) !important; --ZEpPmd: var(--n19-border) !important; --nwXobb: var(--n19-border) !important; --KIZPne: var(--n19-border) !important;
+}
+html, body { background: var(--n19-bg) !important; color: var(--n19-text) !important; }
+body, input, textarea, button { font-family: arial, sans-serif !important; }
+
+/* ---- Search box: 2019 shape on every page (home, results, suggestion list) ---- */
+form[role="search"] .RNNXgb { background: var(--n19-bg) !important; border: 1px solid var(--n19-border) !important; border-radius: 24px !important; box-shadow: none !important; }
+form[role="search"] .RNNXgb:hover, form[role="search"] .RNNXgb:focus-within, form[role="search"] .emcav .RNNXgb { box-shadow: var(--n19-shadow) !important; border-color: transparent !important; }
+form[role="search"] .SDkEP, form[role="search"] .fM33ce, form[role="search"] .dRYYxd { background: transparent !important; }
+form[role="search"] .aajZCb, .UUbT9, .erkvQe { background: var(--n19-bg) !important; box-shadow: var(--n19-shadow) !important; border-radius: 0 0 24px 24px !important; }
+textarea[name="q"], input[name="q"] { color: var(--n19-text) !important; background: transparent !important; font-size: 16px !important; }
+/* 2019 had a microphone only: no "+", Lens or AI Mode controls */
+form[role="search"] button.UbbAWe, form[role="search"] div.etxtjc, form[role="search"] button.plR5qb, form[role="search"] [aria-label="AI Mode" i] { display: none !important; }
+
+/* Homepage: the multicolor logo, gray buttons */
+div:has(> svg[viewBox="0 0 272 92"]) {
   background: url("https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png") center bottom / 272px 92px no-repeat !important;
-  width: 272px !important; height: 92px !important; margin: 0 auto !important;
 }
-div:has(> svg[viewBox="0 0 272 92"]) > svg, img.lnXdpd { visibility: hidden !important; }
-
-/* Search box: 584px pill, thin gray border, shadow on hover/focus */
-form[role="search"] .RNNXgb, form[action="/search"] div:has(> div > textarea[name="q"]):not(:has(center)) {
-  background: #fff !important; border: 1px solid #dfe1e5 !important; border-radius: 24px !important; box-shadow: none !important;
-  height: 44px !important; min-height: 44px !important; max-width: 584px !important; margin: 0 auto !important; box-sizing: border-box !important;
-}
-form[role="search"] .RNNXgb:hover, form[role="search"] .RNNXgb:focus-within { box-shadow: 0 1px 6px rgba(32,33,36,.28) !important; border-color: rgba(223,225,229,0) !important; }
-form[role="search"] .SDkEP, form[role="search"] .fM33ce { background: transparent !important; height: 42px !important; }
-form[role="search"] .A8SBwf { max-width: 584px !important; width: 584px !important; margin: 0 auto !important; }
-textarea[name="q"] { color: rgba(0,0,0,.87) !important; background: transparent !important; font: 16px arial, sans-serif !important; caret-color: #000 !important; }
-textarea[name="q"]::placeholder { color: transparent !important; }
-/* 2019 had a magnifier and a microphone only: no "+", no Lens, no AI Mode */
-form[role="search"] button.UbbAWe, form[role="search"] button[aria-haspopup="menu"],
-form[role="search"] div.etxtjc, form[role="search"] [aria-label*="Search by image" i],
-form[role="search"] button.plR5qb, form[role="search"] [aria-label="AI Mode" i], form[role="search"] a[href*="udm=50"] { display: none !important; }
-form[role="search"] .SDkEP:has(button.UbbAWe)::before {
-  content: ""; flex: none; width: 20px; height: 20px; margin: 0 12px 0 14px; align-self: center;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%239aa0a6' d='M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3E%3C/svg%3E") center / 20px no-repeat;
-}
-form[role="search"] div.fzj3ad svg path:nth-child(1) { fill: #4285f4 !important; }
-form[role="search"] div.fzj3ad svg path:nth-child(2) { fill: #34a853 !important; }
-form[role="search"] div.fzj3ad svg path:nth-child(3) { fill: #fbbc05 !important; }
-form[role="search"] div.fzj3ad svg path:nth-child(4) { fill: #ea4335 !important; }
-form[role="search"] div.fzj3ad svg { color: #4285f4 !important; }
-
-/* Google Search / I'm Feeling Lucky */
+div:has(> svg[viewBox="0 0 272 92"]) > svg { visibility: hidden !important; }
 input[name="btnK"], input[name="btnI"] {
-  background: #f8f9fa !important; border: 1px solid #f8f9fa !important; border-radius: 4px !important; color: #3c4043 !important;
-  font: 14px arial, sans-serif !important; height: 36px !important; line-height: 27px !important; padding: 0 16px !important; margin: 11px 4px !important;
-  min-width: 54px !important; box-shadow: none !important;
+  background: var(--n19-button) !important; border: 1px solid var(--n19-button) !important; border-radius: 4px !important; color: var(--n19-button-text) !important;
+  font-size: 14px !important; box-shadow: none !important;
 }
-input[name="btnK"]:hover, input[name="btnI"]:hover { box-shadow: 0 1px 1px rgba(0,0,0,.1) !important; border-color: #dadce0 !important; color: #202124 !important; }
-a.m5Qfy, #SIvCob a { color: #1a0dab !important; }
-#SIvCob { color: #222 !important; font-size: 13px !important; }
+input[name="btnK"]:hover, input[name="btnI"]:hover { border-color: var(--n19-border) !important; box-shadow: 0 1px 1px rgba(0,0,0,.1) !important; }
 
-/* Footer: light gray band, gray links */
-div.Ij8KCd, .fbar { background: #f2f2f2 !important; border-top: 1px solid #e4e4e4 !important; }
-div.Ij8KCd a, div.Ij8KCd div, .fbar a { color: #5f6368 !important; font: 14px arial, sans-serif !important; }
-div.g55egf.Z849od { visibility: hidden !important; }
+/* Results header: the small multicolor logo */
+a#logo svg, #logo img, a[href*="webhp"] svg[viewBox="0 0 272 92"] { visibility: hidden !important; }
+a#logo, a[href*="webhp"]:has(svg[viewBox="0 0 272 92"]) {
+  background: url("https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png") left center / 92px 30px no-repeat !important;
+}
+
+/* Results tabs: blue text and underline on the selected one; later tabs hidden */
+div[role="navigation"] a, #hdtb a, [role="list"] a[role="link"] { color: var(--n19-text-3) !important; }
+div[role="navigation"] [aria-current="page"], div[role="navigation"] [selected], #hdtb .hdtb-msel { color: var(--n19-accent) !important; border-color: var(--n19-accent) !important; }
+a[href*="udm=50"], a[href*="udm=39"], a[href*="udm=18"], a[href*="udm=14"] { display: none !important; }
+
+/* Results: title first, green URL beneath, gray snippet; no favicons or site names (added in 2020) */
+/* Google draws the site line above the title by flipping the block upside down twice; undo both flips */
+#search :has(> a.zReHs), #rso :has(> a.zReHs), #search a.zReHs > *, #rso a.zReHs > * { transform: none !important; }
+#search a.zReHs, #rso a.zReHs { display: inline-flex !important; flex-direction: column !important; }
+#search a.zReHs > br, #rso a.zReHs > br { display: none !important; }
+#search a.zReHs > h3, #rso a.zReHs > h3 { padding-top: 0 !important; margin: 0 !important; font-size: 20px !important; line-height: 1.3 !important; font-weight: 400 !important; color: var(--n19-link) !important; }
+#search a.zReHs:visited > h3 { color: var(--n19-visited) !important; }
+#search a.zReHs > div, #rso a.zReHs > div { margin: 0 !important; position: static !important; }
+#search .q0vns > span:first-child, #search span.VuuXrf, #search .B6fmyf { display: none !important; }
+#search cite, #rso cite { color: var(--n19-url) !important; font-size: 14px !important; }
+#search .VwiC3b, #search [data-sncf] { color: var(--n19-text-2) !important; font-size: 14px !important; line-height: 1.58 !important; }
+#rcnt, #center_col, #search, #rhs { background: transparent !important; }
+
+/* Footer */
+.Ij8KCd, #footcnt, .fbar { background: var(--n19-surface-2) !important; border-top: 1px solid var(--n19-border-soft) !important; }
+.Ij8KCd a, .fbar a { color: var(--n19-text-3) !important; }
+
+/* Sign in: the 2019 flat blue button (Google's own geometry is left alone so the bar stays aligned) */
+html { --n19-signin: #4285f4; --n19-signin-text: #fff; }
+html[data-net19-mode="dark"] { --n19-signin: #8ab4f8; --n19-signin-text: #202124; }
+#gb a.gb_A, #gb a[href*="ServiceLogin"] { background: var(--n19-signin) !important; color: var(--n19-signin-text) !important; border-radius: 4px !important; font-weight: 700 !important; }

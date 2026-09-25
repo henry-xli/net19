@@ -1,86 +1,74 @@
-/* net19 handmade theme: YouTube, 2019 (light Polymer era). youtube.js switches the page to its light palette. */
-:root { color-scheme: light !important; }
-html, body, ytd-app { background: #f9f9f9 !important; }
-ytd-app, ytd-app * { font-family: Roboto, Arial, sans-serif !important; }
-ytd-app { --yt-spec-text-primary: #030303; --yt-spec-text-secondary: #606060; }
+/* net19 handmade theme: YouTube, 2019 (the Polymer layout), in its light and dark themes.
+   Tokens are set per mode; the rules below only use tokens, so both themes get the same 2019 shapes. */
+html { --n19-page: #f9f9f9; --n19-bar: #fff; --n19-rail: #fff; --n19-text: #030303; --n19-text-2: #606060; --n19-hover: rgba(0,0,0,.05);
+  --n19-active: #e5e5e5; --n19-divider: rgba(0,0,0,.1); --n19-field: #fff; --n19-field-border: #ccc; --n19-field-inset: inset 0 1px 2px #eee;
+  --n19-button: #f8f8f8; --n19-button-border: #d3d3d3; --n19-link: #065fd4; --n19-subscribe: #cc0000; --n19-subscribed: #ececec; --n19-subscribed-text: #606060; }
+html[data-net19-mode="dark"] { --n19-page: #181818; --n19-bar: #202020; --n19-rail: #212121; --n19-text: #fff; --n19-text-2: #aaa; --n19-hover: rgba(255,255,255,.1);
+  --n19-active: #383838; --n19-divider: rgba(255,255,255,.1); --n19-field: #121212; --n19-field-border: #303030; --n19-field-inset: inset 0 1px 2px rgba(0,0,0,.3);
+  --n19-button: #323232; --n19-button-border: #303030; --n19-link: #3ea6ff; --n19-subscribe: #cc0000; --n19-subscribed: #303030; --n19-subscribed-text: #aaa; }
 
-/* Masthead: plain white bar, square search field with a gray button */
-#masthead-container, ytd-masthead, #masthead.ytd-masthead, #background.ytd-masthead { background: #fff !important; }
-#masthead-container::after { content: ""; display: block; height: 1px; background: rgba(0,0,0,.08); }
-yt-searchbox .ytSearchboxComponentInputBox, ytd-searchbox #container.ytd-searchbox, .ytSearchboxComponentInputBox {
-  border: 1px solid #ccc !important; border-right: none !important; border-radius: 2px 0 0 2px !important;
-  box-shadow: inset 0 1px 2px #eee !important; background: #fff !important; margin-left: 0 !important; padding: 2px 6px !important; height: 40px !important; box-sizing: border-box !important;
+ytd-app { background: var(--n19-page) !important; }
+ytd-app, ytd-app input, ytd-app button { font-family: Roboto, Arial, sans-serif !important; }
+
+/* Masthead: flat bar; square search field with a separate gray button */
+#masthead-container #background, ytd-masthead #background, ytd-masthead, #masthead-container { background: var(--n19-bar) !important; }
+#masthead-container { border-bottom: 1px solid var(--n19-divider) !important; }
+yt-searchbox .ytSearchboxComponentInputBox {
+  background: var(--n19-field) !important; border: 1px solid var(--n19-field-border) !important; border-right: none !important;
+  border-radius: 2px 0 0 2px !important; box-shadow: var(--n19-field-inset) !important; margin-left: 0 !important;
 }
-yt-searchbox .ytSearchboxComponentSearchButton, #search-icon-legacy {
-  background: #f8f8f8 !important; border: 1px solid #d3d3d3 !important; border-radius: 0 2px 2px 0 !important; width: 65px !important; height: 40px !important; box-sizing: border-box !important;
+yt-searchbox .ytSearchboxComponentSearchButton {
+  background: var(--n19-button) !important; border: 1px solid var(--n19-button-border) !important; border-radius: 0 2px 2px 0 !important; width: 65px !important;
 }
-yt-searchbox .ytSearchboxComponentSearchButton:hover, #search-icon-legacy:hover { background: #f0f0f0 !important; box-shadow: 0 1px 0 rgba(0,0,0,.1) !important; }
-.ytSearchboxComponentInput, input#search { font-size: 16px !important; color: #111 !important; }
-/* "Ask YouTube" / AI entry points did not exist */
-yt-searchbox [aria-label*="Ask" i], #masthead [aria-label*="Ask YouTube" i] { display: none !important; }
+yt-searchbox .ytSearchboxComponentInput { color: var(--n19-text) !important; }
+yt-searchbox .ytSearchboxComponentSuggestionsContainer, .sbdd_b { border-radius: 0 0 2px 2px !important; }
 
-/* Sign in: blue outlined, uppercase */
-#masthead ytd-button-renderer a[href*="ServiceLogin"], #masthead a[aria-label="Sign in" i], #masthead yt-button-shape a[href*="accounts.google.com"] {
-  border: 1px solid #065fd4 !important; border-radius: 2px !important; color: #065fd4 !important; background: transparent !important;
-  text-transform: uppercase !important; font-weight: 500 !important; letter-spacing: .007px !important;
+/* Guide: plain rail, gray selected row, red selected icon */
+#guide-content, tp-yt-app-drawer #contentContainer, ytd-mini-guide-renderer { background: var(--n19-rail) !important; }
+ytd-guide-entry-renderer tp-yt-paper-item, ytd-guide-entry-renderer #endpoint, ytd-mini-guide-entry-renderer #endpoint { border-radius: 0 !important; }
+ytd-guide-entry-renderer[active] tp-yt-paper-item { background: var(--n19-active) !important; }
+ytd-guide-entry-renderer[active] yt-icon, ytd-mini-guide-entry-renderer[active] yt-icon { color: #f00 !important; }
+ytd-guide-section-renderer #guide-section-title { text-transform: uppercase !important; color: var(--n19-text-2) !important; font-size: 1.4rem !important; font-weight: 500 !important; }
+ytd-guide-entry-renderer:has(a[title="Shorts"]), ytd-mini-guide-entry-renderer:has(a[title="Shorts"]), ytd-mini-guide-entry-renderer[aria-label="Shorts"] { display: none !important; }
+
+/* 2019 had no feed filter chips and no Shorts */
+ytd-browse[page-subtype="home"] ytd-feed-filter-chip-bar-renderer, ytd-browse[page-subtype="home"] #chips-wrapper,
+ytd-search-header-renderer chip-bar-view-model, ytd-search-header-renderer yt-chip-cloud-renderer,
+ytd-rich-section-renderer:has([is-shorts]), ytd-rich-section-renderer:has(grid-shelf-view-model), ytd-reel-shelf-renderer, grid-shelf-view-model { display: none !important; }
+/* Other chips (a channel's Latest / Popular / Oldest) become flat text choices */
+.ytChipShapeChip { background: transparent !important; border-radius: 0 !important; color: var(--n19-text-2) !important; text-transform: uppercase !important; font-weight: 500 !important; }
+.ytChipShapeActive { color: var(--n19-text) !important; box-shadow: inset 0 -2px 0 var(--n19-text-2) !important; }
+
+/* Home grid: more, smaller items; no avatars beside titles */
+ytd-rich-grid-renderer { --ytd-rich-grid-items-per-row: 5 !important; --ytd-rich-grid-item-margin: 4px !important; }
+ytd-rich-item-renderer #avatar-container, ytd-rich-item-renderer yt-decorated-avatar-view-model, ytd-rich-item-renderer .yt-lockup-metadata-view-model__avatar { display: none !important; }
+
+/* Square thumbnails, players and cards */
+ytd-thumbnail, ytd-thumbnail a, ytd-thumbnail img, yt-image img, .yt-core-image, yt-thumbnail-view-model, .ytThumbnailViewModelImage,
+.yt-lockup-view-model__content-image, #movie_player, .html5-video-player, ytd-player, #ytd-player, ytd-playlist-thumbnail,
+ytd-watch-metadata #description, ytd-text-inline-expander { border-radius: 0 !important; }
+
+/* Titles and metadata */
+#video-title, .yt-lockup-metadata-view-model__title { color: var(--n19-text) !important; font-weight: 500 !important; }
+ytd-video-renderer #video-title { font-size: 1.8rem !important; font-weight: 400 !important; }
+#metadata-line span, .yt-content-metadata-view-model__metadata-text { color: var(--n19-text-2) !important; }
+ytd-watch-metadata h1 { font-size: 1.8rem !important; font-weight: 400 !important; line-height: 2.6rem !important; }
+
+/* Subscribe: red, uppercase, square */
+ytd-subscribe-button-renderer button, yt-subscribe-button-view-model button, button[aria-label^="Subscribe" i] {
+  background: var(--n19-subscribe) !important; color: #fff !important; border-radius: 2px !important; text-transform: uppercase !important; font-weight: 500 !important;
 }
+ytd-subscribe-button-renderer[subscribed] button, button[aria-label^="Unsubscribe" i] { background: var(--n19-subscribed) !important; color: var(--n19-subscribed-text) !important; }
 
-/* Guide: white rail, gray selected row, red selected icon; no Shorts */
-#guide-content, tp-yt-app-drawer #contentContainer, ytd-guide-renderer, ytd-mini-guide-renderer { background: #fff !important; }
-ytd-guide-entry-renderer[active] tp-yt-paper-item, ytd-guide-entry-renderer[active] #endpoint { background: #e5e5e5 !important; border-radius: 0 !important; }
-ytd-guide-entry-renderer tp-yt-paper-item, ytd-guide-entry-renderer #endpoint { border-radius: 0 !important; }
-ytd-guide-entry-renderer[active] yt-icon, ytd-mini-guide-entry-renderer[active] yt-icon { color: #f00 !important; fill: #f00 !important; }
-ytd-guide-entry-renderer .title, ytd-mini-guide-entry-renderer .title { font-size: 14px !important; color: #030303 !important; }
-ytd-guide-section-renderer #guide-section-title { text-transform: uppercase !important; color: #606060 !important; font-size: 14px !important; font-weight: 500 !important; }
-ytd-guide-entry-renderer:has(a[title="Shorts"]), ytd-mini-guide-entry-renderer[aria-label="Shorts"], ytd-mini-guide-entry-renderer:has(a[title="Shorts"]) { display: none !important; }
-
-/* 2019 had no filter chips and no Shorts shelves */
-ytd-feed-filter-chip-bar-renderer, #chips-wrapper.ytd-rich-grid-renderer, ytd-search-header-renderer yt-chip-cloud-renderer, ytd-search-header-renderer chip-bar-view-model,
-ytd-browse[page-subtype="home"] chip-bar-view-model,
-ytd-rich-section-renderer:has(ytd-rich-shelf-renderer[is-shorts]), ytd-rich-section-renderer:has(grid-shelf-view-model),
-ytd-reel-shelf-renderer, grid-shelf-view-model, ytd-rich-section-renderer:has([is-shorts]), ytm-shorts-lockup-view-model-v2 { display: none !important; }
-ytd-rich-grid-renderer #contents.ytd-rich-grid-renderer { padding-top: 24px !important; }
-
-/* Home grid: more, smaller square thumbnails; no avatars under them */
-ytd-rich-grid-renderer { --ytd-rich-grid-items-per-row: 5 !important; --ytd-rich-grid-posts-per-row: 5 !important; --ytd-rich-grid-item-margin: 4px !important; --ytd-rich-grid-item-max-width: 250px !important; }
-ytd-rich-item-renderer { margin-bottom: 24px !important; }
-ytd-rich-item-renderer #avatar-container, ytd-rich-item-renderer yt-decorated-avatar-view-model, ytd-rich-item-renderer .yt-lockup-metadata-view-model__avatar,
-ytd-rich-item-renderer .yt-lockup-metadata-view-model-wiz__avatar { display: none !important; }
-
-/* Square corners everywhere thumbnails, cards and players appear */
-ytd-thumbnail, ytd-thumbnail a, ytd-thumbnail img, yt-image, yt-image img, .yt-core-image, yt-thumbnail-view-model, .yt-thumbnail-view-model,
-.ytThumbnailViewModelImage, .ytCoreImageHost, #thumbnail, ytd-playlist-thumbnail, #movie_player, .html5-video-player, ytd-player, #ytd-player,
-.yt-lockup-view-model__content-image, .yt-lockup-view-model-wiz__content-image { border-radius: 0 !important; }
-
-/* Titles and metadata in the old weights and grays */
-#video-title, .yt-lockup-metadata-view-model__title, .yt-lockup-metadata-view-model-wiz__title, h3 a.yt-lockup-metadata-view-model__title {
-  color: #030303 !important; font-weight: 500 !important; font-size: 14px !important; line-height: 2rem !important;
+/* Watch actions: flat, uppercase labels instead of pills */
+ytd-watch-metadata #actions button, segmented-like-dislike-button-view-model button {
+  background: transparent !important; border-radius: 0 !important; text-transform: uppercase !important; color: var(--n19-text-2) !important;
 }
-ytd-video-renderer #video-title, ytd-search #video-title { font-size: 18px !important; font-weight: 400 !important; line-height: 2.6rem !important; }
-#metadata-line, #metadata-line span, ytd-channel-name, ytd-channel-name a, .yt-content-metadata-view-model__metadata-text,
-.yt-content-metadata-view-model-wiz__metadata-text, .yt-core-attributed-string--link-inherit-color { color: #606060 !important; font-size: 13px !important; }
-
-/* Subscribe: the red uppercase button */
-ytd-subscribe-button-renderer button, yt-subscribe-button-view-model button, #subscribe-button button, button[aria-label^="Subscribe" i] {
-  background: #cc0000 !important; color: #fff !important; border-radius: 2px !important; text-transform: uppercase !important; font-weight: 500 !important; letter-spacing: .007px !important;
+/* Tabs on channel pages */
+yt-tab-shape .yt-tab-shape__tab, yt-tab-shape .ytTabShapeTab { text-transform: uppercase !important; font-weight: 500 !important; color: var(--n19-text-2) !important; }
+yt-tab-shape[aria-selected="true"] .yt-tab-shape__tab, yt-tab-shape[aria-selected="true"] .ytTabShapeTab { color: var(--n19-text) !important; }
+/* Sign in: blue outlined, uppercase; channel banners and header art square */
+#masthead a[href*="accounts.google.com"], #masthead yt-button-shape a[aria-label="Sign in" i] {
+  border: 1px solid var(--n19-link) !important; border-radius: 2px !important; color: var(--n19-link) !important; background: transparent !important; text-transform: uppercase !important; font-weight: 500 !important;
 }
-ytd-subscribe-button-renderer button[aria-label*="Unsubscribe" i], yt-subscribe-button-view-model button[aria-label*="Unsubscribe" i] { background: #ececec !important; color: #606060 !important; }
-
-/* Watch page: flat icon buttons with uppercase labels instead of pills */
-ytd-watch-metadata #actions yt-button-shape button, ytd-watch-metadata #actions like-button-view-model button, ytd-watch-metadata #actions dislike-button-view-model button,
-segmented-like-dislike-button-view-model button, ytd-menu-renderer yt-button-shape button {
-  background: transparent !important; border-radius: 0 !important; text-transform: uppercase !important; color: #606060 !important; box-shadow: none !important;
-}
-ytd-watch-metadata h1, ytd-watch-metadata #title h1 yt-formatted-string { font-size: 18px !important; font-weight: 400 !important; line-height: 2.6rem !important; color: #030303 !important; }
-ytd-watch-metadata #description, ytd-text-inline-expander, #description-inner { background: transparent !important; border-radius: 0 !important; }
-ytd-watch-flexy, ytd-watch-flexy #columns { background: #fff !important; }
-#comments #header ytd-comments-header-renderer, ytd-comment-thread-renderer { font-size: 13px !important; }
-
-/* Remaining chips (e.g. a channel's Latest/Popular/Oldest) become flat text choices */
-.ytChipShapeChip { background: transparent !important; border-radius: 0 !important; color: #606060 !important; text-transform: uppercase !important; font-weight: 500 !important; font-size: 13px !important; }
-.ytChipShapeActive, .ytChipShapeChip[aria-selected="true"] { color: #030303 !important; border-bottom: 2px solid #606060 !important; }
-
-/* Channel tabs: uppercase, gray, dark underline on the active tab */
-yt-tab-shape .yt-tab-shape__tab, yt-tab-shape .ytTabShapeTab, tp-yt-paper-tab .tab-content { text-transform: uppercase !important; font-size: 14px !important; font-weight: 500 !important; color: #606060 !important; }
-yt-tab-shape[aria-selected="true"] .yt-tab-shape__tab, yt-tab-shape[aria-selected="true"] .ytTabShapeTab { color: #030303 !important; }
-yt-page-header-renderer, ytd-tabbed-page-header, #page-header-container, yt-page-header-view-model { background: #fff !important; }
+yt-page-header-view-model img, yt-image-banner-view-model, yt-image-banner-view-model img, .yt-page-header-view-model__page-header-banner img { border-radius: 0 !important; }

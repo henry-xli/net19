@@ -1,16 +1,10 @@
-// net19 handmade theme: keep YouTube on its own light palette (2019 had no default dark mode).
-(() => {
-  const root = document.documentElement;
-  const light = () => {
-    if (root.hasAttribute('dark')) root.removeAttribute('dark');
-    if (!root.hasAttribute('light')) root.setAttribute('light', '');
-    root.removeAttribute('darker-dark-theme');
-    root.removeAttribute('darker-dark-theme-deprecate');
-    for (const node of document.querySelectorAll('ytd-app[dark], ytd-masthead[dark], #masthead[dark], ytd-mini-guide-renderer[dark], tp-yt-app-drawer[dark]')) node.removeAttribute('dark');
-  };
-  light();
-  new MutationObserver(light).observe(root, { attributes: true, attributeFilter: ['dark', 'light', 'darker-dark-theme'] });
-  const deep = new MutationObserver(() => light());
-  const start = () => deep.observe(document.body, { subtree: true, attributes: true, attributeFilter: ['dark'] });
-  if (document.body) start(); else document.addEventListener('DOMContentLoaded', start, { once: true });
-})();
+// net19 handmade theme: YouTube, 2019. YouTube marks its dark theme with html[dark]; both modes are restyled.
+// Palette: the current near-black/near-white pair moves to 2019's values (#181818 page and pure white text in
+// dark; #030303 text in light); every YouTube variable holding those colors follows.
+globalThis.net19Theme = {
+  detect: () => document.documentElement.hasAttribute('dark') ? 'dark' : 'light',
+  watch: ['dark', 'class'],
+  scopes: ['ytd-app'],
+  light: { '#0f0f0f': '#030303', '#f2f2f2': '#f1f1f1' },
+  dark: { '#0f0f0f': '#181818', '#f1f1f1': '#ffffff', '#272727': '#303030' },
+};

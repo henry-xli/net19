@@ -1,5 +1,4 @@
 /* net19 handmade theme: eBay, 2019: blue #0654ba search button with square corners, Helvetica Neue, flat tiles. */
-:root { color-scheme: light !important; }
 body, body * { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important; }
 body { background: #fff !important; color: #333 !important; }
 #gh-search-btn, #gh-btn, .gh-search-button__button, button.gh-search-button {

@@ -1,38 +1,21 @@
-/* net19 handmade theme: LinkedIn, 2019: dark #283e4a global nav, #f3f6f8 page, square-cornered blue #0073b1 buttons, shadowed white cards. */
-:root, html, .theme--light, .theme--dark {
-  color-scheme: light !important;
-  --color-background-canvas: #f3f6f8 !important;
-  --color-background-container: #fff !important;
-  --color-brand: #0073b1 !important;
-  --color-action: #0073b1 !important;
-  --color-text: rgba(0,0,0,.9) !important;
-  --color-text-low-emphasis: rgba(0,0,0,.6) !important;
-  --corner-radius-large: 2px !important;
-  --corner-radius-medium: 2px !important;
-  --corner-radius-small: 2px !important;
+/* net19 handmade theme: LinkedIn, 2019: dark blue-gray global navigation, rectangular #0073b1 buttons, shadowed
+   2px-radius cards. The dark variant keeps the shapes on LinkedIn's dark surfaces. */
+html { --n19-canvas: #f3f6f8; --n19-card: #fff; --n19-text: rgba(0,0,0,.9); --n19-text-2: rgba(0,0,0,.6); --n19-blue: #0073b1; --n19-blue-hover: #006097;
+  --n19-nav: #283e4a; --n19-nav-text: rgba(255,255,255,.75); --n19-nav-active: #fff; --n19-nav-field: #e1e9ee; --n19-nav-field-text: rgba(0,0,0,.9);
+  --n19-card-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 2px 3px rgba(0,0,0,.2); }
+html[data-net19-mode="dark"] { --n19-canvas: #1b1f23; --n19-card: #1d2226; --n19-text: rgba(255,255,255,.9); --n19-text-2: rgba(255,255,255,.6); --n19-blue: #70b5f9; --n19-blue-hover: #9ccbfa;
+  --n19-nav: #1d2226; --n19-nav-text: rgba(255,255,255,.6); --n19-nav-active: #fff; --n19-nav-field: #38434f; --n19-nav-field-text: rgba(255,255,255,.9);
+  --n19-card-shadow: 0 0 0 1px rgba(255,255,255,.12); }
+html:root, html .theme--light, html .theme--dark {
+  --color-background-canvas: var(--n19-canvas) !important; --color-background-container: var(--n19-card) !important;
+  --color-text: var(--n19-text) !important; --color-text-low-emphasis: var(--n19-text-2) !important; --color-brand: var(--n19-blue) !important;
+  --color-action: var(--n19-blue) !important; --corner-radius-large: 2px !important; --corner-radius-medium: 2px !important; --corner-radius-small: 2px !important;
 }
-body, body * { font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
-body, .application-outlet, main { background: #f3f6f8 !important; }
-
-/* Global navigation: the dark blue-gray bar with light icons */
-header.global-nav, #global-nav, .global-nav__content { background: #283e4a !important; border-bottom: none !important; }
-.global-nav a, .global-nav button, .global-nav__primary-link, .global-nav__primary-link-text, .global-nav__me-content, .global-nav li-icon, .global-nav svg { color: rgba(255,255,255,.75) !important; fill: currentColor !important; }
-.global-nav__primary-link--active, .global-nav__primary-link--active .global-nav__primary-link-text { color: #fff !important; }
-.global-nav__primary-link--active::after { background: #fff !important; }
-.global-nav input, #global-nav-typeahead input, .search-global-typeahead__input { background: #e1e9ee !important; border-radius: 2px !important; color: rgba(0,0,0,.9) !important; }
-
-/* Rectangular buttons (pill buttons arrived in 2020) */
-.artdeco-button, button.artdeco-button, a.artdeco-button { border-radius: 2px !important; }
-.artdeco-button--primary { background: #0073b1 !important; color: #fff !important; }
-.artdeco-button--primary:hover { background: #006097 !important; }
-.artdeco-button--secondary { box-shadow: inset 0 0 0 1px #0073b1 !important; color: #0073b1 !important; }
-
-/* Cards */
-.artdeco-card, section.artdeco-card, .feed-shared-update-v2, .scaffold-layout__sidebar .artdeco-card {
-  border-radius: 2px !important; box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 2px 3px rgba(0,0,0,.2) !important; border: none !important; background: #fff !important;
-}
-.feed-shared-actor__name, .update-components-actor__name { color: rgba(0,0,0,.9) !important; font-weight: 600 !important; }
-a { color: #0073b1; }
-
-/* Logged-out landing pages */
-nav.nav a.nav__button-secondary, a.btn-md.btn-primary, .btn-primary { border-radius: 2px !important; }
+header.global-nav, #global-nav { background: var(--n19-nav) !important; border-bottom: none !important; }
+.global-nav__primary-link, .global-nav__primary-link-text, .global-nav__me-content, .global-nav li-icon, .global-nav svg { color: var(--n19-nav-text) !important; fill: currentColor !important; }
+.global-nav__primary-link--active, .global-nav__primary-link--active .global-nav__primary-link-text { color: var(--n19-nav-active) !important; }
+#global-nav-typeahead input, .search-global-typeahead__input { background: var(--n19-nav-field) !important; color: var(--n19-nav-field-text) !important; border-radius: 2px !important; }
+.artdeco-button { border-radius: 2px !important; }
+.artdeco-button--primary { background: var(--n19-blue) !important; }
+.artdeco-button--primary:hover { background: var(--n19-blue-hover) !important; }
+.artdeco-card, .feed-shared-update-v2 { border-radius: 2px !important; box-shadow: var(--n19-card-shadow) !important; border: none !important; }

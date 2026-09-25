@@ -1,53 +1,23 @@
-/* net19 handmade theme: Facebook, 2019 ("classic"): blue #4267b2 top bar, #e9ebee page, small-radius white cards, Helvetica. facebook.js keeps the light palette. */
-:root, .__fb-light-mode, .__fb-dark-mode {
-  color-scheme: light !important;
-  --web-wash: #e9ebee !important;
-  --wash: #e9ebee !important;
-  --surface-background: #fff !important;
-  --card-background: #fff !important;
-  --card-background-flat: #f5f6f7 !important;
-  --comment-background: #f2f3f5 !important;
-  --primary-text: #1d2129 !important;
-  --secondary-text: #606770 !important;
-  --placeholder-text: #90949c !important;
-  --primary-icon: #606770 !important;
-  --secondary-icon: #606770 !important;
-  --accent: #4267b2 !important;
-  --blue-link: #385898 !important;
-  --primary-button-background: #4267b2 !important;
-  --primary-button-text: #fff !important;
-  --secondary-button-background: #f5f6f7 !important;
-  --secondary-button-text: #4b4f56 !important;
-  --divider: #dddfe2 !important;
-  --media-inner-border: #dddfe2 !important;
-  --card-corner-radius: 3px !important;
-  --button-corner-radius: 2px !important;
-  --button-corner-radius-large: 2px !important;
-  --button-small-corner-radius: 2px !important;
-  --input-corner-radius: 2px !important;
-  --nav-list-selected-accent: #4267b2 !important;
-  --shadow-card: 0 0 0 1px #dddfe2 !important;
-  --card-box-shadow: 0 0 0 1px #dddfe2 !important;
-  --shadow-1: 0 0 0 1px #dddfe2 !important;
+/* net19 handmade theme: Facebook, 2019: blue top bar, gray page, small-radius white cards, Helvetica. Facebook had no
+   dark mode in 2019; the dark variant keeps the same shapes and the navy top bar on Facebook's dark surfaces. */
+html { --n19-wash: #e9ebee; --n19-card: #fff; --n19-card-2: #f5f6f7; --n19-comment: #f2f3f5; --n19-text: #1d2129; --n19-text-2: #606770; --n19-muted: #90949c;
+  --n19-icon: #606770; --n19-accent: #4267b2; --n19-link: #385898; --n19-divider: #dddfe2; --n19-bar: #4267b2; --n19-bar-border: #29487d; --n19-bar-field: #fff; --n19-bar-field-text: #1d2129; }
+html[data-net19-mode="dark"] { --n19-wash: #18191a; --n19-card: #242526; --n19-card-2: #3a3b3c; --n19-comment: #3a3b3c; --n19-text: #e4e6eb; --n19-text-2: #b0b3b8; --n19-muted: #8a8d91;
+  --n19-icon: #b0b3b8; --n19-accent: #5b7ec2; --n19-link: #8ea8e0; --n19-divider: #3e4042; --n19-bar: #29487d; --n19-bar-border: #1e3560; --n19-bar-field: #3a3b3c; --n19-bar-field-text: #e4e6eb; }
+html:root, html.__fb-light-mode, html.__fb-dark-mode, html .__fb-light-mode, html .__fb-dark-mode {
+  --web-wash: var(--n19-wash) !important; --wash: var(--n19-wash) !important; --surface-background: var(--n19-card) !important;
+  --card-background: var(--n19-card) !important; --card-background-flat: var(--n19-card-2) !important; --comment-background: var(--n19-comment) !important;
+  --primary-text: var(--n19-text) !important; --secondary-text: var(--n19-text-2) !important; --placeholder-text: var(--n19-muted) !important;
+  --primary-icon: var(--n19-icon) !important; --secondary-icon: var(--n19-icon) !important; --accent: var(--n19-accent) !important;
+  --blue-link: var(--n19-link) !important; --primary-button-background: var(--n19-accent) !important; --secondary-button-background: var(--n19-card-2) !important;
+  --divider: var(--n19-divider) !important; --media-inner-border: var(--n19-divider) !important; --nav-list-selected-accent: var(--n19-accent) !important;
+  --card-corner-radius: 3px !important; --button-corner-radius: 2px !important; --button-corner-radius-large: 2px !important; --button-small-corner-radius: 2px !important;
+  --input-corner-radius: 2px !important; --shadow-card: 0 0 0 1px var(--n19-divider) !important; --card-box-shadow: 0 0 0 1px var(--n19-divider) !important;
 }
-body, body * { font-family: Helvetica, Arial, sans-serif !important; }
-html, body { background: #e9ebee !important; }
-
-/* The blue bar */
-div[role="banner"] {
-  background: #4267b2 !important; border-bottom: 1px solid #29487d !important; box-shadow: none !important;
-  --surface-background: #4267b2; --primary-icon: #fff; --secondary-icon: #fff; --primary-text: #fff; --secondary-text: #fff;
-  --accent: #fff; --disabled-icon: rgba(255,255,255,.5); --comment-background: #fff; --secondary-button-background: #365899;
-}
-div[role="banner"] input[type="search"], div[role="banner"] input { background: #fff !important; color: #1d2129 !important; border-radius: 2px !important; }
-div[role="banner"] svg { color: #fff !important; }
+body, button, input, textarea { font-family: Helvetica, Arial, sans-serif !important; }
+/* The blue bar: its own variables, so icons, labels and the search field inside it follow */
+div[role="banner"] { background: var(--n19-bar) !important; border-bottom: 1px solid var(--n19-bar-border) !important; box-shadow: none !important;
+  --surface-background: var(--n19-bar); --primary-icon: #fff; --secondary-icon: #fff; --primary-text: #fff; --secondary-text: #fff; --accent: #fff;
+  --secondary-button-background: rgba(0,0,0,.15); --comment-background: var(--n19-bar-field); }
+div[role="banner"] input { background: var(--n19-bar-field) !important; color: var(--n19-bar-field-text) !important; border-radius: 2px !important; }
 div[role="banner"] a[aria-label="Facebook"] svg path { fill: #fff !important; }
-
-/* Feed cards and composer */
-div[role="feed"] > div, div[role="main"] div[aria-posinset], div[data-pagelet^="FeedUnit"], div[role="article"] {
-  border-radius: 3px !important;
-}
-div[role="main"] [aria-label="Create a post"], div[role="region"][aria-label="Create a post"] { border-radius: 3px !important; }
-div[role="button"][aria-label], a[role="link"] img { border-radius: inherit; }
-span, a { font-size: inherit; }
-div[role="article"] { font-size: 14px !important; }

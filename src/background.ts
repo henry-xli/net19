@@ -142,15 +142,14 @@ function syncScripts(): Promise<unknown> {
       return;
     }
     const paused = config.disabledHosts.map(h => `*://${h}/*`);
-    const themes = THEMES.filter(theme => (theme.css !== false || theme.js) && config.year >= theme.years[0] && config.year <= theme.years[1]);
+    // Every theme ships a config script (its 2019 palette and how to read the site's own light/dark mode)
+    // followed by the shared palette engine; frames are included so same-site menus and popups match.
+    const themes = THEMES.filter(theme => config.year >= theme.years[0] && config.year <= theme.years[1]);
     if (themes.length) await chrome.scripting.registerContentScripts(themes.map((theme): chrome.scripting.RegisteredContentScript => ({
-      id: `net19-theme-${theme.id}`, matches: themeMatches(theme), ...(theme.css !== false ? { css: [`themes/${theme.id}.css`] } : {}),
-      ...(theme.js ? { js: [`themes/${theme.id}.js`] } : {}), runAt: 'document_start' as const, allFrames: false, persistAcrossSessions: true,
+      id: `net19-theme-${theme.id}`, matches: themeMatches(theme), css: [`themes/${theme.id}.css`],
+      js: [`themes/${theme.id}.js`, 'themes/palette.js'], runAt: 'document_start', allFrames: true, persistAcrossSessions: true,
       ...(paused.length ? { excludeMatches: paused } : {}),
-    }) as chrome.scripting.RegisteredContentScript).concat(themes.filter(theme => theme.preferLight).map(theme => ({
-      id: `net19-theme-${theme.id}-light`, matches: themeMatches(theme), js: ['themes/prefer-light.js'], world: 'MAIN' as const,
-      runAt: 'document_start' as const, allFrames: false, persistAcrossSessions: true, ...(paused.length ? { excludeMatches: paused } : {}),
-    }) as chrome.scripting.RegisteredContentScript)));
+    }) as chrome.scripting.RegisteredContentScript));
     const spec: chrome.scripting.RegisteredContentScript = {
       id: 'net19-start', matches, js: ['content.js'], css: ['gate.css'], runAt: 'document_start',
       allFrames: false, persistAcrossSessions: true,
