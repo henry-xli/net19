@@ -6,7 +6,7 @@ Net19 prepares historical visual styling for live websites. It has no developer-
 
 ## What leaves your device
 
-With net19 enabled and Chrome website access granted, navigating to an uncached public site automatically queries the Internet Archive for its **public homepage origin** and the selected year. Net19 may download public archived HTML, a bounded number of archived stylesheets and imports, and small archived PNG branding/background graphics. Asset paths and query strings come from the public archive, not the current page.
+With net19 enabled and Chrome website access granted, navigating to an uncached public site automatically queries the Internet Archive for its **public homepage origin** and the selected year. Net19 may download public archived HTML, a bounded number of archived stylesheets and imports, and small archived PNG branding/background graphics. Asset paths and query strings come from the public archive, not the current page. Net19 also prepares a fixed list of about 25 popular homepages in the background; the list is built into the extension, is the same for every user, and does not depend on your browsing.
 
 Net19 does not transmit your visited path, query string, fragment, current page contents, form values, cookies, passwords, authentication tokens, or account data. Requests omit credentials and referrers. Remote connections made by the extension are restricted to `archive.org` and `web.archive.org`; its network policy also blocks redirects to other hosts.
 

@@ -17,7 +17,7 @@ Automatic preparation requires access to public websites. Chrome may ask you to 
 
 ## What changed in 0.2
 
-- Uncached public GET navigations first open a local loading page. The destination request is held while net19 checks the archive, up to **60 seconds** by default. Cached sites skip this lookup.
+- Uncached public GET navigations first open a local loading page. The destination request is held while net19 checks the archive, up to **8 seconds** by default (Settings: 3–30 seconds). If the archive is slower, the page opens with its current style and preparation finishes in the background, so the next visit is instant. About 25 popular homepages are prepared in the background ahead of time. Cached sites skip this lookup.
 - The parser measures an archived document in an isolated browser frame. It preserves the CSS cascade, media conditions, component typography, borders, spacing, gradients, and bounded raster graphics.
 - A general matcher connects archived components to live elements using labels, links, form names, classes, and structure. There are **no website-specific layout adapters**. Compatible compact pages recover measured geometry; longer pages can recover matched grid/flex proportions while current text continues to flow.
 - Live controls and event handlers remain in place. Styles activate while the page is covered. Once a page is revealed, a late archive response cannot restyle it.
@@ -34,7 +34,7 @@ Wayback is the implemented provider. Archive.is is not queried. The timeout cove
 
 ## Privacy
 
-Archive requests disclose the **public homepage origin and selected year** to the Internet Archive. Archived public stylesheet and graphic addresses may also be requested. Your visited path, query, fragment, current page text, form values, and cookies are not sent by net19. Matching and storage happen locally. There is no developer server, remote AI, account, analytics, or telemetry. [Full privacy policy](PRIVACY.md).
+Archive requests disclose the **public homepage origin and selected year** to the Internet Archive. Archived public stylesheet and graphic addresses may also be requested. A fixed list of popular homepages, identical for every user, is also looked up in the background. Your visited path, query, fragment, current page text, form values, and cookies are not sent by net19. Matching and storage happen locally. There is no developer server, remote AI, account, analytics, or telemetry. [Full privacy policy](PRIVACY.md).
 
 ## Development
 

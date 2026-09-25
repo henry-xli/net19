@@ -21,7 +21,7 @@ function paint(): void {
   }
 }
 const update = action(async () => {
-  await send<Settings>('SETTINGS', { patch: { enabled: power.checked, year: Number(year.value), waitMs: Number(wait.value) } });
+  await send<Settings>('SETTINGS', { patch: { enabled: power.checked, year: Number(year.value), waitMs: Number(wait.value), waitChosen: true } });
   state = await send<State>('STATE'); paint(); announce('Saved. Other years are removed from the cache.');
 });
 year.addEventListener('change', update); wait.addEventListener('change', update); power.addEventListener('change', update);

@@ -19,7 +19,8 @@ There is no website-specific adapter or downloaded executable code. A site's arc
 
 | Resource | Limit |
 | --- | --- |
-| Preflight wait | 60 seconds by default; Settings offers 15, 30 or 60 seconds |
+| Preflight wait | 8 seconds by default; Settings offers 3, 5, 8, 15 or 30 seconds. Preparation continues in the background after release |
+| Background warm-up | 25 fixed popular homepages, one at a time, 45 s after worker start, only while no visit is being prepared, 2 s apart; stops on two outages and resumes on the next start |
 | Archive job | 55 seconds, additionally capped by the chosen timeout |
 | Index / HTML-CSS / PNG request | CDX 25, Availability 12 / 15 / 10 seconds; one retry for transient errors |
 | Independent document-cover CSS expiry | 65 seconds |

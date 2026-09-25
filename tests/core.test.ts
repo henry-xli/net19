@@ -16,9 +16,11 @@ test('legacy short waits migrate to automatic preparation and controls remain bo
   assert.equal(settingsFrom(null).year,2019);
   assert.equal(settingsFrom({year:2000}).year,2007);
   assert.equal(settingsFrom({year:9999}).year,currentYear());
-  for (const waitMs of [0,800,1800,2200,Infinity]) assert.equal(settingsFrom({waitMs}).waitMs,60_000);
-  assert.equal(settingsFrom({waitMs:30000}).waitMs,30000);
-  assert.equal(settingsFrom({waitMs:90000}).waitMs,60000);
+  // Old stored defaults (including 60 s) migrate to the short hold; chosen values stay.
+  for (const waitMs of [0,800,1800,2200,60000,Infinity]) assert.equal(settingsFrom({waitMs}).waitMs,8_000);
+  assert.equal(settingsFrom({waitMs:30000}).waitMs,8_000);
+  assert.equal(settingsFrom({waitMs:30000,waitChosen:true}).waitMs,30000);
+  assert.equal(settingsFrom({waitMs:90000,waitChosen:true}).waitMs,8_000);
 });
 test('only authentic replay origins and captures no newer than the selected year validate', () => {
   assert.equal(validTimestamp('20200101000000',2019),false);

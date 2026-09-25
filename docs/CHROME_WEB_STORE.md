@@ -10,7 +10,7 @@ Package: `downloads/net19-0.2.0.zip`. Its root contains `manifest.json`, bundled
 
 **Description:**
 
-Net19 prepares archived website styling before opening an uncached site. Choose a year from 2007 through today; the default is 2019. Preparation runs automatically and can wait up to 60 seconds for the archive. Saved profiles skip the archive lookup on later visits.
+Net19 prepares archived website styling before opening an uncached site. Choose a year from 2007 through today; the default is 2019. Preparation runs automatically and waits up to 8 seconds (adjustable) before opening the page; slower lookups finish in the background for the next visit. Popular sites are prepared ahead of time. Saved profiles skip the archive lookup on later visits.
 
 The extension measures historical layouts locally and matches their components to the live page. Compatible pages can recover historical spacing, typography, colors and layout proportions while retaining current text and working controls. If a usable archive or reliable match is unavailable, the current appearance is used. Pixel-identical results on every website are not guaranteed.
 

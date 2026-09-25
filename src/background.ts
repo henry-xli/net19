@@ -85,6 +85,41 @@ async function profile(origin: string): Promise<ProfileResult> {
   return promise;
 }
 
+// Popular homepages are prepared ahead of time, one at a time and only while no visit is
+// being prepared, so their first visit is instant. The list is identical for every user,
+// so these lookups reveal nothing about browsing. Results use the ordinary bounded cache.
+export const POPULAR = ['https://www.google.com','https://www.youtube.com','https://www.facebook.com','https://www.wikipedia.org',
+  'https://en.wikipedia.org','https://www.amazon.com','https://www.reddit.com','https://www.yahoo.com','https://www.bing.com',
+  'https://github.com','https://stackoverflow.com','https://www.linkedin.com','https://www.instagram.com','https://twitter.com',
+  'https://www.netflix.com','https://www.ebay.com','https://www.cnn.com','https://www.nytimes.com','https://www.bbc.com',
+  'https://www.espn.com','https://www.apple.com','https://www.microsoft.com','https://www.twitch.tv','https://www.imdb.com',
+  'https://news.ycombinator.com'];
+const WARM_KEY = 'warmed-year';
+let warming: Promise<void> | null = null;
+const pause = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+function warmPopular(delayMs = 45_000): Promise<void> {
+  warming ??= (async () => {
+    await initialized;
+    await pause(delayMs);
+    let outages = 0;
+    for (const origin of POPULAR) {
+      const config = await settings();
+      if (!config.enabled || config.year === currentYear()) return;
+      if ((await chrome.storage.local.get(WARM_KEY))[WARM_KEY] === config.year) return;
+      // Visits always come first.
+      while (activeJobs > 0 || inflight.size > 0) await pause(2_000);
+      if (isPaused(config, origin) || await cache.read(origin, config.year)) continue;
+      const result = await profile(origin);
+      if (result.reason === 'unavailable' && ++outages >= 2) return; // archive outage: retry on next start
+      if (!result.pack && result.reason === 'paused') return;          // year changed or cache cleared mid-run
+      await pause(2_000); // be gentle with the Internet Archive
+    }
+    const config = await settings();
+    await chrome.storage.local.set({ [WARM_KEY]: config.year });
+  })().catch(() => undefined).finally(() => { warming = null; });
+  return warming;
+}
+
 function syncScripts(): Promise<unknown> {
   registration = registration.catch(() => undefined).then(async () => {
     await initialized;
@@ -169,6 +204,7 @@ async function handle(message: unknown, sender: chrome.runtime.MessageSender): P
       const config = settingsFrom({ ...previous, ...m.patch });
       config.disabledHosts = config.disabledHosts.filter(host => publicOrigin(`https://${host}`));
       if (config.year !== previous.year || !config.enabled) for (const item of inflight.values()) item.controller.abort();
+      if (config.year !== previous.year || config.enabled !== previous.enabled) void warmPopular();
       if (config.year !== previous.year) {
         await cache.retainYear(config.year);
         await chrome.storage.session.remove('archive-backoff');
@@ -184,6 +220,7 @@ async function handle(message: unknown, sender: chrome.runtime.MessageSender): P
   if (m.type === 'CLEAR') {
     for (const item of inflight.values()) item.controller.abort();
     await cache.clear();
+    await chrome.storage.local.remove(WARM_KEY);
     await chrome.storage.session.remove('archive-backoff');
     failures = 0;
     await syncScripts();
@@ -203,6 +240,8 @@ chrome.runtime.onMessage.addListener((message, sender, respond) => {
   return true;
 });
 chrome.runtime.onInstalled.addListener(() => { void syncScripts().catch(() => undefined); });
+// Every worker start resumes an unfinished warm-up; it stops at once when already done.
+void warmPopular();
 chrome.runtime.onStartup.addListener(() => { void syncScripts().catch(() => undefined); });
 chrome.permissions.onAdded.addListener(() => { void syncScripts().catch(() => undefined); });
 chrome.permissions.onRemoved.addListener(() => {

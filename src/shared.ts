@@ -4,6 +4,8 @@ export const MAX_PROFILES = 100;
 export const MAX_CACHE_BYTES = 4 * 1024 * 1024;
 export const MAX_PROFILE_BYTES = 96 * 1024;
 export const HARD_GATE_MS = 65_000;
+export const DEFAULT_WAIT_MS = 8_000;
+export const WAIT_CHOICES = [3_000, 5_000, 8_000, 15_000, 30_000];
 export const WARM_BUDGET_MS = 55_000;
 export const SETTINGS_KEY = 'settings';
 export const INDEX_KEY = 'profile-index';
@@ -12,6 +14,7 @@ export type Settings = {
   enabled: boolean;
   year: number;
   waitMs: number;
+  waitChosen: boolean;
   disabledHosts: string[];
 };
 
@@ -51,8 +54,11 @@ export function settingsFrom(value: unknown): Settings {
   return {
     enabled: v.enabled !== false,
     year: Number.isInteger(v.year) ? Math.max(MIN_YEAR, Math.min(currentYear(), v.year!)) : 2019,
-    // Migrate the old prepare-only / 1.8-second defaults to automatic preparation.
-    waitMs: typeof v.waitMs === 'number' && Number.isFinite(v.waitMs) && v.waitMs >= 10_000 ? Math.min(60_000, v.waitMs) : 60_000,
+    // An uncached site is held only briefly; preparation continues in the background
+    // and the next visit is instant. Values not explicitly chosen in Settings (including
+    // the old 60-second default) migrate to the default.
+    waitMs: v.waitChosen === true && typeof v.waitMs === 'number' && WAIT_CHOICES.includes(v.waitMs) ? v.waitMs : DEFAULT_WAIT_MS,
+    waitChosen: v.waitChosen === true && typeof v.waitMs === 'number' && WAIT_CHOICES.includes(v.waitMs),
     disabledHosts: Array.isArray(v.disabledHosts) ? [...new Set(v.disabledHosts.filter(h => typeof h === 'string' && h.length < 254))].slice(0, 500) : [],
   };
 }
