@@ -102,6 +102,22 @@ export function deriveTheme(s: Snapshot): Theme {
   return theme;
 }
 
+// The archived tokens are light-era colors. Painting them onto a page that is currently
+// rendered dark (dark mode, or a dark design) leaves the site's own light text and white
+// logos on a light background, which is unreadable. Sample what is actually painted.
+export function darkPage(): boolean {
+  const points = [[.5,.5],[.25,.3],[.75,.3],[.25,.7],[.75,.7],[.5,.15],[.5,.85],[.1,.5],[.9,.5]];
+  let dark = 0, seen = 0;
+  for (const [x, y] of points) {
+    const node = document.elementFromPoint(innerWidth * x, innerHeight * y);
+    if (!node) continue;
+    seen++;
+    const [r, g, b] = rgb(background(node));
+    if (.2126 * r + .7152 * g + .0722 * b < 90) dark++;
+  }
+  return seen > 0 && dark / seen >= .4;
+}
+
 // A theme is worth applying when the capture carried more than browser defaults.
 export function themeStrength(theme: Theme): number {
   return (['heading','link','button','field','header','footer','prose'] as const).filter(role => theme[role]).length;

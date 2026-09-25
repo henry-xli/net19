@@ -1,7 +1,7 @@
 import { collect } from './collect';
 import { matchSnapshots } from './matcher';
 import { type Paint, type Snapshot, type Box } from './snapshot';
-import { applyTheme, background, deriveTheme, ratio, themeStrength } from './theme';
+import { applyTheme, background, darkPage, deriveTheme, ratio, themeStrength } from './theme';
 
 export type Adaptation = { css: string; matched: number; coverage: number; mode: 'layout'|'styles'|'theme'; cleanup: () => void; check: () => boolean };
 const number = (value: number) => Math.round(value * 10) / 10;
@@ -105,7 +105,7 @@ export async function adapt(snapshot: Snapshot, session: string, signal: AbortSi
       rules.push(`${prefix} [data-net19-extra]{display:none !important}`);
     }
     // Unmatched parts of a partially corresponding page still receive the era's theme.
-    const base = compact ? null : applyTheme(deriveTheme(snapshot), prefix, mark, new Set(mapped.keys()));
+    const base = compact || darkPage() ? null : applyTheme(deriveTheme(snapshot), prefix, mark, new Set(mapped.keys()));
     if (base) rules.push(...base.rules.filter(rule => !rule.startsWith(`${prefix} body{`)));
     const checked: Element[] = [];
     for (const [element, mapping] of mapped) {
@@ -151,7 +151,7 @@ export async function adapt(snapshot: Snapshot, session: string, signal: AbortSi
 
 export function themed(snapshot: Snapshot, session: string, prefix: string, signal: AbortSignal): Adaptation | null {
   const theme = deriveTheme(snapshot);
-  if (themeStrength(theme) < 2 || signal.aborted) return null;
+  if (themeStrength(theme) < 2 || signal.aborted || darkPage()) return null;
   const attributes: Array<[Element,string,string|null]> = [];
   let disposed = false;
   const mark = (node: Element, name: string, value = '') => { attributes.push([node,name,node.getAttribute(name)]); node.setAttribute(name,value); };
