@@ -1,0 +1,12 @@
+/* net19 handmade theme: Rotten Tomatoes, 2019: the #fa320a header, gray trending bar and Neusa/Franklin Gothic type are essentially today's look; 2019 used the older #3976dc link blue and squarer corners, and had no aRTi assistant. */
+html { --n19-link: #3976dc; --n19-link-hover: #2a62c0; }
+html[data-net19-mode="dark"] { --n19-link: #6f9ce8; --n19-link-hover: #9dbcf0; }
+html:root, body {
+  --Foreground-Interactive-Default: var(--n19-link) !important; --Foreground-Interactive-Hover: var(--n19-link-hover) !important;
+  --blueLink: var(--n19-link) !important; --borderRadius: 3px !important;
+}
+body { font-family: "Franklin Gothic", "Franklin Gothic FS", -apple-system, BlinkMacSystemFont, "PT Sans", Arial, sans-serif; }
+/* Header search: the 2019 field was a plain white box */
+rt-header input[type="search"], rt-header [slot="search"] input, search-results-nav input { border-radius: 3px !important; }
+/* aRTi (an AI assistant) did not exist in 2019 */
+button.arti-desktop, button[aria-label="Open aRTi"], [slot="arti-desktop"], [slot="arti-mobile"] { display: none !important; }

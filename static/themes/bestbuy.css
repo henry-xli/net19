@@ -1,0 +1,26 @@
+/* net19 handmade theme: Best Buy, 2019: the same #0046be header with plain white "Products / Brands / Deals /
+   Services" menu words instead of pill chips, a white page with square 1px-ruled panels instead of rounded cards on
+   grey, a squared-off search field and 4px buttons. The 2019 design is close to today's, so the theme is small. */
+html { --n19-page: #fff; --n19-rule: #e0e6ef; --n19-header: #0046be; --n19-header-text: #fff; }
+html[data-net19-mode="dark"] { --n19-page: #1d252c; --n19-rule: #3a444d; --n19-header: #0046be; --n19-header-text: #fff; }
+html:root {
+  --colorBgDefaultSubdued: var(--n19-page) !important; --color-unstable-background-white: var(--n19-page) !important;
+  --sizeRadiusLg: 4px !important; --sizeRadiusXl: 4px !important;
+}
+
+/* Header: menu chips become the 2019 text menu */
+nav.bottom-nav button[data-brix-component-name="Chip"] {
+  background: transparent !important; border-color: transparent !important; border-radius: 0 !important;
+  color: var(--n19-header-text) !important; font-size: 18px !important; padding-left: 10px !important; padding-right: 10px !important;
+}
+nav.bottom-nav button[data-brix-component-name="Chip"] * { font-size: 18px !important; font-weight: 400 !important; color: inherit !important; }
+nav.bottom-nav button[data-brix-component-name="Chip"]:hover { text-decoration: underline !important; }
+.sugg-search-bar-container-adjust, .sugg-search-bar-input-adjust { border-radius: 2px !important; }
+.sugg-search-bar-container-adjust button, .sugg-search-bar-container-adjust [class*="search-button" i] { border-radius: 0 2px 2px 0 !important; }
+
+/* Panels: square, separated by 1px rules as in 2019 */
+.rounded-border-lv, .deals-by-categories { border-radius: 0 !important; }
+.mc-content .rounded-border-lv.bg-default, .mc-content .deals-by-categories { box-shadow: 0 0 0 1px var(--n19-rule) !important; }
+[data-testid^="story-block-body"], .mc-content [style*="radius:16px"], .mc-content [style*="radius: 16px"] { border-radius: 0 !important; }
+.mc-content .rounded-lg, a.dct-be-btn { border-radius: 4px !important; }
+.c-button, [data-brix-component-name="Button"], button[class*="c-button"] { border-radius: 4px !important; }

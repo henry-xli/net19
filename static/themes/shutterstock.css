@@ -1,0 +1,16 @@
+/* net19 handmade theme: Shutterstock, 2019: bold condensed-feeling sans headings, #f54336 red-orange primary buttons and search button on the same white and near-black surfaces. */
+html { --n19-red: #f54336; --n19-red-hover: #e33e2f; --n19-red-active: #c9321f; --n19-text: #212121; --n19-link: #0f7ab8;
+  --n19-font: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+html[data-net19-mode="dark"] { --n19-red: #f54336; --n19-red-hover: #ff5a4c; --n19-red-active: #e33e2f; --n19-text: #f2f2f2; --n19-link: #5cb3e6;
+  --n19-font: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+/* Shutterstock's theme tokens (html.theme-light / html.theme-dark): primary buttons were the red-orange brand color in 2019, not black. */
+html:root, html.theme-light, html.theme-dark {
+  --font-family-body: var(--n19-font) !important; --font-family-heading: var(--n19-font) !important;
+  --theme-btn-primary-bg-default: var(--n19-red) !important; --theme-btn-primary-bg-hover: var(--n19-red-hover) !important;
+  --theme-btn-primary-bg-active: var(--n19-red-active) !important; --theme-btn-primary-fg-default: #fff !important;
+  --theme-btn-temp-primary-bg-default: var(--n19-red) !important; --theme-btn-temp-primary-bg-hover: var(--n19-red-hover) !important;
+  --theme-btn-temp-primary-bg-active: var(--n19-red-active) !important;
+  --theme-fg-border-brand: var(--n19-red) !important; --theme-bg-brand-red: var(--n19-red) !important;
+}
+body, h1, h2, h3, h4, button, input { font-family: var(--n19-font) !important; }
+h1, h2 { font-weight: 700 !important; letter-spacing: -.01em !important; }

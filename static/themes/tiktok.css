@@ -1,0 +1,17 @@
+/* net19 handmade theme: TikTok, 2019: the web app was flatter: rectangular buttons and fields with small 2-4px
+   corners instead of today's rounded capsules and 10-26px panels, and the 2019 razzmatazz pink (#fe2c55) for
+   primary actions. Layout and type are close to today's, so the theme only changes colors and corner radii.
+   TikTok's own light and dark themes are both followed. */
+html { --n19-primary: #fe2c55; --n19-primary-hover: #ef2950; }
+html[data-net19-mode="dark"] { --n19-primary: #fe2c55; --n19-primary-hover: #ef2950; }
+html:root, html[data-theme] {
+  --tux-v2-radius-content-tiny: 2px !important; --tux-v2-radius-content-small: 2px !important; --tux-v2-radius-content-medium: 4px !important;
+  --tux-v2-radius-content-large: 4px !important; --tux-v2-radius-content-xlarge: 4px !important;
+  --tux-v2-radius-container-level0-small: 4px !important; --tux-v2-radius-container-level0-large: 4px !important;
+  --tux-v2-radius-container-level1-small: 4px !important; --tux-v2-radius-container-level1-large: 4px !important;
+  --tux-v2-radius-container-level2-small: 4px !important; --tux-v2-radius-container-level2-large: 8px !important;
+  --tux-colorPrimary: var(--n19-primary) !important;
+}
+/* Primary and secondary buttons: rectangles with 4px corners */
+button[class*="Button"], a[class*="Button"], [class*="-StyledLoginButton"], [class*="-Button-StyledButton"], .TUXButton { border-radius: 4px !important; }
+[data-e2e="nav-login-button"], [data-e2e="top-login-button"] { border-radius: 4px !important; }

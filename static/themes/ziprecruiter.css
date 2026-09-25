@@ -1,0 +1,28 @@
+/* net19 handmade theme: ZipRecruiter, 2019: a white header with the green-chair logo, Helvetica, #57b228 green pill buttons, square gray-edged fields on a #f1f3f4 search strip. */
+html { --n19-header: #fff; --n19-header-text: #2a3035; --n19-header-edge: #e0e3e5; --n19-green: #57b228; --n19-green-hover: #4a9a21; --n19-green-text: #3d8a17;
+  --n19-field-border: #c8ccd0; --n19-strip: #f1f3f4; --n19-button-2: #fff; }
+html[data-net19-mode="dark"] { --n19-header: #1f2326; --n19-header-text: #e6e8ea; --n19-header-edge: #33393e; --n19-green: #57b228; --n19-green-hover: #6cc53c; --n19-green-text: #7fd052;
+  --n19-field-border: #4a5157; --n19-strip: #262b2f; --n19-button-2: #1f2326; }
+body, body :is(p, span, a, button, input, select, textarea, h1, h2, h3, h4, li, label, div) { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important; }
+
+/* Header: white bar, dark links, the logo's white wordmark turned dark */
+header .bg-black { background: var(--n19-header) !important; border-bottom: 1px solid var(--n19-header-edge) !important; }
+header .bg-black :is(a, button, p, span):not([class*="bg-button"], [class*="bg-button"] *) { color: var(--n19-header-text) !important; }
+header .bg-black svg { color: var(--n19-header-text) !important; }
+html:not([data-net19-mode="dark"]) header img[src*="whitetext"] { filter: invert(1) hue-rotate(180deg) saturate(1.4); }
+
+/* Buttons: 2019 green pills */
+[class*="bg-button-primary"] { background: var(--n19-green) !important; border-color: var(--n19-green) !important; border-radius: 20px !important; }
+[class*="bg-button-primary"], [class*="bg-button-primary"] :is(p, span) { color: #fff !important; }
+[class*="bg-button-primary"]:hover { background: var(--n19-green-hover) !important; }
+[class*="bg-button-secondary"] { background: var(--n19-button-2) !important; border-radius: 20px !important; border-color: var(--n19-field-border) !important; }
+[class*="bg-button-secondary"], [class*="bg-button-secondary"] :is(p, span) { color: var(--n19-green-text) !important; }
+
+/* Fields: square with a gray edge; the search strip is 2019's light gray */
+.rounded-8:has(> input), input.rounded-8 { border-radius: 2px !important; }
+.rounded-8:has(> input) { border-color: var(--n19-field-border) !important; }
+section.bg-\[\#F2F4F4\] { background: var(--n19-strip) !important; }
+
+/* The homepage hero sits on white, as the 2019 landing page did */
+.xl\:bg-black, .xl\:bg-black > .bg-black, .xl\:text-inverse-primary { background: var(--n19-header) !important; }
+.xl\:text-inverse-primary, .xl\:text-inverse-primary :is(p, h1, h2, span):not([class*="bg-button"] *) { color: var(--n19-header-text) !important; }

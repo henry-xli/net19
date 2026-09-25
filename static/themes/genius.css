@@ -1,0 +1,31 @@
+/* net19 handmade theme: Genius, 2019: two-row header (yellow bar with search left, centered GENIUS logo and SIGN UP right, then a black bar of centered uppercase section links). */
+html { --n19-yellow: #ffff64; --n19-bar-text: #000; --n19-sub: #000; --n19-sub-text: #fff; --n19-sub-rule: rgba(255,255,255,.6); --n19-search: #fff; --n19-search-text: #000; }
+html[data-net19-mode="dark"] { --n19-yellow: #ffff64; --n19-bar-text: #000; --n19-sub: #000; --n19-sub-text: #fff; --n19-sub-rule: rgba(255,255,255,.6); --n19-search: #fff; --n19-search-text: #000; }
+/* The single-row sticky nav becomes the 2019 two-row header; its pieces are re-placed on a grid, nothing is hidden. */
+nav[class*="StickyNav-desktop__Container"] {
+  display: grid !important; grid-template-columns: 1fr auto 1fr !important; grid-template-rows: 40px 40px !important; align-items: center !important;
+  height: 80px !important; padding: 0 !important; background: var(--n19-yellow) !important; color: var(--n19-bar-text) !important;
+}
+nav[class*="StickyNav-desktop__Container"] > [class*="StickyNav-desktop__Left"],
+nav[class*="StickyNav-desktop__Container"] > [class*="StickyNav-desktop__Right"],
+nav[class*="StickyNav-desktop__Container"] [class*="StickyNav-desktop__Subnavigation"] { display: contents !important; }
+nav[class*="StickyNav-desktop__Container"] [class*="StickyNav-desktop__Logo"] { grid-column: 2 !important; grid-row: 1 !important; justify-self: center !important; margin: 0 !important; color: var(--n19-bar-text) !important; transform: scale(1.35); }
+nav[class*="StickyNav-desktop__Container"] [class*="StickyNav-desktop__Logo"] svg { fill: currentColor !important; }
+nav[class*="StickyNav-desktop__Container"] form[class*="StickyNavSearch"] { grid-column: 1 !important; grid-row: 1 !important; justify-self: start !important; margin: 0 0 0 6px !important; width: 220px !important; height: 28px !important; background: var(--n19-search) !important; }
+nav[class*="StickyNav-desktop__Container"] form[class*="StickyNavSearch"] input { width: 100% !important; height: 28px !important; padding: 0 30px 0 8px !important; font-size: 14px !important; color: var(--n19-search-text) !important; background: var(--n19-search) !important; }
+nav[class*="StickyNav-desktop__Container"] form[class*="StickyNavSearch"] input::placeholder { color: var(--n19-search-text) !important; opacity: 1 !important; }
+nav[class*="StickyNav-desktop__Container"] form[class*="StickyNavSearch"] svg { fill: var(--n19-search-text) !important; }
+nav[class*="StickyNav-desktop__Container"] [class*="StickyNav-desktop__Right"] > :not(form) { grid-column: 3 !important; grid-row: 1 !important; justify-self: end !important; margin-right: 16px !important; }
+nav[class*="StickyNav-desktop__Container"] [class*="StickyNav-desktop__Right"] button:not([type="submit"]) {
+  color: var(--n19-bar-text) !important; text-transform: uppercase !important; font-weight: 400 !important; font-size: 12px !important; letter-spacing: 1px !important;
+}
+nav[class*="StickyNav-desktop__Container"] [class*="StickyNavSiteLinks__DesktopContainer"] {
+  grid-column: 1 / -1 !important; grid-row: 2 !important; align-self: stretch !important; display: flex !important; justify-content: center !important; align-items: center !important;
+  gap: 0 !important; margin: 0 !important; background: var(--n19-sub) !important;
+}
+nav[class*="StickyNav-desktop__Container"] a[class*="StickyNavSectionLink"] {
+  color: var(--n19-sub-text) !important; text-transform: uppercase !important; font-size: 12px !important; font-weight: 400 !important; letter-spacing: 1.5px !important;
+  padding: 0 36px !important; border: 0 !important; border-right: 1px solid var(--n19-sub-rule) !important; border-radius: 0 !important; line-height: 14px !important; height: auto !important;
+}
+nav[class*="StickyNav-desktop__Container"] a[class*="StickyNavSectionLink"]:last-child { border-right: 0 !important; }
+nav[class*="StickyNav-desktop__Container"] a[class*="StickyNavSectionLink"]:hover { text-decoration: underline !important; }

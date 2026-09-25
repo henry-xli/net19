@@ -1,0 +1,21 @@
+/* net19 handmade theme: OpenAI, 2019: small bold uppercase, widely letter-spaced menu words ("ABOUT  PROGRESS
+   RESOURCES  BLOG"), "LEARN MORE >" style uppercase calls to action, white cards with 4px corners instead of pills
+   and 1rem rounding. The 2019 full-bleed colored section backgrounds are not reproduced (today's pages have no
+   matching structure), so the theme is typographic. OpenAI follows the device's dark mode; both modes are covered. */
+html { --n19-text: #000; --n19-text-2: #555; --n19-rule: #e5e5e5; --n19-card: #fff; }
+html[data-net19-mode="dark"] { --n19-text: #fff; --n19-text-2: #aaa; --n19-rule: #333; --n19-card: #171717; }
+html:root { --radius-md: 4px !important; --radius-lg: 4px !important; --radius-xl: 4px !important; --radius-2xl: 4px !important;
+  --cgm-radius-xl: 4px !important; --cgm-radius-2xl: 4px !important; }
+
+/* Menu words */
+.text-nav-header { text-transform: uppercase !important; letter-spacing: .2em !important; font-size: 11px !important; font-weight: 700 !important; }
+
+/* Pills become 4px buttons; calls to action are uppercase and spaced */
+[class*="rounded-[2.5rem]"], [class*="rounded-full"].text-cta, a.text-cta, button.text-cta { border-radius: 4px !important; }
+.text-cta { text-transform: uppercase !important; letter-spacing: .14em !important; font-size: 12px !important; font-weight: 700 !important; }
+[class*="rounded-[2.5rem]"] { text-transform: uppercase !important; letter-spacing: .12em !important; font-size: 12px !important; font-weight: 700 !important; }
+main [class*="rounded-md"], main [class*="rounded-lg"], main [class*="rounded-xl"], main [class*="rounded-2xl"], main [class*="rounded-3xl"] { border-radius: 4px !important; }
+
+/* Headings: the 2019 site set them lighter and larger-tracked */
+main h1, main h2 { font-weight: 400 !important; letter-spacing: -.01em !important; }
+.text-meta { text-transform: uppercase !important; letter-spacing: .12em !important; font-size: 11px !important; color: var(--n19-text-2) !important; }

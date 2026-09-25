@@ -1,0 +1,19 @@
+/* net19 handmade theme: NY.gov, 2019: Proxima Nova with heavy white hero headlines on a full-bleed photo, bold black menu links, #24387e navy blocks, square outlined buttons and cards with no rounding. */
+html { --n19-navy: #24387e; --n19-text: #000; --n19-card-border: #24387e; --n19-card-text: #24387e; --n19-card-bg: #fff; }
+html[data-net19-mode="dark"] { --n19-navy: #2e4596; --n19-text: #f2f2f2; --n19-card-border: #8ea3e6; --n19-card-text: #c7d2f5; --n19-card-bg: #1c1c1c; }
+/* Menu: bold black links */
+.nygov-unav__links .o-universalMainMenu__link a, .nygov-unav__links a { color: var(--n19-text) !important; font-weight: 700 !important; font-size: 18px !important; }
+/* Hero: text straight on the photo, as in 2019, with a square dark scrim instead of the rounded card */
+.m-landingHero__contentWrapper { border-radius: 0 !important; background: linear-gradient(90deg, rgba(0,0,0,.72), rgba(0,0,0,.35)) !important; }
+.a-hero__titleLanding, .m-landingHero__title h1 { font-weight: 800 !important; letter-spacing: 0 !important; }
+/* Navy blocks and square cards */
+/* Popular services: the 2019 navy arrow block (the round canvas swoosh is decorative) */
+.m-popularService__title.bg-primary-blue { background-color: var(--n19-navy) !important; }
+#popularServicesCanvasSection { display: none !important; }
+.m-popularService__title.-container .m-popularService__title.bg-primary-blue { flex: 1 1 auto !important; padding-right: 50px !important; }
+.m-popularService__button .a-hero__btn, .m-popularService__card a { border-radius: 0 !important; border: 1px solid var(--n19-card-border) !important; background: var(--n19-card-bg) !important; color: var(--n19-card-text) !important; }
+.o-cardGlobalTablet, .o-cardLogo, .m-card__bioData, .m-card__linkData, .a-btn__link, [class*="m-card"] { border-radius: 0 !important; }
+.m-popularService__title.bg-primary-blue { clip-path: polygon(0 0, calc(100% - 45px) 0, 100% 50%, calc(100% - 45px) 100%, 0 100%); }
+/* Service pages: square hero panel and square buttons */
+.m-hero__meta, .o-hero [class*="__meta"] { border-radius: 0 !important; }
+.a-hero__btn, a[class*="a-btn"], button[class*="a-btn"] { border-radius: 0 !important; }

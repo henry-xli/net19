@@ -1,0 +1,21 @@
+/* net19 handmade theme: Allrecipes, 2019: Source Sans Pro everywhere with light, normal-weight titles, the #ff7e1a orange for stars, links and the square Save button, flat gray action bar. */
+html { --n19-orange: #ff7e1a; --n19-orange-hover: #e8680a; --n19-title: #2d2d2d; --n19-bar: #e6e6e6; --n19-edge: #e0e0e0; }
+html[data-net19-mode="dark"] { --n19-orange: #ff8a33; --n19-orange-hover: #ff9d52; --n19-title: #eee; --n19-bar: #333; --n19-edge: #444; }
+html:root { --border-radius-md: 0 !important; --border-radius-sm: 0 !important; --border-radius-lg: 2px !important; }
+body, body :is(h1, h2, h3, h4, p, a, span, button, input, li, div, label) { font-family: "Source Sans Pro", SourceSansPro, "Helvetica Neue", Helvetica, sans-serif !important; }
+
+/* Titles: 2019 used normal and light weights, never the heavy display face */
+h1.article-heading, h1 { font-weight: 400 !important; color: var(--n19-title) !important; letter-spacing: 0 !important; }
+h2, h3, [class*="text-headline"], [class*="text-title"] { font-weight: 400 !important; letter-spacing: 0 !important; }
+.mm-recipes-structured-ingredients__heading, .mm-recipes-steps__heading, h2.mntl-sc-block-heading { font-weight: 300 !important; }
+
+/* Save/rate/print bar: square orange Save on a flat gray bar */
+.mm-recipes-utility-nav .mntl-button, .mm-myrecipes-favorite__link, [class*="button--contained"], .mntl-search-form__button { border-radius: 0 !important; }
+.mm-myrecipes-favorite__link, .mntl-search-form__button { background: var(--n19-orange) !important; border-color: var(--n19-orange) !important; }
+.mm-myrecipes-favorite__link:hover, .mntl-search-form__button:hover { background: var(--n19-orange-hover) !important; }
+.mm-recipes-details { border-radius: 0 !important; }
+.mntl-search-form__input, .mntl-search-form { border-radius: 0 !important; }
+
+/* Breadcrumbs and nav: 2019 sentence case, not letter-spaced capitals */
+.mntl-breadcrumbs__link { text-transform: none !important; letter-spacing: 0 !important; font-weight: 400 !important; }
+.mm-recipes-utility-nav .mntl-button:not(.mm-myrecipes-favorite__link), .mm-recipes-utility-nav { background-color: var(--n19-bar) !important; }

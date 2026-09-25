@@ -1,0 +1,10 @@
+/* net19 handmade theme: New York Post, 2019: the same red masthead with the centered logo, in the older, softer Post
+   red (#cc3333) instead of today's #c60800, square corners, red "Follow us"-style section rules. The 2019 layout is
+   essentially today's, so the theme is small: colors and corner radii. The Post has no dark mode. */
+html { --n19-red: #cc3333; --n19-red-hover: #e04848; --n19-rule: #cc3333; }
+html[data-net19-mode="dark"] { --n19-red: #e05555; --n19-red-hover: #f07070; --n19-rule: #e05555; }
+html:root { --wp--custom--utility--radius: 0 !important; }
+.site-header__wrapper { background-color: var(--n19-red) !important; }
+.content-header--lines .content-header__heading, .section-heading { letter-spacing: 0 !important; }
+.content-header--lines::before, .content-header--lines::after { border-color: var(--n19-rule) !important; background-color: var(--n19-rule) !important; }
+.button, .wp-block-button__link, [class*="btn"] { border-radius: 0 !important; }

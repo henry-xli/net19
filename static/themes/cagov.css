@@ -1,0 +1,29 @@
+/* net19 handmade theme: CA.gov, 2019: a solid #046b99 blue utility bar with white links, a white header with a soft
+   drop shadow and grey menu words, a light-grey (#efefef) search area with a plain square field instead of the blue
+   banner, a mid-grey (#777) "Explore" band and square dark-grey (#545454) buttons. CA.gov has no dark mode; the dark
+   block keeps a readable variant. */
+html { --n19-blue: #046b99; --n19-bar-text: #fff; --n19-panel: #efefef; --n19-panel-text: #333; --n19-band: #777; --n19-button: #545454; --n19-button-hover: #3b3b3b;
+  --n19-field: #fafafa; --n19-nav: #555; }
+html[data-net19-mode="dark"] { --n19-blue: #046b99; --n19-bar-text: #fff; --n19-panel: #2a2a2a; --n19-panel-text: #eee; --n19-band: #444; --n19-button: #5e5e5e; --n19-button-hover: #777;
+  --n19-field: #1e1e1e; --n19-nav: #ccc; }
+html:root { --border-radius-large: 0 !important; --border-radius-small: 0 !important; }
+
+/* Utility bar */
+.utility-header { background: var(--n19-blue) !important; }
+.utility-header a, .utility-header button, .utility-header span, .utility-header [class*="icon"] { color: var(--n19-bar-text) !important; }
+
+/* Header and menu */
+header#header { box-shadow: 0 2px 5px rgba(0,0,0,.2) !important; }
+#navigation .first-level-link { color: var(--n19-nav) !important; }
+
+/* Search area: grey panel, square field */
+.header-banner { background: var(--n19-panel) !important; }
+.header-banner h1, .header-banner h2, .header-banner p { color: var(--n19-panel-text) !important; }
+.header-banner input { background: var(--n19-field) !important; border-radius: 0 !important; color: var(--n19-panel-text) !important; }
+.header-banner svg, .header-banner [class*="bg-shape"], .header-banner [class*="lines"] { opacity: .25; }
+
+/* Explore band and buttons */
+.section-primary.bg-p2-darkest { background: var(--n19-band) !important; }
+.section-primary .btn, .btn.rounded-5 { border-radius: 0 !important; }
+.section-primary .btn-outline-light { background: var(--n19-button) !important; border-color: var(--n19-button) !important; color: #fff !important; }
+.section-primary .btn-outline-light:hover { background: var(--n19-button-hover) !important; }

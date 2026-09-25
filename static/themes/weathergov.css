@@ -1,0 +1,6 @@
+/* net19 handmade theme: National Weather Service, 2019: fixed-width page on the pale blue gradient, Arial, gray-gradient Bootstrap 3 panels. */
+/* weather.gov's desktop design is unchanged since 2019, so this theme only pins the 2019 type and panel edges. */
+html { --n19-panel-border: #ddd; }
+html[data-net19-mode="dark"] { --n19-panel-border: #555; }
+body, input, select, button { font-family: Arial, Helvetica, sans-serif !important; }
+.panel-default { border-color: var(--n19-panel-border); }

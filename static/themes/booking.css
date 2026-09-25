@@ -1,0 +1,9 @@
+/* net19 handmade theme: Booking.com, 2019: the deeper #003580 navy header, #0071c2 action blue for links and buttons,
+   the #febb02 yellow search frame, and 2-3px corners instead of today's 4-8px rounding. The 2019 layout is close to
+   today's, so the theme only moves the palette and corner radii through Booking's own design tokens. Booking has no
+   dark mode on the web. Not verified against the live site (blocked here, and excluded from the Wayback Machine). */
+html { --n19-navy: #003580; --n19-blue: #0071c2; --n19-yellow: #febb02; }
+html[data-net19-mode="dark"] { --n19-navy: #002a66; --n19-blue: #4aa3ff; --n19-yellow: #febb02; }
+html:root {
+  --bui_border_radius_100: 2px !important; --bui_border_radius_200: 3px !important; --bui_border_radius_300: 3px !important;
+}

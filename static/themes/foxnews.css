@@ -1,0 +1,15 @@
+/* net19 handmade theme: Fox News, 2019: Roboto on a navy #003366 bar with a red top rule, stories in square white boxes with hairline borders, square navy kicker labels and red "Watch TV" button. The 2019 look is close to today's, so this is mostly shapes. */
+html { --n19-navy: #003366; --n19-red: #c20017; --n19-box-border: #e0e0e0; --n19-page: #f5f5f5; --n19-box: #fff; }
+html[data-net19-mode="dark"] { --n19-navy: #0d2a4a; --n19-red: #e0192f; --n19-box-border: #333; --n19-page: #111; --n19-box: #1b1b1b; }
+html:root, body { --cm-video-label-border-radius: 0px !important; --cm-video-repeat-border-radius: 0px !important; --border-color: var(--n19-box-border) !important; }
+body, input, button { font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif !important; }
+/* Header: the navy bar already carries the red rule; only the buttons change */
+.site-header .button a, .site-header .button button, .site-header [class*="watch-tv" i] a { border-radius: 2px !important; }
+/* Story boxes: square white panels with a hairline */
+.main-content .collection, .sidebar .collection, .collection-section, .article-ct, .collection-3-across { border-radius: 0 !important; }
+.page .main-content > .collection, .sidebar-panel, .sidebar .collection { background: var(--n19-box) !important; border: 1px solid var(--n19-box-border) !important; box-shadow: none !important; }
+/* Kickers and pills: square */
+.kicker, .pill, .eyebrow, [class*="kicker"] { border-radius: 0 !important; }
+.kicker { background: var(--n19-navy) !important; }
+.kicker-text { text-transform: uppercase !important; }
+.article img, .m img, picture img, .video-container, .collection img { border-radius: 0 !important; }

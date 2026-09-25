@@ -1,0 +1,16 @@
+/* net19 handmade theme: The Weather Channel (weather.com), 2019: Helvetica/Arial type, a black forecast bar with
+   white Today / Hourly / 10 Day links, square modules instead of today's large rounded cards and floating pills.
+   The 2026 layout (left rail, location pill) is kept; its corners, type and the forecast bar move to 2019. */
+html { --n19-font: "Helvetica Neue", Helvetica, Arial, sans-serif; --n19-bar: #000; --n19-bar-text: #fff; --n19-bar-active: #fff; --n19-module: 2px; }
+html[data-net19-mode="dark"] { --n19-bar: #000; --n19-bar-text: #e6e6e6; --n19-bar-active: #6aa6f8; }
+html:root, html.dark {
+  --font-sans: var(--n19-font) !important; --radius: 2px !important; --radius-sm: 2px !important; --radius-md: 2px !important; --radius-lg: 3px !important;
+  --radius-xl: 3px !important; --radius-2xl: 3px !important; --radius-3xl: 3px !important; --radius-4xl: 3px !important;
+}
+body, body.font-sans, .font-sans { font-family: var(--n19-font) !important; }
+/* Forecast tabs: a flat black bar */
+header .overflow-hidden.rounded-3xl.bg-white { background: var(--n19-bar) !important; border-radius: 0 !important; padding: 0 !important; }
+header .overflow-hidden.rounded-3xl.bg-white a { color: var(--n19-bar-text) !important; background: transparent !important; border-radius: 0 !important; font-weight: 400 !important; }
+header .overflow-hidden.rounded-3xl.bg-white a[aria-current]:not([aria-current="false"]) { box-shadow: inset 0 -3px 0 var(--n19-bar-active) !important; font-weight: 700 !important; }
+/* Floating pill shadows around the header controls */
+header .rounded-4xl, header .rounded-3xl { box-shadow: none !important; }

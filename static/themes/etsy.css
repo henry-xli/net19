@@ -1,0 +1,20 @@
+/* net19 handmade theme: Etsy, 2019: sans UI with serif headlines on plain white, a light gray pill search field with a dark magnifier, 3px buttons, square listing photos, #f45800 orange. */
+html { --n19-page: #fff; --n19-text: #222; --n19-field: #f5f5f5; --n19-field-edge: #e1e1e1; --n19-icon: #222; --n19-rule: #e5e5e5; }
+html[data-net19-mode="dark"] { --n19-page: #1c1c1c; --n19-text: #eee; --n19-field: #2c2c2c; --n19-field-edge: #444; --n19-icon: #eee; --n19-rule: #333; }
+html:root, html body {
+  --clg-shape-app-button-border-radius: 3px !important; --clg-shape-app-button-small-border-radius: 3px !important; --clg-shape-app-button-focus-ring-border-radius: 5px !important;
+  --clg-shape-app-button-small-focus-ring-border-radius: 5px !important; --clg-shape-app-chip-border-radius: 3px !important; --clg-shape-app-input-border-radius: 3px !important;
+  --clg-shape-app-menu-border-radius: 3px !important; --clg-shape-app-popover-border-radius: 3px !important; --clg-shape-app-alert-border-radius: 3px !important;
+  --clg-shape-sem-border-radius-card: 0px !important; --clg-shape-sem-border-radius-base: 3px !important; --clg-shape-sem-border-radius-small: 3px !important;
+  --clg-shape-sem-border-radius-larger: 4px !important; --clg-shape-sem-border-radius-largest: 4px !important; --clg-shape-app-dialog-border-radius: 4px !important;
+}
+
+/* Header search: the 2019 light gray pill with a plain dark magnifier */
+#global-enhancements-search-query { border-radius: 24px 0 0 24px !important; background: var(--n19-field) !important; border: 1px solid var(--n19-field-edge) !important; border-right: 0 !important; box-shadow: none !important; }
+.global-enhancements-search-input-btn-group__btn { border-radius: 0 24px 24px 0 !important; background: var(--n19-field) !important; border: 1px solid var(--n19-field-edge) !important; border-left: 0 !important; color: var(--n19-icon) !important; }
+.global-enhancements-search-input-btn-group__btn::before, .global-enhancements-search-input-btn-group__btn::after { display: none !important; }
+.global-enhancements-search-input-btn-group__btn svg { fill: var(--n19-icon) !important; }
+header.wt-bb-xs, #gnav-header { border-bottom-color: var(--n19-rule) !important; }
+
+/* Listing photos and cards are square-cornered */
+.v2-listing-card, .v2-listing-card img, .wt-card, .listing-link img, [data-listing-card-v2] img, [class*="card"] > img { border-radius: 0 !important; }

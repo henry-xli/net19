@@ -1,4 +1,4 @@
-# Validation of 0.3.0
+# Validation of 0.4.0
 
 ## Automated checks
 
@@ -42,3 +42,17 @@ The comparisons were made on live pages in a real browser with the built extensi
 - a comment thread.
 
 Pages behind a sign-in are best-effort.
+
+## Breakage audit
+
+Every themed site's homepage (or a typical inner page) was loaded twice in real Chromium, once with the built extension and once without. The two runs were compared for:
+
+- horizontal overflow;
+- the number of visible links, buttons and fields in the first screen;
+- text drawn in nearly the same color as its background.
+
+Differences were inspected by hand. One theme created unreadable text: Trustpilot, whose header links were black on navy. It was fixed.
+
+About 20 sites answered this cloud browser with a bot check or an access-denied page, so their live pages could not be compared. They were checked on recent Wayback copies instead. Booking.com is excluded from the Wayback Machine, so its theme was never checked.
+
+A navigation benchmark measured the median page load of a local fixture with 20 and with 120 registered themes. Both runs measured 17–21 ms, with no measurable difference. Only the matching site's theme loads on any page.

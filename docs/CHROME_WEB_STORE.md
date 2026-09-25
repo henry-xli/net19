@@ -1,6 +1,6 @@
 # Chrome Web Store submission kit
 
-The package is `downloads/net19-0.3.0.zip`. Its root contains:
+The package is `downloads/net19-0.4.0.zip`. Its root contains:
 
 - `manifest.json`;
 - the bundled worker and popup;
@@ -26,7 +26,7 @@ Keep the package, lockfile, manifest and displayed version aligned.
 
 **Description:**
 
-net19 restyles 20 popular websites to look as they did in 2019. The sites are Google, YouTube, Wikipedia, Reddit, GitHub, Yahoo, Twitch, Amazon, eBay, Bing, Stack Overflow, CNN, The New York Times, IMDb, ESPN, Facebook, Instagram, Twitter/X and LinkedIn. Each look is designed by hand. It applies before the page first appears and follows the site's own light or dark mode.
+net19 restyles 90 of the most visited US websites to look as they did in 2019, from Google, YouTube, Wikipedia and Reddit to Walmart, Weather.com, Zillow and the BBC. Each look is designed by hand. It applies before the page first appears and follows the site's own light or dark mode.
 
 Two sites still serve their older design themselves, and net19 uses it:
 
@@ -45,7 +45,7 @@ net19 makes no network requests and does not run on any other website. There is 
 | Support | https://github.com/henry-xli/net19/issues |
 | Privacy policy | https://github.com/henry-xli/net19/blob/main/PRIVACY.md |
 | Single purpose | Restyle a fixed set of websites to look as they did in 2019 |
-| Host permissions | Only the 20 themed domains, to apply their themes |
+| Host permissions | Only the themed sites' domains, to apply their themes |
 | `scripting` | Register the bundled theme stylesheets and scripts at document start |
 | `declarativeNetRequestWithHostAccess` | Add Wikipedia's legacy-skin parameter; send signed-in Reddit visits to old.reddit.com |
 | `cookies` | Check whether a Reddit session cookie exists; its value is not stored or sent |

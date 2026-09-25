@@ -1,0 +1,25 @@
+/* net19 handmade theme: Adobe (www marketing pages), 2019: Adobe Clean bold headlines at modest sizes with normal tracking, Spectrum blue #1473e6 pill buttons and links, 4px cards. */
+html { --n19-blue: #1473e6; --n19-blue-hover: #0d66d0; --n19-text: #2c2c2c; }
+html[data-net19-mode="dark"] { --n19-blue: #2680eb; --n19-blue-hover: #378ef0; --n19-text: #e3e3e3; }
+/* Adobe's s2a / Milo tokens */
+html:root, body {
+  --heading-font-family: "Adobe Clean", adobe-clean, "Source Sans Pro", "Trebuchet MS", sans-serif !important;
+  --s2a-font-family-heading: "Adobe Clean", adobe-clean, "Source Sans Pro", sans-serif !important;
+  --s2a-font-weight-heading: 700 !important; --s2a-font-weight-adobe-clean-display-black: 700 !important; --s2a-font-weight-adobe-clean-black: 700 !important;
+  --s2a-typography-letter-spacing-heading-1: 0 !important; --s2a-typography-letter-spacing-heading-2: 0 !important; --s2a-typography-letter-spacing-heading-3: 0 !important;
+  --s2a-typography-letter-spacing-heading-4: 0 !important; --s2a-typography-letter-spacing-heading-5: 0 !important; --s2a-typography-letter-spacing-heading-6: 0 !important;
+  --s2a-typography-letter-spacing-super: 0 !important;
+  --s2a-typography-font-size-super: 3rem !important; --s2a-typography-font-size-heading-1: 2.75rem !important; --s2a-typography-font-size-heading-2: 2.25rem !important;
+  --s2a-typography-font-size-heading-3: 2rem !important; --s2a-typography-font-size-heading-4: 1.75rem !important;
+  --s2a-border-radius-md: 4px !important; --s2a-border-radius-lg: 4px !important; --s2a-border-radius-12: 4px !important; --s2a-border-radius-22: 4px !important; --s2a-border-radius-24: 4px !important;
+  --s2a-color-button-background-accent-solid-on-light-default: var(--n19-blue) !important; --s2a-color-button-background-accent-solid-on-light-hover: var(--n19-blue-hover) !important;
+  --link-color: var(--n19-blue) !important; --color-accent: var(--n19-blue) !important;
+}
+main h1, main h2, main h3, main [class*="heading-"] { font-family: "Adobe Clean", adobe-clean, "Source Sans Pro", "Trebuchet MS", sans-serif !important; font-weight: 700 !important; letter-spacing: 0 !important; }
+main h1 { font-size: clamp(2rem, 3.5vw, 2.75rem) !important; line-height: 1.2 !important; }
+/* Buttons: the 2019 Spectrum blue pill */
+main .con-button.fill, main .con-button.blue { background: var(--n19-blue) !important; border-color: var(--n19-blue) !important; color: #fff !important; border-radius: 16px !important; font-weight: 700 !important; }
+main .con-button.fill:hover, main .con-button.blue:hover { background: var(--n19-blue-hover) !important; }
+main .con-button { border-radius: 16px !important; font-weight: 700 !important; }
+/* Cards */
+.links-card, .rm-card, .feds-product-card, main [class*="card"] { border-radius: 4px !important; }

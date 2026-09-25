@@ -1,0 +1,10 @@
+/* net19 handmade theme: Costco, 2019: Helvetica/Arial type, a light gray logo and search band, square promo images, square fields and buttons. */
+/* Costco's 2019 header and layout are close to today's; this theme restores the 2019 type and square corners. */
+html { --n19-link: #0060a9; --n19-top: #eee; }
+html[data-net19-mode="dark"] { --n19-link: #5aa9e6; --n19-top: #2a2a2a; }
+html:root { --mui-shape-borderRadius: 0px !important; }
+body, body :not(svg, svg *, i, [class*="icon" i]) { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important; }
+#image-container, #image-container img, #image-container > div { border-radius: 0 !important; }
+.MuiOutlinedInput-root, .MuiButton-root, .MuiChip-root, .MuiCard-root, .MuiPaper-rounded { border-radius: 0 !important; }
+/* The logo and search row sit on 2019's light gray */
+#header-content header > .MuiStack-root > .MuiBox-root:has(input) { background: var(--n19-top) !important; }

@@ -1,0 +1,25 @@
+/* net19 handmade theme: MapQuest, 2019: Helvetica/Arial with bold letter-spaced labels, lime #a5cc00 pill buttons with dark text, #eaeaea blocks, 4px cards and fields. */
+html { --n19-lime: #a5cc00; --n19-lime-hover: #b4dc0a; --n19-lime-text: #333; --n19-link: #5a7300; --n19-text: #333; --n19-block: #eaeaea; }
+html[data-net19-mode="dark"] { --n19-lime: #a5cc00; --n19-lime-hover: #b4dc0a; --n19-lime-text: #1d1d1d; --n19-link: #b9e021; --n19-text: #e8e8e8; --n19-block: #333; }
+/* MapQuest's Tailwind theme tokens (declared again on body by the site) */
+html:root, html body {
+  --color-primary: var(--n19-lime) !important; --color-primary-500: var(--n19-lime) !important; --color-primary-600: var(--n19-lime-hover) !important;
+  --color-primary-700: var(--n19-lime-hover) !important; --color-primary-800: var(--n19-lime) !important; --color-primary-900: var(--n19-link) !important;
+  --color-primary-50: #f4f9e0 !important; --color-primary-25: #f8fbec !important; --color-primary-100: #e6f2b3 !important; --color-primary-200: #d4ea80 !important;
+  --font-default: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  --radius-lg: 4px !important; --radius-xl: 4px !important; --radius-2xl: 4px !important;
+}
+body, input, button { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important; }
+/* Lime buttons carry dark bold text, as in 2019 */
+.bg-primary, .bg-primary-800, .bg-primary-700, .bg-primary-600, .bg-primary-800 .text-white, .bg-primary .text-white { color: var(--n19-lime-text) !important; font-weight: 700 !important; letter-spacing: .05em !important; }
+.bg-primary svg, .bg-primary-800 svg { color: var(--n19-lime-text) !important; fill: currentColor; }
+.text-primary, .text-primary-800, .text-primary-700, .text-primary-600 { color: var(--n19-link) !important; }
+/* Headings: tight bold sans instead of Montserrat */
+h1, h2, h3 { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important; font-weight: 700 !important; color: var(--n19-text); }
+/* Soft 2019 card shadow on the search field */
+/* The 2019 search field: a 4px card with a soft shadow; pill buttons stay pills */
+input.rounded-3xl { border-radius: 4px !important; box-shadow: 0 1px 4px rgba(0,0,0,.25) !important; }
+button.rounded-r-3xl { border-radius: 0 4px 4px 0 !important; }
+.bg-primary-800, .bg-primary-700, .bg-primary-600 { background-color: var(--n19-lime) !important; }
+.hover\:bg-primary-700:hover, .hover\:bg-primary-900:hover { background-color: var(--n19-lime-hover) !important; }
+.rounded-\[16px\] { border-radius: 4px !important; }

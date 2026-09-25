@@ -1,0 +1,21 @@
+/* net19 handmade theme: Dictionary.com, 2019: Arial throughout, a flat #3a76c3 blue header, square search box, bold black headword, #3a76c3 links and flat white cards. */
+html { --n19-blue: #3a76c3; --n19-blue-dark: #2f62a6; --n19-text: #1a1a1a; --n19-text-2: #4a4a4a; --n19-rule: #e2e2e2; --n19-chip: #f5f5f5; --n19-card: #fff; }
+html[data-net19-mode="dark"] { --n19-blue: #3a76c3; --n19-blue-dark: #2f62a6; --n19-text: #eee; --n19-text-2: #bbb; --n19-rule: #444; --n19-chip: #2a2a2a; --n19-card: #1e1e1e; }
+html body { --wrapper-site-hdr-bg: var(--n19-blue) !important; --search-border-radius: 0 !important;
+  --wrapper-site-hdr-bg-dsktp: linear-gradient(var(--n19-blue) 0 490px, transparent 490px) !important; --wrapper-site-hdr-bg-mbl-tblt: linear-gradient(var(--n19-blue) 0 420px, transparent 420px) !important; }
+body, button, input, select, textarea, h1, h2, h3, h4, p, a, li, span, label { font-family: Arial, Helvetica, sans-serif !important; }
+
+/* Header: flat blue, square white search field */
+header, .wrapper-site-hdr, [class*="site-hdr"] { background-image: none !important; }
+form.search-form { border-radius: 0 !important; }
+
+/* Entry: bold black headword, flat card, small radii everywhere */
+h1.hdr-headword { font-weight: 700 !important; color: var(--n19-text) !important; font-size: 48px !important; letter-spacing: -.5px !important; }
+.box-headword-audio-pronunciation { border-radius: 0 !important; box-shadow: none !important; border-bottom: 1px solid var(--n19-rule) !important; }
+a.lk-site-nav, a.lk-entry-group, .more-menu-btn, .sec-trivia-card, .btn-common-cta, a.lk-common-cta, .common-bg-lk-chip, .common-lk-chip,
+.lk-vocabulary-lists-card, label[class=""], .ac-player-wrapper, .ac-lre-player, main img { border-radius: 2px !important; }
+a.lk-entry-group { text-transform: uppercase !important; font-size: 13px !important; }
+main a:not([class]) { color: var(--n19-blue) !important; }
+.sec-wotd-card { border-radius: 0 !important; box-shadow: 0 1px 3px rgba(0,0,0,.15) !important; }
+form.search-form .search-button { border-radius: 0 !important; background: var(--n19-blue-dark) !important; }
+header a.lk-home { filter: brightness(0) invert(1); }

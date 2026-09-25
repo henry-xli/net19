@@ -1,0 +1,19 @@
+/* net19 handmade theme: Kelley Blue Book, 2019: #2b5195 blue nav bar with bold white Helvetica/Arial links, Open Sans headings, glossy green (#218809) "Price New/Used" and "My Car's Value" buttons, #0b5eaa links. */
+html { --n19-bar: #2b5195; --n19-green: #218809; --n19-green-dark: #1d6d08; --n19-link: #0b5eaa; --n19-font: "Open Sans", sans-serif; --n19-nav-font: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+html[data-net19-mode="dark"] { --n19-bar: #2b5195; --n19-green: #2a9c0e; --n19-green-dark: #1d6d08; --n19-link: #5ea3e6; --n19-font: "Open Sans", sans-serif; --n19-nav-font: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+/* Global nav (the kbb-global-nav element): brighter 2019 blue, bold Arial links. */
+kbb-global-nav { --base-type-font-heading: var(--n19-nav-font) !important; }
+kbb-global-nav > nav, kbb-global-nav nav[class*="font-heading"] { background: var(--n19-bar) !important; }
+kbb-global-nav nav a, kbb-global-nav nav label, kbb-global-nav nav button { font-family: var(--n19-nav-font) !important; font-weight: 700 !important; letter-spacing: 0 !important; }
+/* Hero entry points: 2019's glossy green buttons with white text. */
+#superheroSection a[data-lean-auto$="entry-point"] {
+  background: linear-gradient(var(--n19-green), var(--n19-green-dark)) !important; border: 1px solid var(--n19-green-dark) !important; border-radius: 3px !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.25) !important;
+}
+#superheroSection a[data-lean-auto$="entry-point"] > span { background: transparent !important; }
+#superheroSection a[data-lean-auto$="entry-point"], #superheroSection a[data-lean-auto$="entry-point"] * { color: #fff !important; font-family: var(--n19-nav-font) !important; font-weight: 700 !important; }
+/* Headings were Open Sans (Montserrat came later). */
+main#content :is(h1, h2, h3, h4) , main#content [class*="css-"]:is(span, a, div, button) { font-family: var(--n19-font) !important; }
+main#content :is(h1, h2, h3) { letter-spacing: 0 !important; }
+/* "Try AI Mode" did not exist in 2019. */
+a[href*="kbb.com/ai-mode"], a[href^="/ai-mode"] { display: none !important; }

@@ -1,0 +1,26 @@
+/* net19 handmade theme: OANDA currency converter, 2019: Arial text, the converter on a flat light-grey panel with
+   white square boxed fields, amounts in OANDA orange, lime-green accents, no card shadows. Limited to the converter
+   pages; OANDA has no dark mode. */
+html { --n19-panel: #e6e6e6; --n19-field: #fff; --n19-field-border: #c8c8c8; --n19-text: #333; --n19-amount: #f7941d; --n19-green: #8dc63f; --n19-font: Arial, "Helvetica Neue", Helvetica, sans-serif; }
+html[data-net19-mode="dark"] { --n19-panel: #2b2b2b; --n19-field: #1e1e1e; --n19-field-border: #555; --n19-text: #e6e6e6; --n19-amount: #ffa53d; --n19-green: #9bd14c; }
+
+body, main, #oa-flat-nav-bar, #top-bar-desktop, .MuiTypography-root, .MuiInputBase-root, .MuiButton-root, main h1, main h2, main h3, main [class*="title"],
+main p, main a, main td, main th, main label, main li, .card-content span, .card-content div {
+  font-family: var(--n19-font) !important;
+}
+.h1_title_indexed, .h1_title_indexed * { font-weight: 400 !important; color: var(--n19-text) !important; letter-spacing: 0 !important; }
+
+/* The converter: flat grey panel, no drop shadow */
+.card-currency_converter_row .content-cards__card__inner { background: var(--n19-panel) !important; box-shadow: none !important; border-radius: 0 !important; }
+.card-currency_converter_row .MuiFilledInput-root, .card-currency_converter_row .MuiOutlinedInput-root {
+  background: var(--n19-field) !important; border-radius: 0 !important; box-shadow: inset 0 0 0 1px var(--n19-field-border) !important;
+}
+.card-currency_converter_row .MuiFilledInput-underline::before, .card-currency_converter_row .MuiFilledInput-underline::after,
+.card-currency_converter_row .MuiOutlinedInput-notchedOutline { border-color: transparent !important; }
+.card-currency_converter_row .MuiFilledInput-input { color: var(--n19-amount) !important; }
+.card-currency_converter_row .MuiOutlinedInput-input, .card-currency_converter_row .MuiSelect-root { color: var(--n19-text) !important; }
+.card-currency_converter_row .MuiButton-root { border-radius: 0 !important; }
+
+/* Other content cards on the converter pages lose their shadows too */
+.content-cards__card__inner.drop-shadow { box-shadow: none !important; border: 1px solid var(--n19-field-border) !important; }
+.card-currency_converter_row .content-cards__card__inner.drop-shadow { border: 0 !important; }

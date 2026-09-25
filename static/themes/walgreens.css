@@ -1,0 +1,26 @@
+/* net19 handmade theme: Walgreens, 2019: Helvetica/Arial type, a light-aqua promo strip, a white logo row with a
+   squared grey-outlined search field, the main menu on a solid aqua-blue (#02a0c0) band in white 18px words, teal
+   links and square white tiles. Walgreens has no dark mode; the dark block keeps a readable variant. */
+html { --n19-band: #02a0c0; --n19-band-text: #fff; --n19-strip: #cfeff5; --n19-strip-text: #0e5566; --n19-link: #0080a8; --n19-tile: #fff; --n19-tile-line: #ddd;
+  --n19-font: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+html[data-net19-mode="dark"] { --n19-band: #026b80; --n19-band-text: #fff; --n19-strip: #0f3a44; --n19-strip-text: #cfeff5; --n19-link: #5cc8e6; --n19-tile: #222; --n19-tile-line: #444; }
+html:root { --palette-brand-neutral: var(--n19-tile) !important; --surface-container-default: var(--n19-tile) !important; }
+body, button, input, select, textarea, h1, h2, h3, h4, p, a, li { font-family: var(--n19-font) !important; }
+
+/* Promo strip and search */
+#wag-header-promo-container { background: var(--n19-strip) !important; }
+#wag-header-promo-container a { color: var(--n19-strip-text) !important; }
+header .nav__top-container form { border-radius: 3px !important; border-color: #b5b5b5 !important; }
+
+/* Main menu on the aqua band */
+header .nav__bottom-container, header .contain-header-links > .dropdown__menu > .menu-dropdown { background: var(--n19-band) !important; }
+header .nav__main-container > li > a, header .nav__main-container > li > button, header .nav__main-container > li > a span, header .nav__main-container > li > button span {
+  color: var(--n19-band-text) !important; font-weight: 400 !important; font-size: 17px !important;
+}
+header .nav__main-container > li > a svg, header .nav__main-container > li > button svg { fill: currentColor !important; color: var(--n19-band-text) !important; }
+header .nav__bottom-container > *:not(nav) a, header .nav__bottom-container > *:not(nav) span { color: var(--n19-band-text) !important; }
+
+/* Tiles and cards: square with a thin grey line instead of rounded beige cards */
+main .wag-card, main .card, main .quicklinkcardv1, main .wag-slim-banner { border-radius: 0 !important; }
+main .card__basic { border: 1px solid var(--n19-tile-line) !important; background-color: var(--n19-tile) !important; }
+main a:not([class*="btn"]):not(.card):not(.wag-card):not(.quicklinkcardv1) { color: var(--n19-link); }

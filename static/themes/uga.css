@@ -1,0 +1,29 @@
+/* net19 handmade theme: University of Georgia, 2019: Merriweather Sans text, a black audience-links strip across the
+   top, a boxed white search field and a black "Quick Links" style tab, and the homepage message set in a solid
+   Bulldog-red (#ba0c2f) panel with Oswald headings. UGA has no dark mode; the dark block only keeps text readable. */
+html { --n19-red: #ba0c2f; --n19-red-dark: #8f0a24; --n19-strip: #000; --n19-strip-text: #fff; --n19-field: #fff; --n19-field-text: #333; --n19-field-border: #ccc;
+  --n19-sans: "Merriweather Sans", Arial, sans-serif; }
+html[data-net19-mode="dark"] { --n19-red: #ba0c2f; --n19-red-dark: #e0284e; --n19-strip: #000; --n19-strip-text: #fff; --n19-field: #1d1b19; --n19-field-text: #eee; --n19-field-border: #554f47; }
+html:root { --bs-body-font-family: var(--n19-sans) !important; --bs-border-radius: 0 !important; --bs-border-radius-sm: 0 !important; --bs-border-radius-lg: 0 !important; }
+body, p, li, td, th, input, button, .btn, .navbar, .hero__text { font-family: var(--n19-sans) !important; }
+
+/* Header: audience links on a black strip, boxed search, black menu tab */
+#navbar .navbar__right-links { background: var(--n19-strip) !important; padding: 4px 14px !important; }
+#navbar .navbar__right-links-link { color: var(--n19-strip-text) !important; font-family: var(--n19-sans) !important; }
+#navbar .navbar__right-buttons-search {
+  background: var(--n19-field) !important; color: var(--n19-field-text) !important; border: 1px solid var(--n19-field-border) !important; border-radius: 0 !important;
+  font-family: var(--n19-sans) !important; font-weight: 300 !important;
+}
+#navbar .navbar__right-buttons-menu { background: var(--n19-strip) !important; color: var(--n19-strip-text) !important; border-radius: 0 0 6px 6px !important; font-family: var(--n19-sans) !important; }
+#navbar .navbar__right-buttons-menu:hover { background: var(--n19-red) !important; }
+
+/* Homepage message in the 2019 red panel */
+#hero .hero__message { background: var(--n19-red) !important; padding: 24px 28px 28px !important; max-width: 640px !important; }
+#hero .hero__heading { color: #fff !important; margin-top: 0 !important; }
+#hero .hero__text, #hero .hero__text p { color: #fff !important; font-size: 20px !important; line-height: 1.45 !important; }
+
+/* Buttons and cards: square corners, red primary */
+.btn { border-radius: 0 !important; }
+.btn-primary, .btn-red { background-color: var(--n19-red) !important; border-color: var(--n19-red) !important; }
+.btn-primary:hover, .btn-red:hover { background-color: var(--n19-red-dark) !important; }
+.card, .card-img-top { border-radius: 0 !important; }

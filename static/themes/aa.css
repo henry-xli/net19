@@ -1,0 +1,15 @@
+/* net19 handmade theme: American Airlines, 2019: the same white page, AmericanSans type and blue gradient buttons as
+   today, with the main menu in light AA-blue words, open white booking tabs with a single outlined active tab, and
+   2px corners. The 2019 design is essentially today's, so the theme is small. aa.com has no dark mode. */
+html { --n19-blue: #0078d2; --n19-navy: #36495a; --n19-rule: #9da6ab; --n19-tab-bg: #fff; }
+html[data-net19-mode="dark"] { --n19-blue: #4db2ff; --n19-navy: #d0dae3; --n19-rule: #55636e; --n19-tab-bg: #1b2833; }
+
+/* Booking tabs: white row, outlined active tab */
+#booking-module-tabs .ui-tabs-nav { background: var(--n19-tab-bg) !important; border: 0 !important; border-bottom: 1px solid var(--n19-rule) !important; border-radius: 0 !important; }
+#booking-module-tabs .ui-tabs-nav li { background: var(--n19-tab-bg) !important; border: 1px solid transparent !important; border-bottom: 0 !important; border-radius: 3px 3px 0 0 !important; margin-bottom: -1px !important; }
+#booking-module-tabs .ui-tabs-nav li.ui-tabs-active { border-color: var(--n19-rule) !important; }
+#booking-module-tabs .ui-tabs-nav a { color: var(--n19-blue) !important; }
+#booking-module-tabs .ui-tabs-nav li.ui-tabs-active a { color: var(--n19-navy) !important; }
+
+/* Trip-type pills and buttons keep 2019's small radii */
+.btn, input.btn { border-radius: 2px !important; }

@@ -1,0 +1,9 @@
+/* net19 handmade theme: craigslist, 2019: Arial, a plain blue "craigslist" wordmark, and gray category bars without emoji. */
+/* The 2019 page is nearly identical to today's, so this theme only changes type, the wordmark and the category bars. */
+html { --n19-link: #00e; --n19-ban: #eee; --n19-ban-edge: #ddd; }
+html[data-net19-mode="dark"] { --n19-link: #8ab4f8; --n19-ban: #2a2a2a; --n19-ban-edge: #444; }
+body, button, input, select, textarea { font-family: Arial, Helvetica, sans-serif !important; }
+.cl-goto-home { color: var(--n19-link) !important; }
+.cl-goto-home > .icon { display: none !important; }
+.cl-link-table .heading .emoji { display: none !important; }
+.cl-link-table .heading { background: var(--n19-ban) !important; border-top: 1px solid var(--n19-ban-edge) !important; border-bottom: 1px solid var(--n19-ban-edge) !important; font-weight: 700 !important; }

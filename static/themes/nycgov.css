@@ -1,0 +1,41 @@
+/* net19 handmade theme: NYC.gov, 2019: Helvetica/Arial bold on a light gray page, white square-cornered cards and flat #1b75bb buttons, white header with a gray bar, black footer. */
+html { --n19-page: #e8e8e8; --n19-card: #fff; --n19-text: #222; --n19-text-2: #555; --n19-blue: #1b75bb; --n19-blue-dark: #155a91; --n19-link: #1b75bb;
+  --n19-border: #d6d6d6; --n19-header: #fff; --n19-header-text: #333; --n19-header-rule: #ccc; --n19-surface-low: #f2f2f2; }
+html[data-net19-mode="dark"] { --n19-page: #1c1c1c; --n19-card: #2a2a2a; --n19-text: #eee; --n19-text-2: #bbb; --n19-blue: #2b86cf; --n19-blue-dark: #1b75bb; --n19-link: #6cb4ee;
+  --n19-border: #444; --n19-header: #111; --n19-header-text: #eee; --n19-header-rule: #333; --n19-surface-low: #333; }
+/* The city's design-system tokens: every component (cards, buttons, modals, accordions) reads these. */
+html:root {
+  --nyc-sys-font-family-body: "Helvetica Neue", Helvetica, Arial, sans-serif !important; --nyc-sys-font-family-heading: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  --atomic-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  --nyc-sys-radius-2xs: 0px !important; --nyc-sys-radius-xs: 0px !important; --nyc-sys-radius-sm: 0px !important; --nyc-sys-radius-base: 0px !important;
+  --nyc-sys-radius-lg: 0px !important; --nyc-sys-radius-xl: 0px !important; --nyc-sys-radius-2xl: 0px !important;
+  --nyc-sys-radius-fluid-base-2xl: 0px !important; --nyc-sys-radius-fluid-sm-base: 0px !important; --nyc-sys-radius-fluid-xs-base: 0px !important;
+  --nyc-cmp-button-border-radius: 0px !important; --nyc-cmp-card-border-radius: 0px !important; --nyc-cmp-card-border-radius-hover: 0px !important;
+  --nyc-cmp-card-radius-base: 0px !important; --nyc-cmp-card-radius-lg: 0px !important; --nyc-cmp-card-radius-lg-hover: 0px !important; --nyc-cmp-card-radius-xl: 0px !important;
+  --nyc-cmp-modal-border-radius: 0px !important; --atomic-border-radius-md: 0px !important; --atomic-border-radius-lg: 0px !important;
+  --nyc-cmp-card-shadow: none !important; --nyc-sys-shadow-base: none !important; --nyc-sys-shadow-low: 0 1px 2px rgba(0,0,0,.15) !important;
+  --nyc-cmp-card-background: var(--n19-card) !important; --nyc-cmp-card-background-hover: var(--n19-card) !important; --nyc-cmp-card-color: var(--n19-text) !important;
+  --nyc-cmp-card-border-color: var(--n19-border) !important; --nyc-cmp-card-border-width: 1px !important;
+  --nyc-sys-color-primary: var(--n19-blue) !important; --nyc-sys-color-primary-hover: var(--n19-blue-dark) !important; --color-primary--blue: var(--n19-blue) !important;
+  --nyc-sys-color-on-secondary: var(--n19-blue) !important; --nyc-sys-color-on-secondary-hover: var(--n19-blue-dark) !important; --nyc-sys-color-border-selected: var(--n19-blue) !important;
+  --nyc-sys-color-link: var(--n19-link) !important; --nyc-sys-color-link-hover: var(--n19-blue-dark) !important;
+  --nyc-sys-color-text-base: var(--n19-text) !important; --nyc-sys-color-on-surface-base: var(--n19-text) !important; --nyc-sys-color-text-secondary: var(--n19-text-2) !important;
+  --nyc-sys-color-surface-base: var(--n19-card) !important; --nyc-sys-color-surface-low: var(--n19-surface-low) !important; --nyc-sys-color-border-base: var(--n19-border) !important;
+  --nyc-cmp-header-primary-background: var(--n19-header) !important; --nyc-cmp-header-primary-on-header: var(--n19-header-text) !important;
+  --nyc-cmp-navigation-primary-background: var(--n19-header) !important; --nyc-cmp-navigation-primary-active: var(--n19-header-text) !important; --nyc-cmp-navigation-primary-inactive: var(--n19-text-2) !important;
+}
+/* The 2020s pastel gradient behind the homepage becomes 2019's flat light gray. */
+.root.background-gradient { background: var(--n19-page) !important; }
+body h1, body h2, body h3 { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important; font-weight: 700 !important; letter-spacing: -.5px !important; }
+.globalheader { border-bottom: 1px solid var(--n19-header-rule) !important; }
+/* 2019 header: white bar, dark bold links, the black NYC wordmark (the logo file is white, so it is inverted in light mode). */
+#primary-header, #primary-header :is(a, button, span, h4) { color: var(--n19-header-text) !important; }
+#primary-header .official-website-banner, #primary-header .official-website-banner :is(div, h4, button) { background: transparent !important; }
+html:not([data-net19-mode="dark"]) #primary-header .nyc-header__title img { filter: invert(1) !important; }
+#primary-header a.nyc-navigation__item-link { font-weight: 700 !important; font-size: 17px !important; }
+#global-search-button { border: 1px solid var(--n19-header-rule) !important; border-radius: 0 !important; background: var(--n19-card) !important; }
+/* Some surfaces carry their own rounding outside the tokens (hero, news photos, feature cards). */
+#mainContent :is(div, a, img, picture, figure, section, article, button) { border-radius: 0 !important; }
+#primary-header .official-website-banner, #primary-header .official-website-banner * { box-shadow: none !important; }
+.cmp-news-carousel a.cmp-button { background: var(--n19-blue) !important; border-color: var(--n19-blue) !important; }
+.cmp-news-carousel a.cmp-button:hover { background: var(--n19-blue-dark) !important; }

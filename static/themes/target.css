@@ -1,0 +1,28 @@
+/* net19 handmade theme: Target, 2019: a solid #cc0000 header with a white bullseye, bold white nav and a white pill search, a white utility bar of gray links beneath, 4px buttons and square cards. */
+html { --n19-red: #c00; --n19-red-dark: #a00; --n19-on-red: #fff; --n19-bar: #fff; --n19-bar-text: #666; --n19-bar-border: #d6d6d6; --n19-text: #333; }
+html[data-net19-mode="dark"] { --n19-red: #c00; --n19-red-dark: #a00; --n19-on-red: #fff; --n19-bar: #1f1f1f; --n19-bar-text: #bbb; --n19-bar-border: #3a3a3a; --n19-text: #eee; }
+/* Target's Nicollet design system tokens: 2019 had small radii */
+html:root {
+  --radius-button: 4px !important; --radius-card: 0px !important; --radius-input: 4px !important; --radius-label: 2px !important; --radius-menu: 4px !important;
+  --radius-asset: 0px !important; --radius-messaging: 4px !important; --radius-modal: 4px !important; --radius-filter: 4px !important;
+}
+/* Header: red bar on top, white utility bar below it */
+div:has(> [class*="styles_utilityHeaderWrapper"]) { display: flex !important; flex-direction: column !important; }
+div:has(> [class*="styles_utilityHeaderWrapper"]) > * { order: 3; }
+[class*="styles_utilityHeaderWrapper"] { order: 2 !important; background: var(--n19-bar) !important; border-bottom: 1px solid var(--n19-bar-border) !important; }
+[class*="styles_utilityHeaderWrapper"] a, [class*="styles_utilityHeaderWrapper"] button, [class*="styles_utilityHeaderWrapper"] span { color: var(--n19-bar-text) !important; }
+[class*="styles_primaryHeaderWrapper"] { order: 1 !important; background: var(--n19-red) !important; box-shadow: none !important; }
+[class*="styles_primaryHeaderWrapper"] [class*="styles_styledRef"] { background: transparent !important; }
+[class*="styles_primaryHeaderWrapper"] a, [class*="styles_primaryHeaderWrapper"] a *, [class*="styles_primaryHeaderWrapper"] button:not(form button), [class*="styles_primaryHeaderWrapper"] button:not(form button) * { color: var(--n19-on-red) !important; }
+[class*="styles_primaryHeaderWrapper"] a svg, [class*="styles_primaryHeaderWrapper"] a svg *, [class*="styles_primaryHeaderWrapper"] button:not(form button) svg { fill: var(--n19-on-red) !important; color: var(--n19-on-red) !important; }
+/* The red bullseye sits on a white disc, reading as the 2019 white-on-red logo */
+[class*="styles_primaryHeaderWrapper"] a[class*="logoLink"] svg { background: #fff !important; border-radius: 50% !important; padding: 3px !important; box-sizing: border-box !important; }
+[class*="styles_primaryHeaderWrapper"] a:not([class*="logoLink"]):hover { background: var(--n19-red-dark) !important; }
+/* The white pill search field of 2019 */
+[class*="styles_primaryHeaderWrapper"] form[class*="styles_searchForm"], [class*="styles_primaryHeaderWrapper"] input[data-test*="SearchInput"] { background: #fff !important; border-radius: 20px !important; color: #333 !important; }
+[class*="styles_primaryHeaderWrapper"] form svg { fill: #666 !important; color: #666 !important; }
+/* Buttons and cards */
+[class*="styles_ndsButton"] { border-radius: 4px !important; }
+[class*="styles_storycardWrapper"], [class*="styles_ndsPicture"] img, [class*="ProductCard"] img { border-radius: 0 !important; }
+/* "Ask Target" (an AI shopping assistant) did not exist in 2019 */
+[class*="AskAiButton_button"], [aria-label="Ask Target"] { display: none !important; }

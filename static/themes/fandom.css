@@ -1,0 +1,34 @@
+/* net19 handmade theme: Fandom wikis (Oasis skin), 2019: a dark teal-navy (#002a32) global navigation with
+   uppercase aqua (#00d6d6) links in Rubik, articles set in Helvetica Neue with bold #3a3a3a page titles, a square
+   content page framed by a thin #bcc2c4 border, and 3px outlined buttons. Each wiki's own colors and background art
+   are kept, as they were in 2019. Both FandomDesktop light and dark themes are followed. */
+html { --n19-nav: #002a32; --n19-nav-link: #00d6d6; --n19-nav-text: #fff; --n19-nav-field: rgba(255,255,255,.1); --n19-nav-rule: rgba(255,255,255,.25);
+  --n19-font: "Helvetica Neue", Helvetica, Arial, sans-serif; --n19-title: #3a3a3a; --n19-page-border: #bcc2c4; }
+html[data-net19-mode="dark"] { --n19-nav: #002a32; --n19-nav-link: #00d6d6; --n19-nav-text: #fff; --n19-nav-field: rgba(255,255,255,.1); --n19-nav-rule: rgba(255,255,255,.25);
+  --n19-title: #e6e6e6; --n19-page-border: #3a4a4f; }
+
+/* Global navigation (top bar and the explore rail beside it) on Fandom's own variables */
+#global-top-navigation, #global-explore-navigation, .global-explore-navigation__top {
+  --fandom-global-nav-background-color: var(--n19-nav); --fandom-global-nav-text-color: var(--n19-nav-text);
+  --fandom-global-nav-link-color: var(--n19-nav-link); --fandom-global-nav-icon-color: var(--n19-nav-link);
+  --fandom-global-nav-icon-background-color--hover: rgba(255,255,255,.12); --fandom-global-nav-separator-color: var(--n19-nav-rule);
+  background-color: var(--n19-nav) !important; color: var(--n19-nav-text) !important;
+}
+#global-explore-navigation .global-explore-navigation__label, #global-explore-navigation button, #global-explore-navigation a { color: var(--n19-nav-link) !important; }
+#global-top-navigation a:not(.wds-button), #global-top-navigation .global-top-navigation__links a { color: var(--n19-nav-link) !important; text-transform: uppercase; }
+#global-top-navigation input[type="search"], #global-top-navigation .search-app__input, #global-top-navigation [class*="search"] input {
+  background: var(--n19-nav-field) !important; color: var(--n19-nav-text) !important; border-color: var(--n19-nav-rule) !important; border-radius: 3px !important;
+}
+#global-top-navigation [class*="search"] input::placeholder { color: rgba(255,255,255,.7) !important; }
+#global-top-navigation .search-container :is(button, span, div, svg) { color: rgba(255,255,255,.8) !important; }
+#global-top-navigation .search-container > :is(button, div) { background: var(--n19-nav-field) !important; border-color: var(--n19-nav-rule) !important; border-radius: 3px !important; }
+#global-top-navigation svg, #global-explore-navigation svg { fill: currentColor; }
+#global-top-navigation .wds-button { background: transparent !important; color: var(--n19-nav-link) !important; border: 1px solid var(--n19-nav-link) !important; border-radius: 3px !important; }
+#global-top-navigation .wds-button:not(.wds-is-secondary) { background: var(--n19-nav-link) !important; color: var(--n19-nav) !important; }
+
+/* Article page */
+.page__main { border-radius: 0 !important; border: 1px solid var(--n19-page-border) !important; }
+.page-content, .page-content .mw-parser-output, .page-header, .page-header__title { font-family: var(--n19-font) !important; }
+.page-header__title { font-weight: 700 !important; color: var(--n19-title) !important; }
+.page-content .mw-parser-output h2, .page-content .mw-parser-output h3 { font-family: var(--n19-font) !important; font-weight: 700 !important; }
+.wds-button { border-radius: 3px !important; }

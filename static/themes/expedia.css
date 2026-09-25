@@ -1,0 +1,27 @@
+/* net19 handmade theme: Expedia, 2019: #fc0 yellow header over both nav rows, Arial, #0065b8 blue accents and links, yellow Search buttons, 3px corners instead of pills. */
+html { --n19-header: #fc0; --n19-header-text: #1f2b3a; --n19-header-text-2: #333; --n19-blue: #0065b8; --n19-blue-dark: #004e8f; --n19-blue-light: #d6e8f7;
+  --n19-cta: #fc0; --n19-cta-hover: #f2b900; --n19-cta-text: #1f1f1f; --n19-font: Arial, "Helvetica Neue", Helvetica, sans-serif; }
+html[data-net19-mode="dark"] { --n19-header: #2b2b2b; --n19-header-text: #f2f2f2; --n19-header-text-2: #ccc; --n19-blue: #4d9be0; --n19-blue-dark: #2d7fc7; --n19-blue-light: #16324d;
+  --n19-cta: #fc0; --n19-cta-hover: #f2b900; --n19-cta-text: #1f1f1f; --n19-font: Arial, "Helvetica Neue", Helvetica, sans-serif; }
+/* Expedia's UITK design tokens: every component reads these, so menus, dialogs and later-loaded content follow. */
+html:root, html:root body {
+  --font_face__family_stack: var(--n19-font) !important; --standard__body_font_stack: var(--n19-font) !important;
+  --standard__display_font_stack: var(--n19-font) !important; --standard__headline_font_stack: var(--n19-font) !important;
+  --button__corner_radius: 3px !important; --button__tertiary__corner_radius: 3px !important; --button__paging__corner_radius: 3px !important;
+  --button_toggle__corner_radius: 3px !important; --card__corner_radius: 4px !important; --dialog__corner_radius: 4px !important;
+  --banner__corner_radius: 4px !important; --error_summary__corner_radius: 4px !important;
+  --corner_radius__2x: 3px !important; --corner_radius__three: 3px !important; --corner_radius__4x: 4px !important; --corner_radius__6x: 4px !important;
+  --global_navigation__primary_row__background_color: var(--n19-header) !important; --global_navigation__secondary_row__background_color: var(--n19-header) !important;
+  --global_navigation__header_link__text_color: var(--n19-header-text-2) !important; --global_navigation__header_nav_content__secondary__text_color: var(--n19-header-text) !important;
+  --global_navigation__header_nav_content__active__text_color: var(--n19-header-text) !important; --global_navigation__header__shadow: none !important;
+  --global_navigation__button__primary__active__background_color: var(--n19-blue) !important;
+  --button__primary__default__background_color: var(--n19-cta) !important; --button__primary__default__text_color: var(--n19-cta-text) !important;
+  --button__primary__default__icon__fill_color: var(--n19-cta-text) !important; --button__primary__hover__background_color: var(--n19-cta-hover) !important;
+  --button__primary__hover__text_color: var(--n19-cta-text) !important; --button__primary__hover__icon__fill_color: var(--n19-cta-text) !important;
+  --button__primary__active__background_color: var(--n19-cta-hover) !important; --button__primary__active__text_color: var(--n19-cta-text) !important;
+  --button__primary__active__icon__fill_color: var(--n19-cta-text) !important;
+  --color__accent__1: var(--n19-blue-dark) !important; --color__accent__1__700: var(--n19-blue-dark) !important; --color__accent__2: var(--n19-blue) !important;
+  --light_1__primary: #0065b8 !important; --light_1__primary_variant: #004e8f !important; --light_1__on_primary_container: #004e8f !important;
+  --card__featured__header__background_color: var(--n19-blue) !important; --card__focus__border_color: var(--n19-blue) !important;
+}
+body { font-family: var(--n19-font) !important; }

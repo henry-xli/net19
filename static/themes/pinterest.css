@@ -1,0 +1,25 @@
+/* net19 handmade theme: Pinterest, 2019: system Helvetica Neue type instead of Pin Sans, cool neutral grays (#efefef)
+   instead of today's warm stone grays, pill-shaped buttons and search field, round icon buttons. The layout is
+   essentially today's, so the theme only changes type, colors and corner radii. */
+html { --n19-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; --n19-text: #333; }
+html[data-net19-mode="dark"] { --n19-text: #efefef; }
+html:root {
+  --base-font-family-default-latin: var(--n19-font) !important; --font-family-default-latin: var(--n19-font) !important;
+  --sema-font-family-body-100: var(--n19-font) !important; --sema-font-family-body-200: var(--n19-font) !important;
+  --sema-font-family-body-300: var(--n19-font) !important; --sema-font-family-body-400: var(--n19-font) !important;
+  --sema-font-family-compact-100: var(--n19-font) !important; --sema-font-family-ui-100: var(--n19-font) !important;
+  --sema-font-family-ui-200: var(--n19-font) !important; --sema-font-family-ui-300: var(--n19-font) !important; --sema-font-family-ui-400: var(--n19-font) !important;
+  --sema-font-family-heading-200: var(--n19-font) !important; --sema-font-family-heading-300: var(--n19-font) !important;
+  --sema-font-family-heading-400: var(--n19-font) !important; --sema-font-family-heading-500: var(--n19-font) !important;
+  --sema-font-family-heading-600: var(--n19-font) !important; --sema-font-family-heading-700: var(--n19-font) !important;
+  --sema-font-family-display-700: var(--n19-font) !important; --sema-font-family-display-800: var(--n19-font) !important;
+  --sema-font-family-display-900: var(--n19-font) !important; --sema-font-family-display-1000: var(--n19-font) !important;
+  --comp-button-rounding-sm: 20px !important; --comp-button-rounding-md: 24px !important; --comp-button-rounding-lg: 24px !important;
+  --comp-buttontoggle-rounding-sm: 20px !important; --comp-buttontoggle-rounding-md: 24px !important; --comp-buttontoggle-rounding-lg: 24px !important;
+  --comp-iconbutton-rounding-xs: 999px !important; --comp-iconbutton-rounding-sm: 999px !important; --comp-iconbutton-rounding-md: 999px !important;
+  --comp-iconbutton-rounding-lg: 999px !important; --comp-iconbutton-rounding-xl: 999px !important;
+  --comp-searchguide-rounding-container: 24px !important;
+}
+body { font-family: var(--n19-font) !important; color: var(--n19-text); }
+/* Search: the 2019 field was a full pill */
+#searchBoxContainer > div, #searchBoxContainer > div > div { border-radius: 24px !important; }

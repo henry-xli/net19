@@ -1,0 +1,24 @@
+/* net19 handmade theme: Lowe's, 2019: Arial, the #0471af Lowe's blue for links and buttons, the #004990 navy strip, square fields and buttons. */
+html { --n19-blue: #0471af; --n19-blue-hover: #035a8c; --n19-blue-pressed: #024a73; --n19-navy: #004990; --n19-text: #333; --n19-field-border: #ccc; }
+html[data-net19-mode="dark"] { --n19-blue: #4ea3d9; --n19-blue-hover: #6db4e2; --n19-blue-pressed: #3b8cc0; --n19-navy: #004990; --n19-text: #eee; --n19-field-border: #555; }
+html:root, html body {
+  --bds-font-family-fellix: Arial, Helvetica, sans-serif !important; --bds-font-family-fellix-roboto: Arial, Helvetica, sans-serif !important;
+  --bds-font-family-roboto: Arial, Helvetica, sans-serif !important;
+  --bds-border-radius-md: 0 !important; --bds-border-radius-lg: 2px !important;
+  --bds-color-action-interactive: var(--n19-blue) !important; --bds-color-action-interactive-hover: var(--n19-blue-hover) !important;
+  --bds-color-action-interactive-pressed: var(--n19-blue-pressed) !important; --bds-color-text-interactive: var(--n19-blue) !important;
+  --bds-color-icon-interactive: var(--n19-blue) !important; --bds-color-marketing-interactive: var(--n19-blue) !important;
+  --bds-color-focus-interactive: var(--n19-blue) !important; --bds-color-surface-dark-blue: var(--n19-navy) !important;
+}
+body, body :not(svg, svg *, i, [class*="icon" i]) { font-family: Arial, Helvetica, sans-serif !important; }
+header .backyard.button, header input.sb-input, header form section, main .backyard.button { border-radius: 2px !important; }
+header input.sb-input, header form section { border-radius: 0 !important; }
+header form section { border-color: var(--n19-field-border) !important; }
+/* "Mylow" AI Assist did not exist in 2019 */
+header button[data-linkid="mylow"], header a[data-linkid="mylow"] { display: none !important; }
+/* The department row sits on the 2019 blue bar with white labels */
+#mh-nav-link-wrapper, #mh-nav-link-wrapper > div { background: var(--n19-blue) !important; }
+#mh-nav-link-wrapper :is(a, button, span, p) { color: #fff !important; }
+#mh-nav-link-wrapper svg { color: #fff !important; fill: currentColor; }
+#mh-nav-link-wrapper :is(a, button):hover { background: var(--n19-blue-hover) !important; }
+#mh-nav-link-wrapper :is(img, svg) { filter: brightness(0) invert(1); }

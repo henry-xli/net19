@@ -1,0 +1,38 @@
+/* net19 handmade theme: YouTube Official Blog, 2019 (then youtube.googleblog.com on Blogger): Roboto throughout in
+   sentence case, a light-grey (#eee) masthead band, plain white pages without the per-category pastel washes,
+   Google-blue (#4285f4) links and labels, flat square cards and thin grey rules. The blog has no dark mode. */
+html { --n19-band: #eeeeee; --n19-page: #fff; --n19-text: #212121; --n19-text-2: #757575; --n19-link: #4285f4; --n19-rule: #e0e0e0; --n19-font: Roboto, Arial, sans-serif; }
+html[data-net19-mode="dark"] { --n19-band: #2a2a2a; --n19-page: #181818; --n19-text: #e8e8e8; --n19-text-2: #a0a0a0; --n19-link: #8ab4f8; --n19-rule: #3c3c3c; }
+
+/* One family, as on Blogger: every YouTube Sans token points at Roboto */
+html:root, html .yt-page, html [class*="category--"] {
+  --youtube-sans-black: var(--n19-font) !important; --youtube-sans-bold: var(--n19-font) !important; --youtube-sans-semibold: var(--n19-font) !important;
+  --youtube-sans-regular: var(--n19-font) !important; --youtube-sans-light: var(--n19-font) !important;
+  --youtube-sans-mono-semibold: var(--n19-font) !important; --youtube-sans-mono-medium: var(--n19-font) !important; --google-font-family: var(--n19-font) !important;
+  --bg-primary-color: var(--n19-page) !important; --bg-secondary-color: var(--n19-page) !important; --bg-callout-color: var(--n19-band) !important;
+  --bg-pull-quote-color: var(--n19-band) !important; --text-primary-color: var(--n19-text) !important; --primary-color: var(--n19-link) !important;
+}
+.yt-page h1, .yt-page h2, .yt-page h3, .yt-page h4, .yt-page p, .yt-page a, .yt-page span, .yt-page li, .yt-page button, .yt-page time, .yt-page div {
+  font-family: var(--n19-font) !important;
+}
+.yt-page h1, .yt-page h2, .yt-page h3, .yt-page h4, .yt-page [class*="title"], .yt-page [class*="headline"], .yt-page [class*="category"],
+.yt-page [class*="eyebrow"], .yt-page [class*="tag"], .yt-page [class*="date"], .yt-page [class*="byline"], .yt-page .yt-link {
+  text-transform: none !important; letter-spacing: 0 !important;
+}
+.yt-page h1, .yt-page h2, .yt-page h3, .yt-page [class*="__title"] { font-weight: 400 !important; line-height: 1.3 !important; }
+
+/* Masthead band */
+.yt-header, .yt-header__navigation { background: var(--n19-band) !important; box-shadow: none !important; border-bottom: 1px solid var(--n19-rule) !important; }
+.yt-subscription__header-btn { border-radius: 2px !important; }
+
+/* Category labels become plain blue link text; cards are flat and square */
+.yt-page [class*="category-link-content"], .yt-article-hero-section__page-content-category-cta, .yt-article-hero-section__page-content-category-cta span {
+  background: none !important; color: var(--n19-link) !important; padding-left: 0 !important; padding-right: 0 !important; border-radius: 0 !important;
+}
+.yt-page [class*="card"], .yt-page [class*="card__wrapper"], .yt-page picture, .yt-page img, .yt-article-pull-quote__wrapper,
+.yt-article-hero-section__media, .yt-article-hero-section__page-media, .yt-homepage-hero-refresh [class*="slide"] { border-radius: 0 !important; }
+.yt-page [class*="card__wrapper"] { box-shadow: none !important; border: 1px solid var(--n19-rule) !important; }
+.yt-article-hero, .yt-article-hero [class*="hero-section"] { background: var(--n19-page) !important; }
+.yt-homepage-hero-refresh__video-bg-container { visibility: hidden !important; }
+.yt-page [class*="__date"], .yt-page [class*="read-time"], .yt-author-byline__content__job { color: var(--n19-text-2) !important; }
+.yt-article-rel-tags__link, .yt-link { color: var(--n19-link) !important; border-color: var(--n19-link) !important; }

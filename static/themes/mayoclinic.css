@@ -1,0 +1,21 @@
+/* net19 handmade theme: Mayo Clinic, 2019: Arial/Helvetica everywhere (no serif display type), deep #0033a0 blue, square buttons, tiles and letter boxes, a gray-ruled menu bar. */
+html { --n19-blue: #0033a0; --n19-blue-2: #0057b8; --n19-text: #333; --n19-text-2: #555; --n19-rule: #d6d6d6; }
+html[data-net19-mode="dark"] { --n19-blue: #8cc5ff; --n19-blue-2: #afd7ff; --n19-text: #eee; --n19-text-2: #bbb; --n19-rule: #444; }
+/* Mayo's design tokens (radii are unitless pixel numbers) */
+html:root, body.light-mode, body.dark-mode {
+  --mc-typography-font-family-sans: Arial, "Helvetica Neue", Helvetica, sans-serif !important;
+  --mc-typography-font-family-serif: Arial, "Helvetica Neue", Helvetica, sans-serif !important;
+  --mc-typography-font-family-display: Arial, "Helvetica Neue", Helvetica, sans-serif !important;
+  --mc-radius-x-small: 2 !important; --mc-radius-small: 3 !important; --mc-radius-medium: 3 !important; --mc-radius-large: 3 !important;
+  --mc-radius-x-large: 3 !important; --mc-radius-xx-large: 3 !important; --mc-radius-full: 3 !important;
+}
+body.light-mode { --mc-color-action-primary-default: var(--n19-blue) !important; --mc-color-text-action-default: var(--n19-blue) !important; --mc-color-layer-brand-1-default: var(--n19-blue) !important; }
+body, input, button { font-family: Arial, "Helvetica Neue", Helvetica, sans-serif !important; }
+/* Article pages set mayo-sans / mayo-display directly on their elements */
+body :is(h1, h2, h3, h4, h5, h6, p, li, a, dd, dt, td, th, label, blockquote, figcaption, .content, .main) { font-family: Arial, "Helvetica Neue", Helvetica, sans-serif !important; letter-spacing: normal !important; }
+h1 { font-weight: 400 !important; }
+h2, h3 { font-weight: 700 !important; }
+/* Buttons and fields: square with 3px corners */
+a[class*="button" i], button[class*="button" i], .cmp-button, #access-nav a, input[type="search"], input[type="text"] { border-radius: 3px !important; }
+/* Top menu: gray rules between the items, as in the 2019 bar */
+header nav > ul > li + li, .cmp-navigation__item--level-0 + .cmp-navigation__item--level-0 { border-left: 1px solid var(--n19-rule) !important; }

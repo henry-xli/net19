@@ -1,0 +1,19 @@
+/* net19 handmade theme: FedEx, 2019: Roboto type on the #4d148c purple bar, square light-gray tool tiles, square orange TRACK button. */
+html { --n19-purple: #4d148c; --n19-orange: #ff6200; --n19-tile: #fafafa; --n19-text: #333; --n19-link: #007ab7; }
+html[data-net19-mode="dark"] { --n19-purple: #4d148c; --n19-orange: #ff6200; --n19-tile: #2a2a2a; --n19-text: #e6e6e6; --n19-link: #5bb8e8; }
+html:root {
+  --cb-font-family-latin: Roboto, "Helvetica Neue", Arial, sans-serif !important;
+  --cb-size-border-radius-small: 0 !important; --cb-size-border-radius-default: 2px !important; --cb-size-border-radius-large: 2px !important; --cb-size-border-radius-x-large: 2px !important;
+  --bs-border-radius: 2px !important; --bs-border-radius-sm: 0 !important; --bs-border-radius-lg: 2px !important; --bs-border-radius-xl: 2px !important;
+  --cb-color-accent-brand-primary: var(--n19-purple) !important; --cb-color-accent-brand-secondary: var(--n19-orange) !important;
+}
+body, button, input, select, textarea, h1, h2, h3, h4, h5, h6, p, a, li, label, span:not([class*="icon"]) { font-family: Roboto, "Helvetica Neue", Arial, sans-serif !important; }
+
+/* Hero tool strip: square light tiles instead of one rounded card */
+.homepage-b-links { border-radius: 0 !important; background: var(--n19-tile) !important; }
+h1, h2, .fxg-title { font-weight: 300 !important; }
+
+/* Buttons: primary stays square and orange, uppercase */
+.cc-aem-c-button, .fxg-button { border-radius: 0 !important; }
+.cc-aem-c-button--primary, .fxg-button--orange { background: var(--n19-orange) !important; color: #fff !important; text-transform: uppercase !important; letter-spacing: .03em !important; }
+.fxg-field input, .fxg-tracking-module input { border-radius: 0 !important; }

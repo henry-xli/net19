@@ -1,0 +1,26 @@
+/* net19 handmade theme: U.S. News & World Report, 2019: a near-black (#111) masthead and section bar with small bold
+   uppercase letter-spaced words, Arial headlines in black, and square white boxes topped by a 3px U.S. News red rule
+   with centered uppercase box titles ("TOP STORIES"). U.S. News has no dark mode. */
+html { --n19-bar: #111; --n19-bar-text: #fff; --n19-red: #c4212a; --n19-text: #111; --n19-text-2: #555; --n19-line: #ddd; --n19-box: #fff;
+  --n19-font: Arial, "Helvetica Neue", Helvetica, sans-serif; }
+html[data-net19-mode="dark"] { --n19-bar: #000; --n19-bar-text: #fff; --n19-red: #e0444c; --n19-text: #eee; --n19-text-2: #aaa; --n19-line: #444; --n19-box: #1a1a1a; }
+html:root { --font-primary: var(--n19-font) !important; --font-secondary: var(--n19-font) !important; }
+main#app h1, main#app h2, main#app h3, main#app h4, main#app h5, main#app p, main#app a, main#app span, main#app li { font-family: var(--n19-font) !important; }
+
+/* Masthead and section bar */
+main#app > div.MuiBox-root, main#app > div.MuiBox-root > div.MuiBox-root { background: var(--n19-bar) !important; }
+main#app > div.MuiBox-root a:not(.MuiButton-root), main#app > div.MuiBox-root a:not(.MuiButton-root) span {
+  color: var(--n19-bar-text) !important; text-transform: uppercase !important; letter-spacing: .1em !important; font-size: 13px !important; font-weight: 700 !important;
+  border-color: #555 !important;
+}
+main#app > div.MuiBox-root .MuiButton-root { border-radius: 2px !important; }
+main#app > section.MuiBox-root { background: var(--n19-bar) !important; }
+main#app > section.MuiBox-root .MuiInputBase-root { border-radius: 0 !important; }
+
+/* Boxes: square, red top rule, centered uppercase titles */
+main#app aside.MuiBox-root { border-radius: 0 !important; border: 1px solid var(--n19-line) !important; border-top: 3px solid var(--n19-red) !important; background: var(--n19-box) !important; }
+main#app aside.MuiBox-root > div:first-child { background: var(--n19-box) !important; border-radius: 0 !important; border-bottom: 1px solid var(--n19-line) !important; text-align: center !important; }
+main#app aside.MuiBox-root > div:first-child h2 { text-transform: uppercase !important; letter-spacing: .08em !important; font-size: 14px !important; font-weight: 700 !important; }
+main#app aside.MuiBox-root > div { border-radius: 0 !important; }
+main#app article.MuiBox-root, main#app article img { border-radius: 0 !important; }
+main#app h2.MuiTypography-h5, main#app header.MuiBox-root h3 { text-transform: uppercase !important; letter-spacing: .06em !important; }

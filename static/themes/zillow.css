@@ -1,0 +1,26 @@
+/* net19 handmade theme: Zillow, 2019: Open Sans on white, #006aff blue, plain text "Sign in or Join" links, square 2-4px corners, serif hero headline. */
+html { --n19-text: #2a2a33; --n19-text-2: #62626d; --n19-blue: #006aff; --n19-blue-hover: #0d4599; --n19-surface: #fff; --n19-border: #d1d1d5; }
+html[data-net19-mode="dark"] { --n19-text: #e8e8ec; --n19-text-2: #a7a6ab; --n19-blue: #4d9aff; --n19-blue-hover: #7fb5ff; --n19-surface: #1f1f24; --n19-border: #3d3d45; }
+/* Zillow's Constellation (c11n) components, all versions */
+.znav, .znav a, .znav button, [class*="-c11n-"], .c11n, input, button { font-family: "Open Sans", "Segoe UI", Helvetica, Arial, sans-serif !important; }
+.znav-links a, .znav a[data-zg-role="section-title"] { color: var(--n19-text) !important; font-size: 15px !important; }
+.znav-links a:hover { color: var(--n19-blue) !important; }
+[class*="Anchor-c11n"]:not(.znav-topnav-logo) { color: var(--n19-blue) !important; }
+[class*="StyledTextButton-c11n"] { color: var(--n19-text) !important; }
+/* Sign in was a text link in 2019 */
+.znav a[data-za-action="Sign in"] button { background: transparent !important; border-color: transparent !important; color: var(--n19-text) !important;
+  font-weight: 400 !important; font-size: 15px !important; border-radius: 0 !important; padding: 0 8px !important; }
+.znav a[data-za-action="Sign in"] button:hover { color: var(--n19-blue) !important; }
+/* Buttons: blue, 4px corners */
+[class*="StyledButton-c11n"], .c11n_button, [data-c11n-component^="Button"] { border-radius: 4px !important; font-weight: 600 !important; }
+/* Headlines: the 2019 serif hero line */
+h1[class*="StyledHeading-c11n"], h1[class*="Text-c11n"] { font-family: "Ivar Display", Georgia, "Times New Roman", serif !important; font-weight: 700 !important; letter-spacing: 0 !important; }
+[class*="StyledHeading-c11n"]:not(h1) { font-family: "Open Sans", "Segoe UI", Helvetica, Arial, sans-serif !important; font-weight: 600 !important; letter-spacing: 0 !important; }
+/* Search fields: white, square */
+[data-c11n-component^="Combobox"], .c11n_combobox__input, [class*="StyledFormControl-c11n"], [class*="StyledSearch"], [class*="Input-c11n"], [class*="StyledInput-c11n"] { border-radius: 2px !important; }
+[data-c11n-component="Combobox.Root"], [data-c11n-component="Combobox.InputGroup"], [data-c11n-component^="SearchInput"] { border-radius: 2px !important; box-shadow: 0 1px 3px rgba(0,0,0,.2) !important; }
+/* Listing cards: square photos and edges */
+.c11n_property-card__root, [data-c11n-component^="PropertyCard"], .property-card, [class*="StyledCard-c11n"], [class*="StyledPropertyCard"] { border-radius: 2px !important; }
+.c11n_property-card__root img, .property-card img, [class*="StyledCard-c11n"] img, [data-c11n-component^="PropertyCard"] [data-c11n-component^="Image"] { border-radius: 0 !important; }
+.search-page-header { border-bottom: 1px solid var(--n19-border) !important; }
+[class*="StyledParagraph-c11n"] { color: var(--n19-text-2); }

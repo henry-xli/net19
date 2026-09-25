@@ -1,0 +1,27 @@
+/* net19 handmade theme: BBC, 2019: black global bar with white BBC blocks and bold white Helvetica section links split by thin rules; on News, the #bb1919 red masthead and nav band; Helvetica/Arial bold headlines instead of Reith Serif. */
+html { --n19-bar: #000; --n19-bar-text: #fff; --n19-bar-rule: #3a3a3a; --n19-news: #bb1919; --n19-news-dark: #a91717; --n19-news-rule: rgba(255,255,255,.35);
+  --n19-head: #222; --n19-font: Helvetica, Arial, freesans, sans-serif; }
+html[data-net19-mode="dark"] { --n19-bar: #000; --n19-bar-text: #fff; --n19-bar-rule: #3a3a3a; --n19-news: #bb1919; --n19-news-dark: #a91717; --n19-news-rule: rgba(255,255,255,.35);
+  --n19-head: #eee; --n19-font: Helvetica, Arial, freesans, sans-serif; }
+/* Global bar: black, with the logo shown as white blocks and every control in white. */
+header#bbc-header { background: var(--n19-bar) !important; border-bottom: 0 !important; }
+header#bbc-header :is(a, span, button:not([class*="SubscribeButton"])) { color: var(--n19-bar-text) !important; background-color: transparent !important; font-family: var(--n19-font) !important; font-weight: 700 !important; }
+header#bbc-header button svg, header#bbc-header [class*="HeaderMenuButton"] svg path { fill: var(--n19-bar-text) !important; }
+header#bbc-header [class*="HeaderLogo"] svg { color: var(--n19-bar-text) !important; fill: var(--n19-bar-text) !important; }
+header#bbc-header [class*="SubscribeButton"] { border-radius: 0 !important; font-family: var(--n19-font) !important; }
+/* Section links sat in the same black band, bold, separated by thin vertical rules. */
+nav#main-navigation-container { background: var(--n19-bar) !important; border: 0 !important; box-shadow: none !important; }
+nav#main-navigation-container a { color: var(--n19-bar-text) !important; font-family: var(--n19-font) !important; font-weight: 700 !important; font-size: 13px !important; }
+nav#main-navigation-container ul[class*="MainNavigationWrapper"] > li { border-left: 1px solid var(--n19-bar-rule) !important; padding: 0 6px !important; }
+nav#main-navigation-container ul[class*="MainNavigationWrapper"] > li:last-child { border-right: 1px solid var(--n19-bar-rule) !important; }
+nav#main-navigation-container a[aria-current], nav#main-navigation-container a[aria-current] * { box-shadow: inset 0 -4px 0 var(--n19-bar-text) !important; }
+nav#main-navigation-container a::after, nav#main-navigation-container a::before { background-color: var(--n19-bar-text) !important; }
+/* News pages: the red masthead band carries the section navigation. */
+html[data-net19-section="news"] nav#main-navigation-container, html[data-net19-section="news"] nav#main-navigation-container nav[class*="SubNavigation"] { background: var(--n19-news) !important; }
+html[data-net19-section="news"] nav#main-navigation-container ul[class*="MainNavigationWrapper"] > li { border-color: var(--n19-news-rule) !important; }
+html[data-net19-section="news"] nav#main-navigation-container nav[class*="SubNavigation"] { border-top: 1px solid var(--n19-news-dark) !important; }
+nav#main-navigation-container nav[class*="SubNavigation"] a { font-weight: 400 !important; }
+/* Headlines: 2019 used Helvetica/Arial bold everywhere (Reith arrived later). */
+[data-testid="card-headline"], main h1, main h2, main h3, article h1, #main-heading { font-family: var(--n19-font) !important; font-weight: 700 !important; letter-spacing: 0 !important; }
+[data-testid="card-headline"] { color: var(--n19-head) !important; }
+main p, article p, [data-testid="card-description"] { font-family: var(--n19-font) !important; }

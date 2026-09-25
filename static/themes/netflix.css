@@ -1,0 +1,14 @@
+/* net19 handmade theme: Netflix, 2019: the browse UI was already today's dark #141414 layout; the 2019 details were flat #e50914 buttons with 2-3px corners, square-cornered box art and plain white row titles. Kept deliberately small. */
+html { --n19-red: #e50914; --n19-red-hover: #f40612; --n19-text: #e5e5e5; }
+html[data-net19-mode="dark"] { --n19-red: #e50914; --n19-red-hover: #f40612; --n19-text: #e5e5e5; }
+/* Browse: box art, rows and billboard buttons */
+.title-card, .title-card .boxart-container, .boxart-rounded, .boxart-container img, .slider-item .title-card-container, .previewModal--boxart { border-radius: 2px !important; }
+.rowHeader .row-header-title, .rowHeader h2, .row-header-title { color: var(--n19-text) !important; font-weight: 700 !important; }
+.billboard-links .color-primary, .billboard .button-primary, button.color-primary { border-radius: 3px !important; }
+.previewModal--container, .previewModal--player_container { border-radius: 4px !important; }
+/* Signed-out pages: flat red buttons, no gradients */
+[data-uia="header-login-link"], [data-uia^="nmhp-card-cta"], [data-uia*="cta" i]:is(button, a)[class] { border-radius: 3px !important; }
+[data-uia^="nmhp-card-cta"] { background: var(--n19-red) !important; background-image: none !important; color: #fff !important; }
+[data-uia^="nmhp-card-cta"]:hover { background: var(--n19-red-hover) !important; }
+[data-uia^="nmhp-card-cta"] svg { color: #fff !important; fill: currentColor; }
+input[data-uia="field-email"] { border-radius: 2px !important; }

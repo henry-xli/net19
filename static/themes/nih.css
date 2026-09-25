@@ -1,0 +1,30 @@
+/* net19 handmade theme: NIH / NCBI / PubMed, 2019: the legacy NCBI look: Arial throughout, a flat NCBI-blue
+   (#336699) header, rust-brown (#985735) section headings, compact bold Arial titles instead of Merriweather, and
+   the rounded blue gradient Search button. Page structure is today's (the 2020 PubMed rebuild), so the theme only
+   moves type, colors and corners. None of these sites has a dark mode; the dark tokens apply only if a page renders dark. */
+html { --n19-font: Arial, Helvetica, sans-serif; --n19-bar: #336699; --n19-head: #985735; --n19-title: #000; --n19-link: #2f4a8b;
+  --n19-btn-from: #6d98c7; --n19-btn-to: #3f6fa2; --n19-btn-border: #2c5a8a; }
+html[data-net19-mode="dark"] { --n19-bar: #22456b; --n19-head: #d79a74; --n19-title: #f0f0f0; --n19-link: #8fb1e6;
+  --n19-btn-from: #4f79a8; --n19-btn-to: #2f5a88; --n19-btn-border: #1f4470; }
+body, button, input, select, textarea, .usa-button, .usa-banner { font-family: var(--n19-font) !important; }
+h1, h2, h3, h4, .heading-title, .title, .action-title { font-family: var(--n19-font) !important; }
+
+/* Header: the NCBI blue bar (PubMed homepage hero included) */
+header.ncbi-header, .ncbi-header, #ncbi-header { background: var(--n19-bar) !important; }
+#home-page .intro { background: var(--n19-bar) !important; }
+header.ncbi-header .header-button, #account_login { border-radius: 3px !important; }
+
+/* PubMed search: the rounded gradient button */
+#search-form button.search-btn, form.search-form button[type="submit"] {
+  background: linear-gradient(var(--n19-btn-from), var(--n19-btn-to)) !important; border: 1px solid var(--n19-btn-border) !important;
+  border-radius: 4px !important; font-weight: 700 !important; box-shadow: 0 1px 1px rgba(0,0,0,.25) !important; color: #fff !important;
+}
+#search-form .term-input, form.search-form input[type="search"], form.search-form input[type="text"] { border-radius: 0 !important; }
+
+/* Article: compact Arial titles, rust section headings */
+.article-details .heading-title, h1.heading-title { font-size: 20px !important; line-height: 1.3 !important; font-weight: 700 !important; color: var(--n19-title) !important; }
+.article-details h2.title, #abstract h2.title, main h2.title, .homepage-action .action-title, .results-amount-container h3 {
+  color: var(--n19-head) !important; font-size: 17px !important; font-weight: 700 !important;
+}
+.docsum-title { font-family: var(--n19-font) !important; color: var(--n19-link) !important; font-size: 15px !important; }
+.usa-button, .button-primary, .usa-button-primary { border-radius: 3px !important; }

@@ -1,0 +1,15 @@
+/* net19 handmade theme: Getty Images, 2019: Lato on white, #6f43d6 purple accents, near-square 3px buttons and inputs, black outlined secondary buttons. */
+html { --n19-radius: 3px; --n19-purple: #6f43d6; --n19-purple-dark: #4316ac; --n19-text: #080808; --n19-muted: #666; --n19-hollow: #fff; }
+html[data-net19-mode="dark"] { --n19-radius: 3px; --n19-purple: #8a66e0; --n19-purple-dark: #6f43d6; --n19-text: #f2f2f2; --n19-muted: #aaa; --n19-hollow: #1a1a1a; }
+/* Getty's 2019 design system is the direct ancestor of today's: only corner radii and the brand purple drifted. */
+html:root {
+  --button-border-radius: var(--n19-radius) !important; --icon-button-border-radius: var(--n19-radius) !important; --alert-border-radius: var(--n19-radius) !important;
+  --dimension-radius-1: 2px !important; --dimension-radius-2: 3px !important; --dimension-radius-3: 3px !important; --dimension-radius-4: 4px !important;
+  --button-primary-bg: var(--n19-purple) !important; --button-primary-border: var(--n19-purple-dark) !important; --button-primary-hover-bg: var(--n19-purple-dark) !important;
+  --button-secondary-bg: var(--n19-purple) !important; --button-secondary-border: var(--n19-purple-dark) !important; --button-secondary-hover-bg: var(--n19-purple-dark) !important;
+  --button-link-text: var(--n19-purple) !important; --button-link-hover-text: var(--n19-purple-dark) !important; --button-overlay-hover-bg: var(--n19-purple) !important;
+  --color-background-standard-brand-primary: var(--n19-purple) !important; --color-background-standard-brand-primary-cta: var(--n19-purple) !important;
+  --color-text-standard-brand-primary: var(--n19-purple) !important; --color-link-standard-brand-primary: var(--n19-purple) !important;
+  --color-border-standard-brand-active: var(--n19-purple) !important; --color-label-standard-brand-cta: var(--n19-purple) !important;
+}
+body, button, input, select, textarea { font-family: Lato, "Helvetica Neue", Arial, sans-serif !important; }

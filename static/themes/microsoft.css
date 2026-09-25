@@ -1,0 +1,28 @@
+/* net19 handmade theme: Microsoft, 2019: Segoe UI with semibold headlines, square corners, uppercase CTAs and "SHOP NOW >" style links in #0067b8. */
+html { --n19-blue: #0067b8; --n19-text: #000; --n19-text-2: #2f2f2f; --n19-border: #e6e6e6; }
+html[data-net19-mode="dark"] { --n19-blue: #4cc2ff; --n19-text: #fff; --n19-text-2: #d2d2d2; --n19-border: #505050; }
+/* Microsoft's store design system tokens */
+html:root {
+  --ds-radii-xs: 0 !important; --ds-radii-s: 0 !important; --ds-radii-m: 0 !important; --ds-radii-l: 0 !important; --border-radius-medium: 0 !important;
+  --ds-font-family-segoe-variable-display: "Segoe UI", SegoeUI, "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  --ds-font-family-segoe-variable-text: "Segoe UI", SegoeUI, "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  --ds-font-family-segoe-variable-small: "Segoe UI", SegoeUI, "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  --ds-heading-3xl-font-weight: 600 !important; --ds-heading-2xl-font-weight: 600 !important; --ds-heading-xl-font-weight: 600 !important;
+  --ds-heading-l-font-weight: 600 !important; --ds-heading-m-font-weight: 600 !important; --ds-heading-s-font-weight: 600 !important; --ds-heading-xs-font-weight: 600 !important;
+  --ds-heading-3xl-letter-spacing: normal !important; --ds-heading-2xl-letter-spacing: normal !important; --ds-heading-xl-letter-spacing: normal !important;
+  --ds-heading-l-letter-spacing: normal !important; --ds-heading-m-letter-spacing: normal !important; --ds-heading-s-letter-spacing: normal !important;
+  --ds-body-m-letter-spacing: normal !important; --ds-body-xs-letter-spacing: normal !important; --ds-action-button-letter-spacing: normal !important;
+  --ds-theme-background-accent-strong-normal: var(--n19-blue) !important; --ds-theme-border-base-pure: var(--n19-blue) !important;
+}
+body { font-family: "Segoe UI", SegoeUI, "Helvetica Neue", Helvetica, Arial, sans-serif !important; }
+/* CTAs: square, uppercase, semibold, with the chevron look of 2019 */
+store-button a, store-button button, .btn, a.cta, [class*="c-call-to-action"] { border-radius: 0 !important; text-transform: uppercase !important; font-weight: 600 !important; letter-spacing: normal !important; }
+store-button[appearance*="link"] a, store-button[appearance*="tertiary"] a { color: var(--n19-blue) !important; }
+store-tag, store-card, store-card img, store-image img, .card, .card img { border-radius: 0 !important; }
+/* Header: the 2019 flat bar with a hairline */
+header.uhf-header, #uhfHeader { border-bottom: 1px solid var(--n19-border) !important; box-shadow: none !important; }
+.uhf-nav-item, .uhf-nav-button { font-size: 13px !important; }
+/* Copilot and the AI store assistant did not exist in 2019 */
+.uhf-nav-item[href*="copilot.com"], .uhf-nav-item[href*="/microsoft-copilot"], .msstore-chatonpage, html #storeassistantroot, html body .sa-default-entry-container.microsoft-client { display: none !important; }
+/* Product pages (Surface and others) built with utility classes */
+.rounded-xs, .rounded-sm, .rounded-md, .rounded-lg, .rounded-xl, .rounded-2xl, .rounded-3xl { border-radius: 0 !important; }

@@ -1,0 +1,9 @@
+/* net19 handmade theme: Canva (home and marketing pages), 2019: Open Sans throughout, light 300-weight headlines, plain buttons with 4px corners, teal #00c4cc accents. */
+/* Canva's markup uses generated atomic class names, so this theme only styles by element and role. */
+html { --n19-teal: #00c4cc; --n19-text: #0e1318; }
+html[data-net19-mode="dark"] { --n19-teal: #00c4cc; --n19-text: #f0f0f0; }
+body, body :not(svg, svg *, i, code, pre, [class*="icon" i]) { font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important; }
+main h1, main h2, body > div h1 { font-weight: 300 !important; letter-spacing: 0 !important; }
+main h3 { font-weight: 600 !important; letter-spacing: 0 !important; }
+header :is(a, button)[href], header button, main h1 ~ div a[href], main h1 ~ a[href], h1 ~ div a[href] { border-radius: 4px !important; }
+header input, main form input[type="search"], main form input[type="text"] { border-radius: 4px !important; }

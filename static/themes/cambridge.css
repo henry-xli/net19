@@ -1,0 +1,27 @@
+/* net19 handmade theme: Cambridge Dictionary, 2019: charcoal header bars, a square search field with a gold #d0a44c button, solid blue sense bars with white text, red UK/US labels, #222 text on white. */
+html { --n19-bar: #3d3d3d; --n19-bar-2: #292929; --n19-on-bar: #fff; --n19-gold: #d0a44c; --n19-blue: #234b9a; --n19-link: #1f4ea3; --n19-red: #e84427; --n19-text: #222; --n19-border: #ddd; }
+html[data-net19-mode="dark"] { --n19-bar: #3d3d3d; --n19-bar-2: #292929; --n19-on-bar: #fff; --n19-gold: #d0a44c; --n19-blue: #2f5bb5; --n19-link: #8fb1ff; --n19-red: #ff6b50; --n19-text: #e6e6e6; --n19-border: #444; }
+body, input, button { font-family: Arial, Helvetica, sans-serif !important; }
+/* Header: two charcoal rows */
+#header #topNavBar { background: var(--n19-bar) !important; }
+#header #topNavBar a, #header #topNavBar button, #header #topNavBar span, #header #topNavBar i, #header #topNavBar .hdib { color: var(--n19-on-bar) !important; }
+#header #searchBar { background: var(--n19-bar-2) !important; }
+#header #searchBar a { color: var(--n19-on-bar) !important; font-weight: 400 !important; }
+#header .cdo-search-input { border-radius: 0 !important; }
+#header #searchword ~ *, #header .cdo-dataset-selector { border-radius: 0 !important; }
+#header .cdo-search-button { background: var(--n19-gold) !important; border-radius: 0 !important; color: #fff !important; }
+#header .cdo-search-button i { color: #fff !important; }
+/* Entries */
+.entry-body .dhw, .dpos-h_hw { color: var(--n19-text) !important; font-weight: 700 !important; }
+.dsense_h { background: var(--n19-blue) !important; color: #fff !important; padding: 8px 20px !important; border: 0 !important; }
+.dsense_h .dsense_hw, .dsense_h .dsense_pos, .dsense_h .dsense_gw, .dsense_h span { color: #fff !important; }
+.dsense_h .dsense_gw { font-weight: 700 !important; }
+.entry-body .region, .entry-body .dpron-i .region { color: var(--n19-red) !important; font-weight: 700 !important; }
+.entry-body .daud .i-volume-up { color: var(--n19-red) !important; }
+.entry-body .def { color: var(--n19-text) !important; font-weight: 700 !important; }
+.entry-body .eg, .entry-body .deg { color: var(--n19-text) !important; }
+.entry-body .def a.query, .entry-body .deg a.query, .entry-body .eg a.query { color: inherit !important; }
+.entry-body .xref a, .entry-body a.Ref, .cdo-more-results a { color: var(--n19-link) !important; }
+.bb, .di-head, .di_h { border-radius: 0 !important; }
+/* The "AI Assistant" did not exist in 2019 */
+#header li:has(> a[href="/assistant"]), .ai-header-button, a[href="/assistant"] { display: none !important; }

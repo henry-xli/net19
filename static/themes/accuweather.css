@@ -1,0 +1,19 @@
+/* net19 handmade theme: AccuWeather, 2019: the near-black header closed by an orange (#f05514) rule, a dark search
+   field, a warm light-gray (#ebebeb) page, square white modules, and uppercase forecast tabs where the current tab is
+   a box with an orange top edge. The header, Solis type and module layout are otherwise close to today's.
+   AccuWeather has no dark mode; the dark tokens only apply if the page renders dark. */
+html { --n19-page: #ebebeb; --n19-card: #fff; --n19-orange: #f05514; --n19-field: #3d3d3d; --n19-field-text: #fff; --n19-tab: #fafafa; --n19-rule: #d8d8d8; --n19-text: #1f1f1f; }
+html[data-net19-mode="dark"] { --n19-page: #161616; --n19-card: #232323; --n19-orange: #f05514; --n19-field: #3d3d3d; --n19-field-text: #fff; --n19-tab: #2b2b2b; --n19-rule: #3a3a3a; --n19-text: #eee; }
+.template-root { background: var(--n19-page) !important; }
+.basic-header { border-bottom: 3px solid var(--n19-orange) !important; }
+.header-outer .header-search-bar { background: var(--n19-field) !important; border-radius: 2px !important; }
+.header-outer .header-search-bar input.search-input { color: var(--n19-field-text) !important; }
+.header-outer .header-search-bar input.search-input::placeholder { color: #bbb !important; }
+.header-outer .header-search-bar svg:not(.no-recolor) { fill: #bbb; color: #bbb; }
+.header-outer .header-search-bar :is(button, .locations-title, [class*="location"]) { color: var(--n19-field-text) !important; }
+/* Square modules */
+.content-module, .card-header, .card, .cur-con-weather-card, .today-forecast-card, [class*="-card"]:not(img) { border-radius: 0 !important; }
+/* Forecast tabs: the current one is a box with an orange top edge */
+.subnav.secondary-nav .subnav-item { text-transform: uppercase !important; padding-left: 18px !important; padding-right: 18px !important; border: 1px solid transparent !important; border-bottom: 0 !important; }
+.subnav.secondary-nav .subnav-item.active { background: var(--n19-tab) !important; border-color: var(--n19-rule) !important; border-top: 3px solid var(--n19-orange) !important; color: var(--n19-text) !important; }
+.subnav.secondary-nav .subnav-item.active::after, .subnav.secondary-nav .subnav-item.active h2::after { display: none !important; }

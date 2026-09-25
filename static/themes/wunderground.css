@@ -1,0 +1,7 @@
+/* net19 handmade theme: Weather Underground, 2019: black header over the rainbow rule, Roboto, bright #1eaadc station links and #1088b0 text links. */
+/* The 2019 desktop layout is essentially today's, so this theme only restores the 2019 link colors and the plain station line. */
+html { --n19-station: #15aadc; --n19-link: #1088b0; --n19-text: #1e2023; }
+html[data-net19-mode="dark"] { --n19-station: #4cc3ec; --n19-link: #4cb5dc; --n19-text: #e6e6e6; }
+lib-city-header a.station-name { color: var(--n19-station) !important; }
+lib-city-header .city-header a, a[href*="/wundermap"], a[href*="nexrad"], .content-block a:not(.button) { color: var(--n19-link); }
+lib-city-header h1 { font-weight: 400 !important; }

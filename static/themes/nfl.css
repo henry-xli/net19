@@ -1,0 +1,16 @@
+/* net19 handmade theme: NFL.com, 2019: navy #013369 main navigation bar with white upright bold uppercase links, flat #eee page behind white cards, Arial headlines. */
+html { --n19-navy: #013369; --n19-nav-text: #fff; --n19-nav-text-2: #c8d1dd; --n19-page: #eee; --n19-card: #fff; --n19-alt: #e4e4e4; --n19-rule: #d6d6d6; }
+html[data-net19-mode="dark"] { --n19-navy: #013369; --n19-nav-text: #fff; --n19-nav-text-2: #c8d1dd; --n19-page: #13141d; --n19-card: #1d1f2a; --n19-alt: #272731; --n19-rule: #393e4a; }
+/* Surface tokens: the light scheme's blue-tinted grays go back to 2019's neutral gray page; dark keeps its own scheme. */
+html:not(.dark) [class*="bg-(--bg-color)"] { --bg-color: var(--n19-page) !important; }
+html:root:not(.dark) { --color-ls-level-1: var(--n19-page) !important; --color-ls-level-3: var(--n19-alt) !important; --color-ls-200: var(--n19-rule) !important; }
+/* Main navigation bar (the last nav row of the header): 2019's navy bar. */
+header > nav:not(.bg-plus-primary) { background: var(--n19-navy) !important; border-bottom: 0 !important; box-shadow: 0 1px 3px rgba(0,0,0,.3) !important; }
+header > nav:not(.bg-plus-primary) :is(a, button, span) { color: var(--n19-nav-text) !important; font-style: normal !important; }
+header > nav:not(.bg-plus-primary) ul:first-of-type ~ ul :is(a, button, span), header > nav:not(.bg-plus-primary) > div > div + div :is(a, button, span) { color: var(--n19-nav-text-2) !important; }
+header > nav:not(.bg-plus-primary) svg { fill: currentColor !important; }
+header > nav:not(.bg-plus-primary) [class*="border-l-"] { border-color: rgba(255,255,255,.25) !important; }
+header > nav:not(.bg-plus-primary) :is(a, button)[class*="display-"] { font-family: Arial, "Helvetica Neue", Helvetica, sans-serif !important; font-weight: 700 !important; letter-spacing: .02em !important; font-size: 13px !important; }
+/* Story headlines and body copy were Arial; display type was upright, not today's slanted face. */
+main :is(h1, h2, h3, h4, [role="heading"]) { font-family: Arial, "Helvetica Neue", Helvetica, sans-serif !important; font-style: normal !important; }
+main [class*="rounded-"]:is(div, a, img, figure, section) { border-radius: 0 !important; }

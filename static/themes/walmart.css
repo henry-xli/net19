@@ -1,0 +1,23 @@
+/* net19 handmade theme: Walmart, 2019: a navy (#041e42) header with a plain white, square-cornered search field and
+   a dark search icon, Bogle type (Walmart's 2018-2020 typeface, still served by walmart.com) and the 2019 #0071ce
+   action blue. Walmart has no dark mode; the dark tokens only apply if the page renders dark. */
+html { --n19-bar: #041e42; --n19-bar-hover: rgba(255,255,255,.12); --n19-field: #fff; --n19-field-text: #2e2f32; --n19-icon: #041e42;
+  --n19-font: Bogle, "Helvetica Neue", Helvetica, Arial, sans-serif; }
+html[data-net19-mode="dark"] { --n19-bar: #041e42; --n19-bar-hover: rgba(255,255,255,.12); --n19-field: #1f2023; --n19-field-text: #e3e4e5; --n19-icon: #e3e4e5; }
+body {
+  --font-family-default: var(--n19-font); --ld-primitive-font-family-sans: var(--n19-font);
+  --ld-semantic-font-body-large-family: var(--n19-font); --ld-semantic-font-body-medium-family: var(--n19-font); --ld-semantic-font-body-small-family: var(--n19-font);
+  --ld-semantic-font-caption-family: var(--n19-font); --ld-semantic-font-display-large-family: var(--n19-font); --ld-semantic-font-display-small-family: var(--n19-font);
+  --ld-semantic-font-heading-large-family: var(--n19-font); --ld-semantic-font-heading-medium-family: var(--n19-font); --ld-semantic-font-heading-small-family: var(--n19-font);
+  --ld-semantic-color-top-nav-fill: var(--n19-bar); --ld-semantic-color-top-nav-fill-hovered: var(--n19-bar-hover);
+  --ld-semantic-color-top-nav-fill-focused: var(--n19-bar-hover); --ld-semantic-color-top-nav-fill-pressed: rgba(0,0,0,.3);
+  font-family: var(--n19-font) !important;
+}
+.sans-serif, button, input, select, textarea { font-family: var(--n19-font) !important; }
+/* Search: a flat white field with square corners and a dark magnifier instead of a pill with a round blue button */
+header input.search-bar, header .search-input-field-v2 { border-radius: 2px !important; background: var(--n19-field) !important; color: var(--n19-field-text) !important; }
+header form[role="search"], header .search-bar-container, header input.search-bar + * { border-radius: 2px !important; }
+header button.search-icon-redesigned-v2, header button[aria-label="Search" i] { background: transparent !important; border-radius: 0 !important; color: var(--n19-icon) !important; }
+header button.search-icon-redesigned-v2 svg, header button[aria-label="Search" i] svg { fill: var(--n19-icon) !important; color: var(--n19-icon) !important; }
+/* The sticky header band */
+span.bg-secondary.sticky:has(> header), .bg-secondary.sticky.top-0 { background: var(--n19-bar) !important; }

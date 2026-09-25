@@ -1,0 +1,33 @@
+/* net19 handmade theme: Collins Dictionary, 2019: near-black #110d0a header with the white Collins logo and white links, square white search box, Open Sans everywhere, square blue entry tabs, teal-tinted headword band, red word-frequency dots. */
+html { --n19-header: #110d0a; --n19-header-text: #fff; --n19-rule: rgba(255,255,255,.5); --n19-tab: #e5ebf3; --n19-tab-text: #1c4b8b; --n19-tab-on: #1c4b8b;
+  --n19-band: #ccedf0; --n19-band-edge: #00a5b5; --n19-freq: #c3221b; --n19-link: #1683be; --n19-text: #333; }
+html[data-net19-mode="dark"] { --n19-header: #110d0a; --n19-header-text: #fff; --n19-rule: rgba(255,255,255,.5); --n19-tab: #2a3342; --n19-tab-text: #b9cdea; --n19-tab-on: #2f64ad;
+  --n19-band: #173c42; --n19-band-edge: #00a5b5; --n19-freq: #e0433b; --n19-link: #5cb6e6; --n19-text: #ddd; }
+/* Header: dark bar, white links, the black logo file shown white. */
+body > header, body:not(.headerMinimized) header.sticky { background-color: var(--n19-header) !important; border-bottom: 0 !important; box-shadow: none !important; }
+body > header .major-links-container a, body > header .major-links-container span, body > header .login a, body > header .login span, body > header .icon-user, body > header .icon-sphere,
+body > header .menuPanelOpenButton, body > header #searchMobile { color: var(--n19-header-text) !important; }
+body > header .major-links-container a { font-family: "Open Sans", sans-serif !important; font-size: 15px !important; text-decoration: none !important; border-bottom: 0 !important; }
+body > header .major-links-container > div::before { border-right-color: var(--n19-rule) !important; }
+body > header img.home_logo { filter: invert(1) !important; }
+/* Dictionary tabs under the search were plain white links on the dark bar; the current one a dark gray block. */
+.header-complete-top .major-links-container.sub .major-links, body[class*="context-language"] .header-complete-top .major-links-container.sub .major-links { background-color: transparent !important; border-radius: 0 !important; }
+.header-complete-top .major-links-container.sub .major-links:first-child { background-color: #3d3d3d !important; }
+body > header .search-desktop .search-input-container, body > header .search-desktop, body > header .search-input, body > header .search-select { border-radius: 0 !important; }
+body > header .search-desktop .search-input-container { background: #fff !important; border: 0 !important; }
+body > header .search-input, body > header .search-submit { background: #fff !important; color: #000 !important; }
+/* AI assistant entry points did not exist in 2019. */
+body > header a.assistantIcon, .assistantMobile, .assistant-pwa-bar { display: none !important; }
+/* Entry pages: Open Sans instead of Lora, square blue tabs, a teal-tinted headword band and red frequency dots. */
+.entry_title, h2.h2_entry, .dc .mini_h2 .orth, .box.type-definition .sense .orth, .gramGrp > .pos, .gramGrp.pos, .navigation a.tab, .navigation span.tab > a,
+.page .dictionary .form.type-infl .orth, .page .dictionary .form.type-drv .orth { font-family: "Open Sans", sans-serif !important; }
+.entry_title, .dc .entry_title { color: #444 !important; font-weight: 600 !important; }
+body :is(div, span, a, h1, h2, h3, h4, h5, p, li, button, label):not(.pron):not([class*="icon"]) { font-family: "Open Sans", sans-serif !important; }
+h2.h2_entry { font-weight: 400 !important; font-size: 30px !important; }
+.navigation a.tab, .navigation span.tab > a { background-color: var(--n19-tab) !important; color: var(--n19-tab-text) !important; border-radius: 0 !important; font-weight: 400 !important; font-size: 14px !important; }
+.navigation a.tab.current, .navigation span.tab.current > a { background-color: var(--n19-tab-on) !important; color: #fff !important; }
+.navigation .tabsNavigation { gap: 4px !important; }
+.dc .cB-def .title_container, .dc .cB-def > .title_container { background: var(--n19-band) !important; border-left: 4px solid var(--n19-band-edge) !important; padding: 6px 12px !important; }
+.dc .word-frequency-container .level.roundRed { background-color: var(--n19-freq) !important; }
+.dc .word-frequency-container .level { border-radius: 50% !important; }
+.hom > .gramGrp > .pos, .hom > .gramGrp.pos, .type-drv .gramGrp .pos { color: var(--n19-text) !important; font-weight: 400 !important; font-size: 16px !important; }

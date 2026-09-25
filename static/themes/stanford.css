@@ -1,0 +1,16 @@
+/* net19 handmade theme: Stanford, 2019: bright cardinal (#b1040e) bar with the white "Stanford University" wordmark, then a white bar of centered dark Source Sans section links; square controls. */
+html { --n19-cardinal: #b1040e; --n19-cardinal-dark: #8c1515; --n19-nav-bg: #fff; --n19-nav-text: #2e2d29; --n19-nav-hover: #b1040e; --n19-rule: #d5d5d4; }
+html[data-net19-mode="dark"] { --n19-cardinal: #b1040e; --n19-cardinal-dark: #8c1515; --n19-nav-bg: #1c1b19; --n19-nav-text: #eaeaea; --n19-nav-hover: #f4795b; --n19-rule: #43423e; }
+/* The combined logo + links row becomes 2019's two bands: cardinal wordmark bar, then the white section-link bar. */
+header .bg-bg-knockout-brand { background: var(--n19-cardinal) !important; }
+header .bg-bg-knockout-brand-strong { background: var(--n19-cardinal-dark) !important; }
+header nav.main-nav { display: grid !important; grid-template-columns: 1fr !important; row-gap: 0 !important; padding-left: 0 !important; padding-right: 0 !important; max-width: none !important; background: var(--n19-cardinal) !important; }
+header nav.main-nav > a.logo { justify-self: start !important; padding: 8px 0 8px 30px !important; font-size: 26px !important; line-height: 32px !important; }
+header nav.main-nav > ul { justify-content: center !important; width: 100% !important; margin: 0 !important; background: var(--n19-nav-bg) !important; border-bottom: 1px solid var(--n19-rule) !important; column-gap: 34px !important; }
+header nav.main-nav > ul > li > :is(button, a) { color: var(--n19-nav-text) !important; padding-top: 12px !important; padding-bottom: 12px !important; font-size: 20px !important; }
+header nav.main-nav > ul > li > :is(button, a):hover { color: var(--n19-nav-hover) !important; text-decoration-color: currentColor !important; }
+header nav.main-nav > ul > li > :is(button, a) svg { color: currentColor !important; fill: currentColor !important; }
+/* Pills (impact tags, search) were square-cornered. */
+header .bg-bg-knockout-brand-strong :is(a, input, button) { border-radius: 0 !important; }
+header .bg-bg-knockout-brand-strong :is(div, form):has(> input) { border-radius: 0 !important; }
+main :is(img, picture, figure, video) { border-radius: 0 !important; }

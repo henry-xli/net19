@@ -1,0 +1,28 @@
+/* net19 handmade theme: Trustpilot, 2019: Helvetica Neue, a #000032 navy header, #00b67a green buttons with 4px corners, white cards on #f2f2f5. */
+html { --n19-header: #000032; --n19-green: #00b67a; --n19-green-hover: #009567; --n19-page: #f2f2f5; --n19-card: #fff; --n19-text: #191919; --n19-link: #1c7ae8; --n19-border: #dcdce6; }
+html[data-net19-mode="dark"] { --n19-header: #000032; --n19-green: #00b67a; --n19-green-hover: #009567; --n19-page: #16161d; --n19-card: #22222b; --n19-text: #e6e6ea; --n19-link: #6aaaf2; --n19-border: #3a3a46; }
+[class*="CDS_themes_theme"], html:root {
+  --CDS-border-radius-m: 4px !important; --CDS-border-radius-l: 4px !important;
+  --CDS-color-background-control-base: var(--n19-green) !important; --CDS-color-background-neutral-muted: var(--n19-page) !important;
+  --CDS-color-background-control-subtle: rgba(0,182,122,.12) !important; --CDS-color-background-control-subtle-hovered: rgba(0,182,122,.2) !important;
+}
+body, body :is(p, span, a, button, input, h1, h2, h3, h4, h5, li, label, div) { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important; }
+h1, h2, h3 { font-weight: 700 !important; letter-spacing: 0 !important; }
+
+/* Header */
+header[class*="styles_header__"] { background: var(--n19-header) !important; }
+/* Today's header is white with black links; on the 2019 navy they are white (menus that open from it keep their own colors). */
+header[class*="styles_header__"] :is(a, button):not([role="menu"] *, [role="dialog"] *) { color: #fff !important; }
+header[class*="styles_header__"] :is(a, button):not([role="menu"] *, [role="dialog"] *) svg { fill: currentColor !important; color: #fff !important; }
+header[class*="styles_header__"] a[class*="CDS_Button_button"] { background: transparent !important; color: #fff !important; border: 1px solid #fff !important; }
+
+/* Buttons and the search field: 4px corners instead of pills */
+[class*="CDS_Button_button"] { border-radius: 4px !important; }
+[class*="styles_searchInputField"], [class*="styles_searchForm"] { border-radius: 4px !important; }
+[class*="styles_searchForm"] button[class*="CDS_Button_button"] { background: var(--n19-green) !important; color: #fff !important; }
+[class*="styles_searchForm"] button[class*="CDS_Button_button"]:hover { background: var(--n19-green-hover) !important; }
+
+/* Hero and page sections: flat, no curved edges */
+[class*="styles_heroContainer"] { background: var(--n19-page) !important; }
+[class*="styles_curvedWrapper"] { border-radius: 0 !important; }
+[class*="styles_card"], article[class*="styles_reviewCard"], section[class*="styles_reviewCard"] { border-radius: 4px !important; }

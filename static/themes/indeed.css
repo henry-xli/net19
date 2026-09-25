@@ -1,0 +1,19 @@
+/* net19 handmade theme: Indeed, 2019: Helvetica/Arial type instead of Indeed Sans, the bright 2019 action blue
+   (#085ff7) for buttons, links and job titles, neutral (not warm) grays, and flatter job cards and fields with small
+   corners. The page structure is close to today's, so the theme only changes type, colors and radii. Indeed has
+   no dark mode on the web; the dark tokens apply only if a page renders dark. */
+html { --n19-font: "Helvetica Neue", Helvetica, Arial, sans-serif; --n19-title: #2164f3; --n19-button: #085ff7; --n19-button-hover: #0452d8; }
+html[data-net19-mode="dark"] { --n19-title: #6d9bff; --n19-button: #085ff7; --n19-button-hover: #0452d8; }
+html:root {
+  --fonts-default: var(--n19-font) !important;
+  --border-radius-sm: 3px !important; --border-radius-md: 4px !important; --border-radius-lg: 6px !important;
+}
+/* Indeed forces its face with `html body * { font-family: ... !important }`; this outranks it */
+:root:root body, :root:root body * { font-family: var(--n19-font) !important; }
+/* Search: the bright blue Find Jobs button */
+.yosegi-InlineWhatWhere-primaryButton { background: var(--n19-button) !important; border-color: var(--n19-button) !important; }
+.yosegi-InlineWhatWhere-primaryButton:hover { background: var(--n19-button-hover) !important; }
+/* Flatter job cards and job pane */
+.job_seen_beacon, .cardOutline, .resultWithShelf, .slider_container, .jobsearch-RightPane, #jobsearch-ViewjobPaneWrapper, .jobsearch-ViewJobLayout--embedded { border-radius: 4px !important; }
+/* Job titles in the result list: the 2019 link blue */
+.jobTitle, .jobTitle a, h2.jobTitle span[title], .jcs-JobTitle { color: var(--n19-title) !important; }

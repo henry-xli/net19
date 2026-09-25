@@ -1,0 +1,48 @@
+/* net19 handmade theme: Merriam-Webster, 2019: a slate-blue (#305f7a) header with a plain white search field, a
+   dark/steel Dictionary-Thesaurus switch, a white page with no dark side rail, Open Sans section headings in
+   #265667 and teal in-text links. Merriam-Webster has no dark mode; the dark tokens only apply if the page renders dark. */
+html { --n19-bar: #305f7a; --n19-bar-2: #1b3e52; --n19-steel: #4a7d95; --n19-page: #fff; --n19-text: #303336; --n19-head: #265667;
+  --n19-link: #265667; --n19-soft: #e7eff4; --n19-rule: #d6e1e8; --n19-search: #fff; --n19-search-text: #303336; }
+html[data-net19-mode="dark"] { --n19-bar: #1f4153; --n19-bar-2: #10283a; --n19-steel: #3b6679; --n19-page: #121a20; --n19-text: #e3e8eb; --n19-head: #9cc3d6;
+  --n19-link: #9cc3d6; --n19-soft: #1d3342; --n19-rule: #2b4555; --n19-search: #1b262e; --n19-search-text: #e3e8eb; }
+
+/* Header and the announcement strip above it */
+header#base-header, .toupee-banner { background: var(--n19-bar) !important; }
+header#base-header .btn-blue { background: transparent !important; border: 0 !important; border-radius: 0 !important; text-transform: uppercase !important;
+  font-size: 12px !important; font-weight: 400 !important; letter-spacing: .5px !important; color: #fff !important; }
+header#base-header .search-form-container { background: transparent !important; }
+header#base-header .button-switcher { background: var(--n19-steel) !important; border-radius: 0 !important; }
+header#base-header .button-switcher .btn-toggle { border-radius: 0 !important; text-transform: uppercase !important; letter-spacing: .5px !important; }
+header#base-header .button-switcher .btn-switch { background: var(--n19-bar-2) !important; border-radius: 0 !important; box-shadow: none !important; }
+header#base-header #search-container, header#base-header #search-term { background: var(--n19-search) !important; color: var(--n19-search-text) !important; border-radius: 0 !important; }
+header#base-header #search-form-submit-btn { background: var(--n19-search) !important; border-left: 1px solid var(--n19-rule) !important; border-radius: 0 !important; }
+header#base-header #search-form-submit-btn svg, header#base-header #search-form-submit-btn svg path { fill: #d71920 !important; color: #d71920 !important; }
+#main-banner-ad-container.bg-mw-black { background: var(--n19-page) !important; }
+
+/* The dark side rail becomes a plain white table of contents */
+.redesign-container { background: var(--n19-page) !important; }
+.redesign-container .left-sidebar, .redesign-container .left-sidebar-col, .redesign-container .left-sidebar::before { background: var(--n19-page) !important; }
+.left-sidebar .sidebar-header-title { color: var(--n19-head) !important; }
+.left-sidebar .nav-link, .left-sidebar .nav-link .nav-link-text, .left-sidebar .dropdown-toggle { color: var(--n19-link) !important; }
+.left-sidebar .sidebar-nav-item-active-ribbon { display: none !important; }
+.left-sidebar #sidebar-show-more-collapse-toggler, .left-sidebar #sidebar-show-more-collapse-toggler span { color: var(--n19-link) !important; }
+.left-sidebar .nav-list-divider { background: var(--n19-page) !important; }
+.left-sidebar .entry-nav-link.active { background: var(--n19-soft) !important; color: var(--n19-head) !important; font-weight: 700 !important; clip-path: none !important; }
+.left-sidebar .sidebar-nav-union-icon { display: none !important; }
+.left-sidebar #save-word-dropdown-menu-toggler { background: var(--n19-bar) !important; color: #fff !important; border: 0 !important; border-radius: 3px !important; }
+
+/* Entry */
+#left-content { background: var(--n19-page) !important; color: var(--n19-text) !important; }
+#left-content h2:not(.parts-of-speech), #left-content .function-label { font-family: "Open Sans", Helvetica, Arial, sans-serif !important; font-weight: 700 !important; color: var(--n19-head) !important; }
+#left-content a:not(.btn):not(.important-blue-link) { color: var(--n19-link) !important; }
+#left-content .word-syllables-prons-header-content a, #left-content .prons-entries-list-inline a { border-radius: 0 !important; border: 0 !important; background: transparent !important; }
+
+/* Homepage header: the same slate bar, white search field and dark/steel switch */
+header#home-header, header#home-header #home-search-wrapper { background: var(--n19-bar) !important; }
+header#home-header .home-btn-blue { color: #fff !important; text-transform: uppercase !important; font-size: 12px !important; font-weight: 400 !important; letter-spacing: .5px !important; }
+header#home-header #home-search-container { background: transparent !important; border-radius: 0 !important; box-shadow: none !important; }
+header#home-header .home-search-stack { background: none !important; box-shadow: none !important; }
+#home-redesign .big-3-promos-container.background-blue { background: var(--n19-page) !important; }
+header#home-header .home-button-switcher { background: var(--n19-steel) !important; border-radius: 0 !important; }
+header#home-header .home-button-switcher .btn-switch { background: var(--n19-bar-2) !important; border-radius: 0 !important; box-shadow: none !important; }
+header#home-header #home-search-term { border-radius: 0 !important; }

@@ -1,0 +1,23 @@
+/* net19 handmade theme: MLB.com, 2019: #002d72 navy nav bar with condensed bold uppercase links, a condensed face for headlines (MLB still ships HEX Franklin Narrow), Helvetica body copy, square white cards on a #ececec page. */
+html { --n19-navy: #002d72; --n19-page: #ececec; --n19-card: #fff; --n19-head: #333; --n19-font-head: "HEX Franklin MLB Narrow", mlb-primary, "Helvetica Neue", Helvetica, Arial, sans-serif; --n19-font-body: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+html[data-net19-mode="dark"] { --n19-navy: #002d72; --n19-page: #14191f; --n19-card: #1e252d; --n19-head: #eee; --n19-font-head: "HEX Franklin MLB Narrow", mlb-primary, "Helvetica Neue", Helvetica, Arial, sans-serif; --n19-font-body: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+/* MLB's design tokens: corners were square in 2019, and the page gray was a neutral #ececec. */
+html:root {
+  --mlb-2-1-0-radius-radius-base: 0px !important; --mlb-2-1-0-radius-radius25: 0px !important; --mlb-2-1-0-radius-radius50: 0px !important;
+  --mlb-2-1-0-radius-radius100: 0px !important; --mlb-2-1-0-radius-radius150: 0px !important; --mlb-2-1-0-radius-radius300: 0px !important;
+  --mlb-5-0-0-beta-2-radius-radius-base: 0px !important; --mlb-5-0-0-beta-2-radius-radius25: 0px !important; --mlb-5-0-0-beta-2-radius-radius50: 0px !important;
+  --mlb-5-0-0-beta-2-radius-radius100: 0px !important; --mlb-5-0-0-beta-2-radius-radius150: 0px !important; --mlb-5-0-0-beta-2-radius-radius200: 0px !important;
+  --mlb-5-0-0-beta-2-radius-radius300: 0px !important; --mlb-5-0-0-beta-2-radius-radius400: 0px !important;
+}
+html:root:not([data-net19-mode="dark"]) { --mlb-2-1-0-surface-surface0: var(--n19-page) !important; --mlb-2-1-0-background-neutral: var(--n19-page) !important; }
+main.club-bg-skin { background: var(--n19-page) !important; }
+.header__nav-top { background: var(--n19-navy) !important; }
+.header__nav-top__nav-container :is(a, button, span) { font-family: var(--n19-font-head) !important; font-weight: 700 !important; font-size: 15px !important; text-transform: uppercase !important; letter-spacing: 0 !important; }
+:is(main, aside) :is(h1, h2, h3, h4) { font-family: var(--n19-font-head) !important; letter-spacing: 0 !important; }
+main :is(h1, h2, h3) { font-weight: 500 !important; }
+main p { font-family: var(--n19-font-body) !important; }
+main :is(article, section, [class*="Card"], [class*="card"]) { border-radius: 0 !important; }
+main img { border-radius: 0 !important; }
+/* The "Latest News" stack was a compact list of small Helvetica links with the uppercase condensed heading. */
+[class*="HeadlineStackContainer"] h2 { text-transform: uppercase !important; font-size: 20px !important; font-weight: 500 !important; color: #555 !important; }
+[class*="HeadlineStackContainer"] [class*="HeadlineText"] { font-family: var(--n19-font-body) !important; font-size: 14px !important; font-weight: 400 !important; line-height: 1.35 !important; }

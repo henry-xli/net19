@@ -1,0 +1,19 @@
+/* net19 handmade theme: USPS, 2019: Helvetica Neue, the #333366 postal navy for the Quick Tools tab, menu, headings and square buttons. */
+html { --n19-navy: #333366; --n19-navy-hover: #202040; --n19-heading: #333366; --n19-text: #333; --n19-nav: #d8d8d8; }
+html[data-net19-mode="dark"] { --n19-navy: #333366; --n19-navy-hover: #45457a; --n19-heading: #b3b3e6; --n19-text: #ddd; --n19-nav: #3a3a3a; }
+body, button, input, select, textarea, h1, h2, h3, h4, h5, p, a, li { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important; }
+
+/* Global header (www and tools.usps.com share it) */
+nav[aria-label="Main"] .nav-first-element::before { background: var(--n19-navy) !important; }
+nav[aria-label="Main"] a.menuitem:not(.nav-first-element) { color: var(--n19-heading) !important; }
+nav[aria-label="Main"] .repos h3 { color: var(--n19-heading) !important; }
+
+/* Headings, text links and buttons in the page body */
+.button--link, .global-footer--navigation-category { color: var(--n19-heading) !important; }
+.container-fluid h1:not(.sr-only), .container h1, .container-fluid h2:not(.d-lg-block), .container h2, .container-fluid h3, .container h2 a, .container-fluid h2 a { color: var(--n19-heading); }
+a.button--primary, button.button--primary, .button--primary {
+  background: var(--n19-navy) !important; border-color: var(--n19-navy) !important; color: #fff !important; border-radius: 0 !important; font-weight: 700 !important;
+}
+a.button--primary:hover, .button--primary:hover { background: var(--n19-navy-hover) !important; }
+.carousel-indicators li.active { background: var(--n19-navy) !important; }
+.input--field, .search--track-input { border-radius: 0 !important; }

@@ -1,0 +1,18 @@
+/* net19 handmade theme: Cleveland Clinic health library, 2019: a white header with gray (not blue) navigation links
+   and a soft drop shadow, an orange uppercase Appointments button with square corners, a white article intro (no pale
+   blue band) with the summary set in bold gray, and square buttons. Type (Roboto) and the article layout are close
+   to today's, so the theme is small. The site has no dark mode; the dark tokens apply only if the page renders dark. */
+html { --n19-nav: #4a4a4a; --n19-orange: #f18a21; --n19-orange-hover: #e07810; --n19-intro-bg: #fff; --n19-intro: #707070; --n19-shadow: rgba(0,0,0,.14); }
+html[data-net19-mode="dark"] { --n19-nav: #ddd; --n19-orange: #f18a21; --n19-orange-hover: #e07810; --n19-intro-bg: #161616; --n19-intro: #bbb; --n19-shadow: rgba(0,0,0,.5); }
+header.bg-white { box-shadow: 0 3px 8px var(--n19-shadow) !important; border-bottom-color: transparent !important; }
+header ul .text-brandBlue-500, header nav .text-brandBlue-500 { color: var(--n19-nav) !important; font-weight: 400 !important; }
+header ul .text-brandBlue-500:hover { color: #007bc2 !important; }
+header a.bg-brandBlue-500 {
+  background: var(--n19-orange) !important; color: #fff !important; border-radius: 0 !important; text-transform: uppercase !important;
+  letter-spacing: 1.5px !important; font-size: 14px !important; font-weight: 700 !important;
+}
+header a.bg-brandBlue-500:hover { background: var(--n19-orange-hover) !important; }
+/* Article intro: white, summary in bold gray */
+section.bg-blue-050 { background: var(--n19-intro-bg) !important; }
+section.bg-blue-050 p.text-gray-800 { color: var(--n19-intro) !important; font-weight: 700 !important; }
+main a.bg-brandBlue-500, main button.bg-brandBlue-500, a.rounded-rem5px, button.rounded-rem5px { border-radius: 0 !important; }

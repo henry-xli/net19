@@ -1,0 +1,22 @@
+/* net19 handmade theme: Spotify web player, 2019: a flush, square layout: a pure black left rail and top bar against
+   a #181818 main view (no floating rounded panels), square cover art and cards, the 2019 green (#1db954), and
+   uppercase, letter-spaced pill buttons. The web player is always dark; spotify.com's light pages get the same
+   green and button type through the light tokens. */
+html { --n19-rail: #fff; --n19-main: #fff; --n19-green: #1db954; --n19-green-hover: #1ed760; }
+html[data-net19-mode="dark"] { --n19-rail: #000; --n19-main: #181818; --n19-green: #1db954; --n19-green-hover: #1ed760; }
+html:root, html.encore-dark-theme {
+  --encore-corner-radius-base: 0px !important; --encore-corner-radius-larger: 0px !important; --encore-corner-radius-larger-2: 0px !important;
+  --encore-corner-radius-larger-3: 2px !important; --essential-bright-accent: var(--n19-green) !important;
+}
+/* Flush panels: the rail is black, the main view #181818 */
+#Desktop_LeftSidebar_Id, #Desktop_LeftSidebar_Id nav > div, #Desktop_LeftSidebar_Id .YourLibraryX { background: var(--n19-rail) !important; border-radius: 0 !important; }
+#main-view, .Root__main-view, #Desktop_PanelContainer_Id, aside[data-testid*="panel" i] { border-radius: 0 !important; }
+#main-view { background: var(--n19-main) !important; }
+/* Buttons: uppercase, letter-spaced pills */
+[class*="legacy-button-primary"] [class*="button-primary__inner"], [class*="legacy-button-secondary"], [class*="legacy-button"] [class*="button-secondary__inner"],
+[data-encore-id="buttonPrimary"] > span, [data-encore-id="buttonSecondary"] {
+  text-transform: uppercase !important; letter-spacing: .12em !important; font-size: 12px !important;
+}
+[data-encore-id="buttonPrimary"] [class*="button-primary__inner"]:not([class*="inverted-light"]) { background-color: var(--n19-green) !important; }
+/* Cover art and tiles: square */
+[data-encore-id="card"], [data-encore-id="card"] img, [data-testid="card-image"], [data-testid="cover-art-image"], img[data-testid*="image"] { border-radius: 0 !important; }

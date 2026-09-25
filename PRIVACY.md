@@ -1,8 +1,8 @@
 # net19 privacy policy
 
-Effective September 25, 2026. Applies to net19 0.3.0.
+Effective September 25, 2026. Applies to net19 0.4.0.
 
-Net19 restyles 20 popular websites to look as they did in 2019. It has no developer-operated server, account system, analytics, advertisements, remote AI, or telemetry.
+Net19 restyles 90 popular websites to look as they did in 2019. It has no developer-operated server, account system, analytics, advertisements, remote AI, or telemetry.
 
 ## What leaves your device
 
@@ -15,7 +15,7 @@ Two themes send you to an older version of a site on that site's own servers:
 
 ## Access and storage
 
-Net19 has access only to the 20 sites it themes (listed in the README). It does not run on any other site and cannot read them.
+Net19 has access only to the 90 sites it themes (listed in `src/themes.ts`). It does not run on any other site and cannot read them.
 
 Chrome local extension storage holds your settings: whether net19 is on, and which sites you switched off. Updating from an earlier version deletes the archive profiles and other data those versions kept.
 

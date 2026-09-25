@@ -1,0 +1,9 @@
+/* net19 handmade theme: Quora, 2019: Helvetica Neue/Arial interface, bold question titles, the deep #b92b27 red for primary buttons, 3px corners instead of pills. Written without access to the live DOM (see report), so it only touches fonts, the brand red and corner radii. */
+html { --n19-red: #b92b27; --n19-red-hover: #a82400; --n19-text: #282829; --n19-link: #2e69ff; }
+html[data-net19-mode="dark"] { --n19-red: #b92b27; --n19-red-hover: #c9302c; --n19-text: #d5d6d6; --n19-link: #6f95ff; }
+body, .q-text, .q-box, input, textarea, button { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+/* Question titles: bold, as in 2019 */
+.puppeteer_test_question_title, .puppeteer_test_question_title span { font-weight: 700 !important; }
+/* Buttons: 3px corners instead of pills; the primary one in 2019 red */
+button[class*="puppeteer_test_button"], a[class*="puppeteer_test_button"], [role="button"][class*="qu-borderRadius--pill"], .qu-borderRadius--pill { border-radius: 3px !important; }
+[class*="qu-bg--blue"][class*="puppeteer_test_button"], button.qu-bg--red, .qu-bg--red[role="button"] { background-color: var(--n19-red) !important; }

@@ -1,0 +1,14 @@
+/* net19 handmade theme: ABC (go.com: ABC News and ABC.com), 2019: on ABC News, a plain white masthead with the menu in
+   small bold uppercase letter-spaced words ("VIDEO  LIVE  SHOWS"), square photos and video frames, and flat white
+   story blocks instead of rounded grey cards. ABC.com's 2019 look (black bar, white menu words, dark page) is
+   essentially today's, so it is left as it is. Neither site has a separate dark mode. */
+html { --n19-text: #000; --n19-rule: #e5e5e5; --n19-card: #fff; }
+html[data-net19-mode="dark"] { --n19-text: #fff; --n19-rule: #333; --n19-card: #141414; }
+
+/* ABC News masthead */
+nav.navigation .navMenu25__text { text-transform: uppercase !important; letter-spacing: .12em !important; font-size: 14px !important; font-weight: 700 !important; }
+nav.navigation { box-shadow: 0 2px 4px rgba(0,0,0,.08) !important; }
+
+/* Square media and story blocks */
+nav.navigation ~ * main img, main figure.Image, main .MediaPlaceholder, main [class*="IndividualVideo"], [class*="FittWebPlayerContainer"],
+[class*="FittWebPlayerContainer"] video, .page-home main img, .page-home main picture { border-radius: 0 !important; }

@@ -1,0 +1,39 @@
+/* net19 handmade theme: Apple, 2019: a near-black translucent global nav with white links, and hero calls to action
+   as plain blue "Learn more ›  Buy ›" text links instead of pill buttons. Type, tiles and colors are otherwise
+   essentially today's (SF Pro, #1d1d1f, #06c), so the theme is small. Apple.com has no dark mode of its own. */
+html { --n19-nav: rgba(0,0,0,.8); --n19-nav-open: #161617; --n19-nav-text: rgba(255,255,255,.8); --n19-nav-text-2: #e8e8ed;
+  --n19-link: #06c; --n19-link-on-dark: #2997ff; }
+html[data-net19-mode="dark"] { --n19-nav: rgba(0,0,0,.8); --n19-nav-open: #161617; --n19-nav-text: rgba(255,255,255,.8); --n19-nav-text-2: #e8e8ed;
+  --n19-link: #2997ff; --n19-link-on-dark: #2997ff; }
+
+/* Global nav: Apple's own dark nav variables (the ones its .globalheader-dark pages use), with the 2019 bar color */
+html #globalnav {
+  --globalnav-background: var(--n19-nav) !important; --r-globalnav-background-opened: var(--n19-nav-open) !important;
+  --r-globalnav-color: var(--n19-nav-text) !important; --r-globalnav-color-secondary: var(--n19-nav-text-2) !important; --r-globalnav-color-hover: #fff !important;
+}
+html #globalnav .globalnav-submenu-header { --r-globalnav-submenu-header-color: #86868b !important; }
+html #globalnav .globalnav-search {
+  --r-globalnav-search-icon-fill: #86868b !important; --r-globalnav-search-icon-active-fill: #e8e8ed !important; --r-globalnav-search-input-placeholder-color: #86868b !important;
+  --r-globalnav-search-input-value-color: #e8e8ed !important; --r-globalnav-search-list-header-color: #86868b !important; --r-globalnav-search-list-item-color: #e8e8ed !important;
+  --r-globalnav-search-list-item-icon-fill: #86868b !important; --r-globalnav-search-list-item-hover-background: #1d1d1f !important; --r-globalnav-search-list-item-hover-color: #fff !important;
+  --r-globalnav-search-list-item-nonsearchterm-color: #86868b !important; --r-globalnav-search-list-item-searchterm-color: #e8e8ed !important;
+}
+html #globalnav .globalnav-link, html #globalnav .globalnav-menutrigger-button { color: var(--n19-nav-text) !important; }
+html #globalnav .globalnav-link:hover { color: #fff !important; }
+html #globalnav .globalnav-curtain { background: rgba(0,0,0,.4) !important; }
+html #globalnav .globalnav-bag-badge { --globalnav-badge-background: #fff !important; --globalnav-badge-text-color: #000 !important; }
+html #globalnav-bag .ac-gn-bagview-nav-text, html #globalnav-bag .ac-gn-bagview-header { color: #e8e8ed !important; }
+html #globalnav-bag .ac-gn-bagview-nav-link, html #globalnav-bag .ac-gn-bagview-message, html #globalnav-bag .ac-gn-bagview-subheader { color: #86868b !important; }
+
+/* Hero calls to action: text links with a chevron */
+.tile-ctas .button, .section-hero .button, .hero .cta-links .button {
+  background: transparent !important; border: 0 !important; border-radius: 0 !important; padding: 0 !important; min-width: 0 !important;
+  color: var(--n19-link) !important; font-size: 21px !important; line-height: 1.38 !important; font-weight: 400 !important; box-shadow: none !important;
+}
+.theme-dark .tile-ctas .button, .theme-dark.tile-ctas .button { color: var(--n19-link-on-dark) !important; }
+.tile-ctas .button:hover { text-decoration: underline !important; }
+.tile-ctas .button::after {
+  content: ""; display: inline-block; width: .34em; height: .34em; margin: 0 0 .1em .3em; vertical-align: middle;
+  border: solid currentColor; border-width: .08em .08em 0 0; transform: rotate(45deg);
+}
+.tile-ctas { gap: 0 32px !important; }
