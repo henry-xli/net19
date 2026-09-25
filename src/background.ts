@@ -133,24 +133,27 @@ function syncScripts(): Promise<unknown> {
     await chrome.declarativeNetRequest.updateDynamicRules({ removeRuleIds: oldRules.map(r => r.id),
       addRules: matches.length ? navigationRules(config, await cache.readyOrigins(), chrome.runtime.getURL('loading.html'), themedDomains(config.year),
         THEMES.filter(t => t.query && config.year >= t.years[0] && config.year <= t.years[1]).map(t => t.query!)) : [] });
-    // Handmade themes are plain content-script stylesheets: they apply at document_start
-    // with nothing to fetch. Re-registered whenever settings or site pauses change.
-    const themeIds = registered.filter(s => s.id.startsWith('net19-theme-')).map(s => s.id);
-    if (themeIds.length) await chrome.scripting.unregisterContentScripts({ ids: themeIds });
-    if (!config.enabled || config.year===currentYear() || !matches.length) {
+    const active = config.enabled && config.year !== currentYear() && matches.length > 0;
+    const paused = config.disabledHosts.map(h => `*://${h}/*`);
+    // Handmade themes are content-script stylesheets plus a config script and the shared palette engine. Top-level
+    // pages only: embedded frames (account menus, players, ads) are transparent overlays drawn by their own origin.
+    // They are only re-registered when the desired set actually changes: this runs after every cached profile, and
+    // an unregister/register cycle leaves a window in which a loading page would miss its theme.
+    const desired: chrome.scripting.RegisteredContentScript[] = active ? THEMES
+      .filter(theme => config.year >= theme.years[0] && config.year <= theme.years[1])
+      .map(theme => ({ id: `net19-theme-${theme.id}`, matches: themeMatches(theme), css: [`themes/${theme.id}.css`],
+        js: [`themes/${theme.id}.js`, 'themes/palette.js'], runAt: 'document_start', allFrames: false, persistAcrossSessions: true,
+        ...(paused.length ? { excludeMatches: paused } : {}) } as chrome.scripting.RegisteredContentScript)) : [];
+    const signature = (list: chrome.scripting.RegisteredContentScript[]) => JSON.stringify(list.map(s => [s.id, s.matches, s.excludeMatches ?? []]).sort());
+    const current = registered.filter(s => s.id.startsWith('net19-theme-'));
+    if (signature(current) !== signature(desired)) {
+      if (current.length) await chrome.scripting.unregisterContentScripts({ ids: current.map(s => s.id) });
+      if (desired.length) await chrome.scripting.registerContentScripts(desired);
+    }
+    if (!active) {
       if (registered.some(s => s.id === 'net19-start')) await chrome.scripting.unregisterContentScripts({ ids: ['net19-start'] });
       return;
     }
-    const paused = config.disabledHosts.map(h => `*://${h}/*`);
-    // Every theme ships a config script (its 2019 palette and how to read the site's own light/dark mode)
-    // followed by the shared palette engine. Top-level pages only: embedded frames (account menus, players,
-    // ads) are transparent overlays drawn by their own origin, and painting them creates visible seams.
-    const themes = THEMES.filter(theme => config.year >= theme.years[0] && config.year <= theme.years[1]);
-    if (themes.length) await chrome.scripting.registerContentScripts(themes.map((theme): chrome.scripting.RegisteredContentScript => ({
-      id: `net19-theme-${theme.id}`, matches: themeMatches(theme), css: [`themes/${theme.id}.css`],
-      js: [`themes/${theme.id}.js`, 'themes/palette.js'], runAt: 'document_start', allFrames: false, persistAcrossSessions: true,
-      ...(paused.length ? { excludeMatches: paused } : {}),
-    }) as chrome.scripting.RegisteredContentScript));
     const spec: chrome.scripting.RegisteredContentScript = {
       id: 'net19-start', matches, js: ['content.js'], css: ['gate.css'], runAt: 'document_start',
       allFrames: false, persistAcrossSessions: true,
@@ -169,7 +172,7 @@ function syncScripts(): Promise<unknown> {
 }
 
 function isUI(sender: chrome.runtime.MessageSender): boolean {
-  return sender.id === chrome.runtime.id && ['popup.html', 'options.html'].some(path => sender.url?.split(/[?#]/)[0] === chrome.runtime.getURL(path));
+  return sender.id === chrome.runtime.id && sender.url?.split(/[?#]/)[0] === chrome.runtime.getURL('popup.html');
 }
 
 async function handle(message: unknown, sender: chrome.runtime.MessageSender): Promise<unknown> {

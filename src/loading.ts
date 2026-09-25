@@ -11,12 +11,8 @@ void (async () => {
   const tabId = tab.id;
   const destination = target!;
   const origin = new URL(destination).origin;
-  const title = document.getElementById('destination')!;
-  const detail = document.getElementById('detail')!;
   const skip = document.getElementById('continue') as HTMLButtonElement;
-  title.textContent = new URL(origin).hostname;
   const config = settingsFrom((await chrome.storage.local.get(SETTINGS_KEY))[SETTINGS_KEY]);
-  document.getElementById('year')!.textContent = String(config.year);
   let finished = false;
   let timer: ReturnType<typeof setTimeout> | undefined;
   let heartbeat: ReturnType<typeof setInterval> | undefined;
@@ -33,7 +29,7 @@ void (async () => {
     } catch {
       finished = false;
       skip.disabled = false;
-      detail.textContent = 'Chrome could not continue this navigation. Try Continue, or turn net19 off in the Extensions menu.';
+      // Nothing to explain: the Skip button stays available.
     }
   }
   skip.addEventListener('click', () => { void finish({ reason: 'timeout' }); });
@@ -52,4 +48,4 @@ void (async () => {
     const result = await chrome.runtime.sendMessage({ type: 'PREPARE_NAVIGATION' }) as ProfileResult;
     await finish(result?.pack || result?.reason ? result : { reason: 'unavailable' });
   } catch { await finish({ reason: 'unavailable' }); }
-})().catch(() => { document.getElementById('detail')!.textContent = 'Unable to prepare this address. Turn net19 off in the Extensions menu to continue.'; });
+})().catch(() => undefined);

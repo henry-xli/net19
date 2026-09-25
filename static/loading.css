@@ -1,1 +1,13 @@
-:root{color-scheme:light;font-family:Arial,Helvetica,sans-serif;color:#222;background:#fafaf7}body{margin:0;min-height:100vh;display:grid;place-items:center}main{width:min(420px,calc(100vw - 48px))}.brand{font-size:22px;font-weight:700;color:#344d2d}h1{font-size:26px;overflow-wrap:anywhere}p{font-size:15px;line-height:1.6}progress{width:100%;height:5px;accent-color:#344d2d}#detail{color:#61645d;font-size:13px}button{margin-top:12px;padding:10px 14px;font:14px Arial;background:#fff;border:1px solid #b8beb0;border-radius:5px;color:#263522;cursor:pointer}button:focus-visible{outline:2px solid #344d2d;outline-offset:3px}
+:root { color-scheme: light dark; --bg: #fff; --accent: #1a73e8; --track: #c6dafc; --text: #1a73e8; }
+@media (prefers-color-scheme: dark) { :root { --bg: #202124; --accent: #8ab4f8; --track: #394457; --text: #8ab4f8; } }
+body { margin: 0; min-height: 100vh; background: var(--bg); font: 500 14px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+/* 2019 Material indeterminate progress bar along the top edge */
+.bar { position: fixed; top: 0; left: 0; right: 0; height: 4px; background: var(--track); overflow: hidden; }
+.bar::before { content: ""; position: absolute; top: 0; bottom: 0; width: 40%; background: var(--accent); animation: slide 1.4s cubic-bezier(.4,0,.2,1) infinite; }
+@keyframes slide { from { left: -40%; } to { left: 100%; } }
+@media (prefers-reduced-motion: reduce) { .bar::before { animation: none; left: 0; width: 100%; opacity: .5; } }
+button { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); padding: 0 16px; height: 36px; border: none; border-radius: 4px; background: transparent;
+  color: var(--text); font: inherit; letter-spacing: .25px; cursor: pointer; }
+button:hover { background: rgba(26,115,232,.08); }
+button:focus-visible { outline: 2px solid var(--accent); }
+button:disabled { opacity: .4; cursor: default; }

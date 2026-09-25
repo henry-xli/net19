@@ -5,6 +5,7 @@ export const MAX_CACHE_BYTES = 4 * 1024 * 1024;
 export const MAX_PROFILE_BYTES = 96 * 1024;
 export const HARD_GATE_MS = 65_000;
 export const DEFAULT_WAIT_MS = 8_000;
+export const TARGET_YEAR = 2019;
 export const WAIT_CHOICES = [3_000, 5_000, 8_000, 15_000, 30_000];
 export const WARM_BUDGET_MS = 55_000;
 export const SETTINGS_KEY = 'settings';
@@ -45,6 +46,7 @@ export type PageStatus = {
   reason?: string;
   snapshotUrl?: string;
   mode?: 'layout' | 'styles' | 'theme';
+  timings?: Record<string, number>;   // milliseconds since document start, per preparation phase
 };
 
 export function currentYear(): number { return new Date().getFullYear(); }
@@ -53,12 +55,11 @@ export function settingsFrom(value: unknown): Settings {
   const v = (value && typeof value === 'object' ? value : {}) as Partial<Settings>;
   return {
     enabled: v.enabled !== false,
-    year: Number.isInteger(v.year) ? Math.max(MIN_YEAR, Math.min(currentYear(), v.year!)) : 2019,
-    // An uncached site is held only briefly; preparation continues in the background
-    // and the next visit is instant. Values not explicitly chosen in Settings (including
-    // the old 60-second default) migrate to the default.
-    waitMs: v.waitChosen === true && typeof v.waitMs === 'number' && WAIT_CHOICES.includes(v.waitMs) ? v.waitMs : DEFAULT_WAIT_MS,
-    waitChosen: v.waitChosen === true && typeof v.waitMs === 'number' && WAIT_CHOICES.includes(v.waitMs),
+    // net19 recreates the web as it looked in 2019; the year is not a setting.
+    year: TARGET_YEAR,
+    // An uncached site is held briefly; preparation continues in the background and the next visit is instant.
+    waitMs: DEFAULT_WAIT_MS,
+    waitChosen: false,
     disabledHosts: Array.isArray(v.disabledHosts) ? [...new Set(v.disabledHosts.filter(h => typeof h === 'string' && h.length < 254))].slice(0, 500) : [],
   };
 }

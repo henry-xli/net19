@@ -3,7 +3,8 @@ import { matchSnapshots } from './matcher';
 import { type Paint, type Snapshot, type Box } from './snapshot';
 import { applyTheme, background, darkPage, deriveTheme, ratio, themeStrength } from './theme';
 
-export type Adaptation = { css: string; matched: number; coverage: number; mode: 'layout'|'styles'|'theme'; cleanup: () => void; check: () => boolean };
+export type Adaptation = { css: string; matched: number; coverage: number; mode: 'layout'|'styles'|'theme'; cleanup: () => void; check: () => boolean;
+  extend?: () => void };  // theme mode: give roles to elements added after the reveal
 const number = (value: number) => Math.round(value * 10) / 10;
 function declarations(paint: Paint): string { return Object.entries(paint).map(([p, v]) => `${p}:${v} !important`).join(';'); }
 function horizontal(box: Box, parent: Box): string {
@@ -164,6 +165,7 @@ export function themed(snapshot: Snapshot, session: string, prefix: string, sign
     mark(document.documentElement, 'data-net19-session', session);
     const applied = applyTheme(theme, prefix, mark);
     if (!applied.marked.length) { cleanup(); return null; }
-    return { css: ['/* net19 generated */', ...applied.rules].join('\n'), cleanup, matched: 0, coverage: 0, mode: 'theme', check: applied.verify };
+    const extend = () => { if (!disposed && !signal.aborted) applyTheme(theme, prefix, mark).verify(); };
+    return { css: ['/* net19 generated */', ...applied.rules].join('\n'), cleanup, matched: 0, coverage: 0, mode: 'theme', check: applied.verify, extend };
   } catch { cleanup(); return null; }
 }

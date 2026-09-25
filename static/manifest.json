@@ -2,16 +2,49 @@
   "manifest_version": 3,
   "name": "net19",
   "version": "0.2.0",
-  "description": "Prepare historical website styles before opening pages. Adjustable year, automatic archive lookup and a local cache.",
+  "description": "Websites as they looked in 2019.",
   "minimum_chrome_version": "120",
-  "permissions": ["storage", "scripting", "declarativeNetRequestWithHostAccess", "webNavigation", "offscreen"],
-  "host_permissions": ["http://*/*", "https://*/*"],
-  "background": { "service_worker": "background.js", "type": "module" },
-  "action": { "default_popup": "popup.html", "default_title": "net19", "default_icon": { "16": "icons/16.png", "32": "icons/32.png" } },
-  "icons": { "16": "icons/16.png", "32": "icons/32.png", "48": "icons/48.png", "128": "icons/128.png" },
-  "options_ui": { "page": "options.html", "open_in_tab": true },
+  "permissions": [
+    "storage",
+    "scripting",
+    "declarativeNetRequestWithHostAccess",
+    "webNavigation",
+    "offscreen"
+  ],
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "net19",
+    "default_icon": {
+      "16": "icons/16.png",
+      "32": "icons/32.png"
+    }
+  },
+  "icons": {
+    "16": "icons/16.png",
+    "32": "icons/32.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
   "incognito": "not_allowed",
-  "web_accessible_resources": [{ "resources": ["loading.html"], "matches": ["http://*/*", "https://*/*"] }],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "loading.html"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ]
+    }
+  ],
   "content_security_policy": {
     "extension_pages": "default-src 'self'; script-src 'self'; object-src 'none'; connect-src https://archive.org https://web.archive.org; style-src 'self' 'unsafe-inline'; img-src 'self' data:; base-uri 'none'; frame-src 'self'"
   }

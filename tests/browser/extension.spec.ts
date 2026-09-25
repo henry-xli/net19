@@ -49,7 +49,6 @@ test.afterEach(async()=>{active=false;await context.close();});
 
 async function navigate(page:Page,url=ORIGIN):Promise<void>{await page.goto(url,{waitUntil:'commit'});await page.waitForURL(u=>u.origin===new URL(url).origin);await expect(page.locator('#net19-loading-screen')).toHaveCount(0,{timeout:12000});}
 async function warm(origin=ORIGIN):Promise<void>{const page=await context.newPage();await navigate(page,origin);await expect(page.locator('html')).toHaveAttribute('data-net19-styled','2019');await page.close();archiveRequests=[];siteRequests=[];}
-async function config(patch:object):Promise<void>{const ui=await context.newPage();await ui.goto(`chrome-extension://${extensionId}/options.html`);await ui.evaluate(patch=>chrome.runtime.sendMessage({type:'SETTINGS',patch}),patch);await ui.close();}
 async function pageStatus(origin=ORIGIN):Promise<any>{return worker.evaluate(async origin=>{const tab=(await chrome.tabs.query({url:`${origin}/*`}))[0];return chrome.tabs.sendMessage(tab.id!,{type:'PAGE_STATUS'});},origin);}
 
 test('uncached sites are prepared automatically before the destination receives a request',async()=>{
@@ -136,7 +135,7 @@ test('unrelated live structures receive only the role theme, with no structural 
 
 test('continuing during preparation never repaints the current visit when a late archive completes',async()=>{
   delay=700;const page=await context.newPage();await page.goto(ORIGIN,{waitUntil:'commit'});
-  await page.getByRole('button',{name:'Continue with current styling'}).click();await page.waitForURL(`${ORIGIN}/`);
+  await page.getByRole('button',{name:'Skip'}).click();await page.waitForURL(`${ORIGIN}/`);
   await expect(page.locator('#net19-loading-screen')).toHaveCount(0);await expect(page.locator('html')).not.toHaveAttribute('data-net19-styled');
   await expect.poll(()=>worker.evaluate(async key=>!!(await chrome.storage.local.get(key))[key],profileKey(ORIGIN,2019)),{timeout:8000}).toBe(true);
   await expect(page.locator('html')).not.toHaveAttribute('data-net19-styled');expect(siteRequests).toHaveLength(1);
@@ -146,18 +145,6 @@ test('same-origin simultaneous navigation shares archive work',async()=>{
   delay=150;const a=await context.newPage(),b=await context.newPage();await Promise.all([navigate(a),navigate(b)]);
   await expect(a.locator('html')).toHaveAttribute('data-net19-styled','2019');await expect(b.locator('html')).toHaveAttribute('data-net19-styled','2019');
   expect(archiveRequests.filter(url=>url.includes('/cdx/'))).toHaveLength(1);expect(siteRequests).toHaveLength(2);
-});
-
-test('year changes purge other years and cancel stale in-flight writes',async()=>{
-  await warm();delay=350;const pending=await context.newPage();await pending.goto(SECOND,{waitUntil:'commit'});
-  await config({year:2012});
-  await expect.poll(()=>worker.evaluate(async()=>Object.keys(await chrome.storage.local.get(null)).filter(k=>k.startsWith('profile:')&&!k.startsWith('profile:2:2012:')).length)).toBe(0);
-  await pending.waitForTimeout(1000);
-  expect(await worker.evaluate(async()=>Object.keys(await chrome.storage.local.get(null)).filter(k=>k.startsWith('profile:')&&!k.startsWith('profile:2:2012:')))).toEqual([]);
-});
-
-test('current-year mode bypasses archive preparation completely',async()=>{
-  await config({year:new Date().getFullYear()});const page=await context.newPage();await navigate(page);expect(archiveRequests).toHaveLength(0);expect(siteRequests).toHaveLength(1);await expect(page.locator('html')).not.toHaveAttribute('data-net19-styled');
 });
 
 test('strict page CSP still permits document-specific styling',async()=>{
@@ -173,23 +160,23 @@ test('the document cover has an independent finite expiry',async()=>{
   await expect(page.locator('#net19-loading-screen')).toHaveCSS('visibility','hidden');await expect(page.locator('#net19-loading-screen')).toHaveCSS('pointer-events','none');
 });
 
-test('settings pause restores the original page and cache clearing removes navigation bypasses',async({},info)=>{
-  await warm();const site=await context.newPage();await navigate(site);const ui=await context.newPage();await ui.goto(`chrome-extension://${extensionId}/options.html`);
-  await expect(ui.locator('#cache-count')).toHaveText('1');await ui.screenshot({path:resolve(info.outputDir,'settings.png')});
-  await ui.getByLabel('Enable net19',{exact:true}).uncheck();await expect(site.locator('html')).not.toHaveAttribute('data-net19-styled');
+test('switching net19 off restores the original page and removes navigation bypasses',async()=>{
+  await warm();const site=await context.newPage();await navigate(site);const ui=await context.newPage();await ui.goto(`chrome-extension://${extensionId}/popup.html`);
+  await ui.getByLabel('net19',{exact:true}).uncheck();await expect(site.locator('html')).not.toHaveAttribute('data-net19-styled');
   await expect(site.locator('[data-net19-node],[data-net19-contents],[data-net19-extra]')).toHaveCount(0);
   await expect.poll(()=>worker.evaluate(async()=>(await chrome.declarativeNetRequest.getDynamicRules()).length)).toBe(0);
-  await ui.getByRole('button',{name:'Clear saved styles'}).click();await expect(ui.locator('#cache-count')).toHaveText('0');
 });
 
-test('popup contains direct controls, no preparation button or slogans, and clears other years',async({},info)=>{
+test('popup is two switches and nothing else',async({},info)=>{
   await warm();const site=await context.newPage();await navigate(site);
   const tabId=await worker.evaluate(async origin=>(await chrome.tabs.query({url:`${origin}/*`}))[0].id!,ORIGIN);
   const popup=await context.newPage();await popup.addInitScript(({tabId,origin})=>{const api=(globalThis as any).chrome;if(api?.tabs)api.tabs.query=async()=>[{id:tabId,url:origin,incognito:false}];},{tabId,origin:ORIGIN});
-  await popup.setViewportSize({width:388,height:600});await popup.goto(`chrome-extension://${extensionId}/popup.html`);
-  await expect(popup.locator('#destination')).toHaveText('2019');await expect(popup.getByRole('button',{name:/prepare/i})).toHaveCount(0);
-  expect(await popup.locator('body').innerText()).not.toMatch(/THE WEB\. YOUR YEAR|familiar feeling|NO RELOADS|A little of/);
+  await popup.setViewportSize({width:260,height:200});await popup.goto(`chrome-extension://${extensionId}/popup.html`);
+  const host=new URL(ORIGIN).hostname.replace(/^www\./,'');
+  await expect(popup.locator('#site')).toHaveText(host);
+  expect((await popup.locator('body').innerText()).split('\n').map(line=>line.trim()).filter(Boolean)).toEqual(['net19',host]);
+  await expect(popup.locator('input[type=checkbox]')).toHaveCount(2);await expect(popup.locator('button, a, select, input[type=range]')).toHaveCount(0);
   await popup.screenshot({path:resolve(info.outputDir,'popup.png')});
-  await popup.getByRole('button',{name:'Previous year'}).click();await expect(popup.locator('#destination')).toHaveText('2018');await expect(popup.locator('#cache-count')).toHaveText('0');
-  expect(await popup.evaluate(()=>document.documentElement.scrollHeight)).toBeLessThanOrEqual(600);
+  await popup.locator('#site-switch').uncheck();
+  await expect.poll(()=>worker.evaluate(async()=>((await chrome.storage.local.get('settings')).settings as any)?.disabledHosts??[])).toContain(new URL(ORIGIN).hostname);
 });

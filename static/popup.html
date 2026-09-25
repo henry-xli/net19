@@ -1,30 +1,8 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>net19</title><link rel="stylesheet" href="ui.css"><script src="popup.js" defer></script></head>
-<body class="popup">
-  <header class="popup-header">
-    <a class="wordmark" href="https://github.com/henry-xli/net19" target="_blank" rel="noreferrer" aria-label="net19 on GitHub">net<span>19</span><i></i></a>
-    <label class="power-label"><span id="power-state">On</span><input id="power" class="switch" type="checkbox" checked aria-label="Enable net19"></label>
-  </header>
-  <main>
-    <section class="destination-panel" aria-labelledby="destination-label">
-      <div class="eyebrow" id="destination-label">ARCHIVE YEAR</div>
-      <div class="year-display"><button id="year-back" class="round-button" aria-label="Previous year">−</button><output id="destination" for="year">2019</output><button id="year-next" class="round-button" aria-label="Next year">+</button></div>
-      <p class="year-hint" id="year-hint">Prepared automatically before pages open.</p>
-      <label class="sr-only" for="year">Target year</label><input id="year" class="year-range" type="range" min="2007" max="2026" value="2019">
-      <div class="range-labels"><span>2007</span><span id="latest-year">2026</span></div>
-      <div class="presets" role="group" aria-label="Quick years"><button data-year="2007" aria-pressed="false">2007</button><button data-year="2012" aria-pressed="false">2012</button><button data-year="2019" aria-pressed="true">2019</button><button id="today" data-year="2026" aria-pressed="false">Today</button></div>
-    </section>
-    <section class="site-card" aria-label="Current website">
-      <div class="card-topline"><span class="eyebrow">THIS SITE</span><span class="status-tag" id="site-state">CHECKING</span></div>
-      <h1 id="site-name">Current website</h1>
-      <p id="site-detail">Open a public website to get started.</p>
-      <a id="source" class="text-link" href="https://web.archive.org/" target="_blank" rel="noreferrer" hidden>View source snapshot ↗</a>
-      <label class="site-pause" id="site-pause-row" hidden><input type="checkbox" id="pause-site">Use current styling on this site</label>
-    </section>
-    <section class="cache-strip" aria-label="Local style cache"><div><span class="cache-icon" aria-hidden="true">▤</span><strong id="cache-count">0</strong><span> / 100 saved styles</span><span class="device-tag">ON THIS DEVICE</span></div><progress id="cache-meter" max="100" value="0" aria-label="Saved style profiles"></progress></section>
-    <p class="notice" id="notice" aria-live="polite">New sites are checked automatically.</p>
-  </main>
-  <footer class="popup-footer"><span>net19 · 0.2.0</span><button id="settings" class="text-button">Settings <span aria-hidden="true">↗</span></button></footer>
+<head><meta charset="utf-8"><title>net19</title><link rel="stylesheet" href="ui.css"><script src="popup.js" defer></script></head>
+<body>
+  <label class="row"><span class="name">net19</span><input id="power" class="switch" type="checkbox" checked aria-label="net19"></label>
+  <label class="row" id="site-row" hidden><span class="site" id="site"></span><input id="site-switch" class="switch" type="checkbox" checked></label>
 </body>
 </html>

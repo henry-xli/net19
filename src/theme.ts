@@ -224,7 +224,8 @@ export function applyTheme(theme: Theme, prefix: string, mark: Mark, owned: Set<
   }
   for (const name of THEME_ROLES) {
     const paint = theme[name];
-    if (paint && marked.some(node => node.getAttribute('data-net19-role') === name)) rules.push(`${prefix} [data-net19-role="${name}"]{${declarations(paint)}}`);
+    // Every role's rule is installed, so elements the page adds after the reveal can join it later.
+    if (paint) rules.push(`${prefix} [data-net19-role="${name}"]{${declarations(paint)}}`);
   }
   return {
     rules, marked,

@@ -1,6 +1,6 @@
 # net19
 
-A Chrome extension that prepares archived website styling automatically before opening a site. Choose **2007 through the current year**; the default is **2019**.
+A Chrome extension that shows websites as they looked in **2019**, prepared automatically before a site opens.
 
 [Download net19 0.2.0](https://github.com/henry-xli/net19/raw/refs/heads/main/downloads/net19-0.2.0.zip) · [Privacy](PRIVACY.md) · [Architecture](docs/ARCHITECTURE.md) · [Validation](docs/VALIDATION.md)
 
@@ -17,16 +17,16 @@ Automatic preparation requires access to public websites. Chrome may ask you to 
 
 ## What changed in 0.2
 
-- Uncached public GET navigations first open a local loading page. The destination request is held while net19 checks the archive, up to **8 seconds** by default (Settings: 3–30 seconds). If the archive is slower, the page opens with its current style and preparation finishes in the background, so the next visit is instant. About 25 popular homepages are prepared in the background ahead of time. Cached sites skip this lookup.
+- Uncached public GET navigations first open a local loading page. The destination request is held while net19 checks the archive, up to **8 seconds**. If the archive is slower, the page opens with its current style and preparation finishes in the background, so the next visit is instant. About 25 popular homepages are prepared in the background ahead of time. Cached sites skip this lookup.
 - The parser measures an archived document in an isolated browser frame. It preserves the CSS cascade, media conditions, component typography, borders, spacing, gradients, and bounded raster graphics.
 - A general matcher connects archived components to live elements using labels, links, form names, classes, and structure. There are **no website-specific layout adapters**. Compatible compact pages recover measured geometry; longer pages can recover matched grid/flex proportions while current text continues to flow.
 - Live controls and event handlers remain in place. Styles activate while the page is covered. Once a page is revealed, a late archive response cannot restyle it.
-- The local cache holds up to **100 profiles**, subject to a **4 MiB** total limit. Changing the year immediately removes profiles from other years and cancels stale downloads. An older fallback capture can be used for one visit but is not stored as a selected-year capture.
-- The popup and settings use direct controls and status messages. No manual preparation action is required.
+- The local cache holds up to **100 profiles**, subject to a **4 MiB** total limit. An older fallback capture can be used for one visit but is not stored as a 2019 capture.
+- The popup has two switches: net19 everywhere, and net19 on the current site. There is no settings page.
 
 ## Handmade themes
 
-For 19 heavily used sites, net19 ships built-in 2019 themes instead of reconstructing them from the archive: Google Search, YouTube, Wikipedia, Reddit, GitHub, Yahoo, Twitch, Amazon, eBay, Bing, Stack Overflow, CNN, The New York Times, IMDb, ESPN, Facebook, Instagram, Twitter/X and LinkedIn. They apply before the first paint, with no archive lookup or loading page, whenever the selected year falls in each theme's era (`src/themes.ts`).
+For 19 heavily used sites, net19 ships built-in 2019 themes instead of reconstructing them from the archive: Google Search, YouTube, Wikipedia, Reddit, GitHub, Yahoo, Twitch, Amazon, eBay, Bing, Stack Overflow, CNN, The New York Times, IMDb, ESPN, Facebook, Instagram, Twitter/X and LinkedIn. They apply before the first paint, with no archive lookup or loading page, (`src/themes.ts`).
 
 Each theme is a set of styling rules rather than per-element patches: its 2019 palette is mapped onto the site's own design variables, so everything the site draws later (menus, suggestion lists, popups in same-site frames, content loaded while scrolling) uses the same palette. Every theme has a light and a dark variant and follows the site's own light/dark setting; sites that had a dark theme in 2019 (YouTube, Reddit, Twitch, Twitter) use it, the others get a dark version of their 2019 look. Wikipedia uses its own legacy Vector skin. Layouts that changed structurally are not rebuilt, and logged-in feeds that could not be inspected (Facebook, Instagram, X, LinkedIn) are best-effort. Netflix is not themed because its 2019 design is essentially the current one.
 
@@ -40,7 +40,7 @@ Wayback is the implemented provider. Archive.is is not queried. The timeout cove
 
 ## Privacy
 
-Archive requests disclose the **public homepage origin and selected year** to the Internet Archive. Archived public stylesheet and graphic addresses may also be requested. A fixed list of popular homepages, identical for every user, is also looked up in the background. Your visited path, query, fragment, current page text, form values, and cookies are not sent by net19. Matching and storage happen locally. There is no developer server, remote AI, account, analytics, or telemetry. [Full privacy policy](PRIVACY.md).
+Archive requests disclose the **public homepage origin** to the Internet Archive. Archived public stylesheet and graphic addresses may also be requested. A fixed list of popular homepages, identical for every user, is also looked up in the background. Your visited path, query, fragment, current page text, form values, and cookies are not sent by net19. Matching and storage happen locally. There is no developer server, remote AI, account, analytics, or telemetry. [Full privacy policy](PRIVACY.md).
 
 ## Development
 

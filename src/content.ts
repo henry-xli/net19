@@ -11,6 +11,7 @@ import { adapt, themed, type Adaptation } from './adapt';
   const controller = new AbortController();
   let adaptation: Adaptation | null = null;
   let status: PageStatus = { state: 'waiting', elapsedMs: 0 };
+  const timings: Record<string, number> = {};
   let overlay: HTMLDivElement | undefined;
   let rootObserver: MutationObserver | undefined;
   let timer = setTimeout(() => reveal('timeout'), deadline);
@@ -54,11 +55,13 @@ import { adapt, themed, type Adaptation } from './adapt';
       let quiet: ReturnType<typeof setTimeout>;
       const done = () => { clearTimeout(quiet); clearTimeout(limit); observer.disconnect(); window.removeEventListener('load',loaded); controller.signal.removeEventListener('abort',done); resolve(); };
       const settled = () => { if (document.readyState === 'complete') done(); };
-      const loaded = () => { clearTimeout(quiet); quiet = setTimeout(done,180); };
-      const observer = new MutationObserver(() => { clearTimeout(quiet); quiet = setTimeout(settled,180); });
-      const limit = setTimeout(done,2500);
+      const loaded = () => { clearTimeout(quiet); quiet = setTimeout(done,100); };
+      const observer = new MutationObserver(() => { clearTimeout(quiet); quiet = setTimeout(settled,100); });
+      // Reveal soon after the document is parsed. Theme-mode pages keep styling elements that arrive later
+      // (see extend below), so waiting for a fully quiet page (up to 2.5 s before) is not needed; 200 ms lets frameworks render their first pass.
+      const limit = setTimeout(done,200);
       observer.observe(document.documentElement,{subtree:true,childList:true,attributes:true,attributeFilter:['class','style','hidden']});
-      quiet = setTimeout(settled,180); window.addEventListener('load',loaded,{once:true}); controller.signal.addEventListener('abort',done,{once:true});
+      quiet = setTimeout(settled,100); window.addEventListener('load',loaded,{once:true}); controller.signal.addEventListener('abort',done,{once:true});
       if (controller.signal.aborted) done();
     });
   }
@@ -84,7 +87,13 @@ import { adapt, themed, type Adaptation } from './adapt';
 
   void (async () => {
     try {
+      const mark = (name: string) => { timings[name] = Math.round(performance.now() - start); };
+      // Settings and the profile are requested together: the worker checks settings itself, and waking it is the
+      // slowest step of a cached visit.
+      const profileRequest = chrome.runtime.sendMessage({ type: 'PROFILE' }) as Promise<ProfileResult>;
+      profileRequest.catch(() => undefined);
       const config = settingsFrom((await chrome.storage.local.get(SETTINGS_KEY))[SETTINGS_KEY]);
+      mark('settings');
       if (isPaused(config, origin)) { restore(); return; }
       if (config.year === currentYear()) { reveal('current-year'); return; }
       deadline = config.waitMs;
@@ -92,16 +101,20 @@ import { adapt, themed, type Adaptation } from './adapt';
       const left = Math.min(deadline, HARD_GATE_MS - 100) - (performance.now() - start);
       if (left <= 0) reveal('timeout');
       else timer = setTimeout(() => reveal('timeout'), left);
-      const result = await chrome.runtime.sendMessage({ type: 'PROFILE' }) as ProfileResult;
+      const result = await profileRequest;
+      mark('profile');
       if (!pending || performance.now() - start >= deadline) { reveal('timeout'); return; }
       if (isStylePack(result?.pack, origin, config.year)) {
         const snapshot = await decodeSnapshot(result.pack.snapshot);
+        mark('decoded');
         if (document.readyState === 'loading') await new Promise<void>(resolve => {
           document.addEventListener('DOMContentLoaded', () => resolve(), { once: true });
           controller.signal.addEventListener('abort', () => resolve(), { once: true });
         });
         if (!pending || controller.signal.aborted) return;
+        mark('dom');
         await settle();
+        mark('settled');
         if (!pending || controller.signal.aborted) return;
         const year = result.pack.capturedAt.slice(0, 4);
         // Activate only under the cover, validate the resulting controls/contrast, then
@@ -117,6 +130,7 @@ import { adapt, themed, type Adaptation } from './adapt';
           return 'unreadable-layout';
         };
         const matched = await adapt(snapshot, crypto.randomUUID(), controller.signal);
+        mark('adapted');
         let failure = matched ? await activate(matched) : 'unmatched-layout';
         // A structural reconstruction that fails validation degrades to the role theme
         // (fonts, colors, links, controls) rather than to the current style.
@@ -127,8 +141,17 @@ import { adapt, themed, type Adaptation } from './adapt';
         }
         if (failure || !adaptation) { reveal(failure ?? 'unmatched-layout'); return; }
         status = { state: 'archived', year: Number(result.pack.capturedAt.slice(0, 4)),
-          elapsedMs: Math.round(performance.now() - start), cached: result.cached, snapshotUrl: result.pack.snapshotUrl, mode: (adaptation as Adaptation).mode };
+          elapsedMs: Math.round(performance.now() - start), cached: result.cached, snapshotUrl: result.pack.snapshotUrl, mode: (adaptation as Adaptation).mode, timings };
         reveal();
+        // Content that loads after the reveal (feeds, lazy sections) joins the same roles, batched and for a bounded time.
+        const extend = (adaptation as Adaptation | null)?.extend;
+        if (extend) {
+          let queued = false;
+          const observer = new MutationObserver(() => { if (queued) return; queued = true; setTimeout(() => { queued = false; extend(); }, 400); });
+          observer.observe(document.body, { childList: true, subtree: true });
+          setTimeout(() => observer.disconnect(), 20_000);
+          controller.signal.addEventListener('abort', () => observer.disconnect(), { once: true });
+        }
       } else reveal(result?.reason ?? 'unavailable');
     } catch { reveal('unavailable'); }
   })();

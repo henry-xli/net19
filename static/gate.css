@@ -9,7 +9,7 @@
   margin: 0 !important;
   padding: 0 !important;
   border: 0 !important;
-  background: #fafaf7 !important;
+  background: #fff !important;
   z-index: 2147483647 !important;
   pointer-events: none;
   visibility: hidden;
@@ -20,3 +20,4 @@
 @keyframes net19-gate-hold {
   from, to { visibility: visible; pointer-events: auto; }
 }
+@media (prefers-color-scheme: dark) { #net19-loading-screen { background: #202124 !important; } }

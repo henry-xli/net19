@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { gzipSync } from 'node:zlib';
-import { isStylePack, settingsFrom, publicOrigin, parseReplay, validTimestamp, currentYear } from '../src/shared';
+import { isStylePack, settingsFrom, publicOrigin, parseReplay, validTimestamp } from '../src/shared';
 import { readDocument, sanitizeCSS, cssImports } from '../src/analyzer';
 import { encodeSnapshot, decodeSnapshot, isSnapshot } from '../src/snapshot';
 import { matchSnapshots } from '../src/matcher';
@@ -12,15 +12,10 @@ test('visited paths, queries and fragments never become archive targets', () => 
   assert.equal(publicOrigin('https://example.com/account/private?token=secret#fragment'),'https://example.com');
   for (const url of ['https://user:secret@example.com/','http://localhost/','http://localhost./','http://printer.home.arpa','http://127.0.0.1','http://2130706433','http://192.168.1.1','http://[::1]','http://printer.local','https://example.com:8443','file:///private/file','https://web.archive.org/web/2019/https://example.com']) assert.equal(publicOrigin(url),null,url);
 });
-test('legacy short waits migrate to automatic preparation and controls remain bounded', () => {
-  assert.equal(settingsFrom(null).year,2019);
-  assert.equal(settingsFrom({year:2000}).year,2007);
-  assert.equal(settingsFrom({year:9999}).year,currentYear());
-  // Old stored defaults (including 60 s) migrate to the short hold; chosen values stay.
-  for (const waitMs of [0,800,1800,2200,60000,Infinity]) assert.equal(settingsFrom({waitMs}).waitMs,8_000);
-  assert.equal(settingsFrom({waitMs:30000}).waitMs,8_000);
-  assert.equal(settingsFrom({waitMs:30000,waitChosen:true}).waitMs,30000);
-  assert.equal(settingsFrom({waitMs:90000,waitChosen:true}).waitMs,8_000);
+test('the year and wait are fixed: stored values from older versions are ignored', () => {
+  for (const stored of [null, {year:2000}, {year:2012}, {year:9999}]) assert.equal(settingsFrom(stored).year, 2019);
+  for (const waitMs of [0, 800, 30000, 60000, Infinity]) assert.equal(settingsFrom({waitMs, waitChosen: true}).waitMs, 8_000);
+  assert.equal(settingsFrom({enabled:false}).enabled, false);
 });
 test('only authentic replay origins and captures no newer than the selected year validate', () => {
   assert.equal(validTimestamp('20200101000000',2019),false);
@@ -76,7 +71,7 @@ test('navigation rules prepare uncached GETs and scope cache bypass to the exact
   assert.equal(rules[0].action.type,'redirect');assert.deepEqual(rules[0].condition.requestMethods,['get']);
   const filter=new RegExp(originFilter('https://example.com'));
   assert.ok(filter.test('https://www.example.com/path'));assert.ok(!filter.test('https://login.example.com/path'));assert.ok(!filter.test('https://example.com.evil.example/path'));
-  assert.equal(navigationRules(settingsFrom({year:currentYear()}),[],'' ).length,0);
+  assert.equal(navigationRules(settingsFrom({enabled:false}),[],'' ).length,0);
   assert.equal(loadingTarget('chrome-extension://id/loading.html#https://example.com/path?q=1#part','chrome-extension://id/loading.html'),'https://example.com/path?q=1#part');
   assert.equal(loadingTarget('chrome-extension://id/loading.html#javascript:alert(1)','chrome-extension://id/loading.html'),null);
 });

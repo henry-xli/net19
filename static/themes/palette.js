@@ -39,49 +39,73 @@
     const bg = luminance(getComputedStyle(document.body || document.documentElement).backgroundColor);
     return bg !== null && bg < .35 ? 'dark' : 'light';
   };
-  let current = '';
-  const apply = () => {
+  const hasMap = tables.light.size > 0 || tables.dark.size > 0;
+  let sheet = null;
+  let lastMode = '';
+  // Read the site's own variable values with net19's override sheet switched off. Toggling `disabled` is not a
+  // DOM mutation, so it does not wake any observer (an earlier version re-inserted the element and re-triggered
+  // itself on every animation frame).
+  const siteValues = () => {
+    if (sheet?.sheet) sheet.sheet.disabled = true;
+    const values = [];
     const root = document.documentElement;
-    if (!root) return;
-    const old = document.getElementById(STYLE_ID);
-    old?.remove(); // read the site's own values, not ours
-    const mode = detect();
-    const table = tables[mode];
-    const declared = new Map();
     for (const selector of ['html', 'body', ...(theme.scopes || [])]) {
       const node = selector === 'html' ? root : document.querySelector(selector);
       if (!node) continue;
       const style = getComputedStyle(node);
       for (let i = 0; i < style.length; i++) {
         const name = style[i];
-        if (!name.startsWith('--')) continue;
-        const to = table.get(normal(style.getPropertyValue(name)));
-        if (to && !declared.has(name)) declared.set(name, to);
+        if (name.charCodeAt(0) === 45 && name.charCodeAt(1) === 45) values.push([name, style.getPropertyValue(name)]);
       }
+    }
+    if (sheet?.sheet) sheet.sheet.disabled = false;
+    return values;
+  };
+  const apply = (force = false) => {
+    const root = document.documentElement;
+    if (!root) return;
+    if (sheet?.sheet) sheet.sheet.disabled = true; // detection must see the site, not the theme
+    const mode = detect();
+    if (sheet?.sheet) sheet.sheet.disabled = false;
+    if (root.getAttribute('data-net19-mode') !== mode) root.setAttribute('data-net19-mode', mode);
+    if (!hasMap || mode === lastMode && !force) return; // palette maps only change with the mode or new stylesheets
+    lastMode = mode;
+    const table = tables[mode];
+    const declared = new Map();
+    for (const [name, value] of siteValues()) {
+      if (declared.has(name)) continue;
+      const to = table.get(normal(value));
+      if (to) declared.set(name, to);
     }
     const body = [...declared].map(([name, to]) => `${name}:${to} !important`).join(';');
     const selectors = ['html:root', ...(theme.scopes || []).map(s => `html ${s}`)].join(',');
-    const style = old || document.createElement('style');
-    style.id = STYLE_ID;
-    style.textContent = body ? `${selectors}{${body}}` : '';
-    (document.head || root).append(style);
-    if (root.getAttribute('data-net19-mode') !== mode) root.setAttribute('data-net19-mode', mode);
-    current = mode;
+    if (!sheet) { sheet = document.createElement('style'); sheet.id = STYLE_ID; (document.head || root).append(sheet); }
+    const text = body ? `${selectors}{${body}}` : '';
+    if (sheet.textContent !== text) sheet.textContent = text;
   };
-  let queued = false;
-  const later = () => { if (queued) return; queued = true; requestAnimationFrame(() => { queued = false; apply(); }); };
+  // Mode changes are cheap to check; a palette re-scan after new stylesheets is batched to at most every 400 ms.
+  let queued = false, rescan = false, timer = 0;
+  const later = full => {
+    rescan = rescan || full;
+    if (full && !timer) timer = setTimeout(() => { timer = 0; run(); }, 400);
+    if (!queued) { queued = true; requestAnimationFrame(() => { queued = false; if (!timer) run(); }); }
+  };
+  const run = () => { const full = rescan; rescan = false; apply(full); };
   const watch = () => {
-    apply();
-    // The site switches modes by changing root/body attributes or by adding stylesheets.
+    apply(true);
     const observer = new MutationObserver(records => {
-      if (records.some(r => r.type === 'attributes' && r.attributeName !== 'data-net19-mode' ||
-          r.type === 'childList' && [...r.addedNodes].some(n => n.nodeName === 'STYLE' || n.nodeName === 'LINK' && n.id !== STYLE_ID))) later();
+      let attributes = false, sheets = false;
+      for (const r of records) {
+        if (r.type === 'attributes' && r.attributeName !== 'data-net19-mode') attributes = true;
+        else if (r.type === 'childList') for (const n of r.addedNodes) if (n !== sheet && (n.nodeName === 'STYLE' || n.nodeName === 'LINK')) sheets = true;
+      }
+      if (attributes || sheets) later(sheets);
     });
     observer.observe(document.documentElement, { attributes: true, attributeFilter: theme.watch || ['class', 'dark', 'data-color-mode', 'data-theme', 'style'] });
-    if (document.head) observer.observe(document.head, { childList: true });
+    if (hasMap && document.head) observer.observe(document.head, { childList: true });
     if (document.body) observer.observe(document.body, { attributes: true, attributeFilter: ['class', 'style'] });
-    addEventListener('load', later, { once: true });
-    matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change', later);
+    addEventListener('load', () => later(true), { once: true });
+    matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change', () => later(true));
   };
   // Stylesheets in <head> are parsed by the time <body> starts: decide then, before the first paint.
   if (document.body) watch();
