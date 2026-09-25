@@ -15,6 +15,10 @@
 
 There is no website-specific adapter or downloaded executable code. A site's archived template is not assumed to match its modern template.
 
+## Handmade themes
+
+`src/themes.ts` lists bundled per-site themes (`static/themes/<id>.css`, optional `<id>.js`). For the selected year, the worker registers each as a `document_start` content script, so the stylesheet is present before the first paint. Themed domains are excluded from the loading-page redirect and from the archive content script. A theme's optional script only switches the site to its own light palette (root class or attribute changes, with a loop guard) or, for Reddit, adds the same rules inside open shadow roots. Sites that choose dark mode in script also get `prefer-light.js` in the page's main world, which answers `prefers-color-scheme` queries with light. Wikipedia uses a declarativeNetRequest query transform (`useskin=vector`) on article URLs without a query. Paused sites are excluded from all of these.
+
 ## Bounds
 
 | Resource | Limit |

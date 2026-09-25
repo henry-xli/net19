@@ -1,0 +1,16 @@
+/* net19 handmade theme: Twitter, 2019 (the redesign launched that July): "Tweet" instead of "Post", Twitter blue #1da1f2, no Grok, Premium or Jobs entries. */
+:root { --net19-blue: #1da1f2; }
+/* Say "Tweet" again */
+[data-testid="SideNav_NewTweet_Button"] span span, [data-testid="tweetButtonInline"] span span, [data-testid="tweetButton"] span span { font-size: 0 !important; }
+[data-testid="SideNav_NewTweet_Button"] span span::after, [data-testid="tweetButtonInline"] span span::after, [data-testid="tweetButton"] span span::after { content: "Tweet"; font-size: 15px; }
+[data-testid="SideNav_NewTweet_Button"], [data-testid="tweetButtonInline"], [data-testid="tweetButton"] { background-color: #1da1f2 !important; border-color: #1da1f2 !important; }
+[data-testid="SideNav_NewTweet_Button"] *, [data-testid="tweetButtonInline"] *, [data-testid="tweetButton"] * { color: #fff !important; }
+/* Features that arrived later */
+a[href="/i/grok"], a[href^="/i/grok"], a[href="/i/premium_sign_up"], a[href*="/i/verified-orgs-signup"], a[href="/jobs"], a[href$="/communities"], a[href="/i/communitynotes"],
+[data-testid="GrokDrawer"], [data-testid="grokImgGen"], button[aria-label="Grok actions"], a[aria-label="Grok"], a[aria-label="Premium"], a[aria-label="Jobs"], a[aria-label="Communities"],
+[data-testid="super-upsell-UpsellCardRenderProperties"], aside[aria-label="Subscribe to Premium"], [data-testid="sidebarColumn"] section:has(a[href="/i/premium_sign_up"]) { display: none !important; }
+/* Blue accents on active tabs, links and follow buttons */
+[role="tablist"] [aria-selected="true"] div > div:last-child { background-color: #1da1f2 !important; }
+[data-testid$="-follow"] { background-color: #1da1f2 !important; border-color: #1da1f2 !important; }
+[data-testid$="-follow"] * { color: #fff !important; }
+[data-testid="tweetText"] a { color: #1b95e0 !important; }

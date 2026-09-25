@@ -9,6 +9,7 @@ export type HandmadeTheme = {
   matches?: string[];          // narrower URL patterns when only some pages are themed
   css?: false;                 // themes/<id>.css exists unless false
   js?: boolean;                // themes/<id>.js exists
+  preferLight?: boolean;       // also report a light prefers-color-scheme to the page's own scripts
   // Some sites still serve their own 2019-era frontend behind a URL parameter (for example
   // Wikipedia's legacy Vector skin). Matching navigations get the parameter added.
   query?: { pattern: string; params: Array<[string, string]> };
@@ -22,6 +23,22 @@ export const THEMES: HandmadeTheme[] = [
   { id: 'youtube', name: 'YouTube', domains: ['youtube.com'], js: true, years: [2018, 2020] },
   { id: 'wikipedia', name: 'Wikipedia', domains: ['wikipedia.org'], css: false, years: [2010, 2022],
     query: { pattern: '^https://[a-z-]+\\.wikipedia\\.org/wiki/[^?#]*$', params: [['useskin', 'vector']] } },
+  { id: 'reddit', name: 'Reddit', domains: ['reddit.com'], js: true, years: [2018, 2020] },
+  { id: 'github', name: 'GitHub', domains: ['github.com'], js: true, years: [2017, 2020] },
+  { id: 'yahoo', name: 'Yahoo', domains: ['yahoo.com'], matches: ['*://www.yahoo.com/*', '*://yahoo.com/*'], js: true, preferLight: true, years: [2017, 2019] },
+  { id: 'twitch', name: 'Twitch', domains: ['twitch.tv'], js: true, preferLight: true, years: [2017, 2019] },
+  { id: 'amazon', name: 'Amazon', domains: ['amazon.com'], years: [2016, 2021] },
+  { id: 'ebay', name: 'eBay', domains: ['ebay.com'], years: [2017, 2020] },
+  { id: 'bing', name: 'Bing', domains: ['bing.com'], years: [2016, 2020] },
+  { id: 'stackoverflow', name: 'Stack Overflow', domains: ['stackoverflow.com'], years: [2018, 2019] },
+  { id: 'cnn', name: 'CNN', domains: ['cnn.com'], years: [2016, 2021] },
+  { id: 'nytimes', name: 'The New York Times', domains: ['nytimes.com'], years: [2018, 2021] },
+  { id: 'imdb', name: 'IMDb', domains: ['imdb.com'], years: [2016, 2019] },
+  { id: 'espn', name: 'ESPN', domains: ['espn.com'], years: [2017, 2021] },
+  { id: 'facebook', name: 'Facebook', domains: ['facebook.com'], js: true, preferLight: true, years: [2016, 2019] },
+  { id: 'instagram', name: 'Instagram', domains: ['instagram.com'], js: true, preferLight: true, years: [2017, 2019] },
+  { id: 'twitter', name: 'Twitter', domains: ['x.com', 'twitter.com'], years: [2019, 2022] },
+  { id: 'linkedin', name: 'LinkedIn', domains: ['linkedin.com'], preferLight: true, years: [2017, 2019] },
 ];
 
 export function themeMatches(theme: HandmadeTheme): string[] {

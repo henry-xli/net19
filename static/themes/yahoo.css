@@ -1,0 +1,24 @@
+/* net19 handmade theme: Yahoo homepage, 2019: white page, purple (#400090 / #6001d2) search, Helvetica Neue, square corners. */
+:root, html.uds-color-mode-light, html.uds-color-mode-dark { color-scheme: light !important; }
+html, body, body#news-content-app, .cls-content-grid { background: #fff !important; color: #26282a !important; }
+body, body * { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important; }
+
+/* Header: white, logo purple, purple rectangular search button */
+header#module-uh, #module-uh { background: #fff !important; border-bottom: 1px solid #e0e4e9 !important; }
+#module-uh a[href="https://www.yahoo.com/"] svg, #module-uh a[aria-label*="Yahoo" i] svg { color: #400090 !important; fill: #400090 !important; }
+#module-uh form { background: #fff !important; border: 1px solid #b0b9c1 !important; border-radius: 2px !important; box-shadow: none !important; }
+#module-uh form:focus-within { border-color: #6001d2 !important; }
+#module-uh form button[type="submit"], #module-uh form button:last-of-type {
+  background: #6001d2 !important; border-radius: 0 2px 2px 0 !important; color: #fff !important; min-width: 80px !important;
+}
+#module-uh form button[type="submit"] svg, #module-uh form button:last-of-type svg { color: #fff !important; fill: #fff !important; }
+#module-uh #ybar-l1-nav a { color: #26282a !important; font-weight: 700 !important; font-size: 13px !important; }
+#module-uh #ybar-l1-nav a:hover { color: #6001d2 !important; }
+#module-uh a[href*="login"], #module-uh a[href*="mail.yahoo"] { border-radius: 2px !important; }
+
+/* Stories: square images and cards, dark headlines, purple hover */
+#nca-homepage img, #nca-homepage [class*="rounded"], #convenience-bar [class*="rounded"], #conbar-content > div { border-radius: 0 !important; }
+#nca-homepage h2, #nca-homepage h3 { font-weight: 700 !important; }
+#nca-homepage a:hover h3, #nca-homepage h3 a:hover { color: #6001d2 !important; text-decoration: underline !important; }
+#conbar-content > div { background: #f5f8fa !important; border: 1px solid #e0e4e9 !important; }
+.cls-ad-top-center { background: #fff !important; }

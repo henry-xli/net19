@@ -1,0 +1,15 @@
+/* net19 handmade theme: eBay, 2019: blue #0654ba search button with square corners, Helvetica Neue, flat tiles. */
+:root { color-scheme: light !important; }
+body, body * { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important; }
+body { background: #fff !important; color: #333 !important; }
+#gh-search-btn, #gh-btn, .gh-search-button__button, button.gh-search-button {
+  background: #0654ba !important; border: 1px solid #0654ba !important; border-radius: 0 !important; color: #fff !important; font-size: 16px !important; font-weight: 400 !important;
+}
+#gh-ac-box2, #gh-ac-box, .gh-search-input__wrap, #gh-f .gh-search__wrap, .gh-search-input { border-radius: 0 !important; border: 2px solid #ccc !important; }
+#gh-cat-box, .gh-search-categories { border-radius: 0 !important; }
+.btn--primary, .fake-btn--primary, button.btn--primary { background: #0654ba !important; border-color: #0654ba !important; border-radius: 3px !important; }
+.btn--secondary, .fake-btn--secondary { border-color: #0654ba !important; color: #0654ba !important; border-radius: 3px !important; }
+.s-item__image-wrapper, .s-item__image, .s-card, .brwrvr__item-card, .vl-card, .hl-card, img, [class*="carousel"] img { border-radius: 0 !important; }
+.s-item__title, .s-item__link { color: #0654ba !important; }
+.s-item__price, .x-price-primary { color: #333 !important; font-weight: 700 !important; }
+.hl-cat-nav, #vl-flyout-nav, .vl-flyout-nav { border-bottom: 1px solid #ddd !important; }

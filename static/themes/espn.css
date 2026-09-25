@@ -1,0 +1,5 @@
+/* net19 handmade theme: ESPN, 2019. The layout is essentially unchanged; this removes later additions (Where to Watch, betting odds, ESPN BET) and restores Helvetica. */
+body, body *:not(svg):not(path) { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+.where-to-watch, #global-header .where-to-watch, li.where-to-watch, a[href*="/watch/"][class*="where"],
+a[href*="espnbet"], [class*="Odds"], [class*="odds__"], .betting, [data-testid*="odds"] { display: none !important; }
+.contentItem, .headlineStack, .scoreboard { border-radius: 0 !important; }

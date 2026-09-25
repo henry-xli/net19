@@ -1,0 +1,59 @@
+/* net19 handmade theme: GitHub, 2019: dark header, gradient buttons, square avatars, orange-topped tabs. github.js selects the light palette. */
+:root { color-scheme: light !important; }
+html, body { --borderRadius-medium: 3px; --borderRadius-default: 3px; --borderRadius-large: 3px; --fgColor-accent: #0366d6; --fgColor-link: #0366d6; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif !important; font-size: 14px !important; color: #24292e !important; }
+a:not([class*="btn"]):not([class*="Button"]) { color: #0366d6; }
+
+/* The near-black header on every page */
+.AppHeader, header.Header, .Header, header.HeaderMktg { background: #24292e !important; color: rgba(255,255,255,.7) !important; box-shadow: none !important; border-bottom: none !important; }
+.AppHeader .AppHeader-globalBar { background: #24292e !important; box-shadow: none !important; }
+.AppHeader a, .AppHeader button, .AppHeader .AppHeader-context-item-label, .Header-link, .HeaderMktg a, .HeaderMktg button { color: #fff !important; }
+.AppHeader svg, .Header svg, .HeaderMktg svg { color: #fff !important; fill: currentColor !important; }
+.AppHeader .AppHeader-button, .AppHeader .AppHeader-search-button, .AppHeader button.Button, .AppHeader .AppHeader-searchButton {
+  background: rgba(255,255,255,.125) !important; border: 1px solid #444d56 !important; border-radius: 3px !important; color: #fff !important;
+}
+.AppHeader .AppHeader-localBar { background: #fafbfc !important; border-bottom: 1px solid #e1e4e8 !important; }
+.AppHeader .AppHeader-localBar a, .AppHeader .AppHeader-localBar span { color: #586069 !important; }
+
+/* Buttons: 3px corners, subtle vertical gradients */
+.btn, .Button--secondary, .Button--invisible:not(.AppHeader *), button[data-variant="default"], a[data-variant="default"] {
+  border-radius: 3px !important; border: 1px solid rgba(27,31,35,.2) !important; color: #24292e !important;
+  background: linear-gradient(-180deg, #fafbfc, #eff3f6 90%) !important; box-shadow: none !important; font-weight: 600 !important;
+}
+.btn:hover, .Button--secondary:hover, button[data-variant="default"]:hover { background: linear-gradient(-180deg, #f0f3f6, #e6ebf1 90%) !important; border-color: rgba(27,31,35,.35) !important; }
+.btn-primary, .Button--primary, button[data-variant="primary"], a[data-variant="primary"] {
+  border-radius: 3px !important; border: 1px solid rgba(27,31,35,.2) !important; color: #fff !important;
+  background: linear-gradient(-180deg, #34d058, #28a745 90%) !important; box-shadow: none !important; font-weight: 600 !important;
+}
+.btn-primary:hover, .Button--primary:hover, button[data-variant="primary"]:hover { background: linear-gradient(-180deg, #2fcb53, #269f42 90%) !important; border-color: rgba(27,31,35,.5) !important; }
+.btn-primary *, .Button--primary *, button[data-variant="primary"] * { color: #fff !important; }
+.btn-danger, .Button--danger { color: #cb2431 !important; }
+
+/* Square avatars (circular ones arrived in 2020) */
+.avatar, .avatar-user, img.avatar, .avatar-small, img[data-testid="github-avatar"], [class*="Avatar"] img, img[class*="Avatar"] { border-radius: 3px !important; }
+
+/* Boxes and form controls */
+.Box, .border.rounded-2, .rounded-2, [class*="Box-sc-"] { border-radius: 3px !important; }
+.Box, .Box-header, .Box-row { border-color: #e1e4e8 !important; }
+.Box-header { background: #f6f8fa !important; }
+.form-control, .FormControl-input, input.form-control, .FormControl-input-wrap, [class*="TextInput-wrapper"] {
+  border-radius: 3px !important; border: 1px solid #d1d5da !important; box-shadow: inset 0 1px 2px rgba(27,31,35,.075) !important; background-color: #fff !important;
+}
+.Counter { background: rgba(27,31,35,.08) !important; color: #586069 !important; border: none !important; }
+.Label, .IssueLabel, .Label--secondary { border-radius: 2px !important; font-weight: 600 !important; }
+
+/* Repository tabs: the selected tab is a white folder tab with an orange top edge */
+.UnderlineNav { box-shadow: inset 0 -1px 0 #e1e4e8 !important; }
+.UnderlineNav-item { border-radius: 3px 3px 0 0 !important; border: 1px solid transparent !important; border-top-width: 3px !important; color: #586069 !important; padding: 7px 15px 8px !important; }
+.UnderlineNav-item.selected, .UnderlineNav-item[aria-current="page"], .UnderlineNav-item[aria-current]:not([aria-current="false"]) {
+  border-color: #e36209 #e1e4e8 transparent !important; background: #fff !important; color: #24292e !important; font-weight: 400 !important;
+}
+.UnderlineNav-item.selected::after, .UnderlineNav-item[aria-current]::after { display: none !important; }
+.UnderlineNav-item .UnderlineNav-octicon, .UnderlineNav-item svg { color: #959da5 !important; }
+
+/* Page and file-list surfaces */
+body, .application-main, main { background: #fff !important; }
+.react-directory-row:hover, .Box-row--hover-gray:hover { background: #f6f8fa !important; }
+.markdown-body { font-size: 16px !important; color: #24292e !important; }
+.markdown-body h1, .markdown-body h2 { border-bottom-color: #eaecef !important; }
+footer.footer, .footer { color: #586069 !important; }

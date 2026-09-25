@@ -43,7 +43,7 @@ test.beforeEach(async ({},info)=>{
     await route.abort();
   });
   worker=context.serviceWorkers()[0]??await context.waitForEvent('serviceworker');extensionId=new URL(worker.url()).host;
-  await expect.poll(()=>worker.evaluate(async()=>globalThis.chrome?.scripting?(await chrome.scripting.getRegisteredContentScripts()).length:-1)).toBe(1);
+  await expect.poll(()=>worker.evaluate(async()=>globalThis.chrome?.scripting?(await chrome.scripting.getRegisteredContentScripts()).some(s=>s.id==="net19-start"):false)).toBe(true);
 });
 test.afterEach(async()=>{active=false;await context.close();});
 

@@ -1,0 +1,8 @@
+/* net19 handmade theme: The New York Times, 2019. The site's design is largely unchanged; this restores the lighter 2019 top bar and removes later product tabs. */
+:root { color-scheme: light !important; }
+body { background: #fff !important; color: #121212 !important; }
+/* Games, Cooking, Wirecutter and The Athletic cross-product tabs came later */
+nav[data-testid="masthead-mini-nav"] a[href*="/crosswords"], nav a[href*="cooking.nytimes.com"], nav a[href*="/wirecutter"], nav a[href*="/athletic"],
+[data-testid="tab-bar"] a[href*="/games"], [data-testid="tab-bar"] a[href*="cooking"] { display: none !important; }
+header[data-testid="masthead-container"], #masthead { border-bottom: 1px solid #e2e2e2 !important; }
+section[data-testid="block-Briefings"] { display: none !important; }

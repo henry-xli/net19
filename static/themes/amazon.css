@@ -1,0 +1,34 @@
+/* net19 handmade theme: Amazon, 2019: classic gradient yellow buttons with dark borders, square product tiles, #232f3e header. */
+:root { color-scheme: light !important; }
+body, body #a-page { font-family: Arial, sans-serif !important; }
+
+/* Buttons: the pre-2023 "a-button" gradients */
+.a-button:not(.a-button-primary):not(.a-button-oneclick) {
+  border-radius: 3px !important; border: 1px solid #adb1b8 !important; border-color: #adb1b8 #a2a6ac #8d9096 !important;
+  background: linear-gradient(to bottom, #f7f8fa, #e7e9ec) !important; box-shadow: 0 1px 0 rgba(255,255,255,.6) inset !important;
+}
+.a-button-primary, #add-to-cart-button-ubb, .a-button-primary.a-button-span12, #submit\.add-to-cart, .a-button-buybox {
+  border-radius: 3px !important; border: 1px solid #a88734 !important; border-color: #a88734 #9c7e31 #846a29 !important;
+  background: linear-gradient(to bottom, #f7dfa5, #f0c14b) !important; box-shadow: 0 1px 0 rgba(255,255,255,.4) inset !important;
+}
+.a-button-primary:hover { background: linear-gradient(to bottom, #f5d78e, #eeb933) !important; }
+.a-button-oneclick, #buy-now-button, span#submit\.buy-now {
+  border-radius: 3px !important; border: 1px solid #ca7c1b !important; border-color: #ca7c1b #be751a #a56616 !important;
+  background: linear-gradient(to bottom, #f6c88f, #ed9220) !important;
+}
+.a-button-inner, .a-button .a-button-inner, .a-button-primary .a-button-inner { border-radius: 3px !important; background: transparent !important; box-shadow: none !important; }
+.a-button-text, .a-button-input + .a-button-text { color: #111 !important; }
+
+/* Header: navy belt, square search with the old orange-yellow button */
+#nav-belt, #navbar, #nav-main { background: #232f3e !important; }
+#nav-main { background: #232f3e !important; }
+#nav-search-bar-form, .nav-search-field, #nav-search .nav-fill { border-radius: 4px !important; }
+#nav-search-submit-button, .nav-search-submit, #nav-search-submit-text { background: #febd69 !important; border-radius: 0 4px 4px 0 !important; }
+#nav-search-dropdown-card, .nav-search-scope { background: #f3f3f3 !important; border-radius: 4px 0 0 4px !important; }
+
+/* Product tiles and cards were square */
+.a-cardui, .gw-card-layout .a-cardui, .s-card-container, .puis-card-container, .a-box, .a-carousel-card img, .s-image, .s-product-image-container,
+.a-section.a-spacing-base, [class*="rounded"] { border-radius: 0 !important; }
+.s-card-container, .puis-card-container { box-shadow: none !important; }
+a.a-link-normal .a-text-normal, h2 a.a-link-normal, .a-link-normal.s-link-style { color: #0066c0 !important; }
+.a-price, .a-color-price { color: #b12704 !important; }

@@ -24,6 +24,10 @@ Automatic preparation requires access to public websites. Chrome may ask you to 
 - The local cache holds up to **100 profiles**, subject to a **4 MiB** total limit. Changing the year immediately removes profiles from other years and cancels stale downloads. An older fallback capture can be used for one visit but is not stored as a selected-year capture.
 - The popup and settings use direct controls and status messages. No manual preparation action is required.
 
+## Handmade themes
+
+For 19 heavily used sites, net19 ships hand-written 2019 themes instead of reconstructing them from the archive: Google (homepage), YouTube, Wikipedia, Reddit, GitHub, Yahoo, Twitch, Amazon, eBay, Bing, Stack Overflow, CNN, The New York Times, IMDb, ESPN, Facebook, Instagram, Twitter/X and LinkedIn. They are built into the extension, so they apply before the first paint with no archive lookup and no loading page, whenever the selected year falls in the era each theme represents (see `src/themes.ts`). Where a site still serves its own 2019-era frontend, net19 uses it (Wikipedia's legacy Vector skin). Sites that switch to dark mode are kept on their own light palette, as they all were in 2019. The themes restyle the live page (colors, type, buttons, corners, and removal of features that did not exist yet); they do not rebuild layouts that changed structurally, and logged-in pages that could not be inspected (Facebook, Instagram, X, LinkedIn feeds) are best-effort. ESPN and The New York Times changed little since 2019, so their themes are small. Netflix is not themed because its 2019 design is essentially the current one.
+
 ## Coverage and limitations
 
 A historical site's CSS alone cannot reconstruct a different modern application. Net19 checks correspondence and readability before revealing a result; incompatible pages retain their current appearance. It cannot promise pixel-identical reconstruction across arbitrary sites, recreate behavior from archived JavaScript, recover unavailable graphics/fonts, or discover every alternate archived homepage URL.

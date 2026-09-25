@@ -147,7 +147,10 @@ function syncScripts(): Promise<unknown> {
       id: `net19-theme-${theme.id}`, matches: themeMatches(theme), ...(theme.css !== false ? { css: [`themes/${theme.id}.css`] } : {}),
       ...(theme.js ? { js: [`themes/${theme.id}.js`] } : {}), runAt: 'document_start' as const, allFrames: false, persistAcrossSessions: true,
       ...(paused.length ? { excludeMatches: paused } : {}),
-    }) as chrome.scripting.RegisteredContentScript));
+    }) as chrome.scripting.RegisteredContentScript).concat(themes.filter(theme => theme.preferLight).map(theme => ({
+      id: `net19-theme-${theme.id}-light`, matches: themeMatches(theme), js: ['themes/prefer-light.js'], world: 'MAIN' as const,
+      runAt: 'document_start' as const, allFrames: false, persistAcrossSessions: true, ...(paused.length ? { excludeMatches: paused } : {}),
+    }) as chrome.scripting.RegisteredContentScript)));
     const spec: chrome.scripting.RegisteredContentScript = {
       id: 'net19-start', matches, js: ['content.js'], css: ['gate.css'], runAt: 'document_start',
       allFrames: false, persistAcrossSessions: true,

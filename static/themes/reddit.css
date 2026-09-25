@@ -1,0 +1,84 @@
+/* net19 handmade theme: Reddit, 2019 redesign ("new Reddit"): blue-gray page, bordered white cards, blue buttons. */
+:root, html, html.theme-dark, .theme-rpl, .theme-dark, .theme-light {
+  color-scheme: light !important;
+  --color-neutral-background: #ffffff !important;
+  --color-neutral-background-strong: #ffffff !important;
+  --color-neutral-background-weak: #f6f7f8 !important;
+  --color-neutral-background-container: #f6f7f8 !important;
+  --color-neutral-background-medium: #f6f7f8 !important;
+  --color-neutral-background-canvas: #dae0e6 !important;
+  --color-neutral-background-hover: #f6f7f8 !important;
+  --color-neutral-background-selected: #e9f5fd !important;
+  --color-neutral-content: #1c1c1c !important;
+  --color-neutral-content-strong: #222222 !important;
+  --color-neutral-content-weak: #7c7c7c !important;
+  --color-neutral-border: #ccc !important;
+  --color-neutral-border-weak: #edeff1 !important;
+  --color-secondary-background: transparent !important;
+  --color-secondary-background-hover: #e8e8e8 !important;
+  --color-secondary-background-selected: #e8e8e8 !important;
+  --color-secondary-plain: #878a8c !important;
+  --color-secondary-weak: #878a8c !important;
+  --color-button-secondary-background: transparent !important;
+  --color-button-secondary-background-hover: #e8e8e8 !important;
+  --color-button-secondary-text: #878a8c !important;
+  --color-primary: #0079d3 !important;
+  --color-primary-background: #0079d3 !important;
+  --color-primary-background-hover: #1484d6 !important;
+  --color-primary-plain: #0079d3 !important;
+  --color-button-primary-background: #0079d3 !important;
+  --color-button-primary-background-hover: #1484d6 !important;
+  --color-action-primary: #0079d3 !important;
+  --color-input-secondary: #f6f7f8 !important;
+  --color-input-secondary-hover: #ffffff !important;
+  --color-upvote-plain: #ff4500 !important;
+  --color-downvote-plain: #7193ff !important;
+}
+html, body, shreddit-app { background: #dae0e6 !important; color: #1c1c1c !important; }
+body, shreddit-app, button, input, textarea { font-family: "IBMPlexSans", "Noto Sans", Arial, sans-serif !important; }
+
+/* Header: white 48px bar with a light divider */
+reddit-header-large header, header.v2 { background: #fff !important; border-bottom: 1px solid #edeff1 !important; box-shadow: none !important; }
+.reddit-search-bar, faceplate-search-input .label-container, reddit-search-large .reddit-search-bar * { background: #f6f7f8 !important; border: 1px solid #edeff1 !important; border-radius: 4px !important; }
+.reddit-search-bar:hover, faceplate-search-input:focus-within .label-container { background: #fff !important; border-color: #0079d3 !important; }
+reddit-search-large .reddit-search-bar * { border: none !important; background: transparent !important; }
+reddit-search-large .reddit-search-bar { color: #1c1c1c !important; }
+faceplate-search-input { --color-neutral-content: #1c1c1c; --color-neutral-content-weak: #878a8c; --color-input-secondary: #f6f7f8; --color-input-secondary-hover: #fff; color: #1c1c1c !important; }
+#reddit-logo { color: #1c1c1c !important; }
+#reddit-logo svg:not(:first-child), #reddit-logo svg:not(:first-child) path { fill: #1c1c1c !important; }
+/* LOG IN (outlined) / SIGN UP (filled), uppercase and bold */
+a#login-button, a#signup-button {
+  border-radius: 4px !important; text-transform: uppercase !important; font-weight: 700 !important; font-size: 14px !important;
+  letter-spacing: .5px !important; height: 32px !important; min-height: 32px !important; padding: 0 16px !important; align-self: center !important;
+}
+a#login-button { background: #0079d3 !important; color: #fff !important; border: 1px solid #0079d3 !important; }
+a#signup-button { background: transparent !important; color: #0079d3 !important; border: 1px solid #0079d3 !important; }
+
+/* 2019 had no persistent left navigation */
+#left-sidebar-container, flex-left-nav-container { display: none !important; }
+.grid-container { grid-template-columns: 1fr !important; }
+#subgrid-container { grid-column: 1 / -1 !important; margin: 0 auto !important; max-width: 1024px !important; }
+.main-container { gap: 24px !important; padding-top: 20px !important; }
+
+/* Posts: white bordered cards on the gray page */
+shreddit-post, shreddit-ad-post, article > shreddit-post {
+  background: #fff !important; border: 1px solid #ccc !important; border-radius: 4px !important; margin: 0 0 10px !important; box-shadow: none !important;
+}
+shreddit-post:hover { border-color: #898989 !important; }
+shreddit-feed hr, shreddit-feed > hr { display: none !important; }
+a[id^="post-title-"], [slot="title"] { color: #222 !important; font-size: 18px !important; font-weight: 500 !important; line-height: 22px !important; }
+[slot="credit-bar"], [slot="credit-bar"] a, faceplate-timeago { color: #787c7e !important; font-size: 12px !important; }
+[slot="credit-bar"] a[data-testid="subreddit-name"] { color: #1c1c1c !important; font-weight: 700 !important; }
+shreddit-join-button button, button.button-primary { background: #0079d3 !important; color: #fff !important; border-radius: 4px !important; text-transform: uppercase !important; font-weight: 700 !important; }
+
+/* Right column widgets: white cards with a blue title strip */
+#right-sidebar-container aside, #right-sidebar-container > div > div, [slot="sidebar"] > * {
+  background: #fff !important; border: 1px solid #ccc !important; border-radius: 4px !important;
+}
+#right-sidebar-container h2 { display: block !important; width: auto !important; background: #0079d3 !important; color: #fff !important; padding: 12px !important; margin: 0 !important; font-size: 12px !important; text-transform: uppercase !important; letter-spacing: .5px !important; border-radius: 4px 4px 0 0 !important; }
+
+/* Sort bar ("Best / Hot / New") as a card */
+main#main-content > div.my-xs { background: #fff !important; border: 1px solid #ccc !important; border-radius: 4px !important; padding: 6px 12px !important; margin-bottom: 16px !important; }
+
+/* Comments page */
+shreddit-comment { --color-neutral-border: #edeff1; }

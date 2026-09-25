@@ -1,0 +1,53 @@
+/* net19 handmade theme: Facebook, 2019 ("classic"): blue #4267b2 top bar, #e9ebee page, small-radius white cards, Helvetica. facebook.js keeps the light palette. */
+:root, .__fb-light-mode, .__fb-dark-mode {
+  color-scheme: light !important;
+  --web-wash: #e9ebee !important;
+  --wash: #e9ebee !important;
+  --surface-background: #fff !important;
+  --card-background: #fff !important;
+  --card-background-flat: #f5f6f7 !important;
+  --comment-background: #f2f3f5 !important;
+  --primary-text: #1d2129 !important;
+  --secondary-text: #606770 !important;
+  --placeholder-text: #90949c !important;
+  --primary-icon: #606770 !important;
+  --secondary-icon: #606770 !important;
+  --accent: #4267b2 !important;
+  --blue-link: #385898 !important;
+  --primary-button-background: #4267b2 !important;
+  --primary-button-text: #fff !important;
+  --secondary-button-background: #f5f6f7 !important;
+  --secondary-button-text: #4b4f56 !important;
+  --divider: #dddfe2 !important;
+  --media-inner-border: #dddfe2 !important;
+  --card-corner-radius: 3px !important;
+  --button-corner-radius: 2px !important;
+  --button-corner-radius-large: 2px !important;
+  --button-small-corner-radius: 2px !important;
+  --input-corner-radius: 2px !important;
+  --nav-list-selected-accent: #4267b2 !important;
+  --shadow-card: 0 0 0 1px #dddfe2 !important;
+  --card-box-shadow: 0 0 0 1px #dddfe2 !important;
+  --shadow-1: 0 0 0 1px #dddfe2 !important;
+}
+body, body * { font-family: Helvetica, Arial, sans-serif !important; }
+html, body { background: #e9ebee !important; }
+
+/* The blue bar */
+div[role="banner"] {
+  background: #4267b2 !important; border-bottom: 1px solid #29487d !important; box-shadow: none !important;
+  --surface-background: #4267b2; --primary-icon: #fff; --secondary-icon: #fff; --primary-text: #fff; --secondary-text: #fff;
+  --accent: #fff; --disabled-icon: rgba(255,255,255,.5); --comment-background: #fff; --secondary-button-background: #365899;
+}
+div[role="banner"] input[type="search"], div[role="banner"] input { background: #fff !important; color: #1d2129 !important; border-radius: 2px !important; }
+div[role="banner"] svg { color: #fff !important; }
+div[role="banner"] a[aria-label="Facebook"] svg path { fill: #fff !important; }
+
+/* Feed cards and composer */
+div[role="feed"] > div, div[role="main"] div[aria-posinset], div[data-pagelet^="FeedUnit"], div[role="article"] {
+  border-radius: 3px !important;
+}
+div[role="main"] [aria-label="Create a post"], div[role="region"][aria-label="Create a post"] { border-radius: 3px !important; }
+div[role="button"][aria-label], a[role="link"] img { border-radius: inherit; }
+span, a { font-size: inherit; }
+div[role="article"] { font-size: 14px !important; }

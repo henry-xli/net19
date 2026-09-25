@@ -1,0 +1,43 @@
+/* net19 handmade theme: Twitch, early-to-mid 2019 (before the September 2019 rebrand): #6441a4 purple, Helvetica Neue, light theme. */
+:root, .tw-root--theme-light, .tw-root--theme-dark {
+  color-scheme: light !important;
+  --color-background-button-primary-default: #6441a4 !important;
+  --color-background-button-primary-hover: #7d5bbe !important;
+  --color-background-button-primary-active: #4b367c !important;
+  --color-background-button-brand: #6441a4 !important;
+  --color-background-brand: #6441a4 !important;
+  --color-background-accent: #6441a4 !important;
+  --color-text-link: #6441a4 !important;
+  --color-text-link-hover: #7d5bbe !important;
+  --color-text-brand: #6441a4 !important;
+  --color-fill-brand: #6441a4 !important;
+  --color-background-base: #faf9fa !important;
+  --color-background-body: #faf9fa !important;
+  --color-background-alt: #efeef1 !important;
+  --color-border-base: #dad8de !important;
+  --font-base: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  --font-display: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  --border-radius-medium: 2px !important;
+  --border-radius-large: 2px !important;
+}
+body, #root { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important; }
+body *:not(svg):not(path) { font-family: inherit; }
+.navigation-link, h1, h2, h3, h4, [class*="CoreText"] { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important; }
+
+/* Top navigation: white bar, purple glitch mark, a thin divider */
+nav.top-nav .top-nav__menu { background: #fff !important; box-shadow: 0 1px 0 #dad8de !important; }
+nav.top-nav a[aria-label="Twitch Home"] svg, nav.top-nav a[aria-label*="Twitch" i] svg { color: #6441a4 !important; fill: #6441a4 !important; }
+.navigation-link { color: #19171c !important; font-weight: 600 !important; }
+.navigation-link:hover { color: #6441a4 !important; }
+
+/* Buttons: small radius, flat purple */
+button[class*="ScCoreButton"], a[class*="ScCoreButton"] { border-radius: 2px !important; }
+[data-a-target="signup-button"], [data-a-target="follow-button"] { background: #6441a4 !important; color: #fff !important; }
+[data-a-target="login-button"] { background: #efeef1 !important; color: #19171c !important; }
+
+/* Side column: pale gray; channel rows compact */
+.side-nav, .side-nav__overlay-wrapper, .side-bar-contents { background: #efeef1 !important; }
+.side-nav-card__title, .side-nav-card__title * { color: #19171c !important; }
+
+/* Thumbnails and cards: square corners */
+[class*="ScAspectRatio"], [class*="preview-card-image"], .tw-image, img.tw-image, [class*="ScTransformWrapper"], [class*="ScWrapper"] { border-radius: 0 !important; }

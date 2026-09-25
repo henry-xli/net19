@@ -1,0 +1,38 @@
+/* net19 handmade theme: LinkedIn, 2019: dark #283e4a global nav, #f3f6f8 page, square-cornered blue #0073b1 buttons, shadowed white cards. */
+:root, html, .theme--light, .theme--dark {
+  color-scheme: light !important;
+  --color-background-canvas: #f3f6f8 !important;
+  --color-background-container: #fff !important;
+  --color-brand: #0073b1 !important;
+  --color-action: #0073b1 !important;
+  --color-text: rgba(0,0,0,.9) !important;
+  --color-text-low-emphasis: rgba(0,0,0,.6) !important;
+  --corner-radius-large: 2px !important;
+  --corner-radius-medium: 2px !important;
+  --corner-radius-small: 2px !important;
+}
+body, body * { font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+body, .application-outlet, main { background: #f3f6f8 !important; }
+
+/* Global navigation: the dark blue-gray bar with light icons */
+header.global-nav, #global-nav, .global-nav__content { background: #283e4a !important; border-bottom: none !important; }
+.global-nav a, .global-nav button, .global-nav__primary-link, .global-nav__primary-link-text, .global-nav__me-content, .global-nav li-icon, .global-nav svg { color: rgba(255,255,255,.75) !important; fill: currentColor !important; }
+.global-nav__primary-link--active, .global-nav__primary-link--active .global-nav__primary-link-text { color: #fff !important; }
+.global-nav__primary-link--active::after { background: #fff !important; }
+.global-nav input, #global-nav-typeahead input, .search-global-typeahead__input { background: #e1e9ee !important; border-radius: 2px !important; color: rgba(0,0,0,.9) !important; }
+
+/* Rectangular buttons (pill buttons arrived in 2020) */
+.artdeco-button, button.artdeco-button, a.artdeco-button { border-radius: 2px !important; }
+.artdeco-button--primary { background: #0073b1 !important; color: #fff !important; }
+.artdeco-button--primary:hover { background: #006097 !important; }
+.artdeco-button--secondary { box-shadow: inset 0 0 0 1px #0073b1 !important; color: #0073b1 !important; }
+
+/* Cards */
+.artdeco-card, section.artdeco-card, .feed-shared-update-v2, .scaffold-layout__sidebar .artdeco-card {
+  border-radius: 2px !important; box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 2px 3px rgba(0,0,0,.2) !important; border: none !important; background: #fff !important;
+}
+.feed-shared-actor__name, .update-components-actor__name { color: rgba(0,0,0,.9) !important; font-weight: 600 !important; }
+a { color: #0073b1; }
+
+/* Logged-out landing pages */
+nav.nav a.nav__button-secondary, a.btn-md.btn-primary, .btn-primary { border-radius: 2px !important; }

@@ -12,6 +12,8 @@ Net19 does not transmit your visited path, query string, fragment, current page 
 
 The Internet Archive receives these public homepage/asset requests, timestamp queries, your network IP address, and normal connection metadata. Its [terms and privacy policy](https://archive.org/about/terms.php) apply. Net19 does not submit sites for archiving, bypass archive access controls, or send requests to Archive.is.
 
+Handmade themes (see the README) are bundled with the extension and make no network requests of their own, except that the Google homepage theme displays Google's own hosted logo image from google.com.
+
 ## Local processing and storage
 
 Archived documents are sanitized and measured locally in a script-disabled, network-isolated browser frame. The extension examines the live page's labels, links, element structure, computed styles, and positions locally to match components. Current page data is not sent to an archive or saved as a profile. Archived scripts never run.
