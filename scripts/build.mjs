@@ -6,7 +6,7 @@ const out = new URL('../dist/extension/', import.meta.url);
 await rm(out, { recursive: true, force: true });
 await mkdir(out, { recursive: true });
 await cp(new URL('../static/', import.meta.url), out, { recursive: true });
-await build({ entryPoints: ['src/background.ts', 'src/content.ts', 'src/popup.ts', 'src/loading.ts', 'src/offscreen.ts'],
+await build({ entryPoints: ['src/background.ts', 'src/popup.ts'],
   outdir: out.pathname, bundle: true, platform: 'browser', target: 'chrome120', format: 'iife',
   minify: true, legalComments: 'eof', logLevel: 'warning' });
 // Original vector artwork: no platform fonts, remote images, or generated-photo dependencies.
@@ -16,18 +16,6 @@ for (const size of [16, 32, 48, 128]) {
   await sharp(Buffer.from(icon)).resize(size, size).png().toFile(new URL(`icons/${size}.png`, out).pathname);
 }
 await writeFile(new URL('icons/icon.svg', out), icon);
-const licenses = [];
-for (const name of ['css-tree', 'mdn-data', 'source-map-js', 'parse5', 'entities']) {
-  const directory = new URL(`../node_modules/${name}/`, import.meta.url);
-  const pkg = JSON.parse(await readFile(new URL('package.json', directory), 'utf8'));
-  let license = '';
-  for (const file of ['LICENSE', 'LICENSE.txt', 'LICENSE.md']) {
-    try { license = await readFile(new URL(file, directory), 'utf8'); break; } catch { /* Different packages use different license filenames. */ }
-  }
-  if (!license) throw new Error(`Missing redistribution license for ${name}`);
-  licenses.push(`${name} ${pkg.version}\n${license}`);
-}
-await writeFile(new URL('THIRD_PARTY_NOTICES.txt', out), licenses.join('\n\n--------------------------------\n\n'));
 const manifest = JSON.parse(await readFile(new URL('manifest.json', out), 'utf8'));
 const sourcePackage = JSON.parse(await readFile(new URL('../package.json', import.meta.url), 'utf8'));
 if (manifest.version !== sourcePackage.version) throw new Error('Package and manifest versions must match');

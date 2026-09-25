@@ -1,8 +1,8 @@
 {
   "name": "net19",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
-  "description": "Automatic historical website layout preparation with local caching.",
+  "description": "Websites as they looked in 2019.",
   "type": "module",
   "scripts": {
     "build": "node scripts/build.mjs",
@@ -10,20 +10,14 @@
     "test": "node --import tsx --test tests/*.test.ts",
     "test:browser": "playwright test",
     "check": "npm run typecheck && npm test && npm run build && npm run test:browser",
-    "package": "node scripts/package.mjs",
-    "check:archive": "node scripts/check-browser-live.mjs"
+    "package": "node scripts/package.mjs"
   },
   "engines": {
     "node": ">=22"
   },
-  "dependencies": {
-    "css-tree": "^3.1.0",
-    "parse5": "^8.0.0"
-  },
   "devDependencies": {
     "@playwright/test": "^1.55.0",
     "@types/chrome": "^0.1.12",
-    "@types/css-tree": "^2.3.10",
     "@types/node": "^24.0.0",
     "esbuild": "^0.25.0",
     "fflate": "^0.8.3",

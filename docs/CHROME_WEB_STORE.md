@@ -1,24 +1,41 @@
 # Chrome Web Store submission kit
 
-Package: `downloads/net19-0.2.0.zip`. Its root contains `manifest.json`, bundled JavaScript, extension pages, styles, icons, and third-party notices. Source/test tooling and downloaded archives are excluded. Run `npm ci`, `npm run check`, `npm audit --omit=dev`, and `npm run package` for a release. Keep package, lockfile, manifest and displayed version aligned.
+The package is `downloads/net19-0.3.0.zip`. Its root contains:
+
+- `manifest.json`;
+- the bundled worker and popup;
+- the theme stylesheets and scripts;
+- icons.
+
+For a release, run:
+
+```sh
+npm ci
+npm run check
+npm audit --omit=dev
+npm run package
+```
+
+Keep the package, lockfile, manifest and displayed version aligned.
 
 ## Listing text
 
 **Name:** net19
 
-**Summary:** Prepare historical website styles before opening pages. Adjustable year, automatic archive lookup and a local cache.
+**Summary:** Websites as they looked in 2019.
 
 **Description:**
 
-Net19 prepares archived website styling before opening an uncached site. Choose a year from 2007 through today; the default is 2019. Preparation runs automatically and waits up to 8 seconds (adjustable) before opening the page; slower lookups finish in the background for the next visit. Popular sites are prepared ahead of time. Saved profiles skip the archive lookup on later visits.
+net19 restyles 20 popular websites to look as they did in 2019. The sites are Google, YouTube, Wikipedia, Reddit, GitHub, Yahoo, Twitch, Amazon, eBay, Bing, Stack Overflow, CNN, The New York Times, IMDb, ESPN, Facebook, Instagram, Twitter/X and LinkedIn. Each look is designed by hand. It applies before the page first appears and follows the site's own light or dark mode.
 
-The extension measures historical layouts locally and matches their components to the live page. Compatible pages can recover historical spacing, typography, colors and layout proportions while retaining current text and working controls. If a usable archive or reliable match is unavailable, the current appearance is used. Pixel-identical results on every website are not guaranteed.
+Two sites still serve their older design themselves, and net19 uses it:
 
-Use the toolbar popup to change the year, pause a site, or view the result for this visit. Changing the year deletes cached profiles from other years. Up to 100 profiles are kept locally, subject to a 4 MiB total cache limit.
+- Wikipedia opens in its legacy Vector skin.
+- Signed-in Reddit opens on old.reddit.com.
 
-Net19 sends the public homepage origin and selected year to the Internet Archive, and may request public archived stylesheet/graphic addresses. Visited paths, queries, live page text, form values and cookies are not sent by net19. Analysis and storage happen on your device. There is no account, developer server, remote AI, analytics or telemetry.
+The popup has two switches: net19 on or off, and net19 on or off for the current site.
 
-Net19 is open source and independent of the Internet Archive. Wayback availability and compatibility with modern pages determine coverage. The current-year setting uses the site's current appearance.
+net19 makes no network requests and does not run on any other website. There is no account, server, analytics, or telemetry.
 
 ## Disclosures
 
@@ -27,27 +44,26 @@ Net19 is open source and independent of the Internet Archive. Wayback availabili
 | Homepage | https://github.com/henry-xli/net19 |
 | Support | https://github.com/henry-xli/net19/issues |
 | Privacy policy | https://github.com/henry-xli/net19/blob/main/PRIVACY.md |
-| Single purpose | Apply the user's selected historical visual styling to compatible live websites |
-| Host permissions | Public HTTP(S) access enables automatic preparation and local page matching; archive connections retrieve public snapshots/resources |
-| `declarativeNetRequestWithHostAccess` | Redirect uncached public GET requests to a local preparation page before the destination is contacted |
-| `webNavigation` | Remove temporary per-tab navigation allow rules after commit or failure |
-| `offscreen` | Measure sanitized archive layouts in an isolated local frame |
-| `scripting` | Register startup content scripts and install generated CSS into the correct document |
-| `storage` | Local preferences, bounded historical models, and temporary preparation results |
-| Remote code | All executable code is bundled. Archived HTML/CSS are inert measurement inputs; archived scripts never run, and original selectors are never injected into live pages |
-| Data | Disclose browsing-related homepage addresses sent to the Internet Archive and locally stored origin/recency metadata. Live page data is examined locally for matching, never transmitted or persisted by net19 |
+| Single purpose | Restyle a fixed set of websites to look as they did in 2019 |
+| Host permissions | Only the 20 themed domains, to apply their themes |
+| `scripting` | Register the bundled theme stylesheets and scripts at document start |
+| `declarativeNetRequestWithHostAccess` | Add Wikipedia's legacy-skin parameter; send signed-in Reddit visits to old.reddit.com |
+| `cookies` | Check whether a Reddit session cookie exists; its value is not stored or sent |
+| `storage` | The two switches |
+| Remote code | None. All code is bundled |
+| Data | None collected or transmitted |
 
-Review the dashboard's current data questionnaire against the actual behavior and privacy policy. Do not claim universal fidelity, offline discovery, instantaneous cold loads, or guaranteed approval.
+## Reviewer steps
 
-## Reviewer steps and assets
+1. Load the package and open youtube.com, google.com or github.com. The 2019 look applies on the first load.
+2. Open a Wikipedia article: the URL gains `useskin=vector`.
+3. Sign in to Reddit and open reddit.com: it opens on old.reddit.com.
+4. Use the popup to switch the current site, or net19, off. The site is back to normal on its next load.
 
-1. Load the packaged extension with public-site access. Open a public site with 2019 selected.
-2. On a first visit, preparation begins automatically on the local loading page. The destination opens after preparation or bounded fallback. There is no preparation button.
-3. Inspect the popup for the actual result and source. A saved but incompatible profile must still report current styling for that page.
-4. Visit again to exercise caching. Change the year to confirm other-year entries disappear. Pause to restore original styling; clear the cache in Settings.
+Assets:
 
-Deterministic tests exercise successful archives and failures in a real Chromium extension. Optional live checks are separate and can fail when archives or layouts are incompatible. No test responses or browser profiles ship.
+- `dist/extension/icons/128.png`;
+- `docs/images/popup.png`;
+- optionally, `docs/images/promo-440.png` (440 × 280).
 
-Assets: `dist/extension/icons/128.png`, `docs/images/settings.png` (1280 × 800), `docs/images/popup.png`, and optional `docs/images/promo-440.png` (440 × 280). Screenshots show actual extension UI with synthetic example-site data.
-
-A Chrome Web Store developer account is needed to upload and submit. These files do not imply submission or approval. See [Chrome's publishing guide](https://developer.chrome.com/docs/webstore/publish).
+These files do not imply submission or approval. See [Chrome's publishing guide](https://developer.chrome.com/docs/webstore/publish).

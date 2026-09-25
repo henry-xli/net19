@@ -1,57 +1,32 @@
-import { canonicalOrigin, publicOrigin, type ProfileResult, type Settings } from './shared';
+import { THEMES, themePaused, type HandmadeTheme } from './themes';
+import type { Settings } from './shared';
 
-export const NAVIGATION_TTL_MS = 90_000;
-export const PUBLIC_NAVIGATION = '^https?://(?:[a-z0-9-]+\\.)+[a-z][a-z0-9-]*/.*';
-export const EXCLUDED_DOMAINS = ['archive.org', 'archive.is', 'archive.today', 'archive.ph', 'chromewebstore.google.com',
-  'localhost', 'local', 'localdomain', 'internal', 'lan', 'home', 'test', 'invalid', 'onion', 'home.arpa'];
+type Rule = chrome.declarativeNetRequest.Rule;
+const MAIN = ['main_frame' as chrome.declarativeNetRequest.ResourceType];
+const GET = ['get' as chrome.declarativeNetRequest.RequestMethod];
+const REDIRECT = 'redirect' as chrome.declarativeNetRequest.RuleActionType;
+const ALLOW = 'allow' as chrome.declarativeNetRequest.RuleActionType;
 
-export function originFilter(origin: string): string {
-  const host = new URL(canonicalOrigin(origin)).hostname.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  return `^https?://(?:www\\.)?${host}/`;
-}
-
-export function loadingTarget(url: string, extensionUrl: string): string | null {
-  if (!url.startsWith(`${extensionUrl}#`)) return null;
-  const target = url.slice(extensionUrl.length + 1);
-  return publicOrigin(target) ? target : null;
-}
-
-export function navigationRules(config: Settings, origins: string[], extensionUrl: string, excluded: string[] = [],
-  queries: Array<{ pattern: string; params: Array<[string, string]> }> = []): chrome.declarativeNetRequest.Rule[] {
-  if (!config.enabled || config.year === new Date().getFullYear()) return [];
-  const rules: chrome.declarativeNetRequest.Rule[] = [{
-    id: 1, priority: 1,
-    action: { type: 'redirect' as chrome.declarativeNetRequest.RuleActionType, redirect: { regexSubstitution: `${extensionUrl}#\\0` } },
-    condition: { regexFilter: PUBLIC_NAVIGATION, resourceTypes: ['main_frame' as chrome.declarativeNetRequest.ResourceType],
-      requestMethods: ['get' as chrome.declarativeNetRequest.RequestMethod], excludedRequestDomains: [...EXCLUDED_DOMAINS, ...config.disabledHosts, ...excluded] },
-  }];
-  // A theme's URL parameter (e.g. a site's legacy skin). The pattern only matches URLs
-  // without a query, so the redirected URL never matches again.
-  for (const [i, query] of queries.slice(0, 20).entries()) rules.push({ id: 60 + i, priority: 3,
-    action: { type: 'redirect' as chrome.declarativeNetRequest.RuleActionType, redirect: { transform: { queryTransform: {
-      addOrReplaceParams: query.params.map(([key, value]) => ({ key, value })) } } } },
-    condition: { regexFilter: query.pattern, resourceTypes: ['main_frame' as chrome.declarativeNetRequest.ResourceType],
-      requestMethods: ['get' as chrome.declarativeNetRequest.RequestMethod], excludedRequestDomains: config.disabledHosts } });
-  for (const [i, origin] of [...new Set(origins.map(canonicalOrigin))].slice(0, 100).entries()) {
-    rules.push({ id: 100 + i, priority: 2, action: { type: 'allow' as chrome.declarativeNetRequest.RuleActionType },
-      condition: { regexFilter: originFilter(origin), resourceTypes: ['main_frame' as chrome.declarativeNetRequest.ResourceType] } });
+// Navigation rules for themes that use a site's own older frontend: a URL parameter (Wikipedia's legacy skin)
+// or a legacy host (old.reddit.com, only while `signedIn` reports the site's session cookie).
+// Nothing else is redirected, and nothing leaves the browser.
+export function navigationRules(config: Settings, signedIn: (theme: HandmadeTheme) => boolean = () => false, themes = THEMES): Rule[] {
+  if (!config.enabled) return [];
+  const rules: Rule[] = [];
+  let id = 1;
+  for (const theme of themes) {
+    if (themePaused(theme, config.disabledHosts)) continue;
+    // The query pattern only matches URLs without a query, so the redirected URL never matches again.
+    if (theme.query) rules.push({ id: id++, priority: 1,
+      action: { type: REDIRECT, redirect: { transform: { queryTransform: { addOrReplaceParams: theme.query.params.map(([key, value]) => ({ key, value })) } } } },
+      condition: { regexFilter: theme.query.pattern, resourceTypes: MAIN, requestMethods: GET } });
+    const legacy = theme.legacy;
+    if (legacy && (!legacy.signedIn || signedIn(theme))) {
+      rules.push({ id: id++, priority: 1, action: { type: REDIRECT, redirect: { regexSubstitution: legacy.substitution } },
+        condition: { regexFilter: legacy.pattern, resourceTypes: MAIN, requestMethods: GET } });
+      if (legacy.except) rules.push({ id: id++, priority: 2, action: { type: ALLOW },
+        condition: { regexFilter: legacy.except, resourceTypes: MAIN } });
+    }
   }
   return rules;
-}
-
-export const navigationKey = (tabId: number): string => `navigation:${tabId}`;
-export const releaseRuleId = (tabId: number): number => 1_000_000 + tabId;
-export type PreparedNavigation = { origin: string; year: number; expiresAt: number; result: ProfileResult };
-
-export async function releaseNavigation(tabId: number, target: string, year: number, result: ProfileResult): Promise<void> {
-  const origin = publicOrigin(target);
-  if (!origin) throw new Error('Unsupported destination');
-  const id = releaseRuleId(tabId);
-  // Keep the result in session memory so a timeout/fallback does not start a second lookup
-  // after the site is allowed through. No visited path, query or fragment goes to the archive.
-  await chrome.storage.session.set({ [navigationKey(tabId)]: { origin, year, result, expiresAt: Date.now() + NAVIGATION_TTL_MS } satisfies PreparedNavigation });
-  await chrome.declarativeNetRequest.updateSessionRules({ removeRuleIds: [id], addRules: [{
-    id, priority: 100, action: { type: 'allow' as chrome.declarativeNetRequest.RuleActionType },
-    condition: { tabIds: [tabId], regexFilter: originFilter(origin), resourceTypes: ['main_frame' as chrome.declarativeNetRequest.ResourceType] },
-  }] });
 }

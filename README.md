@@ -1,46 +1,47 @@
 # net19
 
-A Chrome extension that shows websites as they looked in **2019**, prepared automatically before a site opens.
+A Chrome extension that shows popular websites as they looked in **2019**.
 
-[Download net19 0.2.0](https://github.com/henry-xli/net19/raw/refs/heads/main/downloads/net19-0.2.0.zip) · [Privacy](PRIVACY.md) · [Architecture](docs/ARCHITECTURE.md) · [Validation](docs/VALIDATION.md)
+[Download net19 0.3.0](https://github.com/henry-xli/net19/raw/refs/heads/main/downloads/net19-0.3.0.zip) · [Privacy](PRIVACY.md) · [Architecture](docs/ARCHITECTURE.md) · [Validation](docs/VALIDATION.md)
 
 ## Install or update
 
 1. Download the ZIP and **extract it**. Chrome's **Load unpacked** accepts a folder, not a ZIP.
 2. Open `chrome://extensions` and turn on **Developer mode**.
 3. Click **Load unpacked** and select the extracted folder containing `manifest.json`.
-4. Open a website normally. Preparation is automatic, including the first visit to a new site.
 
-For an existing unpacked installation, replace its folder contents with this release and click the extension's **Reload** button once. If you load a different folder, remove the old copy so two versions are not running. This is only an installation step; everyday browsing needs no preparation button or extra reload.
+To update an existing unpacked installation, replace its folder contents and click the extension's **Reload** button once.
 
-Automatic preparation requires access to public websites. Chrome may ask you to accept the expanded permissions when updating from 0.1.0. Pausing a site or the extension restores its current styling.
+## Sites
 
-## What changed in 0.2
+The 2019 look is designed by hand for these sites, using the [Web Design Museum](https://www.webdesignmuseum.org/gallery/)'s capture of each one as the reference:
 
-- Uncached public GET navigations first open a local loading page. The destination request is held while net19 checks the archive, up to **8 seconds**. If the archive is slower, the page opens with its current style and preparation finishes in the background, so the next visit is instant. About 25 popular homepages are prepared in the background ahead of time. Cached sites skip this lookup.
-- The parser measures an archived document in an isolated browser frame. It preserves the CSS cascade, media conditions, component typography, borders, spacing, gradients, and bounded raster graphics.
-- A general matcher connects archived components to live elements using labels, links, form names, classes, and structure. There are **no website-specific layout adapters**. Compatible compact pages recover measured geometry; longer pages can recover matched grid/flex proportions while current text continues to flow.
-- Live controls and event handlers remain in place. Styles activate while the page is covered. Once a page is revealed, a late archive response cannot restyle it.
-- The local cache holds up to **100 profiles**, subject to a **4 MiB** total limit. An older fallback capture can be used for one visit but is not stored as a 2019 capture.
-- The popup has two switches: net19 everywhere, and net19 on the current site. There is no settings page.
+- Google Search, YouTube, Wikipedia, Reddit, GitHub, Yahoo
+- Twitch, Amazon, eBay, Bing, Stack Overflow, CNN
+- The New York Times, IMDb, ESPN, Facebook, Instagram, Twitter/X, LinkedIn
 
-## Handmade themes
+net19 does nothing on any other site.
 
-For 19 heavily used sites, net19 ships built-in 2019 themes instead of reconstructing them from the archive: Google Search, YouTube, Wikipedia, Reddit, GitHub, Yahoo, Twitch, Amazon, eBay, Bing, Stack Overflow, CNN, The New York Times, IMDb, ESPN, Facebook, Instagram, Twitter/X and LinkedIn. They apply before the first paint, with no archive lookup or loading page, (`src/themes.ts`).
+Each look is a set of styling rules on the site's own design variables. Everything the site draws, including menus, popups and content that loads while scrolling, gets the same palette. The look applies before the first paint.
 
-Each theme is a set of styling rules rather than per-element patches: its 2019 palette is mapped onto the site's own design variables, so everything the site draws later (menus, suggestion lists, popups in same-site frames, content loaded while scrolling) uses the same palette. Every theme has a light and a dark variant and follows the site's own light/dark setting; sites that had a dark theme in 2019 (YouTube, Reddit, Twitch, Twitter) use it, the others get a dark version of their 2019 look. Wikipedia uses its own legacy Vector skin. Layouts that changed structurally are not rebuilt, and logged-in feeds that could not be inspected (Facebook, Instagram, X, LinkedIn) are best-effort. Netflix is not themed because its 2019 design is essentially the current one.
+Every theme has a light and a dark variant and follows the site's own light or dark setting. Sites that had a dark theme in 2019 (YouTube, Twitch, Twitter) use it. The others get a dark version of their 2019 look.
 
-## Coverage and limitations
+Two sites still serve their older design themselves:
 
-A historical site's CSS alone cannot reconstruct a different modern application. Net19 checks correspondence and readability before revealing a result; incompatible pages retain their current appearance. It cannot promise pixel-identical reconstruction across arbitrary sites, recreate behavior from archived JavaScript, recover unavailable graphics/fonts, or discover every alternate archived homepage URL.
+- **Wikipedia** articles open in its legacy Vector skin.
+- **Reddit**, while you are signed in, opens on old.reddit.com: the list with vote arrows, blue titles and the sidebar Reddit used through 2021. Old Reddit has no dark mode, so when your device is dark, net19 gives the same layout a dark palette. Signed out, old.reddit.com only offers a sign-in page, so Reddit stays on its current app with 2019 colors and a flat list.
 
-Snapshots come from the public homepage, not the private path you are visiting. Subpages with different structures may therefore stay current. The Chrome navigation gate handles ordinary public HTTP(S) GET requests; POST submissions are not redirected or replayed. A site's own service worker, an in-page SPA transition, closed shadow roots, embedded frames, and canvas interfaces have additional limits. See [the exact behavior](docs/ARCHITECTURE.md).
+The popup has two switches: net19 on or off, and net19 on or off for the current site.
 
-Wayback is the implemented provider. Archive.is is not queried. The timeout covers archive preparation, not the destination site's own load time. Cached rendering still takes local matching and browser work; it is not literally instantaneous. The popup reports whether this page received a layout/style or kept its current appearance.
+## Limits
+
+- Where a site's structure has changed since 2019, the theme restyles the current layout rather than rebuilding the old one.
+- Signed-in feeds that could not be inspected (Facebook, Instagram, X, LinkedIn) are best-effort.
+- A site redesign can break parts of a theme until the theme is updated.
 
 ## Privacy
 
-Archive requests disclose the **public homepage origin** to the Internet Archive. Archived public stylesheet and graphic addresses may also be requested. A fixed list of popular homepages, identical for every user, is also looked up in the background. Your visited path, query, fragment, current page text, form values, and cookies are not sent by net19. Matching and storage happen locally. There is no developer server, remote AI, account, analytics, or telemetry. [Full privacy policy](PRIVACY.md).
+net19 makes no network requests and has access only to the themed sites. It stores only its two switches. For Reddit, it checks whether Reddit's session cookie exists, and nothing more. [Full privacy policy](PRIVACY.md).
 
 ## Development
 
@@ -53,6 +54,6 @@ npm run check
 npm run package
 ```
 
-`src/` and `static/` are the source. `dist/extension/` is the unpacked extension; `artifacts/net19-0.2.0.zip` is the packaged build, with a SHA-256 file beside it. Tests, browser profiles, archive downloads, and logs are excluded from the package.
-
-`npm run check:archive -- https://www.example.com` runs an optional real archive/site check in a fresh browser. A failure remains a failed live check, even when deterministic tests pass. See [validation](docs/VALIDATION.md) and the [Chrome Web Store submission kit](docs/CHROME_WEB_STORE.md). This repository is not evidence of Web Store approval.
+- `src/` and `static/` are the source; the themes are in `static/themes/`.
+- `dist/extension/` is the unpacked extension.
+- `artifacts/net19-0.3.0.zip` is the packaged build, with a SHA-256 file beside it.

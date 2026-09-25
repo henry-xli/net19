@@ -1,50 +1,97 @@
-/* net19 handmade theme: Reddit, 2019 redesign ("new Reddit"), light and night mode. Reddit's own design variables
-   are pointed at the 2019 tokens, so every component (menus, dialogs, comments) follows. */
-html { --n19-page: #dae0e6; --n19-card: #fff; --n19-card-2: #f6f7f8; --n19-text: #1c1c1c; --n19-title: #222; --n19-meta: #878a8c;
-  --n19-border: #ccc; --n19-border-hover: #898989; --n19-divider: #edeff1; --n19-hover: rgba(26,26,27,.1); --n19-blue: #0079d3; --n19-blue-hover: #1484d6;
-  --n19-on-blue: #fff; --n19-field: #f6f7f8; --n19-field-border: #edeff1; --n19-header: #fff; }
-html[data-net19-mode="dark"] { --n19-page: #030303; --n19-card: #1a1a1b; --n19-card-2: #272729; --n19-text: #d7dadc; --n19-title: #d7dadc; --n19-meta: #818384;
-  --n19-border: #343536; --n19-border-hover: #818384; --n19-divider: #343536; --n19-hover: rgba(215,218,220,.1); --n19-blue: #d7dadc; --n19-blue-hover: #e8eaec;
-  --n19-on-blue: #1a1a1b; --n19-field: #272729; --n19-field-border: #343536; --n19-header: #1a1a1b; }
-html:root, html.theme-dark, html .theme-rpl {
-  --color-neutral-background: var(--n19-card) !important; --color-neutral-background-strong: var(--n19-card) !important;
-  --color-neutral-background-weak: var(--n19-card-2) !important; --color-neutral-background-container: var(--n19-card-2) !important;
-  --color-neutral-background-medium: var(--n19-card-2) !important; --color-neutral-background-canvas: var(--n19-page) !important;
-  --color-neutral-background-hover: var(--n19-card-2) !important; --color-neutral-content: var(--n19-text) !important;
-  --color-neutral-content-strong: var(--n19-title) !important; --color-neutral-content-weak: var(--n19-meta) !important;
-  --color-neutral-border: var(--n19-border) !important; --color-neutral-border-weak: var(--n19-divider) !important;
-  --color-secondary-background: transparent !important; --color-secondary-background-hover: var(--n19-hover) !important;
-  --color-secondary-plain: var(--n19-meta) !important; --color-secondary-weak: var(--n19-meta) !important;
-  --color-button-secondary-background: transparent !important; --color-button-secondary-background-hover: var(--n19-hover) !important;
-  --color-button-secondary-text: var(--n19-meta) !important; --color-primary-background: var(--n19-blue) !important;
-  --color-primary-background-hover: var(--n19-blue-hover) !important; --color-primary-plain: var(--n19-blue) !important;
-  --color-button-primary-background: var(--n19-blue) !important; --color-button-primary-background-hover: var(--n19-blue-hover) !important;
-  --color-action-primary: var(--n19-blue) !important; --color-input-secondary: var(--n19-field) !important;
+/* net19 handmade theme: Reddit on old.reddit.com, the design Reddit served through 2021 (Web Design Museum,
+   "Reddit in 2021"): blue-gray header with the subreddit bar and hot/new/rising tabs, a numbered list with vote arrows,
+   blue titles, gray taglines and the sidebar with search, login and the "Submit" buttons.
+   In light mode that is exactly what old.reddit.com draws, so nothing is changed. Old Reddit never had a dark mode;
+   when the device is dark, the same layout gets a dark palette on the tokens below. */
+html[data-net19-mode="dark"] {
+  color-scheme: dark;
+  --n19-page: #161617; --n19-surface: #1f1f21; --n19-surface-2: #29292b; --n19-border: #38383b; --n19-border-2: #4a4a4e;
+  --n19-text: #d7dadc; --n19-text-2: #b4b7ba; --n19-meta: #8b8e91; --n19-score: #7d8083;
+  --n19-title: #8fb6ff; --n19-title-visited: #b39ddb; --n19-link: #7eb0e6; --n19-author: #7eb0e6; --n19-submitter: #5a9cff;
+  --n19-header: #1b2632; --n19-header-2: #223040; --n19-header-border: #33475c; --n19-bar: #101011; --n19-bar-text: #c6c8ca;
+  --n19-tab: #223040; --n19-tab-text: #8fb6ff; --n19-orangered: #ff6b3d;
+  --n19-button-from: #25354a; --n19-button-to: #1b2632; --n19-button-text: #a9c7ea;
+  --n19-flair: #2b2b2e; --n19-flair-text: #c1c3c5; --n19-code: #232325; --n19-quote: #5a5a5e;
+  --n19-login: #1b2632; --n19-login-border: #3a5a80;
 }
-body, shreddit-app { background: var(--n19-page) !important; }
-body, shreddit-app, button, input, textarea { font-family: "IBMPlexSans", "Noto Sans", Arial, sans-serif !important; }
 
-/* Header */
-reddit-header-large header, header.v2 { background: var(--n19-header) !important; border-bottom: 1px solid var(--n19-divider) !important; box-shadow: none !important; }
-a#login-button, a#signup-button { border-radius: 4px !important; text-transform: uppercase !important; font-weight: 700 !important; letter-spacing: .5px !important; }
-a#login-button { background: var(--n19-blue) !important; color: var(--n19-on-blue) !important; border: 1px solid var(--n19-blue) !important; }
-a#signup-button { background: transparent !important; color: var(--n19-blue) !important; border: 1px solid var(--n19-blue) !important; }
+/* Page */
+html[data-net19-mode="dark"] body, html[data-net19-mode="dark"] body > .content, html[data-net19-mode="dark"] .footer-parent,
+html[data-net19-mode="dark"] .listing-page .content, html[data-net19-mode="dark"] .side { background-color: var(--n19-page) !important; color: var(--n19-text) !important; }
 
-/* No persistent left navigation in 2019 */
-#left-sidebar-container, flex-left-nav-container { display: none !important; }
-.grid-container { grid-template-columns: 1fr !important; }
-#subgrid-container { grid-column: 1 / -1 !important; margin: 0 auto !important; max-width: 1024px !important; }
+/* Subreddit bar and header */
+html[data-net19-mode="dark"] #sr-header-area, html[data-net19-mode="dark"] #sr-more-link {
+  background-color: var(--n19-bar) !important; border-bottom-color: var(--n19-border) !important; color: var(--n19-bar-text) !important; }
+html[data-net19-mode="dark"] #sr-header-area a, html[data-net19-mode="dark"] .sr-bar a, html[data-net19-mode="dark"] #sr-more-link,
+html[data-net19-mode="dark"] .dropdown.srdrop .selected { color: var(--n19-bar-text) !important; }
+html[data-net19-mode="dark"] .sr-bar .separator { color: var(--n19-meta) !important; }
+html[data-net19-mode="dark"] #header { background-color: var(--n19-header) !important; border-bottom-color: var(--n19-header-border) !important; }
+html[data-net19-mode="dark"] #header-bottom-right { background-color: var(--n19-header-2) !important; color: var(--n19-text-2) !important; }
+html[data-net19-mode="dark"] #header-bottom-right a, html[data-net19-mode="dark"] #header .pagename a, html[data-net19-mode="dark"] #header .redditname a { color: var(--n19-tab-text) !important; }
+html[data-net19-mode="dark"] #header-bottom-right .separator { color: var(--n19-meta) !important; }
+/* The default logo is one image with dark lettering; it is lightened so the word stays readable. */
+html[data-net19-mode="dark"] #header-img.default-header { filter: invert(1) hue-rotate(180deg) brightness(1.15); }
+html[data-net19-mode="dark"] .tabmenu li a { background-color: var(--n19-tab) !important; color: var(--n19-tab-text) !important; }
+html[data-net19-mode="dark"] .tabmenu li.selected a { background-color: var(--n19-page) !important; color: var(--n19-orangered) !important; border-color: var(--n19-header-border) !important; }
 
-/* Posts: bordered cards on the page color */
-shreddit-post, shreddit-ad-post { background: var(--n19-card) !important; border: 1px solid var(--n19-border) !important; border-radius: 4px !important; margin: 0 0 10px !important; }
-shreddit-post:hover { border-color: var(--n19-border-hover) !important; }
-shreddit-feed hr { display: none !important; }
-a[id^="post-title-"] { color: var(--n19-title) !important; font-size: 18px !important; font-weight: 500 !important; }
-[slot="credit-bar"], [slot="credit-bar"] a, faceplate-timeago { color: var(--n19-meta) !important; }
-[slot="credit-bar"] a[data-testid="subreddit-name"] { color: var(--n19-text) !important; font-weight: 700 !important; }
-shreddit-join-button button { background: var(--n19-blue) !important; color: var(--n19-on-blue) !important; border-radius: 4px !important; text-transform: uppercase !important; font-weight: 700 !important; }
-main#main-content > div.my-xs { background: var(--n19-card) !important; border: 1px solid var(--n19-border) !important; border-radius: 4px !important; padding: 6px 12px !important; }
+/* Links list */
+html[data-net19-mode="dark"] .link .title, html[data-net19-mode="dark"] .link a.title { color: var(--n19-title) !important; }
+html[data-net19-mode="dark"] .link a.title:visited, html[data-net19-mode="dark"] .link.visited a.title { color: var(--n19-title-visited) !important; }
+html[data-net19-mode="dark"] .rank, html[data-net19-mode="dark"] .score.unvoted, html[data-net19-mode="dark"] .midcol .score { color: var(--n19-score) !important; }
+html[data-net19-mode="dark"] .midcol .score.likes { color: var(--n19-orangered) !important; }
+html[data-net19-mode="dark"] .midcol .score.dislikes { color: #9494ff !important; }
+html[data-net19-mode="dark"] .tagline, html[data-net19-mode="dark"] .domain, html[data-net19-mode="dark"] .domain a,
+html[data-net19-mode="dark"] .flat-list.buttons li a, html[data-net19-mode="dark"] .buttons li a, html[data-net19-mode="dark"] .reportform,
+html[data-net19-mode="dark"] .morecomments a, html[data-net19-mode="dark"] .comment .expand, html[data-net19-mode="dark"] .live-timestamp { color: var(--n19-meta) !important; }
+html[data-net19-mode="dark"] .tagline a, html[data-net19-mode="dark"] .author { color: var(--n19-author) !important; }
+html[data-net19-mode="dark"] .tagline .submitter, html[data-net19-mode="dark"] .author.submitter { color: var(--n19-submitter) !important; }
+html[data-net19-mode="dark"] .link.promotedlink, html[data-net19-mode="dark"] .link.promoted { background-color: var(--n19-surface) !important; border-color: var(--n19-border) !important; }
+html[data-net19-mode="dark"] .thumbnail.self, html[data-net19-mode="dark"] .thumbnail.default, html[data-net19-mode="dark"] .thumbnail.nsfw,
+html[data-net19-mode="dark"] .thumbnail.spoiler, html[data-net19-mode="dark"] .expando-button { filter: invert(.86) hue-rotate(180deg); }
+html[data-net19-mode="dark"] .linkflairlabel, html[data-net19-mode="dark"] .flair, html[data-net19-mode="dark"] .flairrichtext {
+  background-color: var(--n19-flair) !important; border-color: var(--n19-border-2) !important; color: var(--n19-flair-text) !important; }
+html[data-net19-mode="dark"] .nav-buttons .nextprev a, html[data-net19-mode="dark"] .next-suggestions {
+  background-color: var(--n19-surface) !important; border-color: var(--n19-border) !important; color: var(--n19-link) !important; }
+html[data-net19-mode="dark"] .menuarea, html[data-net19-mode="dark"] .dropdown.lightdrop .selected { color: var(--n19-meta) !important; }
+html[data-net19-mode="dark"] .drop-choices, html[data-net19-mode="dark"] .hover-bubble, html[data-net19-mode="dark"] .popup, html[data-net19-mode="dark"] .modal-content {
+  background-color: var(--n19-surface) !important; border-color: var(--n19-border-2) !important; color: var(--n19-text) !important; }
+html[data-net19-mode="dark"] .drop-choices a.choice:hover { background-color: var(--n19-surface-2) !important; }
+html[data-net19-mode="dark"] .infobar, html[data-net19-mode="dark"] .linkinfo, html[data-net19-mode="dark"] .expando .usertext-body,
+html[data-net19-mode="dark"] .link .usertext-body .md, html[data-net19-mode="dark"] .panestack-title, html[data-net19-mode="dark"] .content .details,
+html[data-net19-mode="dark"] .sitetable .thing.link .expando { background-color: var(--n19-surface) !important; border-color: var(--n19-border-2) !important; color: var(--n19-text) !important; }
 
-/* Right column widgets: bordered cards with small uppercase titles */
-#right-sidebar-container aside { background: var(--n19-card) !important; border: 1px solid var(--n19-border) !important; border-radius: 4px !important; }
-#right-sidebar-container h2 { color: var(--n19-meta) !important; font-size: 10px !important; font-weight: 700 !important; text-transform: uppercase !important; letter-spacing: .5px !important; }
+/* Text, comments and forms */
+html[data-net19-mode="dark"] .md, html[data-net19-mode="dark"] .md p, html[data-net19-mode="dark"] .md li, html[data-net19-mode="dark"] .md h1,
+html[data-net19-mode="dark"] .md h2, html[data-net19-mode="dark"] .md h3, html[data-net19-mode="dark"] .md h4, html[data-net19-mode="dark"] .md h5,
+html[data-net19-mode="dark"] .md h6, html[data-net19-mode="dark"] .md td, html[data-net19-mode="dark"] .md th, html[data-net19-mode="dark"] .md strong,
+html[data-net19-mode="dark"] .commentarea .panestack-title .title, html[data-net19-mode="dark"] .titlebox, html[data-net19-mode="dark"] .titlebox h1 a { color: var(--n19-text) !important; }
+html[data-net19-mode="dark"] .md a { color: var(--n19-link) !important; }
+html[data-net19-mode="dark"] .md blockquote { border-left-color: var(--n19-quote) !important; color: var(--n19-text-2) !important; }
+html[data-net19-mode="dark"] .md pre, html[data-net19-mode="dark"] .md code { background-color: var(--n19-code) !important; border-color: var(--n19-border) !important; color: var(--n19-text) !important; }
+html[data-net19-mode="dark"] .md hr, html[data-net19-mode="dark"] .md table th, html[data-net19-mode="dark"] .md table td { border-color: var(--n19-border) !important; }
+html[data-net19-mode="dark"] .comment .child, html[data-net19-mode="dark"] .comment .child .comment { border-left-color: var(--n19-border) !important; }
+html[data-net19-mode="dark"] .comment.collapsed .tagline, html[data-net19-mode="dark"] .comment.collapsed a.author { color: var(--n19-score) !important; }
+html[data-net19-mode="dark"] input, html[data-net19-mode="dark"] textarea, html[data-net19-mode="dark"] select,
+html[data-net19-mode="dark"] .usertext-edit .md textarea, html[data-net19-mode="dark"] #search input[type="text"] {
+  background-color: var(--n19-surface-2) !important; border-color: var(--n19-border-2) !important; color: var(--n19-text) !important; }
+html[data-net19-mode="dark"] .usertext-buttons button, html[data-net19-mode="dark"] .login-form-side button, html[data-net19-mode="dark"] .reportform button,
+html[data-net19-mode="dark"] form.toggle button, html[data-net19-mode="dark"] input[type="submit"] {
+  background-color: var(--n19-surface-2) !important; border-color: var(--n19-border-2) !important; color: var(--n19-text) !important; }
+
+/* Sidebar: search, login and the Submit buttons */
+html[data-net19-mode="dark"] .side .spacer, html[data-net19-mode="dark"] .sidecontentbox .content, html[data-net19-mode="dark"] .side .md {
+  background-color: transparent !important; border-color: var(--n19-border) !important; }
+html[data-net19-mode="dark"] .login-form-side, html[data-net19-mode="dark"] .login-form-side .submit { background-color: var(--n19-login) !important; border-color: var(--n19-login-border) !important; color: var(--n19-text-2) !important; }
+html[data-net19-mode="dark"] .morelink, html[data-net19-mode="dark"] .sidebox .morelink {
+  background: linear-gradient(var(--n19-button-from), var(--n19-button-to)) !important; border-color: var(--n19-login-border) !important; }
+html[data-net19-mode="dark"] .morelink a, html[data-net19-mode="dark"] .morelink:hover a { color: var(--n19-button-text) !important; }
+html[data-net19-mode="dark"] .morelink .nub { filter: invert(1) hue-rotate(180deg) brightness(.9); }
+html[data-net19-mode="dark"] .titlebox .word, html[data-net19-mode="dark"] .titlebox .number, html[data-net19-mode="dark"] .side .leavemoderator,
+html[data-net19-mode="dark"] .side .linkinfo .date { color: var(--n19-text-2) !important; }
+html[data-net19-mode="dark"] .listing-chooser, html[data-net19-mode="dark"] .listing-chooser .grippy, html[data-net19-mode="dark"] .listing-chooser li.selected {
+  background-color: var(--n19-surface) !important; border-color: var(--n19-border) !important; }
+
+/* Footer */
+html[data-net19-mode="dark"] .footer .col, html[data-net19-mode="dark"] .footer, html[data-net19-mode="dark"] .footer-parent .bottommenu {
+  background-color: var(--n19-page) !important; border-color: var(--n19-border) !important; color: var(--n19-meta) !important; }
+html[data-net19-mode="dark"] .footer .col .title { color: var(--n19-text) !important; }

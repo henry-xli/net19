@@ -1,19 +1,36 @@
 {
   "manifest_version": 3,
   "name": "net19",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Websites as they looked in 2019.",
   "minimum_chrome_version": "120",
   "permissions": [
     "storage",
     "scripting",
     "declarativeNetRequestWithHostAccess",
-    "webNavigation",
-    "offscreen"
+    "cookies"
   ],
   "host_permissions": [
-    "http://*/*",
-    "https://*/*"
+    "*://*.google.com/*",
+    "*://*.youtube.com/*",
+    "*://*.wikipedia.org/*",
+    "*://*.reddit.com/*",
+    "*://*.github.com/*",
+    "*://*.yahoo.com/*",
+    "*://*.twitch.tv/*",
+    "*://*.amazon.com/*",
+    "*://*.ebay.com/*",
+    "*://*.bing.com/*",
+    "*://*.stackoverflow.com/*",
+    "*://*.cnn.com/*",
+    "*://*.nytimes.com/*",
+    "*://*.imdb.com/*",
+    "*://*.espn.com/*",
+    "*://*.facebook.com/*",
+    "*://*.instagram.com/*",
+    "*://*.x.com/*",
+    "*://*.twitter.com/*",
+    "*://*.linkedin.com/*"
   ],
   "background": {
     "service_worker": "background.js",
@@ -34,18 +51,7 @@
     "128": "icons/128.png"
   },
   "incognito": "not_allowed",
-  "web_accessible_resources": [
-    {
-      "resources": [
-        "loading.html"
-      ],
-      "matches": [
-        "http://*/*",
-        "https://*/*"
-      ]
-    }
-  ],
   "content_security_policy": {
-    "extension_pages": "default-src 'self'; script-src 'self'; object-src 'none'; connect-src https://archive.org https://web.archive.org; style-src 'self' 'unsafe-inline'; img-src 'self' data:; base-uri 'none'; frame-src 'self'"
+    "extension_pages": "default-src 'self'; script-src 'self'; object-src 'none'; connect-src 'none'; style-src 'self'; img-src 'self'; base-uri 'none'; frame-src 'none'"
   }
 }

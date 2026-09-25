@@ -1,39 +1,26 @@
 # net19 privacy policy
 
-Effective September 24, 2026. Applies to net19 0.2.0.
+Effective September 25, 2026. Applies to net19 0.3.0.
 
-Net19 prepares historical visual styling for live websites. It has no developer-operated server, account system, analytics, advertisements, remote AI, or telemetry.
+Net19 restyles 20 popular websites to look as they did in 2019. It has no developer-operated server, account system, analytics, advertisements, remote AI, or telemetry.
 
 ## What leaves your device
 
-With net19 enabled and Chrome website access granted, navigating to an uncached public site automatically queries the Internet Archive for its **public homepage origin**. Net19 may download public archived HTML, a bounded number of archived stylesheets and imports, and small archived PNG branding/background graphics. Asset paths and query strings come from the public archive, not the current page. Net19 also prepares a fixed list of about 25 popular homepages in the background; the list is built into the extension, is the same for every user, and does not depend on your browsing.
+Nothing. Net19 makes no network requests of its own. Its themes are stylesheets and small scripts bundled inside the extension. The Google homepage theme shows Google's own hosted logo image, which your browser loads from google.com like any other part of that page.
 
-Net19 does not transmit your visited path, query string, fragment, current page contents, form values, cookies, passwords, authentication tokens, or account data. Requests omit credentials and referrers. Remote connections made by the extension are restricted to `archive.org` and `web.archive.org`; its network policy also blocks redirects to other hosts.
+Two themes send you to an older version of a site on that site's own servers:
 
-The Internet Archive receives these public homepage/asset requests, timestamp queries, your network IP address, and normal connection metadata. Its [terms and privacy policy](https://archive.org/about/terms.php) apply. Net19 does not submit sites for archiving, bypass archive access controls, or send requests to Archive.is.
+- Wikipedia article links get `useskin=vector`, Wikipedia's own legacy skin.
+- While you are signed in to Reddit, reddit.com links open on old.reddit.com. To know whether you are signed in, net19 checks locally whether Reddit's `reddit_session` cookie exists. It never reads the cookie's contents into storage, copies it, or sends it anywhere.
 
-Handmade themes (see the README) are bundled with the extension and make no network requests of their own, except that the Google homepage theme displays Google's own hosted logo image from google.com.
+## Access and storage
 
-## Local processing and storage
+Net19 has access only to the 20 sites it themes (listed in the README). It does not run on any other site and cannot read them.
 
-Archived documents are sanitized and measured locally in a script-disabled, network-isolated browser frame. The extension examines the live page's labels, links, element structure, computed styles, and positions locally to match components. Current page data is not sent to an archive or saved as a profile. Archived scripts never run.
-
-Chrome local extension storage contains:
-
-- Settings: enabled state and paused hostnames.
-- Up to 100 profiles: public origin, capture year, snapshot URL, timestamps, and compressed computed measurements, component descriptors, and normalized raster graphics from the public archive.
-- Up to 100 temporary failure entries to avoid repeated unavailable archive requests.
-
-The profile/failure cache is limited to 4 MiB, with a 96 KiB limit per profile. Obsolete-format entries are removed on startup. No complete archived HTML/CSS documents, live page contents, or visited full URLs are persisted by net19.
-
-During navigation, the local loading page temporarily holds the original destination in its URL fragment so it can continue to the correct address. It is not sent to the archive. Chrome session storage briefly holds a tab identifier, public origin, year, preparation result, and expiry; completed/closed tabs remove these entries, and entries expire logically after 90 seconds. A provider backoff timestamp can also be held in session storage. Chrome independently maintains its normal browsing history and network cache.
-
-Cached origins and recency can reveal which sites you use. They stay on this device: net19 does not synchronize, sell, or share this cache with the developer or advertisers.
+Chrome local extension storage holds your settings: whether net19 is on, and which sites you switched off. Updating from an earlier version deletes the archive profiles and other data those versions kept.
 
 ## Controls
 
-Public HTTP(S) website access is requested at installation so preparation works automatically. You can restrict access in Chrome's extension controls, pause individual sites in the popup, or switch the extension off in the popup. Incognito, IP/local addresses, non-default ports, browser pages, and archive sites are excluded.
+Switch net19 off in the popup, or off for the current site. Either change restores the site's current styling from the next page load. Uninstalling removes the extension's storage.
 
-Switching net19 off, or off for a site, immediately restores the current styling. Uninstalling removes the extension's storage.
-
-Report questions through [the repository](https://github.com/henry-xli/net19/issues). Avoid posting private addresses, credentials, or personal page contents in public issues. Material changes to these practices will be reflected here and in the extension disclosures.
+Report questions through [the repository](https://github.com/henry-xli/net19/issues). Avoid posting private addresses, credentials, or personal page contents in public issues.

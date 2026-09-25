@@ -1,0 +1,52 @@
+/* net19 handmade theme: Reddit signed out (old.reddit.com needs an account), moved toward the list Reddit drew through
+   2021: white page, blue-gray header, blue titles, a flat list instead of cards; light, and dark when Reddit is dark. Reddit's own design variables
+   are pointed at the 2019 tokens, so every component (menus, dialogs, comments) follows. */
+html { --n19-page: #fff; --n19-card: #fff; --n19-card-2: #f5f5f5; --n19-text: #222; --n19-title: #0000ff; --n19-title-visited: #551a8b; --n19-meta: #888;
+  --n19-border: #e6e6e6; --n19-border-hover: #c6c6c6; --n19-divider: #eee; --n19-hover: rgba(0,0,0,.06); --n19-blue: #369; --n19-blue-hover: #2c5b8a;
+  --n19-on-blue: #fff; --n19-field: #fff; --n19-field-border: #ccc; --n19-header: #cee3f8; --n19-header-border: #5f99cf; }
+html[data-net19-mode="dark"] { --n19-page: #161617; --n19-card: #161617; --n19-card-2: #1f1f21; --n19-text: #d7dadc; --n19-title: #8fb6ff; --n19-title-visited: #b39ddb; --n19-meta: #8b8e91;
+  --n19-border: #38383b; --n19-border-hover: #4a4a4e; --n19-divider: #29292b; --n19-hover: rgba(215,218,220,.08); --n19-blue: #7eb0e6; --n19-blue-hover: #a9c7ea;
+  --n19-on-blue: #161617; --n19-field: #29292b; --n19-field-border: #4a4a4e; --n19-header: #1b2632; --n19-header-border: #33475c; }
+html:root, html.theme-dark, html .theme-rpl {
+  --color-neutral-background: var(--n19-card) !important; --color-neutral-background-strong: var(--n19-card) !important;
+  --color-neutral-background-weak: var(--n19-card-2) !important; --color-neutral-background-container: var(--n19-card-2) !important;
+  --color-neutral-background-medium: var(--n19-card-2) !important; --color-neutral-background-canvas: var(--n19-page) !important;
+  --color-neutral-background-hover: var(--n19-card-2) !important; --color-neutral-content: var(--n19-text) !important;
+  --color-neutral-content-strong: var(--n19-title) !important; --color-neutral-content-weak: var(--n19-meta) !important;
+  --color-neutral-border: var(--n19-border) !important; --color-neutral-border-weak: var(--n19-divider) !important;
+  --color-secondary-background: transparent !important; --color-secondary-background-hover: var(--n19-hover) !important;
+  --color-secondary-plain: var(--n19-meta) !important; --color-secondary-weak: var(--n19-meta) !important;
+  --color-button-secondary-background: transparent !important; --color-button-secondary-background-hover: var(--n19-hover) !important;
+  --color-button-secondary-text: var(--n19-meta) !important; --color-primary-background: var(--n19-blue) !important;
+  --color-primary-background-hover: var(--n19-blue-hover) !important; --color-primary-plain: var(--n19-blue) !important;
+  --color-button-primary-background: var(--n19-blue) !important; --color-button-primary-background-hover: var(--n19-blue-hover) !important;
+  --color-action-primary: var(--n19-blue) !important; --color-input-secondary: var(--n19-field) !important;
+}
+body, shreddit-app { background: var(--n19-page) !important; }
+body, shreddit-app, button, input, textarea { font-family: verdana, arial, helvetica, sans-serif !important; }
+
+/* Header */
+reddit-header-large header, header.v2 { background: var(--n19-header) !important; border-bottom: 1px solid var(--n19-header-border) !important; box-shadow: none !important; }
+a#login-button, a#signup-button { border-radius: 4px !important; text-transform: uppercase !important; font-weight: 700 !important; letter-spacing: .5px !important; }
+a#login-button { background: var(--n19-blue) !important; color: var(--n19-on-blue) !important; border: 1px solid var(--n19-blue) !important; }
+a#signup-button { background: transparent !important; color: var(--n19-blue) !important; border: 1px solid var(--n19-blue) !important; }
+
+/* No persistent left navigation in 2019 */
+#left-sidebar-container, flex-left-nav-container { display: none !important; }
+.grid-container { grid-template-columns: 1fr !important; }
+#subgrid-container { grid-column: 1 / -1 !important; margin: 0 auto !important; max-width: 1024px !important; }
+
+/* Posts: a flat list, one row per link */
+shreddit-post, shreddit-ad-post { background: var(--n19-card) !important; border: 0 !important; border-bottom: 1px solid var(--n19-divider) !important; border-radius: 0 !important; margin: 0 !important; padding-top: 6px !important; padding-bottom: 6px !important; }
+shreddit-post:hover { background: var(--n19-card) !important; }
+shreddit-feed hr { display: none !important; }
+a[id^="post-title-"] { color: var(--n19-title) !important; font-size: 16px !important; font-weight: 400 !important; line-height: 1.3 !important; }
+a[id^="post-title-"]:visited { color: var(--n19-title-visited) !important; }
+[slot="credit-bar"], [slot="credit-bar"] a, faceplate-timeago { color: var(--n19-meta) !important; font-size: 11px !important; }
+[slot="credit-bar"] a[data-testid="subreddit-name"] { color: var(--n19-blue) !important; font-weight: 400 !important; }
+shreddit-join-button button { background: var(--n19-blue) !important; color: var(--n19-on-blue) !important; border-radius: 3px !important; font-weight: 700 !important; }
+main#main-content > div.my-xs { background: var(--n19-card) !important; border: 0 !important; border-bottom: 1px solid var(--n19-divider) !important; border-radius: 0 !important; padding: 6px 12px !important; }
+
+/* Right column: plain boxes */
+#right-sidebar-container aside { background: var(--n19-card-2) !important; border: 1px solid var(--n19-border) !important; border-radius: 0 !important; }
+#right-sidebar-container h2 { color: var(--n19-text) !important; font-size: 12px !important; font-weight: 700 !important; text-transform: none !important; letter-spacing: 0 !important; }

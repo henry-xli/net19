@@ -2,10 +2,10 @@
 
 - This directory is the repository root. Verify `git rev-parse --show-toplevel` before status/staging; never operate on the unrelated parent repository.
 - Use `src/` and `static/` as the source of truth. Build into `dist/extension/`; do not hand-edit generated JavaScript.
-- Keep reveal timing, no-late-activation, document-ID targeting, archive-only networking, origin-only disclosure, and local cache bounds intact.
-- Archive content is untrusted data. Never execute archived scripts, import arbitrary CSS selectors or assets, or add a live-page message bridge.
-- Run focused tests for changes, then `npm run check` once at release readiness. Use a real Chromium extension test for timing and lifecycle changes.
-- Live archive failures are an external availability signal, not a passing historical-style test. Record them honestly; never replace a failed probe with a fixture while calling it live.
-- Keep logs, test browser profiles, archive downloads, environment files, and working notes out of version control and shipping packages.
+- net19 only themes the sites listed in `src/themes.ts`. Do not add archive lookups, caches, or behavior on other sites.
+- Themes are styling rules on `--n19-*` tokens with light and dark values. They follow the site's own mode and never switch it. `npm test` enforces the stylesheet contract.
+- Compare a theme with the site's Web Design Museum capture and check it on the live site, in light and dark, before calling it done.
+- Run focused tests for changes, then `npm run check` once at release readiness.
+- Keep logs, test browser profiles, environment files, and working notes out of version control and shipping packages.
 - Build and package the exact verified source. Stage an explicit file list; inspect the staged file names and diff before publication.
 - Do not delegate routine work. Keep tool output and progress reports focused.
