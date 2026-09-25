@@ -1,63 +1,53 @@
 # Chrome Web Store submission kit
 
-The production package is `downloads/net19-0.1.0.zip`. Its root contains `manifest.json`; it contains no Node runtime or development dependencies. Rebuild with `npm ci`, `npm run check`, and `npm run package` before a new version. Increment **both** `package.json` and `static/manifest.json`, plus the displayed settings version, for an update.
+Package: `downloads/net19-0.2.0.zip`. Its root contains `manifest.json`, bundled JavaScript, extension pages, styles, icons, and third-party notices. Source/test tooling and downloaded archives are excluded. Run `npm ci`, `npm run check`, `npm audit --omit=dev`, and `npm run package` for a release. Keep package, lockfile, manifest and displayed version aligned.
 
-## Listing
+## Listing text
 
 **Name:** net19
 
-**Summary (also used in the manifest):**
+**Summary:** Prepare historical website styles before opening pages. Adjustable year, automatic archive lookup and a local cache.
 
-Bring archived website colors and typography to today's web. Choose 2007–today, with local caching and a fast loading fallback.
+**Description:**
 
-**Detailed description:**
+Net19 prepares archived website styling before opening an uncached site. Choose a year from 2007 through today; the default is 2019. Preparation runs automatically and can wait up to 60 seconds for the archive. Saved profiles skip the archive lookup on later visits.
 
-The web keeps moving. Bring a little of it back.
+The extension measures historical layouts locally and matches their components to the live page. Compatible pages can recover historical spacing, typography, colors and layout proportions while retaining current text and working controls. If a usable archive or reliable match is unavailable, the current appearance is used. Pixel-identical results on every website are not guaranteed.
 
-Net19 adapts a website's archived colors and typography to the live page you're visiting. Start in 2019, or choose a year from 2007 to today. Read current stories, use current links, and keep current controls—surrounded by a little of the site's past.
+Use the toolbar popup to change the year, pause a site, or view the result for this visit. Changing the year deletes cached profiles from other years. Up to 100 profiles are kept locally, subject to a 4 MiB total cache limit.
 
-• Choose your year from a simple toolbar popup.
-• Enable individual websites, or opt in across public sites.
-• Reuse up to 100 locally saved site/year styles.
-• Prepare historical styling behind a brief loading gate, without reloading the page.
-• Keep the current site if the archive is missing, incompatible, or slow.
-• Pause a site or clear saved styles whenever you like.
+Net19 sends the public homepage origin and selected year to the Internet Archive, and may request public archived stylesheet/graphic addresses. Visited paths, queries, live page text, form values and cookies are not sent by net19. Analysis and storage happen on your device. There is no account, developer server, remote AI, analytics or telemetry.
 
-Net19 queries the Internet Archive for an enabled site's public homepage address. Your visited paths, searches, page contents, and cookies are never sent by net19. Archive analysis and style storage happen locally. No net19 account, server, analytics, or remote AI.
+Net19 is open source and independent of the Internet Archive. Wayback availability and compatibility with modern pages determine coverage. The current-year setting uses the site's current appearance.
 
-Historical styling is an adaptation, not an exact recreation of an old site's layout. Coverage depends on available Wayback snapshots and compatibility with today's website. The first uncached visit may retain its current style while a usable profile is prepared for a future page load. The current-year setting uses the live site's current style.
+## Disclosures
 
-Net19 is open source and independent of the Internet Archive.
-
-## Store fields and disclosures
-
-| Field | Value / explanation |
+| Field | Value |
 | --- | --- |
-| Category | Accessibility or Tools, according to the categories offered by the dashboard; choose the closest styling/personalization category |
-| Language | English |
 | Homepage | https://github.com/henry-xli/net19 |
 | Support | https://github.com/henry-xli/net19/issues |
 | Privacy policy | https://github.com/henry-xli/net19/blob/main/PRIVACY.md |
-| Single purpose | Adapt archived website visual styling to live websites for the user's chosen year |
-| `storage` | Save local preferences and bounded historical style profiles |
-| `scripting` | Register granted-site document-start scripts and inject guarded historical CSS before revealing pages |
-| `activeTab` | Identify the current website when the user invokes the toolbar popup |
-| Archive host access | Read public capture indexes, archived HTML, and archived CSS from archive.org and web.archive.org |
-| Optional website access | Apply styling on user-approved websites; broad access is granted only by an explicit Settings action |
-| Remote code | No remotely hosted executable code; archived HTML/CSS are parsed as data into a fixed, local theme compiler |
-| Data disclosure | Disclose browsing-related website addresses/history: an enabled site's homepage origin is transmitted to the Internet Archive, and origins/recency are cached locally. Do **not** claim that no data leaves the device. |
+| Single purpose | Apply the user's selected historical visual styling to compatible live websites |
+| Host permissions | Public HTTP(S) access enables automatic preparation and local page matching; archive connections retrieve public snapshots/resources |
+| `declarativeNetRequestWithHostAccess` | Redirect uncached public GET requests to a local preparation page before the destination is contacted |
+| `webNavigation` | Remove temporary per-tab navigation allow rules after commit or failure |
+| `offscreen` | Measure sanitized archive layouts in an isolated local frame |
+| `scripting` | Register startup content scripts and install generated CSS into the correct document |
+| `storage` | Local preferences, bounded historical models, and temporary preparation results |
+| Remote code | All executable code is bundled. Archived HTML/CSS are inert measurement inputs; archived scripts never run, and original selectors are never injected into live pages |
+| Data | Disclose browsing-related homepage addresses sent to the Internet Archive and locally stored origin/recency metadata. Live page data is examined locally for matching, never transmitted or persisted by net19 |
 
-Check the dashboard's current questionnaire and describe the actual behavior above. Do not claim full offline archive discovery, universal site support, instant cold loads, exact old layouts, or guaranteed approval. The local cache works without a new archive request; acquiring a new profile requires archive connectivity.
+Review the dashboard's current data questionnaire against the actual behavior and privacy policy. Do not claim universal fidelity, offline discovery, instantaneous cold loads, or guaranteed approval.
 
-## Assets and reviewer testing
+## Reviewer steps and assets
 
-- 128 × 128 icon: `dist/extension/icons/128.png`.
-- 1280 × 800 settings screenshot: `docs/images/settings.png` (actual extension UI; example site data is synthetic).
-- Popup image: `docs/images/popup.png`. Use within a correctly sized screenshot/promo canvas if required by the dashboard.
-- Optional 440 × 280 small promotional tile: `docs/images/promo-440.png`.
+1. Load the packaged extension with public-site access. Open a public site with 2019 selected.
+2. On a first visit, preparation begins automatically on the local loading page. The destination opens after preparation or bounded fallback. There is no preparation button.
+3. Inspect the popup for the actual result and source. A saved but incompatible profile must still report current styling for that page.
+4. Visit again to exercise caching. Change the year to confirm other-year entries disappear. Pause to restore original styling; clear the cache in Settings.
 
-Reviewer steps: load the extension, open a public site, enable access, select 2019 and choose **Prepare next visit**. Navigate normally when a usable style is available. If the archive cannot be reached, the page stays current and the popup explains the outcome. Settings exposes waiting time, pause, permissions, and cache clearing. There is no login or paid feature.
+Deterministic tests exercise successful archives and failures in a real Chromium extension. Optional live checks are separate and can fail when archives or layouts are incompatible. No test responses or browser profiles ship.
 
-Deterministic successful-archive tests are available through `npm run check` without relying on current Wayback uptime. Test fixtures never ship in the extension. Live archive probes are recorded separately in the validation notes and must not be confused with the deterministic test results.
+Assets: `dist/extension/icons/128.png`, `docs/images/settings.png` (1280 × 800), `docs/images/popup.png`, and optional `docs/images/promo-440.png` (440 × 280). Screenshots show actual extension UI with synthetic example-site data.
 
-Uploading to the dashboard and submitting for review requires a Chrome Web Store developer account. This repository provides the package and listing material; it is not evidence of store submission or approval. See the [official publishing guide](https://developer.chrome.com/docs/webstore/publish).
+A Chrome Web Store developer account is needed to upload and submit. These files do not imply submission or approval. See [Chrome's publishing guide](https://developer.chrome.com/docs/webstore/publish).

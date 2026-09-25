@@ -1,16 +1,40 @@
 {
-  "checkedAt": "2026-09-24T22:54:28.670Z",
-  "origin": "https://www.python.org",
-  "browser": "153.0.8010.12",
-  "status": "live-archive-and-cached-paint-passed",
-  "capturedAt": "20190701215108",
-  "acquiredMs": 3022,
-  "cachedPage": {
-    "state": "archived",
-    "year": 2019,
-    "elapsedMs": 14,
-    "cached": true,
-    "snapshotUrl": "https://web.archive.org/web/20190701215108id_/https://www.python.org/"
-  },
-  "archiveRequestsDuringCachedVisit": 0
+  "version": "0.2.0",
+  "method": "Fresh Chromium extension profiles; actual archive and website responses; no fixture routes or seeded profiles. These observations include failures and are not a universal fidelity claim.",
+  "results": [
+    {
+      "checkedAt": "2026-09-25T03:09:04.284Z",
+      "origin": "https://www.google.com",
+      "status": "live-check-failed",
+      "reason": "First visit stayed current: unmatched-layout; capture 20191231235918, 85 measured nodes",
+      "capture": {
+        "capturedAt": "20191231235918",
+        "nodes": 85,
+        "url": "https://web.archive.org/web/20191231235918id_/https://www.google.com/"
+      }
+    },
+    {
+      "checkedAt": "2026-09-25T02:59:14.192Z",
+      "origin": "https://www.python.org",
+      "status": "live-check-failed",
+      "reason": "First visit stayed current: unreadable-layout; capture 20191231233039, 300 measured nodes",
+      "capture": {
+        "capturedAt": "20191231233039",
+        "nodes": 300,
+        "url": "https://web.archive.org/web/20191231233039id_/https://www.python.org/"
+      }
+    },
+    {
+      "checkedAt": "2026-09-25T04:25:14.334Z",
+      "origin": "https://news.ycombinator.com",
+      "status": "live-check-failed",
+      "reason": "page.waitForURL: Timeout 65000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation until \"domcontentloaded\"\n============================================================"
+    }
+  ],
+  "earlier_observation": {
+    "origin": "https://news.ycombinator.com",
+    "capture": "20191231232500",
+    "first_visit": "historical style applied",
+    "repeat_visit": "checker reported additional preparation; not a complete pass"
+  }
 }

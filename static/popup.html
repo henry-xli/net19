@@ -8,26 +8,23 @@
   </header>
   <main>
     <section class="destination-panel" aria-labelledby="destination-label">
-      <div class="eyebrow" id="destination-label">THE WEB. YOUR YEAR.</div>
+      <div class="eyebrow" id="destination-label">ARCHIVE YEAR</div>
       <div class="year-display"><button id="year-back" class="round-button" aria-label="Previous year">−</button><output id="destination" for="year">2019</output><button id="year-next" class="round-button" aria-label="Next year">+</button></div>
-      <p class="year-hint" id="year-hint">A familiar feeling. A living web.</p>
+      <p class="year-hint" id="year-hint">Prepared automatically before pages open.</p>
       <label class="sr-only" for="year">Target year</label><input id="year" class="year-range" type="range" min="2007" max="2026" value="2019">
       <div class="range-labels"><span>2007</span><span id="latest-year">2026</span></div>
       <div class="presets" role="group" aria-label="Quick years"><button data-year="2007" aria-pressed="false">2007</button><button data-year="2012" aria-pressed="false">2012</button><button data-year="2019" aria-pressed="true">2019</button><button id="today" data-year="2026" aria-pressed="false">Today</button></div>
     </section>
     <section class="site-card" aria-label="Current website">
       <div class="card-topline"><span class="eyebrow">THIS SITE</span><span class="status-tag" id="site-state">CHECKING</span></div>
-      <h1 id="site-name">Your next destination</h1>
+      <h1 id="site-name">Current website</h1>
       <p id="site-detail">Open a public website to get started.</p>
-      <p id="access-disclosure" class="access-disclosure" hidden>To find a past style, net19 shares this site's homepage address with the Internet Archive. Page paths and contents stay private.</p>
       <a id="source" class="text-link" href="https://web.archive.org/" target="_blank" rel="noreferrer" hidden>View source snapshot ↗</a>
-      <button class="primary-button" id="primary" hidden>Enable on this site <span>↗</span></button>
-      <button class="outline-button" id="warm" hidden>Prepare next visit ↗</button>
       <label class="site-pause" id="site-pause-row" hidden><input type="checkbox" id="pause-site">Use current styling on this site</label>
     </section>
     <section class="cache-strip" aria-label="Local style cache"><div><span class="cache-icon" aria-hidden="true">▤</span><strong id="cache-count">0</strong><span> / 100 saved styles</span><span class="device-tag">ON THIS DEVICE</span></div><progress id="cache-meter" max="100" value="0" aria-label="Saved style profiles"></progress></section>
-    <p class="notice" id="notice" aria-live="polite">Today's content. A little of its past.</p>
+    <p class="notice" id="notice" aria-live="polite">New sites are checked automatically.</p>
   </main>
-  <footer class="popup-footer"><span>NO RELOADS. NO TIME MACHINES.</span><button id="settings" class="text-button">Settings <span aria-hidden="true">↗</span></button></footer>
+  <footer class="popup-footer"><span>net19 · 0.2.0</span><button id="settings" class="text-button">Settings <span aria-hidden="true">↗</span></button></footer>
 </body>
 </html>

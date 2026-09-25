@@ -1,5 +1,7 @@
-import { analyze, cssImports, readDocument } from './analyzer';
-import { MIN_YEAR, WARM_BUDGET_MS, parseReplay, publicOrigin, sameSite, validTimestamp, type StylePack } from './shared';
+import { absoluteCSS, cssImports, cssImageURLs, readDocument } from './analyzer';
+import { MIN_YEAR, SCHEMA, WARM_BUDGET_MS, parseReplay, publicOrigin, sameSite, validTimestamp, type StylePack } from './shared';
+import { encodeSnapshot, DEFAULT_VIEWPORT } from './snapshot';
+import { type Renderer, type Raster } from './render';
 
 type Capture = { timestamp: string; original: string };
 type Fetcher = typeof fetch;
@@ -64,7 +66,23 @@ async function boundedText(response: Response, limit: number): Promise<string> {
 }
 
 export class WaybackClient {
-  constructor(private fetcher: Fetcher = fetch.bind(globalThis)) {}
+  constructor(private fetcher: Fetcher = fetch.bind(globalThis), private renderer?: Renderer) {}
+
+  private async raster(url: string, signal: AbortSignal, year: number): Promise<string | null> {
+    const controller = new AbortController();
+    const abort = () => controller.abort(); signal.addEventListener('abort', abort, { once: true });
+    if (signal.aborted) controller.abort();
+    const timer = setTimeout(abort, 10_000);
+    try {
+      const response = await this.fetcher(url, { signal: controller.signal, credentials: 'omit', referrerPolicy: 'no-referrer' });
+      const final = parseReplay(response.url || url);
+      if (!response.ok || !final || !validTimestamp(final.timestamp, year) || !/^image\/png/i.test(response.headers.get('content-type') ?? '') || !response.body) { await response.body?.cancel(); return null; }
+      const bytes = await boundedBytes(response.body, 40_000);
+      if (![137,80,78,71,13,10,26,10].every((v, i) => bytes[i] === v)) return null;
+      let binary = ''; for (let i = 0; i < bytes.length; i += 8192) binary += String.fromCharCode(...bytes.subarray(i, i + 8192));
+      return `data:image/png;base64,${btoa(binary)}`;
+    } catch { return null; } finally { clearTimeout(timer); signal.removeEventListener('abort', abort); }
+  }
 
   private async request(url: string, signal: AbortSignal, limit: number, kind: 'json' | 'html' | 'css', year: number): Promise<{ text: string; url: string }> {
     const u = new URL(url);
@@ -73,7 +91,7 @@ export class WaybackClient {
     const abort = () => controller.abort();
     signal.addEventListener('abort', abort, { once: true });
     if (signal.aborted) controller.abort();
-    const timer = setTimeout(abort, kind === 'json' ? 6000 : 4500);
+    const timer = setTimeout(abort, kind === 'json' ? 12_000 : 15_000);
     try {
       // The extension's connect-src CSP also blocks redirects to a live website.
       const response = await this.fetcher(url, { signal: controller.signal, credentials: 'omit', referrerPolicy: 'no-referrer', redirect: 'follow' });
@@ -105,7 +123,7 @@ export class WaybackClient {
       const endpoint = new URL('https://archive.org/wayback/available');
       // The Availability index can miss older HTTP→HTTPS migrations when queried
       // with only today's HTTPS origin. A scheme-less homepage covers both.
-      endpoint.search = new URLSearchParams({ url: `${new URL(origin).host}/`, timestamp: `${year}0701` }).toString();
+      endpoint.search = new URLSearchParams({ url: `${new URL(origin).host}/`, timestamp: `${year}1231` }).toString();
       const result = await this.request(endpoint.href, controller.signal, 16_000, 'json', year);
       const closest = JSON.parse(result.text)?.archived_snapshots?.closest;
       if (closest?.available !== true || String(closest.status) !== '200' || !validTimestamp(closest.timestamp, year)) return [];
@@ -114,20 +132,13 @@ export class WaybackClient {
     };
     const jobs = [cdx(), available()];
     try {
-      // Race the two public indexes for a target-year hit. An older answer waits for
-      // both so it cannot preempt an available capture from the requested year.
-      try {
-        return await Promise.any(jobs.map(async job => {
-          const captures = await job;
-          if (captures.some(c => c.timestamp.startsWith(String(year)))) return captures;
-          throw new ArchiveError('No target-year capture', 'missing');
-        }));
-      } catch {
-        const results = await Promise.allSettled(jobs);
-        const candidates = results.flatMap(result => result.status === 'fulfilled' ? result.value : []);
-        if (!candidates.length && results.every(result => result.status === 'rejected')) throw new ArchiveError('Archive indexes unavailable');
-        return [...new Map(candidates.map(c => [c.timestamp, c])).values()].sort((a, b) => b.timestamp.localeCompare(a.timestamp)).slice(0, 3);
-      }
+      // Use the newest usable captures in the selected year, not whichever index
+      // answers first. Each index has its own deadline; one outage does not discard
+      // the other's result. Keep alternatives when a capture has missing resources.
+      const results = await Promise.allSettled(jobs);
+      const candidates = results.flatMap(result => result.status === 'fulfilled' ? result.value : []);
+      if (!candidates.length && results.every(result => result.status === 'rejected')) throw new ArchiveError('Archive indexes unavailable');
+      return [...new Map(candidates.map(c => [c.timestamp, c])).values()].sort((a, b) => b.timestamp.localeCompare(a.timestamp)).slice(0, 3);
     } finally { signal.removeEventListener('abort', abort); controller.abort(); }
   }
 
@@ -140,30 +151,52 @@ export class WaybackClient {
     const meta = { origin, targetYear, capturedAt: resolved.timestamp, snapshotUrl: replayUrl(resolved) };
     // Preserve stylesheet order, even when downloads complete out of order.
     let external = 0;
-    const selected = document.sheets.filter(s => s.text !== undefined || ++external <= 4);
-    const seen = new Set<string>();
-    let imports = 0;
-    const download = async (href: string): Promise<string[]> => {
-      if (seen.has(href) || signal.aborted) return [];
-      seen.add(href);
-      try {
-        const result = await this.request(replayUrl({ timestamp: resolved.timestamp, original: href }), signal, 750_000, 'css', targetYear);
-        const imported: string[] = [];
-        for (const url of cssImports(result.text, href)) {
-          if (imports++ >= 3) break;
-          if (seen.has(url)) continue;
-          seen.add(url);
-          try {
-            const nested = await this.request(replayUrl({ timestamp: resolved.timestamp, original: url }), signal, 250_000, 'css', targetYear);
-            imported.push(nested.text);
-          } catch { /* One missing import does not discard the other sheets. */ }
-        }
-        return [...imported, result.text];
-      } catch { return []; }
+    const selected = document.sheets.filter(s => s.text !== undefined || ++external <= 6);
+    type Sheet = { text: string; base: string };
+    const downloads = new Map<string, Promise<Sheet | null>>();
+    const download = (href: string, limit: number): Promise<Sheet | null> => {
+      let pending = downloads.get(href);
+      if (!pending) {
+        pending = this.request(replayUrl({ timestamp: resolved.timestamp, original: href }), signal, limit, 'css', targetYear)
+          .then(result=>({text:result.text,base:parseReplay(result.url)?.original??href}),()=>null);
+        downloads.set(href,pending);
+      }
+      return pending;
     };
-    const sheets = await Promise.all(selected.map(s => s.text !== undefined ? Promise.resolve([s.text]) : download(s.href!)));
+    const [mainSheets, images] = await Promise.all([
+      Promise.all(selected.map(s=>s.text!==undefined ? Promise.resolve({text:s.text,base:s.base??resolved.original}) : download(s.href!,750_000))),
+      Promise.all(document.images.map(async image => {
+        const data = await this.raster(replayUrl({ timestamp: resolved.timestamp, original: image.url }), signal, targetYear);
+        return data ? { id: image.id, data } : null;
+      })),
+    ]);
+    if (selected.some(s=>s.href) && !selected.some((s,i)=>s.href && mainSheets[i]?.text.trim())) return null;
+    // Discover imports in source order after the parallel downloads finish. A shared
+    // resource is fetched once but appears at every original cascade position.
+    const references = mainSheets.map(sheet=>sheet ? cssImports(sheet.text,sheet.base) : []);
+    const importURLs = [...new Set(references.flat().map(ref=>ref.url))].slice(0,3);
+    const imported = new Map(await Promise.all(importURLs.map(async url=>[url,await download(url,250_000)] as const)));
+    const wrap = (text: string, media?: string) => media ? `@media ${media}{${text}}` : text;
+    const sheets = mainSheets.flatMap((sheet,index)=>{
+      if (!sheet) return [];
+      const pieces = references[index].flatMap(ref=>{
+        const nested=imported.get(ref.url);
+        return nested ? [wrap(absoluteCSS(nested.text,nested.base),ref.media)] : [];
+      });
+      pieces.push(absoluteCSS(sheet.text,sheet.base));
+      return pieces.map(css=>wrap(css,selected[index].media));
+    });
+    const backgrounds = await Promise.all(cssImageURLs(sheets,resolved.original).map(async(url,index)=>{
+      const data=await this.raster(replayUrl({timestamp:resolved.timestamp,original:url}),signal,targetYear);
+      return data?{id:`css-${index}`,url,data}:null;
+    }));
     if (signal.aborted) return null;
-    return analyze(document, sheets.flat(), meta);
+    if (document.sheets.length && !sheets.some(sheet=>sheet.trim())) return null;
+    if (!this.renderer) throw new ArchiveError('A local browser renderer is required');
+    const resources: Raster[] = [...images.filter((image): image is Raster => !!image), ...backgrounds.filter(image=>image!==null)];
+    const snapshot = await this.renderer({ document, sheets, images: resources, original: resolved.original, viewport: DEFAULT_VIEWPORT });
+    if (!snapshot || snapshot.nodes.length < 5 || signal.aborted) return null;
+    return { ...meta, schema: SCHEMA, source: 'wayback', snapshot: await encodeSnapshot(snapshot), palette: [], createdAt: Date.now(), ruleCount: snapshot.nodes.length };
   }
 
   async load(origin: string, year: number, outerSignal?: AbortSignal): Promise<StylePack> {

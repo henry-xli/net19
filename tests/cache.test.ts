@@ -50,6 +50,23 @@ test('oversized or corrupted entries never become applicable styles', async () =
   const storage = new Memory(); const cache = new ProfileCache(storage);
   storage.data[profileKey(ORIGIN, 2019)] = { css: 'malicious', schema: 1 };
   assert.equal(await cache.read(ORIGIN, 2019), null);
-  await assert.rejects(cache.put({ ...makePack(), css: 'x'.repeat(100_000) }));
+  await assert.rejects(cache.put({ ...makePack(), snapshot: 'x'.repeat(100_000) }));
   assert.equal(storage.data[INDEX_KEY], undefined);
+});
+
+test('changing years removes positives, misses, legacy entries and prevents stale writes', async () => {
+  const storage = new Memory(); const cache = new ProfileCache(storage);
+  await cache.retainYear(2019); const revision = cache.revision();
+  await cache.put(makePack()); await cache.miss('https://missing.example',2019,'missing');
+  storage.data['profile:1:2012:https://legacy.example'] = {};
+  await cache.retainYear(2012); await cache.put(makePack(),revision);
+  assert.equal((await cache.stats()).count,0); assert.equal(await cache.read(ORIGIN,2019),null);
+  assert.equal(Object.keys(storage.data).filter(k=>k.startsWith('profile:')).length,0);
+  await cache.put(makePack(ORIGIN,2012)); assert.equal((await cache.stats()).count,1);
+  assert.equal(await cache.read('https://www.net19-fixture.example',2012).then(x=>!!x?.pack),true);
+});
+test('older fallback captures are used transiently and never saved as the selected year', async () => {
+  const storage = new Memory(); const cache = new ProfileCache(storage); await cache.retainYear(2019);
+  const pack = makePack(ORIGIN,2018); pack.targetYear = 2019; await cache.put(pack);
+  assert.equal((await cache.stats()).count,0);
 });

@@ -1,8 +1,8 @@
 {
   "name": "net19",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
-  "description": "The live web, with a little of its past. A local-first Chrome extension.",
+  "description": "Automatic historical website layout preparation with local caching.",
   "type": "module",
   "scripts": {
     "build": "node scripts/build.mjs",
@@ -11,7 +11,7 @@
     "test:browser": "playwright test",
     "check": "npm run typecheck && npm test && npm run build && npm run test:browser",
     "package": "node scripts/package.mjs",
-    "check:archive": "node --import tsx scripts/check-archive.ts"
+    "check:archive": "node scripts/check-browser-live.mjs"
   },
   "engines": {
     "node": ">=22"

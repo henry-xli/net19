@@ -1,4 +1,4 @@
-import { INDEX_KEY, MAX_CACHE_BYTES, MAX_PROFILES, MAX_PROFILE_BYTES, isStylePack, profileKey, type ProfileResult, type StylePack } from './shared';
+import { INDEX_KEY, MAX_CACHE_BYTES, MAX_PROFILES, MAX_PROFILE_BYTES, SCHEMA, isStylePack, profileKey, type ProfileResult, type StylePack } from './shared';
 
 export interface LocalStorage {
   get(keys: string | string[] | null): Promise<Record<string, unknown>>;
@@ -11,6 +11,7 @@ type Miss = { miss: true; expiresAt: number; reason: ProfileResult['reason'] };
 export class ProfileCache {
   private writes: Promise<unknown> = Promise.resolve();
   private generation = 0;
+  private year?: number;
   constructor(private storage: LocalStorage, private now = Date.now) {}
 
   private serialize<T>(fn: () => Promise<T>): Promise<T> {
@@ -20,6 +21,34 @@ export class ProfileCache {
   }
 
   revision(): number { return this.generation; }
+
+  retainYear(year: number): Promise<void> {
+    // Increment synchronously so an already downloading previous year cannot repopulate storage.
+    this.year = year;
+    this.generation++;
+    return this.serialize(async () => {
+      const all = await this.storage.get(null);
+      const index = (all[INDEX_KEY] ?? {}) as Index;
+      const retained: Index = {};
+      const remove: string[] = [];
+      for (const [key, entry] of Object.entries(all)) {
+        if (!key.startsWith('profile:')) continue;
+        const inYear = key.startsWith(`profile:${SCHEMA}:${year}:`);
+        const valid = inYear && ((isStylePack(entry, undefined, year) && entry.capturedAt.startsWith(String(year))) ||
+          ((entry as Miss)?.miss === true && (entry as Miss).expiresAt > this.now()));
+        if (!valid) remove.push(key);
+        else retained[key] = index[key] ?? { usedAt: this.now(), bytes: new TextEncoder().encode(JSON.stringify(entry)).byteLength, kind: isStylePack(entry) ? 'profile' : 'miss' };
+      }
+      if (remove.length) await this.storage.remove(remove);
+      await this.storage.set({ [INDEX_KEY]: retained });
+    });
+  }
+
+  async readyOrigins(): Promise<string[]> {
+    await this.writes;
+    const all = await this.storage.get(null);
+    return Object.values(all).filter((entry): entry is StylePack => isStylePack(entry, undefined, this.year)).map(pack => pack.origin);
+  }
 
   async read(origin: string, year: number): Promise<ProfileResult | null> {
     const key = profileKey(origin, year);
@@ -40,6 +69,9 @@ export class ProfileCache {
 
   async put(pack: StylePack, revision = this.generation): Promise<void> {
     if (!isStylePack(pack)) throw new Error('Invalid historical profile');
+    // Older fallback captures can be used for this visit, but the saved cache contains
+    // only the exact year selected by the user.
+    if (!pack.capturedAt.startsWith(String(pack.targetYear))) return;
     return this.save(profileKey(pack.origin, pack.targetYear), pack, 'profile', revision);
   }
 
@@ -50,7 +82,7 @@ export class ProfileCache {
 
   private save(key: string, entry: StylePack | Miss, kind: 'profile' | 'miss', revision: number): Promise<void> {
     return this.serialize(async () => {
-      if (revision !== this.generation) return;
+      if (revision !== this.generation || (this.year !== undefined && !key.startsWith(`profile:${SCHEMA}:${this.year}:`))) return;
       const bytes = new TextEncoder().encode(JSON.stringify(entry)).byteLength;
       if (bytes > MAX_PROFILE_BYTES) throw new Error('Historical profile exceeds storage budget');
       const index = ((await this.storage.get(INDEX_KEY))[INDEX_KEY] ?? {}) as Index;

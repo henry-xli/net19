@@ -8,7 +8,7 @@ async function collect(directory, prefix = '') {
     const name = prefix + entry.name;
     if (entry.isDirectory()) await collect(new URL(entry.name + '/', directory), name + '/');
     else {
-      if (!/^(?:icons\/(?:\d+\.png|icon\.svg)|(?:background|content|popup|options)\.js|(?:popup|options)\.html|(?:gate|ui|options)\.css|manifest\.json|THIRD_PARTY_NOTICES\.txt)$/.test(name)) throw new Error(`Unexpected package file: ${name}`);
+      if (!/^(?:icons\/(?:\d+\.png|icon\.svg)|(?:background|content|popup|options|loading|offscreen)\.js|(?:popup|options|loading|offscreen)\.html|(?:gate|ui|options|loading)\.css|manifest\.json|THIRD_PARTY_NOTICES\.txt)$/.test(name)) throw new Error(`Unexpected package file: ${name}`);
       files[name] = new Uint8Array(await readFile(new URL(entry.name, directory)));
     }
   }

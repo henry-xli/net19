@@ -1,35 +1,37 @@
 # net19 privacy policy
 
-Effective date: September 24, 2026. Applies to net19 0.1.0.
+Effective September 24, 2026. Applies to net19 0.2.0.
 
-Net19 adapts historical website styling to the current web. It has no developer-operated backend, account system, analytics, advertisements, remote AI, or telemetry.
+Net19 prepares historical visual styling for live websites. It has no developer-operated server, account system, analytics, advertisements, remote AI, or telemetry.
 
 ## What leaves your device
 
-Only after you enable site access, net19 queries the Internet Archive's Wayback Machine for the site's **public homepage origin**, such as `https://example.com/`, and your selected year. It may fetch that public archived HTML and a bounded number of its archived stylesheets. Public stylesheet addresses found in the archived HTML may include their original asset query strings; these come from the public snapshot, never from the live page.
+With net19 enabled and Chrome website access granted, navigating to an uncached public site automatically queries the Internet Archive for its **public homepage origin** and the selected year. Net19 may download public archived HTML, a bounded number of archived stylesheets and imports, and small archived PNG branding/background graphics. Asset paths and query strings come from the public archive, not the current page.
 
-The visited path, query string, fragment, page contents, form values, cookies, passwords, authentication tokens, and account data are not sent by net19. Requests omit credentials and referrers. All remote requests go to `archive.org` or `web.archive.org`; the extension's network policy also blocks redirects to other destinations.
+Net19 does not transmit your visited path, query string, fragment, current page contents, form values, cookies, passwords, authentication tokens, or account data. Requests omit credentials and referrers. Remote connections made by the extension are restricted to `archive.org` and `web.archive.org`; its network policy also blocks redirects to other hosts.
 
-The Internet Archive receives the requested public homepage/asset addresses, timestamp queries, your network IP address, and ordinary connection metadata necessary to serve these requests. Its [terms and privacy policy](https://archive.org/about/terms.php) apply to those requests. Net19 does not submit pages for archiving. No requests are made to Archive.is.
+The Internet Archive receives these public homepage/asset requests, timestamp queries, your network IP address, and normal connection metadata. Its [terms and privacy policy](https://archive.org/about/terms.php) apply. Net19 does not submit sites for archiving, bypass archive access controls, or send requests to Archive.is.
 
-## What is stored locally
+## Local processing and storage
 
-Chrome's local extension storage holds:
+Archived documents are sanitized and measured locally in a script-disabled, network-isolated browser frame. The extension examines the live page's labels, links, element structure, computed styles, and positions locally to match components. Current page data is not sent to an archive or saved as a profile. Archived scripts never run.
 
-- Preferences: destination year, maximum waiting time, enabled state, and paused-site hostnames.
-- Up to 100 historical style profiles: public site origin, selected year, capture timestamp, source snapshot URL, locally generated CSS, a small color palette, creation time, and last-used time.
-- Up to 100 short-lived failure entries, which reduce repeated requests for unavailable archives.
+Chrome local extension storage contains:
 
-The total style cache has a 4 MiB budget. An additional short-lived service-worker backoff timestamp may be kept in Chrome session storage. Open tab identifiers are briefly queried to notify existing content scripts when permissions are removed; they are not persisted or transmitted.
+- Settings: selected year, preparation timeout, enabled state, and paused hostnames.
+- Up to 100 profiles: public origin, selected/capture year, snapshot URL, timestamps, and compressed computed measurements, component descriptors, and normalized raster graphics from the public archive.
+- Up to 100 temporary failure entries to avoid repeated unavailable archive requests.
 
-The cache is browsing-related metadata: its site addresses and last-used times can indicate which enabled sites you use. It is stored on this device, not sent to the developer, synchronized by net19, sold, or shared for advertising. Net19 does not save full archived pages or current page contents. Chrome may separately maintain its normal HTTP cache for public archive requests.
+The profile/failure cache is limited to 4 MiB, with a 96 KiB limit per profile. Other-year and obsolete-format entries are removed on startup and year changes. No complete archived HTML/CSS documents, live page contents, or visited full URLs are persisted by net19.
 
-## Your choices
+During navigation, the local loading page temporarily holds the original destination in its URL fragment so it can continue to the correct address. It is not sent to the archive. Chrome session storage briefly holds a tab identifier, public origin, year, preparation result, and expiry; completed/closed tabs remove these entries, and entries expire logically after 90 seconds. A provider backoff timestamp can also be held in session storage. Chrome independently maintains its normal browsing history and network cache.
 
-Website access is requested for a single site when you choose **Enable on this site**, or broadly when you explicitly choose **Enable on all public sites** in Settings. The Internet Archive hosts are declared permissions needed for archive lookups. You can remove site access through net19 Settings or Chrome's extension controls.
+Cached origins and recency can reveal which sites you use. They stay on this device: net19 does not synchronize, sell, or share this cache with the developer or advertisers.
 
-Pause net19 globally or for one site to restore the current styling. **Clear saved styles** removes the local profile/failure cache and cancels active lookups. Preferences and Chrome-granted permissions remain. Uninstalling net19 removes its extension storage. Private/IP/local URLs, browser pages, archive sites, and incognito are excluded.
+## Controls
 
-## Questions or changes
+Public HTTP(S) website access is requested at installation so preparation works automatically. You can restrict access in Chrome's extension controls, pause individual sites in the popup, or pause the extension in Settings. Incognito, IP/local addresses, non-default ports, browser pages, and archive sites are excluded.
 
-Report privacy questions through the [net19 repository](https://github.com/henry-xli/net19/issues). Do not post private addresses, credentials, or personal page contents in a public issue. Material changes to data handling will be reflected in this policy and the extension's disclosures.
+Changing the year deletes other years' cache entries and cancels stale jobs. **Clear saved styles** removes profile/failure entries and cancels active lookups; preferences remain. Pausing immediately restores the current styling. Uninstalling removes the extension's storage.
+
+Report questions through [the repository](https://github.com/henry-xli/net19/issues). Avoid posting private addresses, credentials, or personal page contents in public issues. Material changes to these practices will be reflected here and in the extension disclosures.

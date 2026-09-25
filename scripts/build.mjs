@@ -6,7 +6,7 @@ const out = new URL('../dist/extension/', import.meta.url);
 await rm(out, { recursive: true, force: true });
 await mkdir(out, { recursive: true });
 await cp(new URL('../static/', import.meta.url), out, { recursive: true });
-await build({ entryPoints: ['src/background.ts', 'src/content.ts', 'src/popup.ts', 'src/options.ts'],
+await build({ entryPoints: ['src/background.ts', 'src/content.ts', 'src/popup.ts', 'src/options.ts', 'src/loading.ts', 'src/offscreen.ts'],
   outdir: out.pathname, bundle: true, platform: 'browser', target: 'chrome120', format: 'iife',
   minify: true, legalComments: 'eof', logLevel: 'warning' });
 // Original vector artwork: no platform fonts, remote images, or generated-photo dependencies.

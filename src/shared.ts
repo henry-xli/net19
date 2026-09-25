@@ -1,10 +1,10 @@
 export const MIN_YEAR = 2007;
-export const SCHEMA = 1;
+export const SCHEMA = 2;
 export const MAX_PROFILES = 100;
 export const MAX_CACHE_BYTES = 4 * 1024 * 1024;
-export const MAX_PROFILE_BYTES = 28 * 1024;
-export const HARD_GATE_MS = 2400;
-export const WARM_BUDGET_MS = 14_000;
+export const MAX_PROFILE_BYTES = 96 * 1024;
+export const HARD_GATE_MS = 65_000;
+export const WARM_BUDGET_MS = 55_000;
 export const SETTINGS_KEY = 'settings';
 export const INDEX_KEY = 'profile-index';
 
@@ -21,7 +21,7 @@ export type StylePack = {
   targetYear: number;
   capturedAt: string;
   snapshotUrl: string;
-  css: string;
+  snapshot: string;
   palette: string[];
   createdAt: number;
   source: 'wayback';
@@ -41,6 +41,7 @@ export type PageStatus = {
   cached?: boolean;
   reason?: string;
   snapshotUrl?: string;
+  mode?: 'layout' | 'styles';
 };
 
 export function currentYear(): number { return new Date().getFullYear(); }
@@ -50,7 +51,8 @@ export function settingsFrom(value: unknown): Settings {
   return {
     enabled: v.enabled !== false,
     year: Number.isInteger(v.year) ? Math.max(MIN_YEAR, Math.min(currentYear(), v.year!)) : 2019,
-    waitMs: typeof v.waitMs === 'number' && Number.isFinite(v.waitMs) ? Math.max(0, Math.min(2200, v.waitMs)) : 1800,
+    // Migrate the old prepare-only / 1.8-second defaults to automatic preparation.
+    waitMs: typeof v.waitMs === 'number' && Number.isFinite(v.waitMs) && v.waitMs >= 10_000 ? Math.min(60_000, v.waitMs) : 60_000,
     disabledHosts: Array.isArray(v.disabledHosts) ? [...new Set(v.disabledHosts.filter(h => typeof h === 'string' && h.length < 254))].slice(0, 500) : [],
   };
 }
@@ -75,7 +77,11 @@ export function sameSite(a: string, b: string): boolean {
 }
 
 export function profileKey(origin: string, year: number): string {
-  return `profile:${SCHEMA}:${year}:${origin}`;
+  return `profile:${SCHEMA}:${year}:${canonicalOrigin(origin)}`;
+}
+
+export function canonicalOrigin(origin: string): string {
+  return `https://${new URL(origin).hostname.replace(/^www\./, '')}`;
 }
 
 export function validTimestamp(value: unknown, year: number): value is string {
@@ -98,12 +104,11 @@ export function isStylePack(value: unknown, origin?: string, year?: number): val
   const p = value as StylePack;
   const replay = typeof p.snapshotUrl === 'string' && parseReplay(p.snapshotUrl);
   return p.schema === SCHEMA && p.source === 'wayback' && typeof p.origin === 'string' &&
-    publicOrigin(p.origin) === p.origin && (!origin || p.origin === origin) &&
+    publicOrigin(p.origin) === p.origin && (!origin || canonicalOrigin(p.origin) === canonicalOrigin(origin)) &&
     Number.isInteger(p.targetYear) && p.targetYear >= MIN_YEAR && p.targetYear <= currentYear() &&
     (year === undefined || p.targetYear === year) && validTimestamp(p.capturedAt, p.targetYear) &&
     !!replay && replay.timestamp === p.capturedAt && sameSite(replay.original, p.origin) &&
-    typeof p.css === 'string' && p.css.startsWith('/* net19: local historical style */') &&
-    p.css.length < MAX_PROFILE_BYTES && !/url\s*\(|@import|@font-face|expression\s*\(|[<>\\]/i.test(p.css) &&
+    typeof p.snapshot === 'string' && p.snapshot.length < 90_000 && /^[A-Za-z0-9+/=]+$/.test(p.snapshot) &&
     Array.isArray(p.palette) && p.palette.length <= 6 && p.palette.every(c => /^#[\da-f]{3,8}$/i.test(c)) &&
     Number.isFinite(p.createdAt) && Number.isInteger(p.ruleCount) && p.ruleCount > 0;
 }

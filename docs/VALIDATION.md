@@ -1,33 +1,41 @@
-# Validation of 0.1.0
+# Validation of 0.2.0
 
-Initial release validation: September 24, 2026, on macOS using real Chromium 153 and Node.js 24.
+## Automated release checks
 
-## Deterministic checks
+`npm run check` passes TypeScript checking, **28 unit tests**, a production build, and **16 real Chromium extension tests**. `npm audit --omit=dev` reports zero production dependency vulnerabilities.
 
-- TypeScript strict checks passed.
-- 24 unit/integration tests passed, covering target-year bounds, HTTP-to-HTTPS archive lookup, URL privacy, capture validation, inert HTML/CSS parsing, unsafe CSS rejection, contrast fallback, CSS imports/variables, gzip replay decoding and expansion limits, request cancellation, LRU eviction, simultaneous writes, negative-cache expiration, and clearing during in-flight work.
-- 11 browser tests passed against the bundled extension in real Chromium: cached paint ordering and no reload; cold archived styling; raw gzip replay CSS; delayed response warming without a later repaint; archive outage; shared concurrent jobs; current-year bypass; strict page CSP and document isolation across navigation; the independent CSS gate expiry; settings/clear/pause; and popup/year controls.
-- The cache test requires the first archived-style frame within 500 ms on a controlled local fixture, with **zero visible unstyled frames, zero archive requests, and one page load**. This is a local regression assertion, not a claim about Internet Archive latency or every website.
-- The independent gate test verifies that an abandoned overlay becomes hidden and non-interactive without JavaScript removal.
-- `npm audit` reported zero known dependency vulnerabilities at validation time.
-- The shipping archive uses an explicit file allowlist, contains bundled executable code, and excludes test fixtures, browser profiles, developer logs, and environment files.
+Browser tests use the **unchanged production manifest and bundle** in fresh, isolated profiles. Controlled archive/site responses make timing and visual regressions reproducible. They verify:
 
-Browser tests use a copy of the real production bundle with **only** two extra required fixture origins in its test manifest. Archived responses are controlled at the network boundary. Production optional permissions, CSS, scripts, analyzer and cache code are retained. For popup screenshots, the current-tab query is supplied with the real fixture tab ID because a normal toolbar popup is not itself a browser tab.
+- The first uncached destination request occurs after automatic archive preparation; path, query and fragment are preserved locally and never sent to archive indexes.
+- New sites need no enable/prepare action. Archive failure opens the current destination once, without a second lookup.
+- Changed wrappers and input element types retain working live form controls and nested button labels.
+- CSS cascade, external/inline imports, print conditions and raster sprite cropping are preserved. Pixel assertions check the selected sprite region.
+- Long pages recover archived grid proportions while keeping current article text and natural row heights.
+- Cached first visible frames are styled, with no archive requests or extension loading-page redirect.
+- Incompatible structures roll back; continuing early prevents late repaint; concurrent navigations share work.
+- Year changes purge other-year entries and cancel stale writes; current-year mode bypasses preparation.
+- Strict page CSP, document-specific CSS insertion, independent cover expiry, pause/restore, cache clearing and direct popup controls work.
 
-## Live archive evidence and limits
+Unit tests additionally check archive response/decompression bounds, source/date validation, fallback selection, CSS sanitization, safe model decoding, repeat-route matching, cache LRU limits and generation races.
 
-Initial checks on `www.wikipedia.org` and `www.python.org` encountered index timeouts and unusable styling. Investigation found raw gzip CSS bytes in a Wayback `id_` response whose headers did not instruct fetch to decompress it. The final client detects this format and bounds both compressed and expanded bytes.
+These tests establish behavior on their controlled inputs. They do not establish universal compatibility with arbitrary current websites or guarantee archive availability.
 
-After that correction, a **live Wayback request for `www.python.org` produced a usable profile from capture `20190701215108` in 2,963 ms**, including real archived HTML/CSS downloads and local analysis. This exceeded the default page reveal budget, illustrating why background warming and the next-visit cache path are necessary.
+## Actual archive observations
 
-A separate **live Chromium check** then visited the actual Python.org homepage using a fresh browser profile and the bundled extension. It acquired the July 2019 profile in 3,022 ms. On the next normal test navigation, the content script applied the cached style in **14 ms**, with **zero archive requests** during that visit. See [the recorded result](live-validation.json). Run `node scripts/check-browser-live.mjs` after a build to reproduce this optional external check; it does not use the user's browser profile.
+Live checks use `node scripts/check-browser-live.mjs ORIGIN` in a fresh Chromium profile, with actual Wayback and website responses, no fixture routes, and no seeded profiles. Machine-readable outcomes are in [live-validation.json](live-validation.json). Failed live checks remain failed.
 
-Those results demonstrate one real capture, not broad real-site coverage or a latency guarantee. Deterministic browser tests and live probes are recorded separately. The measured local cached fixture produced its first styled frame in approximately 37 ms, with zero visible unstyled frames, zero archive requests, and a single navigation. Timing for cached style application excludes the live website's own network loading time.
+- **Google automatic lookup:** the bare homepage resolved to capture `20191231235918`, a different template from the supplied parameterized reference. The general matcher rejected that structure and revealed current styling. Automatic selection of the particular reference remains unverified; this must not be described as a successful Google restoration.
+- **Python.org:** a real `20191231233039` capture was downloaded and measured. Inspection uncovered and fixed an insufficient generated-CSS size limit. The subsequent layout failed the readability check and rolled back to current styling.
+- **Hacker News:** one real first visit applied a measured `20191231232500` profile. That run's repeat-visit check reported additional preparation, so it was not a complete pass. A later diagnostic run timed out while waiting for destination navigation. Controlled cache tests pass; a successful real-network repeat-visit run is not claimed here.
 
-Run `npm run check:archive` to repeat an explicit, bounded live check on the default public homepages. Its local output is `artifacts/live-archive-check.json`; exit status 1 records that no usable profile was obtained. This external availability check is kept separate from deterministic CI.
+## Supplied Google reference: isolated parser comparison
 
-## Release boundaries
+Separately, the actual [December 29, 2019 reference](https://web.archive.org/web/20191229024955/https://www.google.com/?gws_rd=ssl) was downloaded and passed through the general inert renderer. Its measured model was seeded into a fresh extension profile to isolate parsing/matching from snapshot discovery. The destination was the actual current, anonymous Google homepage in dark mode.
 
-The public ZIP and its SHA-256 checksum are in `downloads/`. Store listing text, permission explanations, privacy disclosures and visual assets are provided. Chrome Web Store submission and approval are separate from publishing the repository.
+The adapter recovered the source's 272 × 92 logo, 484 × 46 search container at (398, 317) in a 1280 × 800 viewport, light controls, button placement, and header links. The reference parser uses no Google-specific selectors or adapter. Some live decorations remain when archived graphics are unavailable.
 
-No arbitrary-site compatibility, exact historical layout reconstruction, guaranteed cold-load speed, or store approval is claimed. A site can always be paused to recover its current styling.
+**This is a source-specific parser comparison, not an automatic archive-discovery pass or a claim of pixel identity.** Google’s bare-homepage archive and the supplied query-bearing homepage differ. Archive downloads, diagnostic HTML, browser profiles and screenshots of live third-party content are excluded from version control and the package.
+
+## Remaining limits
+
+Historical HTML may be incomplete, use unavailable fonts/assets, or depend on scripts that net19 deliberately does not execute. Current markup can have different controls and behavior. Homepage models cannot faithfully reconstruct every subpage, closed shadow tree, canvas interface, SPA transition, or archived template variant. Successful capture measurement alone is not considered successful styling; the live page must also pass matching and readability checks.

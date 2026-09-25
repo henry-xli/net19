@@ -1,11 +1,15 @@
 import { HARD_GATE_MS, SETTINGS_KEY, currentYear, isPaused, isStylePack, publicOrigin, settingsFrom, type PageStatus, type ProfileResult } from './shared';
+import { decodeSnapshot } from './snapshot';
+import { adapt, type Adaptation } from './adapt';
 
 (() => {
   if (window !== window.top || chrome.extension.inIncognitoContext) return;
   const origin = publicOrigin(location.href);
   if (!origin) return;
   const start = performance.now();
-  let deadline = 2200, pending = true;
+  let deadline = 60_000, pending = true;
+  const controller = new AbortController();
+  let adaptation: Adaptation | null = null;
   let status: PageStatus = { state: 'waiting', elapsedMs: 0 };
   let overlay: HTMLDivElement | undefined;
   let rootObserver: MutationObserver | undefined;
@@ -16,6 +20,7 @@ import { HARD_GATE_MS, SETTINGS_KEY, currentYear, isPaused, isStylePack, publicO
     clearTimeout(timer);
     rootObserver?.disconnect();
     overlay?.remove();
+    if (status.state !== 'archived') { controller.abort(); adaptation?.cleanup(); document.documentElement?.removeAttribute('data-net19-styled'); }
     if (status.state === 'waiting') status = { state: 'current', elapsedMs: Math.round(performance.now() - start), reason };
   }
 
@@ -36,9 +41,26 @@ import { HARD_GATE_MS, SETTINGS_KEY, currentYear, isPaused, isStylePack, publicO
   }
 
   function restore(): void {
+    controller.abort(); adaptation?.cleanup();
     document.documentElement?.removeAttribute('data-net19-styled');
     status = { state: 'paused', elapsedMs: Math.round(performance.now() - start) };
     reveal();
+  }
+
+  async function settle(): Promise<void> {
+    // Modern pages often install their header/controls just after DOMContentLoaded.
+    // Measure after a short quiet period, with a strict cap for continuously updating pages.
+    await new Promise<void>(resolve => {
+      let quiet: ReturnType<typeof setTimeout>;
+      const done = () => { clearTimeout(quiet); clearTimeout(limit); observer.disconnect(); window.removeEventListener('load',loaded); controller.signal.removeEventListener('abort',done); resolve(); };
+      const settled = () => { if (document.readyState === 'complete') done(); };
+      const loaded = () => { clearTimeout(quiet); quiet = setTimeout(done,180); };
+      const observer = new MutationObserver(() => { clearTimeout(quiet); quiet = setTimeout(settled,180); });
+      const limit = setTimeout(done,2500);
+      observer.observe(document.documentElement,{subtree:true,childList:true,attributes:true,attributeFilter:['class','style','hidden']});
+      quiet = setTimeout(settled,180); window.addEventListener('load',loaded,{once:true}); controller.signal.addEventListener('abort',done,{once:true});
+      if (controller.signal.aborted) done();
+    });
   }
 
   chrome.runtime.onMessage.addListener((message, sender, respond) => {
@@ -73,11 +95,25 @@ import { HARD_GATE_MS, SETTINGS_KEY, currentYear, isPaused, isStylePack, publicO
       const result = await chrome.runtime.sendMessage({ type: 'PROFILE' }) as ProfileResult;
       if (!pending || performance.now() - start >= deadline) { reveal('timeout'); return; }
       if (isStylePack(result?.pack, origin, config.year)) {
-        // CSS was inserted while inert by the worker. Activating it and removing the gate
-        // happen in one JavaScript task, before the browser's next paint opportunity.
+        const snapshot = await decodeSnapshot(result.pack.snapshot);
+        if (document.readyState === 'loading') await new Promise<void>(resolve => {
+          document.addEventListener('DOMContentLoaded', () => resolve(), { once: true });
+          controller.signal.addEventListener('abort', () => resolve(), { once: true });
+        });
+        if (!pending || controller.signal.aborted) return;
+        await settle();
+        if (!pending || controller.signal.aborted) return;
+        adaptation = await adapt(snapshot, crypto.randomUUID(), controller.signal);
+        if (!adaptation) { reveal('unmatched-layout'); return; }
+        const installed = await chrome.runtime.sendMessage({ type: 'INSTALL_STYLE', css: adaptation.css, year: config.year });
+        if (!pending || performance.now() - start >= deadline) { reveal('timeout'); return; }
+        if (installed !== true) { reveal('style-rejected'); return; }
+        // Activate only under the cover, validate the resulting controls/contrast, then
+        // reveal in the same task. A late response never restyles a visible page.
         document.documentElement.setAttribute('data-net19-styled', result.pack.capturedAt.slice(0, 4));
+        if (!adaptation.check()) { reveal('unreadable-layout'); return; }
         status = { state: 'archived', year: Number(result.pack.capturedAt.slice(0, 4)),
-          elapsedMs: Math.round(performance.now() - start), cached: result.cached, snapshotUrl: result.pack.snapshotUrl };
+          elapsedMs: Math.round(performance.now() - start), cached: result.cached, snapshotUrl: result.pack.snapshotUrl, mode: adaptation.mode };
         reveal();
       } else reveal(result?.reason ?? 'unavailable');
     } catch { reveal('unavailable'); }

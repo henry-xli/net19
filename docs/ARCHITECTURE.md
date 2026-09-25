@@ -1,60 +1,71 @@
-# Architecture and guarantees
+# Architecture
 
-## Navigation path
+## Navigation and first paint
 
-1. A user grants optional site access. The worker registers persistent, top-frame `document_start` content scripts for granted origins, excluding paused and unsupported hosts.
-2. Chrome installs the bundled gate CSS before the content script. The script adds an opaque overlay immediately. The underlying website loads concurrently and is not redirected or replaced.
-3. Preferences are read locally. Paused/current-year sites reveal immediately. Other pages ask the worker for a profile derived from the **sender's** public origin. A page cannot supply an arbitrary archive target.
-4. The worker reads the cache. For a miss, it shares any same-origin/year in-flight job or starts one of at most two simultaneous profile jobs.
-5. CDX and Availability requests race for a capture within the selected year. Older results wait for both indexes so they cannot preempt an available selected-year capture. CDX uses exact homepage matching, status/MIME filtering, `fastLatest`, a result limit, and a target-year cutoff. At most two initial captures and one next-older-year capture are analyzed within the overall deadline.
-6. The archived HTML is parsed locally, without a DOM or script execution. Up to four linked CSS files and three one-level imports are fetched concurrently/in order as appropriate. Inline sheets retain source order. Conditional/print CSS is omitted. Responses have streaming byte limits and independent abort deadlines.
-7. The analyzer extracts known color/typography declarations, resolves bounded CSS variables, checks a readable body color pair, maps fonts to local equivalents, and compiles **new CSS with fixed, guarded selectors**. Archived selectors and script/asset behavior are never injected wholesale.
-8. `scripting.insertCSS` installs the result with user origin into the original **document ID**, while all rules remain inactive behind `html[data-net19-styled]`.
-9. Only a still-waiting content script, within its original deadline, can activate that attribute. It removes the overlay in the same JavaScript task. Once the gate closes for any reason, that document's application state is terminal.
+1. A persistent dynamic `declarativeNetRequest` rule redirects uncached public GET main-frame requests to the extension's local loading page, before sending the destination request. The original URL is held only in that page's fragment. Archive/local/private/paused addresses are excluded.
+2. The loading page requests preparation automatically. The worker derives the public origin from its verified extension-page sender, reads the local cache, and shares duplicate origin/year jobs. At most two jobs run concurrently; queued jobs share the same overall timeout.
+3. CDX and Availability are queried with public homepage addresses and a year cutoff. Both bounded responses are considered; candidate captures are ordered newest first. At most two candidates and one older fallback are processed. An archive response redirected outside the archive or past the selected year is rejected.
+4. HTML and CSS are parsed as untrusted data. Archived scripts, handlers, embedded browsing contexts, executable SVG features, network fonts, and arbitrary external assets are removed. Up to six linked sheets and three one-level imports preserve cascade order and supported media conditions. Missing essential stylesheets cause fallback.
+5. An offscreen document renders the sanitized result in a sandboxed iframe with no scripts, forms, navigation privileges, or network access. The local browser resolves the cascade, CSS variables, layout, media queries, typography and gradients. Bounded archived PNG branding/sprites are decoded and re-encoded; small sanitized SVG decorations become raster pixels. Archived source HTML/CSS are not persisted.
+6. The worker stores a validated compressed measurement model. A tab-specific temporary allow rule lets the original URL continue exactly once. A session result prevents a failed preparation from starting a second lookup after release. Commit/error/close removes the temporary rule. Positive cached origins receive bounded persistent allow rules and skip the loading-page redirect on later visits.
+7. A registered top-frame `document_start` content script covers the destination while it loads. It decodes the model and waits for document readiness and a short quiet period, capped at 2.5 seconds for settling. It measures the live DOM locally. The matcher uses form names, labels, links, IDs, classes, descendant identities, and matched-parent relationships; changed article text can retain its component's historical styling.
+8. The adapter emits newly generated attribute selectors. High-confidence compact interfaces recover measured geometry and bounded raster decorations. Larger matched components can recover grid/flex proportions and typography while current content determines row heights. Current controls, links, values and event handlers stay in the DOM. Unsupported structures, sensitive forms, active dialogs, poor correspondence or unreadable output cause rollback under the cover.
+9. `scripting.insertCSS` targets the original **document ID** with USER origin. Rules remain inactive until that content script enables its unique session attribute. Validation, activation and removal of the cover happen before reveal. A late response cannot activate after this visit has revealed or navigated away.
 
-## Deadlines
+There is no website-specific adapter or downloaded executable code. A site's archived template is not assumed to match its modern template.
 
-| Work | Bound |
+## Bounds
+
+| Resource | Limit |
 | --- | --- |
-| Normal reveal delay | 1,800 ms by default; 0–2,200 ms configurable |
-| Independent CSS overlay lifetime | 2,400 ms, then a hidden, non-interactive baseline |
-| Whole background profile job | 14,000 ms |
-| One archive index request | 6,000 ms; CDX and Availability overlap |
-| One HTML or CSS request | 4,500 ms |
-| Active profile jobs | 2; duplicate origin/year requests share a job |
-| HTML response | 1,000,000 bytes |
-| Linked stylesheet / imported stylesheet | 750,000 / 250,000 bytes, compressed and expanded |
-| Local profile / total cache | 28 KiB / 4 MiB |
+| Preflight wait | 60 seconds by default; Settings offers 15, 30 or 60 seconds |
+| Archive job | 55 seconds, additionally capped by the chosen timeout |
+| Index / HTML-CSS / PNG request | 12 / 15 / 10 seconds |
+| Independent document-cover CSS expiry | 65 seconds |
+| Active / queued origin jobs | 2 active, at most 100 total |
+| HTML / linked CSS / imported CSS | 1,000,000 / 750,000 / 250,000 bytes; compressed and expanded limits |
+| Archived graphics | Up to 3 branding PNGs and 3 stylesheet PNGs; 40 KB each; validated dimensions |
+| Rendered model | Up to 300 nodes; graphics processing additionally bounded |
+| Compressed profile / decoded model | 96 KiB / 1,000,000 bytes |
+| Cache | 100 positive + 100 temporary negative entries, 4 MiB total |
+| Generated CSS message | 512 KiB; fixed selector grammar, no URLs/imports/code |
 
-These are extension work bounds under normal browser scheduling, not a guarantee that the remote website finishes loading in that time. No JavaScript or CSS can guarantee wall-clock behavior in a renderer that is frozen or has stopped painting. Cached profiles still require Chrome's local storage/worker/CSS-insertion work; “cached” does not mean zero milliseconds.
+These bounds cover extension work under normal browser scheduling, not the destination's network load or a frozen renderer. The CSS cover is hidden by default and visible only during a finite animation. Missing/disabled animation fails open. The loading page has its own release timer and can install its temporary allow rule without relying on a running worker.
 
-The CSS gate is **hidden by default** and visible only during a finite animation with no forwards fill. A missing/disabled animation therefore fails open. The independent timer does not depend on an archive response or a live service worker. Navigation and setting changes also close a pending gate.
+## Cache and settings
 
-## Cache lifecycle
+A schema/year/canonical-origin key identifies each profile. HTTP/HTTPS and the optional leading `www` share a profile; unrelated subdomains do not. Serialized writes maintain LRU recency and byte/count bounds. Missing captures expire after six hours; transient failures after five minutes. Repeated provider failures trigger a one-minute session backoff.
 
-Each schema/year/origin profile has its own local storage key. A serialized index maintains recency, counts and bytes. Profiles and negative entries each have a cap of 100. Immutable historical profiles last until eviction or clearing; missing profiles are retried after six hours, transient failures after five minutes. Three network failures trigger a one-minute provider backoff saved in session storage.
+Startup and year changes remove other-year, old-schema, corrupt and expired entries. A capture from an older fallback year is used transiently, never saved as the selected year. Generation checks prevent cleared caches or changed years from being repopulated by old jobs. Quota errors do not prevent use of an already prepared profile.
 
-Clear increments a cache generation and aborts active jobs before removing entries. Old jobs cannot write into the new generation. Quota failures do not prevent use of an already fetched, validated profile. The index and entries persist across normal MV3 service-worker suspension; in-memory jobs do not. If a worker is terminated mid-request, that document reveals its current page and a future navigation can retry.
+Changing the year affects subsequent navigation; it does not unexpectedly repaint an already visible page. Changing it on the loading page restarts preparation there. Pausing restores the original DOM attributes/graphics and disables generated styles immediately. Selecting the current year removes preparation rules and content-script registration.
 
-## Boundaries
+## Trust boundaries and permissions
 
-Only the extension's own popup/options URLs may mutate preferences, clear caches, or request explicit warmups. Content messages require the extension sender ID, a supported public origin, a top-level frame, granted permission, and a document ID. No page `postMessage` bridge is exposed. No arbitrary CSS, URLs, or permissions can be supplied by a website message.
+Only verified popup/options messages change settings or clear storage. Loading-page messages must come from the top frame of an extension tab. Live content messages require the extension ID, supported sender origin, top frame, site permission, and document ID. No live-page `postMessage` bridge exists.
 
-All executable code is bundled locally. HTML parsing is data-only (`parse5`); CSS parsing uses `css-tree`. The injected output contains no remote assets, custom font faces, URLs, imports, layout/hiding rules, scripts, arbitrary selectors, or remotely supplied conditions. The extension-page CSP permits connections only to the two archive hosts and contains no unsafe script allowances.
+The extension-page CSP restricts connections to `archive.org` and `web.archive.org`. The measurement frame additionally has `default-src 'none'`, `script-src 'none'`, `connect-src 'none'`, `form-action 'none'` and data-only images. Archived CSS selectors exist only in that inert frame. The live page receives computed values through generated selectors and normalized pixels through canvases.
 
-No `webRequest`, `webNavigation`, browser history, `tabs`, `unlimitedStorage`, offscreen document, proxy, native messaging, or content-frame access permission is requested. `activeTab` supplies the user-invoked popup's current-site context; `scripting` registers startup scripts and installs guarded CSS; `storage` stores preferences and profiles.
+| Permission | Purpose |
+| --- | --- |
+| HTTP(S) host access | Automatic public-site navigation handling and styling |
+| `declarativeNetRequestWithHostAccess` | Hold uncached GET navigations before the destination request |
+| `webNavigation` | Retire temporary tab-specific allow rules after commit/error |
+| `scripting` | Register document-start scripts and insert CSS into a specific document |
+| `offscreen` | Measure sanitized layouts locally without a visible archive tab |
+| `storage` | Preferences, bounded profiles, and transient navigation results |
 
-## Compatibility scope
+No history, `tabs`, proxy, debugger, native messaging, unlimited storage, or remotely hosted script permission is requested. The tabs API is used for tab identifiers and context provided by host access; private pages are never sent to the archive.
 
-This is an adaptive historical theme, not a layout reconstruction. It preserves the current DOM, JavaScript behavior, form semantics, links, component placement, and modern responsive layout. Some app-specific styling remains visible. It does not style cross-origin frames, closed shadow roots, canvas rendering, or unknown classed controls. Capture classification is deliberately conservative; unsupported color formats or missing typography can cause a current-style fallback.
+## Compatibility limits
 
-Same-origin SPA routes inherit the selected profile without navigation observers or repeated analysis. A fresh document checks preferences again. A year change does not automatically repaint an open page; an explicit pause does restore its current styling. Browsing back to a cached document does not trigger another archive lookup.
+Only homepage origins are looked up. A parameterized homepage variant can have a different archive than the bare homepage; net19 does not enumerate every public URL or send the user's query to find it. Missing fonts, unavailable or oversized graphics, script-generated archived content, DOM redesigns and shadow/canvas interfaces limit fidelity. A fallback is reported as current styling, even when a source profile was successfully cached.
 
-## Primary references
+The navigation redirect applies to ordinary public GET requests. POST requests are not redirected/replayed. Requests served within a site's own service worker can bypass Chrome's request interception; the document cover provides best-effort reveal protection in that case. SPA route changes do not initiate a second layout reconstruction. Only the top frame is adapted. Mobile widths retain conservative styling rather than desktop absolute geometry.
 
-- [Chrome content-script lifecycle](https://developer.chrome.com/docs/extensions/develop/concepts/content-scripts)
-- [Chrome scripting API](https://developer.chrome.com/docs/extensions/reference/api/scripting)
-- [Chrome optional permissions](https://developer.chrome.com/docs/extensions/reference/api/permissions)
-- [Chrome's remotely hosted code guidance](https://developer.chrome.com/docs/extensions/develop/migrate/remote-hosted-code)
-- [Internet Archive APIs](https://archive.org/help/wayback_api.php)
-- [Wayback CDX reference](https://github.com/internetarchive/wayback/tree/master/wayback-cdx-server)
+## API references
+
+- [Chrome declarativeNetRequest](https://developer.chrome.com/docs/extensions/reference/api/declarativeNetRequest)
+- [Chrome offscreen documents](https://developer.chrome.com/docs/extensions/reference/api/offscreen)
+- [Chrome scripting and document targeting](https://developer.chrome.com/docs/extensions/reference/api/scripting)
+- [Wayback CDX API](https://github.com/internetarchive/wayback/tree/master/wayback-cdx-server)
