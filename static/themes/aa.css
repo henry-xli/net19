@@ -13,3 +13,6 @@ html[data-net19-mode="dark"] { --n19-blue: #4db2ff; --n19-navy: #d0dae3; --n19-r
 
 /* Trip-type pills and buttons keep 2019's small radii */
 .btn, input.btn { border-radius: 2px !important; }
+
+/* "Travel inspiration with AI" (a 2024 chat search) did not exist in 2019 */
+#watMobiLink, li:has(> #watMobiLink) { display: none !important; }

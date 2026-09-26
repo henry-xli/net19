@@ -24,3 +24,20 @@ globalThis.net19Theme = {
   const start = () => { hide(); new MutationObserver(later).observe(document.body, { childList: true, subtree: true }); };
   if (document.body) start(); else document.addEventListener('DOMContentLoaded', start, { once: true });
 })();
+// Signed-in homepages replace the two buttons with a row of pill chips ("Create images", "Ask about files",
+// "Brainstorm", "I'm feeling lucky"). guard.js hides the three AI chips; the remaining "I'm feeling lucky" chip is
+// marked so google.css can draw it as the 2019 gray button. The chip has no stable class, so it is found by its text.
+(() => {
+  const LUCKY = /^i['’]?m feeling lucky$/i;
+  const mark = () => {
+    for (const el of document.querySelectorAll('a, button, [role="button"], [role="link"]')) {
+      if (el.hasAttribute('data-net19-lucky') || el.closest('#rso, #search')) continue;
+      const text = (el.textContent || '').replace(/\s+/g, ' ').replace(/^[^\p{L}]+|[^\p{L}]+$/gu, '').trim();
+      if (LUCKY.test(text)) el.setAttribute('data-net19-lucky', '');
+    }
+  };
+  let queued = false;
+  const later = () => { if (queued) return; queued = true; requestAnimationFrame(() => { queued = false; mark(); }); };
+  const start = () => { mark(); new MutationObserver(later).observe(document.body, { childList: true, subtree: true }); };
+  if (document.body) start(); else document.addEventListener('DOMContentLoaded', start, { once: true });
+})();

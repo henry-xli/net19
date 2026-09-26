@@ -37,6 +37,10 @@ globalThis.net19Theme = {
   };
   let queued = false;
   const later = () => { if (queued) return; queued = true; requestAnimationFrame(() => { queued = false; fix(); }); };
-  const start = () => { fix(); new MutationObserver(later).observe(document.body, { childList: true, subtree: true }); };
+  const start = () => {
+    fix(); new MutationObserver(later).observe(document.body, { childList: true, subtree: true });
+    // React can re-render the header after hydration without a mutation reaching the label check in time: check again once settled.
+    addEventListener('load', later, { once: true }); for (const t of [1000, 3000, 6000]) setTimeout(later, t);
+  };
   if (document.body) start(); else document.addEventListener('DOMContentLoaded', start, { once: true });
 })();

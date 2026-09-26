@@ -1,4 +1,4 @@
-/* net19 handmade theme: Etsy, 2019: sans UI with serif headlines on plain white, a light gray pill search field with a dark magnifier, 3px buttons, square listing photos, #f45800 orange. */
+/* net19 handmade theme: Etsy, 2019: sans UI with serif headlines on plain white, a light gray pill search field with a dark magnifier, 3px buttons, square listing photos and square-cornered hero banners, #f45800 orange. */
 html { --n19-page: #fff; --n19-text: #222; --n19-field: #f5f5f5; --n19-field-edge: #e1e1e1; --n19-icon: #222; --n19-rule: #e5e5e5; }
 html[data-net19-mode="dark"] { --n19-page: #1c1c1c; --n19-text: #eee; --n19-field: #2c2c2c; --n19-field-edge: #444; --n19-icon: #eee; --n19-rule: #333; }
 html:root, html body {
@@ -18,3 +18,5 @@ header.wt-bb-xs, #gnav-header { border-bottom-color: var(--n19-rule) !important;
 
 /* Listing photos and cards are square-cornered */
 .v2-listing-card, .v2-listing-card img, .wt-card, .listing-link img, [data-listing-card-v2] img, [class*="card"] > img { border-radius: 0 !important; }
+/* Home hero banners and photo tiles had square corners in 2019 */
+[class*="shoppable-hero"], [class*="shoppable-hero"] img, main .wt-rounded-02, main img.wt-rounded, main [class*="hp-carousel__card"] { border-radius: 0 !important; }

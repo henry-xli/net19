@@ -19,3 +19,6 @@ body, input, button { font-family: Roboto, "Helvetica Neue", Helvetica, Arial, s
 .network-wrapper { display: none !important; }
 /* Menu words: bold rather than black-weight */
 .site-header .primary-nav .menu-item > a { font-weight: 700 !important; }
+/* Not in 2019: the "AI" section (2023) in the menu bar and its entries in the expanded menus */
+.site-header li:has(> a[href*="/artificial-intelligence"]), .site-header .menu-item:has(> a[href*="/artificial-intelligence"]),
+.expandable-nav li:has(> a[href*="/artificial-intelligence"]) { display: none !important; }

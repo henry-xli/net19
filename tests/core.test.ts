@@ -78,7 +78,7 @@ test('theme stylesheets follow the styling-rule contract', () => {
     // Every color decision has a dark counterpart when the theme defines tokens.
     if (/--n19-[a-z0-9-]+\s*:/.test(css)) assert.ok(/data-net19-mode="dark"/.test(css) || !/html\s*\{\s*--n19/.test(css), `${file}: tokens without a dark variant`);
   }
-  for (const file of readdirSync('static/themes').filter(name => name.endsWith('.js') && name !== 'palette.js')) {
+  for (const file of readdirSync('static/themes').filter(name => name.endsWith('.js') && !['palette.js', 'guard.js'].includes(name))) {
     const js = readFileSync(`static/themes/${file}`, 'utf8');
     assert.ok(/globalThis\.net19Theme\s*=/.test(js), `${file}: no theme config`);
     // Themes follow the site's own light/dark choice; they never switch it.

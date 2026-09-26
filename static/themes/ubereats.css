@@ -8,3 +8,10 @@ button[data-testid="find-food-button"] { background: var(--n19-green) !important
 button[data-testid="find-food-button"]:hover { background: var(--n19-green-hover) !important; }
 [data-testid="header-v2-wrapper"] a[href*="auth.uber.com"] { box-shadow: inset 0 0 0 1px var(--n19-outline) !important; }
 div:has(> input[data-testid="location-typeahead-input"]), div:has(> div > input[data-testid="location-typeahead-input"]) { border-radius: 0 !important; }
+/* Landing page: type set straight on the full-window food photo (a sibling layer, not a background of the text's boxes).
+   A transparent gradient marks the hero and the header floating over it as "over a picture" for the readability check,
+   which would otherwise read the page color behind them and re-ink the black type. */
+main > div:has(h1):has(input[id^="location-typeahead-home"]) { background-image: linear-gradient(transparent, transparent) !important; }
+body:has(main input[id^="location-typeahead-home"]) [data-testid="header-v2-wrapper"] { background-image: linear-gradient(transparent, transparent) !important; }
+/* The Uber One subscription (2021) and its "$0 Delivery Fee" banner did not exist in 2019 */
+div:has(> a[href^="/uber-one"]), a[href^="/uber-one"] { display: none !important; }

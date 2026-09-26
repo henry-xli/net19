@@ -1,8 +1,17 @@
 /* net19 handmade theme: NY.gov, 2019: Proxima Nova with heavy white hero headlines on a full-bleed photo, bold black menu links, #24387e navy blocks, square outlined buttons and cards with no rounding. */
-html { --n19-navy: #24387e; --n19-text: #000; --n19-card-border: #24387e; --n19-card-text: #24387e; --n19-card-bg: #fff; }
-html[data-net19-mode="dark"] { --n19-navy: #2e4596; --n19-text: #f2f2f2; --n19-card-border: #8ea3e6; --n19-card-text: #c7d2f5; --n19-card-bg: #1c1c1c; }
-/* Menu: bold black links */
-.nygov-unav__links .o-universalMainMenu__link a, .nygov-unav__links a { color: var(--n19-text) !important; font-weight: 700 !important; font-size: 18px !important; }
+html { --n19-strip: #0c1428; --n19-divider: #d6d6d6; --n19-navy: #24387e; --n19-text: #000; --n19-card-border: #24387e; --n19-card-text: #24387e; --n19-card-bg: #fff; }
+html[data-net19-mode="dark"] { --n19-strip: #0c1428; --n19-divider: #444; --n19-navy: #2e4596; --n19-text: #f2f2f2; --n19-card-border: #8ea3e6; --n19-card-text: #c7d2f5; --n19-card-bg: #1c1c1c; }
+/* The official-site strip: dark navy with small white capitals */
+.nygov-unav .trustBar__top { background: var(--n19-strip) !important; }
+.nygov-unav .trustBar__top :is(p, span, button) { color: #fff !important; text-transform: uppercase !important; font-weight: 700 !important; letter-spacing: .08em !important; font-size: 13px !important; }
+.nygov-unav .trustBar__topButton svg { fill: #fff !important; color: #fff !important; }
+/* Logo set off by a thin divider; menu in 20px regular black words; pill search field */
+.nygov-unav .nygov-unav__header { border-right: 1px solid var(--n19-divider) !important; padding-right: 60px !important; }
+.nygov-unav__links .o-universalMainMenu__links { gap: 40px !important; }
+.nygov-unav .nygov-unav__nav-content { padding-left: 40px !important; }
+.nygov-unav__links .o-universalMainMenu__link a, .nygov-unav__links a { color: var(--n19-text) !important; font-weight: 400 !important; font-size: 20px !important; }
+.nygov-unav .nygov-search__form { border-radius: 18px !important; border: 1px solid var(--n19-divider) !important; overflow: hidden !important; }
+.nygov-unav .nygov-search__form :is(input, button) { border: 0 !important; border-radius: 0 !important; }
 /* Hero: text straight on the photo, as in 2019, with a square dark scrim instead of the rounded card */
 .m-landingHero__contentWrapper { border-radius: 0 !important; background: linear-gradient(90deg, rgba(0,0,0,.72), rgba(0,0,0,.35)) !important; }
 .a-hero__titleLanding, .m-landingHero__title h1 { font-weight: 800 !important; letter-spacing: 0 !important; }

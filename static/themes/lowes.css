@@ -17,6 +17,9 @@ html:root, html body {
 body, body :not(svg, svg *, i, [class*="icon" i]) { font-family: Helvetica, Arial, sans-serif !important; }
 /* "Mylow" AI Assist did not exist in 2019 */
 header button[data-linkid="mylow"], header a[data-linkid="mylow"] { display: none !important; }
+/* nor did its floating "Ask Mylow" chat bubble, or searching by photo (the camera in the search field) */
+.ChatInviteButton, .chat-button-desktop[aria-label="Ask Mylow"] { display: none !important; }
+#search-bar #visual-search, #search-bar .js-visual-search { display: none !important; }
 
 /* Promo strip: light gray with dark text instead of a navy bar */
 header [data-testid="global-message-ui"] { background: var(--n19-strip) !important; border-bottom: 1px solid var(--n19-rule) !important; }
@@ -29,6 +32,8 @@ header [data-testid="global-message-ui"] a:hover span { text-decoration: underli
 /* Search: a square white field with a gray border and a white blue-magnifier button */
 #search-bar form section { border: 1px solid var(--n19-field-border) !important; border-radius: 0 !important; height: 38px !important; box-shadow: none !important; }
 #search-bar input.sb-input { border-radius: 0 !important; height: 36px !important; font-size: 14px !important; }
+/* Suggestion list: its "by brand" pills become square 2019 buttons */
+.sb-trend-list-chips-wrapper > *, .sb-trend-list-chips-wrapper > * *, .sb-trend-list-chips-wrapper > *::before, .sb-trend-list-chips-wrapper > *::after { border-radius: 2px !important; }
 #search-bar form section svg { color: var(--n19-blue) !important; fill: currentColor; }
 header nav .nav-diy-icons :is(a, button) span, #cart-label-text { color: var(--n19-text) !important; font-size: 13px !important; }
 header nav .nav-diy-icons svg { color: var(--n19-navy) !important; }

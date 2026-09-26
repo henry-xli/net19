@@ -1,6 +1,9 @@
-/* net19 handmade theme: Getty Images, 2019: Lato on white, #6f43d6 purple accents, near-square 3px buttons and inputs, black outlined secondary buttons. */
-html { --n19-radius: 3px; --n19-purple: #6f43d6; --n19-purple-dark: #4316ac; --n19-text: #080808; --n19-muted: #666; --n19-hollow: #fff; }
-html[data-net19-mode="dark"] { --n19-radius: 3px; --n19-purple: #8a66e0; --n19-purple-dark: #6f43d6; --n19-text: #f2f2f2; --n19-muted: #aaa; --n19-hollow: #1a1a1a; }
+/* net19 handmade theme: Getty Images, 2019: a single white header row with uppercase BROWSE/PRICING links on the left,
+   the black gettyimages wordmark centered and BOARDS/CART and a black-outlined SIGN IN box on the right; a pale lavender
+   #e8eaf8 hero with "Moving the world with images" in 46px regular type over a square black-outlined search box; plain
+   uppercase CREATIVE/EDITORIAL/VIDEO/MUSIC tabs with a purple underline; Lato, #6f43d6 purple, 3px corners. */
+html { --n19-radius: 3px; --n19-purple: #6f43d6; --n19-purple-dark: #4316ac; --n19-text: #080808; --n19-muted: #666; --n19-hollow: #fff; --n19-hero: #e8eaf8; --n19-bar: #fff; }
+html[data-net19-mode="dark"] { --n19-radius: 3px; --n19-purple: #8a66e0; --n19-purple-dark: #6f43d6; --n19-text: #f2f2f2; --n19-muted: #aaa; --n19-hollow: #1a1a1a; --n19-hero: #262838; --n19-bar: #121212; }
 /* Getty's 2019 design system is the direct ancestor of today's: only corner radii and the brand purple drifted. */
 html:root {
   --button-border-radius: var(--n19-radius) !important; --icon-button-border-radius: var(--n19-radius) !important; --alert-border-radius: var(--n19-radius) !important;
@@ -13,3 +16,27 @@ html:root {
   --color-border-standard-brand-active: var(--n19-purple) !important; --color-label-standard-brand-cta: var(--n19-purple) !important;
 }
 body, button, input, select, textarea { font-family: Lato, "Helvetica Neue", Arial, sans-serif !important; }
+
+/* Header: uppercase 14px links, the wordmark centered in the top row, SIGN IN as a black-outlined box */
+#site-top-header-wrapper nav[data-testid="nav-bar"] { background: var(--n19-bar) !important; }
+#site-top-header-wrapper nav[data-testid="nav-bar"] > ul > li > div > :is(a, button), #site-top-header-wrapper nav[data-testid="nav-bar"] > ul > li > div > :is(a, button) > span { text-transform: uppercase !important; font-size: 14px !important; font-weight: 400 !important; color: var(--n19-text) !important; letter-spacing: 0 !important; }
+#site-top-header-wrapper [data-testid="header-logo"] { position: absolute !important; left: 50% !important; transform: translateX(-50%) !important; }
+#site-top-header-wrapper [data-testid="SignIn"] a { background: transparent !important; border: 1px solid var(--n19-text) !important; border-radius: var(--n19-radius) !important; padding: 10px 24px !important; }
+#site-top-header-wrapper [data-testid="SignIn"] a :is(span, svg) { color: var(--n19-text) !important; fill: currentColor !important; text-transform: uppercase !important; font-size: 14px !important; font-weight: 400 !important; }
+/* An open menu's trigger stayed a plain link with a purple rule under it, not today's black pill */
+#site-top-header-wrapper nav[data-testid="nav-bar"] > ul > li > div > a[aria-expanded] { background: transparent !important; border-radius: 0 !important; box-shadow: none !important; }
+#site-top-header-wrapper nav[data-testid="nav-bar"] > ul > li > div > a[aria-expanded="true"] { box-shadow: inset 0 -3px 0 var(--n19-purple) !important; }
+#site-top-header-wrapper nav[data-testid="nav-bar"] > ul > li > div > a[aria-expanded] svg { fill: var(--n19-text) !important; color: var(--n19-text) !important; }
+#site-top-header-wrapper [data-testid="nav-dropdown"], #site-top-header-wrapper [data-testid="nav-dropdown"] > * { border-radius: var(--n19-radius) !important; }
+/* "AI Solutions" did not exist in 2019 */
+#site-top-header-wrapper [data-testid="AIGenerator"], [data-testid="ai-free-banner"] { display: none !important; }
+
+/* Hero: lavender band, one large regular headline, no AI statement under it */
+.site-width > div > div:has(> div > div > h1) { background: var(--n19-hero) !important; }
+.site-width > div > div > div > div > h1 { font-size: 46px !important; font-weight: 400 !important; color: var(--n19-text) !important; letter-spacing: 0 !important; font-family: Lato, "Helvetica Neue", Arial, sans-serif !important; }
+.site-width > div > div > div > div > h1 ~ :is(p, a) { display: none !important; }
+[data-testid="container-search-bar"] > div > div > div { border-radius: 0 !important; }
+
+/* CREATIVE / EDITORIAL / VIDEO / MUSIC tabs */
+.landing-top-menu .landing-top-menu__item a { text-transform: uppercase !important; font-size: 16px !important; font-weight: 400 !important; color: var(--n19-text) !important; }
+.landing-top-menu .landing-top-menu__item:first-child a { border-bottom: 3px solid var(--n19-purple) !important; padding-bottom: 2px !important; }

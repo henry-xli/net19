@@ -28,6 +28,10 @@ section.promo-contain :is(a, span, strong) { color: var(--n19-strip-text) !impor
 .nav__main-container > li > :is(a, button) { height: 46px !important; padding: 0 14px !important; align-items: center !important; }
 .nav__main-container > li > :is(a, button) :is(svg, img, .icon) { display: none !important; }
 .default-dropdown.menu-dropdown a:hover { text-decoration: underline !important; background: transparent !important; }
+/* A hovered tab turns white (the site's own light-grey tab) with teal words, not white on white */
+.nav__main-container > li:is(:hover, :focus-within) { background: var(--n19-tile) !important; }
+.nav__main-container > li:is(:hover, :focus-within) > :is(a, button),
+.nav__main-container > li:is(:hover, :focus-within) > :is(a, button) span { color: var(--n19-link) !important; }
 
 /* Tiles and cards: square with a thin grey line instead of rounded cards */
 main .wag-card, main .card, main .quicklinkcardv1, main .wag-slim-banner, main .wag-row [class*="card"], main img { border-radius: 0 !important; }

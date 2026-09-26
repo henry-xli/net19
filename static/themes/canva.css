@@ -1,9 +1,36 @@
-/* net19 handmade theme: Canva (home and marketing pages), 2019: Open Sans throughout, light 300-weight headlines, plain buttons with 4px corners, teal #00c4cc accents. */
-/* Canva's markup uses generated atomic class names, so this theme only styles by element and role. */
-html { --n19-teal: #00c4cc; --n19-text: #0e1318; }
-html[data-net19-mode="dark"] { --n19-teal: #00c4cc; --n19-text: #f0f0f0; }
+/* net19 handmade theme: Canva (home and marketing pages), 2019 as the Web Design Museum shows it: a plain white page
+   with no gradient, a white header with small dark-gray nav links, a plain "Log in" link and a gray-outlined "Sign up"
+   box; bold dark #0e1318 headlines, Open Sans throughout, teal #00c4cc buttons with 4px corners. */
+/* Canva's markup uses generated atomic class names, so this theme styles by element and role, plus the one hashed
+   class that paints today's purple-to-teal backdrop behind the header and hero. */
+html { --n19-page: #fff; --n19-teal: #00c4cc; --n19-teal-hover: #00b1b9; --n19-text: #0e1318; --n19-nav: #4a4a4a; --n19-border: #c9ccd1; --n19-on-teal: #fff; }
+html[data-net19-mode="dark"] { --n19-page: #16181c; --n19-teal: #00c4cc; --n19-teal-hover: #00b1b9; --n19-text: #f0f0f0; --n19-nav: #c8c8c8; --n19-border: #555; --n19-on-teal: #fff; }
 body, body :not(svg, svg *, i, code, pre, [class*="icon" i]) { font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important; }
-main h1, main h2, body > div h1 { font-weight: 300 !important; letter-spacing: 0 !important; }
-main h3 { font-weight: 600 !important; letter-spacing: 0 !important; }
-header :is(a, button)[href], header button, main h1 ~ div a[href], main h1 ~ a[href], h1 ~ div a[href] { border-radius: 4px !important; }
-header input, main form input[type="search"], main form input[type="text"] { border-radius: 4px !important; }
+
+/* The 2019 page was white from the top: today's gradient backdrop goes. */
+#root .eTTa1w, #root main > div:first-child > div[class]:first-child:not(:has(*)) { background: var(--n19-page) !important; }
+
+/* Header: dark text links on white, plain "Log in", outlined "Sign up" */
+#root header { background: var(--n19-page) !important; border-bottom: 0 !important; }
+#root header :is(a, button, span, p) { color: var(--n19-nav) !important; -webkit-text-fill-color: var(--n19-nav) !important; }
+/* The white wordmark sits in 2019's teal badge */
+#root header a[href="https://www.canva.com/"] img { background: var(--n19-teal) !important; border-radius: 999px !important; padding: 6px 10px !important; box-sizing: border-box !important; filter: none !important; }
+#root header button { font-size: 13px !important; font-weight: 400 !important; border-radius: 4px !important; background: transparent !important; }
+#root header button:hover { color: var(--n19-text) !important; -webkit-text-fill-color: var(--n19-text) !important; background: transparent !important; }
+#root header a[href*="login" i], #root header a[href*="signup" i] { font-size: 13px !important; font-weight: 400 !important; border-radius: 4px !important; background: transparent !important; box-shadow: none !important; }
+#root header a[href*="signup" i] { border: 1px solid var(--n19-border) !important; }
+
+/* Dropdown panels: 2019 menus were plain white boxes with small corners */
+#root header :is(div, nav, ul)[class], [data-is-layer-marker] :is(div, nav, ul)[class] { border-radius: 4px !important; }
+
+/* Hero: bold dark headline, gray subtitle, a teal button */
+#root main h1, #root main h1 * { color: var(--n19-text) !important; -webkit-text-fill-color: var(--n19-text) !important; background: none !important; }
+#root main h1, #root main h1 * { font-weight: 700 !important; letter-spacing: 0 !important; font-size: 52px !important; line-height: 1.2 !important; }
+#root main h1 + span + span, #root main h1 ~ span { color: #555 !important; -webkit-text-fill-color: #555 !important; font-size: 17px !important; font-weight: 400 !important; }
+html[data-net19-mode="dark"] #root main h1 ~ span { color: #bbb !important; -webkit-text-fill-color: #bbb !important; }
+#root main h1 ~ div button, #root main h1 ~ div a[href] { background: var(--n19-teal) !important; color: var(--n19-on-teal) !important; -webkit-text-fill-color: var(--n19-on-teal) !important; border-radius: 4px !important; box-shadow: none !important; font-size: 14px !important; }
+#root main h1 ~ div button:hover { background: var(--n19-teal-hover) !important; }
+#root main h2 { font-weight: 700 !important; letter-spacing: 0 !important; }
+#root main h3 { font-weight: 600 !important; letter-spacing: 0 !important; }
+#root main :is(button, a[href])[class] { border-radius: 4px !important; }
+#root header input, #root main form input[type="search"], #root main form input[type="text"] { border-radius: 4px !important; }

@@ -7,3 +7,19 @@
   };
   globalThis.net19Theme = { light: map, dark: map };
 })();
+// 2019 wording: the search button said "Find Jobs" and the first tab "Find Jobs" (not "Search" and "Home").
+(() => {
+  const fix = () => {
+    // The home page (where the logo sits beside the search fields) is marked for the stylesheet.
+    const home = !!document.getElementById('jobsearch-HomePage');
+    if (document.documentElement.hasAttribute('data-n19-home') !== home) document.documentElement.toggleAttribute('data-n19-home', home);
+    const button = document.querySelector('#jobsearch .yosegi-InlineWhatWhere-primaryButton span');
+    if (button && button.textContent === 'Search') button.textContent = 'Find Jobs';
+    const tab = document.querySelector('#gnav-main-container a#FindJobs');
+    if (tab && tab.childNodes.length === 1 && tab.firstChild.nodeType === 3 && tab.textContent === 'Home') tab.firstChild.nodeValue = 'Find Jobs';
+  };
+  let queued = false;
+  const later = () => { if (queued) return; queued = true; requestAnimationFrame(() => { queued = false; fix(); }); };
+  const start = () => { fix(); new MutationObserver(later).observe(document.body, { childList: true, subtree: true, characterData: true }); };
+  if (document.body) start(); else document.addEventListener('DOMContentLoaded', start, { once: true });
+})();

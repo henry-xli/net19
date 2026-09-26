@@ -1,11 +1,12 @@
 /* net19 handmade theme: Apple, 2019: a near-black translucent (rgba(0,0,0,.8)) 44px global nav with 14px white links
    spread across a 980px column; full-width hero tiles split by 12px white gaps, SF Pro headlines in #111 with #333 copy,
    and calls to action as plain 21px "Learn more ›  Buy ›" text links in the 2019 blue (#0070c9, #2997ff on dark tiles)
-   instead of pill buttons; a light gray (#f2f2f2) footer in 12px #888 type. Apple.com has no dark mode of its own. */
+   instead of pill buttons; a light gray (#f2f2f2) footer in 12px #888 type. Apple.com has no dark mode of its own: on a dark
+   device the nav, its menus and the footer are dark and the product tiles stay as drawn. */
 html { --n19-nav: rgba(0,0,0,.8); --n19-nav-open: #000; --n19-nav-text: rgba(255,255,255,.8); --n19-nav-text-2: #e8e8ed;
-  --n19-link: #0070c9; --n19-link-on-dark: #2997ff; --n19-head: #111; --n19-text: #333; --n19-muted: #888; --n19-foot: #f2f2f2; --n19-foot-rule: #d6d6d6; }
+  --n19-link: #0070c9; --n19-link-on-dark: #2997ff; --n19-head: #111; --n19-text: #333; --n19-muted: #888; --n19-foot: #f2f2f2; --n19-foot-rule: #d6d6d6; --n19-tile-head: #111; --n19-tile-text: #333; --n19-tile-link: #0070c9; }
 html[data-net19-mode="dark"] { --n19-nav: rgba(0,0,0,.8); --n19-nav-open: #000; --n19-nav-text: rgba(255,255,255,.8); --n19-nav-text-2: #e8e8ed;
-  --n19-link: #2997ff; --n19-link-on-dark: #2997ff; --n19-head: #f5f5f7; --n19-text: #d2d2d7; --n19-muted: #86868b; --n19-foot: #1d1d1f; --n19-foot-rule: #424245; }
+  --n19-link: #2997ff; --n19-link-on-dark: #2997ff; --n19-head: #f5f5f7; --n19-text: #d2d2d7; --n19-muted: #86868b; --n19-foot: #1d1d1f; --n19-foot-rule: #424245; --n19-tile-head: #111; --n19-tile-text: #333; --n19-tile-link: #0070c9; }
 
 /* Global nav: Apple's own dark nav variables (the ones its .globalheader-dark pages use), with the 2019 bar color */
 html #globalnav {
@@ -32,17 +33,21 @@ html #globalnav-bag .ac-gn-bagview-nav-text, html #globalnav-bag .ac-gn-bagview-
 html #globalnav-bag .ac-gn-bagview-nav-link, html #globalnav-bag .ac-gn-bagview-message, html #globalnav-bag .ac-gn-bagview-subheader { color: #86868b !important; }
 
 /* Tiles: #111 headlines and #333 copy on the light tiles */
-.tile-wrapper:not(.theme-dark) .tile-headline { color: var(--n19-head) !important; }
-.tile-wrapper:not(.theme-dark) .tile-subhead { color: var(--n19-text) !important; }
+.tile-wrapper:not(.theme-dark) .tile-headline { color: var(--n19-tile-head) !important; }
+.tile-wrapper:not(.theme-dark) .tile-subhead { color: var(--n19-tile-text) !important; }
 .tile-wrapper:not(.theme-dark) .tile-callout { color: var(--n19-muted) !important; }
-.section-ribbon .ribbon-content { color: var(--n19-text) !important; font-size: 14px !important; }
-.section-ribbon .ribbon-link { color: var(--n19-link) !important; }
-main a.more:not(.button), main .ribbon-link { color: var(--n19-link) !important; }
+/* The 2019 ribbon was a still strip: no blue-to-white color animation (which also left the readability guard judging the
+   link against the passing blue and inking it white on the final white strip) */
+.section-ribbon .ribbon-animate-color, .section-ribbon .ribbon-animate-color * { animation: none !important; transition: none !important; }
+.section-ribbon .ribbon-animate-color .ribbon-content-wrapper { background-color: #fff !important; }
+.section-ribbon .ribbon-content { color: var(--n19-tile-text) !important; font-size: 14px !important; }
+.section-ribbon .ribbon-link { color: var(--n19-tile-link) !important; }
+main a.more:not(.button), main .ribbon-link { color: var(--n19-tile-link) !important; }
 
 /* Hero calls to action: text links with a chevron */
 .tile-ctas .button, .section-hero .button, .hero .cta-links .button {
   background: transparent !important; border: 0 !important; border-radius: 0 !important; padding: 0 !important; min-width: 0 !important;
-  color: var(--n19-link) !important; font-size: 21px !important; line-height: 1.38 !important; font-weight: 400 !important; box-shadow: none !important;
+  color: var(--n19-tile-link) !important; font-size: 21px !important; line-height: 1.38 !important; font-weight: 400 !important; box-shadow: none !important;
 }
 .theme-dark .tile-ctas .button, .theme-dark.tile-ctas .button { color: var(--n19-link-on-dark) !important; }
 .tile-ctas .button:hover { text-decoration: underline !important; }

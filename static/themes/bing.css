@@ -11,11 +11,12 @@ html[data-net19-mode="dark"] { --n19-title: #8ab4f8; --n19-url: #81c995; --n19-f
 #hp_app header#hdr { transform: translateY(-9px) !important; }
 #hp_app header#hdr #headCont { margin-left: 64px !important; }
 #hp_app header#hdr nav.scope_cont { margin-left: 0 !important; }
-#hp_app header#hdr .scopes li { margin: 0 30px 0 0 !important; padding: 0 !important; }
-#hp_app header#hdr .scopes a, #hp_app header#hdr .scopes li { color: var(--n19-scope) !important; font-size: 13px !important; font-weight: 400 !important;
+#hp_app header#hdr .scopes > li { margin: 0 30px 0 0 !important; padding: 0 !important; }
+/* Only the row's own items: the "..." flyout (ul.overflow_menu inside the last item) keeps Bing's padded dark-on-white menu. */
+#hp_app header#hdr .scopes > li > a, #hp_app header#hdr .scopes > li:not(.dots) { color: var(--n19-scope) !important; font-size: 13px !important; font-weight: 400 !important;
   font-family: "Segoe UI", Segoe, Tahoma, Arial, sans-serif !important; text-shadow: 0 0 2px rgba(0,0,0,.5) !important; }
-#hp_app header#hdr .scopes a:hover { text-decoration: underline !important; }
-#hp_app header#hdr .scopes li::after, #hp_app header#hdr .scopes li[class*="selected"]::after { display: none !important; }
+#hp_app header#hdr .scopes > li > a:hover { text-decoration: underline !important; }
+#hp_app header#hdr .scopes > li::after, #hp_app header#hdr .scopes > li[class*="selected"]::after { display: none !important; }
 #hp_app header#hdr .identity_wrapper { margin-right: 64px !important; }
 #hp_app #id_h a, #hp_app #id_h span { color: #fff !important; font-size: 13px !important; font-weight: 400 !important; text-shadow: 0 0 2px rgba(0,0,0,.6) !important; }
 
@@ -35,6 +36,8 @@ html[data-net19-mode="dark"] { --n19-title: #8ab4f8; --n19-url: #81c995; --n19-f
 /* ---- Not in 2019: AI and Copilot entry points, the endless feed under the image ---- */
 #aitools, .aitools, #sb_form a[href*="copilot" i], #sb_form [aria-label*="Copilot" i], [id*="copilot" i]:not(body):not(html),
 #b_sydConvCont, .b_hpcopilot, .hp_copilot, #codex, .cib-serp-main, #hp_app #vs_cont > .vs { display: none !important; }
+/* Nor the dark scrim laid over the image when the search box is focused (it also lingers after the box loses focus) */
+#hp_app .dimmer.hp_focus_overlay { display: none !important; }
 .mc_caro, #vs_cont .mc_vtvc, #vs_cont .mc_vtvc_con { border-radius: 0 !important; }
 
 /* ---- Results pages: a square search box, blue titles first with the green address under them, gray snippets ---- */

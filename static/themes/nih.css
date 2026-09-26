@@ -78,3 +78,6 @@ header.ncbi-header .header-button, #account_login { background: transparent !imp
 .article-details .heading-title, h1.heading-title { font-size: 20px !important; line-height: 1.3 !important; font-weight: 700 !important; color: var(--n19-title) !important; }
 .docsum-title { font-family: var(--n19-font) !important; color: var(--n19-link) !important; font-size: 14px !important; font-weight: 400 !important; }
 .usa-button, .button-primary, .usa-button-primary { border-radius: 3px !important; }
+/* The field's clear (x) button is today's; it is placed for today's wide field and in the 2019 band lands on the logo.
+   2019's plain field had none. */
+#home-page .intro #search-form .form-field .clear-btn { display: none !important; }

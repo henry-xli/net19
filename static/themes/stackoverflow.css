@@ -30,6 +30,9 @@ header.s-topbar { background: var(--n19-bar) !important; border-top: 3px solid #
 
 /* Left nav: 13px gray links, indented; the current page bold on #eff0f1 with an orange right edge; no icons */
 #left-sidebar li:has(> #nav-askstack), #left-sidebar li:has(> #nav-sofa), #left-sidebar .js-freemium-cta { display: none !important; }
+/* Challenges (2024), Articles and the Collectives block (2021) were not in the 2019 nav */
+#left-sidebar li:has(> #nav-challenges), #left-sidebar li:has(> #nav-articles),
+#left-sidebar li.ml8.mt32:has(+ li.js-collectives-navcta-toggle), #left-sidebar li.js-collectives-navcta-toggle { display: none !important; }
 #left-sidebar .nav-links li.pb24 { padding-bottom: 8px !important; }
 #left-sidebar .nav-links a.s-block-link { color: var(--n19-nav) !important; font-size: 13px !important; line-height: 1.8 !important; height: auto !important; padding: 4px 4px 4px 30px !important; border-radius: 0 !important; }
 #left-sidebar .nav-links a.s-block-link:is(.js-homepage-wizard-link, #nav-questions) { padding-left: 8px !important; }

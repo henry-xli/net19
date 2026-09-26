@@ -80,3 +80,5 @@ body, .cc, .cc_pgwn { color: var(--n19-text) !important; }
 #header li:has(> a > .ai-header-button), #header li:has(> a[href="/assistant"]), .ai-header-button, a[href="/assistant"] { display: none !important; }
 .cdo-more-results a, .cdo-more-results a * { text-decoration: none !important; }
 .entry-body .dwl, .entry-body .dsense .dwl, .entry-body .def-block > .dwl { border: 0 !important; box-shadow: none !important; background: transparent !important; }
+/* The logo's link is an inline box on the text baseline; as a block it sits on the search field's center line */
+#header #searchBar .chsf > .hdb-l > a:has(> img) { display: block !important; margin-top: 3px !important; }

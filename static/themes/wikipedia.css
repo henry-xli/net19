@@ -38,3 +38,17 @@ html[data-net19-mode="dark"] body.skin-vector-legacy .infobox-header, html[data-
   background: var(--n19-box-2) !important; color: var(--n19-text) !important; }
 html[data-net19-mode="dark"] body.skin-vector-legacy #searchInput, html[data-net19-mode="dark"] body.skin-vector-legacy #simpleSearch { background: var(--n19-box) !important; color: var(--n19-text) !important; border-color: var(--n19-border) !important; }
 html[data-net19-mode="dark"] body.skin-vector-legacy #footer, html[data-net19-mode="dark"] body.skin-vector-legacy #footer li { color: var(--n19-text-2) !important; }
+/* dark variant, continued: the sidebar's sister-project links, the contents numbers and toggles, navbox rows, and the
+   caption and audio panels the skin draws #f8f9fa. */
+html[data-net19-mode="dark"] body.skin-vector-legacy #mw-panel a, html[data-net19-mode="dark"] body.skin-vector-legacy #mw-panel a span { color: var(--n19-link) !important; }
+html[data-net19-mode="dark"] body.skin-vector-legacy #mw-panel a:visited, html[data-net19-mode="dark"] body.skin-vector-legacy #mw-panel a:visited span { color: var(--n19-link-visited) !important; }
+html[data-net19-mode="dark"] body.skin-vector-legacy .tocnumber { color: var(--n19-text-2) !important; }
+html[data-net19-mode="dark"] body.skin-vector-legacy .toctogglelabel, html[data-net19-mode="dark"] body.skin-vector-legacy .mw-collapsible-toggle,
+html[data-net19-mode="dark"] body.skin-vector-legacy .mw-collapsible-toggle .mw-collapsible-text { color: var(--n19-link) !important; }
+html[data-net19-mode="dark"] body.skin-vector-legacy .navbox-list, html[data-net19-mode="dark"] body.skin-vector-legacy .navbox-odd,
+html[data-net19-mode="dark"] body.skin-vector-legacy .navbox-subgroup, html[data-net19-mode="dark"] body.skin-vector-legacy .navbox-image { background: var(--n19-box) !important; color: var(--n19-text) !important; }
+html[data-net19-mode="dark"] body.skin-vector-legacy .navbox-even { background: var(--n19-box-2) !important; color: var(--n19-text) !important; }
+html[data-net19-mode="dark"] body.skin-vector-legacy figure[typeof] > figcaption, html[data-net19-mode="dark"] body.skin-vector-legacy .thumbcaption,
+html[data-net19-mode="dark"] body.skin-vector-legacy .spoken-wikipedia, html[data-net19-mode="dark"] body.skin-vector-legacy .sistersitebox,
+html[data-net19-mode="dark"] body.skin-vector-legacy .side-box, html[data-net19-mode="dark"] body.skin-vector-legacy .portalbox, html[data-net19-mode="dark"] body.skin-vector-legacy .reflist { background: var(--n19-box) !important; color: var(--n19-text) !important; border-color: var(--n19-border) !important; }
+html[data-net19-mode="dark"] body.skin-vector-legacy figure[typeof] { background: var(--n19-box) !important; border-color: var(--n19-border) !important; }

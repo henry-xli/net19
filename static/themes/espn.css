@@ -37,7 +37,8 @@ body, #global-viewport, #pane-main, .main-content { background-color: var(--n19-
 .quicklinks_list__item { border: 0 !important; }
 .quicklinks_list__link { height: 40px !important; min-height: 40px !important; }
 .quicklinks_list__name { color: var(--n19-text) !important; font-size: 12px !important; }
-.sub-module.dtc-upsell, .quicklinks_list__item--eplus-paywall, .quicklinks_list__item:has(a[href*="/betting" i]), .quicklinks_list__item:has(a[href*="odds" i]) { display: none !important; }
+.sub-module.dtc-upsell, .quicklinks_list__item--eplus-paywall, .quicklinks_list__item:has(a[href*="/betting" i]), .quicklinks_list__item:has(a[href*="odds" i]),
+.quicklinks_list__item:has(a[href*="/where-to-watch" i]) { display: none !important; }
 
 /* Top Headlines: a plain bulleted list, no icon in the heading, no separators, 12px regular dark lines */
 .headlineStack__header .module__header::before { display: none !important; }
@@ -51,5 +52,16 @@ body, #global-viewport, #pane-main, .main-content { background-color: var(--n19-
 /* Buttons: 2019's bright blue pill with a diagonal shade */
 .sub-module .button:not(.button-alt):not([class*="outline"]) { background-color: var(--n19-button) !important; background-image: linear-gradient(124deg, transparent 24%, rgba(0,0,0,.25) 76%) !important; border-color: transparent !important; color: #fff !important; font-size: 12px !important; font-weight: 600 !important; }
 
-/* Betting odds modules came with ESPN BET */
+/* Betting odds modules came with ESPN BET; the section menus' "Odds" and "Where To Watch" entries came with them */
+#global-nav .submenu-wrapper li:has(> a[href*="/odds" i]), #global-nav .submenu-wrapper li:has(> a[href*="where-to-watch" i]) { display: none !important; }
 [class*="Odds"], [class*="odds__"], .betting, [data-testid*="odds"], a[href*="espnbet"] { display: none !important; }
+
+/* On dark devices the page is flipped and the bar's nav is kept as drawn; the red logo block beside it (two pseudo-element
+   slants and the wordmark link) is kept too, so it stays red with the white wordmark instead of turning pink with black
+   letters. */
+html[data-net19-flip] #global-header h2.logo-header::before, html[data-net19-flip] #global-header h2.logo-header::after,
+html[data-net19-flip] #global-header h2.logo-header > a { filter: contrast(1.13636) hue-rotate(180deg) invert(1) !important; }
+/* The "Customize ESPN" sign-in card is drawn dark by ESPN's own dark-scheme rules, which the flip then turns light gray;
+   it gets the card colors the other rail modules use. */
+.sideLogin { background-color: var(--n19-card) !important; }
+.sideLogin .sideLogin__headline { color: var(--n19-text) !important; }

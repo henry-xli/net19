@@ -180,3 +180,63 @@ ytd-watch-flexy #secondary .ytLockupMetadataViewModelTitle { font-size: 13px !im
 /* Watch actions: plain icon-and-label buttons, no pill backgrounds */
 ytd-watch-metadata #actions :is(button, a).ytSpecButtonShapeNextHost, ytd-watch-metadata #actions like-button-view-model, ytd-watch-metadata #actions dislike-button-view-model,
 ytd-watch-metadata #actions .ytSegmentedLikeDislikeButtonViewModelSegmentedButtonsWrapper, ytd-watch-metadata #actions yt-button-shape { background: transparent !important; border-radius: 0 !important; }
+/* Signed-in variants of the search field ("Search or ask a question", guard.js restores "Search") draw the search
+   button round inside the field and widen it: square, flush and 2019-sized in every variant. */
+yt-searchbox.ytSearchboxComponentDesktop { max-width: 728px !important; }
+yt-searchbox button:not(.ytSearchboxComponentClearButton):not([aria-label^="Ask" i]) {
+  border-radius: 0 2px 2px 0 !important; background: var(--n19-button) !important; border: 1px solid var(--n19-button-border) !important;
+  box-shadow: none !important; height: 30px !important; min-width: 65px !important; margin: 0 !important; color: var(--n19-icon) !important;
+}
+yt-searchbox .ytSearchboxComponentInputBox :is(button:not(.ytSearchboxComponentClearButton), [role="button"]) { position: static !important; transform: none !important; }
+yt-searchbox .ytSearchboxComponentInputBox:has(button:not(.ytSearchboxComponentClearButton)) { padding-right: 0 !important; overflow: hidden !important; }
+/* Masthead icon buttons: flat, with no filled hover plates */
+ytd-masthead #buttons yt-touch-feedback-shape, ytd-masthead #voice-search-button yt-touch-feedback-shape { display: none !important; }
+ytd-masthead #buttons :is(button, a).ytSpecButtonShapeNextHost:not([aria-label="Sign in" i]) { background: transparent !important; }
+
+/* 2019 masthead geometry: one 56px row, the search field and button 30px tall on the row's center line, and the search
+   centered on the page whatever the two sides hold (signed-in accounts carry more buttons on the right). */
+yt-searchbox .ytSearchboxComponentInputBox { box-sizing: border-box !important; }
+yt-searchbox .ytSearchboxComponentInputContainer { margin-top: 5px !important; }
+@media (min-width: 900px) {
+  ytd-masthead #container.ytd-masthead { display: grid !important; grid-template-columns: 1fr minmax(0, auto) 1fr !important; align-items: center !important; }
+  ytd-masthead #container.ytd-masthead > #start { grid-column: 1 !important; justify-self: start !important; }
+  ytd-masthead #container.ytd-masthead > #center { grid-column: 2 !important; justify-self: center !important; width: min(640px, 50vw) !important; margin: 0 !important; }
+  ytd-masthead #container.ytd-masthead > #end { grid-column: 3 !important; justify-self: end !important; min-width: 0 !important; }
+  ytd-masthead #center yt-searchbox.ytSearchboxComponentDesktop { margin: 0 !important; width: 100% !important; max-width: none !important; }
+}
+
+/* The signed-in "unified" search ("Search or ask a question"): a 48px rounded box whose search button is a round icon
+   inside the field, with attach (+), query-builder and AI suggestion chips, which opens into a rounded panel. It is
+   drawn as the 2019 field and button in every state; the assistant parts are hidden. */
+yt-searchbox.ytSearchboxComponentHostUnified { height: 40px !important; max-height: none !important; }
+yt-searchbox.ytSearchboxComponentHostIsFocused.ytSearchboxComponentHostUnified {
+  flex-direction: row !important; margin: 0 !important; padding: 0 !important; border-radius: 0 !important; box-shadow: none !important; height: 40px !important; max-width: none !important; }
+yt-searchbox .ytSearchboxComponentInputContainerUnified, yt-searchbox .ytSearchboxComponentInputContainerIsFocused.ytSearchboxComponentInputContainerUnified {
+  flex-direction: row !important; align-items: stretch !important; height: 30px !important; min-height: 0 !important; max-height: 30px !important; margin-top: 5px !important;
+  padding: 0 !important; gap: 0 !important; border-radius: 0 !important; background: transparent !important; }
+yt-searchbox .ytSearchboxComponentInputBoxUnified, yt-searchbox .ytSearchboxComponentInputBoxHasFocus.ytSearchboxComponentInputBoxUnified {
+  flex: 1 1 auto !important; background: var(--n19-field) !important; border: 1px solid var(--n19-field-border) !important; border-radius: 2px 0 0 2px !important;
+  box-shadow: var(--n19-field-inset) !important; height: 30px !important; min-height: 0 !important; margin: 0 !important; padding: 0 0 0 6px !important; gap: 0 !important; align-items: center !important; }
+yt-searchbox .ytSearchboxComponentInputBoxUnified:hover { background: var(--n19-field) !important; }
+yt-searchbox .ytSearchboxComponentInputBoxUnified :is(.ytSearchboxComponentInput, .ytSearchboxComponentInputTextArea) {
+  font-size: 16px !important; line-height: 28px !important; height: 28px !important; min-height: 0 !important; margin: 0 !important; padding: 0 !important; resize: none !important; overflow: hidden !important; }
+yt-searchbox :is(.ytSearchboxComponentInnerSearchIconUnified, .ytSearchboxComponentAddMultimodalContextButtonContainer, .ytSearchboxComponentAddMultimodalContextButton,
+  .ytSearchboxComponentMultimodalContextContainer, .ytSearchboxComponentQueryBuilderButton, .ytSearchboxComponentAiSuggestionsContainer,
+  .ytSearchboxComponentAiSuggestionChipsContainer, .ytSearchboxComponentYtdTextInputAssistantWrapper, .ytSearchboxComponentReportButton) { display: none !important; }
+/* Its round search button becomes the flush gray 2019 button at the field's right end */
+yt-searchbox .ytSearchboxComponentActions { width: auto !important; margin: -1px -1px -1px 0 !important; padding: 0 !important; gap: 0 !important; align-self: stretch !important; }
+yt-searchbox .ytSearchboxComponentActions .ytSearchboxComponentActionsButton { padding: 0 !important; margin: 0 !important; }
+yt-searchbox .ytSearchboxComponentActions :is(button, a, [role="button"], yt-button-shape, button-view-model, yt-touch-feedback-shape, div) { border-radius: 0 !important; }
+yt-searchbox .ytSearchboxComponentActions :is(button, a) { width: 65px !important; min-width: 65px !important; height: 30px !important; }
+yt-searchbox .ytSearchboxComponentActions yt-touch-feedback-shape { display: none !important; }
+yt-searchbox .ytSearchboxComponentSuggestionsContainerUnified { position: absolute !important; top: 100% !important; border-radius: 0 !important; }
+
+/* Right side, in both class spellings YouTube ships: flat icon buttons; "Create" keeps only its icon, with no box */
+ytd-masthead #buttons :is(button, a):is(.ytSpecButtonShapeNextHost, .yt-spec-button-shape-next):not([aria-label="Sign in" i]) {
+  background: transparent !important; border: none !important; box-shadow: none !important; border-radius: 0 !important; color: var(--n19-icon) !important; }
+ytd-masthead #buttons :is(ytd-button-renderer, button-view-model, yt-button-view-model, yt-button-shape):has([aria-label^="Create" i])
+  :is(.ytSpecButtonShapeNextButtonTextContent, .yt-spec-button-shape-next__button-text-content) { display: none !important; }
+ytd-masthead #buttons :is(button, a)[aria-label^="Create" i] { padding: 0 8px !important; min-width: 40px !important; width: 40px !important; justify-content: center !important; }
+ytd-masthead #buttons :is(button, a)[aria-label^="Create" i] :is(.ytSpecButtonShapeNextIcon, .yt-spec-button-shape-next__icon) { margin: 0 !important; }
+/* The empty-feed "Try searching to get started" prompt: flat text in the feed card, not a floating rounded panel */
+ytd-feed-nudge-renderer, ytd-feed-nudge-renderer div { border-radius: 0 !important; box-shadow: none !important; border-color: transparent !important; }

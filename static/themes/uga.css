@@ -26,11 +26,14 @@ body, p, li, td, th, input, button, .btn, .navbar, .hero__text { font-family: va
 #navbar .navbar__right-buttons-search {
   background: var(--n19-field) !important; color: var(--n19-field-text) !important; border: 1px solid var(--n19-field-border) !important; border-radius: 0 !important;
   height: 46px !important; width: 300px !important; justify-content: flex-end !important; flex-direction: row-reverse !important; gap: 12px !important; padding: 0 14px !important;
-  font-family: var(--n19-sans) !important; font-weight: 300 !important; font-size: 14px !important; text-align: right !important; margin-top: 8px !important;
+  font-family: var(--n19-sans) !important; font-weight: 300 !important; font-size: 14px !important; text-align: right !important; margin-top: 12px !important;
 }
+/* With search open, the field replaces the button: keep it on the logo's center line */
+#navbar .navbar__right-buttons > form { margin-top: 12px !important; height: 46px !important; }
+#navbar .navbar__right-buttons > form input { height: 46px !important; }
 #navbar .navbar__right-buttons-search .bi { font-size: 20px !important; color: var(--n19-field-text) !important; }
 #navbar .navbar__right-buttons-menu { background: var(--n19-strip) !important; color: var(--n19-strip-text) !important; border-radius: 0 0 6px 6px !important; height: 30px !important; font-family: Arial, sans-serif !important;
-  font-size: 12px !important; text-transform: uppercase !important; padding: 0 16px !important; margin: -15px 0 0 12px !important; }
+  font-size: 12px !important; text-transform: uppercase !important; padding: 0 16px !important; margin: -26px 0 0 12px !important; }
 #navbar .navbar__right-buttons-menu .bi { font-size: 16px !important; }
 #navbar .navbar__right-buttons-menu:hover { background: var(--n19-red) !important; }
 
@@ -38,8 +41,10 @@ body, p, li, td, th, input, button, .btn, .navbar, .hero__text { font-family: va
 #hero .hero__message { background: var(--n19-box) !important; padding: 20px 24px 24px !important; max-width: 370px !important; }
 #hero .hero__heading { color: var(--n19-red) !important; margin-top: 0 !important; font-family: Arial, "Helvetica Neue", sans-serif !important; font-size: 36px !important; line-height: 1 !important; text-transform: uppercase !important; }
 #hero .hero__text, #hero .hero__text p { color: var(--n19-text) !important; font-family: Arial, "Helvetica Neue", sans-serif !important; font-size: 18px !important; line-height: 1.45 !important; font-weight: 400 !important; }
-#hero .hero__link { font-size: 26px !important; }
-#hero .hero__link-description { font-size: 16px !important; }
+#hero .hero__message, #hero .hero__message * { text-shadow: none !important; }
+/* The three links sit on the video: a firmer shadow keeps them readable over its bright frames */
+#hero .hero__link { font-size: 26px !important; text-shadow: 0 1px 2px rgba(0,0,0,.9), 0 0 10px rgba(0,0,0,.75) !important; }
+#hero .hero__link-description { font-size: 16px !important; text-shadow: 0 1px 2px rgba(0,0,0,.9), 0 0 10px rgba(0,0,0,.75) !important; }
 
 /* Buttons and cards: square corners, red primary */
 .btn { border-radius: 0 !important; }

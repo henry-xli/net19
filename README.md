@@ -2,7 +2,7 @@
 
 A Chrome extension that shows popular websites as they looked in **2019**.
 
-[Download net19 0.7.0](https://github.com/henry-xli/net19/raw/refs/heads/main/downloads/net19-0.7.0.zip) · [Privacy](PRIVACY.md) · [Architecture](docs/ARCHITECTURE.md) · [Validation](docs/VALIDATION.md)
+[Download net19 0.8.0](https://github.com/henry-xli/net19/raw/refs/heads/main/downloads/net19-0.8.0.zip) · [Privacy](PRIVACY.md) · [Architecture](docs/ARCHITECTURE.md) · [Validation](docs/VALIDATION.md)
 
 ## Install or update
 
@@ -70,4 +70,4 @@ npm run package
 
 - `src/` and `static/` are the source; the themes are in `static/themes/`.
 - `dist/extension/` is the unpacked extension.
-- `artifacts/net19-0.7.0.zip` is the packaged build, with a SHA-256 file beside it.
+- `artifacts/net19-0.8.0.zip` is the packaged build, with a SHA-256 file beside it.

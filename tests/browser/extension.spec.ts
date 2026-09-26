@@ -3,10 +3,12 @@ import { mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
 // Every site is a local fixture: nothing reaches the network, and any request to a host that is not listed fails the test.
-const PAGE = (title: string) => `<!doctype html><html><head><title>${title}</title></head><body style="background:#fff;color:#111"><header><a href="/">${title}</a></header><main><h1>${title}</h1>` +
+const PAGE = (title: string) => `<!doctype html><html><head><meta charset="utf-8"><title>${title}</title></head><body style="background:#fff;color:#111"><header><a href="/">${title}</a></header><main><h1>${title}</h1>` +
   `<div id="bar" style="background:#13233a;color:#fff;width:600px;height:40px">already dark</div>` +
   `<img id="photo" width="200" height="100" src="/photo.jpg"><img id="logo" width="120" height="30" src="/logo.svg">` +
-  `<dialog id="modal">modal</dialog></main></body></html>`;
+  `<dialog id="modal">modal</dialog>` +
+  `<input id="q" placeholder="Search or ask a question"><button id="gen">🍌 Create images</button><a id="ask" href="/x">Ask Question</a>` +
+  `<div id="menu" style="background:rgba(250,250,252,.95);width:300px;height:40px"><a id="faint" href="/y" style="color:#fff">Find a Store</a></div></main></body></html>`;
 let context: BrowserContext, worker: Worker, extensionId: string, requests: string[], unexpected: string[];
 
 test.beforeEach(async ({}, info) => {
@@ -58,6 +60,15 @@ test('the device decides light or dark: a light site is flipped for a dark devic
   await page.emulateMedia({ colorScheme: 'light' });
   await expect(html).not.toHaveAttribute('data-net19-flip', /.*/);
   await expect(page.locator('#bar')).not.toHaveAttribute('data-net19-keep', /.*/);
+});
+
+test('post-2019 features are hidden and unreadable text is given readable ink, on every themed site', async () => {
+  const page = await context.newPage(); await page.emulateMedia({ colorScheme: 'light' }); await page.goto('https://www.youtube.com/');
+  await expect(page.locator('#gen')).toBeHidden();
+  await expect(page.locator('#ask')).toBeVisible();   // 2019 had "Ask Question" on Stack Overflow: only listed features go
+  await expect(page.locator('#q')).toHaveAttribute('placeholder', 'Search');
+  await expect(page.locator('#faint')).toHaveAttribute('data-net19-ink', 'dark');
+  await expect(page.locator('#bar')).not.toHaveAttribute('data-net19-ink', /.*/);   // readable text is left alone
 });
 
 test('Wikipedia opens in its legacy skin', async () => {

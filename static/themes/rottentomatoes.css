@@ -3,9 +3,9 @@
    "Trending on RT" bar; spotlight captions in a translucent white box with a red left rule and dark uppercase titles; uppercase
    section headings, #343434 text and #2466d4 links; no aRTi assistant and no "New" badges. */
 html { --n19-page: #eee; --n19-column: #fff; --n19-text: #343434; --n19-heading: #1c1c1c; --n19-link: #2466d4; --n19-link-hover: #23527c;
-  --n19-red: #fa320a; --n19-field: #fff; --n19-field-text: #343434; --n19-field-hint: #999; --n19-caption: rgba(255,255,255,.94); --n19-rule: #eee; }
+  --n19-red: #fa320a; --n19-field: #fff; --n19-field-text: #343434; --n19-field-hint: #999; --n19-caption: rgba(255,255,255,.94); --n19-rule: #eee; --n19-trending: #666; }
 html[data-net19-mode="dark"] { --n19-page: #161616; --n19-column: #1e1e1e; --n19-text: #ddd; --n19-heading: #eee; --n19-link: #6f9ce8; --n19-link-hover: #9dbcf0;
-  --n19-red: #fa320a; --n19-field: #2a2a2a; --n19-field-text: #eee; --n19-field-hint: #999; --n19-caption: rgba(20,20,20,.85); --n19-rule: #333; }
+  --n19-red: #fa320a; --n19-field: #2a2a2a; --n19-field-text: #eee; --n19-field-hint: #999; --n19-caption: rgba(20,20,20,.85); --n19-rule: #333; --n19-trending: #666; }
 
 /* Rotten Tomatoes' own design variables, so menus, dialogs and components in shadow roots follow */
 html:root, body {
@@ -33,8 +33,9 @@ rt-header rt-header-nav { max-width: 500px; white-space: normal !important; }
 rt-header-nav-item > a[slot="link"] { font-size: 20px !important; font-weight: 700 !important; text-transform: uppercase !important; letter-spacing: 0 !important; }
 rt-header-nav-item temporary-display, rt-header-nav-item rt-badge { display: none !important; }
 
-/* Trending bar: the translucent gray strip with the yellow Neusa label */
-.trending-bar { background-color: rgba(0,0,0,.6) !important; }
+/* Trending bar: the gray strip with the yellow Neusa label. 2019's 60% black over the page, drawn opaque: on dark devices
+   the header is kept as drawn, and a translucent strip inside it would be treated as a scrim and come out pale gray. */
+.trending-bar { background-color: var(--n19-trending) !important; }
 
 /* Spotlight: captions in a translucent white box (2019), dark bold uppercase titles; the red left rule stays */
 editorial-spotlight-tile > div[slot="caption"] {
@@ -58,3 +59,6 @@ rt-header search-results-controls input, watchlist-button, rt-button { --borderR
 
 /* aRTi (an AI assistant) did not exist in 2019 */
 button.arti-desktop, button[aria-label="Open aRTi"], [slot="arti-desktop"], [slot="arti-mobile"] { display: none !important; }
+/* On dark devices the header is kept as drawn with a filter (rottentomatoes.js), which makes it its own stacking layer:
+   the menus that open from it would slide under the spotlight below, so the layer is lifted above the page. */
+html[data-net19-flip] #main > header[data-net19-keep] { position: relative !important; z-index: 20 !important; }

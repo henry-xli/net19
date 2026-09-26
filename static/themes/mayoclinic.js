@@ -3,11 +3,11 @@ globalThis.net19Theme = {
   detect: () => document.body?.classList.contains('dark-mode') ? 'dark' : 'light',
   watch: ['class'],
 };
-// On a dark device the page is flipped by palette.js. The home page hero sets white type straight on a video poster (a background image, not an <img>), so flipped, their white text would turn dark on
-// the photo: those parts are kept as drawn instead.
+// On a dark device the page is flipped by palette.js. The home page hero sets white type straight on a video poster (a background image, not an <img>),
+// and the menus' photo teasers set white type on a dark scrim over a photo; flipped, the white text would turn dark and the scrim white: those parts are kept as drawn instead.
 (() => {
   const root = document.documentElement;
-  const SEL = '.cmp-hero-card';
+  const SEL = '.cmp-hero-card, .cmp-teaser:has(.cmp-teaser__image--overlay)';
   const mark = () => {
     if (!root.hasAttribute('data-net19-flip')) return;
     for (const el of document.querySelectorAll(SEL)) if (!el.hasAttribute('data-net19-keep')) { el.removeAttribute('data-net19-scrim'); el.setAttribute('data-net19-keep', ''); }

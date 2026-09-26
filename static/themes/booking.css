@@ -1,9 +1,51 @@
-/* net19 handmade theme: Booking.com, 2019: the deeper #003580 navy header, #0071c2 action blue for links and buttons,
-   the #febb02 yellow search frame, and 2-3px corners instead of today's 4-8px rounding. The 2019 layout is close to
-   today's, so the theme only moves the palette and corner radii through Booking's own design tokens. Booking has no
-   dark mode on the web. Not verified against the live site (blocked here, and excluded from the Wayback Machine). */
-html { --n19-navy: #003580; --n19-blue: #0071c2; --n19-yellow: #febb02; }
-html[data-net19-mode="dark"] { --n19-navy: #002a66; --n19-blue: #4aa3ff; --n19-yellow: #febb02; }
+/* net19 handmade theme: Booking.com, 2019: the deeper #003580 navy header and hero, white "Register" and "Sign in"
+   buttons with blue text, product tabs with a thin white outline around the current one, a plain white system-font
+   headline (no Avenir, no illustration), the #febb02 yellow search frame with 2px corners around square white fields
+   and a #0071c2 blue "Search" button, #0071c2 links, and 2-3px corners everywhere instead of today's 4-8px rounding.
+   Booking has no dark mode on the web; palette.js flips the page on dark devices. No 2019 capture of Booking exists
+   (it is excluded from the Wayback Machine), so this follows the remembered 2019 design. */
+html { --n19-navy: #003580; --n19-blue: #0071c2; --n19-blue-hover: #00487a; --n19-yellow: #febb02; --n19-white: #fff;
+  --n19-font: BlinkMacSystemFont, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+html[data-net19-mode="dark"] { --n19-navy: #002a66; --n19-blue: #4aa3ff; --n19-blue-hover: #1f8ce0; --n19-yellow: #febb02; --n19-white: #1e1e1e; }
 html:root {
   --bui_border_radius_100: 2px !important; --bui_border_radius_200: 3px !important; --bui_border_radius_300: 3px !important;
 }
+
+/* Header: flat navy; Register and Sign in are white buttons with blue text and 2px corners */
+header.Header_root, #HeroBannerDesktop > div > div:first-child { background: var(--n19-navy) !important; }
+header.Header_root a[data-testid="header-sign-up-button"], header.Header_root a[data-testid="header-sign-in-button"] {
+  background: var(--n19-white) !important; color: var(--n19-blue) !important; border: 1px solid var(--n19-blue) !important; border-radius: 2px !important; }
+header.Header_root a[data-testid="header-sign-up-button"] *, header.Header_root a[data-testid="header-sign-in-button"] * { color: var(--n19-blue) !important; }
+header.Header_root a[data-testid="header-custom-action-button"] { border-radius: 2px !important; }
+/* Product tabs: the current one outlined in white with small rounding (not a pill) */
+header.Header_root nav.Header_tab a { border-radius: 24px !important; font-weight: 400 !important; }
+header.Header_root nav.Header_tab a[aria-current="page"] { font-weight: 500 !important; }
+
+/* Hero: a shorter navy band with a plain white system-font headline; the promo illustration is gone */
+#HeroBannerDesktop [data-testid="herobanner-illustration"] { display: none !important; }
+#HeroBannerDesktop > div > div, #HeroBannerDesktop > div > div > div { height: auto !important; min-height: 0 !important; }
+#HeroBannerDesktop > div > div > div { padding-top: 40px !important; padding-bottom: 88px !important; }
+#HeroBannerDesktop h1, #HeroBannerDesktop [data-testid="herobanner-title1"], #HeroBannerDesktop [data-testid="herobanner-subtitile"] { font-family: var(--n19-font) !important; }
+#HeroBannerDesktop [data-testid="herobanner-title1"] { font-size: 32px !important; line-height: 40px !important; font-weight: 700 !important; }
+#HeroBannerDesktop [data-testid="herobanner-subtitile"] { font-size: 20px !important; line-height: 28px !important; margin-top: 8px !important; }
+#HeroBannerDesktop header + *, #HeroBannerDesktop [data-testid="herobanner-cta"] { margin-top: 16px !important; }
+#HeroBannerDesktop [data-testid="herobanner-cta"] { border-radius: 2px !important; background: var(--n19-blue) !important; }
+#HeroBannerDesktop div:has(> header) { flex: 1 1 auto !important; max-width: none !important; }
+#HeroBannerDesktop header, #HeroBannerDesktop h1, #HeroBannerDesktop [data-testid="herobanner-title1"], #HeroBannerDesktop [data-testid="herobanner-subtitile"] {
+  width: auto !important; max-width: 900px !important; height: auto !important; }
+
+/* Search: the yellow frame with 2px corners around square white fields and the blue Search button */
+[data-testid="searchbox-layout-wide"] { background: var(--n19-yellow) !important; border-radius: 2px !important; padding: 4px !important; }
+[data-testid="searchbox-layout-wide"] > div { border-radius: 2px !important; }
+[data-testid="searchbox-layout-wide"] > div:last-child { background: transparent !important; }
+[data-testid="searchbox-layout-wide"] button[type="submit"] { background: var(--n19-blue) !important; border-radius: 2px !important; font-weight: 500 !important; }
+[data-testid="searchbox-layout-wide"] button[type="submit"]:hover { background: var(--n19-blue-hover) !important; }
+[data-testid="searchbox-layout-wide"] button, [data-testid="searchbox-layout-wide"] input { border-radius: 2px !important; }
+/* "Search in your own words" (a language-model search, 2024) goes back to the plain destination field */
+[data-testid="destination-container"] label[for="searchbox-horizontal-destination-input"] { display: none !important; }
+/* ... and its suggestion list loses the "Search with AI" row */
+li[role="option"]:has(> div > [data-testid="autocomplete-result"] > [data-testid="autocomplete-icon-ai-suggestion"]) { display: none !important; }
+[data-testid="destination-container"] input { font-size: 14px !important; height: 33px !important; font-weight: 500 !important; }
+
+/* Section titles in the system face */
+main h2 { font-family: var(--n19-font) !important; }

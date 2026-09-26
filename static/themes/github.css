@@ -47,7 +47,7 @@ header.HeaderMktg a[href^="/signup"] { background: transparent !important; borde
 .lp-Home #hero, .lp-Home .lp-Intro { background: var(--n19-hero) !important; }
 .lp-Home .lp-Intro-gradient, .lp-Home .lp-IntroVisuals { display: none !important; }
 .lp-Home .lp-Intro > .lp-Spacer:not(.lp-IntroTop-spacer):not(.lp-IntroVisuals-spacer) { height: 0 !important; }
-.lp-Home .lp-IntroTop-spacer { height: 64px !important; }
+.lp-Home .lp-IntroTop-spacer { height: 136px !important; }  /* clear the 72px header that overlays the hero, then 64px */
 .lp-Home .lp-IntroVisuals-spacer { height: 96px !important; }
 /* The hero sits in the page (not pinned while the demo slides over it), with no glow around the demo */
 .lp-Home .lp-IntroHero { position: relative !important; top: auto !important; left: auto !important; transform: none !important; opacity: 1 !important; filter: none !important; }
@@ -76,6 +76,13 @@ header.HeaderMktg a[href^="/signup"] { background: transparent !important; borde
 .lp-Home .lp-IntroHero .CtaForm button * { color: #fff !important; font-size: 16px !important; }
 /* The Copilot app did not exist */
 .lp-Home .CtaForm-secondaryAction { display: none !important; }
+/* Nor the framed demo video under the hero (Copilot and coding agents at work): the 2019 hero ended with the sign-up box */
+.lp-Home .lp-HeroCarousel, .lp-Home .HeroCarouselControls { display: none !important; }
+/* Header menus: no post-2019 AI entries. The whole "AI code creation" group of the Platform menu (it opens with Copilot),
+   and single Copilot, MCP and AI-topic links elsewhere (Enterprise's "Copilot for Business", Resources' "AI"). */
+header.HeaderMktg nav li:has(> [class*="NavGroup-module__group"] > ul > li:first-child > a[href*="/features/copilot"]),
+header.HeaderMktg nav li:has(> a[href*="/features/copilot"]), header.HeaderMktg nav li:has(> a[href$="github.com/mcp"]),
+header.HeaderMktg nav li:has(> a[href*="topic=ai"]) { display: none !important; }
 
 /* Buttons */
 .btn:not(.btn-primary):not(.btn-danger), .Button--secondary, button[data-variant="default"], a[data-variant="default"] {

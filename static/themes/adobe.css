@@ -1,6 +1,9 @@
-/* net19 handmade theme: Adobe (www marketing pages), 2019: Adobe Clean bold headlines at modest sizes with normal tracking, Spectrum blue #1473e6 pill buttons and links, 4px cards. */
-html { --n19-blue: #1473e6; --n19-blue-hover: #0d66d0; --n19-text: #2c2c2c; }
-html[data-net19-mode="dark"] { --n19-blue: #2680eb; --n19-blue-hover: #378ef0; --n19-text: #e3e3e3; }
+/* net19 handmade theme: Adobe (www marketing pages), 2019: a solid white 64px top bar with the black "Adobe" logo, bold
+   15px #2c2c2c menu labels centered and a plain "Sign In" text link; Adobe Clean bold headlines at modest sizes (the hero title
+   44px, not a 80px black display face) with normal tracking; Spectrum blue #1473e6 pill buttons and links; 4px cards;
+   no Firefly (generative AI) calls to action. */
+html { --n19-blue: #1473e6; --n19-blue-hover: #0d66d0; --n19-text: #2c2c2c; --n19-bar: #fff; --n19-bar-line: #eaeaea; }
+html[data-net19-mode="dark"] { --n19-blue: #2680eb; --n19-blue-hover: #378ef0; --n19-text: #e3e3e3; --n19-bar: #1e1e1e; --n19-bar-line: #333; }
 /* Adobe's s2a / Milo tokens */
 html:root, body {
   --heading-font-family: "Adobe Clean", adobe-clean, "Source Sans Pro", "Trebuchet MS", sans-serif !important;
@@ -23,3 +26,28 @@ main .con-button.fill:hover, main .con-button.blue:hover { background: var(--n19
 main .con-button { border-radius: 16px !important; font-weight: 700 !important; }
 /* Cards */
 .links-card, .rm-card, .feds-product-card, main [class*="card"] { border-radius: 4px !important; }
+
+/* Top bar: solid white with a hairline, the black logo, centered dark bold labels and a plain "Sign In" */
+header.global-navigation { background: var(--n19-bar) !important; border-bottom: 1px solid var(--n19-bar-line) !important; height: 64px !important; }
+header.global-navigation > nav { background: transparent !important; border-radius: 0 !important; box-shadow: none !important; backdrop-filter: none !important; margin: 0 !important; height: 64px !important; top: 0 !important; left: 0 !important; width: 100% !important; }
+header.global-navigation > nav > ul { flex: 1 1 auto !important; }
+header.global-navigation .feds-menu-wrapper > ul.feds-gnav-items { margin: 0 auto !important; gap: 12px !important; }
+header.global-navigation .feds-link, header.global-navigation .feds-link * { color: var(--n19-text) !important; font-size: 15px !important; font-weight: 700 !important; }
+header.global-navigation .feds-link::after { display: none !important; }
+header.global-navigation .feds-brand .desktop-brand img { display: none !important; }
+header.global-navigation .feds-brand .desktop-brand img:first-child { display: block !important; }
+header.global-navigation .profile-comp.secondary-button { background: transparent !important; border: none !important; box-shadow: none !important; color: var(--n19-text) !important; font-weight: 700 !important; font-size: 15px !important; }
+/* Home hero: the headline at 2019 size and weight */
+.router-marquee .rm-title, .router-marquee .rm-title * { font-family: "Adobe Clean", adobe-clean, "Source Sans Pro", sans-serif !important; font-size: 44px !important; line-height: 1.15 !important; font-weight: 700 !important; letter-spacing: 0 !important; }
+.router-marquee .rm-content p { font-size: 18px !important; line-height: 1.4 !important; }
+.router-marquee .con-button { border-radius: 16px !important; min-height: 32px !important; padding: 4px 16px !important; font-size: 15px !important; }
+.router-marquee .con-button.fill:not(.outline) { background: var(--n19-blue) !important; border-color: var(--n19-blue) !important; color: #fff !important; }
+.router-marquee .rm-card { border-radius: 4px !important; }
+/* Menus: no Firefly or GenStudio (generative AI, 2023-24) product cards */
+a.feds-product-card[href*="firefly" i], a.feds-product-card[href*="genstudio" i] { display: none !important; }
+/* Sections: square edges, not the 32px rounded tops that overlap the hero */
+main .section.rounded-corners-top, main .section.rounded-corners-top > .section-background { border-radius: 0 !important; }
+/* Not in 2019: the Brand Concierge AI assistant ("Ask a question" floating button and its panel, 2025) */
+#brand-concierge, .brand-concierge, .bc-floating-button { display: none !important; }
+/* Home hero: no "Content creation" (Firefly) tab or slide; the other four tabs fill the row */
+.router-marquee a.rm-card[href*="firefly" i], .router-marquee .rm-slide:has(a[href*="firefly" i]) { display: none !important; }

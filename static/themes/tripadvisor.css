@@ -1,13 +1,37 @@
 /* net19 handmade theme: Tripadvisor, 2019: Helvetica/Arial type instead of Trip Sans, near-black (#000a12) headings
-   and #4a4a4a text instead of today's deep forest green, the 2019 teal-green (#00a680) for the account button with small
-   square corners, and no AI trip planner or "Ask AI" buttons (added in 2024-2025). Layout is today's.
-   Tripadvisor has no dark mode; the dark tokens apply only if a page renders dark. */
-html { --n19-font: Arial, Tahoma, "Bitstream Vera Sans", sans-serif; --n19-green: #00a680; --n19-green-hover: #008a6a; }
-html[data-net19-mode="dark"] { --n19-green: #00a680; --n19-green-hover: #00c294; }
+   and #4a4a4a text instead of today's deep forest green; a white header with a hairline and the 2019 teal-green
+   (#00a680) account button with small square corners; on the home page "Where to?" over a white pill search field with
+   a soft shadow and a green Search button, and the product row as a white strip of bold 15px #4a4a4a tiles between
+   thin rules; photo tiles with 2px corners; no AI trip planner or "Ask AI" buttons (added in 2024-2025).
+   Tripadvisor has no dark mode; palette.js flips the page on dark devices. */
+html { --n19-font: Arial, Tahoma, "Bitstream Vera Sans", sans-serif; --n19-green: #00a680; --n19-green-hover: #008a6a; --n19-ink: #000a12; --n19-text: #4a4a4a;
+  --n19-rule: #e0e0e0; --n19-card: #fff; --n19-shadow: 0 2px 8px rgba(0,0,0,.18); }
+html[data-net19-mode="dark"] { --n19-green: #00a680; --n19-green-hover: #00c294; --n19-ink: #f2f2f2; --n19-text: #ccc;
+  --n19-rule: #3a3a3a; --n19-card: #1e1e1e; --n19-shadow: 0 2px 8px rgba(0,0,0,.6); }
 :root:root body, :root:root body :not(svg):not(svg *) { font-family: var(--n19-font) !important; }
 [data-automation="desktop-cart-and-profile"] a[href*="RegistrationController"] {
   background: var(--n19-green) !important; color: #fff !important; border-radius: 3px !important; text-transform: uppercase !important; letter-spacing: .5px !important;
+  font-size: 13px !important; font-weight: 700 !important; min-height: 32px !important; height: 32px !important; padding: 0 14px !important;
 }
 [data-automation="desktop-cart-and-profile"] a[href*="RegistrationController"]:hover { background: var(--n19-green-hover) !important; }
+/* Header: a hairline under the white bar, plain 14px bold links */
+header { border-bottom: 1px solid var(--n19-rule) !important; }
+header nav [data-automation^="topNav"] :is(a, button) { font-size: 14px !important; font-weight: 700 !important; color: var(--n19-text) !important; border-radius: 3px !important; }
+/* Home: "Where to?" and the white pill search with a soft shadow and a green Search button */
+main h1:first-of-type { color: var(--n19-ink) !important; }
+div:has(> form input[placeholder]) { border: none !important; box-shadow: var(--n19-shadow) !important; background: var(--n19-card) !important; }
+form:has(input[placeholder]) button:not([type="submit"]):last-of-type { background: var(--n19-green) !important; border-color: var(--n19-green) !important; color: #fff !important; font-weight: 700 !important; font-size: 15px !important; }
+form:has(input[placeholder]) button:not([type="submit"]):last-of-type * { color: #fff !important; }
+form:has(input[placeholder]) button:not([type="submit"]):last-of-type:hover { background: var(--n19-green-hover) !important; }
+/* The product row: a white strip of bold tiles between thin rules */
+[data-automation="tab-list"] { background: var(--n19-card) !important; border: 1px solid var(--n19-rule) !important; gap: 0 !important; padding: 10px 0 !important; }
+[data-automation="tab-list"] > button, [data-automation="tab-list"] [role="tab"] { border-radius: 0 !important; padding: 6px 22px !important; border-left: 1px solid var(--n19-rule) !important; }
+[data-automation="tab-list"] [role="tab"]:first-child { border-left: none !important; }
+[data-automation="tab-list"] [role="tab"] span { font-size: 15px !important; font-weight: 700 !important; color: var(--n19-text) !important; }
+[data-automation="tab-list"] [role="tab"][aria-selected="true"] span { color: var(--n19-ink) !important; }
+[data-automation="tab-list"] [role="tab"]::after, [data-automation="tab-list"] [role="tab"]::before { display: none !important; }
+[data-automation="tab-list"] [role="tab"] svg { fill: var(--n19-green) !important; }
+/* Photo tiles: small corners */
+main a img, main picture img, main a > div:has(picture) { border-radius: 2px !important; }
 /* AI entry points (marked by tripadvisor.js) */
 [data-net19-hidden] { display: none !important; }

@@ -22,3 +22,12 @@ h1, h2, .fxg-title { font-weight: 300 !important; }
 .fxg-global-nav .fxg-dropdown-js::after, .fxg-global-nav .fxg-dropdown-js::before, .fxg-global-nav .fxg-mouse::after, .fxg-global-nav .fxg-mouse::before { display: none !important; }
 .fxg-global-nav .fxg-dropdown-js, .fxg-global-nav .fxg-dropdown-js .fxg-mouse { font-size: 14px !important; font-weight: 400 !important; }
 .fxg-user-options__sign-in img.fxg-user-options__icon { display: none !important; }
+/* The sign-in link and search icon sat 6px above the menu words' center line; drop them onto it */
+.fxg-nav .fdx-utilityWrap { margin-top: 6px !important; }
+
+/* The "Ship, manage, track, deliver" hero lays its headline over a sibling photo; a black backdrop under the photo keeps
+   its white type seen as white-on-dark (otherwise the readability guard reads the page white behind it and inks it dark). */
+.fxg-hero.fxg-hero_homepage:has(> .fxg-hero__image) { background-color: #000 !important; }
+
+/* "ASK FEDEX", the floating virtual-assistant button (post-2019), and its chat frame */
+.nuance-chat-floating-container, #nuanMessagingFrame, #inqChatStage { display: none !important; }

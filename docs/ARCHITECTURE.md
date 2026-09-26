@@ -36,6 +36,19 @@ Classification runs once per element in `requestAnimationFrame`, before the fram
 
 On cnn.com, flipping adds about 150–250 ms of main-thread time during load. There is no cost when the site already matches the device.
 
+### Guard
+
+`guard.js` runs after every theme and palette.js. It has two parts.
+
+**Post-2019 features.** Controls labelled as AI or assistant features that did not exist in 2019 are hidden by their label: "Create images", "Brainstorm", "Ask AI", "AI Mode", Copilot, Gemini, Grok, Rufus and similar. Placeholders such as "Search or ask a question" go back to "Search". A theme can add its own labels with a `later` regex, or protect labels with `keepLabels`.
+
+**Readability.** After loading, a change of mode, and every hover, click, key press, animation end or scroll, visible text is checked against the background it sits on:
+
+- The check accounts for translucent layers and for the page flip.
+- Text under about 2.2:1 contrast is given a dark or light ink.
+- Text over photos, gradients or media, including those in sibling layers, is left alone, because its background is unknown.
+- Ink is removed again once the text reads correctly without it.
+
 The looks follow the Web Design Museum's captures of each site (2019 where one exists, otherwise the nearest year), rebuilt by hand as rules for the live pages rather than copied.
 
 ## A site's own older frontend

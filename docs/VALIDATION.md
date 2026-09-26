@@ -1,4 +1,4 @@
-# Validation of 0.7.0
+# Validation of 0.8.0
 
 ## Automated checks
 
@@ -102,3 +102,37 @@ About 20 sites blocked the test browser with a bot check, and the Wayback Machin
 - Tripadvisor, NY.gov, realtor.com and Costco;
 - Expedia, Shutterstock, Getty Images and Collins;
 - American Airlines, Canva, Quora, Yelp, Booking.com, Adobe and Uber Eats.
+
+## Stress audit
+
+`npm run audit` loads every themed site with the built extension, once in light and once in dark. On each site it:
+
+1. hovers up to six header menu items;
+2. opens the first menu;
+3. types into the search field.
+
+In every state it flags:
+
+- faint text, measured from the screenshot's pixels, so filters, blur and translucency count;
+- visible post-2019 labels and "ask" placeholders;
+- header items off their row's center;
+- round buttons drawn inside text fields.
+
+The first full run found real problems, all fixed, on 30 sites. Examples:
+
+- Apple's menus were unreadable in dark mode.
+- Bing's "More" menu had white text on white.
+- USPS's "Quick Tools" was unreadable.
+- GitHub's Copilot menu entries were still showing.
+- The FedEx and Lowe's assistants were still showing.
+- Several hero headlines were re-inked over photos.
+
+The re-run leaves only false flags, which were checked by hand:
+
+- carousel slides that are off screen or fading in;
+- line-clamped text;
+- two-line cells;
+- news headlines that mention AI;
+- bot-check pages.
+
+Sites that block automated browsers were checked in a real Chrome on a Mac instead. This covered Indeed, Booking.com, Expedia, eBay, Instagram, Adobe, Tripadvisor, Walmart, Quora, Britannica, Canva, Collins, Getty Images, Shutterstock, American Airlines, NY.gov, Costco, Uber Eats, TikTok, timeanddate, Etsy and Yelp. realtor.com, Fandom, Genius and Allrecipes could not be checked there either.

@@ -4,3 +4,10 @@ html { --n19-panel-border: #ddd; }
 html[data-net19-mode="dark"] { --n19-panel-border: #555; }
 body, input, select, button { font-family: Arial, Helvetica, sans-serif !important; }
 .panel-default { border-color: var(--n19-panel-border); }
+/* The small "Privacy Policy" link under the Customize box is white on the box's pale green; a dark green ink reads on it. */
+#myfcst .myfcst-policy a { color: #0d4a12 !important; }
+/* The Customize box is white type (with a dark shadow) over a green picture; on flipped pages the type would turn black on
+   a darkened green, so the box is kept as drawn. */
+html[data-net19-flip] #myfcst { filter: contrast(1.13636) hue-rotate(180deg) invert(1) !important; }
+/* The territory links are drawn over the (kept, light) alert map; on flipped pages they are turned back with it. */
+html[data-net19-flip] #territorylinks { filter: contrast(1.13636) hue-rotate(180deg) invert(1) !important; }

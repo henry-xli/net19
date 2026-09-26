@@ -8,6 +8,9 @@ body > header, body:not(.headerMinimized) header.sticky { background-color: var(
 body > header .major-links-container a, body > header .major-links-container span, body > header .login a, body > header .login span, body > header .icon-user, body > header .icon-sphere,
 body > header .menuPanelOpenButton, body > header #searchMobile { color: var(--n19-header-text) !important; }
 body > header .major-links-container a { font-family: "Open Sans", sans-serif !important; font-size: 15px !important; text-decoration: none !important; border-bottom: 0 !important; }
+/* 2019 set the header links in title case ("Dictionary", "Thesaurus"), not today's capitals. */
+body > header .major-links-container:not(.sub) a { display: inline-block !important; text-transform: lowercase !important; font-size: 16px !important; }
+body > header .major-links-container:not(.sub) a::first-letter { text-transform: uppercase !important; }
 body > header .major-links-container > div::before { border-right-color: var(--n19-rule) !important; }
 body > header img.home_logo { filter: invert(1) !important; }
 /* Dictionary tabs under the search were plain white links on the dark bar; the current one a dark gray block. */

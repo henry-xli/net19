@@ -31,7 +31,7 @@ function syncScripts(): Promise<unknown> {
       addRules: navigationRules(config, theme => signedIn.has(theme.id)) });
     const desired: chrome.scripting.RegisteredContentScript[] = THEMES.filter(active).map(theme => ({
       id: `net19-theme-${theme.id}`, matches: themeMatches(theme), css: [`themes/${theme.id}.css`],
-      js: [`themes/${theme.id}.js`, 'themes/palette.js'], runAt: 'document_start', allFrames: false, persistAcrossSessions: true }));
+      js: [`themes/${theme.id}.js`, 'themes/palette.js', 'themes/guard.js'], runAt: 'document_start', allFrames: false, persistAcrossSessions: true }));
     const signature = (list: chrome.scripting.RegisteredContentScript[]) => JSON.stringify(list.map(s => [s.id, s.matches, s.css, s.js]).sort());
     // Anything else registered by an earlier version (the archive pipeline's content script) is removed too.
     const current = registered.filter(script => script.id.startsWith('net19-'));

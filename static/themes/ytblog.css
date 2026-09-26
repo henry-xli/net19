@@ -24,6 +24,11 @@ html:root, html .yt-page, html [class*="category--"] {
 /* Masthead band */
 .yt-header, .yt-header__navigation { background: var(--n19-band) !important; box-shadow: none !important; border-bottom: 1px solid var(--n19-rule) !important; }
 .yt-subscription__header-btn { border-radius: 2px !important; }
+/* Menu words on one line each, as on the 2019 blog's single-row tabs, instead of wrapping into two-line stacks */
+.yt-header__navigation-item-link { white-space: nowrap !important; }
+.yt-header__navigation-items > .yt-header__navigation-item { margin-left: 9px !important; margin-right: 9px !important; }
+/* The header search is today's "AI search" (spark icon, "Ask us a question"): the spark goes, the magnifier stays */
+.yt-header__search-submit-icon .spark, .yt-header__search-btn .spark { display: none !important; }
 
 /* Category labels become plain blue link text; cards are flat and square */
 .yt-page [class*="category-link-content"], .yt-article-hero-section__page-content-category-cta, .yt-article-hero-section__page-content-category-cta span {

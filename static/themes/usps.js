@@ -16,3 +16,20 @@ globalThis.net19Theme = {};
   const start = () => { fix(); new MutationObserver(later).observe(document.body, { childList: true, subtree: true }); };
   if (document.body) start(); else document.addEventListener('DOMContentLoaded', start, { once: true });
 })();
+// On a dark device the page is flipped by palette.js. The navy Quick Tools tab (a ::before fill) would turn pale lavender
+// under its inverted white words; it is kept as drawn, so it stays white on navy as in 2019.
+(() => {
+  const root = document.documentElement;
+  const mark = () => {
+    if (!root.hasAttribute('data-net19-flip')) return;
+    for (const el of document.querySelectorAll('nav[aria-label="Main"] a.menuitem.nav-first-element')) if (!el.hasAttribute('data-net19-keep')) el.setAttribute('data-net19-keep', '');
+  };
+  let queued = false;
+  const later = () => { if (queued) return; queued = true; requestAnimationFrame(() => { queued = false; mark(); }); };
+  const start = () => {
+    later();
+    new MutationObserver(later).observe(document.body, { childList: true, subtree: true });
+    new MutationObserver(later).observe(root, { attributes: true, attributeFilter: ['data-net19-flip'] });
+  };
+  if (document.body) start(); else document.addEventListener('DOMContentLoaded', start, { once: true });
+})();

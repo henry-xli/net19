@@ -1,8 +1,11 @@
-/* net19 handmade theme: Shutterstock, 2019: bold condensed-feeling sans headings, #f54336 red-orange primary buttons and search button on the same white and near-black surfaces. */
+/* net19 handmade theme: Shutterstock, 2019: one header row with the white shutterstock wordmark at the left, bold
+   uppercase IMAGES / FOOTAGE / EDITORIAL / MUSIC links beside it and white pill "Log in" buttons at the right, over a
+   full-bleed hero; a bold white 56px "Stock assets to power your creativity" headline, a white search field with 4px
+   corners and a #f54336 red-orange search button; bold Helvetica headings and red-orange primary buttons. */
 html { --n19-red: #f54336; --n19-red-hover: #e33e2f; --n19-red-active: #c9321f; --n19-text: #212121; --n19-link: #0f7ab8;
-  --n19-font: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  --n19-font: "Helvetica Neue", Helvetica, Arial, sans-serif; --n19-hero-text: #fff; }
 html[data-net19-mode="dark"] { --n19-red: #f54336; --n19-red-hover: #ff5a4c; --n19-red-active: #e33e2f; --n19-text: #f2f2f2; --n19-link: #5cb3e6;
-  --n19-font: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  --n19-font: "Helvetica Neue", Helvetica, Arial, sans-serif; --n19-hero-text: #fff; }
 /* Shutterstock's theme tokens (html.theme-light / html.theme-dark): primary buttons were the red-orange brand color in 2019, not black. */
 html:root, html.theme-light, html.theme-dark {
   --font-family-body: var(--n19-font) !important; --font-family-heading: var(--n19-font) !important;
@@ -14,3 +17,28 @@ html:root, html.theme-light, html.theme-dark {
 }
 body, h1, h2, h3, h4, button, input { font-family: var(--n19-font) !important; }
 h1, h2 { font-weight: 700 !important; letter-spacing: -.01em !important; }
+
+/* Promotions that did not exist in 2019: the blue subscription banner and the "Get Unlimited Downloads" button */
+[data-automation^="cms-header-banner"], header[data-automation="top-nav"] button[aria-label^="Get Unlimited" i] { display: none !important; }
+
+/* Header: wordmark at the left and the section links beside it in one row */
+header[data-automation="top-nav"] > div:first-child > div:first-child { visibility: hidden !important; }
+header[data-automation="top-nav"] > div:first-child > div:nth-child(2) { grid-column: 1 !important; grid-row: 1 !important; justify-self: start !important; margin-left: 12px !important; }
+header[data-automation="top-nav"] { position: relative !important; }
+header[data-automation="top-nav"] > div:nth-child(2) { position: absolute !important; top: 15px !important; left: 215px !important; width: auto !important; height: 38px !important; }
+header[data-automation="top-nav"] + * { margin-top: -42px !important; }
+header[data-automation="top-nav"] nav[aria-label="Primary navigation"] { background: transparent !important; width: auto !important; }
+header[data-automation="top-nav"] nav[aria-label="Primary navigation"] > ul > li > a { text-transform: uppercase !important; font-weight: 700 !important; font-size: 14px !important; letter-spacing: 0 !important; padding: 0 14px !important; }
+header[data-automation="top-nav"] nav[aria-label="Primary navigation"] > ul > li > a svg { display: none !important; }
+header[data-automation="top-nav"] [data-automation="loginButton"], header[data-automation="top-nav"] button:is([aria-label="Log in"], [data-automation="loginButton"]) { border-radius: 20px !important; font-weight: 700 !important; }
+
+/* Hero: bold white headline and subtitle, search field with 4px corners and a red-orange search button */
+section[data-automation="UniversalHomeHero"] h1 { font-size: 56px !important; line-height: 1.15 !important; color: var(--n19-hero-text) !important; }
+section[data-automation="UniversalHomeHero"] h1 + p { font-size: 20px !important; max-width: none !important; color: var(--n19-hero-text) !important; opacity: .9 !important; }
+[data-automation="SearchBarContainer"] :is(.MuiGrid-root, .MuiInputBase-root, fieldset) { border-radius: 4px !important; }
+[data-automation="SearchBarContainer"] .MuiGrid-root:has(> div > [data-automation="searchbar_autocomplete"]) { border-radius: 4px 0 0 4px !important; }
+[data-automation="SearchBarContainer"] [data-automation="searchbar_autocomplete"] .MuiInputBase-root, [data-automation="SearchBarContainer"] [data-automation="searchbar_autocomplete"] fieldset { border-radius: 4px 0 0 4px !important; }
+[data-automation="SearchBarContainer"] button[type="submit"], [data-automation="SearchBarContainer"] button[aria-label="Search" i] { background: var(--n19-red) !important; color: #fff !important; border-radius: 0 4px 4px 0 !important; }
+[data-automation="SearchBarContainer"] button[type="submit"] svg, [data-automation="SearchBarContainer"] button[aria-label="Search" i] svg { fill: #fff !important; color: #fff !important; }
+/* "Search Assistant" (an AI chat) and the AI editing showcase are post-2019 */
+[data-automation="SearchBarContainer"] [class*="aiSearchButtonWrapper"], [data-net19-later-section] { display: none !important; }

@@ -1,9 +1,11 @@
-/* net19 handmade theme: Instagram, 2019: a #fafafa page with white boxes in 1px #dbdbdb borders and 1px corners;
-   the login and sign-up boxes with small square-ish #fafafa fields and narrow #3897f0 buttons with 4px corners and
-   14px semibold white text; #003569 links and #3897f0 "Log in"/"Sign up" links; system fonts; no Reels, Threads or
-   Meta AI entry points. The dark variant keeps the same shapes on black. */
-html { --n19-page: 250,250,250; --n19-card: 255,255,255; --n19-text: 38,38,38; --n19-text-2: 142,142,142; --n19-border: 219,219,219; --n19-blue: 56,151,240; --n19-link: 0,55,107; }
-html[data-net19-mode="dark"] { --n19-page: 0,0,0; --n19-card: 18,18,18; --n19-text: 250,250,250; --n19-text-2: 168,168,168; --n19-border: 38,38,38; --n19-blue: 0,149,246; --n19-link: 224,241,255; }
+/* net19 handmade theme: Instagram, 2019: a #fafafa page; logged out, a centered 935px row with the pictures at the
+   left and, at the right, a 350px white box in a 1px #dbdbdb border holding a gray 17px heading, small #fafafa fields
+   with 3px corners, a narrow #3897f0 "Log in" button with 4px corners, a plain #385185 "Log in with Facebook" link and a
+   small "Forgot password?", then "Create new account" under a rule; no Meta logo or big headline; logged in,
+   white boxes with 1px #dbdbdb borders and 1px corners; #003569 links; system fonts; no Reels, Threads or Meta AI entry
+   points. The dark variant keeps the same shapes on black. */
+html { --n19-fb: 56,81,133; --n19-page: 250,250,250; --n19-card: 255,255,255; --n19-text: 38,38,38; --n19-text-2: 142,142,142; --n19-border: 219,219,219; --n19-blue: 56,151,240; --n19-link: 0,55,107; }
+html[data-net19-mode="dark"] { --n19-fb: 120,150,220; --n19-page: 0,0,0; --n19-card: 18,18,18; --n19-text: 250,250,250; --n19-text-2: 168,168,168; --n19-border: 38,38,38; --n19-blue: 0,149,246; --n19-link: 224,241,255; }
 html:root, html.__ig-light-mode, html.__ig-dark-mode, html.__fb-light-mode, html.__fb-dark-mode {
   --ig-colors-button-primary-background: var(--n19-blue) !important; --ig-colors-button-primary-background--pressed: var(--n19-blue) !important;
   --ig-colors-button-primary-link-text: var(--n19-blue) !important; --ig-colors-button-primary-link-text--hover: var(--n19-link) !important;
@@ -23,3 +25,43 @@ a[href="/reels/"], a[href*="threads.net"], a[href*="threads.com"], a[href*="/met
   background: rgb(var(--n19-page)) !important; font-size: 12px !important; border-radius: 3px !important; }
 #loginForm label:has(input), #loginForm div:has(> input[name]) { background: rgb(var(--n19-page)) !important; border-color: rgb(var(--n19-border)) !important; border-radius: 3px !important; }
 #loginForm button[type="submit"] { background: rgb(var(--n19-blue)) !important; border-radius: 4px !important; font-size: 14px !important; font-weight: 600 !important; color: #fff !important; }
+
+/* Logged-out home: the centered 2019 row, pictures left, the white login box right */
+[data-n19-ig="page"], [data-n19-ig="right"] { background: rgb(var(--n19-page)) !important; }
+[data-n19-ig="row"] { max-width: 935px !important; margin: 0 auto !important; padding: 32px 0 !important; justify-content: center !important; align-items: center !important; gap: 32px !important; min-height: 0 !important; }
+[data-n19-ig="left"] { flex: 0 1 454px !important; min-width: 0 !important; }
+[data-n19-ig="left"] i[role="img"], [data-n19-ig="headline"] { display: none !important; }
+[data-n19-ig="left"] img { width: 100% !important; height: auto !important; margin: 0 !important; }
+[data-n19-ig="rule"] { display: none !important; }
+[data-n19-ig="right"] { flex: 0 0 350px !important; width: 350px !important; padding: 0 !important; justify-content: center !important; min-height: 0 !important; }
+[data-n19-ig="right"] > div, [data-n19-ig="right"] > div > div, [data-n19-ig="right"] > div > div > div { padding: 0 !important; margin: 0 !important; width: 100% !important; min-width: 0 !important; }
+[data-n19-ig="box"] { background: rgb(var(--n19-card)) !important; border: 1px solid rgb(var(--n19-border)) !important; border-radius: 1px !important;
+  padding: 36px 40px 16px !important; box-sizing: border-box !important; width: 350px !important; }
+[data-n19-ig="box"] > :first-child span { display: block !important; text-align: center !important; color: rgb(var(--n19-text-2)) !important; font-size: 17px !important; line-height: 20px !important; font-weight: 600 !important; }
+[data-n19-ig="box"] > :first-child, [data-n19-ig="box"] > :first-child * { height: auto !important; max-width: none !important; width: 100% !important; }
+/* Fields: 38px, #fafafa, 1px #dbdbdb, 3px corners, 12px text; everything in the box fits its 350px */
+[data-n19-ig="box"] form, [data-n19-ig="box"] form div:not([role="button"] div, a div) { width: 100% !important; min-width: 0 !important; max-width: 100% !important; box-sizing: border-box !important; }
+form#login_form div:has(> div > input[name="email"]), form#login_form div:has(> div > input[name="pass"]) {
+  height: 38px !important; min-height: 0 !important; padding: 0 !important; background: rgb(var(--n19-page)) !important; border: 1px solid rgb(var(--n19-border)) !important;
+  border-radius: 3px !important; margin-bottom: 6px !important; box-shadow: none !important; }
+form#login_form div:has(> input[name="email"]), form#login_form div:has(> input[name="pass"]) { height: 36px !important; border: none !important; background: transparent !important; border-radius: 0 !important; }
+form#login_form input[name="email"], form#login_form input[name="pass"] { width: 100% !important; height: 36px !important; padding: 12px 8px 4px !important; font-size: 12px !important; font-weight: 400 !important; }
+form#login_form div:has(> input[name="email"]) > label, form#login_form div:has(> input[name="pass"]) > label { left: 8px !important; font-size: 12px !important; font-weight: 400 !important; color: rgb(var(--n19-text-2)) !important; }
+/* Log in: a narrow blue button with 4px corners */
+[data-n19-ig="login"], [data-n19-ig="login"] > div { height: 30px !important; min-height: 0 !important; border-radius: 4px !important; }
+[data-n19-ig="login"] > div:first-child { background: rgb(var(--n19-blue)) !important; }
+[data-n19-ig="login"] span { color: #fff !important; font-size: 14px !important; font-weight: 600 !important; }
+[data-n19-ig="login"] { margin-top: 8px !important; }
+/* Facebook: a plain dark-blue link; Forgot password: small */
+[data-n19-ig="facebook"], [data-n19-ig="facebook"] > div { background: transparent !important; height: 30px !important; min-height: 0 !important; }
+[data-n19-ig="facebook"] span { color: rgb(var(--n19-fb)) !important; font-size: 14px !important; font-weight: 600 !important; }
+[data-n19-ig="forgot"], [data-n19-ig="forgot"] > div { height: 28px !important; min-height: 0 !important; }
+[data-n19-ig="forgot"] span { color: rgb(var(--n19-link)) !important; font-size: 12px !important; font-weight: 400 !important; }
+/* Create new account: under a rule at the foot of the box */
+[data-n19-ig="signup"] { display: block !important; margin: 16px 0 0 !important; height: auto !important; }
+[data-n19-ig="signup"] > div { height: 44px !important; border: none !important; border-top: 1px solid rgb(var(--n19-border)) !important; border-radius: 0 !important; background: transparent !important; }
+[data-n19-ig="signup"] span { color: rgb(var(--n19-blue)) !important; font-size: 14px !important; font-weight: 600 !important; }
+[data-n19-ig="meta"] { display: none !important; }
+/* The footer sits on the same gray page, without a rule above it */
+[data-n19-ig="page"] footer[role="contentinfo"] { background: rgb(var(--n19-page)) !important; }
+[data-n19-ig="page"] hr { display: none !important; }

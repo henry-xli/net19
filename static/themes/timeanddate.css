@@ -45,7 +45,7 @@ html:root {
 .tad-explore-box:nth-of-type(3n) .tad-explore-box__heading { border-left-color: #da0a06; }
 .tad-explore-box[data-n19-color] .tad-explore-box__heading { border-left-color: var(--n19-section) !important; }
 /* Lists: plain bulleted links, no illustrations or blurbs */
-.tad-explore-box .tad-teaser--list-compact { display: list-item !important; list-style: square outside !important; margin: 0 0 0 18px !important; color: var(--n19-bullet) !important; }
+.tad-explore-box .tad-teaser--list-compact { display: list-item !important; list-style: square outside !important; margin: 0 0 0 18px !important; padding-left: 5px !important; color: var(--n19-bullet) !important; }
 .tad-explore-box .tad-teaser--list-compact .tad-teaser__image, .tad-explore-box .tad-teaser--list-compact .tad-box__edge,
 .tad-explore-box .tad-teaser--list-compact .tad-teaser__abstract { display: none !important; }
 .tad-explore-box .tad-teaser--list-compact .tad-teaser__box { padding: 4px 0 !important; min-height: 0 !important; background: transparent !important; }

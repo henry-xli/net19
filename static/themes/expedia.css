@@ -1,7 +1,10 @@
-/* net19 handmade theme: Expedia, 2019: #ffcb00 yellow header over both nav rows with dark navy #00355f links, Helvetica Neue/Arial text, #0065b8 blue accents and links, yellow Search buttons, 3px corners instead of pills. */
-html { --n19-header: #ffcb00; --n19-header-text: #00355f; --n19-header-text-2: #00355f; --n19-blue: #0065b8; --n19-blue-dark: #004e8f; --n19-blue-light: #d6e8f7;
+/* net19 handmade theme: Expedia, 2019: a #ffcb00 yellow header with dark navy #00355f links; below it the search
+   "wizard" is a dark charcoal box with 3px corners, product tabs as separate gray blocks with bold white text (the
+   current one #0065b8 blue, no icons), square white fields and a yellow Search button with dark text; no campaign
+   headline over the photo; Helvetica Neue/Arial text, #0065b8 blue accents and links, 3px corners instead of pills. */
+html { --n19-promo-button: #0c0e1c; --n19-wizard: #3d3d3d; --n19-tab: #555; --n19-tab-hover: #666; --n19-field-line: #ccc; --n19-header: #ffcb00; --n19-header-text: #00355f; --n19-header-text-2: #00355f; --n19-blue: #0065b8; --n19-blue-dark: #004e8f; --n19-blue-light: #d6e8f7;
   --n19-cta: #ffcb00; --n19-cta-hover: #ffbe00; --n19-cta-text: #1f1f1f; --n19-font: "Helvetica Neue", Arial, "Lucida Grande", sans-serif; }
-html[data-net19-mode="dark"] { --n19-header: #2b2b2b; --n19-header-text: #f2f2f2; --n19-header-text-2: #ccc; --n19-blue: #4d9be0; --n19-blue-dark: #2d7fc7; --n19-blue-light: #16324d;
+html[data-net19-mode="dark"] { --n19-promo-button: #0c0e1c; --n19-wizard: #2a2a2a; --n19-tab: #444; --n19-tab-hover: #555; --n19-field-line: #555; --n19-header: #2b2b2b; --n19-header-text: #f2f2f2; --n19-header-text-2: #ccc; --n19-blue: #4d9be0; --n19-blue-dark: #2d7fc7; --n19-blue-light: #16324d;
   --n19-cta: #ffcb00; --n19-cta-hover: #ffbe00; --n19-cta-text: #1f1f1f; --n19-font: "Helvetica Neue", Arial, "Lucida Grande", sans-serif; }
 /* Expedia's UITK design tokens: every component reads these, so menus, dialogs and later-loaded content follow. */
 html:root, html:root body {
@@ -15,13 +18,48 @@ html:root, html:root body {
   --global_navigation__header_link__text_color: var(--n19-header-text-2) !important; --global_navigation__header_nav_content__secondary__text_color: var(--n19-header-text) !important;
   --global_navigation__header_nav_content__active__text_color: var(--n19-header-text) !important; --global_navigation__header__shadow: none !important;
   --global_navigation__button__primary__active__background_color: var(--n19-blue) !important;
-  --button__primary__default__background_color: var(--n19-cta) !important; --button__primary__default__text_color: var(--n19-cta-text) !important;
-  --button__primary__default__icon__fill_color: var(--n19-cta-text) !important; --button__primary__hover__background_color: var(--n19-cta-hover) !important;
-  --button__primary__hover__text_color: var(--n19-cta-text) !important; --button__primary__hover__icon__fill_color: var(--n19-cta-text) !important;
-  --button__primary__active__background_color: var(--n19-cta-hover) !important; --button__primary__active__text_color: var(--n19-cta-text) !important;
-  --button__primary__active__icon__fill_color: var(--n19-cta-text) !important;
   --color__accent__1: var(--n19-blue-dark) !important; --color__accent__1__700: var(--n19-blue-dark) !important; --color__accent__2: var(--n19-blue) !important;
   --light_1__primary: #0065b8 !important; --light_1__primary_variant: #004e8f !important; --light_1__on_primary_container: #004e8f !important;
   --card__featured__header__background_color: var(--n19-blue) !important; --card__focus__border_color: var(--n19-blue) !important;
 }
 body { font-family: var(--n19-font) !important; }
+
+/* Header: the yellow bar, navy text */
+header.global-navigation-site-header, header.global-navigation-site-header section.global-navigation-row { background: var(--n19-header) !important; }
+.page-header.with-shadow { box-shadow: none !important; }
+header.global-navigation-site-header :is(button, a).uitk-button { color: var(--n19-header-text) !important; border-radius: 3px !important; font-weight: 400 !important; }
+header.global-navigation-site-header a[data-stid="listYourProperty-link"] { border: 1px solid var(--n19-header-text) !important; font-weight: 700 !important; min-height: 32px !important; }
+
+/* Hero: the photo stays; the 2020s campaign headline over it goes */
+[data-testid="hero-title-campaign"] { visibility: hidden !important; }
+
+/* Search wizard: a charcoal box with 3px corners */
+[data-testid="multi-product-search-form"] .uitk-card { background: var(--n19-wizard) !important; border: none !important; border-radius: 3px !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,.4) !important; }
+[data-testid="multi-product-search-form"] ul.egds-tabs-custom { background: transparent !important; border-radius: 0 !important; justify-content: flex-start !important;
+  padding: 18px 18px 0 !important; gap: 6px !important; border: none !important; box-shadow: none !important; }
+[data-testid="multi-product-search-form"] ul.egds-tabs-custom::before, [data-testid="multi-product-search-form"] ul.egds-tabs-custom::after { display: none !important; }
+[data-testid="multi-product-search-form"] .egds-tabs-custom-container { border: none !important; box-shadow: none !important; }
+[data-testid="multi-product-search-form"] li.egds-tab-custom { height: auto !important; }
+[data-testid="multi-product-search-form"] a.egds-tab-custom-anchor { height: 58px !important; min-width: 78px !important; padding: 0 8px 10px !important; box-sizing: border-box !important;
+  display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: flex-end !important;
+  background: var(--n19-tab) !important; border-radius: 2px !important; color: #fff !important; }
+[data-testid="multi-product-search-form"] a.egds-tab-custom-anchor:hover { background: var(--n19-tab-hover) !important; }
+[data-testid="multi-product-search-form"] a.egds-tab-custom-anchor-selected { background: var(--n19-blue) !important; }
+[data-testid="multi-product-search-form"] a.egds-tab-custom-anchor :is(.egds-tab-custom-graphic-content, svg, img, figure, .uitk-icon) { display: none !important; }
+[data-testid="multi-product-search-form"] .egds-tab-custom-text { color: #fff !important; font-size: 13px !important; font-weight: 700 !important; margin: 0 !important; }
+[data-testid="multi-product-search-form"] .egds-tab-custom-highlighter { display: none !important; }
+/* Fields: square white boxes with a light border; checkbox labels bold white */
+[data-testid="multi-product-search-form"] :is(input.uitk-field-input, button.uitk-fake-input) { border-radius: 2px !important; border: 1px solid var(--n19-field-line) !important; background: #fff !important; color: #333 !important; }
+[data-testid="multi-product-search-form"] .uitk-field-label { background: #fff !important; color: #555 !important; font-weight: 700 !important; font-size: 11px !important; }
+[data-testid="multi-product-search-form"] .uitk-checkbox-label, [data-testid="multi-product-search-form"] .uitk-checkbox-label-content { color: #fff !important; font-weight: 700 !important; }
+[data-testid="multi-product-search-form"] .uitk-checkbox-label-content * { color: #fff !important; }
+/* Search: the yellow button with dark text and a darker bottom edge */
+[data-testid="multi-product-search-form"] #search_button, [data-testid="multi-product-search-form"] button.uitk-button-primary {
+  background: var(--n19-cta) !important; color: var(--n19-cta-text) !important; border-radius: 3px !important; font-weight: 700 !important; font-size: 17px !important;
+  box-shadow: inset 0 -2px 0 rgba(0,0,0,.2) !important; }
+[data-testid="multi-product-search-form"] #search_button::before, [data-testid="multi-product-search-form"] #search_button::after { background: transparent !important; }
+[data-testid="multi-product-search-form"] #search_button:hover { background: var(--n19-cta-hover) !important; }
+/* A dark button on a yellow promo card is drawn by a pseudo-element; the button itself gets the same fill so its
+   white label is judged (and stays) readable */
+.uitk-card-has-primary-theme :is(a, button).uitk-button-primary { background-color: var(--n19-promo-button) !important; color: #fff !important; }

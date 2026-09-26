@@ -1,7 +1,7 @@
 /* net19 handmade theme: eBay, 2019 (the Web Design Museum capture): a 30px white top strip of 12px #333 links with a light rule under it;
    Helvetica Neue in the header; a square search field with a thin #c7c7c7 edge, the "All Categories" box joined to it, and a
    #0654ba "Search" button with 3px corners and 16px white text; a centered 12px #555 category row between #ddd rules; #0654ba links;
-   flat, square tiles without drop shadows. */
+   flat, square tiles without drop shadows; full-width home banners with square corners. */
 html { --n19-link: #0654ba; --n19-button: #0654ba; --n19-button-hover: #00509d; --n19-text: #333; --n19-text-2: #555; --n19-field: #fff;
   --n19-field-edge: #c7c7c7; --n19-rule: #e5e5e5; --n19-nav-rule: #ddd; --n19-header-font: "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif; }
 html[data-net19-mode="dark"] { --n19-link: #6ea2f0; --n19-button: #0654ba; --n19-button-hover: #1b6bd0; --n19-text: #ddd; --n19-text-2: #aaa; --n19-field: #1e1e1e;
@@ -46,3 +46,17 @@ html:root, body {
 .s-item__image-wrapper, .s-item__image, .s-card, .brwrvr__item-card, .vl-card, .hl-card, .s-card__media-wrapper, .su-card-container__media { border-radius: 0 !important; box-shadow: none !important; }
 .s-item__title, .s-item__link, .s-card__title { color: var(--n19-link) !important; }
 .s-item__price, .x-price-primary, .s-card__price { color: var(--n19-text) !important; font-weight: 700 !important; }
+
+/* Search field: no magnifier inside and no camera (image search came to the desktop site later); the button sized to
+   its label, as in 2019 */
+.gh-search__wrap { border-width: 1px !important; }
+.gh-search-input__wrap > svg, .gh-search-input__wrap .gh-search-input__icon, .gh-search__wrap > svg:first-child { display: none !important; }
+.gh-search-input__camera-btn { display: none !important; }
+#gh-ac { padding-left: 10px !important; }
+#gh-search-btn { width: auto !important; min-width: 90px !important; padding: 0 22px !important; height: 40px !important; align-self: center !important; }
+/* Category row: plain text links; "eBay Live" (2024) is not one of them */
+.vl-flyout-nav li.vl-flyout-nav--pulsating-dot-live { display: none !important; }
+.vl-flyout-nav li > a, .vl-flyout-nav li > span > a { background: transparent !important; border-radius: 0 !important; }
+/* Home page banners: full width with square corners, straight under the category row */
+main .page-grid-container:has(> [class*="dp-hero"]) { padding-left: 0 !important; padding-right: 0 !important; }
+main [class*="dp-hero"][class*="-module"] { border-radius: 0 !important; }

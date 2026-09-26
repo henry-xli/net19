@@ -17,7 +17,8 @@ html[data-net19-mode="dark"] { --n19-bar: #1f4153; --n19-navy: #0b2433; --n19-st
 
 /* Header: one flat steel-blue bar; the round logo larger, hanging below the bar as in 2019 */
 header#base-header { background: var(--n19-bar) !important; box-shadow: none !important; }
-@media (min-width: 992px) { header#base-header .navbar-brand svg { width: 86px !important; height: 88px !important; margin-top: 4px !important; } }
+@media (min-width: 992px) { header#base-header .navbar-brand svg { width: 86px !important; height: 88px !important; margin-top: 4px !important; }
+  header#base-header .navbar-brand { margin-left: 12px !important; } }
 header#base-header .search-form-container, header#base-header .button-switcher-container { background: transparent !important; }
 /* The "AI search" field did not exist: the plain search form is shown instead (it is the same search, submitted to /dictionary) */
 header#base-header #header-ai-search-container, header#base-header .chatbot-nav-item-container, header#base-header .chatbot-nav-item { display: none !important; }

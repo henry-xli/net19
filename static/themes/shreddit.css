@@ -50,3 +50,9 @@ main#main-content > div.my-xs { background: var(--n19-card) !important; border: 
 /* Right column: plain boxes */
 #right-sidebar-container aside { background: var(--n19-card-2) !important; border: 1px solid var(--n19-border) !important; border-radius: 0 !important; }
 #right-sidebar-container h2 { color: var(--n19-text) !important; font-size: 12px !important; font-weight: 700 !important; text-transform: none !important; letter-spacing: 0 !important; }
+
+/* Tooltips draw their bubble inside a shadow root, so the page's readability check cannot see it behind the slotted
+   label and would ink the label for the header underneath. The label carries the bubble's own color. */
+html { --n19-tip: #0e1113; }
+html[data-net19-mode="dark"] { --n19-tip: #fff; }
+rpl-tooltip > [slot="content"], rpl-tooltip > [slot="shortcut"] { background: var(--n19-tip) !important; }

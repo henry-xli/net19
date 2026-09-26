@@ -63,6 +63,11 @@ div:has(> svg[viewBox="0 0 272 92"]) {
   background: url("https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png") center bottom / 272px 92px no-repeat !important;
 }
 div:has(> svg[viewBox="0 0 272 92"]) > svg { visibility: hidden !important; }
+/* Drawn as a background, the multicolor logo would flip with a flipped page (orange-brown and pink letters): under the
+   flip it is turned back with palette.js's exact inverse filter and keeps its colors; so do the colored microphone and
+   the results logo. */
+html[data-net19-flip] :is(div:has(> svg[viewBox="0 0 272 92"]), form[role="search"] [aria-label="Search by voice"], a#logo, a[href*="webhp"]:has(svg[viewBox="0 0 272 92"])) {
+  filter: contrast(1.13636) hue-rotate(180deg) invert(1) !important; }
 input[name="btnK"], input[name="btnI"] {
   background: var(--n19-button) !important; border: 1px solid var(--n19-button) !important; border-radius: 4px !important; color: var(--n19-button-text) !important;
   font-size: 14px !important; font-family: arial, sans-serif !important; box-shadow: none !important; height: 36px !important; line-height: 27px !important; padding: 0 16px !important; margin: 11px 4px !important;
@@ -98,6 +103,8 @@ a[href*="udm=50"], a[href*="udm=39"], a[href*="udm=18"], a[href*="udm=14"] { dis
 .Ij8KCd a, .fbar a, .Ij8KCd [role="button"], .Ij8KCd [role="button"] * { color: var(--n19-footer-text) !important; font-size: 14px !important; }
 .Ij8KCd .g55egf > a { line-height: 40px !important; height: 40px !important; padding-top: 0 !important; padding-bottom: 0 !important; }
 .Ij8KCd .osh6F { display: flex !important; }
+/* "Settings" (a menu button, not a link) sat 3px below the other footer words */
+.Ij8KCd .CcNe6e { display: inline-flex !important; align-items: center !important; height: 40px !important; vertical-align: top !important; }
 .Ij8KCd .osh6F > a[href*="/ads"] { order: 1; } .Ij8KCd .osh6F > a[href*="/services"] { order: 2; }
 .Ij8KCd .osh6F > a[href*="about.google"] { order: 3; } .Ij8KCd .osh6F > a[href*="howsearchworks"] { order: 4; }
 /* the links at the top right: near-black 13px */
@@ -108,4 +115,16 @@ html { --n19-signin: #4285f4; --n19-signin-text: #fff; }
 html[data-net19-mode="dark"] { --n19-signin: #8ab4f8; --n19-signin-text: #202124; }
 #gb a.gb_A, #gb a[href*="ServiceLogin"] { background: var(--n19-signin) !important; color: var(--n19-signin-text) !important; border-radius: 4px !important; font-weight: 700 !important;
   font-size: 13px !important; height: 30px !important; line-height: 28px !important; min-height: 0 !important; padding: 0 12px !important; box-sizing: border-box !important; border: 1px solid transparent !important; }
+/* its 48px slot top-aligns the 30px button 5px above "Gmail  Images" and the apps grid: put it on their center line */
+#gb a.gb_A, #gb a[href*="ServiceLogin"] { margin-top: 5px !important; }
 #gb a.gb_A span, #gb a[href*="ServiceLogin"] span { font-size: 13px !important; line-height: 28px !important; padding: 0 !important; }
+
+/* Signed-in homepage: the "I'm feeling lucky" pill chip (marked by google.js; guard.js hides the AI chips beside it)
+   drawn as the 2019 flat gray button, without its icon */
+[data-net19-lucky] {
+  display: inline-flex !important; align-items: center !important; justify-content: center !important; background: var(--n19-button) !important;
+  border: 1px solid var(--n19-button) !important; border-radius: 4px !important; box-shadow: none !important; height: 36px !important; min-height: 0 !important;
+  padding: 0 16px !important; margin: 11px 4px !important; color: var(--n19-button-text) !important; font: 14px arial, sans-serif !important; }
+[data-net19-lucky] * { color: inherit !important; font: inherit !important; background: transparent !important; border: 0 !important; box-shadow: none !important; }
+[data-net19-lucky] :is(svg, img) { display: none !important; }
+[data-net19-lucky]:hover { border-color: var(--n19-button-hover-border) !important; color: var(--n19-text) !important; box-shadow: 0 1px 1px rgba(0,0,0,.1) !important; }

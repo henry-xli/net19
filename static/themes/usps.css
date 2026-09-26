@@ -38,3 +38,10 @@ a.button--primary:hover, .button--primary:hover { background: var(--n19-navy-hov
 /* The 2019 utility row was plain small text links, without today's globe / pin / headset icons */
 #utility-header a::before, #utility-header li::before { display: none !important; }
 nav[aria-label="Main"] a.menuitem { white-space: nowrap !important; }
+/* Menu row: the site sizes each item for today's short words ("Send", "Receive", "Shop"); with the 2019 labels the row
+   was lopsided (crowded in the middle, wide gaps at the right). The items size to their labels and share the row evenly. */
+nav[aria-label="Main"] ul.nav-list { display: inline-flex !important; justify-content: space-between !important; align-items: stretch !important; }
+nav[aria-label="Main"] ul.nav-list > li.menuheader:not(.qt-nav):not(.nav-search) { width: auto !important; flex: 0 0 auto !important; }
+/* Quick Tools: white type on its navy tab. The tab is drawn by a ::before layer, so a transparent gradient marks the link
+   as "over a picture" for the readability check, which cannot see pseudo-element fills and would ink the words dark. */
+nav[aria-label="Main"] a.menuitem.nav-first-element { color: #fff !important; background-image: linear-gradient(transparent, transparent) !important; }

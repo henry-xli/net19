@@ -1,13 +1,14 @@
 /* net19 handmade theme: Yelp, 2019: the red (#d32323) header bar with a white logo, white Find / Near fields and a
    darker red (#bd1f1f) search button, white header links, Helvetica Neue type instead of Poppins / Open Sans, and
-   buttons with small 3px corners. Yelp has no dark mode; the dark tokens only apply if the page renders dark.
+   buttons with small 3px corners. On the home page the header floats over the full-bleed hero photo with white links and a
+   white-outlined Sign Up box. Yelp has no dark mode; the dark tokens only apply if the page renders dark.
    Built from late-2024 captures of Yelp's current markup: yelp.com itself blocks automated browsers. */
 html { --n19-red: #d32323; --n19-red-dark: #bd1f1f; --n19-on-red: #fff; --n19-field: #fff; --n19-field-text: #2d2e2f; --n19-font: "Helvetica Neue", Helvetica, Arial, sans-serif; }
 html[data-net19-mode="dark"] { --n19-red: #b01e1e; --n19-red-dark: #9a1a1a; --n19-on-red: #fff; --n19-field: #2d2e2f; --n19-field-text: #f0f0f0; }
 :root:root yelp-react-root, :root:root yelp-react-root :not(svg):not(svg *) { font-family: var(--n19-font) !important; }
 
-/* Header bar */
-header[class*="consumer-header-container"] { background: var(--n19-red) !important; border-bottom: 0 !important; }
+/* Header bar: red on inner pages; on the home page it floats over the hero photo, as in 2019 (yelp.js marks the home page) */
+html:not([data-n19-home]) header[class*="consumer-header-container"] { background: var(--n19-red) !important; border-bottom: 0 !important; }
 /* The wordmark is a background image: turned white, as the 2019 logo on the red bar was */
 header[class*="consumer-header-container"] [class*="logo-link"], header[class*="consumer-header-container"] [data-analytics-label="logo"] { filter: brightness(0) invert(1); }
 header[class*="consumer-header-container"] [class*="header-link"], header[class*="consumer-header-container"] [class*="header-link"] *,
@@ -21,11 +22,17 @@ form#header_find_form > div, form#header_find_form [class*="search-suggest"] { b
 form#header_find_form input { color: var(--n19-field-text) !important; }
 form#header_find_form button[type="submit"], form#header_find_form > button { background: var(--n19-red-dark) !important; border-radius: 0 3px 3px 0 !important; }
 
-/* Log In / Sign Up on the red bar: outlined in white */
-header[class*="consumer-header-container"] [data-testid="logged-out-auth-modal-v2"] button {
-  background: transparent !important; border: 1px solid rgba(255,255,255,.8) !important; border-radius: 3px !important;
+/* Log In / Sign Up on the red bar or the hero: Log In plain white words, Sign Up a white-outlined box */
+header[class*="consumer-header-container"] nav[aria-label="More options"] :is(a, button) {
+  background: transparent !important; border: 1px solid transparent !important; border-radius: 3px !important; box-shadow: none !important; color: var(--n19-on-red) !important; font-weight: 700 !important;
+}
+header[class*="consumer-header-container"] nav[aria-label="More options"] :is(a, button) * { color: var(--n19-on-red) !important; }
+header[class*="consumer-header-container"] [data-testid="logged-out-auth-modal-v2"] > div > button {
+  background: transparent !important; border: 1px solid rgba(255,255,255,.9) !important; border-radius: 3px !important;
 }
 header[class*="consumer-header-container"] [data-testid="logged-out-auth-modal-v2"] button * { color: var(--n19-on-red) !important; }
 
 /* Buttons across the page: 3px corners */
 yelp-react-root button, yelp-react-root a[role="button"] { border-radius: 3px; }
+/* Home page section titles ("Find the Best Businesses in Town") were bold Yelp red */
+html[data-n19-home] yelp-react-root h2 { color: var(--n19-red) !important; font-weight: 700 !important; }

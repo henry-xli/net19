@@ -52,6 +52,10 @@ a.cmp-hero-card__button:not(:first-child) *, a[class*="cmp-button__inner--type-p
 /* Headings: regular weight, black; section titles in 2019 were plain Helvetica, not a display serif */
 main h1, main h2 { font-weight: 400 !important; color: var(--n19-text); }
 .cmp-hero-card h1 { color: #fff; }
+/* Type set over a photo (the home hero on its video poster, the photo teasers in the menus): the poster and photo are
+   not behind the text in the DOM, so a transparent gradient marks these boxes as "over a picture" for the readability
+   check, which would otherwise read the white page behind them and ink the white type dark. */
+.cmp-hero-card:has(.cmp-hero-card__media-fullBleed), .cmp-teaser:has(.cmp-teaser__image--overlay) { background-image: linear-gradient(transparent, transparent) !important; }
 main h2[class*="--h2"] { font-size: 24px !important; line-height: 30px !important; }
 main h3 { font-weight: 700 !important; }
 

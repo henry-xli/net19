@@ -11,10 +11,13 @@ globalThis.net19Theme = {
   const hide = () => {
     for (const node of document.querySelectorAll('header button, header a, form button, [data-automation^="topNav"] a, [data-automation^="topNav"] button')) {
       if (!AI.test(node.textContent || '')) continue;
-      // Take the wrapper too (it carries the button's animated glow) while it holds no other text.
+      // Take the wrapper too (it carries the button's animated glow) while it holds no other text and no field or
+      // other button (the search row's wrapper also has no other text while its suggestion list is open).
       let target = node;
       while (target.parentElement && !target.parentElement.matches('header, nav, form, ul, body')
-        && target.parentElement.textContent.trim() === node.textContent.trim()) target = target.parentElement;
+        && target.parentElement.textContent.trim() === node.textContent.trim()
+        && !target.parentElement.querySelector('input, textarea, select')
+        && target.parentElement.querySelectorAll('button, a').length <= 1) target = target.parentElement;
       if (!target.hasAttribute('data-net19-hidden')) target.setAttribute('data-net19-hidden', '');
     }
   };

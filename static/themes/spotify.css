@@ -22,14 +22,17 @@ html:root, html.encore-dark-theme {
 [data-encore-id="card"], [data-encore-id="card"] img, [data-testid="card-image"], [data-testid="cover-art-image"], img[data-testid*="image"] { border-radius: 0 !important; }
 /* 2019 layout: panels sit flush against each other (no 8px gutters or outer padding) */
 [data-testid="root"] > div:has(> #global-nav-bar) { gap: 0 !important; padding: 0 !important; }
-#global-nav-bar { background: var(--n19-rail) !important; }
+/* With the outer padding gone, the bar's -8px margins pushed it above the window, leaving its controls pressed to the
+   top edge; it sits flush at 0 instead, 64px tall with everything on one centered line */
+#global-nav-bar { background: var(--n19-rail) !important; margin: 0 !important; width: auto !important; height: 64px !important; align-items: center !important; }
 /* Left rail: flat black, library prompts as plain text blocks instead of rounded gray cards */
 #Desktop_LeftSidebar_Id section { background: transparent !important; border-radius: 0 !important; padding-top: 8px !important; padding-bottom: 8px !important; }
 #Desktop_LeftSidebar_Id h1 { text-transform: uppercase !important; letter-spacing: .16em !important; font-size: 11px !important; color: #b3b3b3 !important; }
 /* Search: the 2019 white pill with black text */
-input[data-testid="search-input"] { background: #fff !important; color: #000 !important; height: 40px !important; margin-top: 4px !important; }
+input[data-testid="search-input"] { background: #fff !important; color: #000 !important; height: 40px !important; min-height: 0 !important; block-size: 40px !important; }
 input[data-testid="search-input"] ~ div span, input[data-testid="search-input"]::placeholder { color: #7f7f7f !important; }
 #global-nav-bar form svg { color: #000 !important; fill: currentColor; }
+#global-nav-bar form:has(input[data-testid="search-input"]) { margin-top: 4px !important; }
 /* Shelves: 28px bold titles and small uppercase "SEE ALL" links */
 #main-view main section h2 { font-size: 28px !important; line-height: 34px !important; letter-spacing: -.02em !important; }
 #main-view main section h2 a:hover { text-decoration: underline !important; }
@@ -37,6 +40,7 @@ input[data-testid="search-input"] ~ div span, input[data-testid="search-input"]:
 /* Header buttons: "SIGN UP" plain white letter-spaced text, "LOG IN" a white pill */
 [data-testid="signup-button"], [data-testid="login-button"] { text-transform: uppercase !important; letter-spacing: .12em !important; font-size: 12px !important; }
 [data-testid="signup-button"] { color: #fff !important; }
+[data-testid="login-button"] > span { min-block-size: 0 !important; block-size: 40px !important; padding-block: 0 !important; display: inline-flex !important; align-items: center !important; }
 /* The sign-up bar: flush with square corners */
 [data-testid="signup-bar"] { border-radius: 0 !important; }
 /* Artists stayed round in 2019 */

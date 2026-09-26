@@ -1,6 +1,6 @@
 # Chrome Web Store submission kit
 
-The package is `downloads/net19-0.7.0.zip`. Its root contains:
+The package is `downloads/net19-0.8.0.zip`. Its root contains:
 
 - `manifest.json`;
 - the bundled worker and popup;

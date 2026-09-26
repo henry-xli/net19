@@ -1,18 +1,70 @@
-/* net19 handmade theme: Indeed, 2019: Helvetica/Arial type instead of Indeed Sans, the bright 2019 action blue
-   (#085ff7) for buttons, links and job titles, neutral (not warm) grays, and flatter job cards and fields with small
-   corners. The page structure is close to today's, so the theme only changes type, colors and radii. Indeed has
-   no dark mode on the web; the dark tokens apply only if a page renders dark. */
-html { --n19-font: "Helvetica Neue", Helvetica, Arial, sans-serif; --n19-title: #2164f3; --n19-button: #085ff7; --n19-button-hover: #0452d8; }
-html[data-net19-mode="dark"] { --n19-title: #6d9bff; --n19-button: #085ff7; --n19-button-hover: #0452d8; }
+/* net19 handmade theme: Indeed, 2019: a thin white top bar of small gray 13px tabs with a blue underline under the
+   current one; on the home page the rainbow-free "indeed" logo sits at the left of two separate square-cornered
+   white fields with gray borders (blue when focused) and a bright blue (#085ff7) pill "Find Jobs" button; Helvetica/
+   Arial type, blue links and job titles, neutral grays, an orange rule above the footer, flat job cards with small
+   corners. Indeed has no dark mode on the web; palette.js flips the page on dark devices. */
+html { --n19-font: "Helvetica Neue", Helvetica, Arial, sans-serif; --n19-title: #2164f3; --n19-button: #085ff7; --n19-button-hover: #0452d8;
+  --n19-bar: #fff; --n19-bar-line: #e4e4e4; --n19-tab: #666; --n19-tab-on: #000; --n19-field: #fff; --n19-field-line: #949494;
+  --n19-focus: #2164f3; --n19-text: #333; --n19-orange: #ff6421; --n19-link: #085ff7; }
+html[data-net19-mode="dark"] { --n19-title: #6d9bff; --n19-button: #085ff7; --n19-button-hover: #0452d8;
+  --n19-bar: #1c1c1c; --n19-bar-line: #333; --n19-tab: #aaa; --n19-tab-on: #fff; --n19-field: #121212; --n19-field-line: #666;
+  --n19-focus: #6d9bff; --n19-text: #ddd; --n19-orange: #ff6421; --n19-link: #6d9bff; }
 html:root {
   --fonts-default: var(--n19-font) !important;
   --border-radius-sm: 3px !important; --border-radius-md: 4px !important; --border-radius-lg: 6px !important;
 }
-/* Indeed forces its face with `html body * { font-family: ... !important }`; this outranks it */
+/* Indeed forces its face with "html body * { font-family: ... !important }"; this outranks it */
 :root:root body, :root:root body * { font-family: var(--n19-font) !important; }
-/* Search: the bright blue Find Jobs button */
+
+/* Top bar: 52px, a hairline under it, small gray tabs, the current one black with a blue underline */
+#gnav-main-container, #gnav-main-container > div > div > div:first-child { background: var(--n19-bar) !important; }
+#gnav-main-container > div > div > div:first-child { height: 52px !important; min-height: 0 !important; border-bottom: 1px solid var(--n19-bar-line) !important; box-shadow: none !important; }
+#gnav-main-container ul, #gnav-main-container ul > li, #gnav-main-container ul > li > div, #gnav-main-container li div, #gnav-main-container > div > div > div:first-child > div { height: 52px !important; min-height: 0 !important; }
+#gnav-main-container a#indeed-globalnav-logo { height: 52px !important; padding: 0 12px 0 16px !important; }
+#gnav-main-container a#indeed-globalnav-logo svg { height: 22px !important; width: auto !important; }
+#gnav-main-container ul a, #gnav-main-container a#EmployersPostJob { height: 52px !important; margin: 0 !important; box-sizing: border-box !important; padding: 0 12px !important; font-size: 13px !important; font-weight: 400 !important;
+  color: var(--n19-tab) !important; background: transparent !important; border-radius: 0 !important; }
+#gnav-main-container ul a:hover, #gnav-main-container a#EmployersPostJob:hover { color: var(--n19-tab-on) !important; text-decoration: underline !important; }
+#gnav-main-container a[aria-current="page"], #gnav-main-container a#FindJobs[aria-current] { color: var(--n19-tab-on) !important; box-shadow: inset 0 -2px 0 var(--n19-button) !important; }
+#gnav-main-container a[aria-current="page"]::after, #gnav-main-container a[aria-current="page"]::before { display: none !important; }
+#gnav-main-container ul a[href*="account/login" i] { color: var(--n19-tab) !important; font-weight: 400 !important; }
+
+/* Home: the logo moved to the left of the search fields, as in 2019 (the bar has no logo there) */
+html[data-n19-home] #gnav-main-container a#indeed-globalnav-logo { display: none !important; }
+html[data-n19-home] #gnav-main-container ul { margin-left: 20px !important; }
+[data-testid="jobsearch-Content"] { position: relative !important; }
+[data-testid="jobSearch-Yosegi"] { padding-top: 40px !important; }
+[data-testid="jobSearch-Yosegi"] .jobsearch-MosaicProviderRichSearch { max-width: 1000px !important; padding-left: 160px !important; box-sizing: border-box !important; }
+[data-testid="account-focused-homepage"] > div:first-child { position: absolute !important; top: 48px !important; left: calc(50% - 500px) !important; width: 160px !important; height: 60px !important;
+  justify-content: flex-start !important; overflow: hidden !important; animation: none !important; transform: none !important; }
+[data-testid="account-focused-homepage"] > div:first-child svg { width: 150px !important; height: auto !important; animation: none !important; transform: none !important; }
+[data-testid="account-focused-homepage"] > div:nth-child(2) { padding-top: 16px !important; }
+[data-testid="account-focused-homepage"] h2 { font-size: 18px !important; font-weight: 700 !important; color: var(--n19-text) !important; }
+
+/* Search: two separate white fields with square-ish corners and gray borders, and a blue pill "Find Jobs" button */
+#jobsearch > div:first-child { border: none !important; border-radius: 0 !important; box-shadow: none !important; background: transparent !important; gap: 16px !important; }
+#jobsearch > div:first-child > div:first-child > div { gap: 8px !important; }
+#jobsearch > div:first-child > div:first-child > div > div[class*="e15p7aqh"] { display: none !important; }
+#jobsearch span:has(> input#text-input-what), #jobsearch span:has(> input#text-input-where) {
+  height: 44px !important; margin-top: 8px !important; background: var(--n19-field) !important; border: 1px solid var(--n19-field-line) !important; border-radius: 3px !important; box-shadow: none !important; }
+#jobsearch span:has(> input:focus) { border-color: var(--n19-focus) !important; box-shadow: 0 0 0 1px var(--n19-focus) !important; }
+#jobsearch div[class*="e1ttgm5y0"] { border-radius: 3px !important; height: 60px !important; }
+#jobsearch span:has(> input#text-input-what) > span:first-child { display: none !important; }
+#jobsearch input#text-input-what, #jobsearch input#text-input-where { height: 42px !important; padding: 0 10px !important; font-size: 16px !important; border-radius: 0 !important; color: var(--n19-text) !important; }
+#jobsearch .yosegi-InlineWhatWhere-primaryButton { background: var(--n19-button) !important; border-color: var(--n19-button) !important; border-radius: 22px !important;
+  height: 44px !important; padding: 0 26px !important; font-size: 16px !important; font-weight: 700 !important; }
+#jobsearch .yosegi-InlineWhatWhere-primaryButton:hover { background: var(--n19-button-hover) !important; }
 .yosegi-InlineWhatWhere-primaryButton { background: var(--n19-button) !important; border-color: var(--n19-button) !important; }
 .yosegi-InlineWhatWhere-primaryButton:hover { background: var(--n19-button-hover) !important; }
+/* The large "Get Started" call to action: the 2019 blue pill */
+[data-testid="account-focused-homepage"] button { background: var(--n19-button) !important; border-radius: 22px !important; }
+
+/* Links: the 2019 bright blue */
+[data-testid="jobsearch-Footer-promos"] a, #gnav-footer-container a { color: var(--n19-link) !important; }
+#gnav-footer-container footer a { color: var(--n19-text) !important; font-size: 12px !important; }
+/* Footer: the orange rule */
+.jobsearch-Footer { border-top: 5px solid var(--n19-orange) !important; }
+
 /* Flatter job cards and job pane */
 .job_seen_beacon, .cardOutline, .resultWithShelf, .slider_container, .jobsearch-RightPane, #jobsearch-ViewjobPaneWrapper, .jobsearch-ViewJobLayout--embedded { border-radius: 4px !important; }
 /* Job titles in the result list: the 2019 link blue */
