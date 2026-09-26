@@ -7,7 +7,7 @@
 - TypeScript checking;
 - **6 unit tests**;
 - a production build;
-- **7 real Chromium extension tests**.
+- **8 real Chromium extension tests**.
 
 The browser tests load the unchanged production bundle into fresh, isolated profiles. Every site is a local fixture, and a request to any other host fails the test. They verify that:
 
