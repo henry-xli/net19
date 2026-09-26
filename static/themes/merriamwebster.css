@@ -1,48 +1,95 @@
-/* net19 handmade theme: Merriam-Webster, 2019: a slate-blue (#305f7a) header with a plain white search field, a
-   dark/steel Dictionary-Thesaurus switch, a white page with no dark side rail, Open Sans section headings in
-   #265667 and teal in-text links. Merriam-Webster has no dark mode; the dark tokens only apply if the page renders dark. */
-html { --n19-bar: #305f7a; --n19-bar-2: #1b3e52; --n19-steel: #4a7d95; --n19-page: #fff; --n19-text: #303336; --n19-head: #265667;
-  --n19-link: #265667; --n19-soft: #e7eff4; --n19-rule: #d6e1e8; --n19-search: #fff; --n19-search-text: #303336; }
-html[data-net19-mode="dark"] { --n19-bar: #1f4153; --n19-bar-2: #10283a; --n19-steel: #3b6679; --n19-page: #121a20; --n19-text: #e3e8eb; --n19-head: #9cc3d6;
-  --n19-link: #9cc3d6; --n19-soft: #1d3342; --n19-rule: #2b4555; --n19-search: #1b262e; --n19-search-text: #e3e8eb; }
+/* net19 handmade theme: Merriam-Webster, 2019: a steel-blue (#2d5f7c) header with small uppercase gray-white links split
+   by thin rules, a square white search field with a red magnifier and a steel/navy Dictionary-Thesaurus switch; a white
+   page with no dark side rail; a 34px Playfair headword in #303336 with a steel-blue part of speech, plain teal (#225f73)
+   pronunciation, Open Sans bold #265667 section headings and #303336 definitions. Merriam-Webster has no dark mode. */
+html { --n19-bar: #2d5f7c; --n19-navy: #0f3850; --n19-steel: #4a7d95; --n19-rule: #5690b1; --n19-nav-text: #e4e4e4; --n19-page: #fff;
+  --n19-text: #303336; --n19-head: #265667; --n19-teal: #225f73; --n19-link: #265667; --n19-soft: #e7f0f4; --n19-meta: #757575;
+  --n19-divider: #d6e1e8; --n19-search: #fff; --n19-search-border: #d3dde3; --n19-red: #d71920; }
+html[data-net19-mode="dark"] { --n19-bar: #1f4153; --n19-navy: #0b2433; --n19-steel: #3b6679; --n19-rule: #3f6d85; --n19-nav-text: #d6dde1; --n19-page: #121a20;
+  --n19-text: #e3e8eb; --n19-head: #9cc3d6; --n19-teal: #9cc3d6; --n19-link: #9cc3d6; --n19-soft: #1d3342; --n19-meta: #9aa5ab;
+  --n19-divider: #2b4555; --n19-search: #1b262e; --n19-search-border: #2b4555; --n19-red: #e2474d; }
 
-/* Header and the announcement strip above it */
-header#base-header, .toupee-banner { background: var(--n19-bar) !important; }
-header#base-header .btn-blue { background: transparent !important; border: 0 !important; border-radius: 0 !important; text-transform: uppercase !important;
-  font-size: 12px !important; font-weight: 400 !important; letter-spacing: .5px !important; color: #fff !important; }
-header#base-header .search-form-container { background: transparent !important; }
+/* The announcement strip becomes the 2019 row of small links above the search: same steel blue, small uppercase text */
+.toupee-banner { background: var(--n19-bar) !important; }
+.toupee-banner .container-xxl { padding-top: 6px !important; padding-bottom: 2px !important; }
+.toupee-banner, .toupee-banner a, .toupee-banner span { color: var(--n19-nav-text) !important; font-family: "Open Sans", Helvetica, Arial, sans-serif !important;
+  font-size: 11px !important; font-weight: 400 !important; letter-spacing: .0625em !important; text-transform: uppercase !important; text-decoration: none !important; }
+
+/* Header: one flat steel-blue bar; the round logo larger, hanging below the bar as in 2019 */
+header#base-header { background: var(--n19-bar) !important; box-shadow: none !important; }
+@media (min-width: 992px) { header#base-header .navbar-brand svg { width: 86px !important; height: 88px !important; margin-top: 4px !important; } }
+header#base-header .search-form-container, header#base-header .button-switcher-container { background: transparent !important; }
+/* The "AI search" field did not exist: the plain search form is shown instead (it is the same search, submitted to /dictionary) */
+header#base-header #header-ai-search-container, header#base-header .chatbot-nav-item-container, header#base-header .chatbot-nav-item { display: none !important; }
+header#base-header .header-search-stack > .search-form-container { display: flex !important; visibility: visible !important; }
+header#base-header .header-search-stack { max-width: 680px !important; }
+/* Search: a square white field, a thin gray border and a red magnifier with no red block */
+header#base-header #search-container { background: transparent !important; border-radius: 0 !important; }
+header#base-header #search-term { background: var(--n19-search) !important; color: var(--n19-text) !important; border: 1px solid var(--n19-search-border) !important;
+  border-radius: 0 !important; font-family: Lato, "Open Sans", Helvetica, Arial, sans-serif !important; font-size: 18px !important; box-shadow: none !important; }
+header#base-header #search-form-submit-btn { background: transparent !important; border: 0 !important; border-radius: 0 !important; }
+header#base-header #search-form-submit-btn svg, header#base-header #search-form-submit-btn svg path { fill: var(--n19-red) !important; color: var(--n19-red) !important; }
+header#base-header #search-close-btn svg, header#base-header #search-close-btn svg path { fill: #999 !important; }
+/* The Dictionary / Thesaurus switch: the 2019 tab colors, navy for the chosen side on steel blue, square */
 header#base-header .button-switcher { background: var(--n19-steel) !important; border-radius: 0 !important; }
-header#base-header .button-switcher .btn-toggle { border-radius: 0 !important; text-transform: uppercase !important; letter-spacing: .5px !important; }
-header#base-header .button-switcher .btn-switch { background: var(--n19-bar-2) !important; border-radius: 0 !important; box-shadow: none !important; }
-header#base-header #search-container, header#base-header #search-term { background: var(--n19-search) !important; color: var(--n19-search-text) !important; border-radius: 0 !important; }
-header#base-header #search-form-submit-btn { background: var(--n19-search) !important; border-left: 1px solid var(--n19-rule) !important; border-radius: 0 !important; }
-header#base-header #search-form-submit-btn svg, header#base-header #search-form-submit-btn svg path { fill: #d71920 !important; color: #d71920 !important; }
+header#base-header .button-switcher .btn-toggle { border-radius: 0 !important; text-transform: uppercase !important; letter-spacing: .05em !important;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif !important; font-weight: 400 !important; font-size: 13px !important; color: #fff !important; }
+header#base-header .button-switcher .btn-switch { background: var(--n19-navy) !important; border-radius: 0 !important; box-shadow: none !important; }
+/* Links: 11px uppercase, split by thin light-blue rules, no pills */
+header#base-header .header-nav-list > li { margin-right: 0 !important; }
+header#base-header .header-nav-list .btn-blue { background: transparent !important; border: 0 !important; border-left: 1px solid var(--n19-rule) !important; border-radius: 0 !important;
+  text-transform: uppercase !important; font-family: "Open Sans", Helvetica, Arial, sans-serif !important; font-size: 11px !important; font-weight: 400 !important;
+  letter-spacing: .0625em !important; color: var(--n19-nav-text) !important; padding: 0 11px !important; line-height: 14px !important; box-shadow: none !important; }
+header#base-header .header-nav-list > li:first-child .btn-blue, header#base-header .header-nav-list > li.d-none + li .btn-blue { border-left: 0 !important; }
+header#base-header .header-nav-list .btn-blue:hover { color: #adbcc5 !important; }
+header#base-header .header-nav-list .btn-blue span { font-weight: 400 !important; }
 #main-banner-ad-container.bg-mw-black { background: var(--n19-page) !important; }
+/* The anchor ad frame's dark scrim over the page (empty when no ad runs) */
+.tbgads-anchor-slot-wrap, html body .tbgads-anchor-slot-wrap { background-color: transparent !important; }
 
-/* The dark side rail becomes a plain white table of contents */
+/* The dark side rail becomes a plain white table of contents in the entry's teal */
 .redesign-container { background: var(--n19-page) !important; }
 .redesign-container .left-sidebar, .redesign-container .left-sidebar-col, .redesign-container .left-sidebar::before { background: var(--n19-page) !important; }
-.left-sidebar .sidebar-header-title { color: var(--n19-head) !important; }
-.left-sidebar .nav-link, .left-sidebar .nav-link .nav-link-text, .left-sidebar .dropdown-toggle { color: var(--n19-link) !important; }
-.left-sidebar .sidebar-nav-item-active-ribbon { display: none !important; }
+.left-sidebar .sidebar-header-title { color: var(--n19-head) !important; font-size: 22px !important; font-family: "Open Sans", Helvetica, Arial, sans-serif !important; }
+.left-sidebar .nav-link, .left-sidebar .nav-link .nav-link-text, .left-sidebar .dropdown-toggle { color: var(--n19-link) !important; font-size: 15px !important; font-weight: 400 !important; }
+.left-sidebar .sidebar-nav-item-active-ribbon, .left-sidebar .sidebar-nav-union-icon { display: none !important; }
 .left-sidebar #sidebar-show-more-collapse-toggler, .left-sidebar #sidebar-show-more-collapse-toggler span { color: var(--n19-link) !important; }
 .left-sidebar .nav-list-divider { background: var(--n19-page) !important; }
 .left-sidebar .entry-nav-link.active { background: var(--n19-soft) !important; color: var(--n19-head) !important; font-weight: 700 !important; clip-path: none !important; }
-.left-sidebar .sidebar-nav-union-icon { display: none !important; }
-.left-sidebar #save-word-dropdown-menu-toggler { background: var(--n19-bar) !important; color: #fff !important; border: 0 !important; border-radius: 3px !important; }
+.left-sidebar #save-word-dropdown-menu-toggler { background: var(--n19-steel) !important; color: #fff !important; border: 0 !important; border-radius: 3px !important; }
 
-/* Entry */
+/* Entry: 34px Playfair headword, steel-blue part of speech, plain teal pronunciation */
 #left-content { background: var(--n19-page) !important; color: var(--n19-text) !important; }
-#left-content h2:not(.parts-of-speech), #left-content .function-label { font-family: "Open Sans", Helvetica, Arial, sans-serif !important; font-weight: 700 !important; color: var(--n19-head) !important; }
-#left-content a:not(.btn):not(.important-blue-link) { color: var(--n19-link) !important; }
-#left-content .word-syllables-prons-header-content a, #left-content .prons-entries-list-inline a { border-radius: 0 !important; border: 0 !important; background: transparent !important; }
+#left-content h1.hword { font-size: 34px !important; line-height: 36px !important; letter-spacing: .9px !important; color: var(--n19-text) !important; }
+#left-content h2.parts-of-speech, #left-content h2.parts-of-speech a { font-size: 26px !important; line-height: 36px !important; color: var(--n19-steel) !important; letter-spacing: .5px !important; }
+#left-content .entry-attr, #left-content .word-syllables-entry { color: var(--n19-teal) !important; font-size: 18px !important; }
+#left-content .prons-entries-list-inline a { border-radius: 0 !important; border: 0 !important; background: transparent !important; color: var(--n19-teal) !important;
+  font-size: 18px !important; padding: 0 4px !important; }
+#left-content .word-syllables-entry + .prons-entries-list-inline { border-left: 1px solid var(--n19-teal); margin-left: 8px; padding-left: 8px; }
+/* 2019 had no quiz call to action under the headword */
+#left-content .vocab-builder-cta-btn-container, #left-content .vocab-builder-web-components { display: none !important; }
+#left-content h2:not(.parts-of-speech), #left-content .function-label { font-family: "Open Sans", Helvetica, Arial, sans-serif !important; font-size: 22px !important;
+  line-height: 26px !important; font-weight: 700 !important; letter-spacing: .3px !important; color: var(--n19-head) !important; }
+#left-content a:not(.btn) { color: var(--n19-link) !important; }
+#left-content .dtText, #left-content .sd, #left-content .sub-content-thread { color: var(--n19-text) !important; font-size: 18px !important; }
+#left-content .mw_t_bc { color: var(--n19-text) !important; }
+#left-content .ex-sent, #left-content .mw-mdash-gold { color: var(--n19-meta) !important; font-size: 16px !important; }
+#left-content .sub-content-thread { border-left-color: var(--n19-divider) !important; }
+/* Right rail: 2019's small spaced-out uppercase box titles over a thin rule; plain numbered lists without gold bars */
+.right-rail .home-general-promo-item-title { font-family: "Open Sans", Helvetica, Arial, sans-serif !important; font-size: 11px !important; font-weight: 700 !important;
+  letter-spacing: 2px !important; text-transform: uppercase !important; color: var(--n19-text) !important; text-align: center !important;
+  border-bottom: 1px solid var(--n19-divider); padding-bottom: 6px; }
+.top-lookup-now .mw-logo-background, .top-lookup-now .topten .bg, .top-lookup-now .topten .arrow { display: none !important; }
+.top-lookup-now .topten .word-text { color: var(--n19-link) !important; font-family: "Open Sans", Helvetica, Arial, sans-serif !important; font-weight: 400 !important; }
+.top-lookup-now .topten .word-place { color: var(--n19-meta) !important; font-family: "Open Sans", Helvetica, Arial, sans-serif !important; }
+.right-rail .top-lookup-now, .right-rail .home-general-promo-item-card { box-shadow: none !important; border-radius: 0 !important; }
 
-/* Homepage header: the same slate bar, white search field and dark/steel switch */
+/* Homepage header: the same steel bar, square white search field and steel/navy switch */
 header#home-header, header#home-header #home-search-wrapper { background: var(--n19-bar) !important; }
-header#home-header .home-btn-blue { color: #fff !important; text-transform: uppercase !important; font-size: 12px !important; font-weight: 400 !important; letter-spacing: .5px !important; }
+header#home-header .home-btn-blue { color: var(--n19-nav-text) !important; text-transform: uppercase !important; font-size: 11px !important; font-weight: 400 !important; letter-spacing: .0625em !important; }
 header#home-header #home-search-container { background: transparent !important; border-radius: 0 !important; box-shadow: none !important; }
 header#home-header .home-search-stack { background: none !important; box-shadow: none !important; }
 #home-redesign .big-3-promos-container.background-blue { background: var(--n19-page) !important; }
 header#home-header .home-button-switcher { background: var(--n19-steel) !important; border-radius: 0 !important; }
-header#home-header .home-button-switcher .btn-switch { background: var(--n19-bar-2) !important; border-radius: 0 !important; box-shadow: none !important; }
+header#home-header .home-button-switcher .btn-switch { background: var(--n19-navy) !important; border-radius: 0 !important; box-shadow: none !important; }
 header#home-header #home-search-term { border-radius: 0 !important; }

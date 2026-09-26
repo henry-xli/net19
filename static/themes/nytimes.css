@@ -1,7 +1,47 @@
-/* net19 handmade theme: The New York Times, 2019. The site's design is largely unchanged; this restores the lighter 2019 top bar and removes later product tabs. */
-body { background: #fff !important; color: #121212 !important; }
-/* Games, Cooking, Wirecutter and The Athletic cross-product tabs came later */
-nav[data-testid="masthead-mini-nav"] a[href*="/crosswords"], nav a[href*="cooking.nytimes.com"], nav a[href*="/wirecutter"], nav a[href*="/athletic"],
-[data-testid="tab-bar"] a[href*="/games"], [data-testid="tab-bar"] a[href*="cooking"] { display: none !important; }
-header[data-testid="masthead-container"], #masthead { border-bottom: 1px solid #e2e2e2 !important; }
+/* net19 handmade theme: The New York Times, 2019: the centered 430px blackletter logo under a small "English · Español ·
+   中文" edition line; a slate-blue #6288a5 "LOG IN" button with a darker border; a flat row of 12px Franklin section
+   links (no drop-down arrows) between a pale hairline and a single black rule; story columns without the later
+   "free to read" frame, reading-time labels, or cross-product tabs (Games, Cooking, Wirecutter, The Athletic). The
+   site has no dark mode, so palette.js inverts it on dark devices. */
+html { --n19-text: #121212; --n19-text-2: #333; --n19-muted: #666; --n19-rule: #000; --n19-hair: #ebebeb; --n19-hover: #f7f7f7;
+  --n19-login: #6288a5; --n19-login-border: #326891; --n19-login-hover: #326891; }
+html[data-net19-mode="dark"] { --n19-text: #e8e8e8; --n19-text-2: #ccc; --n19-muted: #999; --n19-rule: #e8e8e8; --n19-hair: #333; --n19-hover: #222;
+  --n19-login: #6288a5; --n19-login-border: #326891; --n19-login-hover: #326891; }
+
+/* Edition line: 10px uppercase Franklin, the current edition bold */
+[data-testid="masthead-edition-menu"] a { font-size: 10px !important; letter-spacing: 0 !important; font-weight: 400 !important; color: var(--n19-text) !important;
+  padding: 7px 8px 6px !important; border-radius: 3px !important; }
+[data-testid="masthead-edition-menu"] a[aria-current="page"] { font-weight: 700 !important; }
+[data-testid="masthead-edition-menu"] a:hover { background: var(--n19-hover) !important; }
+
+/* LOG IN: slate blue with a darker border; the price offer next to it is later */
+.Wr7_RG_mastheadSection a[href*="/auth/login"]:not([aria-label]) > span, header a[href*="myaccount.nytimes.com/auth/login"]:not([aria-label]) > span {
+  background: var(--n19-login) !important; border: 1px solid var(--n19-login-border) !important; border-radius: 3px !important; color: #fff !important;
+  font-family: nyt-franklin, helvetica, arial, sans-serif !important; font-size: 11px !important; font-weight: 700 !important; letter-spacing: .05em !important;
+  line-height: 11px !important; padding: 11px 12px 8px !important; text-transform: uppercase !important; }
+.Wr7_RG_mastheadSection a[href*="/auth/login"]:not([aria-label]):hover > span { background: var(--n19-login-hover) !important; }
+header [data-testid="subscribe-button"], header [data-testid="onsite-messaging-unit-barOne"]:has([data-testid="subscribe-button"]) { display: none !important; }
+
+/* Logo at 2019's 430 x 58 */
+[data-testid="masthead-desktop-logo"] svg { width: 430px !important; height: 58px !important; }
+[data-testid="masthead-desktop-logo"] a { height: auto !important; }
+
+/* Sections: one flat row of 12px Franklin links between a pale hairline and a single black rule */
+[data-testid="masthead-nested-nav"] { border-top: 1px solid var(--n19-hair) !important; border-bottom: 1px solid var(--n19-rule) !important; margin-top: 6px !important; }
+[data-testid="masthead-nested-nav"]::before, [data-testid="masthead-nested-nav"]::after { display: none !important; }
+[data-testid="masthead-nested-nav"] nav > ul { padding: 5px 0 4px !important; }
+[data-testid="masthead-nested-nav"] nav > ul > li { font-size: 12px !important; line-height: 16px !important; }
+[data-testid="masthead-nested-nav"] nav > ul > li > a { font-family: nyt-franklin, helvetica, arial, sans-serif !important; font-size: 12px !important; font-weight: 500 !important;
+  color: var(--n19-text-2) !important; padding: 4px !important; border-radius: 3px !important; }
+[data-testid="masthead-nested-nav"] nav > ul > li > a:hover { background: var(--n19-hover) !important; }
+/* The drop-down arrows stay usable but only show on hover or keyboard focus */
+[data-testid="masthead-nested-nav"] nav > ul > li > button { opacity: 0 !important; width: 10px !important; min-width: 0 !important; margin-left: -2px !important; }
+[data-testid="masthead-nested-nav"] nav > ul > li:hover > button, [data-testid="masthead-nested-nav"] nav > ul > li > button:focus-visible { opacity: 1 !important; }
+/* Cross-product tabs came later */
+nav[aria-label="Main"] li:is([data-navid="Games"], [data-navid="Cooking"], [data-navid="Wirecutter"], [data-navid="The Athletic"]) { display: none !important; }
+
+/* Top stories: no "free to read" frame and label; no reading-time labels (net19 marks them) */
+[data-is-always-free] { border: 0 !important; padding: 0 !important; }
+[data-is-always-free] > .U5yBoa_fdrPackageHeader, [data-is-always-free] > div:first-child:has(> p > strong) { display: none !important; }
+[data-net19-hidden] { display: none !important; }
 section[data-testid="block-Briefings"] { display: none !important; }

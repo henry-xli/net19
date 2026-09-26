@@ -1,13 +1,24 @@
-/* net19 handmade theme: OANDA currency converter, 2019: Arial text, the converter on a flat light-grey panel with
+/* net19 handmade theme: OANDA currency converter, 2019: Arial text, a plain white header with small uppercase section
+   links and a square lime-green call to action, a regular-weight 35px "Currency Converter" title, the converter on a flat light-grey panel with
    white square boxed fields, amounts in OANDA orange, lime-green accents, no card shadows. Limited to the converter
    pages; OANDA has no dark mode. */
-html { --n19-panel: #e6e6e6; --n19-field: #fff; --n19-field-border: #c8c8c8; --n19-text: #333; --n19-amount: #f7941d; --n19-green: #8dc63f; --n19-font: Arial, "Helvetica Neue", Helvetica, sans-serif; }
-html[data-net19-mode="dark"] { --n19-panel: #2b2b2b; --n19-field: #1e1e1e; --n19-field-border: #555; --n19-text: #e6e6e6; --n19-amount: #ffa53d; --n19-green: #9bd14c; }
+html { --n19-bar: #fff; --n19-rule: #e5e5e5; --n19-panel: #e6e6e6; --n19-field: #fff; --n19-field-border: #c8c8c8; --n19-text: #333; --n19-amount: #f7941d; --n19-green: #8dc63f; --n19-font: Arial, "Helvetica Neue", Helvetica, sans-serif; }
+html[data-net19-mode="dark"] { --n19-bar: #1a1a1a; --n19-rule: #333; --n19-panel: #2b2b2b; --n19-field: #1e1e1e; --n19-field-border: #555; --n19-text: #e6e6e6; --n19-amount: #ffa53d; --n19-green: #9bd14c; }
 
 body, main, #oa-flat-nav-bar, #top-bar-desktop, .MuiTypography-root, .MuiInputBase-root, .MuiButton-root, main h1, main h2, main h3, main [class*="title"],
 main p, main a, main td, main th, main label, main li, .card-content span, .card-content div {
   font-family: var(--n19-font) !important;
 }
+#oa-flat-nav-bar *, #top-bar-desktop * { font-family: var(--n19-font) !important; }
+/* Header: white, the top links on white too; section links in small regular uppercase; the lime-green call to action
+   is a small square uppercase box, like 2019's "OPEN AN ACCOUNT". */
+#top-bar-desktop { background: var(--n19-bar) !important; height: 26px !important; }
+#top-bar-desktop a, #top-bar-desktop button { background: transparent !important; font-size: 12px !important; text-transform: uppercase !important; color: var(--n19-text) !important; }
+#oa-flat-nav-bar { box-shadow: none !important; border-bottom: 1px solid var(--n19-rule) !important; }
+#oa-flat-nav-bar a[class*="order-none"][class*="h-full"] { font-size: 13px !important; font-weight: 400 !important; text-transform: uppercase !important; color: var(--n19-text) !important; background: transparent !important; letter-spacing: .01em !important; }
+#oa-flat-nav-bar a.cta { background: var(--n19-green) !important; color: #111 !important; border-radius: 0 !important; font-size: 13px !important; text-transform: uppercase !important; padding: 6px 14px !important; height: auto !important; line-height: 18px !important; }
+.btn, .btn-lite { border-radius: 0 !important; }
+.h1_title, .h1_title * { font-size: 35px !important; font-weight: 400 !important; color: var(--n19-text) !important; letter-spacing: 0 !important; }
 .h1_title_indexed, .h1_title_indexed * { font-weight: 400 !important; color: var(--n19-text) !important; letter-spacing: 0 !important; }
 
 /* The converter: flat grey panel, no drop shadow */

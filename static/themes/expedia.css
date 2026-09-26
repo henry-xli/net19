@@ -1,8 +1,8 @@
-/* net19 handmade theme: Expedia, 2019: #fc0 yellow header over both nav rows, Arial, #0065b8 blue accents and links, yellow Search buttons, 3px corners instead of pills. */
-html { --n19-header: #fc0; --n19-header-text: #1f2b3a; --n19-header-text-2: #333; --n19-blue: #0065b8; --n19-blue-dark: #004e8f; --n19-blue-light: #d6e8f7;
-  --n19-cta: #fc0; --n19-cta-hover: #f2b900; --n19-cta-text: #1f1f1f; --n19-font: Arial, "Helvetica Neue", Helvetica, sans-serif; }
+/* net19 handmade theme: Expedia, 2019: #ffcb00 yellow header over both nav rows with dark navy #00355f links, Helvetica Neue/Arial text, #0065b8 blue accents and links, yellow Search buttons, 3px corners instead of pills. */
+html { --n19-header: #ffcb00; --n19-header-text: #00355f; --n19-header-text-2: #00355f; --n19-blue: #0065b8; --n19-blue-dark: #004e8f; --n19-blue-light: #d6e8f7;
+  --n19-cta: #ffcb00; --n19-cta-hover: #ffbe00; --n19-cta-text: #1f1f1f; --n19-font: "Helvetica Neue", Arial, "Lucida Grande", sans-serif; }
 html[data-net19-mode="dark"] { --n19-header: #2b2b2b; --n19-header-text: #f2f2f2; --n19-header-text-2: #ccc; --n19-blue: #4d9be0; --n19-blue-dark: #2d7fc7; --n19-blue-light: #16324d;
-  --n19-cta: #fc0; --n19-cta-hover: #f2b900; --n19-cta-text: #1f1f1f; --n19-font: Arial, "Helvetica Neue", Helvetica, sans-serif; }
+  --n19-cta: #ffcb00; --n19-cta-hover: #ffbe00; --n19-cta-text: #1f1f1f; --n19-font: "Helvetica Neue", Arial, "Lucida Grande", sans-serif; }
 /* Expedia's UITK design tokens: every component reads these, so menus, dialogs and later-loaded content follow. */
 html:root, html:root body {
   --font_face__family_stack: var(--n19-font) !important; --standard__body_font_stack: var(--n19-font) !important;

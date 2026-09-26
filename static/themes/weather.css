@@ -1,8 +1,8 @@
-/* net19 handmade theme: The Weather Channel (weather.com), 2019: Helvetica/Arial type, a black forecast bar with
-   white Today / Hourly / 10 Day links, square modules instead of today's large rounded cards and floating pills.
-   The 2026 layout (left rail, location pill) is kept; its corners, type and the forecast bar move to 2019. */
-html { --n19-font: "Helvetica Neue", Helvetica, Arial, sans-serif; --n19-bar: #000; --n19-bar-text: #fff; --n19-bar-active: #fff; --n19-module: 2px; }
-html[data-net19-mode="dark"] { --n19-bar: #000; --n19-bar-text: #e6e6e6; --n19-bar-active: #6aa6f8; }
+/* net19 handmade theme: The Weather Channel (weather.com), 2019: Helvetica/Arial type, a #3c8ed2 blue location band holding a
+   black forecast bar with white Today / Hourly / 10 Day links, square modules instead of today's large rounded cards and pills,
+   no subscription upsells. The 2026 layout (left rail) is kept; its corners, type and the header band move to 2019. */
+html { --n19-font: "Helvetica Neue", Helvetica, Arial, sans-serif; --n19-bar: #000; --n19-bar-text: #fff; --n19-bar-active: #fff; --n19-module: 2px; --n19-band: #3c8ed2; --n19-band-text: #fff; }
+html[data-net19-mode="dark"] { --n19-bar: #000; --n19-bar-text: #e6e6e6; --n19-bar-active: #6aa6f8; --n19-band: #1f4f7a; --n19-band-text: #fff; }
 html:root, html.dark {
   --font-sans: var(--n19-font) !important; --radius: 2px !important; --radius-sm: 2px !important; --radius-md: 2px !important; --radius-lg: 3px !important;
   --radius-xl: 3px !important; --radius-2xl: 3px !important; --radius-3xl: 3px !important; --radius-4xl: 3px !important;
@@ -14,3 +14,18 @@ header .overflow-hidden.rounded-3xl.bg-white a { color: var(--n19-bar-text) !imp
 header .overflow-hidden.rounded-3xl.bg-white a[aria-current]:not([aria-current="false"]) { box-shadow: inset 0 -3px 0 var(--n19-bar-active) !important; font-weight: 700 !important; }
 /* Floating pill shadows around the header controls */
 header .rounded-4xl, header .rounded-3xl { box-shadow: none !important; }
+
+/* Header row: the 2019 blue location band; the location control is plain white text on it */
+main#main-content-wrapper > header > div { background: var(--n19-band) !important; }
+main#main-content-wrapper > header .rounded-4xl.bg-white { background: transparent !important; padding: 0 !important; }
+main#main-content-wrapper > header .rounded-4xl.bg-white > button { background: transparent !important; color: var(--n19-band-text) !important; border-radius: 0 !important; }
+main#main-content-wrapper > header .rounded-4xl.bg-white > button * { color: var(--n19-band-text) !important; }
+header .overflow-hidden.rounded-3xl.bg-white a { font-size: 14px !important; }
+/* Subscription upsells ("Get Premium") did not exist on the 2019 site */
+a[href^="/subscribe?tpcc=mktg-"] { display: none !important; }
+main#main-content-wrapper > header .rounded-4xl.bg-white:not(:has(> button)) { display: none !important; }
+/* The band runs the full width: under the rail's logo and across the gutter beside it, so the logo sits on the band as in 2019 */
+main#main-content-wrapper > header { margin-left: -32px !important; width: calc(100% + 32px) !important; }
+main#main-content-wrapper > header > div { padding-left: 32px !important; }
+div.z-nav > nav { background: linear-gradient(var(--n19-band) 72px, transparent 72px) !important; }
+div.z-nav > nav > div:first-child { height: 72px !important; margin-bottom: 0 !important; }

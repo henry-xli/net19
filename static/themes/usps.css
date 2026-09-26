@@ -1,19 +1,40 @@
-/* net19 handmade theme: USPS, 2019: Helvetica Neue, the #333366 postal navy for the Quick Tools tab, menu, headings and square buttons. */
-html { --n19-navy: #333366; --n19-navy-hover: #202040; --n19-heading: #333366; --n19-text: #333; --n19-nav: #d8d8d8; }
-html[data-net19-mode="dark"] { --n19-navy: #333366; --n19-navy-hover: #45457a; --n19-heading: #b3b3e6; --n19-text: #ddd; --n19-nav: #3a3a3a; }
+/* net19 handmade theme: USPS, 2019: Helvetica Neue, the #333366 postal navy for the Quick Tools tab, menu, headings and square buttons;
+   a hero photo with a white text panel and a navy 40px headline, a #f7f7f7 Quick Tools band with 28px navy headings. */
+html { --n19-navy: #333366; --n19-navy-hover: #202040; --n19-heading: #333366; --n19-text: #333; --n19-nav: #d8d8d8; --n19-panel: rgba(255,255,255,.92);
+  --n19-band: #f7f7f7; --n19-field-border: #999; }
+html[data-net19-mode="dark"] { --n19-navy: #333366; --n19-navy-hover: #45457a; --n19-heading: #b3b3e6; --n19-text: #ddd; --n19-nav: #3a3a3a; --n19-panel: rgba(24,24,36,.9);
+  --n19-band: #222; --n19-field-border: #666; }
 body, button, input, select, textarea, h1, h2, h3, h4, h5, p, a, li { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important; }
 
-/* Global header (www and tools.usps.com share it) */
+/* Global header (www and tools.usps.com share it): navy menu words at regular weight; the utility row is plain text */
 nav[aria-label="Main"] .nav-first-element::before { background: var(--n19-navy) !important; }
-nav[aria-label="Main"] a.menuitem:not(.nav-first-element) { color: var(--n19-heading) !important; }
+nav[aria-label="Main"] a.menuitem:not(.nav-first-element) { color: var(--n19-heading) !important; font-weight: 400 !important; }
 nav[aria-label="Main"] .repos h3 { color: var(--n19-heading) !important; }
+
+/* Hero: the photo with a white panel and a navy headline instead of today's solid blue slab */
+.jumbotron.premium .article::after { background: var(--n19-panel) !important; }
+.jumbotron.premium .article h2 { color: var(--n19-heading) !important; font-size: 40px !important; font-weight: 700 !important; }
+.jumbotron.premium .article p { color: var(--n19-text) !important; font-size: 16px !important; line-height: 24px !important; }
+.jumbotron.premium .article p a { background: var(--n19-navy) !important; border: 2px solid var(--n19-navy) !important; border-radius: 3px !important; color: #fff !important; }
+.jumbotron.premium .article p a * { color: #fff !important; }
+
+/* Quick Tools band: #f7f7f7 with 28px navy headings */
+.quicktools.track-opt { background: var(--n19-band) !important; }
+.quicktools h2, .quicktools h3, .quicktools h3 a.button--link { color: var(--n19-heading) !important; font-weight: 500 !important; }
+.quicktools h2 { font-size: 28px !important; }
+.quicktools h3, .quicktools h3 a.button--link { font-size: 20px !important; }
+.quicktools p { color: var(--n19-text) !important; }
+.quicktools #home-input, .quicktools .input--search { border-radius: 0 !important; border-color: var(--n19-field-border) !important; }
 
 /* Headings, text links and buttons in the page body */
 .button--link, .global-footer--navigation-category { color: var(--n19-heading) !important; }
 .container-fluid h1:not(.sr-only), .container h1, .container-fluid h2:not(.d-lg-block), .container h2, .container-fluid h3, .container h2 a, .container-fluid h2 a { color: var(--n19-heading); }
 a.button--primary, button.button--primary, .button--primary {
-  background: var(--n19-navy) !important; border-color: var(--n19-navy) !important; color: #fff !important; border-radius: 0 !important; font-weight: 700 !important;
+  background: var(--n19-navy) !important; border: 2px solid var(--n19-navy) !important; color: #fff !important; border-radius: 3px !important; font-weight: 700 !important; min-width: 170px;
 }
 a.button--primary:hover, .button--primary:hover { background: var(--n19-navy-hover) !important; }
 .carousel-indicators li.active { background: var(--n19-navy) !important; }
 .input--field, .search--track-input { border-radius: 0 !important; }
+/* The 2019 utility row was plain small text links, without today's globe / pin / headset icons */
+#utility-header a::before, #utility-header li::before { display: none !important; }
+nav[aria-label="Main"] a.menuitem { white-space: nowrap !important; }

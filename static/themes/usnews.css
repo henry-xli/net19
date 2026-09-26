@@ -1,5 +1,6 @@
-/* net19 handmade theme: U.S. News & World Report, 2019: a near-black (#111) masthead and section bar with small bold
-   uppercase letter-spaced words, Arial headlines in black, and square white boxes topped by a 3px U.S. News red rule
+/* net19 handmade theme: U.S. News & World Report, 2019: a near-black (#111) masthead in two rows, the logo centered
+   on top with the menu button at the right and the section bar under it in small bold uppercase letter-spaced words,
+   no search banner under the masthead (only a slim search strip remains), Arial headlines in black, and square white boxes topped by a 3px U.S. News red rule
    with centered uppercase box titles ("TOP STORIES"). U.S. News has no dark mode. */
 html { --n19-bar: #111; --n19-bar-text: #fff; --n19-red: #c4212a; --n19-text: #111; --n19-text-2: #555; --n19-line: #ddd; --n19-box: #fff;
   --n19-font: Arial, "Helvetica Neue", Helvetica, sans-serif; }
@@ -14,8 +15,29 @@ main#app > div.MuiBox-root a:not(.MuiButton-root), main#app > div.MuiBox-root a:
   border-color: #555 !important;
 }
 main#app > div.MuiBox-root .MuiButton-root { border-radius: 2px !important; }
-main#app > section.MuiBox-root { background: var(--n19-bar) !important; }
-main#app > section.MuiBox-root .MuiInputBase-root { border-radius: 0 !important; }
+/* Two rows: the logo centered on top, the section words centered under it; menu button and Sign in at the sides */
+main#app > div.MuiBox-root > .MuiContainer-root { height: auto !important; max-width: none !important; position: relative !important; }
+main#app > div.MuiBox-root > .MuiContainer-root > .MuiStack-root { height: auto !important; flex: 1 1 auto !important; }
+main#app > div.MuiBox-root > .MuiContainer-root > .MuiStack-root > div:nth-child(2) { flex-wrap: wrap !important; justify-content: center !important; height: auto !important; row-gap: 0 !important; }
+main#app > div.MuiBox-root > .MuiContainer-root > .MuiStack-root > div:nth-child(2) > a { flex: 0 0 100% !important; display: flex !important; justify-content: center !important; padding: 10px 0 !important; margin: 0 !important; }
+main#app > div.MuiBox-root > .MuiContainer-root > .MuiStack-root > div:nth-child(2) > a img { height: 40px !important; width: auto !important; }
+main#app > div.MuiBox-root > .MuiContainer-root > .MuiStack-root > div:nth-child(2) > div:first-child { position: absolute !important; right: 24px !important; top: 12px !important; order: 3 !important; }
+main#app > div.MuiBox-root > .MuiContainer-root > .MuiStack-root > div:nth-child(2) > .MuiStack-root { flex: 0 0 100% !important; justify-content: center !important; height: 32px !important; overflow: hidden !important;
+  border-top: 1px solid #333 !important; align-items: center !important; }
+main#app > div.MuiBox-root > .MuiContainer-root > .MuiStack-root > div:nth-child(2) > .MuiStack-root hr { display: none !important; }
+main#app > div.MuiBox-root > .MuiContainer-root > .MuiStack-root > div:nth-child(2) > .MuiStack-root a { font-size: 11px !important; letter-spacing: .14em !important; padding: 0 14px !important; }
+main#app > div.MuiBox-root > .MuiContainer-root > .MuiStack-root > div:nth-child(3) { position: absolute !important; right: 72px !important; top: 12px !important; }
+main#app > div.MuiBox-root > .MuiContainer-root > .MuiStack-root > div:nth-child(3) .MuiButton-root { background: transparent !important; border: 1px solid #555 !important; font-size: 11px !important; min-height: 0 !important; padding: 4px 10px !important; }
+/* The search banner ("We Help You Make the Best Decisions") was not there in 2019: a slim light strip with the field */
+main#app > section.MuiBox-root { background: #f2f2f2 !important; background-image: none !important; border-bottom: 1px solid var(--n19-line) !important; }
+main#app > section.MuiBox-root::before, main#app > section.MuiBox-root::after { display: none !important; }
+main#app > section.MuiBox-root > .MuiContainer-root { padding-top: 10px !important; padding-bottom: 10px !important; display: flex !important; align-items: center !important; justify-content: center !important; gap: 24px !important; }
+main#app > section.MuiBox-root > .MuiContainer-root > h2 { display: none !important; }
+main#app > section.MuiBox-root form { margin: 0 !important; width: 360px !important; }
+main#app > section.MuiBox-root .MuiInputBase-root { border-radius: 0 !important; height: 32px !important; border: 1px solid #ccc !important; }
+main#app > section.MuiBox-root > .MuiContainer-root > div { margin: 0 !important; }
+main#app > section.MuiBox-root > .MuiContainer-root > div img { display: none !important; }
+main#app > section.MuiBox-root > .MuiContainer-root > div a { color: #0b6db7 !important; font-size: 13px !important; text-transform: none !important; letter-spacing: 0 !important; font-weight: 400 !important; }
 
 /* Boxes: square, red top rule, centered uppercase titles */
 main#app aside.MuiBox-root { border-radius: 0 !important; border: 1px solid var(--n19-line) !important; border-top: 3px solid var(--n19-red) !important; background: var(--n19-box) !important; }

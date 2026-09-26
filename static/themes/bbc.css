@@ -1,4 +1,6 @@
-/* net19 handmade theme: BBC, 2019: black global bar with white BBC blocks and bold white Helvetica section links split by thin rules; on News, the #bb1919 red masthead and nav band; Helvetica/Arial bold headlines instead of Reith Serif. */
+/* net19 handmade theme: BBC, 2019: a slim 40px black global bar with the small white BBC blocks at the far left and sign-in and
+   menu at the right, bold white 13px Helvetica section links split by thin rules in a black band under it (no
+   "Watch Live" or "Subscribe" buttons); on News, the #bb1919 red masthead and nav band; Helvetica/Arial bold headlines instead of Reith Serif. */
 html { --n19-bar: #000; --n19-bar-text: #fff; --n19-bar-rule: #3a3a3a; --n19-news: #bb1919; --n19-news-dark: #a91717; --n19-news-rule: rgba(255,255,255,.35);
   --n19-head: #222; --n19-font: Helvetica, Arial, freesans, sans-serif; }
 html[data-net19-mode="dark"] { --n19-bar: #000; --n19-bar-text: #fff; --n19-bar-rule: #3a3a3a; --n19-news: #bb1919; --n19-news-dark: #a91717; --n19-news-rule: rgba(255,255,255,.35);
@@ -25,3 +27,15 @@ nav#main-navigation-container nav[class*="SubNavigation"] a { font-weight: 400 !
 [data-testid="card-headline"], main h1, main h2, main h3, article h1, #main-heading { font-family: var(--n19-font) !important; font-weight: 700 !important; letter-spacing: 0 !important; }
 [data-testid="card-headline"] { color: var(--n19-head) !important; }
 main p, article p, [data-testid="card-description"] { font-family: var(--n19-font) !important; }
+
+/* The header shrinks to a 40px bar with the logo at the left; the section links follow in a slim black band */
+header#bbc-header [class*="HeaderContentStyled"] { height: 40px !important; min-height: 0 !important; display: flex !important; justify-content: flex-start !important; align-items: center !important; padding: 0 16px !important; }
+header#bbc-header [class*="HeaderLogoContainerStyled"] { order: 0 !important; width: auto !important; flex: 0 0 auto !important; justify-content: flex-start !important; }
+header#bbc-header [class*="HeaderLogoStyled"], header#bbc-header [class*="HeaderLogoStyled"] > div { width: 84px !important; height: 24px !important; }
+header#bbc-header [class*="HeaderLogoStyled"] svg { width: 84px !important; height: 24px !important; }
+header#bbc-header [class*="HeaderMenuContainerStyled"] { order: 2 !important; width: auto !important; flex: 0 0 auto !important; margin-left: auto !important; }
+header#bbc-header [class*="HeaderButtonsContainerStyled"] { order: 3 !important; width: auto !important; flex: 0 0 auto !important; }
+header#bbc-header [class*="WatchLiveStyled"], header#bbc-header [class*="SubscribeButtonStyled"] { display: none !important; }
+header#bbc-header { height: auto !important; min-height: 0 !important; padding-top: 0 !important; padding-bottom: 0 !important; }
+nav#main-navigation-container, nav#main-navigation-container section, nav#main-navigation-container nav[class*="NavigationWrapper"], nav#main-navigation-container ul[class*="MainNavigationWrapper"] { min-height: 0 !important; height: 34px !important; }
+nav#main-navigation-container { border-top: 1px solid var(--n19-bar-rule) !important; top: 40px !important; }

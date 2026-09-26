@@ -1,33 +1,89 @@
-/* net19 handmade theme: Amazon, 2019: classic gradient yellow buttons with dark borders, square product tiles, #232f3e header. */
+/* net19 handmade theme: Amazon, 2019 (the gateway as the 2019 capture's own CSS draws it): a single #232f3e navy nav
+   (60px belt with the search, 39px row of 13px gray #ccc links, "Departments" instead of the later "All" menu), a
+   #eaeded page with square white 20px-padded gateway cards, 21px bold Arial #111 card titles and 13px #0066c0
+   "See more" links, product faces sitting straight on white, and the yellow-gradient a-buttons. Amazon has no dark
+   mode of its own, so dark devices get the engine's inverted page. */
+html { --n19-nav: #232f3e; --n19-nav-text: #fff; --n19-nav-link: #ccc; --n19-nav-dim: #ccc; --n19-page: #eaeded; --n19-card: #fff; --n19-text: #111; --n19-text-2: #555;
+  --n19-link: #0066c0; --n19-link-hover: #c45500; --n19-price: #b12704; --n19-scope: linear-gradient(to bottom, #fafafa, #eee); --n19-scope-border: #cdcdcd;
+  --n19-go: #febd69; --n19-go-hover: #f3a847; --n19-btn-from: #f7f8fa; --n19-btn-to: #e7e9ec; --n19-btn-border: #adb1b8 #a2a6ac #8d9096;
+  --n19-primary-from: #f7dfa5; --n19-primary-to: #f0c14b; --n19-primary-border: #a88734 #9c7e31 #846a29; --n19-primary-hover-from: #f5d78e; --n19-primary-hover-to: #eeb933;
+  --n19-buy-from: #f6c88f; --n19-buy-to: #ed9220; --n19-buy-border: #ca7c1b #be751a #a56616; --n19-divider: #e7e7e7; }
+html[data-net19-mode="dark"] { --n19-nav: #232f3e; --n19-nav-text: #fff; --n19-nav-link: #ccc; --n19-nav-dim: #ccc; --n19-page: #131a22; --n19-card: #1b232d; --n19-text: #eee; --n19-text-2: #aaa;
+  --n19-link: #5aa9e6; --n19-link-hover: #f08804; --n19-price: #e0553c; --n19-scope: linear-gradient(to bottom, #3a4553, #2e3743); --n19-scope-border: #4a5563;
+  --n19-go: #febd69; --n19-go-hover: #f3a847; --n19-btn-from: #3a4553; --n19-btn-to: #2e3743; --n19-btn-border: #4a5563 #4a5563 #3a4553;
+  --n19-primary-from: #f7dfa5; --n19-primary-to: #f0c14b; --n19-primary-border: #a88734 #9c7e31 #846a29; --n19-primary-hover-from: #f5d78e; --n19-primary-hover-to: #eeb933;
+  --n19-buy-from: #f6c88f; --n19-buy-to: #ed9220; --n19-buy-border: #ca7c1b #be751a #a56616; --n19-divider: #333d49; }
 body, body #a-page { font-family: Arial, sans-serif !important; }
+
+/* Nav: one navy color for both rows (the belt was not yet the darker #131921) */
+#navbar, #nav-belt, #nav-main, #navbar.nav-sprite-v1 #nav-belt, #navbar.nav-sprite-v1 #nav-main, #nav-subnav { background: var(--n19-nav) !important; }
+#nav-main { height: 39px !important; }
+#nav-xshop .nav-a, #nav-main .nav-a { color: var(--n19-nav-link) !important; font-size: 13px !important; }
+#nav-xshop .nav-a:hover, #nav-main .nav-a:hover { color: var(--n19-nav-text) !important; text-decoration: underline !important; }
+#nav-main .nav-a, #nav-belt .nav-a { border-color: transparent !important; }
+/* The later hamburger "All" menu reads as 2019's "Departments" (renamed by amazon.js), without the three-line icon */
+#nav-hamburger-menu { padding: 0 8px !important; }
+#nav-hamburger-menu .hm-icon { display: none !important; }
+#nav-hamburger-menu .hm-icon-label { font-size: 13px !important; font-weight: 700 !important; color: var(--n19-nav-text) !important; }
+/* Search: gray "All" scope, white field, the orange-yellow Go button, 4px corners */
+#nav-search-bar-form, .nav-search-field, #nav-search .nav-fill { border-radius: 4px !important; }
+#nav-search-dropdown-card, .nav-search-scope { background: var(--n19-scope) !important; border-radius: 4px 0 0 4px !important; border-right: 1px solid var(--n19-scope-border) !important; }
+#nav-search-label-id { color: var(--n19-text-2) !important; font-size: 12px !important; }
+#nav-search-submit-button, .nav-search-submit, #nav-search-submit-text { background-color: var(--n19-go) !important; border-radius: 0 4px 4px 0 !important; }
+.nav-search-submit:hover, .nav-search-submit:hover #nav-search-submit-text { background-color: var(--n19-go-hover) !important; }
+/* Location line: 2019 said "Deliver to" in small gray over the place */
+#glow-ingress-line1 { color: var(--n19-nav-dim) !important; font-size: 12px !important; }
+#nav-link-accountList-nav-line-1, #nav-orders .nav-line-1 { color: var(--n19-nav-dim) !important; font-size: 12px !important; }
+
+/* Gateway: a #eaeded page, white square cards with 20px padding and 20px gutters */
+#pageContent, #gw-layout, #gwm-Deck, #gwm-Deck-btf, .gw-card-layout, #gw-card-layout { background: var(--n19-page) !important; }
+#gwm-Deck-btf { padding: 0 10px 20px !important; row-gap: 20px !important; column-gap: 20px !important; }
+#gwm-Deck .a-cardui, #gw-layout .a-cardui, #gwm-Deck .gwm-widget, .gw-card-layout .a-cardui { border-radius: 0 !important; box-shadow: none !important; }
+#gwm-Deck-btf .a-cardui, #gw-layout .a-cardui { background: var(--n19-card) !important; padding: 20px !important; }
+#gwm-Deck [class*="card-container"], #gwm-Deck [class*="cardContainer"], #gwm-Deck [class*="_style_card"], #gwm-Deck li, #gwm-Deck .gwm-window-tile,
+#gwm-Deck img, #gw-layout img, #gwm-Deck [class*="tile"], #gwm-Deck [class*="image"], #gwm-Deck [class*="asin-container"], .dcl-container-inner, .dcl-container-inner * { border-radius: 0 !important; }
+/* Product faces sat straight on the white card, with no tinted rounded wells */
+#gwm-Deck [class*="asin-container"], #gwm-Deck [class*="image-container"], #gwm-Deck .aok-dm-img-container-bg, #gw-layout [class*="asin-container"] { background: transparent !important; }
+/* Card titles: 21px bold Arial #111 (not today's condensed display face) */
+#gwm-Deck-btf .a-cardui-header :is(h2, h3, h2 *, h3 *), #gw-layout .a-cardui-header :is(h2, h3), #gwm-Deck-btf .a-cardui h2 {
+  font-family: Arial, sans-serif !important; font-size: 21px !important; line-height: 27.3px !important; font-weight: 700 !important; color: var(--n19-text) !important; letter-spacing: 0 !important;
+}
+/* The top tiles keep their own text colors, set in Arial like the 2019 hero banner's copy */
+#gwm-Deck, #gwm-Deck .gwm-u-blackjack-typography, #gwm-Deck [class*="title-font"], #gwm-Deck .wdTitle { font-family: Arial, sans-serif !important; letter-spacing: 0 !important; }
+#gwm-Deck .gwm-window-tile .wdTitle { font-size: 24px !important; line-height: 29px !important; }
+#gwm-Deck-btf .a-cardui-header .sub-header-title-font { font-size: 13px !important; line-height: 19px !important; color: var(--n19-text-2) !important; }
+#gwm-Deck .a-cardui-header a { text-decoration: none !important; }
+/* Header chevrons and card outlines are later; the card's own "See more" link carries the action */
+#gwm-Deck-btf .a-cardui-header > a > svg, #gwm-Deck-btf .a-cardui-header [class*="chevron"] { display: none !important; }
+#gwm-Deck .gwm-widget { border: none !important; }
+#gwm-Deck-btf .a-cardui [class*="label"], #gwm-Deck-btf .a-cardui [class*="caption"], #gwm-Deck-btf .a-cardui-body .a-size-small { font-size: 12px !important; line-height: 18px !important; }
+#gwm-Deck-btf .a-cardui-footer a, #gw-layout .see-more { color: var(--n19-link) !important; font-size: 13px !important; font-family: Arial, sans-serif !important; }
+/* Rows of products ("shovelers") under a plain 21px title on white */
+#gwm-Deck [class*="shoveler"] h2, #gwm-Deck .a-carousel-header-row h2 { font-family: Arial, sans-serif !important; font-size: 21px !important; font-weight: 700 !important; color: var(--n19-text) !important; }
 
 /* Buttons: the pre-2023 "a-button" gradients */
 .a-button:not(.a-button-primary):not(.a-button-oneclick) {
-  border-radius: 3px !important; border: 1px solid #adb1b8 !important; border-color: #adb1b8 #a2a6ac #8d9096 !important;
-  background: linear-gradient(to bottom, #f7f8fa, #e7e9ec) !important; box-shadow: 0 1px 0 rgba(255,255,255,.6) inset !important;
+  border-radius: 3px !important; border: 1px solid !important; border-color: var(--n19-btn-border) !important;
+  background: linear-gradient(to bottom, var(--n19-btn-from), var(--n19-btn-to)) !important; box-shadow: 0 1px 0 rgba(255,255,255,.6) inset !important;
 }
 .a-button-primary, #add-to-cart-button-ubb, .a-button-primary.a-button-span12, #submit\.add-to-cart, .a-button-buybox {
-  border-radius: 3px !important; border: 1px solid #a88734 !important; border-color: #a88734 #9c7e31 #846a29 !important;
-  background: linear-gradient(to bottom, #f7dfa5, #f0c14b) !important; box-shadow: 0 1px 0 rgba(255,255,255,.4) inset !important;
+  border-radius: 3px !important; border: 1px solid !important; border-color: var(--n19-primary-border) !important;
+  background: linear-gradient(to bottom, var(--n19-primary-from), var(--n19-primary-to)) !important; box-shadow: 0 1px 0 rgba(255,255,255,.4) inset !important;
 }
-.a-button-primary:hover { background: linear-gradient(to bottom, #f5d78e, #eeb933) !important; }
+.a-button-primary:hover { background: linear-gradient(to bottom, var(--n19-primary-hover-from), var(--n19-primary-hover-to)) !important; }
 .a-button-oneclick, #buy-now-button, span#submit\.buy-now {
-  border-radius: 3px !important; border: 1px solid #ca7c1b !important; border-color: #ca7c1b #be751a #a56616 !important;
-  background: linear-gradient(to bottom, #f6c88f, #ed9220) !important;
+  border-radius: 3px !important; border: 1px solid !important; border-color: var(--n19-buy-border) !important;
+  background: linear-gradient(to bottom, var(--n19-buy-from), var(--n19-buy-to)) !important;
 }
 .a-button-inner, .a-button .a-button-inner, .a-button-primary .a-button-inner { border-radius: 3px !important; background: transparent !important; box-shadow: none !important; }
 .a-button-text, .a-button-input + .a-button-text { color: #111 !important; }
 
-/* Header: navy belt, square search with the old orange-yellow button */
-#nav-belt, #navbar, #nav-main { background: #232f3e !important; }
-#nav-main { background: #232f3e !important; }
-#nav-search-bar-form, .nav-search-field, #nav-search .nav-fill { border-radius: 4px !important; }
-#nav-search-submit-button, .nav-search-submit, #nav-search-submit-text { background: #febd69 !important; border-radius: 0 4px 4px 0 !important; }
-#nav-search-dropdown-card, .nav-search-scope { background: #f3f3f3 !important; border-radius: 4px 0 0 4px !important; }
-
-/* Product tiles and cards were square */
-.a-cardui, .gw-card-layout .a-cardui, .s-card-container, .puis-card-container, .a-box, .a-carousel-card img, .s-image, .s-product-image-container,
-.a-section.a-spacing-base, [class*="rounded"] { border-radius: 0 !important; }
+/* Search results and product pages: square tiles, 2019 link blue and price red */
+.a-cardui, .s-card-container, .puis-card-container, .a-box, .a-carousel-card img, .s-image, .s-product-image-container, .a-section.a-spacing-base, [class*="rounded"] { border-radius: 0 !important; }
 .s-card-container, .puis-card-container { box-shadow: none !important; }
-a.a-link-normal .a-text-normal, h2 a.a-link-normal, .a-link-normal.s-link-style { color: #0066c0 !important; }
-.a-price, .a-color-price { color: #b12704 !important; }
+a.a-link-normal .a-text-normal, h2 a.a-link-normal, .a-link-normal.s-link-style, #wayfinding-breadcrumbs_feature_div a, #bylineInfo { color: var(--n19-link) !important; }
+a.a-link-normal:hover .a-text-normal, h2 a.a-link-normal:hover, #bylineInfo:hover { color: var(--n19-link-hover) !important; }
+.a-price, .a-color-price, .a-price .a-offscreen + span { color: var(--n19-price) !important; }
+#productTitle { font-family: Arial, sans-serif !important; font-size: 21px !important; line-height: 1.3 !important; font-weight: 400 !important; }
+/* Deal badges were plain red text, not filled pills */
+#gwm-Deck [class*="deal-badge"] [class*="badge-label"], #gwm-Deck .a-badge-label { border-radius: 0 !important; }

@@ -1,10 +1,61 @@
-/* net19 handmade theme: IMDb, 2019 (before the 2020 redesign): Arial, square posters and chips, yellow action
-   buttons, blue links in light areas. Colors of dark and light areas are left to IMDb, so nothing is re-painted
-   against a background it was not designed for. */
-html { --n19-link: #136cb2; }
-html[data-net19-mode="dark"] { --n19-link: #5799ef; }
-body, button, input { font-family: Arial, sans-serif !important; }
-.ipc-media, .ipc-media img, .ipc-poster, .ipc-poster img, .ipc-image, .ipc-chip, .ipc-button, .ipc-poster-card, .ipc-slate, .ipc-slate img { border-radius: 0 !important; }
-.ipc-button--core-accent1 { background: #f5c518 !important; color: #000 !important; }
-#suggestion-search, #imdbHeader input { border-radius: 0 !important; }
-main a.ipc-link:not([class*="onBase"]):not([class*="inherit"]) { color: var(--n19-link) !important; }
+/* net19 handmade theme: IMDb, 2019 (before the 2020 redesign): the whole site in a 1008px column with a dark shadow on
+   a pale gray-beige #e3e2dd page; a near-black header with square search field, a square yellow search button and a small
+   yellow "Sign in" button; the trailer area stays black, and everything below it is a white page with #333 Arial text,
+   plain 24px dark section headings (no yellow bar), #136cb2 blue links, square posters and cards, small-radius buttons.
+   IMDb has no dark mode of its own, so palette.js inverts the page on dark devices. */
+html { --n19-page: #e3e2dd; --n19-content: #fff; --n19-panel: #f6f6f5; --n19-panel-2: #efefef; --n19-text: #333; --n19-text-2: #666; --n19-link: #136cb2;
+  --n19-border: #ddd; --n19-hover: rgba(0,0,0,.05); --n19-header: #121212; --n19-yellow: #f5c518; --n19-shadow: 0 0 8px rgba(0,0,0,.7); --n19-hero: #222; }
+html[data-net19-mode="dark"] { --n19-page: #1c1c1b; --n19-content: #121212; --n19-panel: #1a1a1a; --n19-panel-2: #1f1f1f; --n19-text: #ddd; --n19-text-2: #aaa; --n19-link: #5799ef;
+  --n19-border: #333; --n19-hover: rgba(255,255,255,.08); --n19-header: #121212; --n19-yellow: #f5c518; --n19-shadow: 0 0 8px rgba(0,0,0,.9); --n19-hero: #222; }
+
+/* Shapes and type everywhere: Arial, square media, small button radius */
+html:root { --ipt-buttonRadius: 3px !important; --ipt-mediaRadius: 0px !important; --ipt-cornerRadius: 2px !important; }
+body, button, input, select, textarea, #__next, .ipc-btn, .ipc-title__text, h1, h2, h3, h4 { font-family: Arial, Helvetica, sans-serif !important; }
+body { background-color: var(--n19-page) !important; }
+.ipc-media, .ipc-media img, .ipc-poster, .ipc-poster img, .ipc-poster-card, .ipc-image, .ipc-slate, .ipc-slate img, .ipc-slate-card, .ipc-lockup-overlay,
+.ipc-list-card, .ipc-poster__poster-image, .ipc-media--poster-27x40 { border-radius: 0 !important; }
+.ipc-chip { border-radius: 3px !important; }
+
+/* The 1008px column: header, page and footer centered on the gray page with a dark shadow */
+#__next > nav#imdbHeader, #__next > main.ipc-page-wrapper, #__next > section.ipc-page-background, #__next > footer.imdb-footer {
+  max-width: 1008px !important; margin-left: auto !important; margin-right: auto !important; box-shadow: var(--n19-shadow) !important; }
+#__next > nav#imdbHeader { background: var(--n19-header) !important; }
+
+/* Header: square white search with a square yellow button; a small yellow Sign in */
+#imdbHeader #suggestion-search-container form, #imdbHeader .searchform { border-radius: 0 !important; }
+#imdbHeader .searchform > div, #imdbHeader .searchCatSelector-button, #imdbHeader #suggestion-search { border-radius: 0 !important; }
+#imdbHeader #suggestion-search-button { background: var(--n19-yellow) !important; color: #000 !important; border-radius: 0 !important; }
+#imdbHeader #suggestion-search-button svg { fill: #000 !important; }
+#imdbHeader .imdb-header__signin-text { background: var(--n19-yellow) !important; color: #000 !important; border-radius: 3px !important; min-height: 26px !important; height: 26px !important;
+  padding: 0 14px !important; font-size: 13px !important; font-weight: 700 !important; align-self: center !important; }
+#imdbHeader .imdb-header__signin-text .ipc-btn__text { color: #000 !important; }
+
+/* Below the trailer area the page is white: IMDb's dark "baseAlt" palette is re-pointed at light values there */
+main.ipc-page-wrapper .ipc-page-content-container--center > :not(:first-child), #__next > section.ipc-page-background, #__next > footer.imdb-footer {
+  --ipt-baseAlt-bg: var(--n19-content); --ipc-pageSection-baseAlt-bg: var(--n19-content); --ipt-baseAlt-rgb: 255,255,255;
+  --ipt-baseAlt-shade1-bg: var(--n19-panel); --ipt-baseAlt-shade1-color: var(--n19-panel); --ipt-baseAlt-shade2-bg: var(--n19-panel-2); --ipt-baseAlt-shade2-color: var(--n19-panel-2);
+  --ipt-baseAlt-shade3-color: var(--n19-content); --ipc-listCard-baseAlt-bg: var(--n19-content); --ipc-prompt-baseAlt-bg: var(--n19-panel); --ipc-blockQuote-baseAlt-bg: var(--n19-panel);
+  --ipt-baseAlt-border-color: var(--n19-border); --ipt-baseAlt-hover-bg: var(--n19-hover); --ipt-baseAlt-pressed-bg: var(--n19-hover);
+  --ipt-on-baseAlt-color: var(--n19-text); --ipt-on-baseAlt-textPrimary-color: var(--n19-text); --ipt-on-baseAlt-textSecondary-color: var(--n19-text-2);
+  --ipt-on-baseAlt-textHint-color: var(--n19-text-2); --ipt-on-baseAlt-textIcon-color: var(--n19-text-2); --ipt-on-baseAlt-accent2-color: var(--n19-link);
+  --ipt-focus-outline-on-baseAlt: 1px dashed var(--n19-text);
+  background-color: var(--n19-content) !important; color: var(--n19-text) !important;
+}
+main.ipc-page-wrapper { background: var(--n19-content) !important; }
+/* The trailer area: 2019's charcoal instead of pure black */
+main.ipc-page-wrapper .ipc-page-content-container--center > :first-child { background-color: var(--n19-hero) !important; }
+main.ipc-page-wrapper .ipc-page-content-container--center > :not(:first-child) :is(.ipc-page-section, .ipc-page-grid, .ipc-page-background),
+#__next > footer.imdb-footer :is(.footer__sign-in, .ipc-page-section) { background-color: var(--n19-content) !important; }
+main.ipc-page-wrapper .ipc-page-content-container--center > :not(:first-child) :is(.ipc-chip, .ipc-chip__text, .ipc-slate-card__title, .ipc-slate-card__title-text,
+  .ipc-poster-card__title, .ipc-rating-star, .ipc-list-card__content, .ipc-title__description, .ipc-metadata-list-item__label) { color: var(--n19-text) !important; }
+main.ipc-page-wrapper .ipc-page-content-container--center > :not(:first-child) .ipc-chip { border-color: var(--n19-border) !important; }
+/* Section headings: plain 24px dark Arial, no yellow bar */
+main.ipc-page-wrapper .ipc-title--baseAlt .ipc-title__text, #__next > section.ipc-page-background .ipc-title__text { color: var(--n19-text) !important; font-weight: 400 !important; }
+main.ipc-page-wrapper .ipc-title--category-title .ipc-title__text { font-size: 24px !important; }
+main.ipc-page-wrapper .ipc-title--category-title::before, main.ipc-page-wrapper .ipc-title--category-title .ipc-title__text::before { display: none !important; }
+main.ipc-page-wrapper .ipc-title--category-title { padding-left: 16px !important; }
+/* Links: 2019 blue */
+main.ipc-page-wrapper .ipc-page-content-container--center > :not(:first-child) :is(a.ipc-link, .ipc-link--baseAlt, .ipc-title-link-wrapper .ipc-title__text) { color: var(--n19-link) !important; }
+/* Title pages and lists (light "base" areas): blue links */
+main a.ipc-link:not([class*="onBase"]):not([class*="inherit"]):not([class*="baseAlt"]) { color: var(--n19-link) !important; }
+.ipc-button--core-accent1, .ipc-btn--core-accent1 { background: var(--n19-yellow) !important; color: #000 !important; }

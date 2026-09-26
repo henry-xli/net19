@@ -1,27 +1,82 @@
-/* net19 handmade theme: Cambridge Dictionary, 2019: charcoal header bars, a square search field with a gold #d0a44c button, solid blue sense bars with white text, red UK/US labels, #222 text on white. */
-html { --n19-bar: #3d3d3d; --n19-bar-2: #292929; --n19-on-bar: #fff; --n19-gold: #d0a44c; --n19-blue: #234b9a; --n19-link: #1f4ea3; --n19-red: #e84427; --n19-text: #222; --n19-border: #ddd; }
-html[data-net19-mode="dark"] { --n19-bar: #3d3d3d; --n19-bar-2: #292929; --n19-on-bar: #fff; --n19-gold: #d0a44c; --n19-blue: #2f5bb5; --n19-link: #8fb1ff; --n19-red: #ff6b50; --n19-text: #e6e6e6; --n19-border: #444; }
+/* net19 handmade theme: Cambridge Dictionary, 2019: a #3d3d3d top bar with plain white 16px links (the current one bold
+   with a gold top rule), a #292929 search row with a tall white field and a square gold #d0a44c button; #292929 Arial
+   text on white, the entry in a hairline box with a 40px bold headword, solid #234b9a sense bars with white text, bold
+   18px definitions, plain italic examples, red UK/US labels; a blue "More meanings" box on a pale blue-gray panel. */
+html { --n19-bar: #3d3d3d; --n19-bar-2: #292929; --n19-on-bar: #fff; --n19-gold: #d0a44c; --n19-blue: #234b9a; --n19-link: #234b9a;
+  --n19-red: #e84427; --n19-text: #292929; --n19-text-2: #444; --n19-border: #e6e6eb; --n19-panel: #eff1f6; --n19-page: #fff; --n19-badge: #444; }
+html[data-net19-mode="dark"] { --n19-bar: #3d3d3d; --n19-bar-2: #292929; --n19-on-bar: #fff; --n19-gold: #d0a44c; --n19-blue: #2f5bb5; --n19-link: #8fb1ff;
+  --n19-red: #ff6b50; --n19-text: #e6e6e6; --n19-text-2: #bbb; --n19-border: #444; --n19-panel: #262a33; --n19-page: #1b1b1b; --n19-badge: #666; }
 body, input, button { font-family: Arial, Helvetica, sans-serif !important; }
-/* Header: two charcoal rows */
-#header #topNavBar { background: var(--n19-bar) !important; }
+body, .cc, .cc_pgwn { color: var(--n19-text) !important; }
+
+/* Header: a charcoal top bar, then a darker search row */
+#header #topNavBar { background: var(--n19-bar) !important; height: 50px !important; }
 #header #topNavBar a, #header #topNavBar button, #header #topNavBar span, #header #topNavBar i, #header #topNavBar .hdib { color: var(--n19-on-bar) !important; }
-#header #searchBar { background: var(--n19-bar-2) !important; }
-#header #searchBar a { color: var(--n19-on-bar) !important; font-weight: 400 !important; }
-#header .cdo-search-input { border-radius: 0 !important; }
-#header #searchword ~ *, #header .cdo-dataset-selector { border-radius: 0 !important; }
-#header .cdo-search-button { background: var(--n19-gold) !important; border-radius: 0 !important; color: #fff !important; }
-#header .cdo-search-button i { color: #fff !important; }
-/* Entries */
-.entry-body .dhw, .dpos-h_hw { color: var(--n19-text) !important; font-weight: 700 !important; }
-.dsense_h { background: var(--n19-blue) !important; color: #fff !important; padding: 8px 20px !important; border: 0 !important; }
-.dsense_h .dsense_hw, .dsense_h .dsense_pos, .dsense_h .dsense_gw, .dsense_h span { color: #fff !important; }
-.dsense_h .dsense_gw { font-weight: 700 !important; }
-.entry-body .region, .entry-body .dpron-i .region { color: var(--n19-red) !important; font-weight: 700 !important; }
+#header #topNavBar .cb i, #header #topNavBar .cb i::before, #header #topNavBar .cb i::after { background: var(--n19-on-bar) !important; }
+#main-nav ul { font-weight: 400 !important; }
+#main-nav a span { font-size: 16px !important; font-weight: 400 !important; }
+#main-nav a { border-top: 3px solid transparent !important; padding-top: 11px !important; padding-bottom: 11px !important; margin-right: 30px !important; }
+#main-nav a.vh-a { border-top-color: var(--n19-gold) !important; }
+#main-nav a.vh-a span { font-weight: 700 !important; }
+#header #topNavBar .hbtn .tb { font-weight: 400 !important; font-size: 14px !important; }
+#header #searchBar { background: var(--n19-bar-2) !important; height: 64px !important; }
+#header #searchBar > div { padding-top: 7px !important; padding-bottom: 7px !important; }
+#header #searchBar form .chsf, #header #searchBar form .chsf > .hoh, #header #searchBar .chsw { height: 50px !important; }
+#header #searchword { height: 50px !important; border: 1px solid #ddd !important; border-radius: 3px 0 0 3px !important; font-size: 16px !important; padding-left: 15px !important; color: #292929 !important; }
+#header #searchBar .chsw button.bw { height: 30px !important; margin-top: 10px !important; border-left: 1px solid #c7c7c7 !important; border-radius: 0 !important; }
+#header #searchBar button.bo { background: var(--n19-gold) !important; width: 50px !important; height: 50px !important; border-radius: 0 3px 3px 0 !important; }
+#header #searchBar button.bo i { color: #fff !important; font-size: 22px !important; }
+#header #searchBar .chsb .hbtn { font-weight: 400 !important; color: var(--n19-on-bar) !important; }
+#header #searchBar a { color: var(--n19-on-bar) !important; }
+/* The header grew by 12px: move the page down with it */
+.cc_pgwn { padding-top: 12px !important; }
+
+/* 2019 layout: no left rail; a 745px entry column and a 300px right column */
+.cc_pgwn > .x > .hdn.hdb-m.hfl-m:has(> #ad_leftslot) { display: none !important; }
+.cc_pgwn > .x > .hfr-m.ltab { float: none !important; width: 1060px !important; max-width: calc(100% - 20px) !important; margin: 0 0 0 auto !important; }
+#page-content { width: calc(100% - 315px) !important; }
+#page-content > h1.ti { font-size: 16px !important; font-style: normal !important; line-height: 1.4 !important; margin: 6px 0 12px !important; color: var(--n19-text) !important; }
+#page-content > h1.ti b { font-size: 20px !important; }
+
+/* The entry: a hairline box, 40px bold headword, italic part of speech */
+.entry-body__el { border: 1px solid var(--n19-border) !important; padding: 15px !important; margin-bottom: 20px !important; background: var(--n19-page) !important; }
+.entry-body .dhw, .dpos-h_hw, .di-title .hw { color: var(--n19-text) !important; font-weight: 700 !important; font-size: 40px !important; line-height: 1.075 !important; }
+.entry-body .posgram .pos, .entry-body .dpos-h .dpos { font-style: italic !important; font-size: 20px !important; color: var(--n19-text-2) !important; font-weight: 400 !important; }
+.entry-body .epp-xref, .entry-body .dxref.A1, .entry-body .def-info .epp-xref { background: var(--n19-badge) !important; color: #fff !important; border-radius: 8px !important; }
+/* Sense bars: solid blue with white text */
+.dsense_h { background: var(--n19-blue) !important; color: #fff !important; padding: 11px 20px !important; margin: 0 !important; border: 0 !important; font-size: 18px !important; line-height: 1.3 !important; }
+.dsense_h .dsense_hw, .dsense_h .dsense_gw, .dsense_h .dsense_gw span { color: #fff !important; font-weight: 700 !important; }
+.dsense_h .dsense_pos { color: #fff !important; font-style: italic !important; font-weight: 400 !important; }
+.dsense { border: 0 !important; }
+.entry-body .dwl .dwla { background: transparent !important; color: var(--n19-text-2) !important; border-radius: 0 !important; }
+.entry-body .region, .entry-body .dpron-i .region, .entry-body .dreg { color: var(--n19-red) !important; font-weight: 700 !important; }
 .entry-body .daud .i-volume-up { color: var(--n19-red) !important; }
-.entry-body .def { color: var(--n19-text) !important; font-weight: 700 !important; }
-.entry-body .eg, .entry-body .deg { color: var(--n19-text) !important; }
+.entry-body .pron, .entry-body .dpron { color: var(--n19-text) !important; }
+/* Definitions bold 18px; examples plain italic lines, no bullets; the picture back on the right */
+.entry-body .def { color: var(--n19-text) !important; font-weight: 700 !important; font-size: 18px !important; line-height: 1.3 !important; }
+.entry-body .def-body .examp { display: block !important; list-style: none !important; padding-left: 20px !important; margin: 0 0 5px !important; font-size: 16px !important; line-height: 1.5 !important; }
+.entry-body .def-body .examp::before, .entry-body .def-body .examp::marker { display: none !important; }
+.entry-body .eg, .entry-body .deg { color: var(--n19-text) !important; font-style: italic !important; font-size: 16px !important; }
 .entry-body .def a.query, .entry-body .deg a.query, .entry-body .eg a.query { color: inherit !important; }
-.entry-body .xref a, .entry-body a.Ref, .cdo-more-results a { color: var(--n19-link) !important; }
+.entry-body .def-block .hflxrev { flex-direction: row !important; }
+.entry-body .def-block .dimg amp-img { width: 120px !important; height: auto !important; min-height: 90px !important; }
+.entry-body .xref-title, .entry-body .dxref-t { font-weight: 700 !important; color: var(--n19-text) !important; }
+.entry-body .xref a, .entry-body a.Ref, .entry-body .see_also a, .cdo-more-results a { color: var(--n19-link) !important; font-weight: 700 !important; }
 .bb, .di-head, .di_h { border-radius: 0 !important; }
+
+/* Right column: "More meanings" is a blue title over a pale panel; the image-quiz promo is new */
+.lt2s > div[amp-access]:has(a[href*="quiz" i], a[title*="quiz" i]) { display: none !important; }
+/* Part of speech and pronunciations share one line */
+.entry-body .pos-header > div:empty { display: none !important; }
+.entry-body .pos-header .posgram { margin-right: 10px !important; }
+.cdo-more-results { background: var(--n19-panel) !important; }
+.cdo-more-results h2 { background: var(--n19-blue) !important; color: #fff !important; font-size: 18px !important; font-weight: 400 !important; padding: 15px !important; margin: 0 !important; }
+.cdo-more-results h2 em { color: #fff !important; font-style: normal !important; font-weight: 400 !important; }
+.cdo-more-results .ca_h { background: transparent !important; color: var(--n19-red) !important; }
+/* Contents bar */
+#ContentsMenu { background: var(--n19-bar) !important; }
+
 /* The "AI Assistant" did not exist in 2019 */
-#header li:has(> a[href="/assistant"]), .ai-header-button, a[href="/assistant"] { display: none !important; }
+#header li:has(> a > .ai-header-button), #header li:has(> a[href="/assistant"]), .ai-header-button, a[href="/assistant"] { display: none !important; }
+.cdo-more-results a, .cdo-more-results a * { text-decoration: none !important; }
+.entry-body .dwl, .entry-body .dsense .dwl, .entry-body .def-block > .dwl { border: 0 !important; box-shadow: none !important; background: transparent !important; }

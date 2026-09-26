@@ -26,3 +26,15 @@ section.bg-\[\#F2F4F4\] { background: var(--n19-strip) !important; }
 /* The homepage hero sits on white, as the 2019 landing page did */
 .xl\:bg-black, .xl\:bg-black > .bg-black, .xl\:text-inverse-primary { background: var(--n19-header) !important; }
 .xl\:text-inverse-primary, .xl\:text-inverse-primary :is(p, h1, h2, span):not([class*="bg-button"] *) { color: var(--n19-header-text) !important; }
+
+/* 2019 proportions: a compact 60px header with a 28px logo; the landing headline is a 34px bold line, not a 65px poster */
+header .bg-black { height: 60px !important; justify-content: center !important; }
+header .bg-black > .mx-auto { height: 60px !important; align-items: center !important; }
+header .bg-black img[class*="h-\[28px\]"] { height: 28px !important; width: auto !important; }
+header #action_nav a { height: 34px !important; padding: 0 18px !important; }
+.xl\:bg-black p[class*="text-\[50px\]"] { font-size: 34px !important; line-height: 1.2 !important; }
+.xl\:bg-black p.text-\[21px\], section p.text-\[21px\] { font-size: 16px !important; line-height: 1.5 !important; }
+section [class*="md:text-\[37px\]"] { font-size: 30px !important; }
+.xl\:bg-black .text-green { color: var(--n19-green) !important; }
+.xl\:bg-black > div:first-child, .xl\:bg-black > div:first-child p { text-align: left !important; }
+.xl\:bg-black > div:first-child { margin-left: 120px !important; }

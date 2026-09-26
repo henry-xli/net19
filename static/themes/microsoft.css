@@ -1,4 +1,6 @@
-/* net19 handmade theme: Microsoft, 2019: Segoe UI with semibold headlines, square corners, uppercase CTAs and "SHOP NOW >" style links in #0067b8. */
+/* net19 handmade theme: Microsoft, 2019: Segoe UI with 34px semibold headlines; a flat white header with 13px links over a
+   hairline; heroes as contained blocks on the white page (not full-bleed), shorter, with white gaps between them; square
+   uppercase CTAs (black on light blocks, white on dark ones) and "SHOP NOW >" style links in #0067b8; square tags and cards. */
 html { --n19-blue: #0067b8; --n19-text: #000; --n19-text-2: #2f2f2f; --n19-border: #e6e6e6; }
 html[data-net19-mode="dark"] { --n19-blue: #4cc2ff; --n19-text: #fff; --n19-text-2: #d2d2d2; --n19-border: #505050; }
 /* Microsoft's store design system tokens */
@@ -8,6 +10,8 @@ html:root {
   --ds-font-family-segoe-variable-text: "Segoe UI", SegoeUI, "Helvetica Neue", Helvetica, Arial, sans-serif !important;
   --ds-font-family-segoe-variable-small: "Segoe UI", SegoeUI, "Helvetica Neue", Helvetica, Arial, sans-serif !important;
   --ds-heading-3xl-font-weight: 600 !important; --ds-heading-2xl-font-weight: 600 !important; --ds-heading-xl-font-weight: 600 !important;
+  --ds-heading-l-font-size: 2.125rem !important; --ds-heading-l-line-height: 2.5rem !important; --ds-heading-xl-font-size: 2.875rem !important; --ds-heading-xl-line-height: 3.5rem !important;
+  --ds-heading-2xl-font-size: 3.5rem !important; --ds-heading-2xl-line-height: 4rem !important; --ds-heading-3xl-font-size: 4.25rem !important; --ds-heading-3xl-line-height: 5rem !important;
   --ds-heading-l-font-weight: 600 !important; --ds-heading-m-font-weight: 600 !important; --ds-heading-s-font-weight: 600 !important; --ds-heading-xs-font-weight: 600 !important;
   --ds-heading-3xl-letter-spacing: normal !important; --ds-heading-2xl-letter-spacing: normal !important; --ds-heading-xl-letter-spacing: normal !important;
   --ds-heading-l-letter-spacing: normal !important; --ds-heading-m-letter-spacing: normal !important; --ds-heading-s-letter-spacing: normal !important;
@@ -26,3 +30,19 @@ header.uhf-header, #uhfHeader { border-bottom: 1px solid var(--n19-border) !impo
 .uhf-nav-item[href*="copilot.com"], .uhf-nav-item[href*="/microsoft-copilot"], .msstore-chatonpage, html #storeassistantroot, html body .sa-default-entry-container.microsoft-client { display: none !important; }
 /* Product pages (Surface and others) built with utility classes */
 .rounded-xs, .rounded-sm, .rounded-md, .rounded-lg, .rounded-xl, .rounded-2xl, .rounded-3xl { border-radius: 0 !important; }
+
+/* Heroes: contained 2019 blocks with white gaps, not full-bleed bands */
+main .hero-featured-slider-item, main .hero-featured-xl-video, main .hero-featured-video, main .hero-featured { max-width: 1184px !important; margin: 0 auto 40px !important; float: none !important; }
+store-hero-featured-slider-item { padding-top: 48px !important; padding-bottom: 48px !important; }
+store-hero-featured-xl-video { max-height: 460px !important; overflow: hidden !important; }
+store-hero-featured-xl-video img, store-hero-featured-slider-item img { object-fit: cover !important; }
+/* Headlines: 34px Segoe semibold */
+main :is(store-hero-featured-slider-item, store-hero-featured-xl-video, store-hero-featured-video) :is(h1, h2) { font-size: 34px !important; line-height: 40px !important; font-weight: 600 !important; }
+main :is(h2, h3) { letter-spacing: normal !important; }
+/* Hero CTAs: square filled buttons, black on light blocks and white on dark ones */
+[theme="day"] store-button[appearance*="button"], [theme="light"] store-button[appearance*="button"] { --ds-button-color: #fff !important; --ds-button-border-color: #000 !important; --ds-icon-color: #fff !important; }
+[theme="day"] store-button[appearance*="button"] a, [theme="light"] store-button[appearance*="button"] a { background: #000 !important; color: #fff !important; border: 2px solid #000 !important; }
+[theme="night"] store-button[appearance*="button"], [theme="dark"] store-button[appearance*="button"] { --ds-button-color: #000 !important; --ds-button-border-color: #fff !important; --ds-icon-color: #000 !important; }
+[theme="night"] store-button[appearance*="button"] a, [theme="dark"] store-button[appearance*="button"] a { background: #fff !important; color: #000 !important; border: 2px solid #fff !important; }
+store-button a { border-radius: 0 !important; font-size: 15px !important; }
+store-tag { border-radius: 0 !important; }

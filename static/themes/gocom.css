@@ -1,14 +1,32 @@
-/* net19 handmade theme: ABC (go.com: ABC News and ABC.com), 2019: on ABC News, a plain white masthead with the menu in
-   small bold uppercase letter-spaced words ("VIDEO  LIVE  SHOWS"), square photos and video frames, and flat white
-   story blocks instead of rounded grey cards. ABC.com's 2019 look (black bar, white menu words, dark page) is
-   essentially today's, so it is left as it is. Neither site has a separate dark mode. */
-html { --n19-text: #000; --n19-rule: #e5e5e5; --n19-card: #fff; }
-html[data-net19-mode="dark"] { --n19-text: #fff; --n19-rule: #333; --n19-card: #141414; }
+/* net19 handmade theme: ABC (go.com: ABC News and ABC.com), 2019: on ABC News, a plain white 72px masthead running the
+   full page width, the small abc NEWS logo at the far left with the menu right after it in small bold uppercase
+   letter-spaced words ("VIDEO  LIVE  SHOWS"), no streaming-service button; Helvetica/Arial bold headlines in black,
+   gray timestamps, square photos and video frames and flat white story blocks. ABC.com's 2019 look (black bar, white
+   menu words, dark page) is essentially today's, so it is left as it is. Neither site has a separate dark mode. */
+html { --n19-text: #000; --n19-meta: #999; --n19-rule: #e5e5e5; --n19-card: #fff; --n19-font: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+html[data-net19-mode="dark"] { --n19-text: #fff; --n19-meta: #999; --n19-rule: #333; --n19-card: #141414; }
 
-/* ABC News masthead */
-nav.navigation .navMenu25__text { text-transform: uppercase !important; letter-spacing: .12em !important; font-size: 14px !important; font-weight: 700 !important; }
-nav.navigation { box-shadow: 0 2px 4px rgba(0,0,0,.08) !important; }
+/* ABC News masthead: full width, logo at the left edge, the menu words right after it */
+nav.navigation { box-shadow: 0 1px 3px rgba(0,0,0,.12) !important; }
+nav.navigation .navigation__container { max-width: none !important; margin: 0 !important; padding: 0 20px !important; }
+nav.navigation .navigation__menu { justify-content: flex-start !important; }
+nav.navigation .navLogo { margin: 0 24px 0 0 !important; }
+nav.navigation .navigation__menu > .navLogo, nav.navigation .navigation__menu > :has(> .navLogo) { order: -1 !important; }
+nav.navigation .navigation__menu > :first-child:not(.navLogo):not(:has(> .navLogo)) { order: 1 !important; margin-left: 12px !important; }
+nav.navigation .navigation__group--main { order: 0 !important; }
+nav.navigation .navLogo__icon { height: 40px !important; width: 116px !important; background-size: contain !important; background-position: left center !important; }
+nav.navigation .navigation__group--main { margin-left: 0 !important; justify-content: flex-start !important; }
+nav.navigation .navMenu25__text { text-transform: uppercase !important; letter-spacing: .08em !important; font: 700 13px/40px var(--n19-font) !important; color: var(--n19-text) !important; }
+/* The "Stream on Disney+" button did not exist in 2019 */
+nav.navigation .navigation__stream { display: none !important; }
+/* The trending strip under the bar: small plain words */
+nav.navigation--has-subnav h2, nav.navigation--has-subnav h2 a, nav.navigation--has-subnav h2 span { font-family: var(--n19-font) !important; font-size: 12px !important; }
+
+/* Type: Helvetica/Arial bold headlines in black, gray meta */
+.page-home main h2, .page-home main h3, .page-home main h1, main article h1, main article h2 { font-family: var(--n19-font) !important; letter-spacing: 0 !important; }
+.page-home main :is(h2, h3) a, .page-home main :is(h2, h3) { color: var(--n19-text) !important; }
+.page-home main time, .page-home main [class*="timestamp" i] { color: var(--n19-meta) !important; }
 
 /* Square media and story blocks */
 nav.navigation ~ * main img, main figure.Image, main .MediaPlaceholder, main [class*="IndividualVideo"], [class*="FittWebPlayerContainer"],
-[class*="FittWebPlayerContainer"] video, .page-home main img, .page-home main picture { border-radius: 0 !important; }
+[class*="FittWebPlayerContainer"] video, .page-home main img, .page-home main picture, .page-home main figure, .page-home main [class*="Image"] { border-radius: 0 !important; }

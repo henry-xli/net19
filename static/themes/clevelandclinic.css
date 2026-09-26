@@ -1,18 +1,60 @@
-/* net19 handmade theme: Cleveland Clinic health library, 2019: a white header with gray (not blue) navigation links
-   and a soft drop shadow, an orange uppercase Appointments button with square corners, a white article intro (no pale
-   blue band) with the summary set in bold gray, and square buttons. Type (Roboto) and the article layout are close
-   to today's, so the theme is small. The site has no dark mode; the dark tokens apply only if the page renders dark. */
-html { --n19-nav: #4a4a4a; --n19-orange: #f18a21; --n19-orange-hover: #e07810; --n19-intro-bg: #fff; --n19-intro: #707070; --n19-shadow: rgba(0,0,0,.14); }
-html[data-net19-mode="dark"] { --n19-nav: #ddd; --n19-orange: #f18a21; --n19-orange-hover: #e07810; --n19-intro-bg: #161616; --n19-intro: #bbb; --n19-shadow: rgba(0,0,0,.5); }
-header.bg-white { box-shadow: 0 3px 8px var(--n19-shadow) !important; border-bottom-color: transparent !important; }
-header ul .text-brandBlue-500, header nav .text-brandBlue-500 { color: var(--n19-nav) !important; font-weight: 400 !important; }
-header ul .text-brandBlue-500:hover { color: #007bc2 !important; }
+/* net19 handmade theme: Cleveland Clinic health library, 2019: Source Sans Pro in #555 on white; a white header with a
+   soft drop shadow, the large logo on the first row with small utility links at the right, the main navigation below
+   it in plain 17px #363636 text; a gray breadcrumb band; a 52px normal-weight #363636 title with a plain 19px gray
+   summary; contents as gray 18px tabs over a hairline; normal-weight gray headings, 17px body text with a 27px line,
+   #0078bf links; square orange uppercase buttons. The site has no dark mode, so dark devices get the inverted page. */
+html { --n19-text: #555; --n19-head: #363636; --n19-link: #0078bf; --n19-link-hover: #0068a6; --n19-orange: #f18a21; --n19-orange-hover: #e07810;
+  --n19-page: #fff; --n19-band: #f2f2f2; --n19-rule: #ddd; --n19-shadow: rgba(0,0,0,.2); }
+html[data-net19-mode="dark"] { --n19-text: #bbb; --n19-head: #e6e6e6; --n19-link: #5fb4ea; --n19-link-hover: #8ccbf2; --n19-orange: #f18a21; --n19-orange-hover: #e07810;
+  --n19-page: #161616; --n19-band: #222; --n19-rule: #3a3a3a; --n19-shadow: rgba(0,0,0,.5); }
+body, body :is(h1, h2, h3, h4, p, a, li, button, input, span, nav) { font-family: "Source Sans Pro", "Source Sans 3", Lato, "Helvetica Neue", Helvetica, Arial, sans-serif !important; }
+
+/* Header: white, soft shadow; utility links sit on white at the top right */
+header.bg-white { box-shadow: 0 2px 10px var(--n19-shadow) !important; border-bottom-color: transparent !important; }
+header section.bg-gray-300, header div.bg-gray-300 { background: var(--n19-page) !important; }
+header section.bg-gray-300 { font-size: 14px !important; }
+header section.bg-gray-300 a { font-size: 14px !important; }
+/* Logo row, then the navigation on its own row below it (grid), search and Appointments at the right of the logo */
+header > div.flex.flex-row:has(> a > div > img) { display: grid !important; grid-template-columns: auto 1fr auto !important; min-height: 0 !important; align-items: center !important; }
+header > div.flex.flex-row:has(> a > div > img) > a:first-child { grid-row: 1 !important; grid-column: 1 !important; }
+header > div.flex.flex-row:has(> a > div > img) > a:first-child > div { width: auto !important; margin: 14px 0 6px 16px !important; padding-left: 0 !important; }
+header > div.flex.flex-row:has(> a > div > img) > a:first-child img { height: 48px !important; width: auto !important; max-width: none !important; }
+header > div.flex.flex-row:has(> a > div > img) > div.flex-1 { grid-row: 2 !important; grid-column: 1 / span 3 !important; justify-content: flex-start !important; padding: 0 16px 0 18px !important; }
+header > div.flex.flex-row:has(> a > div > img) > div.flex-1 > div, header > div.flex.flex-row:has(> a > div > img) > div.flex-1 ul { background: transparent !important; justify-content: flex-start !important; }
+header > div.flex.flex-row:has(> a > div > img) > div:last-child { grid-row: 1 !important; grid-column: 3 !important; }
+header ul li { font-size: 17px !important; }
+header ul .text-brandBlue-500, header nav .text-brandBlue-500, header ul li > button, header ul li > button * { color: var(--n19-head) !important; font-weight: 400 !important; font-size: 17px !important; }
+header ul li > a br { display: none !important; }
+header ul li > a, header ul li > button { white-space: nowrap !important; padding: 8px 12px 10px 0 !important; border-radius: 0 !important; }
+header ul .text-brandBlue-500:hover { color: var(--n19-link) !important; }
 header a.bg-brandBlue-500 {
   background: var(--n19-orange) !important; color: #fff !important; border-radius: 0 !important; text-transform: uppercase !important;
-  letter-spacing: 1.5px !important; font-size: 14px !important; font-weight: 700 !important;
+  letter-spacing: 1.5px !important; font-size: 14px !important; font-weight: 700 !important; height: 40px !important; padding-left: 20px !important; padding-right: 20px !important;
 }
 header a.bg-brandBlue-500:hover { background: var(--n19-orange-hover) !important; }
-/* Article intro: white, summary in bold gray */
-section.bg-blue-050 { background: var(--n19-intro-bg) !important; }
-section.bg-blue-050 p.text-gray-800 { color: var(--n19-intro) !important; font-weight: 700 !important; }
-main a.bg-brandBlue-500, main button.bg-brandBlue-500, a.rounded-rem5px, button.rounded-rem5px { border-radius: 0 !important; }
+
+/* Article intro: white, a gray full-width breadcrumb band, a light 52px title, a plain gray summary */
+section.bg-blue-050 { background: var(--n19-page) !important; padding-top: 0 !important; padding-bottom: 24px !important; }
+section.bg-blue-050 > .container > div:first-child:has(a.underline) {
+  background: var(--n19-band) !important; box-shadow: 0 0 0 100vmax var(--n19-band) !important; clip-path: inset(0 -100vmax) !important;
+  padding: 10px 0 !important; margin-bottom: 30px !important; max-width: none !important;
+}
+section.bg-blue-050 a.underline { color: var(--n19-text) !important; text-decoration: none !important; font-size: 14px !important; }
+section.bg-blue-050 .text-rem13px, section.bg-blue-050 .text-rem13px span { font-size: 14px !important; letter-spacing: 0 !important; }
+h1[data-identity="headline"] { font-weight: 400 !important; font-size: 52px !important; line-height: 60px !important; color: var(--n19-head) !important; letter-spacing: 0 !important; }
+section.bg-blue-050 p.text-gray-800 { color: var(--n19-text) !important; font-weight: 400 !important; font-size: 19px !important; line-height: 30px !important; }
+
+/* Contents: gray tabs on a hairline, as 2019's Overview / Diagnosis / Management tabs */
+nav.flex.flex-wrap.gap-x-rem32px, div.fixed > div.flex.flex-wrap.gap-x-rem32px { border-bottom: 1px solid var(--n19-rule) !important; padding-bottom: 8px !important; }
+nav.flex.flex-wrap.gap-x-rem32px a, div.fixed > div.flex.flex-wrap.gap-x-rem32px a { color: var(--n19-text) !important; font-size: 18px !important; }
+nav.flex.flex-wrap.gap-x-rem32px a:hover { color: var(--n19-link) !important; }
+
+/* Body: gray 17px text on a 27px line, lighter headings, blue links */
+p[data-identity="paragraph-element"], [data-identity="paragraph-element"] li, .container ul li, .container ol li { color: var(--n19-text) !important; font-size: 17px !important; line-height: 27px !important; }
+h2[data-identity="headline"], .container h2.font-bold { font-weight: 600 !important; font-size: 28px !important; line-height: 38px !important; color: var(--n19-head) !important; }
+h3[data-identity="headline"], .container h3.font-bold { font-weight: 600 !important; font-size: 22px !important; line-height: 30px !important; color: var(--n19-head) !important; }
+.container a.text-brandBlue-500, .container a.text-blue-600, p[data-identity="paragraph-element"] a { color: var(--n19-link) !important; }
+main a.bg-brandBlue-500, main button.bg-brandBlue-500, .container a.bg-brandBlue-500, .container button.bg-brandBlue-500 {
+  background: var(--n19-orange) !important; border-color: var(--n19-orange) !important; text-transform: uppercase !important; letter-spacing: 1px !important;
+}
+a.rounded-rem5px, button.rounded-rem5px, .container [class*="rounded-"] { border-radius: 0 !important; }

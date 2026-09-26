@@ -1,7 +1,8 @@
 /* net19 handmade theme: Fandom wikis (Oasis skin), 2019: a dark teal-navy (#002a32) global navigation with
-   uppercase aqua (#00d6d6) links in Rubik, articles set in Helvetica Neue with bold #3a3a3a page titles, a square
-   content page framed by a thin #bcc2c4 border, and 3px outlined buttons. Each wiki's own colors and background art
-   are kept, as they were in 2019. Both FandomDesktop light and dark themes are followed. */
+   uppercase aqua (#00d6d6) links in Rubik and a search field drawn as a bare 2px aqua underline, articles set in
+   Helvetica Neue at 14px/22px with bold #3a3a3a page titles, 18px section headings over a thin #bcc2c4 rule, a square
+   content page, infobox and rail framed by that same thin border, and 3px outlined buttons. Each wiki's own colors and
+   background art are kept, as they were in 2019. Both FandomDesktop light and dark themes are followed. */
 html { --n19-nav: #002a32; --n19-nav-link: #00d6d6; --n19-nav-text: #fff; --n19-nav-field: rgba(255,255,255,.1); --n19-nav-rule: rgba(255,255,255,.25);
   --n19-font: "Helvetica Neue", Helvetica, Arial, sans-serif; --n19-title: #3a3a3a; --n19-page-border: #bcc2c4; }
 html[data-net19-mode="dark"] { --n19-nav: #002a32; --n19-nav-link: #00d6d6; --n19-nav-text: #fff; --n19-nav-field: rgba(255,255,255,.1); --n19-nav-rule: rgba(255,255,255,.25);
@@ -16,12 +17,16 @@ html[data-net19-mode="dark"] { --n19-nav: #002a32; --n19-nav-link: #00d6d6; --n1
 }
 #global-explore-navigation .global-explore-navigation__label, #global-explore-navigation button, #global-explore-navigation a { color: var(--n19-nav-link) !important; }
 #global-top-navigation a:not(.wds-button), #global-top-navigation .global-top-navigation__links a { color: var(--n19-nav-link) !important; text-transform: uppercase; }
+/* Search: no box, just white text over a 2px aqua underline */
 #global-top-navigation input[type="search"], #global-top-navigation .search-app__input, #global-top-navigation [class*="search"] input {
-  background: var(--n19-nav-field) !important; color: var(--n19-nav-text) !important; border-color: var(--n19-nav-rule) !important; border-radius: 3px !important;
+  background: transparent !important; color: var(--n19-nav-text) !important; border: none !important; border-radius: 0 !important; box-shadow: none !important;
 }
 #global-top-navigation [class*="search"] input::placeholder { color: rgba(255,255,255,.7) !important; }
 #global-top-navigation .search-container :is(button, span, div, svg) { color: rgba(255,255,255,.8) !important; }
-#global-top-navigation .search-container > :is(button, div) { background: var(--n19-nav-field) !important; border-color: var(--n19-nav-rule) !important; border-radius: 3px !important; }
+#global-top-navigation .search-container > :is(button, div) {
+  background: transparent !important; border: none !important; border-bottom: 2px solid var(--n19-nav-link) !important; border-radius: 0 !important; box-shadow: none !important;
+}
+#global-top-navigation .search-container svg { color: var(--n19-nav-link) !important; }
 #global-top-navigation svg, #global-explore-navigation svg { fill: currentColor; }
 #global-top-navigation .wds-button { background: transparent !important; color: var(--n19-nav-link) !important; border: 1px solid var(--n19-nav-link) !important; border-radius: 3px !important; }
 #global-top-navigation .wds-button:not(.wds-is-secondary) { background: var(--n19-nav-link) !important; color: var(--n19-nav) !important; }
@@ -32,3 +37,11 @@ html[data-net19-mode="dark"] { --n19-nav: #002a32; --n19-nav-link: #00d6d6; --n1
 .page-header__title { font-weight: 700 !important; color: var(--n19-title) !important; }
 .page-content .mw-parser-output h2, .page-content .mw-parser-output h3 { font-family: var(--n19-font) !important; font-weight: 700 !important; }
 .wds-button { border-radius: 3px !important; }
+/* Article text and headings at the 2019 Oasis sizes: 14px/22px body, 18px h2 over a thin rule, 16px h3 */
+.page-content .mw-parser-output { font-size: 14px !important; line-height: 22px !important; }
+.page-content .mw-parser-output > h2 { font-size: 18px !important; line-height: 1.3 !important; margin-top: 30px !important; padding-bottom: 3px !important; border-bottom: 1px solid var(--n19-page-border) !important; }
+.page-content .mw-parser-output > h3 { font-size: 16px !important; line-height: 1.3 !important; }
+/* Infoboxes, rail modules, the table of contents and thumbnails were square, framed by the same thin border */
+.portable-infobox, .portable-infobox .pi-title, .portable-infobox .pi-image, .page-content .toc, .page-content #toc,
+.page__right-rail .rail-module, .page-content .thumbinner, .page-content .wikia-gallery-item, .page-content img { border-radius: 0 !important; }
+.page__right-rail .rail-module { border: 1px solid var(--n19-page-border) !important; }

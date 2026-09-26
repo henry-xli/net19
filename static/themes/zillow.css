@@ -1,6 +1,6 @@
 /* net19 handmade theme: Zillow, 2019: Open Sans on white, #006aff blue, plain text "Sign in or Join" links, square 2-4px corners, serif hero headline. */
-html { --n19-text: #2a2a33; --n19-text-2: #62626d; --n19-blue: #006aff; --n19-blue-hover: #0d4599; --n19-surface: #fff; --n19-border: #d1d1d5; }
-html[data-net19-mode="dark"] { --n19-text: #e8e8ec; --n19-text-2: #a7a6ab; --n19-blue: #4d9aff; --n19-blue-hover: #7fb5ff; --n19-surface: #1f1f24; --n19-border: #3d3d45; }
+html { --n19-text: #2a2a33; --n19-text-2: #62626d; --n19-blue: #006aff; --n19-blue-hover: #0d4599; --n19-surface: #fff; --n19-border: #d1d1d5; --n19-hero-text: #fff; }
+html[data-net19-mode="dark"] { --n19-text: #e8e8ec; --n19-text-2: #a7a6ab; --n19-blue: #4d9aff; --n19-blue-hover: #7fb5ff; --n19-surface: #1f1f24; --n19-border: #3d3d45; --n19-hero-text: #fff; }
 /* Zillow's Constellation (c11n) components, all versions */
 .znav, .znav a, .znav button, [class*="-c11n-"], .c11n, input, button { font-family: "Open Sans", "Segoe UI", Helvetica, Arial, sans-serif !important; }
 .znav-links a, .znav a[data-zg-role="section-title"] { color: var(--n19-text) !important; font-size: 15px !important; }
@@ -24,3 +24,10 @@ h1[class*="StyledHeading-c11n"], h1[class*="Text-c11n"] { font-family: "Ivar Dis
 .c11n_property-card__root img, .property-card img, [class*="StyledCard-c11n"] img, [data-c11n-component^="PropertyCard"] [data-c11n-component^="Image"] { border-radius: 0 !important; }
 .search-page-header { border-bottom: 1px solid var(--n19-border) !important; }
 [class*="StyledParagraph-c11n"] { color: var(--n19-text-2); }
+/* Homepage hero: 2019 centered its serif headline (48px, white) and a 480px search box over the photo */
+.with-product-nav__top-and-main div:has(> div > h1[class*="StyledHeading-c11n"]) { margin-left: auto !important; margin-right: auto !important; width: 480px !important; max-width: 100% !important; text-align: center !important; }
+.with-product-nav__top-and-main h1[class*="StyledHeading-c11n"] { font-size: 48px !important; line-height: 1.2 !important; text-align: center !important; }
+.with-product-nav__top-and-main div:has(> div > h1[class*="StyledHeading-c11n"]) button svg { color: var(--n19-blue) !important; fill: var(--n19-blue) !important; }
+/* On a dark device the page is inverted but the hero photo is not, so the headline's white is written as black to come out white */
+html[data-net19-flip] { --n19-hero-text: #000; }
+.with-product-nav__top-and-main h1[class*="StyledHeading-c11n"] { color: var(--n19-hero-text) !important; }

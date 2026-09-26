@@ -1,24 +1,50 @@
-/* net19 handmade theme: Lowe's, 2019: Arial, the #0471af Lowe's blue for links and buttons, the #004990 navy strip, square fields and buttons. */
-html { --n19-blue: #0471af; --n19-blue-hover: #035a8c; --n19-blue-pressed: #024a73; --n19-navy: #004990; --n19-text: #333; --n19-field-border: #ccc; }
-html[data-net19-mode="dark"] { --n19-blue: #4ea3d9; --n19-blue-hover: #6db4e2; --n19-blue-pressed: #3b8cc0; --n19-navy: #004990; --n19-text: #eee; --n19-field-border: #555; }
+/* net19 handmade theme: Lowe's, 2019: Helvetica/Arial, a plain white masthead (logo, "Find a Store", myLowe's and the
+   cart) under a light gray promo strip; a #0471af blue department bar with plain white labels; a square white search
+   field with a blue magnifier; square-cornered banners and buttons in #0471af / navy #004990. */
+html { --n19-blue: #0471af; --n19-blue-hover: #035a8c; --n19-blue-pressed: #024a73; --n19-navy: #004990; --n19-text: #333; --n19-text-2: #5d5d5d;
+  --n19-field-border: #ccc; --n19-strip: #f2f2f2; --n19-rule: #e5e5e5; --n19-page: #fff; }
+html[data-net19-mode="dark"] { --n19-blue: #4ea3d9; --n19-blue-hover: #6db4e2; --n19-blue-pressed: #3b8cc0; --n19-navy: #004990; --n19-text: #eee; --n19-text-2: #bbb;
+  --n19-field-border: #555; --n19-strip: #222; --n19-rule: #333; --n19-page: #121212; }
 html:root, html body {
-  --bds-font-family-fellix: Arial, Helvetica, sans-serif !important; --bds-font-family-fellix-roboto: Arial, Helvetica, sans-serif !important;
-  --bds-font-family-roboto: Arial, Helvetica, sans-serif !important;
-  --bds-border-radius-md: 0 !important; --bds-border-radius-lg: 2px !important;
+  --bds-font-family-fellix: Helvetica, Arial, sans-serif !important; --bds-font-family-fellix-roboto: Helvetica, Arial, sans-serif !important;
+  --bds-font-family-roboto: Helvetica, Arial, sans-serif !important;
+  --bds-border-radius-sm: 0 !important; --bds-border-radius-md: 0 !important; --bds-border-radius-lg: 0 !important;
   --bds-color-action-interactive: var(--n19-blue) !important; --bds-color-action-interactive-hover: var(--n19-blue-hover) !important;
   --bds-color-action-interactive-pressed: var(--n19-blue-pressed) !important; --bds-color-text-interactive: var(--n19-blue) !important;
   --bds-color-icon-interactive: var(--n19-blue) !important; --bds-color-marketing-interactive: var(--n19-blue) !important;
   --bds-color-focus-interactive: var(--n19-blue) !important; --bds-color-surface-dark-blue: var(--n19-navy) !important;
 }
-body, body :not(svg, svg *, i, [class*="icon" i]) { font-family: Arial, Helvetica, sans-serif !important; }
-header .backyard.button, header input.sb-input, header form section, main .backyard.button { border-radius: 2px !important; }
-header input.sb-input, header form section { border-radius: 0 !important; }
-header form section { border-color: var(--n19-field-border) !important; }
+body, body :not(svg, svg *, i, [class*="icon" i]) { font-family: Helvetica, Arial, sans-serif !important; }
 /* "Mylow" AI Assist did not exist in 2019 */
 header button[data-linkid="mylow"], header a[data-linkid="mylow"] { display: none !important; }
-/* The department row sits on the 2019 blue bar with white labels */
+
+/* Promo strip: light gray with dark text instead of a navy bar */
+header [data-testid="global-message-ui"] { background: var(--n19-strip) !important; border-bottom: 1px solid var(--n19-rule) !important; }
+header [data-testid="global-message-ui"] :is(a, span, p) { color: var(--n19-text) !important; font-size: 13px !important; }
+header [data-testid="global-message-ui"] a:hover span { text-decoration: underline !important; }
+/* Masthead: plain white; the store picker is plain text with a pin, not a gray pill */
+#headerApp, header[data-testid="full-mast-header"] > div, header[data-testid="full-mast-header"] > div > div:first-child { background: var(--n19-page) !important; }
+#Store-Details, #Store-Details .store-zipcode-wrapper { background: transparent !important; border-radius: 0 !important; }
+#Store-Details span { color: var(--n19-blue) !important; font-size: 14px !important; }
+/* Search: a square white field with a gray border and a white blue-magnifier button */
+#search-bar form section { border: 1px solid var(--n19-field-border) !important; border-radius: 0 !important; height: 38px !important; box-shadow: none !important; }
+#search-bar input.sb-input { border-radius: 0 !important; height: 36px !important; font-size: 14px !important; }
+#search-bar form section svg { color: var(--n19-blue) !important; fill: currentColor; }
+header nav .nav-diy-icons :is(a, button) span, #cart-label-text { color: var(--n19-text) !important; font-size: 13px !important; }
+header nav .nav-diy-icons svg { color: var(--n19-navy) !important; }
+
+/* The department row sits on the 2019 blue bar with plain white labels */
 #mh-nav-link-wrapper, #mh-nav-link-wrapper > div { background: var(--n19-blue) !important; }
+#mh-nav-link-wrapper :is(a, button) { border-radius: 0 !important; }
 #mh-nav-link-wrapper :is(a, button, span, p) { color: #fff !important; }
+#mh-nav-link-wrapper .btn-label, #mh-nav-link-wrapper .link-label { font-size: 15px !important; font-weight: 400 !important; }
+#mh-nav-link-wrapper #shop-flyout .btn-label { font-weight: 700 !important; }
 #mh-nav-link-wrapper svg { color: #fff !important; fill: currentColor; }
-#mh-nav-link-wrapper :is(a, button):hover { background: var(--n19-blue-hover) !important; }
+#mh-nav-link-wrapper :is(a, button):hover { background: var(--n19-navy) !important; }
 #mh-nav-link-wrapper :is(img, svg) { filter: brightness(0) invert(1); }
+
+/* "Recommended Searches for You" pills are a new personalization module */
+.rec-carousels-wrapper:has([data-testid^="lws_hp_recommendations_aboveimage"]) { display: none !important; }
+/* Banners, tiles and buttons: square corners */
+#app :is(img, picture, a, button, section, [class*="banner" i], [class*="card" i], [class*="tile" i]) { border-radius: 0 !important; }
+#app .backyard.button { border-radius: 2px !important; }

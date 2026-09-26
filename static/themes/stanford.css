@@ -1,16 +1,32 @@
-/* net19 handmade theme: Stanford, 2019: bright cardinal (#b1040e) bar with the white "Stanford University" wordmark, then a white bar of centered dark Source Sans section links; square controls. */
-html { --n19-cardinal: #b1040e; --n19-cardinal-dark: #8c1515; --n19-nav-bg: #fff; --n19-nav-text: #2e2d29; --n19-nav-hover: #b1040e; --n19-rule: #d5d5d4; }
-html[data-net19-mode="dark"] { --n19-cardinal: #b1040e; --n19-cardinal-dark: #8c1515; --n19-nav-bg: #1c1b19; --n19-nav-text: #eaeaea; --n19-nav-hover: #f4795b; --n19-rule: #43423e; }
-/* The combined logo + links row becomes 2019's two bands: cardinal wordmark bar, then the white section-link bar. */
-header .bg-bg-knockout-brand { background: var(--n19-cardinal) !important; }
-header .bg-bg-knockout-brand-strong { background: var(--n19-cardinal-dark) !important; }
-header nav.main-nav { display: grid !important; grid-template-columns: 1fr !important; row-gap: 0 !important; padding-left: 0 !important; padding-right: 0 !important; max-width: none !important; background: var(--n19-cardinal) !important; }
-header nav.main-nav > a.logo { justify-self: start !important; padding: 8px 0 8px 30px !important; font-size: 26px !important; line-height: 32px !important; }
-header nav.main-nav > ul { justify-content: center !important; width: 100% !important; margin: 0 !important; background: var(--n19-nav-bg) !important; border-bottom: 1px solid var(--n19-rule) !important; column-gap: 34px !important; }
-header nav.main-nav > ul > li > :is(button, a) { color: var(--n19-nav-text) !important; padding-top: 12px !important; padding-bottom: 12px !important; font-size: 20px !important; }
+/* net19 handmade theme: Stanford, 2019: one 48px bright cardinal (#b1040e) bar with the white "Stanford University"
+   wordmark on the left and a plain search on the right, then a white bar of centered 21px dark Source Sans section
+   links with a hairline under it; no "Our Impact" topic strip; square controls and photos. */
+html { --n19-cardinal: #b1040e; --n19-cardinal-dark: #820000; --n19-nav-bg: #fff; --n19-nav-text: #2e2d29; --n19-nav-hover: #b1040e; --n19-rule: #d5d5d4;
+  --n19-field-line: rgba(255,255,255,.6); }
+html[data-net19-mode="dark"] { --n19-cardinal: #b1040e; --n19-cardinal-dark: #820000; --n19-nav-bg: #1c1b19; --n19-nav-text: #eaeaea; --n19-nav-hover: #f4795b; --n19-rule: #43423e;
+  --n19-field-line: rgba(255,255,255,.6); }
+
+/* The two red rows become one cardinal bar: the topic strip keeps only the search, and the wordmark sits in the same row. */
+header > .bg-bg-knockout-brand { background: var(--n19-cardinal) !important; position: relative !important; }
+header .bg-bg-knockout-brand-strong { background: var(--n19-cardinal) !important; height: 48px !important; }
+header .bg-bg-knockout-brand-strong > nav { height: 48px !important; padding-top: 0 !important; padding-bottom: 0 !important; }
+header .bg-bg-knockout-brand-strong #impact-nav-heading, header .bg-bg-knockout-brand-strong #impact-nav-heading + ul { display: none !important; }
+header .bg-bg-knockout-brand-strong form { background: transparent !important; border: 0 !important; border-bottom: 1px solid var(--n19-field-line) !important; border-radius: 0 !important; height: 30px !important; }
+header .bg-bg-knockout-brand-strong form :is(input, button) { border-radius: 0 !important; border: 0 !important; }
+header .bg-bg-knockout-brand-strong form input { font-size: 16px !important; color: #fff !important; }
+header .bg-bg-knockout-brand-strong form input::placeholder { color: rgba(255,255,255,.85) !important; }
+header nav.main-nav { justify-content: center !important; padding: 0 !important; max-width: none !important; background: var(--n19-nav-bg) !important; border-bottom: 1px solid var(--n19-rule) !important; }
+header nav.main-nav > a.logo {
+  position: absolute !important; top: 0 !important; left: 30px !important; height: 48px !important; padding: 0 !important; display: flex !important; align-items: center !important;
+  font-size: 26px !important; line-height: 48px !important; color: #fff !important;
+}
+/* Section links: a white bar of centered dark links, red on hover. */
+header nav.main-nav > ul { justify-content: center !important; width: 100% !important; margin: 0 !important; column-gap: 34px !important; }
+header nav.main-nav > ul > li > :is(button, a) { color: var(--n19-nav-text) !important; padding-top: 12px !important; padding-bottom: 12px !important; font-size: 21px !important; line-height: 30px !important; }
 header nav.main-nav > ul > li > :is(button, a):hover { color: var(--n19-nav-hover) !important; text-decoration-color: currentColor !important; }
 header nav.main-nav > ul > li > :is(button, a) svg { color: currentColor !important; fill: currentColor !important; }
-/* Pills (impact tags, search) were square-cornered. */
-header .bg-bg-knockout-brand-strong :is(a, input, button) { border-radius: 0 !important; }
-header .bg-bg-knockout-brand-strong :is(div, form):has(> input) { border-radius: 0 !important; }
 main :is(img, picture, figure, video) { border-radius: 0 !important; }
+main a[class*="rounded"], main button[class*="rounded"] { border-radius: 0 !important; }
+/* Dark devices: the page is flipped and the white link bar flipped back (palette.js marks it data-net19-reflip); that
+   filter makes the bar the wordmark's containing block, so the wordmark is lifted back into the red row and un-flipped. */
+html[data-net19-flip] header nav.main-nav[data-net19-reflip] > a.logo { top: -48px !important; filter: contrast(1.13636) hue-rotate(180deg) invert(1) !important; }

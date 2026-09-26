@@ -17,3 +17,8 @@ h1, h2, .fxg-title { font-weight: 300 !important; }
 .cc-aem-c-button, .fxg-button { border-radius: 0 !important; }
 .cc-aem-c-button--primary, .fxg-button--orange { background: var(--n19-orange) !important; color: #fff !important; text-transform: uppercase !important; letter-spacing: .03em !important; }
 .fxg-field input, .fxg-tracking-module input { border-radius: 0 !important; }
+
+/* 2019 header: plain white 14px menu words with no chevrons, "Sign Up or Log In" as text without the person icon */
+.fxg-global-nav .fxg-dropdown-js::after, .fxg-global-nav .fxg-dropdown-js::before, .fxg-global-nav .fxg-mouse::after, .fxg-global-nav .fxg-mouse::before { display: none !important; }
+.fxg-global-nav .fxg-dropdown-js, .fxg-global-nav .fxg-dropdown-js .fxg-mouse { font-size: 14px !important; font-weight: 400 !important; }
+.fxg-user-options__sign-in img.fxg-user-options__icon { display: none !important; }

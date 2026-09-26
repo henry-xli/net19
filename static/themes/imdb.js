@@ -1,3 +1,3 @@
-// net19 handmade theme: imdb. The site has a single (light) design, so the light palette applies; if it renders
-// dark, the palette engine detects that from the page background and the dark tokens apply instead.
-globalThis.net19Theme = {};
+// net19 handmade theme: imdb. IMDb has no dark mode of its own; with net19 its pages read as light (the 2019 white
+// page), so the light palette applies and palette.js inverts the page for dark devices.
+globalThis.net19Theme = { detect: () => 'light' };

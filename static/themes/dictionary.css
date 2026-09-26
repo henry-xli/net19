@@ -1,21 +1,71 @@
-/* net19 handmade theme: Dictionary.com, 2019: Arial throughout, a flat #3a76c3 blue header, square search box, bold black headword, #3a76c3 links and flat white cards. */
-html { --n19-blue: #3a76c3; --n19-blue-dark: #2f62a6; --n19-text: #1a1a1a; --n19-text-2: #4a4a4a; --n19-rule: #e2e2e2; --n19-chip: #f5f5f5; --n19-card: #fff; }
-html[data-net19-mode="dark"] { --n19-blue: #3a76c3; --n19-blue-dark: #2f62a6; --n19-text: #eee; --n19-text-2: #bbb; --n19-rule: #444; --n19-chip: #2a2a2a; --n19-card: #1e1e1e; }
+/* net19 handmade theme: Dictionary.com, 2019: 14px Arial in #4a4a4a on a #f3f3f3 page; a tall flat #3a76c3 header with
+   the white logo and a wide square white search field; the entry in flat white cards; a bold 48px #1a1a1a headword with
+   a gray bracketed pronunciation; small uppercase #3a76c3 section links instead of tabs; an italic lowercase part of
+   speech, gray numbered definitions in #1a1a1a, plain italic examples, #3a76c3 links. No trivia quiz. */
+html { --n19-blue: #3a76c3; --n19-blue-dark: #2f62a6; --n19-text: #1a1a1a; --n19-text-2: #4a4a4a; --n19-num: #979797; --n19-rule: #e2e2e2;
+  --n19-chip: #f5f5f5; --n19-card: #fff; --n19-page: #f3f3f3; --n19-orange: #f5a623; }
+html[data-net19-mode="dark"] { --n19-blue: #3a76c3; --n19-blue-dark: #2f62a6; --n19-text: #eee; --n19-text-2: #bbb; --n19-num: #888; --n19-rule: #444;
+  --n19-chip: #2a2a2a; --n19-card: #1e1e1e; --n19-page: #121212; --n19-orange: #f5a623; }
 html body { --wrapper-site-hdr-bg: var(--n19-blue) !important; --search-border-radius: 0 !important;
-  --wrapper-site-hdr-bg-dsktp: linear-gradient(var(--n19-blue) 0 490px, transparent 490px) !important; --wrapper-site-hdr-bg-mbl-tblt: linear-gradient(var(--n19-blue) 0 420px, transparent 420px) !important; }
-body, button, input, select, textarea, h1, h2, h3, h4, p, a, li, span, label { font-family: Arial, Helvetica, sans-serif !important; }
+  --wrapper-site-hdr-bg-dsktp: var(--n19-blue) !important; --wrapper-site-hdr-bg-mbl-tblt: var(--n19-blue) !important; }
+body, button, input, select, textarea, h1, h2, h3, h4, p, a, li, span, label, em, blockquote { font-family: Arial, Helvetica, sans-serif !important; }
+body.pg-dcom-entry, body[class*="pg-"] { background-color: var(--n19-page) !important; color: var(--n19-text-2) !important; }
 
-/* Header: flat blue, square white search field */
-header, .wrapper-site-hdr, [class*="site-hdr"] { background-image: none !important; }
-form.search-form { border-radius: 0 !important; }
-
-/* Entry: bold black headword, flat card, small radii everywhere */
-h1.hdr-headword { font-weight: 700 !important; color: var(--n19-text) !important; font-size: 48px !important; letter-spacing: -.5px !important; }
-.box-headword-audio-pronunciation { border-radius: 0 !important; box-shadow: none !important; border-bottom: 1px solid var(--n19-rule) !important; }
-a.lk-site-nav, a.lk-entry-group, .more-menu-btn, .sec-trivia-card, .btn-common-cta, a.lk-common-cta, .common-bg-lk-chip, .common-lk-chip,
-.lk-vocabulary-lists-card, label[class=""], .ac-player-wrapper, .ac-lre-player, main img { border-radius: 2px !important; }
-a.lk-entry-group { text-transform: uppercase !important; font-size: 13px !important; }
-main a:not([class]) { color: var(--n19-blue) !important; }
-.sec-wotd-card { border-radius: 0 !important; box-shadow: 0 1px 3px rgba(0,0,0,.15) !important; }
+/* Header: a tall flat blue band, the logo white, a wide square search field */
+.wrapper-site-hdr, header, [class*="site-hdr"] { background-image: none !important; }
+.wrapper-site-hdr { background: var(--n19-blue) !important; height: 88px !important; }
+header#id-site-hdr { height: 88px !important; align-items: center !important; }
+header a.lk-home { filter: brightness(0) invert(1); transform: scale(1.12); transform-origin: left center; }
+header .form-search-word-container { width: 480px !important; max-width: 480px !important; margin-left: 30px !important; }
+form.search-form { border-radius: 0 !important; height: 44px !important; border: 1px solid #fff !important; box-shadow: none !important; }
+form.search-form .search-input { height: 42px !important; font-size: 18px !important; color: #1a1a1a !important; }
 form.search-form .search-button { border-radius: 0 !important; background: var(--n19-blue-dark) !important; }
-header a.lk-home { filter: brightness(0) invert(1); }
+a.lk-site-nav { color: rgba(255,255,255,.85) !important; font-weight: 700 !important; font-size: 12px !important; border-radius: 0 !important; }
+a.lk-logo-redirect { opacity: .9; }
+.wrapper-site-main { padding-top: 24px !important; }
+
+/* Entry: flat white cards on the gray page */
+.box-content-primary > section.sec-item-entry-group, .box-content-primary > section[class*="sec-"]:not(.sec-trivia-card), .box-content-primary > div.box-entry-group-nav {
+  background: var(--n19-card) !important; border-radius: 0 !important; box-shadow: none !important;
+}
+.box-content-primary > section.sec-item-entry-group, .box-content-primary > section[class*="sec-"]:not(.sec-trivia-card) { padding: 30px !important; margin-bottom: 16px !important; }
+/* Section links: small uppercase blue text, as 2019's "EXAMPLES | WORD ORIGIN" */
+div.box-entry-group-nav { padding: 12px 30px 0 !important; margin: 0 !important; position: static !important; }
+a.lk-entry-group, .more-menu-btn, a.lk-to-thesaurus { background: transparent !important; border-radius: 0 !important; text-transform: uppercase !important; font-size: 12px !important;
+  font-weight: 400 !important; color: var(--n19-blue) !important; padding: 0 8px !important; height: 24px !important; min-height: 0 !important; line-height: 24px !important; }
+li.item-entry-group.is-highlighted a.lk-entry-group { color: var(--n19-text) !important; font-weight: 700 !important; }
+li.item-entry-group + li.item-entry-group { border-left: 1px solid var(--n19-rule) !important; }
+a.lk-to-thesaurus { color: var(--n19-orange) !important; }
+/* 2019 had no trivia quiz card */
+section.sec-trivia-card, #trivia-question-container { display: none !important; }
+
+h1.hdr-headword { font-weight: 700 !important; color: var(--n19-text) !important; font-size: 48px !important; line-height: 56px !important; letter-spacing: 0 !important; }
+.box-headword-audio-pronunciation { border-radius: 0 !important; box-shadow: none !important; border-bottom: 1px solid var(--n19-rule) !important; padding: 0 0 16px !important; }
+em.txt-entry-group-type { color: var(--n19-num) !important; font-size: 11px !important; text-transform: uppercase !important; }
+span.txt-phonetic { font-size: 20px !important; color: var(--n19-text-2) !important; }
+span.txt-ipa { font-size: 13px !important; color: var(--n19-blue) !important; }
+button.common-btn-headword-audio { background: var(--n19-blue) !important; border-radius: 50% !important; }
+/* Part of speech: italic, lowercase; definitions: gray numbers, 17px dark text; plain italic examples */
+.box-pos-label h2 { text-transform: none !important; font-style: italic !important; font-weight: 400 !important; font-size: 17px !important; color: var(--n19-text) !important; letter-spacing: 0 !important; }
+.inflected-form-form { font-size: 15px !important; font-weight: 700 !important; color: var(--n19-text-2) !important; }
+ol.list-definition li.item-definition { color: var(--n19-text) !important; font-size: 17px !important; }
+ol.list-definition li.item-definition::marker { color: var(--n19-num) !important; font-size: 13px !important; }
+ol.list-definition p.txt-variant-label-short { font-size: 17px !important; line-height: 1.5 !important; color: var(--n19-text) !important; }
+blockquote.box-examples { border: 0 !important; padding: 2px 0 0 !important; margin: 0 !important; background: transparent !important; }
+blockquote.box-examples::before { display: none !important; }
+blockquote.box-examples p.txt-example { font-size: 15px !important; color: var(--n19-text-2) !important; font-style: italic !important; }
+.definition-image-container, .definition-image-container img, main img { border-radius: 0 !important; }
+main a:not([class]) { color: var(--n19-blue) !important; }
+.sec-wotd-card { border-radius: 0 !important; box-shadow: none !important; }
+.btn-common-cta, a.lk-common-cta, .common-bg-lk-chip, .common-lk-chip, .lk-vocabulary-lists-card, .ac-player-wrapper, .ac-lre-player { border-radius: 2px !important; }
+/* The section links wrap instead of scrolling; headword and pronunciation share one line, as in 2019 */
+#id-wrapper-nav-entry-group, nav.nav-entry-group, menu.menu-entry-group { height: auto !important; min-height: 0 !important; overflow: visible !important; flex-wrap: wrap !important; row-gap: 4px !important; }
+div.box-entry-group-nav { height: auto !important; }
+.box-headword-audio-pronunciation { display: flex !important; flex-direction: row !important; flex-wrap: wrap !important; justify-content: flex-start !important; align-items: center !important; column-gap: 16px !important; text-align: left !important; }
+.box-headword-audio-pronunciation h1.hdr-headword, .box-headword-audio-pronunciation > .box-audio-pronunciation { width: auto !important; flex: 0 1 auto !important; }
+.box-headword-audio-pronunciation > .box-headword-type { display: contents !important; }
+.box-headword-audio-pronunciation em.txt-entry-group-type { order: 3 !important; margin-left: auto !important; }
+.box-headword-audio-pronunciation > .box-audio-pronunciation { margin: 0 !important; }
+blockquote.box-examples, blockquote.box-examples > em, blockquote.box-examples p { border-left: 0 !important; padding-left: 0 !important; }
+/* The entry's decorative background picture (not in 2019) would otherwise be treated as a photo on dark devices */
+.box-item-entry { background-image: none !important; }

@@ -1,21 +1,71 @@
-/* net19 handmade theme: Mayo Clinic, 2019: Arial/Helvetica everywhere (no serif display type), deep #0033a0 blue, square buttons, tiles and letter boxes, a gray-ruled menu bar. */
-html { --n19-blue: #0033a0; --n19-blue-2: #0057b8; --n19-text: #333; --n19-text-2: #555; --n19-rule: #d6d6d6; }
-html[data-net19-mode="dark"] { --n19-blue: #8cc5ff; --n19-blue-2: #afd7ff; --n19-text: #eee; --n19-text-2: #bbb; --n19-rule: #444; }
+/* net19 handmade theme: Mayo Clinic, 2019: Helvetica/Arial everywhere (no serif display type), #003da5 blue; a white header
+   whose menu is a row of small gray 13px items split by thin rules over a hairline; small gray utility links; square
+   solid-blue uppercase buttons; a plain inset search field; headings in regular-weight Helvetica with a short blue rule;
+   square gray-bordered letter boxes with black letters. */
+html { --n19-blue: #003da5; --n19-blue-2: #3967c1; --n19-text: #111; --n19-text-2: #54585a; --n19-rule: #d9d9d9; --n19-box: #dadad5;
+  --n19-field: #f5f5f3; --n19-field-border: #babbb1; --n19-page: #fff; --n19-on-blue: #fff; }
+html[data-net19-mode="dark"] { --n19-blue: #8cb4ff; --n19-blue-2: #afc9ff; --n19-text: #eee; --n19-text-2: #b8babb; --n19-rule: #444; --n19-box: #555;
+  --n19-field: #222; --n19-field-border: #555; --n19-page: #121212; --n19-on-blue: #fff; }
 /* Mayo's design tokens (radii are unitless pixel numbers) */
 html:root, body.light-mode, body.dark-mode {
-  --mc-typography-font-family-sans: Arial, "Helvetica Neue", Helvetica, sans-serif !important;
-  --mc-typography-font-family-serif: Arial, "Helvetica Neue", Helvetica, sans-serif !important;
-  --mc-typography-font-family-display: Arial, "Helvetica Neue", Helvetica, sans-serif !important;
-  --mc-radius-x-small: 2 !important; --mc-radius-small: 3 !important; --mc-radius-medium: 3 !important; --mc-radius-large: 3 !important;
-  --mc-radius-x-large: 3 !important; --mc-radius-xx-large: 3 !important; --mc-radius-full: 3 !important;
+  --mc-typography-font-family-sans: Helvetica, Arial, sans-serif !important;
+  --mc-typography-font-family-serif: Helvetica, Arial, sans-serif !important;
+  --mc-typography-font-family-display: Helvetica, Arial, sans-serif !important;
+  --mc-radius-x-small: 0 !important; --mc-radius-small: 0 !important; --mc-radius-medium: 2 !important; --mc-radius-large: 2 !important;
+  --mc-radius-x-large: 2 !important; --mc-radius-xx-large: 2 !important; --mc-radius-full: 2 !important;
 }
-body.light-mode { --mc-color-action-primary-default: var(--n19-blue) !important; --mc-color-text-action-default: var(--n19-blue) !important; --mc-color-layer-brand-1-default: var(--n19-blue) !important; }
-body, input, button { font-family: Arial, "Helvetica Neue", Helvetica, sans-serif !important; }
-/* Article pages set mayo-sans / mayo-display directly on their elements */
-body :is(h1, h2, h3, h4, h5, h6, p, li, a, dd, dt, td, th, label, blockquote, figcaption, .content, .main) { font-family: Arial, "Helvetica Neue", Helvetica, sans-serif !important; letter-spacing: normal !important; }
-h1 { font-weight: 400 !important; }
-h2, h3 { font-weight: 700 !important; }
-/* Buttons and fields: square with 3px corners */
-a[class*="button" i], button[class*="button" i], .cmp-button, #access-nav a, input[type="search"], input[type="text"] { border-radius: 3px !important; }
-/* Top menu: gray rules between the items, as in the 2019 bar */
-header nav > ul > li + li, .cmp-navigation__item--level-0 + .cmp-navigation__item--level-0 { border-left: 1px solid var(--n19-rule) !important; }
+body.light-mode { --mc-color-action-primary-default: var(--n19-blue) !important; --mc-color-text-action-default: var(--n19-blue) !important;
+  --mc-color-layer-brand-1-default: var(--n19-blue) !important; --mc-color-text-primary: var(--n19-text) !important; }
+body, input, button { font-family: Helvetica, Arial, sans-serif !important; }
+/* Every page sets mayo-sans / mayo-display directly on its elements */
+body :is(h1, h2, h3, h4, h5, h6, p, li, a, span, dd, dt, td, th, label, blockquote, figcaption, button, input) { font-family: Helvetica, Arial, sans-serif !important; letter-spacing: normal !important; }
+main a:not(.cmp-button):not([class*="button"]) { color: var(--n19-blue) !important; }
+
+/* Header: white with a hairline; the menu is small gray 13px items split by thin gray rules */
+header[data-testid="cmp-header"] { border-bottom: 1px solid var(--n19-rule) !important; background: var(--n19-page) !important; }
+header[data-testid="cmp-header"] .cmp-tabs--navigation { gap: 0 !important; }
+header[data-testid="cmp-header"] .cmp-tabs--navigation > li.cmp-tab { margin: 0 !important; padding: 0 18px !important; border-left: 1px solid var(--n19-rule) !important; }
+header[data-testid="cmp-header"] .cmp-tabs--navigation > li.cmp-tab:first-child { border-left: none !important; padding-left: 8px !important; }
+header[data-testid="cmp-header"] .cmp-tab__button-title { white-space: nowrap !important; font-size: 13px !important; line-height: 16px !important; color: var(--n19-text-2) !important; font-weight: 400 !important; }
+header[data-testid="cmp-header"] .cmp-tab__button .cmp-icon { transform: scale(.75) !important; color: var(--n19-text-2) !important; }
+/* 2019 layout: utility links on the top row at the right, the menu on its own row below */
+#header__content-inner-container { flex-wrap: wrap !important; row-gap: 6px !important; }
+#header__content-inner-container > .container-child:has(> ul.cmp-tabs--navigation) { order: 2 !important; flex: 0 0 100% !important; display: block !important; }
+#header__content-inner-container > .container-child:not(:has(> ul.cmp-tabs--navigation)) { order: 1 !important; margin-left: auto !important; }
+/* Utility links: small gray text */
+#header__content-right a, #header__content-right a span { font-size: 12px !important; color: var(--n19-text-2) !important; font-weight: 400 !important; }
+#header__content-right a:hover span { color: var(--n19-blue) !important; text-decoration: underline !important; }
+
+/* Hero: a shorter banner with bold Helvetica type */
+.cmp-hero-card__media-fullBleed, .cmp-hero-card__media-fullBleed .cmp-media__asset-container { max-height: 420px !important; border-radius: 0 !important; }
+.cmp-hero-card:has(.cmp-hero-card__media-fullBleed) { max-height: 420px !important; overflow: hidden !important; }
+.cmp-hero-card__media-fullBleed .cmp-media__asset-container { height: 420px !important; width: 100% !important; aspect-ratio: auto !important; }
+.cmp-hero-card__media-fullBleed :is(.cmp-media-video, .cmp-media__poster, video) { width: 100% !important; height: 100% !important; max-width: none !important; object-fit: cover !important; aspect-ratio: auto !important; }
+.cmp-hero-card h1 { font-size: 44px !important; line-height: 50px !important; font-weight: 700 !important; }
+/* Buttons: square solid blue with white bold uppercase text */
+a.cmp-hero-card__button:not(:first-child), .cmp-button__link.cmp-button--primary, a[class*="cmp-button__inner--type-primary"], a[class*="cmp-button__inner--type-secondary"] {
+  background: var(--n19-blue) !important; border: none !important; border-radius: 0 !important; color: var(--n19-on-blue) !important;
+  text-transform: uppercase !important; font-weight: 700 !important; font-size: 15px !important; padding: 0 24px !important;
+}
+a.cmp-hero-card__button:not(:first-child) *, a[class*="cmp-button__inner--type-primary"] *, a[class*="cmp-button__inner--type-secondary"] * { color: var(--n19-on-blue) !important; }
+
+/* Headings: regular weight, black; section titles in 2019 were plain Helvetica, not a display serif */
+main h1, main h2 { font-weight: 400 !important; color: var(--n19-text); }
+.cmp-hero-card h1 { color: #fff; }
+main h2[class*="--h2"] { font-size: 24px !important; line-height: 30px !important; }
+main h3 { font-weight: 700 !important; }
+
+/* Search fields: a light gray inset box with 2px corners */
+mc-search input.search-input { border-radius: 0 !important; }
+mc-search div:has(> input.search-input) { background: var(--n19-field) !important; border: 1px solid var(--n19-field-border) !important; border-radius: 2px !important;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,.15) !important; }
+input[type="search"], input[type="text"] { border-radius: 2px !important; }
+
+ul.cmp-alphabet-facet--inner { grid-template-columns: repeat(12, 36px) !important; gap: 6px !important; }
+/* Letter boxes: 36px squares, gray border, black letters */
+a.cmp-button__inner--type-alphabetFacet { width: 36px !important; height: 36px !important; min-width: 36px !important; border-radius: 0 !important;
+  border: 1px solid var(--n19-box) !important; background: var(--n19-page) !important; color: var(--n19-text) !important; font-size: 18px !important; font-weight: 400 !important; }
+a.cmp-button__inner--type-alphabetFacet * { color: var(--n19-text) !important; font-weight: 400 !important; font-size: 18px !important; }
+a.cmp-button__inner--type-alphabetFacet:hover { background: var(--n19-blue) !important; }
+a.cmp-button__inner--type-alphabetFacet:hover * { color: #fff !important; }
+main [role="tablist"] :is(a, button, [role="tab"]) { border-radius: 0 !important; }

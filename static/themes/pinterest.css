@@ -1,8 +1,10 @@
-/* net19 handmade theme: Pinterest, 2019: system Helvetica Neue type instead of Pin Sans, cool neutral grays (#efefef)
-   instead of today's warm stone grays, pill-shaped buttons and search field, round icon buttons. The layout is
-   essentially today's, so the theme only changes type, colors and corner radii. */
-html { --n19-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; --n19-text: #333; }
-html[data-net19-mode="dark"] { --n19-text: #efefef; }
+/* net19 handmade theme: Pinterest, 2019: system Helvetica type (no Pin Sans), #333 text, bold 16px labels on 8px-rounded
+   rectangular buttons (red #e60023 "Log in", gray #efefef "Sign up"), a gray #efefef search field with small 8px corners,
+   round icon buttons, cool neutral grays (#efefef) instead of today's warm stone grays, and pins with 8px corners.
+   The layout of today's pages is kept. Pinterest's own dark theme is followed. */
+html { --n19-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; --n19-text: #333; --n19-text-2: #8e8e8e;
+  --n19-red: #e60023; --n19-gray: #efefef; --n19-gray-hover: #e2e2e2; --n19-page: #fff; --n19-band: #f5f5f5; }
+html[data-net19-mode="dark"] { --n19-text: #efefef; --n19-text-2: #a5a5a5; --n19-red: #e60023; --n19-gray: #333; --n19-gray-hover: #444; --n19-page: #111; --n19-band: #1c1c1c; }
 html:root {
   --base-font-family-default-latin: var(--n19-font) !important; --font-family-default-latin: var(--n19-font) !important;
   --sema-font-family-body-100: var(--n19-font) !important; --sema-font-family-body-200: var(--n19-font) !important;
@@ -14,12 +16,24 @@ html:root {
   --sema-font-family-heading-600: var(--n19-font) !important; --sema-font-family-heading-700: var(--n19-font) !important;
   --sema-font-family-display-700: var(--n19-font) !important; --sema-font-family-display-800: var(--n19-font) !important;
   --sema-font-family-display-900: var(--n19-font) !important; --sema-font-family-display-1000: var(--n19-font) !important;
-  --comp-button-rounding-sm: 20px !important; --comp-button-rounding-md: 24px !important; --comp-button-rounding-lg: 24px !important;
-  --comp-buttontoggle-rounding-sm: 20px !important; --comp-buttontoggle-rounding-md: 24px !important; --comp-buttontoggle-rounding-lg: 24px !important;
+  /* 2019 Gestalt: 8px rectangles for buttons and fields, 8px pins, circles for icon buttons */
+  --comp-button-rounding-sm: 8px !important; --comp-button-rounding-md: 8px !important; --comp-button-rounding-lg: 8px !important;
+  --comp-buttontoggle-rounding-sm: 8px !important; --comp-buttontoggle-rounding-md: 8px !important; --comp-buttontoggle-rounding-lg: 8px !important;
   --comp-iconbutton-rounding-xs: 999px !important; --comp-iconbutton-rounding-sm: 999px !important; --comp-iconbutton-rounding-md: 999px !important;
   --comp-iconbutton-rounding-lg: 999px !important; --comp-iconbutton-rounding-xl: 999px !important;
-  --comp-searchguide-rounding-container: 24px !important;
+  --comp-searchguide-rounding-container: 8px !important; --comp-tag-rounding-md: 8px !important; --comp-tag-rounding-lg: 8px !important;
+  --sema-rounding-300: 8px !important; --sema-rounding-400: 8px !important; --sema-rounding-500: 8px !important; --sema-rounding-600: 8px !important;
+  --sema-rounding-700: 8px !important; --sema-rounding-800: 8px !important;
+  --comp-popover-rounding-container: 8px !important; --comp-modal-rounding-container-desktop: 8px !important; --comp-toast-rounding-container: 8px !important;
 }
 body { font-family: var(--n19-font) !important; color: var(--n19-text); }
-/* Search: the 2019 field was a full pill */
-#searchBoxContainer > div, #searchBoxContainer > div > div { border-radius: 24px !important; }
+/* Buttons: bold 16px labels, the red and gray 2019 fills */
+button.G0yGFD, a.G0yGFD, [data-test-id*="button" i] > button { border-radius: 8px !important; }
+button.G0yGFD div, a.G0yGFD div { font-size: 16px !important; font-weight: 700 !important; }
+/* Search: a gray field with small corners */
+#searchBoxContainer > div, #searchBoxContainer > div > div { border-radius: 8px !important; }
+#searchBoxContainer input { font-size: 16px !important; }
+/* Headings: 2019's #333 Helvetica bold */
+h1, h2, h3 { color: var(--n19-text); letter-spacing: -.01em; }
+/* Pins and landing pictures: 8px corners */
+[data-test-id="pin"] img, [data-test-id="pinWrapper"] > div, [data-test-id="pinrep-image"] { border-radius: 8px !important; }

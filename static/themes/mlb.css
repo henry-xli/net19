@@ -1,6 +1,13 @@
-/* net19 handmade theme: MLB.com, 2019: #002d72 navy nav bar with condensed bold uppercase links, a condensed face for headlines (MLB still ships HEX Franklin Narrow), Helvetica body copy, square white cards on a #ececec page. */
-html { --n19-navy: #002d72; --n19-page: #ececec; --n19-card: #fff; --n19-head: #333; --n19-font-head: "HEX Franklin MLB Narrow", mlb-primary, "Helvetica Neue", Helvetica, Arial, sans-serif; --n19-font-body: "Helvetica Neue", Helvetica, Arial, sans-serif; }
-html[data-net19-mode="dark"] { --n19-navy: #002d72; --n19-page: #14191f; --n19-card: #1e252d; --n19-head: #eee; --n19-font-head: "HEX Franklin MLB Narrow", mlb-primary, "Helvetica Neue", Helvetica, Arial, sans-serif; --n19-font-body: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+/* net19 handmade theme: MLB.com, 2019: a two-row #002d72 navy header (the logo row with the account icon, then a
+   46px row of small regular uppercase Helvetica links), a neutral #ececec page with square white cards, a light 26px
+   regular headline on the lead story with gray summary text, and a "LATEST NEWS" list of small bulleted text links
+   under a gray uppercase heading. */
+html { --n19-navy: #002d72; --n19-rule: rgba(255,255,255,.12); --n19-page: #ececec; --n19-card: #fff; --n19-head: #333; --n19-text-2: #666; --n19-label: #555;
+  --n19-bullet: #999; --n19-font-head: "HEX Franklin MLB Narrow", mlb-primary, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --n19-font-body: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+html[data-net19-mode="dark"] { --n19-navy: #002d72; --n19-rule: rgba(255,255,255,.12); --n19-page: #14191f; --n19-card: #1e252d; --n19-head: #eee; --n19-text-2: #aaa;
+  --n19-label: #bbb; --n19-bullet: #777; --n19-font-head: "HEX Franklin MLB Narrow", mlb-primary, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --n19-font-body: "Helvetica Neue", Helvetica, Arial, sans-serif; }
 /* MLB's design tokens: corners were square in 2019, and the page gray was a neutral #ececec. */
 html:root {
   --mlb-2-1-0-radius-radius-base: 0px !important; --mlb-2-1-0-radius-radius25: 0px !important; --mlb-2-1-0-radius-radius50: 0px !important;
@@ -10,14 +17,37 @@ html:root {
   --mlb-5-0-0-beta-2-radius-radius300: 0px !important; --mlb-5-0-0-beta-2-radius-radius400: 0px !important;
 }
 html:root:not([data-net19-mode="dark"]) { --mlb-2-1-0-surface-surface0: var(--n19-page) !important; --mlb-2-1-0-background-neutral: var(--n19-page) !important; }
-main.club-bg-skin { background: var(--n19-page) !important; }
-.header__nav-top { background: var(--n19-navy) !important; }
-.header__nav-top__nav-container :is(a, button, span) { font-family: var(--n19-font-head) !important; font-weight: 700 !important; font-size: 15px !important; text-transform: uppercase !important; letter-spacing: 0 !important; }
-:is(main, aside) :is(h1, h2, h3, h4) { font-family: var(--n19-font-head) !important; letter-spacing: 0 !important; }
-main :is(h1, h2, h3) { font-weight: 500 !important; }
-main p { font-family: var(--n19-font-body) !important; }
+main.club-bg-skin, main.club-bg-skin .container--max-width { background: var(--n19-page) !important; }
+
+/* Header: two navy rows. The logo row carries search and the account button; the links wrap onto a row of their own. */
+#react-header, #react-header header.mlb-header, #react-header .mlb-header--inner { height: auto !important; min-height: 0 !important; }
+#react-header .header__nav-top { background: var(--n19-navy) !important; flex-wrap: wrap !important; height: auto !important; padding: 0 !important; }
+#react-header .header__nav-top__logo { order: 0; margin-right: auto !important; height: 64px !important; display: flex !important; align-items: center !important; padding-left: 20px !important; }
+#react-header .header__nav-top__logo img { height: 44px !important; width: auto !important; }
+#react-header .header__nav-top > [class*="SearchWidgetContainer"] { order: 1; align-self: center !important; margin-left: auto !important; position: relative !important; left: auto !important; right: auto !important; }
+#react-header .header__nav-top__login-container { order: 2; align-self: center !important; margin-right: 16px !important; }
+#react-header .header__nav-top__nav-container { position: relative !important; order: 3; flex: 0 0 100% !important; height: 46px !important; border-top: 1px solid var(--n19-rule) !important; padding-left: 12px !important; }
+#react-header .header__nav-top__nav-container :is(nav, ul, li, [class*="NavItemInner"]) { height: 46px !important; }
+#react-header .header__nav-top__nav-container [class*="RevenueNavBar"] { margin-left: 0 !important; }
+#react-header .header__nav-top__nav-item__link, #react-header .header__nav-top__nav-item__link span, #react-header .header__nav-top__button span {
+  font-family: var(--n19-font-body) !important; font-weight: 400 !important; font-size: 12px !important; text-transform: uppercase !important; letter-spacing: 0 !important; color: #fff !important;
+}
+#react-header .header__nav-top__nav-item__link { padding-left: 8px !important; padding-right: 8px !important; height: 46px !important; }
+
+/* Lead story: a light, regular-weight 26px headline and gray summary text on a square white card. */
 main :is(article, section, [class*="Card"], [class*="card"]) { border-radius: 0 !important; }
 main img { border-radius: 0 !important; }
-/* The "Latest News" stack was a compact list of small Helvetica links with the uppercase condensed heading. */
-[class*="HeadlineStackContainer"] h2 { text-transform: uppercase !important; font-size: 20px !important; font-weight: 500 !important; color: #555 !important; }
-[class*="HeadlineStackContainer"] [class*="HeadlineText"] { font-family: var(--n19-font-body) !important; font-size: 14px !important; font-weight: 400 !important; line-height: 1.35 !important; }
+main :is(h1, h2, h3, h4) { font-family: var(--n19-font-body) !important; letter-spacing: 0 !important; }
+main [class*="ContentCardContainer"] { box-shadow: none !important; }
+main [class*="ContentCardContainer"] [class*="HeadlineContainer"] h2 { font-size: 26px !important; line-height: 1.25 !important; font-weight: 400 !important; color: var(--n19-head) !important; }
+main [class*="ContentCardContainer"] .contentcard__description, main [class*="ContentCardContainer"] .contentcard__description p {
+  font-family: var(--n19-font-body) !important; font-size: 14px !important; font-weight: 400 !important; line-height: 1.5 !important; color: var(--n19-text-2) !important;
+}
+main p { font-family: var(--n19-font-body) !important; }
+/* "Latest News": a gray uppercase heading over a compact list of small bulleted Helvetica links; no team logos. */
+[class*="HeadlineStackContainer"] h2 { text-transform: uppercase !important; font-size: 15px !important; font-weight: 400 !important; color: var(--n19-label) !important; letter-spacing: 0 !important; }
+[class*="HeadlineStackContainer"] [data-testid="headline-stack-spot"] { display: none !important; }
+[class*="HeadlineStackContainer"] li[data-testid="headline-stack"] { display: list-item !important; list-style: disc outside !important; margin: 0 0 4px 14px !important; padding: 0 !important; border: 0 !important; line-height: 17px !important; min-height: 0 !important; height: auto !important; }
+[class*="HeadlineStackContainer"] li[data-testid="headline-stack"]::marker { color: var(--n19-bullet); font-size: 11px; }
+[class*="HeadlineStackContainer"] li[data-testid="headline-stack"] > a { display: inline !important; padding: 0 !important; min-height: 0 !important; }
+[class*="HeadlineStackContainer"] [class*="HeadlineText"] { font-family: var(--n19-font-body) !important; font-size: 13px !important; font-weight: 400 !important; line-height: 17px !important; color: var(--n19-head) !important; }

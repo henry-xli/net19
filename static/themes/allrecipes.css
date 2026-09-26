@@ -1,6 +1,9 @@
-/* net19 handmade theme: Allrecipes, 2019: Source Sans Pro everywhere with light, normal-weight titles, the #ff7e1a orange for stars, links and the square Save button, flat gray action bar. */
-html { --n19-orange: #ff7e1a; --n19-orange-hover: #e8680a; --n19-title: #2d2d2d; --n19-bar: #e6e6e6; --n19-edge: #e0e0e0; }
-html[data-net19-mode="dark"] { --n19-orange: #ff8a33; --n19-orange-hover: #ff9d52; --n19-title: #eee; --n19-bar: #333; --n19-edge: #444; }
+/* net19 handmade theme: Allrecipes, 2019: Source Sans Pro everywhere in #4d4d4d; a pale #fafafa header with a #e6e6e6
+   hairline, plain gray 14px navigation, a square white search field and an orange square sign-in button; light,
+   normal-weight #2d2d2d titles, the #ff7e1a orange for stars, links and the square Save button, a flat #f2f2f2 action
+   bar. No MyRecipes app promotions. */
+html { --n19-orange: #ff7e1a; --n19-orange-hover: #e8680a; --n19-title: #2d2d2d; --n19-text: #4d4d4d; --n19-bar: #f2f2f2; --n19-edge: #e6e6e6; --n19-head: #fafafa; --n19-field: #fff; }
+html[data-net19-mode="dark"] { --n19-orange: #ff8a33; --n19-orange-hover: #ff9d52; --n19-title: #eee; --n19-text: #ccc; --n19-bar: #333; --n19-edge: #444; --n19-head: #1e1e1e; --n19-field: #2a2a2a; }
 html:root { --border-radius-md: 0 !important; --border-radius-sm: 0 !important; --border-radius-lg: 2px !important; }
 body, body :is(h1, h2, h3, h4, p, a, span, button, input, li, div, label) { font-family: "Source Sans Pro", SourceSansPro, "Helvetica Neue", Helvetica, sans-serif !important; }
 
@@ -19,3 +22,19 @@ h2, h3, [class*="text-headline"], [class*="text-title"] { font-weight: 400 !impo
 /* Breadcrumbs and nav: 2019 sentence case, not letter-spaced capitals */
 .mntl-breadcrumbs__link { text-transform: none !important; letter-spacing: 0 !important; font-weight: 400 !important; }
 .mm-recipes-utility-nav .mntl-button:not(.mm-myrecipes-favorite__link), .mm-recipes-utility-nav { background-color: var(--n19-bar) !important; }
+
+/* Header: pale gray with a hairline; plain gray navigation; a square white search field; an orange sign-in button */
+.mntl-header, .mntl-header__menu-top, .mntl-header-nav { background-color: var(--n19-head) !important; }
+.mntl-header { border-bottom: 1px solid var(--n19-edge) !important; box-shadow: none !important; }
+.mntl-header-nav__list-item > a, .mntl-header-nav__list-item > a span { font-weight: 400 !important; letter-spacing: 0 !important; color: var(--n19-text) !important; font-size: 15px !important; }
+.mntl-header .mntl-search-form__input { border: 1px solid var(--n19-edge) !important; border-radius: 0 !important; background: var(--n19-field) !important; box-shadow: none !important; font-size: 16px !important; }
+.mntl-header .mntl-utility-nav__signin > a { background: var(--n19-orange) !important; color: #fff !important; border-radius: 0 !important; padding: 8px 16px !important; text-decoration: none !important; }
+.mntl-header .mntl-utility-nav__signin > a * { color: #fff !important; fill: #fff !important; }
+.mntl-utility-nav__magazine a, .header .mntl-header-nav__subscribe-link { color: var(--n19-orange) !important; letter-spacing: 0 !important; }
+/* The MyRecipes app did not exist in 2019 */
+.mm-myrecipes-app-promo-banner, .mntl-message-banner:has(a[href*="myrecipes" i]) { display: none !important; }
+/* Body text and cards: #4d4d4d text, normal-weight dark titles */
+body { color: var(--n19-text) !important; }
+.card__title-text, .card__title { font-weight: 400 !important; letter-spacing: 0 !important; color: var(--n19-title) !important; }
+.card, .card__content, .mntl-card, .card__media, .card__img { border-radius: 0 !important; }
+.mntl-breadcrumbs__link, .mntl-breadcrumbs__item { color: var(--n19-text) !important; }

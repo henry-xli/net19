@@ -1,8 +1,8 @@
 /* net19 handmade theme: NYC.gov, 2019: Helvetica/Arial bold on a light gray page, white square-cornered cards and flat #1b75bb buttons, white header with a gray bar, black footer. */
 html { --n19-page: #e8e8e8; --n19-card: #fff; --n19-text: #222; --n19-text-2: #555; --n19-blue: #1b75bb; --n19-blue-dark: #155a91; --n19-link: #1b75bb;
-  --n19-border: #d6d6d6; --n19-header: #fff; --n19-header-text: #333; --n19-header-rule: #ccc; --n19-surface-low: #f2f2f2; }
+  --n19-border: #d6d6d6; --n19-header: #fff; --n19-header-text: #333; --n19-header-rule: #ccc; --n19-surface-low: #f2f2f2; --n19-hero-text: #fff; }
 html[data-net19-mode="dark"] { --n19-page: #1c1c1c; --n19-card: #2a2a2a; --n19-text: #eee; --n19-text-2: #bbb; --n19-blue: #2b86cf; --n19-blue-dark: #1b75bb; --n19-link: #6cb4ee;
-  --n19-border: #444; --n19-header: #111; --n19-header-text: #eee; --n19-header-rule: #333; --n19-surface-low: #333; }
+  --n19-border: #444; --n19-header: #111; --n19-header-text: #eee; --n19-header-rule: #333; --n19-surface-low: #333; --n19-hero-text: #fff; }
 /* The city's design-system tokens: every component (cards, buttons, modals, accordions) reads these. */
 html:root {
   --nyc-sys-font-family-body: "Helvetica Neue", Helvetica, Arial, sans-serif !important; --nyc-sys-font-family-heading: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
@@ -32,10 +32,20 @@ body h1, body h2, body h3 { font-family: "Helvetica Neue", Helvetica, Arial, san
 #primary-header, #primary-header :is(a, button, span, h4) { color: var(--n19-header-text) !important; }
 #primary-header .official-website-banner, #primary-header .official-website-banner :is(div, h4, button) { background: transparent !important; }
 html:not([data-net19-mode="dark"]) #primary-header .nyc-header__title img { filter: invert(1) !important; }
-#primary-header a.nyc-navigation__item-link { font-weight: 700 !important; font-size: 17px !important; }
+/* 2019 menu: 15px bold words between hairline dividers; a small gray "official website" line; a plain boxed Search */
+#primary-header a.nyc-navigation__item-link { font-weight: 700 !important; font-size: 15px !important; padding: 0 16px !important; }
+#primary-header li.nyc-navigation__item--level-0 { border-left: 1px solid var(--n19-header-rule) !important; }
+#primary-header li.nyc-navigation__item--level-0:last-child { border-right: 1px solid var(--n19-header-rule) !important; }
+#primary-header .official-website-banner .cmp-accordion__title { font-size: 13px !important; font-weight: 400 !important; color: var(--n19-text-2) !important; text-decoration: none !important; }
+#global-search-button { height: 30px !important; margin-top: 7px !important; padding: 0 10px !important; }
+#global-search-button, #global-search-button * { font-size: 13px !important; font-weight: 400 !important; color: var(--n19-text-2) !important; }
+#global-translate-button .button__text { font-size: 13px !important; font-weight: 700 !important; }
 #global-search-button { border: 1px solid var(--n19-header-rule) !important; border-radius: 0 !important; background: var(--n19-card) !important; }
 /* Some surfaces carry their own rounding outside the tokens (hero, news photos, feature cards). */
 #mainContent :is(div, a, img, picture, figure, section, article, button) { border-radius: 0 !important; }
 #primary-header .official-website-banner, #primary-header .official-website-banner * { box-shadow: none !important; }
 .cmp-news-carousel a.cmp-button { background: var(--n19-blue) !important; border-color: var(--n19-blue) !important; }
 .cmp-news-carousel a.cmp-button:hover { background: var(--n19-blue-dark) !important; }
+/* The homepage headline sits on a photo, which stays as drawn when a dark device inverts the page: its white is written black there so it comes out white */
+html[data-net19-flip] { --n19-hero-text: #000; }
+h1 > .main-heading--subhead { color: var(--n19-hero-text) !important; }

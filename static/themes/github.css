@@ -1,26 +1,81 @@
-/* net19 handmade theme: GitHub, 2019: near-black header, gradient buttons with 3px corners, square avatars,
-   orange-topped repository tabs. The 2019 light palette, and a dark variant with the same shapes. */
-html { --n19-header: #24292e; --n19-header-text: #fff; --n19-header-field: rgba(255,255,255,.125); --n19-header-border: #444d56;
-  --n19-bg: #fff; --n19-bg-2: #fafbfc; --n19-bg-3: #f6f8fa; --n19-text: #24292e; --n19-text-2: #586069; --n19-link: #0366d6; --n19-border: #e1e4e8;
+/* net19 handmade theme: GitHub, 2019: a #24292e header with plain 16px white links, a translucent "Search GitHub"
+   field, a plain "Sign in" and an outlined "Sign up"; the signed-out home page's #2b3137 hero with the headline and
+   lead on the left and the sign-up form in a light #fafbfc box on the right; repositories under a #fafbfc page head
+   with folder tabs topped in orange, blue file names in a compact list under a pale blue commit bar, gradient buttons
+   with 3px corners and square avatars, all in the system font. The dark variant keeps every shape on dark tokens. */
+html { --n19-header: #24292e; --n19-header-text: #fff; --n19-header-dim: rgba(255,255,255,.75); --n19-header-field: rgba(255,255,255,.125); --n19-header-border: #444d56;
+  --n19-hero: #2b3137; --n19-hero-lead: rgba(255,255,255,.6); --n19-signup-box: #fafbfc; --n19-signup-text: #24292e; --n19-signup-note: #6a737d; --n19-signup-green: #2ebc4f; --n19-signup-green-hover: #28a745;
+  --n19-bg: #fff; --n19-bg-2: #fafbfc; --n19-bg-3: #f6f8fa; --n19-text: #24292e; --n19-text-2: #586069; --n19-link: #0366d6; --n19-border: #e1e4e8; --n19-row-border: #eaecef;
   --n19-btn-from: #fafbfc; --n19-btn-to: #eff3f6; --n19-btn-hover-from: #f0f3f6; --n19-btn-hover-to: #e6ebf1; --n19-btn-border: rgba(27,31,35,.2); --n19-btn-text: #24292e;
   --n19-primary-from: #34d058; --n19-primary-to: #28a745; --n19-primary-hover-from: #2fcb53; --n19-primary-hover-to: #269f42;
-  --n19-tab-edge: #e36209; --n19-counter: rgba(27,31,35,.08); --n19-field-border: #d1d5da; --n19-field-inset: inset 0 1px 2px rgba(27,31,35,.075); }
-html[data-net19-mode="dark"] { --n19-header: #161b22; --n19-header-text: #f0f6fc; --n19-header-field: rgba(255,255,255,.07); --n19-header-border: #30363d;
-  --n19-bg: #0d1117; --n19-bg-2: #161b22; --n19-bg-3: #161b22; --n19-text: #c9d1d9; --n19-text-2: #8b949e; --n19-link: #58a6ff; --n19-border: #30363d;
+  --n19-tab-edge: #e36209; --n19-counter: rgba(27,31,35,.08); --n19-field-border: #d1d5da; --n19-field-inset: inset 0 1px 2px rgba(27,31,35,.075);
+  --n19-commit-bar: #f1f8ff; --n19-commit-border: #c8e1ff; --n19-folder: #79b8ff; --n19-file: #6a737d;
+  --n19-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; }
+html[data-net19-mode="dark"] { --n19-header: #161b22; --n19-header-text: #f0f6fc; --n19-header-dim: rgba(240,246,252,.7); --n19-header-field: rgba(255,255,255,.07); --n19-header-border: #30363d;
+  --n19-hero: #2b3137; --n19-hero-lead: rgba(255,255,255,.6); --n19-signup-box: #fafbfc; --n19-signup-text: #24292e; --n19-signup-note: #6a737d; --n19-signup-green: #2ebc4f; --n19-signup-green-hover: #28a745;
+  --n19-bg: #0d1117; --n19-bg-2: #161b22; --n19-bg-3: #161b22; --n19-text: #c9d1d9; --n19-text-2: #8b949e; --n19-link: #58a6ff; --n19-border: #30363d; --n19-row-border: #21262d;
   --n19-btn-from: #2d333b; --n19-btn-to: #22272e; --n19-btn-hover-from: #373e47; --n19-btn-hover-to: #2d333b; --n19-btn-border: rgba(240,246,252,.1); --n19-btn-text: #c9d1d9;
   --n19-primary-from: #2ea043; --n19-primary-to: #238636; --n19-primary-hover-from: #3fb950; --n19-primary-hover-to: #2ea043;
-  --n19-tab-edge: #f78166; --n19-counter: rgba(110,118,129,.4); --n19-field-border: #30363d; --n19-field-inset: inset 0 1px 0 rgba(0,0,0,.2); }
-html { --borderRadius-small: 3px; --borderRadius-medium: 3px; --borderRadius-default: 3px; --borderRadius-large: 3px; }
-body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif !important; }
+  --n19-tab-edge: #f78166; --n19-counter: rgba(110,118,129,.4); --n19-field-border: #30363d; --n19-field-inset: inset 0 1px 0 rgba(0,0,0,.2);
+  --n19-commit-bar: #131d2b; --n19-commit-border: #1f3a5f; --n19-folder: #79b8ff; --n19-file: #8b949e; }
+html { --borderRadius-small: 3px; --borderRadius-medium: 3px; --borderRadius-default: 3px; --borderRadius-large: 3px; --fontStack-sansSerif: var(--n19-font); --fontStack-system: var(--n19-font); }
+body, .font-mktg, .HeaderMktg, header.HeaderMktg :is(button, a, span, input), [class*="Primer_Brand__"] { font-family: var(--n19-font) !important; }
 
-/* Header on every page */
-.AppHeader, .AppHeader .AppHeader-globalBar, header.HeaderMktg, .Header { background: var(--n19-header) !important; box-shadow: none !important; }
+/* Header on every page: flat #24292e */
+.AppHeader, .AppHeader .AppHeader-globalBar, header.HeaderMktg.HeaderMktg.HeaderMktg[data-marketing-header][role="banner"], header.HeaderMktg, .Header { background: var(--n19-header) !important; box-shadow: none !important; backdrop-filter: none !important; }
 .AppHeader .AppHeader-globalBar a, .AppHeader .AppHeader-globalBar button, .AppHeader .AppHeader-context-item-label, header.HeaderMktg a, header.HeaderMktg button,
 .AppHeader .AppHeader-globalBar svg, header.HeaderMktg svg { color: var(--n19-header-text) !important; }
 .AppHeader .AppHeader-globalBar .AppHeader-button, .AppHeader .AppHeader-search-button, .AppHeader .AppHeader-searchButton, header.HeaderMktg .header-search-button {
   background: var(--n19-header-field) !important; border: 1px solid var(--n19-header-border) !important; border-radius: 3px !important;
 }
 .AppHeader .AppHeader-localBar { background: var(--n19-bg-2) !important; }
+/* Signed-out header: 16px regular links, a 240px translucent search field, "Sign in" as a plain link, "Sign up" outlined */
+header.HeaderMktg nav :is(button, a), header.HeaderMktg nav li > a { font-size: 16px !important; font-weight: 400 !important; }
+header.HeaderMktg nav > ul > li > div > button:hover, header.HeaderMktg nav > ul > li > a:hover { color: var(--n19-header-dim) !important; }
+header.HeaderMktg button[aria-label^="Search or jump" i] {
+  width: 240px !important; justify-content: flex-start !important; background: var(--n19-header-field) !important; border: none !important; border-radius: 3px !important;
+  height: 34px !important; padding: 0 10px !important; align-items: center !important; line-height: 20px !important; color: var(--n19-header-dim) !important; font-size: 14px !important; font-weight: 400 !important;
+}
+header.HeaderMktg button[aria-label^="Search or jump" i] svg { display: none !important; }
+header.HeaderMktg button[aria-label^="Search or jump" i] > span { justify-content: flex-start !important; text-align: left !important; width: 100% !important; }
+header.HeaderMktg button[aria-label^="Search or jump" i] { position: relative !important; }
+header.HeaderMktg button[aria-label^="Search or jump" i] [data-net19-label] { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); line-height: 20px; color: var(--n19-header-dim) !important; }
+header.HeaderMktg a[href^="/login"] { background: transparent !important; border: none !important; padding: 0 4px !important; font-size: 16px !important; font-weight: 400 !important; }
+header.HeaderMktg a[href^="/signup"] { background: transparent !important; border: 1px solid var(--n19-header-border) !important; border-radius: 3px !important; padding: 4px 8px !important; font-size: 16px !important; font-weight: 400 !important; }
+
+/* Signed-out home page: the #2b3137 hero, headline and lead left, sign-up form in a light box right */
+.lp-Home #hero, .lp-Home .lp-Intro { background: var(--n19-hero) !important; }
+.lp-Home .lp-Intro-gradient, .lp-Home .lp-IntroVisuals { display: none !important; }
+.lp-Home .lp-Intro > .lp-Spacer:not(.lp-IntroTop-spacer):not(.lp-IntroVisuals-spacer) { height: 0 !important; }
+.lp-Home .lp-IntroTop-spacer { height: 64px !important; }
+.lp-Home .lp-IntroVisuals-spacer { height: 96px !important; }
+/* The hero sits in the page (not pinned while the demo slides over it), with no glow around the demo */
+.lp-Home .lp-IntroHero { position: relative !important; top: auto !important; left: auto !important; transform: none !important; opacity: 1 !important; filter: none !important; }
+.lp-Home .lp-HeroCarousel-background, .lp-Home .lp-Intro::after, .lp-Home .lp-HeroCarousel-content::before { display: none !important; }
+.lp-Home .lp-IntroHero { display: grid !important; grid-template-columns: 7fr 5fr; align-items: center; column-gap: 48px; max-width: 1012px; margin: 0 auto !important; padding: 0 16px; box-sizing: border-box; }
+.lp-Home .lp-IntroHero > section { max-width: none !important; width: auto !important; margin: 0 !important; padding: 0 !important; text-align: left !important; }
+.lp-Home .lp-IntroHero > section * { text-align: left !important; justify-content: flex-start !important; align-items: flex-start !important; margin-left: 0 !important; margin-right: 0 !important; max-width: none !important; }
+.lp-Home .lp-IntroHero h1 { font-size: 64px !important; line-height: 1.1 !important; font-weight: 500 !important; letter-spacing: 0 !important; color: #fff !important; font-variation-settings: normal !important; }
+.lp-Home .lp-IntroHero > section p { font-size: 20px !important; line-height: 1.5 !important; font-weight: 400 !important; color: var(--n19-hero-lead) !important; }
+.lp-Home .lp-IntroHero .CtaForm { display: block !important; margin: 0 !important; width: auto !important; background: var(--n19-signup-box) !important; border-radius: 3px !important; padding: 24px !important; box-sizing: border-box; }
+.lp-Home .lp-IntroHero .CtaForm form { display: block !important; width: 100% !important; }
+.lp-Home .lp-IntroHero .CtaFormControl-container { display: block !important; background: transparent !important; border: none !important; box-shadow: none !important; padding: 0 !important; border-radius: 0 !important; }
+.lp-Home .lp-IntroHero .CtaFormControl-field-wrap { display: flex !important; flex-direction: column !important; width: 100% !important; }
+.lp-Home .lp-IntroHero .CtaFormControl-label { position: static !important; transform: none !important; display: block !important; color: var(--n19-signup-text) !important; font-size: 16px !important; font-weight: 400 !important; margin: 0 0 5px !important; opacity: 1 !important; }
+.lp-Home .lp-IntroHero .CtaFormControl-field-wrap > span, .lp-Home .lp-IntroHero .CtaFormControl-input {
+  width: 100% !important; min-height: 46px !important; background: #fff !important; border: 1px solid var(--n19-field-border) !important; border-radius: 5px !important;
+  box-shadow: var(--n19-field-inset) !important; color: var(--n19-signup-text) !important; font-size: 16px !important; box-sizing: border-box;
+}
+.lp-Home .lp-IntroHero .CtaFormControl-field-wrap > span .CtaFormControl-input { border: none !important; box-shadow: none !important; }
+.lp-Home .lp-IntroHero .CtaFormControl-input::placeholder { color: transparent !important; }
+.lp-Home .lp-IntroHero .CtaForm button[type="submit"], .lp-Home .lp-IntroHero .CtaFormControl-container > button {
+  display: block !important; width: 100% !important; margin: 16px 0 0 !important; height: auto !important; padding: 20px 32px !important; border-radius: 3px !important;
+  background: var(--n19-signup-green) !important; border: 1px solid var(--n19-signup-green) !important; color: #fff !important; font-size: 16px !important; font-weight: 500 !important;
+}
+.lp-Home .lp-IntroHero .CtaForm button[type="submit"]:hover, .lp-Home .lp-IntroHero .CtaFormControl-container > button:hover { background: var(--n19-signup-green-hover) !important; }
+.lp-Home .lp-IntroHero .CtaForm button * { color: #fff !important; font-size: 16px !important; }
+/* The Copilot app did not exist */
+.lp-Home .CtaForm-secondaryAction { display: none !important; }
 
 /* Buttons */
 .btn:not(.btn-primary):not(.btn-danger), .Button--secondary, button[data-variant="default"], a[data-variant="default"] {
@@ -35,7 +90,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Ar
 .btn-primary:hover, .Button--primary:hover, button[data-variant="primary"]:hover { background: linear-gradient(-180deg, var(--n19-primary-hover-from), var(--n19-primary-hover-to) 90%) !important; }
 
 /* Square avatars */
-.avatar, .avatar-user, img.avatar, img[data-testid="github-avatar"], [class*="Avatar"] img, img[class*="Avatar"] { border-radius: 3px !important; }
+.avatar, .avatar-user, img.avatar, img[data-testid="github-avatar"], [class*="Avatar"] img, img[class*="Avatar"], [data-component="Avatar"] { border-radius: 3px !important; }
 
 /* Boxes, counters, fields */
 .Box, .rounded-2, [class*="Box-sc-"] { border-radius: 3px !important; }
@@ -43,9 +98,30 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Ar
 .form-control, .FormControl-input, input.form-control, [class*="TextInput-wrapper"] { border-radius: 3px !important; border-color: var(--n19-field-border) !important; box-shadow: var(--n19-field-inset) !important; }
 .Label, .IssueLabel { border-radius: 2px !important; font-weight: 600 !important; }
 
+/* Repository head: #fafbfc band with a hairline, 20px title (owner regular, name bold), no "Public" badge */
+#repository-container-header { background: var(--n19-bg-2) !important; border-bottom: 1px solid var(--n19-border) !important; }
+#repository-container-header strong[itemprop="name"] a, #repository-container-header [itemprop="author"] a { font-size: 20px !important; }
+#repository-container-header [itemprop="author"] a { font-weight: 400 !important; }
+#repository-container-header .Label--secondary { display: none !important; }
 /* Repository tabs: the selected one is a folder tab with a colored top edge */
-.UnderlineNav-item { border-radius: 3px 3px 0 0 !important; border: 1px solid transparent !important; border-top-width: 3px !important; padding: 7px 15px 8px !important; }
+.UnderlineNav { box-shadow: none !important; }
+.UnderlineNav-item { border-radius: 3px 3px 0 0 !important; border: 1px solid transparent !important; border-top-width: 3px !important; padding: 7px 15px 8px !important; margin-bottom: -1px !important; }
 .UnderlineNav-item.selected, .UnderlineNav-item[aria-current]:not([aria-current="false"]) {
   border-color: var(--n19-tab-edge) var(--n19-border) transparent !important; background: var(--n19-bg) !important; color: var(--n19-text) !important;
 }
 .UnderlineNav-item.selected::after, .UnderlineNav-item[aria-current]::after { display: none !important; }
+.UnderlineNav-item:hover { background: transparent; border-bottom-color: transparent !important; }
+
+/* File list: a pale blue commit bar, compact rows, blue file names, blue folder icons */
+[data-testid="latest-commit"] { color: var(--n19-text-2); }
+[class*="DirectoryContent-module__Box_3"], div:has(> [class*="LatestCommit-module__Box"]) { background: var(--n19-commit-bar) !important; border-color: var(--n19-commit-border) !important; border-radius: 3px 3px 0 0 !important; }
+table[aria-labelledby="folders-and-files"] { border-radius: 0 0 3px 3px !important; }
+table[aria-labelledby="folders-and-files"] thead, table[aria-labelledby="folders-and-files"] thead th { background: var(--n19-commit-bar) !important; border-color: var(--n19-commit-border) !important; }
+table[aria-labelledby="folders-and-files"] .react-directory-row td { padding-top: 6px !important; padding-bottom: 6px !important; line-height: 20px !important; border-top-color: var(--n19-row-border) !important; }
+table[aria-labelledby="folders-and-files"] .react-directory-row, table[aria-labelledby="folders-and-files"] .react-directory-row td { height: auto !important; }
+table[aria-labelledby="folders-and-files"] .react-directory-row .react-directory-filename-column { height: 20px !important; }
+table[aria-labelledby="folders-and-files"] .react-directory-row:hover { background: var(--n19-bg-3) !important; }
+.react-directory-truncate a.Link--primary, .react-directory-filename-cell a { color: var(--n19-link) !important; }
+.react-directory-filename-column svg.icon-directory, .react-directory-filename-column svg[class*="directory" i] { color: var(--n19-folder) !important; fill: var(--n19-folder) !important; }
+.react-directory-filename-column svg:not([class*="directory" i]) { color: var(--n19-file) !important; }
+.react-directory-commit-message a, .react-directory-commit-age { color: var(--n19-text-2) !important; }

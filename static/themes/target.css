@@ -26,3 +26,14 @@ div:has(> [class*="styles_utilityHeaderWrapper"]) > * { order: 3; }
 [class*="styles_storycardWrapper"], [class*="styles_ndsPicture"] img, [class*="ProductCard"] img { border-radius: 0 !important; }
 /* "Ask Target" (an AI shopping assistant) did not exist in 2019 */
 [class*="AskAiButton_button"], [aria-label="Ask Target"] { display: none !important; }
+/* Search: the 2019 field ended in a light gray magnifier button; voice search did not exist */
+[class*="styles_primaryHeaderWrapper"] form button[aria-label*="voice" i], [class*="styles_primaryHeaderWrapper"] form [class*="voice" i] { display: none !important; }
+[class*="styles_primaryHeaderWrapper"] button[data-test="@web/Search/SearchButton"] { display: flex !important; align-items: center !important; justify-content: center !important;
+  visibility: visible !important; opacity: 1 !important; background: #f0f0f0 !important; border-left: 1px solid #d6d6d6 !important; border-radius: 0 20px 20px 0 !important; width: 48px !important;
+  position: absolute !important; right: 0 !important; top: 0 !important; bottom: 0 !important; left: auto !important; height: auto !important; margin: 0 !important; }
+[class*="styles_primaryHeaderWrapper"] form[class*="styles_searchForm"] { position: relative !important; overflow: hidden !important; }
+[class*="styles_primaryHeaderWrapper"] input[data-test*="SearchInput"]::placeholder { color: #888 !important; }
+/* Nav labels: bold white 17px; the utility links are small 13px gray text */
+[class*="styles_primaryHeaderWrapper"] a[data-test="@web/Header/MainMenuLink"], [class*="styles_primaryHeaderWrapper"] a[class*="spacedPrimaryHeaderLink"] { font-size: 17px !important; font-weight: 700 !important; }
+[class*="styles_utilityHeaderWrapper"] a, [class*="styles_utilityHeaderWrapper"] button, [class*="styles_utilityHeaderWrapper"] span { font-size: 13px !important; }
+body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }

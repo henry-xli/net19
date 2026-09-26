@@ -1,10 +1,34 @@
-/* net19 handmade theme: New York Post, 2019: the same red masthead with the centered logo, in the older, softer Post
-   red (#cc3333) instead of today's #c60800, square corners, red "Follow us"-style section rules. The 2019 layout is
-   essentially today's, so the theme is small: colors and corner radii. The Post has no dark mode. */
-html { --n19-red: #cc3333; --n19-red-hover: #e04848; --n19-rule: #cc3333; }
-html[data-net19-mode="dark"] { --n19-red: #e05555; --n19-red-hover: #f07070; --n19-rule: #e05555; }
+/* net19 handmade theme: New York Post, 2019 (checked against the June 2019 homepage and its nypost-2016 stylesheet): one
+   slim flat red (#cc3333) bar about 55px tall with the white Post logo centered at 45px, plain white uppercase Futura-style
+   "Sections" / "Search" links on the left and "Tips" / "Log in" on the right (no outlined buttons), no black section strip
+   under it; headlines in a plain grotesk bold in #2a2a2a, square corners. The Post has no dark mode. */
+html { --n19-red: #cc3333; --n19-red-hover: #7e3332; --n19-rule: #cc3333; --n19-text: #2a2a2a; --n19-meta: #717171; }
+html[data-net19-mode="dark"] { --n19-red: #e05555; --n19-red-hover: #f07070; --n19-rule: #e05555; --n19-text: #e6e6e6; --n19-meta: #aaa; }
 html:root { --wp--custom--utility--radius: 0 !important; }
+
+/* Masthead: a 55px red bar, logo 300x45 in the middle */
 .site-header__wrapper { background-color: var(--n19-red) !important; }
+.site-header__container { height: 55px !important; min-height: 0 !important; }
+.site-header__logo { height: 45px !important; width: 300px !important; top: 5px !important; margin: 0 !important; transform: none !important; left: calc(50% - 150px) !important; position: absolute !important; }
+.site-header__logo svg, .site-header__logo a { height: 45px !important; width: 300px !important; display: block !important; }
+.site-header, .site-header__wrapper { height: auto !important; min-height: 0 !important; }
+.site-header__left, .site-header__right { top: 0 !important; }
+/* Sections: a bare hamburger with small uppercase white text, no outline box */
+.site-header .menu-toggle { border: 0 !important; background: transparent !important; color: #fff !important; padding: 0 !important; height: 30px !important;
+  font: 600 12px/30px futura-pt, "Futura PT", Futura, "Trebuchet MS", Arial, sans-serif !important; text-transform: uppercase !important; letter-spacing: .02em !important; }
+.site-header .menu-toggle * { color: #fff !important; }
+.site-header :is(.button--login, .site-header-cta a, .site-header-cta button) { border: 0 !important; background: transparent !important; border-radius: 0 !important; color: #fff !important;
+  font: 600 12px/30px futura-pt, "Futura PT", Futura, "Trebuchet MS", Arial, sans-serif !important; text-transform: uppercase !important; padding: 0 8px !important; min-height: 0 !important; height: 30px !important; }
+.site-header :is(.button--login, .site-header-cta a, .site-header-cta button):hover { color: var(--n19-red-hover) !important; background: transparent !important; }
+/* The black strip under the bar (edition picker, section links) did not exist in 2019; the links are in "Sections" */
+.site-header__bar, .site-header__subnav--homepage { display: none !important; }
+.site-header__subnav:not(.site-header__subnav--homepage) { background: #fff !important; border-bottom: 1px solid #ddd !important; }
+.site-header__subnav:not(.site-header__subnav--homepage) a { color: var(--n19-text) !important; }
+
+/* Headlines: a plain Helvetica/Arial bold in dark gray rather than today's heavy, tightly set display cut */
+.story__headline, .story__headline a { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important; font-weight: 700 !important; color: var(--n19-text) !important; letter-spacing: 0 !important; }
+.story__headline a:hover { color: var(--n19-red) !important; }
+.story__meta, .meta, .byline { color: var(--n19-meta) !important; }
 .content-header--lines .content-header__heading, .section-heading { letter-spacing: 0 !important; }
 .content-header--lines::before, .content-header--lines::after { border-color: var(--n19-rule) !important; background-color: var(--n19-rule) !important; }
 .button, .wp-block-button__link, [class*="btn"] { border-radius: 0 !important; }

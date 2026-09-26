@@ -1,4 +1,4 @@
-# Validation of 0.6.0
+# Validation of 0.7.0
 
 ## Automated checks
 
@@ -94,12 +94,11 @@ Two kinds of 2019 reference were used:
 
 Each theme was compared against its reference in one side-by-side image. The two pages were placed next to each other at 1280px. The most visible differences were listed, fixed, and the comparison repeated. Each theme went through at least four rounds.
 
-So far this covers these sites:
+Every site went through this comparison, 2 to 5 rounds each.
 
-- YouTube;
-- Google, Bing, Yahoo and Wikipedia;
-- Kelley Blue Book, Rotten Tomatoes and timeanddate;
-- Facebook, LinkedIn and Twitter;
-- CNN, Healthline, PubMed, Stack Overflow and OpenAI.
+About 20 sites blocked the test browser with a bot check, and the Wayback Machine was often unreachable. For those, the themes were checked against the 2019 stylesheets only, or left as they were. These sites include:
 
-eBay and Instagram block this test browser, so their updated themes are unconfirmed. The remaining sites are being done the same way.
+- Instagram, eBay, Etsy, Genius, Indeed and Britannica;
+- Tripadvisor, NY.gov, realtor.com and Costco;
+- Expedia, Shutterstock, Getty Images and Collins;
+- American Airlines, Canva, Quora, Yelp, Booking.com, Adobe and Uber Eats.

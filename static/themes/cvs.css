@@ -1,5 +1,6 @@
 /* net19 handmade theme: CVS, 2019: CVS red (#cc0000) links and buttons instead of today's blue, Helvetica/Arial,
-   square-cornered buttons, fields and tiles, plain black navigation. CVS has no dark mode; the dark block keeps a
+   square-cornered buttons, fields and tiles, plain black bold navigation words (no colored or iconned
+   promo links) and a search field that just says "Search". CVS has no dark mode; the dark block keeps a
    readable variant should the page ever turn dark. */
 html { --n19-red: #cc0000; --n19-red-hover: #a30000; --n19-red-tint: #fdeaea; --n19-text: #000; --n19-line: #ccc; --n19-font: "Helvetica Neue", Helvetica, Arial, sans-serif; }
 html[data-net19-mode="dark"] { --n19-red: #ff5a5a; --n19-red-hover: #ff8080; --n19-red-tint: #3a1616; --n19-text: #f2f2f2; --n19-line: #555; }

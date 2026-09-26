@@ -14,7 +14,9 @@ html:root { --border-radius-large: 0 !important; --border-radius-small: 0 !impor
 
 /* Header and menu */
 header#header { box-shadow: 0 2px 5px rgba(0,0,0,.2) !important; }
-#navigation .first-level-link { color: var(--n19-nav) !important; }
+.top-level-nav .first-level-link { color: var(--n19-nav) !important; font-size: 15px !important; }
+.utility-header a { text-decoration: none !important; }
+header.global-header .section-default { box-shadow: none !important; border-bottom: 0 !important; }
 
 /* Search area: grey panel, square field */
 .header-banner { background: var(--n19-panel) !important; }

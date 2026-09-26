@@ -17,3 +17,5 @@ html[data-net19-mode="dark"] { --n19-navy: #2e4596; --n19-text: #f2f2f2; --n19-c
 /* Service pages: square hero panel and square buttons */
 .m-hero__meta, .o-hero [class*="__meta"] { border-radius: 0 !important; }
 .a-hero__btn, a[class*="a-btn"], button[class*="a-btn"] { border-radius: 0 !important; }
+/* 2019 call-to-action type: small bold uppercase with wide letter-spacing */
+.a-hero__btn, .m-landingHero a[class*="btn"], .m-landingHero button { text-transform: uppercase !important; letter-spacing: .15em !important; font-size: 13px !important; font-weight: 700 !important; }

@@ -1,8 +1,8 @@
-/* net19 handmade theme: Tripadvisor, 2019: Helvetica/Arial type instead of Trip Sans, near-black (#2c2c2c) headings
-   and text instead of today's deep forest green, the 2019 teal-green (#00a680) for the account button with small
+/* net19 handmade theme: Tripadvisor, 2019: Helvetica/Arial type instead of Trip Sans, near-black (#000a12) headings
+   and #4a4a4a text instead of today's deep forest green, the 2019 teal-green (#00a680) for the account button with small
    square corners, and no AI trip planner or "Ask AI" buttons (added in 2024-2025). Layout is today's.
    Tripadvisor has no dark mode; the dark tokens apply only if a page renders dark. */
-html { --n19-font: "Helvetica Neue", Helvetica, Arial, sans-serif; --n19-green: #00a680; --n19-green-hover: #008a6a; }
+html { --n19-font: Arial, Tahoma, "Bitstream Vera Sans", sans-serif; --n19-green: #00a680; --n19-green-hover: #008a6a; }
 html[data-net19-mode="dark"] { --n19-green: #00a680; --n19-green-hover: #00c294; }
 :root:root body, :root:root body :not(svg):not(svg *) { font-family: var(--n19-font) !important; }
 [data-automation="desktop-cart-and-profile"] a[href*="RegistrationController"] {

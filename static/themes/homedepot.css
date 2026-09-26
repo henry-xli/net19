@@ -1,4 +1,6 @@
-/* net19 handmade theme: The Home Depot, 2019: Helvetica on white, square corners everywhere, #f96302 orange with an orange rule under the header, square orange buttons. */
+/* net19 handmade theme: The Home Depot, 2019: Helvetica on white, square corners everywhere; a compact white header with a
+   50px logo, a wide square white search field with a #999 border and a square orange button, small 14px text links, and
+   an orange rule under it; categories as a plain row of 14px text links; square orange buttons with a darker lower edge. */
 html { --n19-orange: #f96302; --n19-orange-dark: #c24e02; --n19-text: #333; --n19-border: #ccc; --n19-field: #fff; }
 html[data-net19-mode="dark"] { --n19-orange: #f96302; --n19-orange-dark: #c24e02; --n19-text: #e6e6e6; --n19-border: #555; --n19-field: #222; }
 body, button, input { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important; }
@@ -16,3 +18,24 @@ body, button, input { font-family: "Helvetica Neue", Helvetica, Arial, sans-seri
 button.sui-rounded-full.sui-border-solid, a.sui-rounded-full.sui-border-solid { border-radius: 0 !important; border-color: var(--n19-border) !important; }
 /* Magic Apron (an AI assistant) did not exist in 2019 */
 [data-testid="header-b2c-magic-apron"], button[aria-label^="Magic Apron" i], [data-component="ExpandableFab"] { display: none !important; }
+
+/* Header: no promo strip, a 50px logo, a wide square white search field, small text labels */
+#header-tophat { display: none !important; }
+#header-root { top: 0 !important; }
+#header-content > div.sui-flex.sui-items-center { height: 80px !important; }
+#header-content > div.sui-flex.sui-items-center > div:first-child a, #header-content > div.sui-flex.sui-items-center > div:first-child a svg,
+#header-content > div.sui-flex.sui-items-center > div:first-child a img { width: 50px !important; height: 50px !important; }
+#header-content > div.sui-flex.sui-items-center > div:first-child { width: 50px !important; height: 50px !important; }
+#header-root form#header-search { background: var(--n19-field) !important; border: 1px solid #999 !important; border-radius: 0 !important; height: 38px !important; }
+#header-root form#header-search > div, #header-root form#header-search input { background: var(--n19-field) !important; border: 0 !important; border-radius: 0 !important; height: 36px !important; font-size: 16px !important; box-shadow: none !important; }
+#header-root form#header-search button { height: 36px !important; width: 44px !important; }
+#header-root #typeahead-container, #header-root #typeahead-container > div { width: 100% !important; }
+#header-nav-container p, #header-content p { font-size: 13px !important; color: var(--n19-text) !important; }
+#header-nav-container svg { width: 20px !important; height: 20px !important; }
+/* Popular categories: a plain row of text links, as 2019's department bar */
+#root a.sui-whitespace-nowrap:has(> div > span.sui-text-ellipsis) { border: 0 !important; background: transparent !important; box-shadow: none !important; }
+#root a.sui-whitespace-nowrap:has(> div > span.sui-text-ellipsis) > div { border: 0 !important; background: transparent !important; }
+#root a.sui-whitespace-nowrap span.sui-text-ellipsis { color: var(--n19-text) !important; font-size: 14px !important; }
+#root a.sui-whitespace-nowrap:hover span.sui-text-ellipsis { color: var(--n19-orange) !important; text-decoration: underline !important; }
+/* The "Sign in for the best experience" nudge is new; Log In stays in the header */
+#sign-in-bubble { display: none !important; }

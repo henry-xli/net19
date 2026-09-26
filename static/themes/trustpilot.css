@@ -1,6 +1,6 @@
 /* net19 handmade theme: Trustpilot, 2019: Helvetica Neue, a #000032 navy header, #00b67a green buttons with 4px corners, white cards on #f2f2f5. */
-html { --n19-header: #000032; --n19-green: #00b67a; --n19-green-hover: #009567; --n19-page: #f2f2f5; --n19-card: #fff; --n19-text: #191919; --n19-link: #1c7ae8; --n19-border: #dcdce6; }
-html[data-net19-mode="dark"] { --n19-header: #000032; --n19-green: #00b67a; --n19-green-hover: #009567; --n19-page: #16161d; --n19-card: #22222b; --n19-text: #e6e6ea; --n19-link: #6aaaf2; --n19-border: #3a3a46; }
+html { --n19-header: #000032; --n19-green: #00b67a; --n19-green-hover: #009567; --n19-page: #f2f2f5; --n19-card: #fff; --n19-text: #191919; --n19-link: #1c7ae8; --n19-border: #dcdce6; --n19-hero: #e3a9b4; --n19-hero-text: #fff; }
+html[data-net19-mode="dark"] { --n19-header: #000032; --n19-green: #00b67a; --n19-green-hover: #009567; --n19-page: #16161d; --n19-card: #22222b; --n19-text: #e6e6ea; --n19-link: #6aaaf2; --n19-border: #3a3a46; --n19-hero: #6e4450; --n19-hero-text: #fff; }
 [class*="CDS_themes_theme"], html:root {
   --CDS-border-radius-m: 4px !important; --CDS-border-radius-l: 4px !important;
   --CDS-color-background-control-base: var(--n19-green) !important; --CDS-color-background-neutral-muted: var(--n19-page) !important;
@@ -10,7 +10,7 @@ body, body :is(p, span, a, button, input, h1, h2, h3, h4, h5, li, label, div) { 
 h1, h2, h3 { font-weight: 700 !important; letter-spacing: 0 !important; }
 
 /* Header */
-header[class*="styles_header__"] { background: var(--n19-header) !important; }
+header[class*="styles_header__"] { background: var(--n19-header) !important; height: 72px !important; }
 /* Today's header is white with black links; on the 2019 navy they are white (menus that open from it keep their own colors). */
 header[class*="styles_header__"] :is(a, button):not([role="menu"] *, [role="dialog"] *) { color: #fff !important; }
 header[class*="styles_header__"] :is(a, button):not([role="menu"] *, [role="dialog"] *) svg { fill: currentColor !important; color: #fff !important; }
@@ -22,7 +22,16 @@ header[class*="styles_header__"] a[class*="CDS_Button_button"] { background: tra
 [class*="styles_searchForm"] button[class*="CDS_Button_button"] { background: var(--n19-green) !important; color: #fff !important; }
 [class*="styles_searchForm"] button[class*="CDS_Button_button"]:hover { background: var(--n19-green-hover) !important; }
 
-/* Hero and page sections: flat, no curved edges */
-[class*="styles_heroContainer"] { background: var(--n19-page) !important; }
+/* On a dark device the page is inverted as a whole, so the hero's white words are written black to come out white */
+html[data-net19-flip] { --n19-hero-text: #000; }
+/* Hero: 2019's dusty-pink band (#e3a9b4, the color behind its photo) with a white 46px bold headline, a white 18px line
+   and a white 3px-cornered search box with a green square button */
+[class*="styles_heroContainer"] { background: var(--n19-hero) !important; }
+[class*="styles_searchContainer"] [class*="styles_heading"] { color: var(--n19-hero-text) !important; font-size: 46px !important; line-height: 60px !important; font-weight: 700 !important; }
+[class*="styles_searchContainer"] [class*="styles_subheading"] { color: var(--n19-hero-text) !important; font-size: 18px !important; line-height: 24px !important; font-weight: 500 !important; }
+[class*="styles_searchContainer"] [class*="styles_transparencyLink"] :is(p, a, span, svg) { color: var(--n19-hero-text) !important; fill: var(--n19-hero-text) !important; }
+[class*="styles_heroSearch"] :is(input[class*="styles_searchInputField"], input[class*="styles_textSuggestion"]) { border-radius: 3px !important; border: none !important; box-shadow: 1px 2px 5px -2px rgba(1,1,1,.1), 0 2px 7px 0 rgba(22,65,89,.03) !important; }
+[class*="styles_heroSearch"] button[class*="CDS_Button_circle"] { border-radius: 3px !important; width: 64px !important; background: var(--n19-green) !important; color: #fff !important; }
+[class*="styles_heroSearch"] button[class*="CDS_Button_circle"] svg { fill: #fff !important; color: #fff !important; }
 [class*="styles_curvedWrapper"] { border-radius: 0 !important; }
 [class*="styles_card"], article[class*="styles_reviewCard"], section[class*="styles_reviewCard"] { border-radius: 4px !important; }

@@ -1,14 +1,41 @@
-/* net19 handmade theme: Netflix, 2019: the browse UI was already today's dark #141414 layout; the 2019 details were flat #e50914 buttons with 2-3px corners, square-cornered box art and plain white row titles. Kept deliberately small. */
-html { --n19-red: #e50914; --n19-red-hover: #f40612; --n19-text: #e5e5e5; }
-html[data-net19-mode="dark"] { --n19-red: #e50914; --n19-red-hover: #f40612; --n19-text: #e5e5e5; }
+/* net19 handmade theme: Netflix, 2019: pure black pages; the signed-out landing is the poster-collage hero under a flat
+   black 40% veil, closed by an 8px #222 rule (no glowing curve), a 50px bold headline, a white square email field and a
+   flat #e50914 button with 2-3px corners and uppercase text; no ad-plan banner. Browse keeps the dark #141414 layout with
+   2px box art and plain white row titles. */
+html { --n19-red: #e50914; --n19-red-hover: #f40612; --n19-text: #e5e5e5; --n19-rule: #222; --n19-page: #000; --n19-field-label: #8c8c8c; }
+html[data-net19-mode="dark"] { --n19-red: #e50914; --n19-red-hover: #f40612; --n19-text: #e5e5e5; --n19-rule: #222; --n19-page: #000; --n19-field-label: #8c8c8c; }
 /* Browse: box art, rows and billboard buttons */
 .title-card, .title-card .boxart-container, .boxart-rounded, .boxart-container img, .slider-item .title-card-container, .previewModal--boxart { border-radius: 2px !important; }
 .rowHeader .row-header-title, .rowHeader h2, .row-header-title { color: var(--n19-text) !important; font-weight: 700 !important; }
 .billboard-links .color-primary, .billboard .button-primary, button.color-primary { border-radius: 3px !important; }
 .previewModal--container, .previewModal--player_container { border-radius: 4px !important; }
-/* Signed-out pages: flat red buttons, no gradients */
+
+/* Signed-out landing: a black page */
+[data-uia="loc"] { background: var(--n19-page) !important; }
+/* Hero: the collage under an even black veil, closed by the 8px gray rule instead of the glowing curve */
+[data-uia="nmhp-hero"] { overflow: hidden !important; border-bottom: 8px solid var(--n19-rule) !important; }
+[data-uia="nmhp-hero"] div:has(+ img), [data-uia="nmhp-hero"] img + div { background: rgba(0,0,0,.62) !important;
+  background-image: linear-gradient(to top, rgba(0,0,0,.8) 0, transparent 60%, rgba(0,0,0,.8) 100%) !important; }
+.curve-container { display: none !important; }
+h1[data-uia="nmhp-hero-headline"] { font-size: 50px !important; line-height: 1.1 !important; font-weight: 700 !important; max-width: 640px !important; }
+/* Email field: white, square, with a gray floating label */
+input[data-uia="field-email"] { background: #fff !important; color: #000 !important; border: 1px solid #8c8c8c !important; border-radius: 2px !important; height: 60px !important; }
+label[data-uia="field-email+label"] { color: var(--n19-field-label) !important; }
+div[data-uia="field-email+container"] { border-radius: 2px !important; background: #fff !important; }
+div[data-uia="field-email+container"] > div { border-radius: 2px !important; }
+/* Buttons: flat red, 2-3px corners, uppercase on the big call to action */
 [data-uia="header-login-link"], [data-uia^="nmhp-card-cta"], [data-uia*="cta" i]:is(button, a)[class] { border-radius: 3px !important; }
-[data-uia^="nmhp-card-cta"] { background: var(--n19-red) !important; background-image: none !important; color: #fff !important; }
+[data-uia="header-login-link"] { padding: 7px 17px !important; font-size: 16px !important; font-weight: 400 !important; }
+[data-uia^="nmhp-card-cta"] { background: var(--n19-red) !important; background-image: linear-gradient(to bottom, #e50914, #db0510) !important; color: #fff !important;
+  border-radius: 2px !important; height: 60px !important; box-shadow: 0 1px 0 rgba(0,0,0,.45) !important; text-transform: uppercase !important; font-size: 26px !important; font-weight: 400 !important; }
 [data-uia^="nmhp-card-cta"]:hover { background: var(--n19-red-hover) !important; }
 [data-uia^="nmhp-card-cta"] svg { color: #fff !important; fill: currentColor; }
-input[data-uia="field-email"] { border-radius: 2px !important; }
+/* The ad-supported plan (2022) and its banner did not exist in 2019 */
+[data-uia="nmhp-ads-banner"] { display: none !important; }
+/* Title cards and value-prop cards: 2px corners, flat */
+button[data-uia^="top-10-element"], button[data-uia^="top-10-element"] img { border-radius: 2px !important; }
+[data-uia="nmhp-full-value-props"] div { border-radius: 2px !important; background-image: none !important; }
+[data-uia="nmhp-full-value-props"] > div > div, [data-uia="nmhp-full-value-props"] li { background-color: #222 !important; }
+/* Section titles and FAQ in the 2019 sizes */
+[data-uia="nmhp-top-10"] h2, [data-uia="nmhp-full-value-props"] h2, h2[data-uia="nmhp-faq-text-title"] { font-size: 32px !important; font-weight: 700 !important; }
+[data-uia^="nmhp-faq-q-"], [data-uia^="nmhp-faq-a-"] { background: #303030 !important; }

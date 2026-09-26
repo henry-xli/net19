@@ -1,9 +1,14 @@
-/* net19 handmade theme: Walmart, 2019: a navy (#041e42) header with a plain white, square-cornered search field and
-   a dark search icon, Bogle type (Walmart's 2018-2020 typeface, still served by walmart.com) and the 2019 #0071ce
-   action blue. Walmart has no dark mode; the dark tokens only apply if the page renders dark. */
-html { --n19-bar: #041e42; --n19-bar-hover: rgba(255,255,255,.12); --n19-field: #fff; --n19-field-text: #2e2f32; --n19-icon: #041e42;
-  --n19-font: Bogle, "Helvetica Neue", Helvetica, Arial, sans-serif; }
-html[data-net19-mode="dark"] { --n19-bar: #041e42; --n19-bar-hover: rgba(255,255,255,.12); --n19-field: #1f2023; --n19-field-text: #e3e4e5; --n19-icon: #e3e4e5; }
+/* net19 handmade theme: Walmart, 2019 (the global header of the 2019 capture): a navy (#041e42) header with a flat,
+   square-cornered white search field (2px navy inset, bold "Search" placeholder, dark magnifier), the store picker as
+   plain white text instead of a blue pill, round navy "bubble" icons over short labels, a white departments row with
+   flat navy links instead of pills, square tiles on a white page, Bogle type (Walmart's 2018-2020 typeface, still
+   served by walmart.com) and the 2019 #0071ce action blue. Walmart has no dark mode; dark devices get the engine's
+   inverted page. */
+html { --n19-bar: #041e42; --n19-bar-hover: rgba(255,255,255,.12); --n19-bar-text: #fff; --n19-field: #fff; --n19-field-text: #000; --n19-icon: #041e42;
+  --n19-row: #fff; --n19-row-border: #e6e7e8; --n19-row-text: #041e42; --n19-bubble: #0a2f5c; --n19-yellow: #ffc220;
+  --n19-font: Bogle, BogleWeb, "Helvetica Neue", Helvetica, Arial, sans-serif; }
+html[data-net19-mode="dark"] { --n19-bar: #041e42; --n19-bar-hover: rgba(255,255,255,.12); --n19-bar-text: #fff; --n19-field: #1f2023; --n19-field-text: #e3e4e5; --n19-icon: #e3e4e5;
+  --n19-row: #16181b; --n19-row-border: #2e3033; --n19-row-text: #e3e4e5; --n19-bubble: #0a2f5c; --n19-yellow: #ffc220; }
 body {
   --font-family-default: var(--n19-font); --ld-primitive-font-family-sans: var(--n19-font);
   --ld-semantic-font-body-large-family: var(--n19-font); --ld-semantic-font-body-medium-family: var(--n19-font); --ld-semantic-font-body-small-family: var(--n19-font);
@@ -14,10 +19,39 @@ body {
   font-family: var(--n19-font) !important;
 }
 .sans-serif, button, input, select, textarea { font-family: var(--n19-font) !important; }
-/* Search: a flat white field with square corners and a dark magnifier instead of a pill with a round blue button */
-header input.search-bar, header .search-input-field-v2 { border-radius: 2px !important; background: var(--n19-field) !important; color: var(--n19-field-text) !important; }
-header form[role="search"], header .search-bar-container, header input.search-bar + * { border-radius: 2px !important; }
-header button.search-icon-redesigned-v2, header button[aria-label="Search" i] { background: transparent !important; border-radius: 0 !important; color: var(--n19-icon) !important; }
-header button.search-icon-redesigned-v2 svg, header button[aria-label="Search" i] svg { fill: var(--n19-icon) !important; color: var(--n19-icon) !important; }
-/* The sticky header band */
+
+/* The sticky header band: navy, 44px controls */
 span.bg-secondary.sticky:has(> header), .bg-secondary.sticky.top-0 { background: var(--n19-bar) !important; }
+span.bg-secondary.sticky > header { padding-top: 10px !important; padding-bottom: 10px !important; }
+/* Store picker: plain white text on the navy bar, not a lighter blue pill */
+header #gic-wrapper, header section.bg-dark-primary { background: transparent !important; border-radius: 0 !important; }
+header section.bg-dark-primary:hover { background: var(--n19-bar-hover) !important; }
+header #gic-wrapper span.b { font-size: 14px !important; }
+/* Search: a flat white field with square corners, a 2px navy inset and a dark magnifier instead of a pill with a round blue button */
+header input.search-bar, header .search-input-field-v2 {
+  border-radius: 0 !important; background: var(--n19-field) !important; color: var(--n19-field-text) !important; height: 44px !important;
+  box-shadow: inset 0 0 0 2px var(--n19-bar), 0 .5px 2px 0 rgba(0,0,0,.23) !important; padding-left: 16px !important;
+}
+header input.search-bar::placeholder { color: var(--n19-field-text) !important; font-weight: 700 !important; opacity: 1 !important; }
+header input.search-bar:focus::placeholder { opacity: 0 !important; }
+header form[role="search"], header .search-bar-container, header input.search-bar + * { border-radius: 0 !important; }
+header button.search-icon-redesigned-v2, header button[aria-label="Search" i] { background: transparent !important; border-radius: 0 !important; color: var(--n19-icon) !important; }
+header button.search-icon-redesigned-v2 i, header button.search-icon-redesigned-v2 svg, header button[aria-label="Search" i] svg { fill: var(--n19-icon) !important; color: var(--n19-icon) !important; }
+/* Right side: each link is a round navy "bubble" icon over a short label */
+header nav a.desktop-header-trigger, header #cart-button-header { flex-direction: column !important; justify-content: center !important; border-radius: 0 !important; padding: 0 8px !important; }
+header nav a.desktop-header-trigger > i, header #cart-button-header > i {
+  display: flex !important; align-items: center; justify-content: center; width: 28px !important; height: 28px !important; padding: 0 !important; margin: 0 0 2px !important;
+  border-radius: 50% !important; background: var(--n19-bubble) !important; font-size: 16px !important;
+}
+header nav a.desktop-header-trigger > div { margin: 0 !important; text-align: center !important; }
+header nav a.desktop-header-trigger > div > div:first-child { display: none !important; }
+header nav a.desktop-header-trigger > div > div, header #cart-button-header .cart-total { font-size: 12px !important; font-weight: 400 !important; line-height: 14px !important; height: auto !important; color: var(--n19-bar-text) !important; }
+header #cart-button-header .cart-total { margin-top: 0 !important; }
+/* Departments row: white with a hairline, flat bold navy links (not pills) */
+span.bg-secondary.sticky > div.header-navigation { background: var(--n19-row) !important; border-bottom: 1px solid var(--n19-row-border) !important; height: 40px !important; }
+span.bg-secondary.sticky > div.header-navigation section.br-pill { background: transparent !important; border-radius: 0 !important; margin: 0 !important; }
+span.bg-secondary.sticky > div.header-navigation :is(button, a) { color: var(--n19-row-text) !important; font-size: 14px !important; border-radius: 0 !important; }
+span.bg-secondary.sticky > div.header-navigation :is(button, a):hover { text-decoration: underline !important; background: transparent !important; }
+
+/* Page: square tiles and cards */
+main .br3, main .br2, main .br4, main [data-testid="flex-container"] img { border-radius: 0 !important; }

@@ -1,10 +1,11 @@
-/* net19 handmade theme: Apple, 2019: a near-black translucent global nav with white links, and hero calls to action
-   as plain blue "Learn more ›  Buy ›" text links instead of pill buttons. Type, tiles and colors are otherwise
-   essentially today's (SF Pro, #1d1d1f, #06c), so the theme is small. Apple.com has no dark mode of its own. */
-html { --n19-nav: rgba(0,0,0,.8); --n19-nav-open: #161617; --n19-nav-text: rgba(255,255,255,.8); --n19-nav-text-2: #e8e8ed;
-  --n19-link: #06c; --n19-link-on-dark: #2997ff; }
-html[data-net19-mode="dark"] { --n19-nav: rgba(0,0,0,.8); --n19-nav-open: #161617; --n19-nav-text: rgba(255,255,255,.8); --n19-nav-text-2: #e8e8ed;
-  --n19-link: #2997ff; --n19-link-on-dark: #2997ff; }
+/* net19 handmade theme: Apple, 2019: a near-black translucent (rgba(0,0,0,.8)) 44px global nav with 14px white links
+   spread across a 980px column; full-width hero tiles split by 12px white gaps, SF Pro headlines in #111 with #333 copy,
+   and calls to action as plain 21px "Learn more ›  Buy ›" text links in the 2019 blue (#0070c9, #2997ff on dark tiles)
+   instead of pill buttons; a light gray (#f2f2f2) footer in 12px #888 type. Apple.com has no dark mode of its own. */
+html { --n19-nav: rgba(0,0,0,.8); --n19-nav-open: #000; --n19-nav-text: rgba(255,255,255,.8); --n19-nav-text-2: #e8e8ed;
+  --n19-link: #0070c9; --n19-link-on-dark: #2997ff; --n19-head: #111; --n19-text: #333; --n19-muted: #888; --n19-foot: #f2f2f2; --n19-foot-rule: #d6d6d6; }
+html[data-net19-mode="dark"] { --n19-nav: rgba(0,0,0,.8); --n19-nav-open: #000; --n19-nav-text: rgba(255,255,255,.8); --n19-nav-text-2: #e8e8ed;
+  --n19-link: #2997ff; --n19-link-on-dark: #2997ff; --n19-head: #f5f5f7; --n19-text: #d2d2d7; --n19-muted: #86868b; --n19-foot: #1d1d1f; --n19-foot-rule: #424245; }
 
 /* Global nav: Apple's own dark nav variables (the ones its .globalheader-dark pages use), with the 2019 bar color */
 html #globalnav {
@@ -20,10 +21,23 @@ html #globalnav .globalnav-search {
 }
 html #globalnav .globalnav-link, html #globalnav .globalnav-menutrigger-button { color: var(--n19-nav-text) !important; }
 html #globalnav .globalnav-link:hover { color: #fff !important; }
+/* The 2019 bar: links in 14px type, spread over a 980px column */
+@media (min-width: 834px) {
+  html #globalnav .globalnav-content { max-width: 980px !important; padding: 0 22px !important; }
+  html #globalnav .globalnav-list > .globalnav-item:not(.globalnav-item-apple) > .globalnav-link { font-size: 14px !important; letter-spacing: -.01em !important; }
+}
 html #globalnav .globalnav-curtain { background: rgba(0,0,0,.4) !important; }
 html #globalnav .globalnav-bag-badge { --globalnav-badge-background: #fff !important; --globalnav-badge-text-color: #000 !important; }
 html #globalnav-bag .ac-gn-bagview-nav-text, html #globalnav-bag .ac-gn-bagview-header { color: #e8e8ed !important; }
 html #globalnav-bag .ac-gn-bagview-nav-link, html #globalnav-bag .ac-gn-bagview-message, html #globalnav-bag .ac-gn-bagview-subheader { color: #86868b !important; }
+
+/* Tiles: #111 headlines and #333 copy on the light tiles */
+.tile-wrapper:not(.theme-dark) .tile-headline { color: var(--n19-head) !important; }
+.tile-wrapper:not(.theme-dark) .tile-subhead { color: var(--n19-text) !important; }
+.tile-wrapper:not(.theme-dark) .tile-callout { color: var(--n19-muted) !important; }
+.section-ribbon .ribbon-content { color: var(--n19-text) !important; font-size: 14px !important; }
+.section-ribbon .ribbon-link { color: var(--n19-link) !important; }
+main a.more:not(.button), main .ribbon-link { color: var(--n19-link) !important; }
 
 /* Hero calls to action: text links with a chevron */
 .tile-ctas .button, .section-hero .button, .hero .cta-links .button {
@@ -37,3 +51,13 @@ html #globalnav-bag .ac-gn-bagview-nav-link, html #globalnav-bag .ac-gn-bagview-
   border: solid currentColor; border-width: .08em .08em 0 0; transform: rotate(45deg);
 }
 .tile-ctas { gap: 0 32px !important; }
+
+/* Other buttons (product pages): 2019's plain blue buttons with 4px corners instead of pills */
+main a.button:not(.tile-ctas .button):not(.button-secondary), main button.button:not(.button-secondary) {
+  border-radius: 4px !important; background: var(--n19-link) !important; color: #fff !important; font-weight: 400 !important; }
+main .button-secondary:not(.tile-ctas .button) { border-radius: 4px !important; }
+
+/* Footer: 2019's light gray band in 12px #888 */
+#globalfooter, .globalfooter, footer#ac-globalfooter { background: var(--n19-foot) !important; }
+:is(#globalfooter, .globalfooter) :is(p, li, span, a, h3, button, .gf-sosumi, .footnotes) { color: var(--n19-muted) !important; }
+:is(#globalfooter, .globalfooter) :is(.globalfooter-divider, .ac-gf-footer-legal) { border-color: var(--n19-foot-rule) !important; }

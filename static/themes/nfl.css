@@ -1,16 +1,38 @@
-/* net19 handmade theme: NFL.com, 2019: navy #013369 main navigation bar with white upright bold uppercase links, flat #eee page behind white cards, Arial headlines. */
-html { --n19-navy: #013369; --n19-nav-text: #fff; --n19-nav-text-2: #c8d1dd; --n19-page: #eee; --n19-card: #fff; --n19-alt: #e4e4e4; --n19-rule: #d6d6d6; }
-html[data-net19-mode="dark"] { --n19-navy: #013369; --n19-nav-text: #fff; --n19-nav-text-2: #c8d1dd; --n19-page: #13141d; --n19-card: #1d1f2a; --n19-alt: #272731; --n19-rule: #393e4a; }
+/* net19 handmade theme: NFL.com, 2019: a navy #013369 header bar with the shield and plain white upright uppercase
+   13px links (no NFL+ promo strip above it), the scores strip under the bar, a flat #eee page behind square white
+   cards without shadows, upright Arial headlines and section titles instead of today's slanted display face. */
+html { --n19-navy: #013369; --n19-navy-2: #00295a; --n19-nav-text: #fff; --n19-nav-text-2: #c8d1dd; --n19-page: #eee; --n19-card: #fff; --n19-alt: #e4e4e4;
+  --n19-rule: #d6d6d6; --n19-head: #1a1a1a; --n19-font: Arial, "Helvetica Neue", Helvetica, sans-serif; }
+html[data-net19-mode="dark"] { --n19-navy: #013369; --n19-navy-2: #00224b; --n19-nav-text: #fff; --n19-nav-text-2: #c8d1dd; --n19-page: #13141d; --n19-card: #1d1f2a;
+  --n19-alt: #272731; --n19-rule: #393e4a; --n19-head: #eee; --n19-font: Arial, "Helvetica Neue", Helvetica, sans-serif; }
 /* Surface tokens: the light scheme's blue-tinted grays go back to 2019's neutral gray page; dark keeps its own scheme. */
 html:not(.dark) [class*="bg-(--bg-color)"] { --bg-color: var(--n19-page) !important; }
 html:root:not(.dark) { --color-ls-level-1: var(--n19-page) !important; --color-ls-level-3: var(--n19-alt) !important; --color-ls-200: var(--n19-rule) !important; }
-/* Main navigation bar (the last nav row of the header): 2019's navy bar. */
-header > nav:not(.bg-plus-primary) { background: var(--n19-navy) !important; border-bottom: 0 !important; box-shadow: 0 1px 3px rgba(0,0,0,.3) !important; }
-header > nav:not(.bg-plus-primary) :is(a, button, span) { color: var(--n19-nav-text) !important; font-style: normal !important; }
-header > nav:not(.bg-plus-primary) ul:first-of-type ~ ul :is(a, button, span), header > nav:not(.bg-plus-primary) > div > div + div :is(a, button, span) { color: var(--n19-nav-text-2) !important; }
-header > nav:not(.bg-plus-primary) svg { fill: currentColor !important; }
-header > nav:not(.bg-plus-primary) [class*="border-l-"] { border-color: rgba(255,255,255,.25) !important; }
-header > nav:not(.bg-plus-primary) :is(a, button)[class*="display-"] { font-family: Arial, "Helvetica Neue", Helvetica, sans-serif !important; font-weight: 700 !important; letter-spacing: .02em !important; font-size: 13px !important; }
-/* Story headlines and body copy were Arial; display type was upright, not today's slanted face. */
-main :is(h1, h2, h3, h4, [role="heading"]) { font-family: Arial, "Helvetica Neue", Helvetica, sans-serif !important; font-style: normal !important; }
-main [class*="rounded-"]:is(div, a, img, figure, section) { border-radius: 0 !important; }
+body, main { background-color: var(--n19-page) !important; }
+
+/* The NFL+ Premium strip on top did not exist (NFL+ launched in 2022); the navy bar comes first, then the scores. */
+header[data-testid="header-section"] { --header-panel-top-hat-height: 0px !important; display: flex !important; flex-direction: column !important; background: var(--n19-page) !important; }
+header[data-testid="header-section"] > nav[aria-label="Top Hat Header"] { display: none !important; }
+header[data-testid="header-section"] > nav[aria-label="Site"] { order: -1; top: 0 !important; }
+/* Main navigation bar: 2019's navy bar, plain white upright links. */
+nav[aria-label="Site"] { background: var(--n19-navy) !important; border-bottom: 0 !important; box-shadow: 0 1px 3px rgba(0,0,0,.3) !important; }
+nav[aria-label="Site"] ul > li > :is(a, button):is([class*="display-"], [class*="misc-1-sans"]),
+nav[aria-label="Site"] ul > li > :is(a, button):is([class*="display-"], [class*="misc-1-sans"]) > span,
+nav[aria-label="Site"] div > div > button[class*="misc-1-sans"], nav[aria-label="Site"] div > div > button[class*="misc-1-sans"] span {
+  color: var(--n19-nav-text) !important; font-family: var(--n19-font) !important; font-style: normal !important; font-weight: 400 !important;
+  font-size: 13px !important; letter-spacing: .02em !important; text-transform: uppercase !important;
+}
+nav[aria-label="Site"] ul > li > :is(a, button)[class*="misc-1-sans"], nav[aria-label="Site"] ul > li > :is(a, button)[class*="misc-1-sans"] > span { font-size: 12px !important; color: var(--n19-nav-text-2) !important; }
+nav[aria-label="Site"] ul > li > :is(a, button) > span > svg, nav[aria-label="Site"] ul > li > :is(a, button) > span svg { fill: currentColor !important; color: currentColor !important; width: 10px !important; }
+nav[aria-label="Site"] [class*="border-l-"] { border-color: rgba(255,255,255,.25) !important; }
+nav[aria-label="Site"] ul > li > :is(a, button):hover { text-decoration: underline !important; }
+/* Scores strip: flat, white games on the gray band. */
+header[data-testid="header-section"] aside { background: var(--n19-page) !important; }
+header[data-testid="header-section"] aside [class*="shadow"] { box-shadow: none !important; }
+
+/* Headlines and section titles: upright Arial; cards square, white, unshadowed. */
+main :is(h1, h2, h3, h4, [role="heading"]), main [class*="display-"] { font-family: var(--n19-font) !important; font-style: normal !important; }
+main h2[class*="display-"] { font-size: 20px !important; font-weight: 700 !important; letter-spacing: 0 !important; color: var(--n19-head) !important; }
+main [class*="rounded-"]:is(div, a, img, figure, section, article, span), main [class*="rounded-"] img { border-radius: 0 !important; }
+main [class*="shadow-"]:is(div, a, article, section) { box-shadow: none !important; }
+main [class*="bg-ls-level-2"], main [class*="bg-white"] { background-color: var(--n19-card) !important; }
