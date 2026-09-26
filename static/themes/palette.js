@@ -136,6 +136,8 @@
         if (seen.has(el)) continue;
         seen.add(el);
         if (el.tagName === 'IMG') { flatIcon(el); continue; }
+        // The page itself is never kept: keeping <body> would undo the flip for everything on it.
+        if (el === document.body) continue;
         if (SKIP.test(el.tagName) || el.hasAttribute('data-net19-keep') || el.hasAttribute('data-net19-reflip') || el.hasAttribute('data-net19-scrim')) continue;
         // Style first (one recalculation per batch); context and size, which needs layout, only for the few candidates.
         const style = getComputedStyle(el);

@@ -193,6 +193,14 @@ ytd-watch-flexy #secondary .ytLockupMetadataViewModelAvatar { display: none !imp
 .ytp-play-progress, .ytp-swatch-background-color { background: #f00 !important; background-image: none !important; }
 .ytp-scrubber-button, .ytp-swatch-background-color-secondary { background: #f00 !important; }
 .ytp-chapter-container, .ytp-chapter-title { display: none !important; }
+/* The 2025 "delhi" player draws its controls as translucent pills; 2019's were plain white glyphs on a dark gradient.
+   No heat map over the progress bar (2022) and no autoplay switch inside the player (2020). */
+.html5-video-player :is(.ytp-play-button, .ytp-volume-area, .ytp-time-wrapper, .ytp-right-controls, .ytp-prev-button, .ytp-next-button) {
+  background: transparent !important; border-radius: 0 !important; box-shadow: none !important; backdrop-filter: none !important; }
+.html5-video-player .ytp-time-display, .html5-video-player .ytp-time-display span { font-size: 13px !important; color: #ddd !important; }
+.html5-video-player.ytp-disable-bottom-gradient .ytp-gradient-bottom { display: block !important; }
+.html5-video-player .ytp-progress-list { border-radius: 0 !important; }
+.html5-video-player .ytp-heat-map-container, .html5-video-player .ytp-autonav-toggle { display: none !important; }
 
 /* Comments, as in 2019: "1,234 Comments" and SORT BY; 40px avatars, 13px names and dates, 14px text, a REPLY text button,
    replies folded under a blue "View 12 replies" link and indented under the comment with 24px avatars. No thread lines

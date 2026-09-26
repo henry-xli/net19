@@ -2,7 +2,8 @@
 // hovers the header's menu items, opens a menu, focuses the search field and types. In every state it flags
 //  - faint text, measured from the screenshot's pixels (so filters, blur and translucency are all accounted for),
 //  - post-2019 features still visible (AI / ask / generate labels, "ask" placeholders),
-//  - header items off the row's vertical center, and buttons drawn inside text fields.
+//  - header items off the row's vertical center, and buttons drawn inside text fields,
+//  - a search field that does not take a real mouse click and typing (reported as BLOCKED).
 // Output: test-results/audit/<id>/<scheme>-<state>.png (flags boxed) and test-results/audit/report.jsonl
 // usage: npm run build && npm run audit -- [id ...]   (default: every site in scripts/audit-urls.json)
 // Needs network access to the sites. Some sites answer automated browsers with a bot check; those states are
@@ -18,7 +19,7 @@ const URLS = process.env.URLS ? JSON.parse(process.env.URLS) : Object.fromEntrie
 const OUT = resolve(process.env.OUT || 'test-results/audit'), ext = resolve(process.env.EXT || 'dist/extension');
 const SCHEMES = (process.env.SCHEMES || 'light,dark').split(',');
 const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36';
-const MODERN = /\b(AI|Gemini|Copilot|Grok|ChatGPT|Rufus|Meta AI)\b|^ask\b(?! question)|create images?|brainstorm|ask about|generate|help me write|or ask a question|ask anything/i;
+const MODERN = /\b(AI|Gemini|Copilot|Grok|ChatGPT|Rufus|Meta AI|Shorts|Reels|Quests|Communities|Spaces)\b|^ask\b(?! question)|create images?|brainstorm|ask about|generate|help me write|or ask a question|ask anything/i;
 
 function inPage() {
   const vis = e => { const r = e.getBoundingClientRect(); const c = getComputedStyle(e); return r.width > 2 && r.height > 2 && r.bottom > 0 && r.top < innerHeight && r.right > 0 && r.left < innerWidth && c.visibility === 'visible' && +c.opacity > .05; };
@@ -42,7 +43,7 @@ function inPage() {
   const modern = [];
   for (const c of controls) {
     const label = (c.getAttribute('aria-label') || c.textContent || '').replace(/\s+/g, ' ').trim();
-    if (label && label.length < 45 && /\b(AI|Gemini|Copilot|Grok|ChatGPT|Rufus)\b|^ask\b(?! question)|create images?|brainstorm|ask about|generate|help me write/i.test(label)) { const r = c.getBoundingClientRect(); modern.push({ t: label, x: r.left, y: r.top, w: r.width, h: r.height }); }
+    if (label && label.length < 45 && /\b(AI|Gemini|Copilot|Grok|ChatGPT|Rufus|Shorts|Reels|Quests|Communities|Spaces)\b|^ask\b(?! question)|create images?|brainstorm|ask about|generate|help me write/i.test(label)) { const r = c.getBoundingClientRect(); modern.push({ t: label, x: r.left, y: r.top, w: r.width, h: r.height }); }
     const ph = c.getAttribute('placeholder');
     if (ph && /ask|chat/i.test(ph)) { const r = c.getBoundingClientRect(); modern.push({ t: 'placeholder: ' + ph, x: r.left, y: r.top, w: r.width, h: r.height }); }
   }
@@ -127,13 +128,20 @@ for (const [id, url] of Object.entries(URLS)) for (const scheme of SCHEMES) {
     await p.mouse.move(5, 850);
     const search = await p.$('input[type=search], input[name=q], input[name=search_query], textarea[name=q], input[role=combobox], input[placeholder*="earch" i], input[aria-label*="earch" i]');
     if (search && await search.isVisible().catch(() => false)) {
-      await search.click({ timeout: 3000 }).catch(() => {}); await p.keyboard.type('new', { delay: 60 }); await p.waitForTimeout(1600); await record('search');
+      // A real mouse click on the field's visible center, as a person would: it must take focus and accept typing.
+      const box = await search.boundingBox();
+      if (box) await p.mouse.click(box.x + Math.min(box.width / 2, 60), box.y + box.height / 2); else await search.click({ timeout: 3000 }).catch(() => {});
+      await p.waitForTimeout(300);
+      await p.keyboard.type('new', { delay: 60 }); await p.waitForTimeout(1600);
+      const typed = await search.evaluate(f => ({ focused: f === document.activeElement || f.contains(document.activeElement) || f.getRootNode().activeElement === f, value: f.value || f.textContent || '' })).catch(() => ({ focused: false, value: '' }));
+      if (!typed.focused || !/new/.test(typed.value)) result.blocked = `search field did not take a click and typing (focused ${typed.focused}, value "${typed.value.slice(0, 20)}")`;
+      await record('search');
       await p.keyboard.press('Escape');
     }
     const menu = await p.$('[aria-haspopup]:not([aria-haspopup=false]), button[aria-expanded=false]');
     if (menu && await menu.isVisible().catch(() => false)) { await menu.click({ timeout: 3000 }).catch(() => {}); await p.waitForTimeout(1200); await record('menu'); }
   } catch (e) { result.err = e.message.slice(0, 100); }
   appendFileSync(`${OUT}/report.jsonl`, JSON.stringify(result) + '\n');
-  console.log(id, scheme, Object.entries(result.states).map(([k, v]) => `${k}:${(v.faint?.length || 0)}f/${(v.modern?.length || 0)}m/${(v.misaligned?.length || 0)}a/${(v.inside?.length || 0)}i`).join(' '));
+  console.log(id, scheme, result.blocked ? 'BLOCKED: ' + result.blocked : '', Object.entries(result.states).map(([k, v]) => `${k}:${(v.faint?.length || 0)}f/${(v.modern?.length || 0)}m/${(v.misaligned?.length || 0)}a/${(v.inside?.length || 0)}i`).join(' '));
   await ctx.close();
 }
