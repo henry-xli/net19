@@ -2,7 +2,7 @@
 
 A Chrome extension that shows popular websites as they looked in **2019**.
 
-[Download net19 0.8.0](https://github.com/henry-xli/net19/raw/refs/heads/main/downloads/net19-0.8.0.zip) · [Privacy](PRIVACY.md) · [Architecture](docs/ARCHITECTURE.md) · [Validation](docs/VALIDATION.md)
+[Download net19 0.9.0](https://github.com/henry-xli/net19/raw/refs/heads/main/downloads/net19-0.9.0.zip) · [Privacy](PRIVACY.md) · [Architecture](docs/ARCHITECTURE.md) · [Validation](docs/VALIDATION.md)
 
 ## Install or update
 
@@ -14,9 +14,9 @@ To update an existing unpacked installation, replace its folder contents and cli
 
 ## Sites
 
-The 2019 look is designed by hand for 90 sites. The references are the [Web Design Museum](https://www.webdesignmuseum.org/gallery/)'s captures, or the Wayback Machine's 2019 captures where the museum has none.
+The 2019 look is designed by hand for 95 sites. The references are the [Web Design Museum](https://www.webdesignmuseum.org/gallery/)'s captures, or the Wayback Machine's 2019 captures where the museum has none.
 
-The sites are most of [SE Ranking's top 100 US websites](https://seranking.com/top-websites-us.html), plus Twitch, Bing and Stack Overflow. From that list, net19 leaves out:
+The sites are most of [SE Ranking's top 100 US websites](https://seranking.com/top-websites-us.html), plus Twitch, Bing, Stack Overflow and the chat and social apps Discord, Telegram Web, WhatsApp Web, Tumblr and Messenger. From that list, net19 leaves out:
 
 - adult sites and video-download sites;
 - banks;
@@ -44,12 +44,21 @@ Two sites still serve their older design themselves:
 - **Wikipedia** articles open in its legacy Vector skin.
 - **Reddit**, while you are signed in, opens on old.reddit.com: the list with vote arrows, blue titles and the sidebar Reddit used through 2021. Old Reddit has no dark mode, so when your device is dark, net19 gives the same layout a dark palette. Signed out, old.reddit.com only offers a sign-in page, so Reddit stays on its current app with 2019 colors and a flat list.
 
+On social sites the themes also hide what those sites added after 2019. Examples:
+
+- YouTube's threaded comment lines, @handles, "Translate" and the pill-shaped player;
+- Discord's server tags, avatar decorations, Quests and the Apps launcher;
+- Stories, reactions and Premium badges on Telegram;
+- the Channels, Communities and Meta AI tabs on WhatsApp;
+- Reels, Threads, Notes and Meta AI on Facebook and Instagram;
+- Grok, views counts and Premium on X.
+
 The popup has two switches: net19 on or off, and net19 on or off for the current site.
 
 ## Limits
 
 - Where a site's structure has changed since 2019, the theme restyles the current layout rather than rebuilding the old one.
-- Signed-in pages that could not be inspected (Facebook, Instagram, X, LinkedIn, Netflix, Quora) are best-effort.
+- Signed-in pages could not be opened in a real signed-in session, so they are best-effort. Their themes were built from each site's own shipped stylesheets and checked on local copies of the markup. This covers the Discord, Telegram, WhatsApp and Messenger apps, the Tumblr dashboard, and signed-in Facebook, Instagram, X, LinkedIn, Netflix and Quora.
 - Some sites block automated browsers, so their themes were checked only on recent Wayback copies: Booking.com, Getty Images, Expedia and Shutterstock among them. Booking.com's theme could not be checked at all, so it only changes colors and corner radii.
 - A site redesign can break parts of a theme until the theme is updated.
 
@@ -70,4 +79,4 @@ npm run package
 
 - `src/` and `static/` are the source; the themes are in `static/themes/`.
 - `dist/extension/` is the unpacked extension.
-- `artifacts/net19-0.8.0.zip` is the packaged build, with a SHA-256 file beside it.
+- `artifacts/net19-0.9.0.zip` is the packaged build, with a SHA-256 file beside it.

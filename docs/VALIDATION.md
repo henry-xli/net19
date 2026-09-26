@@ -1,4 +1,4 @@
-# Validation of 0.8.0
+# Validation of 0.9.0
 
 ## Automated checks
 
@@ -136,3 +136,35 @@ The re-run leaves only false flags, which were checked by hand:
 - bot-check pages.
 
 Sites that block automated browsers were checked in a real Chrome on a Mac instead. This covered Indeed, Booking.com, Expedia, eBay, Instagram, Adobe, Tripadvisor, Walmart, Quora, Britannica, Canva, Collins, Getty Images, Shutterstock, American Airlines, NY.gov, Costco, Uber Eats, TikTok, timeanddate, Etsy and Yelp. realtor.com, Fandom, Genius and Allrecipes could not be checked there either.
+
+## Social apps (0.9.0)
+
+0.9.0 adds Discord, Telegram Web, WhatsApp Web, Tumblr and Messenger. It also rebuilds YouTube's watch page and the themes for Facebook, Instagram, X, TikTok, Pinterest, Reddit, LinkedIn, Twitch and Quora.
+
+For each site, the 2019 design was written down region by region:
+
+- header;
+- navigation;
+- feed or list;
+- post or message;
+- comments;
+- composer;
+- menus;
+- light and dark.
+
+The sources were the Wayback Machine where it answered, and the open-source 2019 Telegram Web client. For each site, a list was also made of every feature added since 2019, and the theme hides each one.
+
+Signed-in apps could not be opened with a real account. Their rules were built from each site's own shipped stylesheet and label files. They were checked on local pages that reproduce the real markup, in light, dark and flipped modes, with real mouse clicks and typing in search and message fields.
+
+Signed-out pages were checked live: login pages, public profiles, posts, feeds and channel pages. YouTube's watch page and comments were checked in a real Chrome on a Mac, in light and dark.
+
+The stress audit now clicks each site's search field with the mouse, the way a person would, and types into it. It reports the site as blocked when the field does not take focus. On the full run, every blocked field was caused by the site itself, not by a theme; the same happened without net19. The causes were:
+
+- a bot check covering the page;
+- a cookie banner;
+- a field hidden behind a search icon.
+
+Two shared fixes came out of this round:
+
+- The page flip never keeps `<body>` as drawn. Keeping it had left Telegram's login page half flipped.
+- The readability guard reads colors written as `oklab()` or `oklch()` (Tailwind v4, used by X). Before, it had misjudged those backgrounds as nearly black.

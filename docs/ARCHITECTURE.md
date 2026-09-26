@@ -79,7 +79,7 @@ Settings are `{ enabled, disabledHosts }`. Only the popup can change them. Switc
 
 | Permission | Purpose |
 | --- | --- |
-| Host access to the themed domains (93 domains for 90 themes) | Register the themes and navigation rules on those sites only |
+| Host access to the themed domains (98 domains for 95 themes) | Register the themes and navigation rules on those sites only |
 | `scripting` | Register the document-start theme scripts |
 | `declarativeNetRequestWithHostAccess` | Wikipedia's legacy-skin parameter and the old.reddit.com redirect |
 | `cookies` | Check whether a Reddit session exists, so old.reddit.com is only used when it works |
