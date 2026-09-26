@@ -149,6 +149,7 @@ ytd-watch-metadata h1, ytd-watch-metadata h1 yt-formatted-string { font-size: 18
 ytd-watch-metadata #top-row { display: contents !important; }
 ytd-watch-metadata #actions { grid-column: 1 / -1 !important; grid-row: 2 !important; justify-self: stretch !important; display: flex !important; justify-content: flex-end !important;
   margin: 0 !important; padding: 0 0 4px !important; border-bottom: 1px solid var(--n19-divider) !important; min-width: 0 !important; }
+ytd-watch-metadata #actions-inner { margin-left: auto !important; }
 ytd-watch-metadata #owner { grid-column: 1 / -1 !important; grid-row: 3 !important; display: flex !important; align-items: flex-start !important; margin: 16px 0 0 !important; min-width: 0 !important; width: auto !important; }
 ytd-watch-metadata #owner #subscribe-button { margin-left: auto !important; }
 ytd-watch-metadata #owner ytd-video-owner-renderer { flex: 1 1 auto !important; min-width: 0 !important; margin-right: 12px !important; }
@@ -216,6 +217,12 @@ ytd-comment-engagement-bar :is(#reply-button-end, #reply-button) :is(button, a) 
 ytd-comment-view-model :is(.threadline, .continuation), ytd-comment-replies-renderer :is(.ytSubThreadThreadline, .ytSubThreadConnection, .ytSubThreadContinuation, .ytSubThreadShadow, .thread-hitbox),
 ytd-comment-thread-renderer .threadline, ytd-comment-view-model .translate-button, ytd-comment-view-model :is(#paid-comment-chip, #paid-comment-background) { display: none !important; }
 ytd-comment-replies-renderer { margin-left: 56px !important; }
+/* 2019 replies were one flat level: replies to replies sit with the others, not indented again */
+ytd-comment-replies-renderer ytd-comment-replies-renderer, ytd-comment-replies-renderer yt-sub-thread yt-sub-thread { margin-left: 0 !important; }
+ytd-comment-replies-renderer :is(ytd-continuation-item-renderer, #continuation, #button-container) :is(button, a) {
+  background: transparent !important; box-shadow: none !important; border-radius: 0 !important; padding: 0 !important; font-size: 13px !important; font-weight: 500 !important; color: var(--n19-blue) !important; }
+ytd-comment-replies-renderer :is(ytd-continuation-item-renderer, #continuation) :is(yt-icon, .yt-icon-shape) { color: var(--n19-blue) !important; }
+ytw-pinned-comment-badge-renderer, ytw-pinned-comment-badge-renderer * { font-size: 12px !important; color: var(--n19-text-2) !important; }
 ytd-comment-replies-renderer yt-sub-thread, ytd-comment-replies-renderer .ytSubThreadSubThreadContent { margin: 0 !important; padding: 0 !important; }
 ytd-comment-replies-renderer yt-sub-thread { display: block !important; }
 ytd-comment-replies-renderer :is(#more-replies, #less-replies, #more-replies-sub-thread, #less-replies-sub-thread, .show-replies-button, .hide-replies-button) :is(button, a) {
