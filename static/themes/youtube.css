@@ -6,12 +6,12 @@ html { --n19-page: #f1f1f1; --n19-card: #fff; --n19-card-shadow: 0 1px 2px rgba(
   --n19-rail: #fff; --n19-text: #222; --n19-text-2: #767676; --n19-title: #167ac6; --n19-related-title: #222; --n19-red: #e62117;
   --n19-field: #fff; --n19-field-border: #ccc; --n19-field-inset: inset 0 1px 2px #eee; --n19-button: #f8f8f8; --n19-button-border: #d3d3d3;
   --n19-button-text: #333; --n19-icon: #909090; --n19-hover: #f1f1f1; --n19-divider: #e2e2e2; --n19-blue: #167ac6; --n19-badge: rgba(0,0,0,.8);
-  --n19-subscribed: #f8f8f8; --n19-subscribed-text: #767676; }
+  --n19-subscribed: #f8f8f8; --n19-subscribed-text: #767676; --n19-sentiment: #909090; }
 html[data-net19-mode="dark"] { --n19-page: #121212; --n19-card: #1e1e1e; --n19-card-shadow: 0 1px 2px rgba(0,0,0,.6); --n19-bar: #232323; --n19-bar-border: #333;
   --n19-rail: #1c1c1c; --n19-text: #eee; --n19-text-2: #999; --n19-title: #5aa9e6; --n19-related-title: #eee; --n19-red: #e62117;
   --n19-field: #121212; --n19-field-border: #3d3d3d; --n19-field-inset: inset 0 1px 2px rgba(0,0,0,.4); --n19-button: #2b2b2b; --n19-button-border: #3d3d3d;
   --n19-button-text: #ddd; --n19-icon: #9a9a9a; --n19-hover: #2a2a2a; --n19-divider: #333; --n19-blue: #167ac6; --n19-badge: rgba(0,0,0,.8);
-  --n19-subscribed: #2b2b2b; --n19-subscribed-text: #aaa; }
+  --n19-subscribed: #2b2b2b; --n19-subscribed-text: #aaa; --n19-sentiment: #606060; }
 
 /* YouTube's own design variables, so menus, dialogs and the suggestion list follow the same palette */
 html:root, html[dark], html ytd-app {
@@ -138,13 +138,92 @@ ytd-search ytd-section-list-renderer > #contents > ytd-item-section-renderer { b
 ytd-search :is(ytd-video-renderer #video-title, yt-lockup-view-model .ytLockupMetadataViewModelTitle) { font-size: 18px !important; line-height: 24px !important; font-weight: 400 !important; }
 ytd-search :is(.ytContentMetadataViewModelMetadataText, .ytContentMetadataViewModelMetadataRow, #metadata-line span, #channel-name a) { font-size: 13px !important; line-height: 18px !important; }
 
-/* Watch page: title and description in white cards, related videos with dark bold titles */
-ytd-watch-flexy ytd-watch-metadata { background: var(--n19-card) !important; box-shadow: var(--n19-card-shadow) !important; padding: 12px 15px !important; margin-top: 10px !important; }
-ytd-watch-metadata h1 { font-size: 20px !important; font-weight: 400 !important; line-height: 26px !important; color: var(--n19-text) !important; }
-ytd-watch-metadata #description { background: transparent !important; border-top: 1px solid var(--n19-divider) !important; margin-top: 12px !important; }
-ytd-watch-flexy #secondary { background: var(--n19-card) !important; box-shadow: var(--n19-card-shadow) !important; padding: 10px !important; margin-top: 10px !important; }
-ytd-watch-flexy #secondary .ytLockupMetadataViewModelTitle, ytd-watch-flexy #secondary #video-title { color: var(--n19-related-title) !important; }
-ytd-watch-flexy ytd-comments { background: var(--n19-card) !important; box-shadow: var(--n19-card-shadow) !important; padding: 12px 15px !important; margin-top: 10px !important; }
+/* Watch page, as in 2019: flat on the page color, no cards and no rounded boxes. The title, then the action row on the
+   right with a hairline under it, then the owner row (avatar, name, subscribers, SUBSCRIBE on the far right), then the
+   description indented under the name, then comments; "Up next" on the right. */
+ytd-watch-flexy { --n19-watch-indent: 64px; }
+ytd-watch-flexy ytd-watch-metadata { background: transparent !important; box-shadow: none !important; padding: 0 !important; margin-top: 16px !important; }
+ytd-watch-metadata #above-the-fold { display: grid !important; grid-template-columns: minmax(0, 1fr) auto !important; margin: 0 !important; border-bottom: 1px solid var(--n19-divider) !important; padding-bottom: 12px !important; }
+ytd-watch-metadata #title-row, ytd-watch-metadata #title { grid-column: 1 / -1 !important; }
+ytd-watch-metadata h1, ytd-watch-metadata h1 yt-formatted-string { font-size: 18px !important; font-weight: 400 !important; line-height: 26px !important; color: var(--n19-text) !important; margin: 0 !important; }
+ytd-watch-metadata #top-row { display: contents !important; }
+ytd-watch-metadata #actions { grid-column: 1 / -1 !important; grid-row: 2 !important; justify-self: stretch !important; display: flex !important; justify-content: flex-end !important;
+  margin: 0 !important; padding: 0 0 4px !important; border-bottom: 1px solid var(--n19-divider) !important; min-width: 0 !important; }
+ytd-watch-metadata #owner { grid-column: 1 / -1 !important; grid-row: 3 !important; display: flex !important; align-items: flex-start !important; margin: 16px 0 0 !important; min-width: 0 !important; width: auto !important; }
+ytd-watch-metadata #owner #subscribe-button { margin-left: auto !important; }
+ytd-watch-metadata #owner ytd-video-owner-renderer { flex: 1 1 auto !important; min-width: 0 !important; margin-right: 12px !important; }
+ytd-watch-metadata ytd-video-owner-renderer #avatar, ytd-watch-metadata ytd-video-owner-renderer #avatar img { width: 48px !important; height: 48px !important; margin-right: 16px !important; }
+ytd-watch-metadata ytd-video-owner-renderer #channel-name, ytd-watch-metadata ytd-video-owner-renderer #channel-name a { font-size: 14px !important; font-weight: 500 !important; color: var(--n19-text) !important; }
+ytd-watch-metadata #owner-sub-count { font-size: 13px !important; color: var(--n19-text-2) !important; }
+ytd-watch-metadata #bottom-row { grid-column: 1 / -1 !important; grid-row: 4 !important; margin: 0 0 0 var(--n19-watch-indent) !important; }
+ytd-watch-metadata #description, ytd-watch-metadata #description-inner, ytd-watch-metadata #description.item { background: transparent !important; border: 0 !important; border-radius: 0 !important; margin: 0 !important; padding: 0 !important; }
+ytd-watch-metadata #description:hover { background: transparent !important; }
+ytd-watch-metadata #description-inner { margin: 0 !important; padding: 4px 0 0 !important; }
+ytd-watch-metadata ytd-watch-info-text, ytd-watch-metadata #info-container, ytd-watch-metadata #info-container * { font-size: 13px !important; font-weight: 500 !important; color: var(--n19-text-2) !important; }
+ytd-watch-metadata #description ytd-text-inline-expander, ytd-watch-metadata #description #attributed-snippet-text, ytd-watch-metadata #description yt-attributed-string,
+ytd-watch-metadata #description #description-inline-expander { font-size: 14px !important; line-height: 21px !important; color: var(--n19-text) !important; }
+ytd-watch-metadata #description :is(tp-yt-paper-button#expand, tp-yt-paper-button#collapse, #expand, #collapse) {
+  display: block !important; margin: 8px 0 0 !important; padding: 0 !important; background: transparent !important;
+  font-size: 13px !important; font-weight: 500 !important; text-transform: uppercase !important; letter-spacing: .007em !important; color: var(--n19-text-2) !important; }
+/* Watch action row: icon and uppercase label buttons with no plates; a thin gray sentiment bar under like / dislike */
+ytd-watch-metadata #actions :is(button, a) { background: transparent !important; border: 0 !important; box-shadow: none !important; border-radius: 0 !important;
+  color: var(--n19-text-2) !important; text-transform: uppercase !important; font-size: 13px !important; font-weight: 500 !important; padding: 0 8px !important; }
+ytd-watch-metadata #actions :is(button, a) yt-light-shape, ytd-watch-metadata #actions yt-light-shape, ytd-watch-metadata #actions yt-touch-feedback-shape { display: none !important; }
+ytd-watch-metadata #actions .ytSegmentedLikeDislikeButtonViewModelSegmentedButtonsWrapper { background: transparent !important; box-shadow: inset 0 -2px 0 var(--n19-sentiment) !important; border-radius: 0 !important; padding-bottom: 2px !important; }
+ytd-watch-metadata #actions .ytSegmentedLikeDislikeButtonViewModelSegmentedButtonsWrapper::after, ytd-watch-metadata #actions .ytSegmentedLikeDislikeButtonViewModelSegmentedButtonsWrapper::before { display: none !important; }
+ytd-watch-metadata #actions [aria-pressed="true"] { color: var(--n19-blue) !important; }
+ytd-watch-metadata #actions yt-icon, ytd-watch-metadata #actions .yt-icon-shape { color: var(--n19-icon) !important; }
+/* Actions that arrived after 2019: download for everyone, clips, Thanks, the AI "Ask" button, remix / create */
+ytd-watch-metadata #actions :is(ytd-download-button-renderer, yt-button-view-model:has(button[aria-label="Clip" i]), yt-button-view-model:has(button[aria-label="Thanks" i]),
+  yt-button-view-model:has(button[aria-label^="Ask" i]), yt-button-view-model:has(button[aria-label^="Remix" i]), yt-button-view-model:has(button[aria-label="Create" i])) { display: none !important; }
+/* Description extras added after 2019: transcript, AI summary, "how this content was made", key concepts, podcast / course cards */
+ytd-video-description-transcript-section-renderer, ytd-structured-description-content-renderer :is(yt-video-attributes-section-view-model, ytd-video-description-course-section-renderer,
+  ytd-video-description-education-section-renderer, how-this-was-made-section-view-model, ytd-video-description-infocards-section-renderer),
+ytd-watch-metadata ytd-expandable-metadata-renderer, ytd-watch-metadata #teaser-carousel, ytd-watch-metadata yt-video-summary-view-model,
+ytd-watch-metadata :is(#ai-summary, [class*="AiSummary"], [class*="aiSummary"]) { display: none !important; }
+/* Up next: plain list, 168px thumbnails, 14px titles; no filter chips (2021) */
+ytd-watch-flexy #secondary { background: transparent !important; box-shadow: none !important; padding: 0 !important; margin-top: 16px !important; }
+ytd-watch-next-secondary-results-renderer :is(yt-related-chip-cloud-renderer, yt-chip-cloud-renderer, #chips-wrapper) { display: none !important; }
+ytd-watch-flexy #secondary .ytLockupMetadataViewModelTitle, ytd-watch-flexy #secondary #video-title { color: var(--n19-related-title) !important; font-size: 14px !important; line-height: 20px !important; }
+ytd-watch-flexy #secondary .ytLockupViewModelHost, ytd-watch-flexy #secondary ytd-compact-video-renderer { margin-bottom: 8px !important; }
+ytd-watch-flexy #secondary .ytLockupMetadataViewModelAvatar { display: none !important; }
+
+/* Player: the 2019 solid red progress bar and square controls; no chapter title in the control bar */
+.ytp-play-progress, .ytp-swatch-background-color { background: #f00 !important; background-image: none !important; }
+.ytp-scrubber-button, .ytp-swatch-background-color-secondary { background: #f00 !important; }
+.ytp-chapter-container, .ytp-chapter-title { display: none !important; }
+
+/* Comments, as in 2019: "1,234 Comments" and SORT BY; 40px avatars, 13px names and dates, 14px text, a REPLY text button,
+   replies folded under a blue "View 12 replies" link and indented under the comment with 24px avatars. No thread lines
+   (2023), no translate button (2023), no Super Thanks chips (2021). */
+ytd-watch-flexy ytd-comments { background: transparent !important; box-shadow: none !important; padding: 0 !important; margin-top: 24px !important; }
+ytd-comments-header-renderer #count, ytd-comments-header-renderer #count * { font-size: 16px !important; font-weight: 400 !important; color: var(--n19-text) !important; }
+ytd-comments-header-renderer #sort-menu :is(tp-yt-paper-button, yt-sort-filter-sub-menu-renderer, #label, #icon-label, yt-dropdown-menu) { text-transform: uppercase !important; font-size: 13px !important; font-weight: 500 !important; color: var(--n19-text-2) !important; }
+ytd-comments-header-renderer #simple-box #placeholder-area, ytd-comment-simplebox-renderer #placeholder-area { border-bottom: 1px solid var(--n19-divider) !important; font-size: 14px !important; color: var(--n19-text-2) !important; }
+ytd-comment-thread-renderer { margin-bottom: 16px !important; }
+ytd-comment-view-model #author-thumbnail yt-img-shadow, ytd-comment-view-model #author-thumbnail img { width: 40px !important; height: 40px !important; }
+ytd-comment-replies-renderer ytd-comment-view-model #author-thumbnail yt-img-shadow, ytd-comment-replies-renderer ytd-comment-view-model #author-thumbnail img { width: 24px !important; height: 24px !important; }
+ytd-comment-view-model #author-thumbnail { margin-right: 16px !important; }
+ytd-comment-view-model #header-author :is(#author-text, #author-text span, #name, #channel-name, #channel-name #text) { font-size: 13px !important; font-weight: 500 !important; line-height: 18px !important; color: var(--n19-text) !important; }
+ytd-comment-view-model #published-time-text, ytd-comment-view-model #published-time-text a { font-size: 13px !important; font-weight: 400 !important; color: var(--n19-text-2) !important; }
+ytd-comment-view-model #content-text, ytd-comment-view-model #content-text .ytAttributedStringHost { font-size: 14px !important; line-height: 20px !important; color: var(--n19-text) !important; }
+ytd-comment-view-model #expander :is(#more, #less) .more-button, ytd-comment-view-model #expander :is(#more, #less) .less-button { font-size: 13px !important; font-weight: 500 !important; color: var(--n19-text-2) !important; }
+ytd-comment-engagement-bar #toolbar { margin-top: 4px !important; }
+ytd-comment-engagement-bar :is(button, a) { background: transparent !important; border-radius: 0 !important; box-shadow: none !important; }
+ytd-comment-engagement-bar yt-touch-feedback-shape { display: none !important; }
+ytd-comment-engagement-bar #vote-count-middle { font-size: 13px !important; color: var(--n19-text-2) !important; margin: 0 8px 0 0 !important; }
+ytd-comment-engagement-bar :is(#reply-button-end, #reply-button) :is(button, a) { text-transform: uppercase !important; font-size: 13px !important; font-weight: 500 !important; color: var(--n19-text-2) !important; padding: 0 8px !important; }
+ytd-comment-view-model :is(.threadline, .continuation), ytd-comment-replies-renderer :is(.ytSubThreadThreadline, .ytSubThreadConnection, .ytSubThreadContinuation, .ytSubThreadShadow, .thread-hitbox),
+ytd-comment-thread-renderer .threadline, ytd-comment-view-model .translate-button, ytd-comment-view-model :is(#paid-comment-chip, #paid-comment-background) { display: none !important; }
+ytd-comment-replies-renderer { margin-left: 56px !important; }
+ytd-comment-replies-renderer yt-sub-thread, ytd-comment-replies-renderer .ytSubThreadSubThreadContent { margin: 0 !important; padding: 0 !important; }
+ytd-comment-replies-renderer yt-sub-thread { display: block !important; }
+ytd-comment-replies-renderer :is(#more-replies, #less-replies, #more-replies-sub-thread, #less-replies-sub-thread, .show-replies-button, .hide-replies-button) :is(button, a) {
+  background: transparent !important; box-shadow: none !important; border-radius: 0 !important; padding: 0 !important; height: 32px !important;
+  font-size: 13px !important; font-weight: 500 !important; color: var(--n19-blue) !important; }
+ytd-comment-replies-renderer :is(#more-replies, #less-replies, #more-replies-sub-thread, #less-replies-sub-thread) :is(yt-icon, .yt-icon-shape, .ytSpecButtonShapeNextIcon) { color: var(--n19-blue) !important; }
+ytd-comment-replies-renderer :is(#more-replies-sub-thread, #less-replies-sub-thread, .show-replies-button) :is(img, yt-img-shadow, .ytSpecAvatarShapeHost) { display: none !important; }
+ytd-comment-replies-renderer ytd-comment-view-model { margin-top: 12px !important; }
 
 /* Subscribe: red, uppercase, square */
 ytd-subscribe-button-renderer button, yt-subscribe-button-view-model button, #subscribe-button a, #subscribe-button button, :is(a, button)[aria-label^="Subscribe" i] {
@@ -176,7 +255,6 @@ ytd-search ytd-video-renderer ytd-expandable-metadata-renderer { display: none !
 ytd-search ytd-video-renderer #channel-info { margin: 2px 0 !important; }
 ytd-search ytd-video-renderer #channel-thumbnail { display: none !important; }
 ytd-watch-flexy #secondary .ytLockupViewModelHorizontal > .ytLockupViewModelContentImage, ytd-watch-flexy #secondary ytd-thumbnail[size] { flex: none !important; width: 168px !important; max-width: 168px !important; min-width: 168px !important; }
-ytd-watch-flexy #secondary .ytLockupMetadataViewModelTitle { font-size: 13px !important; font-weight: 500 !important; }
 /* Watch actions: plain icon-and-label buttons, no pill backgrounds */
 ytd-watch-metadata #actions :is(button, a).ytSpecButtonShapeNextHost, ytd-watch-metadata #actions like-button-view-model, ytd-watch-metadata #actions dislike-button-view-model,
 ytd-watch-metadata #actions .ytSegmentedLikeDislikeButtonViewModelSegmentedButtonsWrapper, ytd-watch-metadata #actions yt-button-shape { background: transparent !important; border-radius: 0 !important; }
