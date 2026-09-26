@@ -1,33 +1,135 @@
-/* net19 handmade theme: Facebook, 2019. Signed out: a pale blue-gray (#edf0f5) top half with the logo and a bold 24px
-   "Connect with friends..." headline on the left, a white 8px-radius login card on the right (54px square-ish fields,
-   a #1877f2 "Log In" bar, a small blue "Forgot account?" link, a rule, a green "Create New Account" button), and a
-   white footer of small 12px links. Signed in: blue top bar, gray page, small-radius white cards, Helvetica. Facebook
-   had no dark mode in 2019; the dark variant keeps the same shapes on Facebook's dark surfaces. */
+/* net19 handmade theme: Facebook, 2019 (classic, before the 2020 "FB5" redesign). A 42px #4267b2 blue bar with a white
+   "f", a small white 2px-corner search field with its magnifier button at the right, and plain white glyph icons (no
+   gray circles, no center tabs, no grid "Menu"); a #e9ebee page; a narrow left nav of 13px labels with 20px icons; a
+   500px feed of white posts in 1px #dddfe2 borders with 3px corners, 40px avatars, bold #385898 names, 14px text, a
+   "Like Comment Share" row of 13px bold gray labels and #f2f3f5 comment bubbles with 32px avatars; the composer is a
+   white "Create Post" box. Helvetica throughout. Facebook had no dark mode in 2019: the dark variant is the same
+   layout on a dark palette. Signed out: the 2019 landing page (blue-gray band, bold headline, white login card). */
 html { --n19-wash: #e9ebee; --n19-card: #fff; --n19-card-2: #f5f6f7; --n19-comment: #f2f3f5; --n19-text: #1d2129; --n19-text-2: #606770; --n19-muted: #90949c;
-  --n19-icon: #606770; --n19-accent: #4267b2; --n19-link: #385898; --n19-divider: #dddfe2; --n19-bar: #4267b2; --n19-bar-border: #29487d; --n19-bar-field: #fff; --n19-bar-field-text: #1d2129;
+  --n19-icon: #606770; --n19-accent: #4267b2; --n19-link: #385898; --n19-divider: #dddfe2; --n19-hover: #ebedf0; --n19-button: #f5f6f7; --n19-button-line: #ccd0d5;
+  --n19-bar: #4267b2; --n19-bar-border: #29487d; --n19-bar-field: #fff; --n19-bar-field-text: #1d2129; --n19-bar-search: #f6f7f9; --n19-bar-glyph: #fff;
   --n19-land: #edf0f5; --n19-land-card: #fff; --n19-land-field: #fff; --n19-land-line: #dddfe2; --n19-login: #1877f2; --n19-green: #42b72a; --n19-heading: #1c1e21; --n19-foot: #fff; --n19-foot-text: #737373; --n19-foot-link: #385898;
-  --n19-land-shadow: 0 2px 4px rgba(0,0,0,.1), 0 8px 16px rgba(0,0,0,.1); }
-html[data-net19-mode="dark"] { --n19-wash: #18191a; --n19-card: #242526; --n19-card-2: #3a3b3c; --n19-comment: #3a3b3c; --n19-text: #e4e6eb; --n19-text-2: #b0b3b8; --n19-muted: #8a8d91;
-  --n19-icon: #b0b3b8; --n19-accent: #5b7ec2; --n19-link: #8ea8e0; --n19-divider: #3e4042; --n19-bar: #29487d; --n19-bar-border: #1e3560; --n19-bar-field: #3a3b3c; --n19-bar-field-text: #e4e6eb;
-  --n19-land: #18191a; --n19-land-card: #242526; --n19-land-field: #3a3b3c; --n19-land-line: #3e4042; --n19-login: #2d88ff; --n19-green: #42b72a; --n19-heading: #e4e6eb; --n19-foot: #242526; --n19-foot-text: #8a8d91; --n19-foot-link: #8ea8e0;
+  --n19-land-shadow: 0 2px 4px rgba(0,0,0,.1), 0 8px 16px rgba(0,0,0,.1); --n19-font: Helvetica, Arial, sans-serif; }
+html[data-net19-mode="dark"] { --n19-wash: #18191a; --n19-card: #242526; --n19-card-2: #3a3b3c; --n19-comment: #3a3b3c; --n19-text: #dadde1; --n19-text-2: #b0b3b8; --n19-muted: #8a8d91;
+  --n19-icon: #b0b3b8; --n19-accent: #5b7ec2; --n19-link: #9cb4e8; --n19-divider: #3e4042; --n19-hover: #3a3b3c; --n19-button: #3a3b3c; --n19-button-line: #4e4f50;
+  --n19-bar: #29487d; --n19-bar-border: #1b2f55; --n19-bar-field: #3a3b3c; --n19-bar-field-text: #e4e6eb; --n19-bar-search: #4e4f50; --n19-bar-glyph: #e4e6eb;
+  --n19-land: #18191a; --n19-land-card: #242526; --n19-land-field: #3a3b3c; --n19-land-line: #3e4042; --n19-login: #2d88ff; --n19-green: #42b72a; --n19-heading: #e4e6eb; --n19-foot: #242526; --n19-foot-text: #8a8d91; --n19-foot-link: #9cb4e8;
   --n19-land-shadow: 0 2px 4px rgba(0,0,0,.3), 0 8px 16px rgba(0,0,0,.3); }
+/* Facebook draws every surface from these variables: re-pointing them moves menus, dialogs and later content too */
 html:root, html.__fb-light-mode, html.__fb-dark-mode, html .__fb-light-mode, html .__fb-dark-mode {
-  --web-wash: var(--n19-wash) !important; --wash: var(--n19-wash) !important; --surface-background: var(--n19-card) !important;
+  --web-wash: var(--n19-wash) !important; --wash: var(--n19-hover) !important; --surface-background: var(--n19-card) !important;
   --card-background: var(--n19-card) !important; --card-background-flat: var(--n19-card-2) !important; --comment-background: var(--n19-comment) !important;
+  --popover-background: var(--n19-card) !important; --messenger-card-background: var(--n19-card) !important; --nav-bar-background: var(--n19-card) !important;
   --primary-text: var(--n19-text) !important; --secondary-text: var(--n19-text-2) !important; --placeholder-text: var(--n19-muted) !important;
-  --primary-icon: var(--n19-icon) !important; --secondary-icon: var(--n19-icon) !important; --accent: var(--n19-accent) !important;
-  --blue-link: var(--n19-link) !important; --primary-button-background: var(--n19-accent) !important; --secondary-button-background: var(--n19-card-2) !important;
+  --primary-icon: var(--n19-text) !important; --secondary-icon: var(--n19-icon) !important; --placeholder-icon: var(--n19-muted) !important;
+  --accent: var(--n19-accent) !important; --blue-link: var(--n19-link) !important; --primary-button-background: var(--n19-accent) !important;
+  --primary-deemphasized-button-text: var(--n19-link) !important; --primary-deemphasized-button-background: var(--n19-button) !important;
+  --secondary-button-background: var(--n19-button) !important; --secondary-button-text: var(--n19-text) !important;
+  --hover-overlay: rgba(0,0,0,.04) !important; --hosted-view-selected-state: var(--n19-hover) !important; --highlight-bg: var(--n19-hover) !important;
   --divider: var(--n19-divider) !important; --media-inner-border: var(--n19-divider) !important; --nav-list-selected-accent: var(--n19-accent) !important;
-  --card-corner-radius: 3px !important; --button-corner-radius: 2px !important; --button-corner-radius-large: 2px !important; --button-small-corner-radius: 2px !important;
-  --input-corner-radius: 2px !important; --shadow-card: 0 0 0 1px var(--n19-divider) !important; --card-box-shadow: 0 0 0 1px var(--n19-divider) !important;
+  --card-corner-radius: 3px !important; --button-corner-radius: 2px !important; --button-corner-radius-medium: 2px !important; --button-corner-radius-large: 2px !important;
+  --button-small-corner-radius: 2px !important; --input-corner-radius: 2px !important; --list-cell-corner-radius: 2px !important; --nav-list-cell-corner-radius: 2px !important;
+  --dialog-corner-radius: 3px !important; --toast-corner-radius: 3px !important; --tooltip-corner-radius: 3px !important; --chip-corner-radius: 2px !important;
+  --alert-banner-corner-radius: 3px !important; --messenger-card-corner-radius: 3px !important; --glimmer-corner-radius: 3px !important; --image-corner-radius: 0 !important;
+  --menu-item-base-overlay-radius: 2px !important; --text-badge-corner-radius: 2px !important; --infochip-medium-radius: 3px !important;
+  --comment-bubble: 18px !important; --nav-list-cell-padding-vertical: 4px !important; --nav-list-cell-padding-vertical-with-addon: 4px !important;
+  --shadow-1: rgba(0,0,0,.1) !important; --card-box-shadow: 0 0 0 1px var(--n19-divider) !important;
+  --font-family-apple: var(--n19-font) !important; --font-family-segoe: var(--n19-font) !important; --font-family-system: var(--n19-font) !important; --font-family-default: var(--n19-font) !important;
 }
-body, button, input, textarea { font-family: Helvetica, Arial, sans-serif !important; }
-/* The blue bar: its own variables, so icons, labels and the search field inside it follow */
-div[role="banner"] { background: var(--n19-bar) !important; border-bottom: 1px solid var(--n19-bar-border) !important; box-shadow: none !important;
-  --surface-background: var(--n19-bar); --primary-icon: #fff; --secondary-icon: #fff; --primary-text: #fff; --secondary-text: #fff; --accent: #fff;
-  --secondary-button-background: rgba(0,0,0,.15); --comment-background: var(--n19-bar-field); }
-div[role="banner"] input { background: var(--n19-bar-field) !important; color: var(--n19-bar-field-text) !important; border-radius: 2px !important; }
-div[role="banner"] a[aria-label="Facebook"] svg path { fill: #fff !important; }
+/* The 42px bar: only where there is a bar (the signed-out landing page has none, and would keep an empty band) */
+html[data-n19-bar]:root, html[data-n19-bar].__fb-light-mode, html[data-n19-bar].__fb-dark-mode, html[data-n19-bar] .__fb-light-mode, html[data-n19-bar] .__fb-dark-mode { --header-height: 42px !important; }
+body, button, input, textarea, [contenteditable] { font-family: Helvetica, Arial, sans-serif !important; }
+
+/* ---- The blue bar (signed in and signed out). Its layers take their height from --header-height (42px). ---- */
+div[role="banner"] { --nav-bar-background: var(--n19-bar); --primary-icon: var(--n19-bar-glyph); --secondary-icon: var(--n19-bar-glyph); --primary-text: var(--n19-bar-glyph);
+  --secondary-text: var(--n19-bar-glyph); --secondary-button-background: transparent; --secondary-button-text: var(--n19-bar-glyph); --hover-overlay: rgba(0,0,0,.12);
+  --fb-logo: var(--n19-bar-glyph); --blue-link: #fff; --accent: var(--n19-bar-glyph); --placeholder-text: var(--n19-muted); --placeholder-icon: var(--n19-icon); --comment-background: var(--n19-bar-field); }
+/* Menus, notification and Messenger panels and search suggestions opened from the bar keep the page's own ink */
+div[role="banner"] :is([role="dialog"], [role="menu"], [role="listbox"], [role="grid"]) { --primary-icon: var(--n19-text); --secondary-icon: var(--n19-icon); --primary-text: var(--n19-text);
+  --secondary-text: var(--n19-text-2); --secondary-button-background: var(--n19-button); --secondary-button-text: var(--n19-text); --blue-link: var(--n19-link); --accent: var(--n19-accent);
+  --hover-overlay: rgba(0,0,0,.04); --comment-background: var(--n19-comment); --nav-bar-background: var(--n19-card); }
+div[role="banner"] > div > div:first-child:not(:has(input, a, [role="button"])) { background: var(--n19-bar) !important; border-bottom: 1px solid var(--n19-bar-border) !important; box-sizing: border-box !important; }
+div[role="banner"] .xnzfen { display: none !important; }
+/* The "f": a white mark on the blue bar */
+div[role="banner"] a[aria-label="Facebook"] svg[viewBox="0 0 36 36"] { width: 26px !important; height: 26px !important; color: var(--n19-bar-glyph) !important; }
+div[role="banner"] a[aria-label="Facebook"] svg[viewBox="0 0 36 36"] path:first-child { fill: var(--n19-bar-glyph) !important; }
+div[role="banner"] a[aria-label="Facebook"] svg[viewBox="0 0 36 36"] path:last-child:not(:first-child) { fill: var(--n19-bar) !important; }
+div[role="banner"] [aria-label="Facebook"] svg:not([viewBox="0 0 36 36"]) :is(path, g) { fill: var(--n19-bar-glyph) !important; }
+/* Search: a 24px white field with 2px corners; the magnifier sits at the right on a pale button */
+div[role="banner"] label:has(> input[type="search"]), div[role="banner"] label:has(input[role="combobox"]) { background: var(--n19-bar-field) !important; border-radius: 2px !important;
+  min-height: 0 !important; height: 26px !important; border: 1px solid var(--n19-bar-border) !important; box-sizing: border-box !important; padding: 0 0 0 6px !important; overflow: hidden !important; }
+div[role="banner"] label:has(input[type="search"]) > :is(span, div):has(svg) { order: 2 !important; align-self: stretch !important; display: flex !important; align-items: center !important;
+  background: var(--n19-bar-search) !important; padding: 0 8px !important; margin: 0 !important; border-left: 1px solid var(--n19-divider) !important; }
+div[role="banner"] label:has(input[type="search"]) svg { color: var(--n19-icon) !important; fill: var(--n19-icon) !important; }
+div[role="banner"] input:is([type="search"], [role="combobox"]) { font-size: 14px !important; color: var(--n19-bar-field-text) !important; background: transparent !important; padding: 0 !important; height: 24px !important; }
+/* Signed out: the bar's login row (Email / Password / Log In / Forgot account?) */
+div[role="banner"] form input:not([type="hidden"]) { background: var(--n19-bar-field) !important; color: var(--n19-bar-field-text) !important; border: 1px solid var(--n19-bar-border) !important;
+  border-radius: 0 !important; height: 24px !important; font-size: 12px !important; padding: 0 6px !important; box-sizing: border-box !important; }
+div[role="banner"] form div:has(> input:not([type="hidden"])) { height: auto !important; border: none !important; background: transparent !important; }
+div[role="banner"] form [role="button"][aria-label="Log In"] { background: var(--n19-bar) !important; border: 1px solid #fff !important; border-radius: 2px !important; height: 24px !important;
+  min-height: 0 !important; box-shadow: none !important; box-sizing: border-box !important; padding: 0 8px !important; display: flex !important; align-items: center !important; }
+div[role="banner"] form [role="button"][aria-label="Log In"] * { background: transparent !important; height: auto !important; min-height: 0 !important; padding: 0 !important; border: none !important; }
+div[role="banner"] form [aria-label="Log In"] span { color: #fff !important; font-size: 12px !important; font-weight: bold !important; }
+div[role="banner"] form a[href*="recover"] span, div[role="banner"] form a[href*="recover"] { color: #dfe3ee !important; font-size: 12px !important; font-weight: 400 !important; }
+/* Right side: plain white glyphs, no gray circles; the profile shows a small round picture */
+div[role="banner"] [role="navigation"] :is([role="button"], a) { background: transparent !important; box-shadow: none !important; }
+div[role="banner"] [role="navigation"] :is([role="button"], a) svg:not(:has(image)) { color: var(--n19-bar-glyph) !important; fill: var(--n19-bar-glyph) !important; }
+div[role="banner"] [role="navigation"] :is([aria-label="Your profile"], [aria-label="Account"], [aria-label="Account controls and settings"]) svg:has(image) { zoom: .7; }
+div[role="banner"] :is([aria-label="Menu"], [aria-label="Meta AI"], [aria-label="Ask Meta AI"], a[href*="meta.ai"]), [data-n19-fb="tabs"], [data-n19-fb="tab"] { display: none !important; }
+
+/* ---- Left nav (home shortcuts, Watch and other hubs; rows marked by facebook.js): 13px labels, 20px icons without
+   the FB5 gray circles, 28px rows with 2px corners ---- */
+[data-n19-fb="navrow"] { border-radius: 2px !important; min-height: 28px !important; display: flex !important; align-items: center !important; }
+[data-n19-fb="navrow"] > div { min-height: 0 !important; width: 100% !important; }
+[data-n19-fb="navrow"] div:not([data-n19-fb]) { padding-top: 0 !important; padding-bottom: 0 !important; min-height: 0 !important; }
+[data-n19-fb="navrow"] span { font-size: 13px !important; line-height: 16px !important; --x-lineHeight: 16px; font-weight: 400 !important; }
+[data-n19-fb="navrow"][aria-current="page"] span, [data-n19-fb="navrow"][aria-selected="true"] span { font-weight: bold !important; }
+[data-n19-fb="navicon-big"] { zoom: .56; }
+[data-n19-fb="navicon-circle"] { background: transparent !important; width: 20px !important; height: 20px !important; min-width: 0 !important; display: flex !important; align-items: center !important; justify-content: center !important; }
+[data-n19-fb="navicon-dot"] { width: 20px !important; height: 20px !important; min-width: 0 !important; border-radius: 3px !important; display: flex !important; align-items: center !important; justify-content: center !important; }
+[data-n19-fb="navicon-dot"] > * { zoom: .7; }
+[data-n19-fb="navicon-box"] { width: 20px !important; height: 20px !important; min-width: 0 !important; margin-right: 8px !important; }
+:is([data-pagelet="LeftRail"], [data-pagelet="LeftNav"]) h2 span, :is([data-pagelet="LeftRail"], [data-pagelet="LeftNav"]) h3 span { font-size: 12px !important; font-weight: bold !important; color: var(--n19-muted) !important; }
+
+/* ---- Feed column and post cards: 1px #dddfe2 borders, 3px corners, no shadow ---- */
+[data-n19-fb="column"] { max-width: 500px !important; width: 500px !important; margin-left: auto !important; margin-right: auto !important; }
+.xquyuld, [data-n19-fb="post"] { box-shadow: 0 0 0 1px var(--n19-divider) !important; }
+[data-n19-fb="post"] { border-radius: 3px !important; }
+/* Post header: bold #385898 names at 14px, gray 12px times */
+[data-ad-rendering-role="profile_name"] :is(h2, h3, h4) :is(a, strong, b, span) { font-size: 14px !important; line-height: 18px !important; }
+[data-ad-rendering-role="profile_name"] a:is([role="link"], [href]) :is(b, strong, span), [data-ad-rendering-role="profile_name"] a[href] { color: var(--n19-link) !important; font-weight: bold !important; }
+[data-ad-rendering-role="profile_name"] ~ div a[href] span, [data-ad-rendering-role="profile_name"] + div span { font-size: 12px !important; color: var(--n19-muted) !important; }
+/* Post text: 14px */
+:is([data-ad-rendering-role="story_message"], [data-ad-preview="message"], [data-ad-comet-preview="message"]) :is(div, span) { font-size: 14px !important; line-height: 19px !important; }
+/* Like · Comment · Share: 13px bold gray labels */
+[data-n19-fb="action"] span, :is([aria-label="Like"], [aria-label="Remove Like"], [aria-label="Leave a comment"], [aria-label^="Send this to friends"])[role="button"] span:not([role]) {
+  font-size: 13px !important; font-weight: bold !important; }
+[data-n19-fb="action"] { border-radius: 2px !important; }
+[data-n19-fb="action"]:not([aria-pressed="true"]) span:not(:has(*)) { color: var(--n19-text-2) !important; }
+/* Comments: 32px avatars, #f2f3f5 bubbles, 13px text, bold #385898 names */
+:is([role="article"][aria-label^="Comment by"], [role="article"][aria-label^="Reply by"]) span[dir="auto"], :is([aria-label^="Comment by"], [aria-label^="Reply by"]) span[lang] { font-size: 13px !important; line-height: 17px !important; }
+:is([role="article"][aria-label^="Comment by"], [role="article"][aria-label^="Reply by"]) a[href] span:not(:has(*)) { color: var(--n19-link) !important; }
+:is([role="article"][aria-label^="Comment by"], [role="article"][aria-label^="Reply by"]) a[href]:not(ul a) span:not(:has(*)) { font-weight: bold !important; font-size: 13px !important; }
+:is([role="article"][aria-label^="Comment by"], [role="article"][aria-label^="Reply by"]) ul span { font-size: 12px !important; }
+:is([role="article"][aria-label^="Comment by"], [role="article"][aria-label^="Reply by"]) ul [role="button"] { color: var(--n19-link) !important; font-weight: bold !important; }
+[aria-label="View information about identity badges"], [aria-label*="avatar sticker" i], [aria-label="Comment with an avatar sticker"] { display: none !important; }
+[role="article"] svg[title="Verified account"], [role="feed"] svg[title="Verified account"], [role="complementary"] svg[title="Verified account"] { display: none !important; }
+/* The "write a comment" field: a white box with a gray 1px rim */
+[role="textbox"][contenteditable="true"][aria-label^="Write a"] { font-size: 13px !important; }
+/* Composer: a white "Create Post" box */
+[data-n19-fb="create-head"] { display: block !important; background: var(--n19-card-2) !important; border-bottom: 1px solid var(--n19-divider) !important; border-radius: 3px 3px 0 0 !important;
+  font: bold 14px/20px Helvetica, Arial, sans-serif !important; color: var(--n19-text) !important; padding: 5px 10px !important; margin: 0 0 8px !important; }
+[data-n19-fb="composer"] { background: transparent !important; border-radius: 0 !important; font-size: 14px !important; padding-left: 0 !important; }
+[data-n19-fb="composer"] span { font-size: 14px !important; color: var(--n19-muted) !important; }
+[data-n19-fb="composer-card"] [role="button"]:not([data-n19-fb="composer"]) { border-radius: 18px !important; }
+/* Right column: small bold gray headings, 13px rows */
+[role="complementary"] :is(h2, h3) span { font-size: 12px !important; font-weight: bold !important; color: var(--n19-muted) !important; line-height: 16px !important; }
+[role="complementary"] li span { font-size: 13px !important; }
+[role="complementary"] li svg:has(image)[style*="36px"] { zoom: .78; }
+/* Post-2019 surfaces marked by facebook.js: Reels trays, Meta AI entry points, left-nav entries that did not exist */
+[data-n19-fb="later"] { display: none !important; }
+/* Menus and dialogs: square 2019 corners */
+[role="menu"], [role="dialog"] { border-radius: 3px !important; }
 
 /* Signed-out landing page (parts marked by facebook.js): the 2019 two-column layout on a blue-gray band */
 [data-n19-fb="top"] { background: var(--n19-land) !important; min-height: 658px !important; height: auto !important; flex-grow: 0 !important; }

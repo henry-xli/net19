@@ -1,0 +1,63 @@
+/* net19 handmade theme: Messenger (messenger.com), 2019. The app: a white three-column layout in Helvetica; on the left
+   the conversation list (a "Messenger" header between the gear and the compose icon, a gray "Search Messenger" pill,
+   rows with 50px round avatars, a bold name when unread, a gray snippet and time); in the middle the conversation with
+   solid blue #0084ff outgoing and light gray #f1f0f0 incoming bubbles rounded 18px, and a composer of +, camera, GIF,
+   sticker and a blue thumbs-up; on the right the contact's avatar, name, "Options" and shared photos. Chat themes and
+   gradients (2020) are forced back to the solid blue. Dark mode existed only on mobile in 2019: the dark variant is
+   that black palette on the same layout. Signed out: the login page in Helvetica with plain fields and a blue button. */
+html { --n19-font: "Helvetica Neue", Helvetica, Arial, sans-serif; --n19-page: #fff; --n19-panel: #fff; --n19-text: #1d2129; --n19-text-2: #90949c; --n19-icon: #0084ff;
+  --n19-blue: #0084ff; --n19-in: #f1f0f0; --n19-in-text: #1d2129; --n19-field: #f5f6f7; --n19-line: rgba(0,0,0,.1); --n19-hover: rgba(0,0,0,.04); --n19-selected: rgba(0,0,0,.05);
+  --n19-menu: #fff; --n19-input-line: #ccd0d5; }
+html[data-net19-mode="dark"] { --n19-font: "Helvetica Neue", Helvetica, Arial, sans-serif; --n19-page: #000; --n19-panel: #000; --n19-text: #fff; --n19-text-2: #8a8d91; --n19-icon: #0084ff;
+  --n19-blue: #0084ff; --n19-in: #3e4042; --n19-in-text: #fff; --n19-field: #242526; --n19-line: rgba(255,255,255,.12); --n19-hover: rgba(255,255,255,.06); --n19-selected: rgba(255,255,255,.1);
+  --n19-menu: #242526; --n19-input-line: #3e4042; }
+
+/* ---- The app: Facebook's Comet design variables, pinned to the 2019 Messenger palette -------------------------------- */
+html:root, html.__fb-light-mode, html.__fb-dark-mode, html .__fb-light-mode, html .__fb-dark-mode {
+  --font-family-default: var(--n19-font) !important; --font-family-segoe: var(--n19-font) !important; --font-family-apple: var(--n19-font) !important;
+  --surface-background: var(--n19-panel) !important; --web-wash: var(--n19-page) !important; --wash: var(--n19-field) !important;
+  --card-background: var(--n19-panel) !important; --messenger-card-background: var(--n19-panel) !important; --card-background-flat: var(--n19-field) !important;
+  --comment-background: var(--n19-in) !important; --popover-background: var(--n19-menu) !important;
+  --primary-text: var(--n19-text) !important; --secondary-text: var(--n19-text-2) !important; --placeholder-text: var(--n19-text-2) !important;
+  --primary-icon: var(--n19-text) !important; --secondary-icon: var(--n19-text-2) !important; --placeholder-icon: var(--n19-text-2) !important;
+  --accent: var(--n19-blue) !important; --blue-link: var(--n19-blue) !important; --base-blue: var(--n19-blue) !important;
+  --primary-button-background: var(--n19-blue) !important; --primary-deemphasized-button-background: var(--n19-field) !important;
+  --secondary-button-background: var(--n19-field) !important; --divider: var(--n19-line) !important; --hover-overlay: var(--n19-hover) !important;
+  --media-inner-border: var(--n19-line) !important; --hosted-view-selected-state: var(--n19-selected) !important;
+}
+/* chat themes, gradients and custom colors (2020) back to the solid 2019 blue and gray, 18px bubbles */
+html:root, html [style*="--chat-"], html [style*="--bubble"], html [class] [style*="--mwp-"] {
+  --chat-outgoing-message-bubble-background-color: var(--n19-blue) !important; --chat-outgoing-message-background-gradient: none !important;
+  --chat-incoming-message-bubble-background-color: var(--n19-in) !important; --chat-incoming-message-text-color: var(--n19-in-text) !important;
+  --chat-message-text-color: #fff !important; --chat-composer-button-color: var(--n19-blue) !important; --chat-composer-caret-color: var(--n19-blue) !important;
+  --chat-composer-background-color: var(--n19-panel) !important; --chat-composer-input-background-color: var(--n19-field) !important;
+  --chat-replied-message-background-color: var(--n19-in) !important; --chat-bubble-border-radius: 18px !important;
+  --chat-incoming-message-border-width: 0px !important; --chat-message-border-width: 0px !important;
+  --bubbleContentUserBackgroundColor: var(--n19-blue) !important; --buttonSendBackgroundColor: var(--n19-blue) !important;
+  --messenger-reply-background: var(--n19-in) !important;
+}
+body { font-family: var(--n19-font) !important; }
+
+/* conversation list: a gray search pill, 50px round avatars, gray snippets */
+[role="navigation"] input[type="search"] { font-size: 14px !important; }
+[role="navigation"] label:has(> input[type="search"]), [role="navigation"] :has(> input[type="search"]) { border-radius: 18px !important; }
+[role="navigation"] [role="grid"] [role="row"] svg:has(image) { width: 50px !important; height: 50px !important; }
+[role="navigation"] [role="grid"] [role="row"] img[height="56"] { width: 50px !important; height: 50px !important; }
+[role="navigation"] h1 { font-size: 16px !important; font-weight: 700 !important; letter-spacing: 0 !important; }
+/* the chat header: name 14px bold */
+[role="main"] h2 { font-size: 14px !important; }
+
+/* ---- Post-2019 parts that have no label of their own ----------------------------------------------------------------- */
+/* message "Edited" marks and the end-to-end encryption notices are marked by messenger.js */
+[data-n19-msgr="later"] { display: none !important; }
+
+/* ---- Signed out: the login page ------------------------------------------------------------------------------------ */
+._6b6w h1, ._6b6b { font-family: var(--n19-font) !important; font-weight: 600 !important; font-size: 56px !important; line-height: 1.1 !important; letter-spacing: -.02em; color: var(--n19-blue) !important; }
+._94-l, ._4n9r, ._4sze { font-family: var(--n19-font) !important; }
+._94-l { color: var(--n19-text-2) !important; font-size: 16px !important; }
+#login_form input._55r1 { height: 40px !important; border: 1px solid var(--n19-input-line) !important; border-radius: 4px !important; background: var(--n19-panel) !important;
+  color: var(--n19-text) !important; font: 16px var(--n19-font) !important; box-shadow: none !important; }
+#login_form input._55r1:focus { border-color: var(--n19-blue) !important; }
+#login_form #loginbutton { border-radius: 4px !important; background: var(--n19-blue) !important; border-color: var(--n19-blue) !important; font: 700 15px var(--n19-font) !important; height: 40px !important; }
+#login_form [role="button"] span { color: var(--n19-blue) !important; font-family: var(--n19-font) !important; }
+._4n9r ._4vo5, ._4n9r ._as87 { font-family: var(--n19-font) !important; }

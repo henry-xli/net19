@@ -1,0 +1,153 @@
+/* net19 handmade theme: Tumblr, 2019. The navy #001935 dashboard: a 55px navy top bar with the white "t" logo, a rounded
+   dark "Search Tumblr" field and white icons on the right ending in a blue pencil compose button; one 540px column of
+   white posts with 3px corners, the blog's 64px square avatar beside each post, a bold 13px blog name with a blue
+   "Follow" link, a footer with "1,234 notes" on the left and share/reply/reblog/like on the right; a plain "Recommended
+   Blogs" list and Radar on the right; Helvetica Neue throughout. Tumblr had no dark mode or palettes in 2019, so the
+   navy look is the design for both modes (only: 'dark'). Today's left sidebar is turned into that top bar. */
+html { --n19-font: "Helvetica Neue", HelveticaNeue, Helvetica, Arial, sans-serif; --n19-navy: #001935; --n19-bar: #001935; --n19-bar-line: rgba(255,255,255,.13);
+  --n19-icon: rgba(255,255,255,.65); --n19-icon-on: #fff; --n19-post: #fff; --n19-text: #444; --n19-meta: #999; --n19-soft: #a8b1ba; --n19-line: #e7e7e7;
+  --n19-blue: #00b8ff; --n19-side: rgba(255,255,255,.5); --n19-side-line: rgba(255,255,255,.13); --n19-menu: #fff; --n19-menu-text: #444; --n19-menu-line: #e7e7e7; }
+html[data-net19-mode="dark"] { --n19-font: "Helvetica Neue", HelveticaNeue, Helvetica, Arial, sans-serif; --n19-navy: #001935; --n19-bar: #001935; --n19-bar-line: rgba(255,255,255,.13);
+  --n19-icon: rgba(255,255,255,.65); --n19-icon-on: #fff; --n19-post: #fff; --n19-text: #444; --n19-meta: #999; --n19-soft: #a8b1ba; --n19-line: #e7e7e7;
+  --n19-blue: #00b8ff; --n19-side: rgba(255,255,255,.5); --n19-side-line: rgba(255,255,255,.13); --n19-menu: #fff; --n19-menu-text: #444; --n19-menu-line: #e7e7e7; }
+
+/* Tumblr's design system, pinned to the 2019 look whatever palette or device mode is active */
+html:root {
+  --font-family: var(--n19-font) !important; --font-family-modern: var(--n19-font) !important;
+  --black: 0, 0, 0 !important; --white: 255, 255, 255 !important; --white-on-dark: 255, 255, 255 !important; --navy: 0, 25, 53 !important;
+  --deprecated-accent: 0, 184, 255 !important; --secondary-accent: 229, 231, 234 !important; --follow: 243, 248, 251 !important;
+  --accent: var(--n19-blue) !important; --accent-fg: #fff !important; --brand-blue: var(--n19-blue) !important; --color-primary-link: var(--n19-blue) !important;
+  --chrome: var(--n19-navy) !important; --side-menu: var(--n19-navy) !important; --top-menu: var(--n19-navy) !important; --chrome-mobile: var(--n19-navy) !important;
+  --chrome-panel: var(--n19-navy) !important; --chrome-panel-border: var(--n19-side-line) !important;
+  --chrome-fg: #fff !important; --chrome-fg-secondary: var(--n19-side) !important; --chrome-fg-tertiary: rgba(255,255,255,.4) !important;
+  --chrome-tint: rgba(255,255,255,.07) !important; --chrome-tint-strong: var(--n19-side-line) !important; --chrome-tint-heavy: rgba(255,255,255,.2) !important;
+  --chrome-ui: var(--n19-blue) !important; --chrome-ui-fg: #fff !important;
+  --content-panel: var(--n19-post) !important; --content-fg: var(--n19-text) !important; --content-fg-secondary: var(--n19-meta) !important;
+  --content-fg-tertiary: var(--n19-soft) !important; --content-tint: rgba(0,0,0,.04) !important; --content-tint-strong: var(--n19-line) !important;
+  --content-ui: var(--n19-navy) !important; --content-ui-fg: #fff !important; --modal: #fff !important; --color-bluespace-background: var(--n19-navy) !important;
+  /* 2019 shapes: 3px posts, avatars, panels and menus, 2px buttons; the search field stays rounded */
+  --radius-panel: 3px !important; --radius-panel-mobile: 3px !important; --radius-banner: 3px !important; --radius-dropdown: 3px !important;
+  --radius-modal-s: 3px !important; --radius-modal-m: 3px !important; --radius-modal-l: 3px !important; --radius-button: 2px !important;
+  --radius-avatar-s: 2px !important; --radius-avatar-m: 3px !important; --radius-avatar-l: 3px !important; --radius-avatar-round: 3px !important;
+  --radius-post-image: 0px !important; --radius-thumb-l: 3px !important; --radius-thumb-m: 3px !important;
+}
+body { font-family: var(--n19-font) !important; }
+
+/* ---- The top bar (desktop widths, wherever Tumblr draws its sidebar navigation) ------------------------------------- */
+@media (min-width: 990px) {
+  .c9lq9:has(> .h_Erh .fra_w) { padding-top: 55px; }
+  .c9lq9 > .h_Erh:has(.fra_w) { flex-basis: 0 !important; width: 0 !important; margin-right: 0 !important; border: 0 !important; }
+  .h_Erh .fra_w { position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; z-index: 100; width: auto !important; max-width: none !important;
+    height: 55px !important; flex-direction: row !important; align-items: center !important; justify-content: flex-end !important; gap: 4px;
+    padding: 0 20px !important; box-sizing: border-box; border-radius: 0 !important; background: var(--n19-bar) !important; border: 0 !important; border-bottom: 1px solid var(--n19-bar-line) !important; overflow: visible !important; }
+  .h_Erh .fra_w > .Z7fGP { flex: 1 1 auto !important; height: 55px; overflow: visible !important; }
+  .h_Erh .fra_w > .Z7fGP::after { display: none !important; }
+  .h_Erh .fra_w nav { flex-direction: row !important; align-items: center; height: 55px; padding: 0 !important; overflow: visible !important; }
+  .h_Erh .fra_w nav > ul { display: flex !important; flex-direction: row !important; align-items: center; width: 100%; height: 55px; }
+  /* the logo: today's wordmark cut down to its "t", white, at the far left */
+  .h_Erh .fra_w nav > ul > li:first-child { margin-right: auto; padding: 0 !important; justify-content: flex-start !important; }
+  .h_Erh .fra_w nav > ul > li:first-child > a { display: block; width: 20px; height: 34px !important; min-height: 0 !important; padding: 0 !important; overflow: hidden; }
+  .h_Erh .fra_w nav > ul > li:first-child > a:has(use[href*="logo-tumblr"]) > div { display: block !important; width: 98px !important; height: 20px !important; transform: translateY(1px) scale(1.6); transform-origin: 0 0; }
+  .h_Erh .fra_w nav > ul > li:first-child > a:has(use[href*="logo-tumblr"]) svg { width: 98px !important; height: 20px !important; max-width: none; display: block; }
+  .h_Erh .fra_w nav > ul > li:first-child img { height: 32px !important; }
+  /* the icons: 24px white glyphs without labels, the current page at full white */
+  .h_Erh .fra_w nav > ul > li.GkT5S, .h_Erh .fra_w nav > ul > li[title] { --icon-color-primary: var(--n19-icon); flex-direction: row !important; height: 55px; background: none !important; }
+  .h_Erh .fra_w nav > ul > li.GkT5S:hover, .h_Erh .fra_w nav > ul > li.MMRRw, .h_Erh .fra_w nav > ul > li:has([aria-current="page"]) { --icon-color-primary: var(--n19-icon-on); }
+  .h_Erh .fra_w nav > ul > li > :is(a, button, span) { flex-direction: row !important; min-height: 55px !important; height: 55px; padding: 0 12px !important; gap: 0 !important; }
+  .h_Erh .fra_w nav > ul > li .YQDd6 svg { width: 24px !important; height: 24px !important; }
+  .h_Erh .fra_w nav > ul > li .Iw1G0 { display: none !important; }
+  .h_Erh .fra_w nav > ul > li .J3ECC, .h_Erh .fra_w nav > ul > .J3ECC { flex-direction: row !important; padding: 0 0 0 8px !important; gap: 8px !important; display: flex !important; }
+  .h_Erh .fra_w .J3ECC button { width: auto !important; height: 32px !important; min-height: 32px; padding: 0 14px !important; border-radius: 2px !important; font-size: 14px !important; }
+  /* the account menu opens as a white 2019 dropdown under the bar, not inside it */
+  .h_Erh .fra_w #account_subnav:not([hidden]), .h_Erh .fra_w #settings_subnav:not([hidden]) {
+    --chrome-fg: var(--n19-menu-text); --chrome-fg-secondary: var(--n19-meta); --chrome-tint: rgba(0,0,0,.05); --chrome-tint-strong: var(--n19-menu-line);
+    --icon-color-primary: var(--n19-meta); --chrome: var(--n19-menu); --chrome-panel: var(--n19-menu);
+    position: fixed !important; top: 60px; right: 12px; z-index: 101; width: 280px; max-height: calc(100vh - 80px); overflow-y: auto;
+    margin: 0 !important; padding: 4px 0 !important; list-style: none; background: var(--n19-menu); color: var(--n19-menu-text); border-radius: 3px; box-shadow: 0 0 0 1px rgba(0,0,0,.07), 0 5px 20px rgba(0,0,0,.35); }
+  .h_Erh .fra_w #account_subnav li { height: auto !important; }
+  .h_Erh .fra_w #account_subnav li > :is(a, button, span) { height: auto; min-height: 36px !important; padding: 6px 16px !important; }
+  .h_Erh .fra_w #account_subnav .Iw1G0 { display: flex !important; }
+  /* the compose button: a blue 2019 pencil block at the right end of the bar */
+  .h_Erh .fra_w > div:has([aria-label="Create a post"]) { order: 2; padding: 0 !important; margin: 0 0 0 10px !important; border: 0 !important; background: none !important; flex: none; }
+  .h_Erh .fra_w [aria-label="Create a post"] { width: 45px !important; min-width: 0 !important; height: 34px !important; padding: 0 !important; border-radius: 3px !important;
+    font-size: 0 !important; gap: 0 !important; background: var(--n19-blue) !important; color: #fff !important; --icon-color-primary: #fff; justify-content: center; }
+  .h_Erh .fra_w [aria-label="Create a post"] svg { width: 22px !important; height: 22px !important; margin: 0 !important; }
+  .h_Erh .fra_w > :is(footer, div:has(> footer)) { display: none !important; }
+  /* search: the aside's field moves into the bar beside the logo */
+  .c9lq9:has(> .h_Erh .fra_w) .N5wJr:has(form[role="search"]) { position: fixed !important; top: 0 !important; left: 58px; z-index: 101; width: 300px !important; height: 55px;
+    padding: 9px 0 !important; background: none !important; }
+  .c9lq9:has(> .h_Erh .fra_w) .zmjaW { display: none !important; }
+  .c9lq9:has(> .h_Erh .fra_w) .Dk06o { top: 55px !important; }
+  .c9lq9:has(> .h_Erh .fra_w) .Yc2Sp { top: 70px !important; }
+}
+/* the rounded dark search field */
+form[role="search"] .oPa7v { height: 36px; border-radius: 18px !important; background-color: rgba(255,255,255,.12) !important; }
+form[role="search"] .oPa7v.Qqfho, form[role="search"] .oPa7v.Qqfho input { color: #fff !important; }
+form[role="search"] input { font-size: 14px !important; font-family: var(--n19-font) !important; }
+form[role="search"] input::placeholder { color: rgba(255,255,255,.55) !important; }
+
+/* ---- Post-2019 features ---------------------------------------------------------------------------------------------- */
+/* nav: Communities (2023), Patio (2025), TumblrMart (2021), Saved and Custom Feeds (2025), palettes (2020) */
+nav li:is([title="Communities"], [title="Patio"], [title="TumblrMart"], [title="Saved"], [title="Custom Feeds"]),
+nav li:has(> a[href^="/communities"]), nav li:has(> a[href^="/tumblrmart"]), nav li:has(> a[href="/patio"]),
+nav li:has(> button[aria-label="Change palette"]), nav li:has(> span > button[aria-label="Change palette"]),
+#community_subnav, #custom_feeds_subnav { display: none !important; }
+/* badges and checkmarks bought in the shop (2022) */
+span.R7jci, span[aria-label$=" badge"], span[aria-label$=" badges"], img[src*="/tumblrmart/badges/"] { display: none !important; }
+/* the ad-blocker "Go Ad-Free" plea and Tumblr's own Premium ads in the right column (2022) */
+.I6Lwl, [data-testid^="house-"], aside div:has(> div > div > [data-testid^="house-"]) { display: none !important; }
+aside .ohi9S:has([data-testid^="house-"]) { display: none !important; }
+
+/* ---- Posts ----------------------------------------------------------------------------------------------------------- */
+[data-id] > .ge_yK, .ge_yK, article { border-radius: 3px !important; }
+article header { border-radius: 3px 3px 0 0 !important; }
+article { font-family: var(--n19-font) !important; color: var(--n19-text); }
+article .k31gt { font-size: 14px !important; line-height: 1.4 !important; }
+article .k31gt :is(h1, h2) { font-weight: 700; line-height: 1.3 !important; }
+/* header: bold 13px blog name, gray meta, a plain blue "Follow" link */
+article a[rel="author"] { font-size: 13px !important; font-weight: 700 !important; color: var(--n19-text) !important; }
+article .N92jF, article .N92jF time, article .dyGO4 { font-size: 12px !important; color: var(--n19-meta) !important; }
+article .Ldjnh button:not([aria-label]) { background: none !important; border: 0 !important; box-shadow: none !important; min-height: 0 !important; height: auto !important;
+  padding: 0 4px !important; color: var(--n19-blue) !important; font-size: 13px !important; font-weight: 700 !important; }
+article .Ldjnh button:not([aria-label]):hover { text-decoration: underline; }
+/* square 3px avatars */
+article figure[aria-label="Avatar"], article figure[aria-label="Avatar"] :is(div, img, a) { border-radius: 3px !important; }
+/* reblog trail: a thin rule and small avatars */
+article .u2tXn { border-top-color: var(--n19-line) !important; }
+article .u2tXn figure[aria-label="Avatar"], article .u2tXn figure[aria-label="Avatar"] img { width: 24px !important; height: 24px !important; }
+/* tags: plain gray */
+article a[data-testid="tag-link"] { color: var(--n19-meta) !important; font-size: 14px !important; }
+/* footer: "N notes" on the left (written by tumblr.js), share / reply / reblog / like on the right */
+footer[aria-label="Post footer"] .ndAE7 { padding: 10px 16px 12px !important; gap: 0 !important; }
+footer[aria-label="Post footer"][data-n19-notes] { position: relative; }
+footer[aria-label="Post footer"][data-n19-notes] .ndAE7 { flex-direction: row-reverse; justify-content: flex-start !important; }
+footer[aria-label="Post footer"][data-n19-notes]::before { content: attr(data-n19-notes); position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
+  pointer-events: none; font: 700 13px/1 var(--n19-font); color: var(--n19-meta); white-space: nowrap; }
+footer[aria-label="Post footer"][data-n19-notes] .rtfvT { display: flex !important; width: auto !important; gap: 18px !important; margin-left: 18px; }
+footer[aria-label="Post footer"][data-n19-notes] button[aria-label] > span + span { display: none !important; }
+footer[aria-label="Post footer"] button[aria-label] { --icon-color-primary: var(--n19-soft); color: var(--n19-soft) !important; }
+footer[aria-label="Post footer"] button[aria-label] svg { width: 21px !important; height: 21px !important; }
+
+/* List view and the dashboard: one 540px column with the 64px avatar outside each post */
+@media (min-width: 990px) {
+  main.V9TEa, main[class*="V9TEa"] { max-width: 540px !important; margin-left: 85px !important; }
+  main.V9TEa article header { position: relative; }
+  main.V9TEa article header :is(.TXE9F, .OIV97, .f1x2m, .K2WUN) { position: static !important; }
+  main.V9TEa article header figure[aria-label="Avatar"] { position: absolute !important; left: -85px; top: 0; width: 64px !important; height: 64px !important; }
+  main.V9TEa article header figure[aria-label="Avatar"] img { width: 64px !important; height: 64px !important; }
+  main.V9TEa article header figure[aria-label="Avatar"] .ajJ46 { display: none; }
+}
+
+/* ---- Tabs (explore, dashboard feeds, tagged): plain 2019 text tabs --------------------------------------------------- */
+.Dk06o, .WVvBo { background: var(--n19-navy) !important; }
+.WVvBo a, .WVvBo button { font-family: var(--n19-font) !important; font-size: 15px !important; font-weight: 700 !important; }
+.sSq2h .wl0Ka, .sSq2h.wl0Ka { box-shadow: inset 0 -2px 0 #fff !important; }
+
+/* ---- Right column: "Recommended Blogs" and Radar on the navy, without boxes -------------------------------------------- */
+aside .B15CE:not(.TD7_C) { background: none !important; border-radius: 0 !important; }
+aside .uJiXu:not(.TD7_C *) { font: 700 14px/1.4 var(--n19-font) !important; color: var(--n19-side) !important; padding: 12px 0 8px !important; margin: 0 !important; border-bottom: 1px solid var(--n19-side-line) !important; }
+aside .PwJi6 figure, aside .PwJi6 figure img, aside .PwJi6 img { border-radius: 3px !important; }
+aside .PwJi6 a { font-family: var(--n19-font) !important; }
+aside .W9GZw button { font-size: 14px !important; text-align: left !important; padding: 12px 0 !important; color: var(--n19-side) !important; }
+aside .hF8Wr { font: 700 14px/1.4 var(--n19-font) !important; color: var(--n19-side) !important; padding: 0 !important; }
+aside footer a { color: var(--n19-side) !important; font-size: 12px !important; }

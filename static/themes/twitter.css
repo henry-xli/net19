@@ -1,31 +1,195 @@
-/* net19 handmade theme: Twitter, late 2019 (after the July redesign). Signed out: a split page, the left half a
-   #1da1f2 panel with a giant darker bird, the right half white with square login fields and an outlined "Log in"
-   pill in a row at the top, then a small blue bird, a bold "See what's happening in the world right now", a filled
-   blue "Sign up" pill and outlined blue pills, and a row of plain 13px gray footer links. Signed in: the site's own
-   Default, Dim and Lights out backgrounds (all from 2019), system fonts instead of Chirp, Twitter blue on the Tweet
-   buttons, no features added later. The "Tweet" wording is restored by twitter.js, which edits the label text. */
-html { --n19-blue: #1da1f2; --n19-panel: #1da1f2; --n19-panel-bird: #1b95e0; --n19-page: #fff; --n19-text: #14171a; --n19-text-2: #657786;
-  --n19-field: #fff; --n19-field-border: #e6ecf0; --n19-hover: rgba(29,161,242,.1); }
-html[data-net19-mode="dark"] { --n19-blue: #1da1f2; --n19-panel: #1da1f2; --n19-panel-bird: #1b95e0; --n19-page: #15202b; --n19-text: #fff; --n19-text-2: #8899a6;
-  --n19-field: #192734; --n19-field-border: #38444d; --n19-hover: rgba(29,161,242,.1); }
-/* The signed-out app's own design variables: primary buttons were Twitter blue, not black; the font was the system's */
-html:root, html[data-theme] { --x-btn-primary: var(--n19-blue) !important; --x-btn-primary-hover: #1a91da !important; --x-btn-primary-pressed: #1681bf !important;
-  --x-fg-brand: var(--n19-blue) !important; --x-btn-brand: var(--n19-blue) !important; --x-blue-500: var(--n19-blue) !important;
-  --x-font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif !important; }
-[class*="bg-btn-primary"] { color: #fff !important; }
-a[href*="/onboarding/web?mode=signup"]:not([data-n19-tw]) { background: var(--n19-blue) !important; color: #fff !important; }
-a[href*="/onboarding/web?mode=signup"]:not([data-n19-tw]) * { color: #fff !important; }
-/* 2019 Twitter used the system font, not Chirp */
-body :is(div, span, a, p, h1, h2, h3, label, input, textarea, button, li) { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif !important; }
-[data-testid="SideNav_NewTweet_Button"] { background-color: #1da1f2 !important; border-color: #1da1f2 !important; }
-a[href="/i/grok"], a[href^="/i/grok"], a[href="/i/premium_sign_up"], a[href*="/i/verified-orgs-signup"], a[href="/jobs"], a[href$="/communities"],
-[data-testid="GrokDrawer"], button[aria-label="Grok actions"], a[aria-label="Grok"], a[aria-label="Premium"], a[aria-label="Jobs"], a[aria-label="Communities"],
-[data-testid="super-upsell-UpsellCardRenderProperties"], aside[aria-label="Subscribe to Premium"] { display: none !important; }
+/* net19 handmade theme: Twitter, late 2019 (the July 2019 React app). A left nav with a blue bird, bold 19px labels and
+   a big #1da1f2 "Tweet" pill; a 600px timeline between 1px #e6ecf0 rules; tweets with round 49px avatars, a bold name,
+   a gray @handle · time, 15px text and gray reply / retweet / like / share icons with counts; a right column with a
+   pill "Search Twitter" field and "What's happening" / "Who to follow" in #f5f8fa boxes with 14px corners. System
+   fonts, Twitter blue on every accent, Default white, "Dim" #15202b and "Lights out" #000. Signed out: the split
+   landing page with a blue bird panel. Nothing added after 2019 (Grok, Premium, views, bookmarks in tweets,
+   Communities, Spaces, Jobs, gold and gray badges). twitter.js puts back "Tweet" wording and the 2019 section names. */
+html { --n19-blue: #1da1f2; --n19-blue-hover: #1a91da; --n19-blue-press: #1681bf; --n19-blue-soft: rgba(29,161,242,.1);
+  --n19-page: #fff; --n19-text: #14171a; --n19-text-2: #657786; --n19-rule: #e6ecf0; --n19-panel: #f5f8fa; --n19-hover: #f5f8fa;
+  --n19-search: #e6ecf0; --n19-panel-bird: #1b95e0; --n19-field: #fff; --n19-field-border: #e6ecf0;
+  --n19-font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
+  --n19-bird: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%231da1f2' fill-rule='evenodd' d='M16 3.6a4.4 4.4 0 0 1 4.3 3.5l3.2 1.3-3.3 1.2a7.8 7.8 0 0 1-7.6 11.1c-3.4 0-6.4-2-7.6-5L1.2 17.2l1.9-4.6L1 7.4l3.9 3.7A7.8 7.8 0 0 1 11.7 7 4.4 4.4 0 0 1 16 3.6zm.9 2.6a1 1 0 1 0 0 2 1 1 0 0 0 0-2zM8.3 12.5c1.3 3.3 4.4 4.8 8.3 4.1-3.1-.2-5.6-1.6-6.9-4.6z'/%3E%3C/svg%3E");
+  --n19-bird-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%231b95e0' fill-rule='evenodd' d='M16 3.6a4.4 4.4 0 0 1 4.3 3.5l3.2 1.3-3.3 1.2a7.8 7.8 0 0 1-7.6 11.1c-3.4 0-6.4-2-7.6-5L1.2 17.2l1.9-4.6L1 7.4l3.9 3.7A7.8 7.8 0 0 1 11.7 7 4.4 4.4 0 0 1 16 3.6zm.9 2.6a1 1 0 1 0 0 2 1 1 0 0 0 0-2zM8.3 12.5c1.3 3.3 4.4 4.8 8.3 4.1-3.1-.2-5.6-1.6-6.9-4.6z'/%3E%3C/svg%3E"); }
+/* Dark is 2019's "Dim" (#15202b); the signed-in app's own "Lights out" keeps its black (see html[data-n19-tw-bg]) */
+html[data-net19-mode="dark"] { --n19-page: #15202b; --n19-text: #fff; --n19-text-2: #8899a6; --n19-rule: #38444d; --n19-panel: #192734;
+  --n19-hover: #192734; --n19-search: #253341; --n19-field: #192734; --n19-field-border: #38444d; }
+html[data-net19-mode="dark"][data-n19-tw-bg="black"] { --n19-page: #000; --n19-text: #d9d9d9; --n19-text-2: #6e767d; --n19-rule: #2f3336;
+  --n19-panel: #15181c; --n19-hover: #15181c; --n19-search: #202327; --n19-field: #15181c; --n19-field-border: #2f3336; }
 
-/* Signed-out landing (parts marked by twitter.js): the blue bird panel on the left, full height and full bleed */
+/* ---- The current web app's design variables (signed-out pages; data-theme="light" | "dark") ---------------------- */
+html:root, html[data-theme] {
+  --x-font-sans: var(--n19-font) !important;
+  --x-blue-500: #1da1f2 !important; --x-fg-brand: var(--n19-blue) !important; --x-btn-brand: var(--n19-blue) !important;
+  --x-btn-brand-hover: var(--n19-blue-hover) !important; --x-btn-brand-pressed: var(--n19-blue-press) !important;
+  --x-btn-primary: var(--n19-blue) !important; --x-btn-primary-hover: var(--n19-blue-hover) !important; --x-btn-primary-pressed: var(--n19-blue-press) !important;
+  --x-btn-ghost-hover: var(--n19-blue-soft) !important; --x-hover-subtle: var(--n19-hover) !important;
+  --x-fg-primary: var(--n19-text) !important; --x-fg-secondary: var(--n19-text-2) !important;
+  --x-bg-primary: var(--n19-page) !important; --x-bg-secondary: var(--n19-panel) !important; --x-bg-sheets: var(--n19-page) !important;
+  --x-bg-modal: var(--n19-page) !important; --x-border-normal: var(--n19-rule) !important; --x-neutral-300: var(--n19-rule) !important;
+  --color-blue-500: 203 89% 53% !important; --color-brand: 203 89% 53% !important; --ring: 203 89% 53% !important;
+  --color-text: 210 13% 9% !important; --foreground: 210 13% 9% !important; --card-foreground: 210 13% 9% !important;
+  --border: 204 25% 92% !important; --input: 204 25% 92% !important; --secondary: 204 33% 97% !important; --muted: 204 33% 97% !important;
+  --muted-foreground: 207 14% 46% !important; --color-nested-border: 204 25% 92% !important;
+  --color-gray-0: 204 33% 97% !important; --color-gray-50: 204 33% 97% !important; --color-gray-100: 204 25% 92% !important;
+  --color-gray-200: 204 25% 92% !important; --color-gray-300: 205 20% 83% !important; --color-gray-400: 205 16% 71% !important;
+  --color-gray-500: 207 14% 46% !important; --color-gray-600: 207 14% 46% !important; --color-gray-700: 207 14% 46% !important;
+  --color-gray-800: 208 17% 35% !important; --color-gray-900: 206 16% 26% !important; --color-gray-1000: 210 27% 20% !important;
+  --color-gray-1100: 210 13% 9% !important;
+}
+html[data-net19-mode="dark"]:root, html[data-net19-mode="dark"][data-theme] {
+  --color-background: 210 34% 13% !important; --background: 210 34% 13% !important; --popover: 210 34% 13% !important;
+  --color-modal-background: 210 34% 13% !important; --color-text: 0 0% 100% !important; --foreground: 0 0% 100% !important;
+  --card-foreground: 0 0% 100% !important; --popover-foreground: 0 0% 100% !important;
+  --border: 206 16% 26% !important; --input: 206 16% 26% !important; --secondary: 209 35% 15% !important; --muted: 209 35% 15% !important;
+  --muted-foreground: 206 14% 59% !important; --color-nested-border: 206 16% 26% !important;
+  --color-gray-0: 209 35% 15% !important; --color-gray-50: 209 35% 15% !important; --color-gray-100: 210 27% 20% !important;
+  --color-gray-200: 206 16% 26% !important; --color-gray-300: 206 16% 26% !important; --color-gray-400: 208 16% 43% !important;
+  --color-gray-500: 206 14% 59% !important; --color-gray-600: 206 14% 59% !important; --color-gray-700: 206 14% 59% !important;
+  --color-gray-800: 205 16% 71% !important; --color-gray-900: 205 20% 83% !important; --color-gray-1000: 205 25% 91% !important;
+  --color-gray-1100: 0 0% 100% !important;
+}
+
+/* Translucent bars are given plain rgba colors (Tailwind's oklab() alpha colors are misread by guard.js's contrast check) */
+html { --n19-bar: rgba(255,255,255,.85); } html[data-net19-mode="dark"] { --n19-bar: rgba(21,32,43,.85); }
+html[data-net19-mode="dark"][data-n19-tw-bg="black"] { --n19-bar: rgba(0,0,0,.65); }
+.bg-background\/80 { background-color: var(--n19-bar) !important; }
+main [data-timeline-entry].hover\:bg-gray-100\/50:hover { background-color: var(--n19-hover) !important; }
+/* Rounded shapes are circles and 14px rounded rectangles, not squircles */
+body :is(div, a, span, button, img, section) { corner-shape: round !important; }
+
+/* Signed in, text colors also come as inline styles: today's #0f1419 / #536471 (Default), #f7f9f9 / #8b98a5 (Dim) and
+   #e7e9ea / #71767b (Lights out) become 2019's; twitter.js does the same for the app's stylesheet rules */
+html:not([data-net19-mode="dark"]) :is([style^="color: rgb(15, 20, 25)"], [style*="; color: rgb(15, 20, 25)"]) { color: #14171a !important; }
+html:not([data-net19-mode="dark"]) :is([style^="color: rgb(83, 100, 113)"], [style*="; color: rgb(83, 100, 113)"]) { color: #657786 !important; }
+html[data-net19-mode="dark"] :is([style^="color: rgb(247, 249, 249)"], [style*="; color: rgb(247, 249, 249)"]) { color: #fff !important; }
+html[data-net19-mode="dark"] :is([style^="color: rgb(139, 152, 165)"], [style*="; color: rgb(139, 152, 165)"]) { color: #8899a6 !important; }
+html[data-net19-mode="dark"] :is([style^="color: rgb(231, 233, 234)"], [style*="; color: rgb(231, 233, 234)"]) { color: #d9d9d9 !important; }
+html[data-net19-mode="dark"] :is([style^="color: rgb(113, 118, 123)"], [style*="; color: rgb(113, 118, 123)"]) { color: #6e767d !important; }
+:is([style^="color: rgb(29, 155, 240)"], [style*="; color: rgb(29, 155, 240)"]) { color: #1da1f2 !important; }
+
+/* ---- Type: the system font, not Chirp ---------------------------------------------------------------------------- */
+body :is(div, span, a, p, h1, h2, h3, label, input, textarea, button, li, time) { font-family: var(--n19-font) !important; }
+
+/* ---- The bird instead of the X (an original simple bird glyph, drawn for net19) --------------------------------- */
+svg[data-icon="icon-logo-x"], a[aria-label="X"] svg:has(path[d^="M21.742 21.75l-7.563"]), svg:has(> g > path[d^="M21.742 21.75l-7.563"]),
+svg:has(path[d^="M18.436 1.92h3.403"]) { visibility: hidden !important; }
+a[aria-label="X"]:has(> svg[data-icon="icon-logo-x"]), :is(a, div):has(> svg path[d^="M21.742 21.75l-7.563"]), :is(a, div):has(> svg path[d^="M18.436 1.92h3.403"]) {
+  background: var(--n19-bird) no-repeat center / 30px 30px !important; }
+a[aria-label="X"].size-8:has(> svg[data-icon="icon-logo-x"]) { background-size: 24px 24px !important; }
+
+/* ---- Buttons: Twitter blue, 2019 pills ------------------------------------------------------------------------ */
+[class*="bg-btn-primary"], [data-testid="SideNav_NewTweet_Button"] *, :is([data-testid="tweetButtonInline"], [data-testid="tweetButton"]) * { color: #fff !important; }
+[data-testid="SideNav_NewTweet_Button"], [data-testid="tweetButtonInline"], [data-testid="tweetButton"], [data-testid="FloatingActionButtons_Tweet_Button"] {
+  background-color: var(--n19-blue) !important; border-color: var(--n19-blue) !important; box-shadow: none !important; }
+[data-testid="SideNav_NewTweet_Button"]:hover, [data-testid="tweetButtonInline"]:hover, [data-testid="tweetButton"]:hover { background-color: var(--n19-blue-hover) !important; }
+[data-testid="SideNav_NewTweet_Button"] { min-height: 49px !important; }
+[data-testid="SideNav_NewTweet_Button"] span { font-size: 15px !important; font-weight: 700 !important; }
+/* The signed-out app's black pills (Sign up, Follow) are blue; its outlined ones get a blue outline and blue text */
+.bg-gray-1100.rounded-full { background-color: var(--n19-blue) !important; color: #fff !important; }
+.bg-gray-1100.rounded-full:hover { background-color: var(--n19-blue-hover) !important; }
+.bg-gray-1100.rounded-full :is(span, svg) { color: #fff !important; }
+aside section a.bg-gray-1100.rounded-full.h-8, :is([data-testid$="-follow"]):not([data-testid$="-unfollow"]) {
+  background-color: transparent !important; color: var(--n19-blue) !important; border: 1px solid var(--n19-blue) !important; }
+:is([data-testid$="-follow"]):not([data-testid$="-unfollow"]) * { color: var(--n19-blue) !important; }
+:is([data-testid$="-follow"]):not([data-testid$="-unfollow"]):hover, aside section a.bg-gray-1100.rounded-full.h-8:hover { background-color: var(--n19-blue-soft) !important; }
+[data-testid$="-unfollow"] { background-color: var(--n19-blue) !important; border-color: var(--n19-blue) !important; }
+[data-testid$="-unfollow"] * { color: #fff !important; }
+aside section :is(button, a).rounded-full.border.border-gray-300 { border-color: var(--n19-blue) !important; color: var(--n19-blue) !important; }
+aside section :is(button, a).rounded-full.border.border-gray-300 :is(span, svg:not([data-icon*="color"])) { color: var(--n19-blue) !important; }
+/* Profile Follow (and Mention) on the signed-out app: outlined blue pills, 2019's 39px height */
+main div:has(> a[aria-label="Follow"]) button[data-slot="xds-button"], main div:has(> a[aria-label="Mention"]) button[data-slot="xds-button"] {
+  background: transparent !important; border: 1px solid var(--n19-blue) !important; color: var(--n19-blue) !important; height: 39px !important; }
+main div:has(> a[aria-label="Follow"]) button[data-slot="xds-button"] *, main div:has(> a[aria-label="Mention"]) button[data-slot="xds-button"] * { color: var(--n19-blue) !important; font-weight: 700 !important; }
+
+/* ---- Avatars: always round (square organization avatars came in 2023); 49px in tweets ---------------------------- */
+div.overflow-hidden:has(> img:is([alt^="@"], [alt="Avatar"])), [data-testid^="UserAvatar-Container"], [data-testid^="UserAvatar-Container"] * { border-radius: 9999px !important; corner-shape: round !important; }
+article .w-10:has(img[alt^="@"]) { width: 49px !important; }
+article .size-10:has(> img[alt^="@"]) { width: 49px !important; height: 49px !important; }
+article > div > .flex.gap-2:has(> .w-10 img[alt^="@"]), article > .flex.gap-2:has(> .w-10 img[alt^="@"]) { gap: 10px !important; }
+[data-testid="tweet"] [data-testid="Tweet-User-Avatar"] { width: 49px !important; flex-basis: 49px !important; }
+[data-testid="tweet"] [data-testid="Tweet-User-Avatar"] [data-testid^="UserAvatar-Container"] { width: 49px !important; height: 49px !important; }
+[data-testid="tweet"] div:has(> [data-testid="Tweet-User-Avatar"]) { flex-basis: 49px !important; width: 49px !important; margin-right: 10px !important; }
+/* Profile photo: round with a 4px page-colored ring */
+main a[href$="/photo"] > div.rounded-xs { border-radius: 9999px !important; }
+
+/* ---- Tweets ---------------------------------------------------------------------------------------------------- */
+[data-testid="tweetText"], article div[dir="auto"].text-body { font-size: 15px !important; line-height: 1.3125 !important; }
+[data-testid="User-Name"] a:first-child span, article .text-body.font-bold.text-primary { font-weight: 700 !important; }
+/* The action bar: four gray actions spread under the text (2019 capped it at 425px) */
+[data-testid="tweet"] [role="group"][id], article div:has(> [data-engagement-action="reply"]) { max-width: 425px !important; }
+:is([data-engagement-action], [data-testid="tweet"] [role="group"]) :is(svg, span) { color: inherit; }
+article div:has(> [data-engagement-action="reply"]) :is(a, button):not(:hover) { color: var(--n19-text-2) !important; }
+article [data-engagement-action] .text-subtext2 { font-size: 13px !important; }
+/* Timeline rules: 1px #e6ecf0 */
+main.border-normal { border-color: var(--n19-rule) !important; border-left-width: 1px !important; border-right-width: 1px !important; }
+main [data-timeline-entry].border-b { border-bottom: 1px solid var(--n19-rule) !important; }
+main [data-timeline-entry].cursor-pointer:hover { background-color: var(--n19-hover) !important; }
+main .border-border, main .border-normal { border-color: var(--n19-rule) !important; }
+/* Media: 14px corners with a hairline */
+article div.relative.overflow-hidden.border.rounded-md { border-radius: 14px !important; border-color: var(--n19-rule) !important; }
+
+/* ---- Profile: 2019 tabs (bold 15px, blue label and 2px blue underline on the chosen one) -------------------------- */
+main [role="tablist"] [role="tab"] { font-weight: 700 !important; font-size: 15px !important; color: var(--n19-text-2) !important; }
+main [role="tablist"] [role="tab"][aria-selected="true"], main [role="tablist"] [role="tab"][aria-selected="true"] * { color: var(--n19-blue) !important; }
+main [role="tablist"] > span[role="presentation"] { background: var(--n19-blue) !important; height: 2px !important; border-radius: 0 !important; }
+main [role="tablist"] [role="tab"] svg[data-icon="icon-chevron-down-md"], main [role="tablist"] [role="tab"] span.w-4:has(svg[data-icon="icon-chevron-down-md"]) { display: none !important; }
+main :is(.sticky, [data-orientation="horizontal"]) > .border-b-\[0\.5px\] { border-bottom: 1px solid var(--n19-rule) !important; }
+/* Home: the For you / Following tabs are shown as two plain labels (twitter.js names them Top Tweets / Latest Tweets) */
+[data-n19-tw="hometabs"] [role="tab"] :is(span, div) { font-weight: 700 !important; font-size: 15px !important; }
+
+/* ---- Right column: "Search Twitter" pill and #f5f8fa boxes with 14px corners -------------------------------------- */
+aside.flex-col > div > div > section.rounded-md, [data-testid="sidebarColumn"] div:has(> :is(section[role="region"], aside[role="complementary"])), [data-testid="sidebarColumn"] aside[role="complementary"] {
+  background-color: var(--n19-panel) !important; border: 0 !important; border-radius: 14px !important; }
+aside.flex-col > div > div > section.rounded-md h2, [data-testid="sidebarColumn"] section h2, [data-testid="sidebarColumn"] aside h2 { font-size: 19px !important; font-weight: 800 !important; color: var(--n19-text) !important; }
+aside.flex-col > div > div > section.rounded-md > div.border-b, [data-testid="sidebarColumn"] section [data-testid="trend"], [data-testid="sidebarColumn"] section [data-testid="UserCell"] { border-color: var(--n19-rule) !important; }
+aside.flex-col > div > div > section.rounded-md .hover\:bg-gray-100:hover { background-color: rgba(0,0,0,.03) !important; }
+form[role="search"] label, [data-testid="SearchBox_Search_Input"] { background-color: transparent; }
+form[role="search"] label:has([data-testid="SearchBox_Search_Input"]) { background-color: var(--n19-search) !important; border-color: transparent !important; border-radius: 9999px !important; }
+form[role="search"] label:has([data-testid="SearchBox_Search_Input"]:focus) { background-color: var(--n19-page) !important; border-color: var(--n19-blue) !important; }
+[data-testid="SearchBox_Search_Input"] { font-size: 15px !important; }
+aside nav[aria-label="Footer"] :is(a, span, button) { color: var(--n19-text-2) !important; font-size: 13px !important; }
+
+/* ---- Left nav (signed in): bold 19px labels, Twitter blue on the chosen and hovered items ------------------------ */
+header[role="banner"] nav[role="navigation"] a[role="link"] span, header[role="banner"] nav a > div > div:last-child span { font-size: 19px !important; font-weight: 700 !important; }
+header[role="banner"] nav a:hover > div, header[role="banner"] nav [data-testid="AppTabBar_More_Menu"]:hover > div { background-color: var(--n19-blue-soft) !important; }
+header[role="banner"] nav a:hover :is(span, svg), header[role="banner"] nav [data-testid="AppTabBar_More_Menu"]:hover :is(span, svg) { color: var(--n19-blue) !important; }
+header[role="banner"] nav a[aria-current="page"] :is(span, svg) { color: var(--n19-blue) !important; }
+
+/* ---- Not in 2019 -------------------------------------------------------------------------------------------------- */
+/* Grok (2023), Premium / Verified Organizations / Business (2022-2025), Communities (2021), Spaces (2020), Jobs (2023),
+   Monetization and Creator Studio (2023), Articles (2024), "Follow" suggestions page, the DM drawer (2020) */
+:is(nav, header, aside, [role="menu"], [role="dialog"], [data-testid="Dropdown"], [data-testid="sheetDialog"], [aria-labelledby="modal-header"])
+  a:is([href^="/i/grok"], [href*="grok.com"], [href^="/i/premium"], [href^="/i/verified"], [href^="/i/premium-business"], [href="/jobs"], [href$="/jobs"],
+    [href$="/communities"], [href^="/i/communities"], [href^="/i/spaces"], [href$="/creators/studio"], [href^="/i/monetization"], [href="/settings/monetization"],
+    [href="/settings/manage_subscriptions"], [href^="/compose/articles"], [href$="/i/connect_people"], [href="/i/account_analytics"], [href^="/i/imagine"], [href^="/i/jf/stories"], [href="/i/radar/new"], [href^="/i/business"]),
+[data-testid="GrokDrawer"], [data-testid="grokImgGen"], button[aria-label="Grok actions"], button[aria-label="Grok"], button[aria-label="Profile Summary"],
+button:has(> span > svg[data-icon^="icon-grok"]), a[aria-label="Grok"], [data-testid="tweet"] a[href="/i/grok"], [data-testid^="followups_"],
+[data-testid="DMDrawer"], [data-testid="chat-drawer-root"], [data-testid="super-upsell-UpsellCardRenderProperties"], aside[aria-label="Subscribe to Premium"],
+[data-testid="verified_profile_upsell"], [data-testid="verified_profile_visitor_upsell"], [data-testid="profileAnalyticsUpsell"], [data-testid="analytics-preview"],
+[role="menuitem"]:is([data-testid="highlightUpsell"], [data-testid="editWithPremium"]), [data-testid="jobs"],
+/* Views (2022) and their analytics icon, the bookmark button in tweets (2023) */
+[data-testid="tweet"] [role="group"] > div:has(> a[href$="/analytics"]), [aria-modal="true"] [role="group"] > div:has(> a[href$="/analytics"]),
+[data-testid="tweet"] [role="group"] div:has(> button:is([data-testid="bookmark"], [data-testid="removeBookmark"])), [data-testid="tweet"] [role="group"] button:is([data-testid="bookmark"], [data-testid="removeBookmark"]),
+[data-engagement-action="generic"]:has(svg[data-icon="icon-bar-chart"]), [data-engagement-action="bookmark"], article div:has(> [data-engagement-action="bookmark"]:only-child),
+[data-n19-tw="views"],
+/* Subscriptions (2021), subscriber badges, "Subscribe" buttons */
+[data-testid$="-subscribe"], [data-testid="subscribe"], [data-testid="icon-subscriber"], a[href$="/creator-subscriptions/subscriptions"], a[href$="/superfollows"],
+/* Community Notes (2021/2022), edit history (2022), the schedule and Grok buttons in the composer (2020/2023) */
+[data-testid="birdwatch-pivot"], [data-testid="tweet"] a[href$="/history"], [data-testid="scheduleOption"],
+/* Gold (organizations) and gray (government) checkmarks; only the blue badge existed in 2019 */
+span[aria-label="Verified account"]:has(> svg:is([data-icon*="government"], [data-icon*="business"], [data-icon*="gold"], [data-icon*="gray"], [data-icon*="affiliate"])),
+svg[data-testid="icon-verified"]:has(linearGradient), [data-n19-tw="badge"],
+/* Profile tabs that came later: Reposts, Highlights, Articles, Subs, Affiliates */
+main [role="tablist"] a[role="tab"]:is([href$="/reposts"], [href$="/highlights"], [href$="/articles"], [href$="/subs"], [href$="/affiliates"], [href*="/highlights?"], [href*="/articles?"]),
+main [role="tablist"] [role="presentation"]:has(> a[role="tab"]:is([href$="/highlights"], [href$="/articles"], [href$="/subs"], [href$="/affiliates"])),
+/* Sidebar modules and footer links added later (marked by twitter.js), the QR "Get app" prompt */
+[data-n19-tw="later"], footer nav a[href*="grok.com"], footer nav a[href*="grok.com"] + span { display: none !important; }
+
+/* ---- Signed-out landing (parts marked by twitter.js): the blue bird panel on the left, full height and full bleed -- */
 [data-n19-tw="row"] { flex-direction: row-reverse !important; max-width: none !important; width: 100% !important; margin: 0 !important; }
-[data-n19-tw="panel"] { flex: 1 1 50% !important; max-width: 50% !important; background: var(--n19-panel) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%231b95e0' d='M23.643 4.937c-.835.37-1.732.62-2.675.733.962-.576 1.7-1.49 2.048-2.578-.9.534-1.897.922-2.958 1.13-.85-.904-2.06-1.47-3.4-1.47-2.572 0-4.658 2.086-4.658 4.66 0 .364.042.718.12 1.06-3.873-.195-7.304-2.05-9.602-4.868-.4.69-.63 1.49-.63 2.342 0 1.616.823 3.043 2.072 3.878-.764-.025-1.482-.234-2.11-.583v.06c0 2.257 1.605 4.14 3.737 4.568-.392.106-.803.162-1.227.162-.3 0-.593-.028-.877-.082.593 1.850 2.313 3.198 4.352 3.234-1.595 1.250-3.604 1.995-5.786 1.995-.376 0-.747-.022-1.112-.065 2.062 1.323 4.510 2.093 7.140 2.093 8.570 0 13.255-7.098 13.255-13.254 0-.2-.005-.402-.014-.602.910-.658 1.700-1.477 2.323-2.410z'/%3E%3C/svg%3E") no-repeat -560px -500px / 1500px auto !important; overflow: hidden !important; }
-[data-n19-tw="panel"] svg[aria-label="X"] { visibility: hidden !important; }
+[data-n19-tw="panel"] { flex: 1 1 50% !important; max-width: 50% !important; background: var(--n19-bird-dark) no-repeat -200px -120px / 1050px auto, var(--n19-blue) !important; overflow: hidden !important; }
+[data-n19-tw="panel"] svg[aria-label="X"], [data-n19-tw="panel"] svg[data-icon="icon-logo-x"] { visibility: hidden !important; }
 [data-n19-tw="main"] { flex: 1 1 50% !important; max-width: 50% !important; position: relative !important; justify-content: center !important; padding: 0 !important; background: var(--n19-page) !important; }
 [data-n19-tw="main"] > div { max-width: 350px !important; }
 [data-n19-tw="main"] > div > div { max-width: 350px !important; width: 350px !important; }
@@ -33,7 +197,7 @@ a[href="/i/grok"], a[href^="/i/grok"], a[href="/i/premium_sign_up"], a[href*="/i
 /* The title: a small blue bird, then bold 28px text */
 [data-n19-tw="title"] { font-size: 27px !important; line-height: 32px !important; font-weight: 700 !important; letter-spacing: normal !important; color: var(--n19-text) !important;
   text-align: start !important; margin: 0 0 60px !important; padding: 0 !important; }
-[data-n19-tw="title"]::before { content: ""; display: block; width: 45px; height: 45px; margin-bottom: 18px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%231da1f2' d='M23.643 4.937c-.835.37-1.732.62-2.675.733.962-.576 1.7-1.49 2.048-2.578-.9.534-1.897.922-2.958 1.13-.85-.904-2.06-1.47-3.4-1.47-2.572 0-4.658 2.086-4.658 4.66 0 .364.042.718.12 1.06-3.873-.195-7.304-2.05-9.602-4.868-.4.69-.63 1.49-.63 2.342 0 1.616.823 3.043 2.072 3.878-.764-.025-1.482-.234-2.11-.583v.06c0 2.257 1.605 4.14 3.737 4.568-.392.106-.803.162-1.227.162-.3 0-.593-.028-.877-.082.593 1.850 2.313 3.198 4.352 3.234-1.595 1.250-3.604 1.995-5.786 1.995-.376 0-.747-.022-1.112-.065 2.062 1.323 4.510 2.093 7.140 2.093 8.570 0 13.255-7.098 13.255-13.254 0-.2-.005-.402-.014-.602.910-.658 1.700-1.477 2.323-2.410z'/%3E%3C/svg%3E") no-repeat center / contain; }
+[data-n19-tw="title"]::before { content: ""; display: block; width: 45px; height: 45px; margin-bottom: 18px; background: var(--n19-bird) no-repeat center / contain; }
 /* Sign up: a filled blue pill; the other ways in: outlined blue pills */
 [data-n19-tw="main"] :is([data-n19-tw="signup"], [data-n19-tw="alt"]) { height: 36px !important; min-height: 0 !important; border-radius: 9999px !important; border: 1px solid var(--n19-blue) !important;
   background: transparent !important; box-shadow: none !important; overflow: hidden !important; }
@@ -43,7 +207,7 @@ a[href="/i/grok"], a[href^="/i/grok"], a[href="/i/premium_sign_up"], a[href*="/i
 [data-n19-tw="main"] [data-n19-tw="signup"] { background: var(--n19-blue) !important; }
 [data-n19-tw="main"] [data-n19-tw="signup"] :is(span, p, div) { color: #fff !important; }
 [data-n19-tw="main"] [data-n19-tw="signup"] svg { display: none !important; }
-[data-n19-tw="main"] :is([data-n19-tw="alt"]):hover { background: var(--n19-hover) !important; }
+[data-n19-tw="main"] :is([data-n19-tw="alt"]):hover { background: var(--n19-blue-soft) !important; }
 [data-n19-tw="main"] p, [data-n19-tw="main"] p a { color: var(--n19-text-2) !important; font-size: 13px !important; }
 [data-n19-tw="main"] [data-n19-tw="signup"] p { color: #fff !important; font-size: 15px !important; }
 [data-n19-tw="main"] [data-n19-tw="alt"] p { color: var(--n19-blue) !important; font-size: 15px !important; }
@@ -57,9 +221,8 @@ a[href="/i/grok"], a[href^="/i/grok"], a[href="/i/premium_sign_up"], a[href*="/i
   border-radius: 9999px !important; border: 1px solid var(--n19-blue) !important; background: transparent !important; display: flex !important; align-items: center !important; justify-content: center !important; overflow: hidden !important;
   color: var(--n19-blue) !important; font-size: 15px !important; font-weight: 700 !important; }
 [data-n19-tw="go"] * { background: transparent !important; border: none !important; color: var(--n19-blue) !important; font-size: 15px !important; font-weight: 700 !important; padding: 0 !important; min-width: 0 !important; width: auto !important; height: auto !important; }
-[data-n19-tw="go"]:hover { background: var(--n19-hover) !important; }
-[data-n19-tw="or"] { display: none !important; }
-[data-n19-tw="qr"], footer nav a[href*="grok.com"], footer nav a[href*="grok.com"] + span { display: none !important; }
+[data-n19-tw="go"]:hover { background: var(--n19-blue-soft) !important; }
+[data-n19-tw="or"], [data-n19-tw="qr"] { display: none !important; }
 /* Footer: a single row of plain gray 13px links, no separators */
 [data-n19-tw="row"] ~ footer nav { font-size: 13px !important; gap: 0 !important; padding: 12px 0 !important; background: var(--n19-page) !important; }
 [data-n19-tw="row"] ~ footer nav a, [data-n19-tw="row"] ~ footer nav > span { color: var(--n19-text-2) !important; font-size: 13px !important; }

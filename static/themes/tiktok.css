@@ -1,40 +1,144 @@
-/* net19 handmade theme: TikTok, 2019: tiktok.com was then a charcoal (#1c1c1c) page in plain bold Hind/Helvetica type with
-   white text, a phone-frame video and the razzmatazz pink (#fe2c55) as the only accent: pink 6px underlines under the
-   chosen tab and flat pink buttons with 4px corners. The app of today keeps its layout; it gets that type, the pink, square
-   4px shapes, a charcoal dark mode, and loses what did not exist yet (Shop, Short dramas, coins, the shop toast).
-   TikTok's own light and dark themes are both followed. */
-html { --n19-primary: #fe2c55; --n19-primary-hover: #ef2950; --n19-page: #fff; --n19-panel: #f8f8f8; --n19-field: #f1f1f2; --n19-text: #161823;
-  --n19-text-2: rgba(22,24,35,.5); --n19-rule: rgba(22,24,35,.12); --n19-font: Hind, "Helvetica Neue", Helvetica, Arial, PingFangSC, sans-serif; }
-html[data-net19-mode="dark"] { --n19-primary: #fe2c55; --n19-primary-hover: #ef2950; --n19-page: #1c1c1c; --n19-panel: #252525; --n19-field: #2f2f2f; --n19-text: #fff;
-  --n19-text-2: rgba(255,255,255,.5); --n19-rule: rgba(255,255,255,.12); }
+/* net19 handmade theme: TikTok, 2019. A white 60px top bar with the TikTok logo on the left, a centered #f1f1f2 pill
+   search and "Log in" on the right; a left column with big bold "For You" and "Following" links (pink when chosen);
+   a centered feed where every video has its author row on top (a round 56px avatar, the bold unique id and the
+   name, an outlined pink "Follow"), the caption with bold #hashtags, then the phone-shaped video with like, comment
+   and share in round gray circles to its right and bold counts under them. Plain Arial-style type, #161823 text and
+   the razzmatazz pink #fe2c55. TikTok's dark mode came in 2021, so dark is the same design on a #121212 page. Shop,
+   LIVE, Explore, Friends, Activity, coins, "Get app", effects, AI labels, playlists and reposts are hidden. */
+html { --n19-primary: #fe2c55; --n19-primary-hover: #ef2950; --n19-page: #fff; --n19-bar: #fff; --n19-panel: #f8f8f8; --n19-field: #f1f1f2;
+  --n19-text: #161823; --n19-text-2: rgba(22,24,35,.75); --n19-text-3: rgba(22,24,35,.5); --n19-rule: rgba(22,24,35,.12);
+  --n19-circle: rgba(22,24,35,.06); --n19-circle-hover: rgba(22,24,35,.12);
+  --n19-font: ProximaNova, "Proxima Nova", Arial, Tahoma, PingFangSC, "Helvetica Neue", sans-serif; }
+html[data-net19-mode="dark"] { --n19-page: #121212; --n19-bar: #121212; --n19-panel: #1e1e1e; --n19-field: #2f2f2f;
+  --n19-text: rgba(255,255,255,.9); --n19-text-2: rgba(255,255,255,.75); --n19-text-3: rgba(255,255,255,.5); --n19-rule: rgba(255,255,255,.12);
+  --n19-circle: rgba(255,255,255,.12); --n19-circle-hover: rgba(255,255,255,.2); }
+/* TikTok's design variables: 2019 pink, 2019 page and text colors, 2019 corners */
 html:root, html[data-theme] {
-  --tux-v2-radius-content-tiny: 2px !important; --tux-v2-radius-content-small: 2px !important; --tux-v2-radius-content-medium: 4px !important;
-  --tux-v2-radius-content-large: 4px !important; --tux-v2-radius-content-xlarge: 4px !important;
-  --tux-v2-radius-container-level0-small: 4px !important; --tux-v2-radius-container-level0-large: 4px !important;
-  --tux-v2-radius-container-level1-small: 4px !important; --tux-v2-radius-container-level1-large: 4px !important;
+  --tux-colorPrimary: var(--n19-primary) !important; --tux-colorLink: var(--n19-primary) !important; --ui-shape-primary: var(--n19-primary) !important;
+  --ui-text-primary-display: var(--n19-primary) !important;
+  --tux-colorBGPrimary: var(--n19-page) !important; --tux-colorTextPrimary: var(--n19-text) !important; --tux-colorTextSecondary: var(--n19-text-2) !important;
+  --tux-colorTextTertiary: var(--n19-text-3) !important; --tux-colorLineSecondary: var(--n19-rule) !important; --tux-colorBGInput: var(--n19-field) !important;
+  --tux-v2-radius-content-tiny: 2px !important; --tux-v2-radius-content-small: 4px !important; --tux-v2-radius-content-medium: 4px !important;
+  --tux-v2-radius-content-large: 8px !important; --tux-v2-radius-content-xlarge: 8px !important;
+  --tux-v2-radius-container-level0-small: 4px !important; --tux-v2-radius-container-level0-large: 8px !important;
+  --tux-v2-radius-container-level1-small: 4px !important; --tux-v2-radius-container-level1-large: 8px !important;
   --tux-v2-radius-container-level2-small: 4px !important; --tux-v2-radius-container-level2-large: 8px !important;
-  --tux-colorPrimary: var(--n19-primary) !important;
   --tux-fontFamilyParagraph: var(--n19-font) !important; --tux-fontFamilyHeader: var(--n19-font) !important;
   --tux-v2-font-display: var(--n19-font) !important; --tux-web-font-display: var(--n19-font) !important;
 }
-/* Type: 2019's plain Hind / Helvetica in place of TikTok Sans and TikTokFont */
-body, body :is(div, span, p, a, button, input, h1, h2, h3, h4, strong, label):not([class*="icon" i]) { font-family: var(--n19-font) !important; }
-/* Pages: charcoal instead of pure black in dark mode (#1c1c1c, the 2019 page) */
-html[data-net19-mode="dark"] body, html[data-net19-mode="dark"] #app { background-color: var(--n19-page) !important; }
-html[data-net19-mode="dark"] [class*="--DivSideNavContainer"], html[data-net19-mode="dark"] [class*="--DivHeaderContainer"],
-html[data-net19-mode="dark"] [class*="--DivMainContainer"], html[data-net19-mode="dark"] [class*="--DivBodyContainer"] { background-color: var(--n19-page) !important; }
+/* Type: 2019's plain sans-serif in place of TikTok Sans and TikTokFont */
+body, body :is(div, span, p, a, button, input, h1, h2, h3, h4, strong, label, textarea):not([class*="icon" i]) { font-family: var(--n19-font) !important; }
+#app, [class*="--BaseBodyContainer"], [class*="--DivSideNavContainer"], [class*="--DivColumnListContainer"] { background-color: var(--n19-page) !important; }
 
-/* Primary and secondary buttons: rectangles with 4px corners, bold */
-button[class*="Button"], a[class*="Button"], [class*="-StyledLoginButton"], [class*="-Button-StyledButton"], .TUXButton { border-radius: 4px !important; }
-[data-e2e="nav-login-button"], [data-e2e="top-login-button"] { border-radius: 4px !important; background: var(--n19-primary) !important; color: #fff !important; font-weight: 700 !important; }
-/* Search: a flat gray rectangle */
-[data-e2e="nav-search"], [data-e2e="search-box"] { border-radius: 4px !important; background: var(--n19-field) !important; border: 1px solid transparent !important; }
-/* Side navigation: bold labels; the chosen one pink with the 2019 pink underline */
-[data-e2e^="nav-"] { border-radius: 4px !important; }
-[data-e2e^="nav-"] :is(h2, span, div) { font-weight: 700 !important; }
-[data-e2e^="nav-"][class*="active" i] :is(h2, span), [data-e2e^="nav-"][aria-current="page"] :is(h2, span) { color: var(--n19-primary) !important; }
+/* ---- The 2019 top bar: TikTok's own header, which the current layout keeps hidden, shown again ------------------ */
+#app-header[style*="display: none"], #app-header { display: flex !important; background: var(--n19-bar) !important; box-shadow: 0 1px 1px var(--n19-rule) !important; height: 60px !important; }
+body:has(#app-header) [class*="--BaseBodyContainer"] { padding-top: 60px !important; box-sizing: border-box !important; }
+body:has(#app-header) [class*="--DivSideNavContainer"] { top: 60px !important; height: calc(100% - 60px) !important; }
+body:has(#app-header) :is([class*="--DivColumnListContainer"], [class*="--DivMainContainer"]#main-content-homepage_hot, #main-content-homepage_hot) { height: calc(100vh - 60px) !important; }
+body:has(#app-header) [data-e2e="recommend-list-item-container"] { height: calc(100vh - 60px) !important; min-height: calc(100vh - 60px) !important; }
+#app-header [class*="--DivHeaderWrapperMain"] { max-width: 1150px !important; margin: 0 auto !important; padding: 0 16px !important; }
+#app-header [class*="--StyledLinkLogo"] svg { height: 42px !important; width: auto !important; }
+#app-header [class*="--DivHeaderCenterContainer"] { flex: 0 1 361px !important; }
+/* The search: a gray #f1f1f2 pill, 46px high, with the magnifier behind a thin splitter */
+#app-header form[data-e2e="search-box"] { background: var(--n19-field) !important; border-radius: 92px !important; border: 1px solid transparent !important; height: 46px !important; width: 361px !important; }
+#app-header form[data-e2e="search-box"]:focus-within { border-color: var(--n19-rule) !important; }
+#app-header form[data-e2e="search-box"] input { font-size: 16px !important; color: var(--n19-text) !important; background: transparent !important; caret-color: var(--n19-primary) !important; }
+#app-header form[data-e2e="search-box"] [class*="--SpanSpliter"] { background: var(--n19-rule) !important; }
+/* The header's own right side gives way to TikTok's floating account bar, which is moved into the header band */
+#app-header [class*="--DivHeaderRightContainer"] { visibility: hidden !important; }
+[class*="--DivFixedTopContainer"] { top: 6px !important; right: 24px !important; z-index: 3001 !important; }
+[class*="--DivTopRightContainer"], [class*="--DivTopRightContainer"] [class*="--DivActionBarContainer"] { background: transparent !important; box-shadow: none !important; border: 0 !important; }
+[class*="--DivTopRightContainer"] [class*="--DivVerticalDivider"] { display: none !important; }
+/* "Log in": the flat pink 2019 button with 4px corners */
+:is([data-e2e="nav-login-button"], [data-e2e="top-login-button"], [class*="--StyledPrimaryLoginButton"]) { border-radius: 4px !important; background: var(--n19-primary) !important; color: #fff !important; font-weight: 600 !important; min-width: 100px !important; height: 36px !important; font-size: 16px !important; }
 
-/* Not in 2019: TikTok Shop, Short dramas, coins, and the shop announcement toast */
-[data-e2e="nav-shop"], [data-e2e="nav-short-drama"], [data-e2e="top-right-action-bar-get-coin"],
-[data-e2e="notice-list-item"], [data-net19-hidden],
-[class*="--DivMainNavContainer"] > h2:has(> div > :is([data-e2e="nav-shop"], [data-e2e="nav-short-drama"])) { display: none !important; }
+/* ---- Left column: big bold For You / Following, pink when chosen; an outlined pink "Log in" prompt ---------------- */
+[class*="--DivSideNavContainer"] { border-right: 0 !important; }
+[class*="--DivSideNavContainer"] [class*="--DivAnimationCover"] { background: transparent !important; }
+[class*="--DivSideNavContainer"] [class*="--DivFixedContentContainer"], [class*="--DivSideNavContainer"] [class*="--DivToggleTrigger"] { display: none !important; }
+[class*="--DivSideNavContainer"] [class*="--DivScrollingContentContainer"] { top: 0 !important; padding-top: 8px !important; }
+[class*="--DivMainNavContainer"] { height: auto !important; min-height: 0 !important; justify-content: flex-start !important; gap: 0 !important; }
+[class*="--DivMainNavContainer"] button[class*="--StyledTUXNavButton"] { height: 48px !important; border-radius: 4px !important; background: transparent !important; }
+[class*="--DivMainNavContainer"] button[class*="--StyledTUXNavButton"]:hover { background: var(--n19-circle) !important; }
+[class*="--DivMainNavContainer"] button[class*="--StyledTUXNavButton"] .TUXButton-label { font-size: 18px !important; font-weight: 700 !important; color: var(--n19-text) !important; }
+[class*="--DivMainNavContainer"] a[aria-current="page"] .TUXButton-label, [class*="--DivMainNavContainer"] button[class*="--StyledTUXNavButton"][class*="active" i] .TUXButton-label,
+[class*="--DivMainNavContainer"] a[class*="active" i] .TUXButton-label { color: var(--n19-primary) !important; }
+[class*="--DivPrimaryButtonContainer"] { padding: 20px 8px !important; }
+[class*="--StyledLeftSidePrimaryButtonRedesign"] { background: transparent !important; color: var(--n19-primary) !important; border: 1px solid var(--n19-primary) !important; border-radius: 4px !important; height: 48px !important; font-size: 18px !important; font-weight: 600 !important; }
+[class*="--StyledLeftSidePrimaryButtonRedesign"] * { color: var(--n19-primary) !important; }
+[class*="--StyledLeftSidePrimaryButtonRedesign"]:hover { background: rgba(254,44,85,.06) !important; }
+[class*="--SubMainNavFooterContainer"] :is(h4, a, span) { color: var(--n19-text-3) !important; font-size: 12px !important; font-weight: 600 !important; }
+
+/* ---- Feed: the author row on top, then the video, the actions in gray circles on its right ------------------------ */
+[data-e2e="recommend-list-item-container"]:has([data-n19-tt="avatar"]) [class*="--DivContentFlexLayout"] { align-self: flex-end !important; }
+[data-e2e="recommend-list-item-container"]:has([data-n19-tt="avatar"]) [class*="--SectionMediaCardContainer"] { height: calc(100vh - 60px - 32px - 112px) !important; max-height: none !important; width: auto !important; min-height: 0 !important; min-width: 0 !important; }
+[data-e2e="recommend-list-item-container"] :is([class*="--BasePlayerContainer"], [class*="--DivVideoPlayerContainer"], [class*="--DivPlayerPlaceHolder"], [class*="--DivMediaCardOverlay"]:not([class*="--DivMediaCardOverlayBottom"]):not([class*="--DivMediaCardOverlayTop"])) { border-radius: 8px !important; }
+[data-e2e="recommend-list-item-container"] :is(video, canvas, img[imagex-type]) { border-radius: 8px !important; }
+/* The creator line and caption leave the video for the space above it */
+[data-e2e="recommend-list-item-container"] [class*="--DivMediaCardOverlayBottomSection"] { position: absolute !important; left: 0 !important; right: 0 !important; bottom: 100% !important; overflow: visible !important; border-radius: 0 !important; }
+[data-e2e="recommend-list-item-container"] [class*="--DivMediaCardOverlayBottom"]:not([class*="--DivMediaCardOverlayBottomSection"]) { background: none !important; overflow: visible !important; border-radius: 0 !important; }
+[data-e2e="recommend-list-item-container"] [class*="--DivMediaCardOverlayBottom"]::before, [data-e2e="recommend-list-item-container"] [class*="--DivMediaCardOverlayBottom"]::after { display: none !important; }
+[data-e2e="recommend-list-item-container"] [class*="--DivOverlayBottomContent"] { position: relative !important; min-height: 68px !important; padding: 2px 0 12px 68px !important; justify-content: flex-start !important; gap: 4px !important; box-sizing: border-box !important; }
+[data-e2e="recommend-list-item-container"] [class*="--DivOverlayBottomContent"] :is(p, span, a, div, button) { color: var(--n19-text) !important; text-shadow: none !important; }
+[data-e2e="recommend-list-item-container"] [class*="--DivCreatorInfoContainer"] { align-items: baseline !important; gap: 6px !important; padding-right: 100px !important; box-sizing: border-box !important; }
+[data-e2e="recommend-list-item-container"] [class*="--DivCreatorInfoContainer"] p { font-size: 14px !important; font-weight: 400 !important; color: var(--n19-text-2) !important; }
+[data-e2e="recommend-list-item-container"] [data-n19-tt="uid"] { margin-right: 6px !important; font-size: 18px !important; font-weight: 700 !important; line-height: 25px !important; color: var(--n19-text) !important; text-decoration: none !important; }
+[data-e2e="recommend-list-item-container"] [data-n19-tt="uid"]:hover { text-decoration: underline !important; }
+[data-e2e="recommend-list-item-container"] [data-e2e="video-desc"], [data-e2e="recommend-list-item-container"] [data-e2e="video-desc"] :is(span, p) { font-size: 16px !important; line-height: 22px !important; }
+[data-e2e="recommend-list-item-container"] [data-e2e="search-common-link"] p, [data-e2e="browse-video-desc"] [data-e2e="search-common-link"] :is(p, strong) { font-weight: 700 !important; }
+[data-e2e="recommend-list-item-container"] [class*="--ButtonExpand"] { font-weight: 700 !important; }
+/* The avatar (a copy of the one TikTok draws in the action bar) and the outlined pink "Follow" (it clicks TikTok's own) */
+[data-n19-tt="avatar"] { position: absolute !important; left: 0 !important; top: 0 !important; width: 56px !important; height: 56px !important; border-radius: 50% !important; overflow: hidden !important; background: var(--n19-circle) !important; }
+[data-n19-tt="avatar"] img { width: 100% !important; height: 100% !important; object-fit: cover !important; border-radius: 50% !important; }
+[data-n19-tt="follow"] { position: absolute !important; right: 0 !important; top: 0 !important; height: 28px !important; min-width: 88px !important; padding: 0 10px !important; border: 1px solid var(--n19-primary) !important;
+  border-radius: 2px !important; background: transparent !important; color: var(--n19-primary) !important; font: 600 15px/26px var(--n19-font) !important; cursor: pointer !important; }
+[data-n19-tt="follow"]:hover { background: rgba(254,44,85,.06) !important; }
+/* The actions: 48px gray circles with dark icons, bold 12px counts under them */
+[class*="--SectionActionBarContainer"] [data-testid="tux-web-icon-button"], [class*="--SectionActionBarContainer"] [data-testid="tux-web-icon-button-container"] { background: var(--n19-circle) !important; }
+[class*="--SectionActionBarContainer"] [data-testid="tux-web-icon-button"]:hover { background: var(--n19-circle-hover) !important; }
+[class*="--SectionActionBarContainer"] [role="button"]:not([aria-pressed="true"]) svg { color: var(--n19-text) !important; }
+[class*="--SectionActionBarContainer"] strong { color: var(--n19-text-2) !important; font-size: 12px !important; font-weight: 700 !important; }
+[class*="--SectionActionBarContainer"] { justify-content: flex-end !important; }
+
+/* ---- Video page: the right-hand panel ------------------------------------------------------------------------ */
+[class*="--DivVideoDetailContainer"] [class*="--RightPanelContainer"], [class*="--DivCommentListContainer"] { background: var(--n19-page) !important; }
+[class*="--DivCommentItemWrapper"] [data-e2e^="comment-username"] :is(p, span) { font-weight: 700 !important; }
+
+/* ---- Profile: a 116px avatar, the unique id in 32px bold, a wide pink Follow, Videos / Liked tabs -------------- */
+[data-e2e="user-page"] [data-e2e="user-avatar"], [data-e2e="user-page"] [data-e2e="user-avatar"] > div { width: 116px !important; height: 116px !important; }
+[data-e2e="user-page"] [data-e2e="user-avatar"] :is(span, img) { width: 116px !important; height: 116px !important; }
+[data-e2e="user-page"] [data-e2e="user-title"] { font-size: 32px !important; line-height: 38px !important; font-weight: 700 !important; }
+[data-e2e="user-page"] [data-e2e="user-subtitle"] { font-size: 18px !important; font-weight: 600 !important; color: var(--n19-text) !important; }
+[data-e2e="user-page"] [class*="--DivVerifiedSubtitleDivider"] { display: none !important; }
+[data-e2e="user-page"] :is([data-e2e="follow-button"], button[class*="--StyledFollowButton"]) { min-width: 208px !important; border-radius: 4px !important; background: var(--n19-primary) !important; color: #fff !important; font-weight: 600 !important; font-size: 16px !important; }
+[data-e2e="user-page"] [class*="--DivButtonPanelWrapper"] [data-testid="tux-web-button-container"], [data-e2e="user-page"] [class*="--DivButtonPanelWrapper"] button { border-radius: 4px !important; }
+[data-e2e="user-page"] [class*="--H3CountInfos"] strong { font-weight: 700 !important; font-size: 18px !important; }
+[data-e2e="user-page"] [class*="--H3CountInfos"] span { color: var(--n19-text-2) !important; font-size: 18px !important; }
+[data-e2e="user-page"] [data-e2e="user-bio"] { font-size: 16px !important; }
+[data-e2e="user-page"] [class*="--DivVideoFeedTab"] [role="tab"], [data-e2e="user-page"] :is([data-e2e="videos-tab"], [data-e2e="liked-tab"]) { font-size: 18px !important; font-weight: 600 !important; }
+[data-e2e="user-page"] [class*="--DivBottomLine"] { background: var(--n19-text) !important; height: 2px !important; }
+[data-e2e="user-post-item"] { border-radius: 4px !important; }
+
+/* ---- Not in 2019 ------------------------------------------------------------------------------------------------- */
+/* Nav entries: Shop (2021), Explore (2022), Friends (2022), LIVE (2020 on web), Short dramas, Activity and Messages
+   in the rail (2023), the Upload pill in the rail and TikTok Studio (2022), coins and rewards, "Get app" */
+[class*="--DivMainNavContainer"] > :is(div, h2):has(a:is([data-e2e="nav-shop"], [data-e2e="nav-explore"], [data-e2e="nav-short-drama"], [data-e2e="nav-live"], [data-e2e="nav-upload"], [data-e2e="nav-friends"], [data-e2e="nav-activity"], [data-e2e="nav-messages"], [data-e2e="nav-effects"], [data-e2e="nav-studio"])):not(:has(:is([data-e2e="nav-foryou"], [data-e2e="nav-following"], [data-e2e="nav-profile"], [data-e2e="nav-more-menu"]))),
+[class*="--DivMainNavContainer"] > :is(div, h2):has(button:is([aria-label="Shop"], [aria-label="Explore"], [aria-label="Friends"], [aria-label="LIVE"], [aria-label="Short dramas"], [aria-label="Activity"], [aria-label="Messages"], [aria-label="Upload"])):not(:has(a:is([data-e2e="nav-foryou"], [data-e2e="nav-following"], [data-e2e="nav-profile"]))),
+[class*="--DivLiveNavWrapper"], [data-e2e="nav-shop"], [data-e2e="nav-short-drama"], [data-e2e="nav-live"], [data-e2e="nav-explore"], [data-e2e="nav-friends"],
+[data-e2e="top-right-action-bar-get-coin"],
+li[data-sonner-toast]:has([class*="--DivShopIconContainer"]), [data-e2e="notice-list-item"]:has([class*="--DivShopIconContainer"]),
+/* In the feed: location and second-party chips (2021), effect and sticker links (2021), AI-generated and Symphony
+   labels (2023/2024), the Favorites button (2021), the spinning music disc, "+" on the avatar (moved to the author row) */
+[data-e2e="recommend-list-item-container"] [class*="--DivOverlayBottomLeadingTagsContainer"], [data-e2e="poi-tag"],
+:is([data-e2e="recommend-list-item-container"], [class*="--DivVideoDetailContainer"]) a:is([href*="/effect/"], [href*="/sticker/"]),
+[data-e2e*="aigc" i], [data-e2e*="ai-label" i], [class*="--DivAIGCLabel"], [class*="--AIGCLabel"], [class*="Symphony"],
+[class*="--SectionActionBarContainer"] [class*="--DivActionItemAvailability"]:has([data-e2e="favorite-icon"]), [class*="--SectionActionBarContainer"] [data-e2e="favorite-icon"],
+[class*="--SectionActionBarContainer"] a[data-e2e="video-music"], [data-e2e="recommend-list-item-container"]:has([data-n19-tt="avatar"]) [class*="--DivAvatarActionItemContainer"],
+[class*="--DivVideoDetailContainer"] [data-e2e="undefined-icon"]:has([class*="--BookmarkWrapper"]),
+/* Profile: playlists (2023), the Reposts and Favorites tabs (2022/2021), Latest/Popular/Oldest (2024), LIVE event banners */
+[data-e2e="user-page"] [class*="--DivPlaylistContainer"], [data-e2e="user-page"] :is([data-e2e="repost-tab"], [data-e2e="favorites-tab"], [data-e2e="collection-tab"], [data-e2e="drama-tab"]),
+[data-e2e="user-page"] [class*="--DivVideoFeedTab"] > [role="tab"]:is([class*="--PRepost"], [class*="--PFavorite"], [class*="--PDrama"]),
+[data-e2e="user-page"] [class*="--DivFeedTabWrapper"] > div:has(> #user-post-sort-control), #user-post-sort-control,
+[data-e2e="user-page"] [class*="--DivButtonPanelWrapper"] > div:has([data-e2e="show-suggested-accounts"]), [data-e2e="show-suggested-accounts"],
+[class*="--DivTopRightContainer"] [class*="--StyledActionBarButton"], [class*="--DivMainNavContainer"] .TUXAlertBadgeDot, [class*="--DivMainNavContainer"] [class*="--DivRedDotContainer"],
+[data-e2e="user-page"] [class*="--DivLiveEvent"], [data-e2e="user-page"] [class*="--DivEventTag"], [data-n19-tt="later"] { display: none !important; }

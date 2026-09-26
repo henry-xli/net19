@@ -46,6 +46,12 @@ export const THEMES: HandmadeTheme[] = [
   // and banks are not themed.
   { id: 'yelp', name: 'Yelp', domains: ['yelp.com'], matches: ['*://www.yelp.com/*', '*://yelp.com/*'] },
   { id: 'pinterest', name: 'Pinterest', domains: ['pinterest.com'] },
+  // Chat and social apps added in 0.9.0
+  { id: 'discord', name: 'Discord', domains: ['discord.com'], matches: ['*://discord.com/*', '*://www.discord.com/*'] },
+  { id: 'telegram', name: 'Telegram', domains: ['telegram.org'], matches: ['*://web.telegram.org/*'] },
+  { id: 'whatsapp', name: 'WhatsApp', domains: ['whatsapp.com'], matches: ['*://web.whatsapp.com/*'] },
+  { id: 'tumblr', name: 'Tumblr', domains: ['tumblr.com'], matches: ['*://www.tumblr.com/*', '*://tumblr.com/*'] },
+  { id: 'messenger', name: 'Messenger', domains: ['messenger.com'], matches: ['*://www.messenger.com/*', '*://messenger.com/*'] },
   { id: 'apple', name: 'Apple', domains: ['apple.com'], matches: ['*://www.apple.com/*'] },
   { id: 'fandom', name: 'Fandom', domains: ['fandom.com'], matches: ['*://*.fandom.com/wiki/*'] },
   { id: 'tiktok', name: 'TikTok', domains: ['tiktok.com'], matches: ['*://www.tiktok.com/*'] },

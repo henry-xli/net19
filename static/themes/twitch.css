@@ -1,5 +1,6 @@
-/* net19 handmade theme: Twitch, mid 2019 (before the September 2019 rebrand): a solid #6441a4 purple top bar
-   (#4b367c in the dark theme) with the white glitch logo, white nav links and a square white search field; Log In and
+/* net19 handmade theme: Twitch, mid 2019 (before the September 2019 rebrand; Wayback core CSS of May 2019): a solid
+   #6441a4 purple top bar (#4b367c in the dark theme) with the white glitch logo, white Browse / Esports / Music links and
+   a square white search field; a "Recommended Channels" side bar; chat on the right with a purple "Chat" button; Log In and
    Sign Up as small square purple buttons on a lighter band; Helvetica Neue at 12-14px; a pale #faf9fa page and side
    bar with 30px round avatars; purple channel and game links; square thumbnails with a red rectangular LIVE tag.
    Twitch has its own dark theme, which gets 2019's dark palette. */
@@ -81,5 +82,28 @@ nav.top-nav [data-a-target="login-button"] *, nav.top-nav [data-a-target="signup
 .tw-channel-status-text-indicator, [class*="ScChannelStatusTextIndicator"] { background: var(--n19-live) !important; border-radius: 2px !important; }
 [class*="ScMediaCardStatWrapper"] { background: rgba(0,0,0,.6) !important; border-radius: 0 !important; font-size: 12px !important; }
 .tw-tag, [class*="ScTag"] { border-radius: 2px !important; font-size: 12px !important; }
+/* Top bar: the added Esports and Music links (twitch.js) read like Browse; the Get Bits button as 2019's plain light button */
+nav.top-nav a[data-net19-link] { text-decoration: none !important; }
+nav.top-nav a.navigation-link { padding: 0 10px !important; }
+nav.top-nav [data-a-target="top-nav-get-bits-button"] { background: rgba(255,255,255,.12) !important; color: #fff !important; border-radius: 4px !important; box-shadow: none !important; height: 30px !important; font-size: 12px !important; font-weight: 400 !important; }
+nav.top-nav [data-a-target="top-nav-get-bits-button"] * { color: #fff !important; fill: #fff !important; font-weight: 400 !important; }
+nav.top-nav [data-a-target="top-nav-get-bits-button"]:hover { background: rgba(255,255,255,.2) !important; }
+
+/* Channel page: chat column in the 2019 manner — uppercase header, a square white field, a purple "Chat" button */
+.stream-chat-header, [data-test-selector="chat-room-header-label"] { text-transform: uppercase !important; font-size: 12px !important; font-weight: 600 !important; letter-spacing: 0 !important; }
+.chat-shell, .stream-chat, .chat-room, .chat-list--default, .chat-list--other { background: var(--n19-surface) !important; }
+.chat-input textarea, [data-a-target="chat-input"] { border-radius: 4px !important; background: var(--n19-field) !important; border: 1px solid var(--n19-field-border) !important; box-shadow: none !important; }
+[data-a-target="chat-send-button"] { background: var(--n19-purple) !important; color: #fff !important; border-radius: 4px !important; }
+[data-a-target="chat-send-button"] * { color: #fff !important; }
+.channel-info-content h1, [data-a-target="stream-title"] { font-size: 14px !important; font-weight: 600 !important; }
+[data-a-target="follow-button"], [data-a-target="unfollow-button"], [data-a-target="subscribe-button"] { border-radius: 4px !important; }
+[data-a-target="follow-button"] { background: var(--n19-purple) !important; color: #fff !important; }
+
+/* Post-2019 features: the category tiles on Browse (2021), stories in the side bar (2024), Guest Star (2022), the hype-train
+   line on side-bar cards (2020, marked by twitch.js), chat's community highlights and Hype Chat (2020–23) */
+.vertical-selector-card__container, [class*="vertical-selector__wrapper"], [class*="storiesLeftNavSection"],
+[class*="guest-star"], [data-a-target*="guest-star"], [data-test-selector*="guest-star"],
+.community-highlight-stack__card, [class*="community-highlight-stack"], [data-test-selector*="hype-chat"], [class*="hype-chat"],
+[data-test-selector*="discovery-feed"], [data-a-target*="discovery-feed"] { display: none !important; }
 /* The fixed "Join the Twitch community!" sign-up bar came later (marked by twitch.js) */
 [data-net19-hidden] { display: none !important; }

@@ -1,0 +1,460 @@
+/* net19 handmade theme: Discord, 2019. The app as it looked before the 2020 message redesign and the 2025 visual
+   refresh: dark by default (#202225 server rail, #2f3136 channel and member lists, #36393f chat, #7289da blurple,
+   Whitney), round 48px server icons that turn into rounded squares with a white pill, "# channel" rows, cozy
+   messages with 40px avatars and role-coloured names, a #40444b composer with "+" and emoji, uppercase member-list
+   role headers and the user panel under the channel list; the light theme is white chat on a #f2f3f5 sidebar.
+   Server tags, decorations, nameplates, Quests/Shop, Activities, GIF/sticker/app buttons, threads, forums, polls,
+   super reactions and the 2025 title bar are hidden. Login/invite get the 480px dark box; the home page its flat blurple. */
+
+/* ---- 2019 tokens ------------------------------------------------------------------------------------------- */
+html, html .theme-light {
+  --n19-tertiary: #e3e5e8; --n19-secondary: #f2f3f5; --n19-secondary-alt: #ebedef; --n19-primary: #fff;
+  --n19-floating: #fff; --n19-input: #ebedef; --n19-input-border: rgba(0, 0, 0, .2); --n19-field: rgba(79, 84, 92, .02);
+  --n19-header: #060607; --n19-header-2: #4f5660; --n19-text: #2e3338; --n19-muted: #747f8d;
+  --n19-int: #4f5660; --n19-int-hover: #2e3338; --n19-int-active: #060607; --n19-int-muted: #c7ccd1; --n19-channels: #6a7480;
+  --n19-hover: rgba(116, 127, 141, .08); --n19-active: rgba(116, 127, 141, .16); --n19-selected: rgba(116, 127, 141, .24);
+  --n19-line: rgba(6, 6, 7, .08); --n19-pill: #060607; --n19-thumb: rgba(0, 0, 0, .2); --n19-track: rgba(0, 0, 0, .06);
+  --n19-elevation: 0 1px 0 rgba(6, 6, 7, .1), 0 1.5px 0 rgba(6, 6, 7, .025), 0 2px 0 rgba(6, 6, 7, .025);
+  --n19-popout: 0 0 0 1px rgba(6, 6, 7, .08), 0 2px 10px 0 rgba(0, 0, 0, .1);
+  --n19-tooltip: #fff; --n19-tooltip-text: #2e3338; --n19-code: #f2f3f5;
+  --n19-brand: #7289da; --n19-brand-hover: #677bc4; --n19-brand-active: #5b6eae;
+  --n19-link: #0068e0; --n19-green: #43b581; --n19-idle: #faa61a; --n19-red: #f04747; --n19-offline: #747f8d;
+  --n19-mention: rgba(114, 137, 218, .15); --n19-mention-text: #7289da; --n19-mentioned: rgba(250, 166, 26, .1);
+  --n19-popout-head: #7289da;
+  --n19-font: Whitney, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+html[data-net19-mode="dark"], html :is(.theme-dark, .theme-darker, .theme-midnight) {
+  --n19-tertiary: #202225; --n19-secondary: #2f3136; --n19-secondary-alt: #292b2f; --n19-primary: #36393f;
+  --n19-floating: #18191c; --n19-input: #40444b; --n19-input-border: rgba(0, 0, 0, .3); --n19-field: rgba(0, 0, 0, .1);
+  --n19-header: #fff; --n19-header-2: #b9bbbe; --n19-text: #dcddde; --n19-muted: #72767d;
+  --n19-int: #b9bbbe; --n19-int-hover: #dcddde; --n19-int-active: #fff; --n19-int-muted: #4f545c; --n19-channels: #8e9297;
+  --n19-hover: rgba(79, 84, 92, .16); --n19-active: rgba(79, 84, 92, .24); --n19-selected: rgba(79, 84, 92, .32);
+  --n19-line: rgba(79, 84, 92, .48); --n19-pill: #fff; --n19-thumb: #202225; --n19-track: #2e3338;
+  --n19-elevation: 0 1px 0 rgba(4, 4, 5, .2), 0 1.5px 0 rgba(6, 6, 7, .05), 0 2px 0 rgba(4, 4, 5, .05);
+  --n19-popout: 0 0 0 1px rgba(4, 4, 5, .15), 0 4px 11px 0 rgba(0, 0, 0, .24);
+  --n19-tooltip: #000; --n19-tooltip-text: #dcddde; --n19-code: #2f3136;
+  --n19-brand: #7289da; --n19-brand-hover: #677bc4; --n19-brand-active: #5b6eae;
+  --n19-link: #00b0f4; --n19-green: #43b581; --n19-idle: #faa61a; --n19-red: #f04747; --n19-offline: #747f8d;
+  --n19-mention: rgba(114, 137, 218, .1); --n19-mention-text: #7289da; --n19-mentioned: rgba(250, 166, 26, .05);
+  --n19-popout-head: #202225;
+}
+
+/* ---- Discord's own design variables, re-pointed at the 2019 palette -----------------------------------------
+   The app declares them on every element that carries a theme class (html, popouts, layers, the login box), so
+   they are re-pointed on those same elements. */
+html, html :is(.theme-light, .theme-dark, .theme-darker, .theme-midnight) {
+  --font-primary: var(--n19-font) !important; --font-display: var(--n19-font) !important;
+  --font-headline: var(--n19-font) !important; --font-display-marketing: var(--n19-font) !important;
+  --font-display-marketing-header: var(--n19-font) !important;
+  --background-base-lowest: var(--n19-tertiary) !important; --background-base-lower: var(--n19-secondary) !important;
+  --background-base-low: var(--n19-secondary-alt) !important; --background-secondary-alt: var(--n19-secondary-alt) !important;
+  --background-surface-high: var(--n19-primary) !important; --background-surface-higher: var(--n19-floating) !important;
+  --background-surface-highest: var(--n19-floating) !important; --app-frame-background: var(--n19-tertiary) !important;
+  --app-frame-border: transparent !important; --chat-background: var(--n19-primary) !important;
+  --chat-background-default: var(--n19-primary) !important; --channel-background-default: var(--n19-secondary) !important;
+  --panel-bg: var(--n19-secondary) !important; --home-background: var(--n19-primary) !important;
+  --bg-surface-raised: var(--n19-input) !important; --channeltextarea-background: var(--n19-input) !important;
+  --modal-background: var(--n19-primary) !important; --modal-footer-background: var(--n19-secondary) !important;
+  --card-background-default: var(--n19-secondary) !important; --custom-channel-members-bg: var(--n19-secondary) !important;
+  --background-mod-subtle: var(--n19-hover) !important; --background-mod-muted: var(--n19-hover) !important;
+  --background-mod-normal: var(--n19-active) !important; --background-mod-strong: var(--n19-selected) !important;
+  --background-brand: var(--n19-brand) !important; --background-accent: var(--n19-muted) !important;
+  --message-background-hover: rgba(4, 4, 5, .07) !important;
+  --message-highlight-background-default: var(--n19-mention) !important;
+  --message-mentioned-background-default: var(--n19-mentioned) !important;
+  --message-mentioned-background-hover: var(--n19-mentioned) !important;
+  --mention-background: var(--n19-mention) !important; --mention-foreground: var(--n19-mention-text) !important;
+  --interactive-background-hover: var(--n19-hover) !important; --interactive-background-active: var(--n19-active) !important;
+  --interactive-background-selected: var(--n19-selected) !important;
+  --interactive-text-default: var(--n19-int) !important; --interactive-text-hover: var(--n19-int-hover) !important;
+  --interactive-text-active: var(--n19-int-active) !important; --interactive-icon-default: var(--n19-int) !important;
+  --interactive-icon-hover: var(--n19-int-hover) !important; --interactive-icon-active: var(--n19-int-active) !important;
+  --interactive-muted: var(--n19-int-muted) !important;
+  --text-default: var(--n19-text) !important; --text-strong: var(--n19-header) !important;
+  --text-subtle: var(--n19-header-2) !important; --text-muted: var(--n19-muted) !important;
+  --text-link: var(--n19-link) !important; --text-brand: var(--n19-brand) !important;
+  --channels-default: var(--n19-channels) !important; --channel-icon: var(--n19-muted) !important;
+  --channel-text-area-placeholder: var(--n19-muted) !important; --chat-text-muted: var(--n19-muted) !important;
+  --icon-default: var(--n19-int) !important; --icon-strong: var(--n19-header) !important;
+  --icon-subtle: var(--n19-int) !important; --icon-muted: var(--n19-muted) !important;
+  --input-background-default: var(--n19-field) !important; --input-border-default: var(--n19-input-border) !important;
+  --input-border-hover: #040405 !important; --input-border-active: var(--n19-brand) !important;
+  --input-text-default: var(--n19-text) !important; --input-placeholder-text-default: var(--n19-muted) !important;
+  --border-subtle: var(--n19-line) !important; --border-muted: transparent !important;
+  --border-normal: var(--n19-line) !important; --border-strong: var(--n19-input-border) !important;
+  --control-primary-background-default: var(--n19-brand) !important;
+  --control-primary-background-hover: var(--n19-brand-hover) !important;
+  --control-primary-background-active: var(--n19-brand-active) !important;
+  --control-primary-border-default: transparent !important; --control-primary-border-hover: transparent !important;
+  --control-primary-border-active: transparent !important;
+  --control-secondary-background-default: #747f8d !important; --control-secondary-background-hover: #68727f !important;
+  --control-secondary-background-active: #5d6671 !important; --control-secondary-text-default: #fff !important;
+  --control-secondary-text-hover: #fff !important; --control-secondary-text-active: #fff !important;
+  --control-secondary-icon-default: #fff !important; --control-secondary-border-default: transparent !important;
+  --control-secondary-border-hover: transparent !important; --control-secondary-border-active: transparent !important;
+  --control-critical-primary-background-default: var(--n19-red) !important;
+  --control-critical-primary-background-hover: #d84040 !important;
+  --control-connected-background-default: var(--n19-green) !important;
+  --control-connected-background-hover: #3ca374 !important;
+  --status-online: var(--n19-green) !important; --status-idle: var(--n19-idle) !important;
+  --status-dnd: var(--n19-red) !important; --status-offline: var(--n19-offline) !important;
+  --status-danger: var(--n19-red) !important; --status-positive: var(--n19-green) !important;
+  --status-positive-background: var(--n19-green) !important; --status-warning: var(--n19-idle) !important;
+  --icon-status-online: var(--n19-green) !important; --icon-status-idle: var(--n19-idle) !important;
+  --icon-status-dnd: var(--n19-red) !important; --icon-status-offline: var(--n19-offline) !important;
+  --text-status-online: var(--n19-green) !important; --text-status-idle: var(--n19-idle) !important;
+  --text-status-dnd: var(--n19-red) !important; --text-status-offline: var(--n19-offline) !important;
+  --background-feedback-notification: var(--n19-red) !important; --icon-feedback-notification: var(--n19-red) !important;
+  --brand-500: var(--n19-brand) !important; --brand-560: var(--n19-brand-hover) !important;
+  --brand-600: var(--n19-brand-active) !important; --brand-360: var(--n19-brand) !important;
+  --scrollbar-auto-thumb: var(--n19-thumb) !important; --scrollbar-auto-track: var(--n19-track) !important;
+  --scrollbar-thin-thumb: var(--n19-thumb) !important; --scrollbar-thin-track: transparent !important;
+  --scrollbar-auto-scrollbar-color-thumb: var(--n19-thumb) !important;
+  --scrollbar-auto-scrollbar-color-track: var(--n19-track) !important;
+  --background-code: var(--n19-code) !important;
+  /* Nitro client themes (2023) and gradient surfaces fall back to the flat 2019 colours. */
+  --background-gradient-chat: initial !important; --background-gradient-highest: initial !important;
+  --background-gradient-high: initial !important; --background-gradient-low: initial !important;
+  --background-gradient-lowest: initial !important; --background-gradient-lower: initial !important;
+  /* 2019 shapes: 3px buttons, 5px popouts and modals, no rounded app panels. */
+  --radius-xs: 3px !important; --radius-sm: 3px !important; --radius-md: 5px !important; --radius-lg: 5px !important;
+  --radius-xl: 8px !important; --radius-xxl: 8px !important; --button-border-radius: 3px !important;
+  --button-border-radius-lg: 3px !important;
+  /* 2019 proportions: a 72px server rail (icons are scaled to 48px below), no 2025 title bar. */
+  --custom-guild-list-width: 72px !important; --custom-app-top-bar-height: 0px !important;
+  --custom-panels-spacing: 0px !important; --chat-avatar-size: 40px !important;
+}
+html:is(.custom-theme-background, .custom-client-theme) body { background-image: none !important; }
+
+/* ---- App shell ------------------------------------------------------------------------------------------------ */
+[class^="appMount_"], [class*=" appMount_"] { font-family: var(--n19-font); }
+/* The 2025 title bar: its server name and back/forward are dropped; its inbox and help buttons move to the right end
+   of the channel header, where 2019 had "Recent Mentions" (@) and Help (?). */
+:is([class^="bar_"], [class*=" bar_"]):has(> :is([class^="trailing_"], [class*=" trailing_"])) {
+  position: static !important; min-height: 0 !important; height: 0 !important; padding: 0 !important; overflow: visible !important;
+}
+:is([class^="bar_"], [class*=" bar_"]) > :is([class^="title_"], [class*=" title_"], [class^="leading_"], [class*=" leading_"]) { display: none !important; }
+:is([class^="bar_"], [class*=" bar_"]) > :is([class^="trailing_"], [class*=" trailing_"]) {
+  position: absolute !important; top: 0; right: 0; z-index: 105; height: 48px; gap: 8px !important; padding: 0 16px 0 0;
+  align-items: center; color: var(--n19-int);
+}
+:is([class^="bar_"], [class*=" bar_"]) > :is([class^="trailing_"], [class*=" trailing_"]) :is(svg, [class*="icon"]) { color: var(--n19-int); }
+:is([class^="base_"], [class*=" base_"])[data-fullscreen] { padding-top: 0 !important; background: var(--n19-tertiary); }
+:is([class^="upperContainer_"], [class*=" upperContainer_"]) { padding-right: 88px !important; }
+
+/* Server rail: #202225, 72px, round 48px icons 8px apart. */
+nav[class*="guilds_"], nav[class*="guilds_"] [class*="scroller_"], [class*="sidebar_"] > nav[class*="wrapper_"] {
+  background: var(--n19-tertiary) !important; margin-bottom: 0 !important; -webkit-mask: none !important; mask: none !important;
+}
+[class*="sidebar_"]:after { display: none !important; }
+[data-list-id="guildsnav"] { padding-top: 12px !important; }
+[data-list-id="guildsnav"] :is([class^="listItem_"], [class*=" listItem_"]) { margin: 0 0 8px !important; }
+[data-list-id="guildsnav"] foreignObject { mask: none !important; }
+/* The icons are drawn in an SVG sized by script (40-44px today); the SVG is scaled to 2019's 48px. */
+[data-list-id="guildsnav"] :is([class^="blobContainer_"], [class*=" blobContainer_"]) > :is([class^="wrapper_"], [class*=" wrapper_"]),
+[data-list-id="guildsnav"] :is([class^="blobContainer_"], [class*=" blobContainer_"]) > :is([class^="wrapper_"], [class*=" wrapper_"]) > svg {
+  width: 48px !important; height: 48px !important;
+}
+[data-list-id="guildsnav"] foreignObject > *, [data-list-id="guildsnav"] foreignObject > * > :is(img, [class*="childWrapper_"], [class*="icon_"]) { width: 100% !important; height: 100% !important; }
+[data-list-id="guildsnav"] foreignObject > *, [data-list-id="guildsnav"] foreignObject > * > :is(img, [class*="childWrapper_"], [class*="icon_"]) {
+  border-radius: 50% !important; transition: border-radius .15s ease-out, background-color .15s ease-out !important; overflow: hidden;
+}
+[data-list-id="guildsnav"] :is([class^="blobContainer_"], [class*=" blobContainer_"]):is(:hover, [class*="selected_"]) foreignObject > *,
+[data-list-id="guildsnav"] :is([class^="blobContainer_"], [class*=" blobContainer_"]):is(:hover, [class*="selected_"]) foreignObject > * > :is(img, [class*="childWrapper_"], [class*="icon_"]),
+[data-list-id="guildsnav"] foreignObject > :is(:hover, [class*="selected_"]), [data-list-id="guildsnav"] foreignObject > :is(:hover, [class*="selected_"]) > * {
+  border-radius: 16px !important;
+}
+[data-list-id="guildsnav"] foreignObject [class*="childWrapper_"] { background-color: var(--n19-primary); color: var(--n19-text); scale: 1 !important; }
+[data-list-id="guildsnav"] :is([class^="blobContainer_"], [class*=" blobContainer_"]):is(:hover, [class*="selected_"]) foreignObject [class*="childWrapper_"],
+[data-list-id="guildsnav"] foreignObject > :is(:hover, [class*="selected_"]) [class*="childWrapper_"] { background-color: var(--n19-brand); color: #fff; }
+/* The white pill on the left edge: 8px wide, round on the right. */
+[data-list-id="guildsnav"] :is([class^="wrapper_"], [class*=" wrapper_"], [class^="pill_"], [class*=" pill_"]) > :is([class^="item_"], [class*=" item_"]) {
+  background-color: var(--n19-pill) !important; width: 8px !important; border-radius: 0 4px 4px 0 !important;
+}
+[data-list-id="guildsnav"] :is([class^="guildSeparator_"], [class*=" guildSeparator_"]) {
+  width: 32px !important; height: 2px !important; border-radius: 1px; background-color: var(--n19-line) !important; margin: 0 auto;
+}
+/* Add a Server / Download: grey circles with a green glyph that fill green on hover. */
+[data-list-id="guildsnav"] :is([class^="circleIconButton_"], [class*=" circleIconButton_"]) {
+  width: 48px !important; height: 48px !important;
+  border-radius: 50% !important; background-color: var(--n19-primary) !important; color: var(--n19-green) !important;
+  transition: border-radius .15s ease-out, background-color .15s ease-out;
+}
+[data-list-id="guildsnav"] :is([class^="circleIconButton_"], [class*=" circleIconButton_"]):is(:hover, [class*="selected_"]) {
+  border-radius: 16px !important; background-color: var(--n19-green) !important; color: #fff !important;
+}
+[data-list-id="guildsnav"] :is([class^="lowerBadge_"], [class*=" lowerBadge_"], [class^="upperBadge_"], [class*=" upperBadge_"]) > * {
+  box-shadow: 0 0 0 3px var(--n19-tertiary);
+}
+
+/* Channel list: #2f3136, square corners, 48px header with the 2019 drop line. */
+[class*="sidebarList_"], [class*="sidebarList_"] > nav, [class*="privateChannels_"] {
+  background: var(--n19-secondary) !important; border: 0 !important; border-radius: 0 !important;
+}
+[class*="sidebarList_"] header, [class*="privateChannels_"] > :is([class^="searchBar_"], [class*=" searchBar_"]) {
+  height: 48px !important; min-height: 48px; box-shadow: var(--n19-elevation) !important; border-bottom: 0 !important; z-index: 2;
+}
+[class*="sidebarList_"] header :is(h1, h2, [class*="name_"]) { font-size: 16px !important; font-weight: 600 !important; color: var(--n19-header) !important; }
+/* Categories: 12px uppercase. */
+#channels :is([class^="mainContent_"], [class*=" mainContent_"]) :is(h2, h3, [class*="name_"]) {
+  text-transform: uppercase !important; font-size: 12px !important; font-weight: 600 !important; letter-spacing: .02em;
+  color: var(--n19-channels) !important;
+}
+#channels :is([class^="mainContent_"], [class*=" mainContent_"]):hover :is(h2, h3, [class*="name_"]) { color: var(--n19-int-hover) !important; }
+/* Channels: 32px rows, 3px corners, "# name" in 16px medium grey; white when unread, selected on a grey slab. */
+#channels :is([class^="link_"], [class*=" link_"]) { border-radius: 3px !important; min-height: 32px; padding: 0 8px !important; margin-left: 8px !important; }
+#channels :is([class^="link_"], [class*=" link_"]) :is([class^="name_"], [class*=" name_"]) { font-size: 16px !important; font-weight: 500 !important; line-height: 20px; }
+#channels :is([class^="link_"], [class*=" link_"]) :is([class^="iconContainer_"], [class*=" iconContainer_"]) { color: var(--n19-muted) !important; }
+#channels li[class*="containerDefault_"] { --interactive-text-default: var(--n19-channels); }
+#channels :is([class^="link_"], [class*=" link_"]):hover { background-color: var(--n19-hover) !important; }
+#channels :is([class^="modeSelected_"], [class*=" modeSelected_"]) :is([class^="link_"], [class*=" link_"]),
+#channels li[class*="selected"] :is([class^="link_"], [class*=" link_"]) { background-color: var(--n19-selected) !important; }
+#channels [class*="unread_"] { background-color: var(--n19-pill) !important; width: 8px !important; height: 8px !important; border-radius: 0 4px 4px 0 !important; }
+/* Server Guide (2023), Browse Channels / Channels & Roles (2022), and the 2023+ event and boost rows are gone. */
+#channels :is(li, [role="listitem"]):has(a:is([href$="/@home"], [href$="/channels-and-roles"], [href$="/browse-channels"], [href$="/shop"], [href$="/game-shop"], [href$="/role-subscriptions"], [href$="/guild-directory"], [href$="/conjuring"]), [data-list-item-id$="guild-home"], [data-list-item-id$="channel-browser"], [data-list-item-id$="customize-community"], [data-list-item-id$="guild-boosts"]) { display: none !important; }
+
+/* Direct messages: "Friends" only above the list (Nitro, Shop, Quests, Message Requests and Family Center were not there). */
+[class*="privateChannels_"] :is(li, [role="listitem"]):has(a:is([href="/store"], [href="/shop"], [href^="/quest-home"], [href^="/discovery"], [href^="/family-center"], [href="/message-requests"], [href="/activity"])) { display: none !important; }
+[class*="privateChannels_"] :is([class^="interactive_"], [class*=" interactive_"]) { border-radius: 3px !important; }
+[class*="privateChannels_"] :is([class^="interactiveSelected_"], [class*=" interactiveSelected_"]) { background-color: var(--n19-selected) !important; }
+[class*="privateChannels_"] h2 { text-transform: uppercase; font-size: 12px !important; font-weight: 600 !important; letter-spacing: .02em; color: var(--n19-channels) !important; }
+
+/* User panel: under the channel list only, #292b2f, 52px, no floating card. */
+[class*="sidebar_"] > section[class*="panels_"],
+[class*="sidebar_"] section[class*="panels_"]:has(:is([class*="panelTitleContainer_"], [class*="nameTag_"])) {
+  position: absolute !important; left: var(--custom-guild-list-width) !important; right: 0 !important; bottom: 0 !important;
+  width: auto !important; border: 0 !important; border-radius: 0 !important; background: var(--n19-secondary-alt) !important;
+  box-shadow: none !important;
+}
+[class*="panels_"] :is([class^="panelTitleContainer_"], [class*=" panelTitleContainer_"]) { font-size: 14px !important; font-weight: 600 !important; color: var(--n19-header) !important; }
+[class*="panels_"] :is([class^="panelSubtextContainer_"], [class*=" panelSubtextContainer_"]) { font-size: 12px !important; color: var(--n19-header-2) !important; }
+[class*="panels_"] :is([class^="accountPopoutButton_"], [class*=" accountPopoutButton_"], [class^="accountPopoutButtonWrapper_"], [class*=" accountPopoutButtonWrapper_"]) { border-radius: 3px !important; }
+[class*="panels_"] :is([class^="buttons_"], [class*=" buttons_"]) :is(button, [role="button"], [role="switch"]) {
+  border-radius: 3px !important; background-color: transparent !important; border-color: transparent !important; color: var(--n19-int) !important;
+}
+[class*="panels_"] :is([class^="buttons_"], [class*=" buttons_"]) :is(button, [role="button"], [role="switch"]):hover { background-color: var(--n19-hover) !important; color: var(--n19-int-hover) !important; }
+/* 2025: mute/deafen come with split chevron menus; the chevron halves go, the icons stay. */
+[class*="panels_"] :is([class^="buttons_"], [class*=" buttons_"]) [class*="audioButtonParent_"] > :is(button, [role="button"]):not(:first-child) { display: none !important; }
+
+/* Chat: #36393f, 48px header with the 2019 drop line, no rounded corner or frame border. */
+[class*="sidebar_"] ~ :is([class^="page_"], [class*=" page_"]), [class*="sidebar_"] ~ [class*="page_"] > [class*="chat_"],
+[class*="chat_"] :is([class^="content_"], [class*=" content_"]) > [class*="chatContent_"] {
+  background: var(--n19-primary) !important; border: 0 !important; border-radius: 0 !important;
+}
+section:has(> :is([class^="upperContainer_"], [class*=" upperContainer_"])), :is([class^="upperContainer_"], [class*=" upperContainer_"]) {
+  min-height: 48px; background: var(--n19-primary) !important; border: 0 !important;
+}
+section:has(> :is([class^="upperContainer_"], [class*=" upperContainer_"])) { box-shadow: var(--n19-elevation) !important; z-index: 3; }
+:is([class^="upperContainer_"], [class*=" upperContainer_"]) :is(h1, h2, [class^="title_"], [class*=" title_"]) {
+  font-size: 16px !important; font-weight: 600 !important; color: var(--n19-header) !important;
+}
+:is([class^="upperContainer_"], [class*=" upperContainer_"]) :is([class^="toolbar_"], [class*=" toolbar_"]) :is([class^="iconWrapper_"], [class*=" iconWrapper_"]) { color: var(--n19-int); margin: 0 8px; }
+:is([class^="upperContainer_"], [class*=" upperContainer_"]) [class*="topic_"] { font-size: 14px !important; color: var(--n19-header-2) !important; }
+/* 2019 header toolbar: bell, pin, members, search, @, ?. Threads (2021) is gone. */
+:is([class^="upperContainer_"], [class*=" upperContainer_"]) :is([class^="toolbar_"], [class*=" toolbar_"]) > [aria-label="Threads"],
+:is([class^="upperContainer_"], [class*=" upperContainer_"]) :is([class^="toolbar_"], [class*=" toolbar_"]) :has(> [aria-label="Threads"]) { display: none !important; }
+/* Header search: 144px, 24px tall on #202225, widening on focus. */
+:is([class^="upperContainer_"], [class*=" upperContainer_"]) :is([class^="search_"], [class*=" search_"]) :is([class^="searchBar_"], [class*=" searchBar_"]) {
+  background-color: var(--n19-tertiary) !important; border-radius: 4px !important; height: 24px !important; min-height: 24px !important; border: 0 !important;
+}
+
+/* Messages, cozy: 40px round avatar at 16px, name 16px medium in the role colour, 12px grey timestamp, groups separated
+   by a hairline. */
+[data-list-id="chat-messages"] > li[id^="chat-messages-"] [class*="cozyMessage_"] { padding-left: 72px !important; }
+[data-list-id="chat-messages"] [class*="cozyMessage_"][class*="groupStart_"] {
+  margin-top: 0 !important; padding-top: 20px !important; padding-bottom: 0;
+  background-image: linear-gradient(var(--n19-line), var(--n19-line)); background-repeat: no-repeat;
+  background-size: calc(100% - 40px) 1px; background-position: 20px 0;
+}
+[data-list-id="chat-messages"] > li:first-of-type [class*="cozyMessage_"][class*="groupStart_"] { background-image: none; }
+[data-list-id="chat-messages"] [class*="cozyMessage_"] > [class*="contents_"] > img[class*="avatar_"],
+[data-list-id="chat-messages"] [class*="cozyMessage_"] > [class*="contents_"] > [class*="avatar_"]:not([class*="avatarDecoration_"]) {
+  width: 40px !important; height: 40px !important; left: 16px !important; border-radius: 50% !important;
+}
+[data-list-id="chat-messages"] [class*="cozyMessage_"][class*="groupStart_"] > [class*="contents_"] > img[class*="avatar_"] { top: 20px !important; margin-top: 0 !important; }
+[data-list-id="chat-messages"] [id^="message-username-"], [data-list-id="chat-messages"] h3 [class*="username_"] {
+  font-size: 16px !important; font-weight: 500 !important; letter-spacing: 0;
+}
+[data-list-id="chat-messages"] h3 time, [data-list-id="chat-messages"] h3 [class*="timestamp_"] {
+  font-size: 12px !important; font-weight: 400 !important; color: var(--n19-muted) !important; margin-left: .3rem;
+}
+[data-list-id="chat-messages"] [id^="message-content-"] {
+  font-size: 1rem !important; line-height: 1.3 !important; color: var(--n19-text); font-weight: 400;
+}
+[data-list-id="chat-messages"] [class*="cozyMessage_"] { border-radius: 0 !important; }
+[data-list-id="chat-messages"] [class*="mentioned_"] { box-shadow: none !important; }
+[data-list-id="chat-messages"] [class*="mentioned_"]::before { display: none !important; }
+/* The hover bar: 2019 showed just "Add Reaction" and "More" at the right edge, without a floating box. Quick
+   reactions, super reactions, reply, forward, thread and app buttons (2020-2024) are gone. */
+[data-list-id="chat-messages"] [class*="buttonsInner_"] { background: var(--n19-primary) !important; box-shadow: none !important; border: 0 !important; border-radius: 3px !important; }
+[data-list-id="chat-messages"] [class*="buttonsInner_"] > :is(
+  [aria-label="Reply"], [aria-label="Forward"], [aria-label="Create Thread"], [aria-label="Add Super Reaction"],
+  [aria-label="Apps"], [aria-label^="Click to react with"], [aria-label^="React with"], [aria-label="Mark Unread"],
+  [aria-label="Pin Message"], [aria-label="Copy Text"], [aria-label^="Summar"]),
+[data-list-id="chat-messages"] [class*="buttonsInner_"] :is([class*="separator_"], [class*="divider_"]) { display: none !important; }
+/* Reactions: small grey pills with a 1px outline in 2019; burst (super) reactions lose their glow. */
+[data-list-id="chat-messages"] :is([class^="reaction_"], [class*=" reaction_"]) {
+  border-radius: 4px !important; background: var(--n19-hover) !important; border: 1px solid transparent !important; box-shadow: none !important;
+}
+[data-list-id="chat-messages"] :is([class^="reaction_"], [class*=" reaction_"])[class*="reactionMe_"] { background: var(--n19-mention) !important; border-color: var(--n19-brand) !important; }
+[data-list-id="chat-messages"] :is([class*="burstGlow_"], [class*="sparkles_"], [class*="shakeReaction_"] > canvas) { display: none !important; }
+[data-list-id="chat-messages"] :is([class^="reactionBtn_"], [class*=" reactionBtn_"]) + :is([class^="reactionBtn_"], [class*=" reactionBtn_"]) { display: none !important; }
+
+/* Composer: #40444b, 5px corners, "+" upload on the left with a divider, emoji on the right. Gift stays. */
+form:is([class^="form_"], [class*=" form_"]) { padding: 0 16px !important; }
+[class*="channelTextArea_"] > [class*="scrollableContainer_"], [class*="channelTextArea_"] [class*="scrollableContainer_"] {
+  background-color: var(--n19-input) !important; border-radius: 5px !important; border: 0 !important; box-shadow: none !important;
+}
+[class*="channelTextArea_"] [role="textbox"] { font-size: 1rem !important; line-height: 1.375rem; color: var(--n19-text); }
+[class*="channelTextArea_"] [class*="attachButton_"] { border-right: 1px solid var(--n19-line) !important; border-radius: 0 !important; margin-right: 4px !important; }
+[class*="channelTextArea_"] [class*="buttons_"] :is(
+  button[aria-label="Open GIF picker"], button[aria-label="Open sticker picker"], button[aria-label="Apps"],
+  button[aria-label="Record Voice Message"], button[aria-label="Send Voice Message"], button[aria-label="Send Message"]),
+[class*="channelTextArea_"] [class*="buttons_"] > :has(> button:is([aria-label="Open GIF picker"], [aria-label="Open sticker picker"], [aria-label="Apps"], [aria-label="Record Voice Message"])),
+[class*="channelTextArea_"] [class*="buttons_"] > :has(> * > button:is([aria-label="Open GIF picker"], [aria-label="Open sticker picker"], [aria-label="Apps"])),
+[class*="channelTextArea_"] :is([class*="stickerButton_"], [class*="sparkles_"], [class*="appLauncher"]) { display: none !important; }
+/* The typing indicator and slow-mode line under the composer, 2019 size. */
+form:is([class^="form_"], [class*=" form_"]) [class*="typing_"] { font-size: 14px; color: var(--n19-header-2); }
+
+/* Member list: #2f3136, uppercase role headers, 44px rows with 32px avatars. */
+[class*="membersWrap_"], [class*="membersWrap_"] [class*="members_"], div:has(> [class*="membersWrap_"]) {
+  background: var(--n19-secondary) !important; border: 0 !important;
+}
+[class*="membersWrap_"] [class*="membersGroup_"] {
+  text-transform: uppercase !important; font-size: 12px !important; font-weight: 600 !important; letter-spacing: .02em;
+  color: var(--n19-channels) !important; padding: 24px 8px 0 16px !important; height: 40px !important; box-sizing: border-box;
+}
+[class*="membersWrap_"] [class*="membersGroup_"] * { font: inherit !important; text-transform: inherit !important; color: inherit !important; }
+[class*="membersWrap_"] [class*="member_"] { margin-left: 8px !important; max-width: 224px; border-radius: 3px !important; }
+[class*="membersWrap_"] [class*="member_"] :is([class^="layout_"], [class*=" layout_"]) { height: 42px; padding: 0 8px !important; border-radius: 3px !important; }
+[class*="membersWrap_"] [class*="member_"] :is([class^="name_"], [class*=" name_"], [class*="username_"]) { font-size: 16px !important; font-weight: 500 !important; }
+[class*="membersWrap_"] [class*="member_"] :is([class^="subText_"], [class*=" subText_"]) { font-size: 12px !important; color: var(--n19-header-2); }
+[class*="membersWrap_"] [class*="member_"]:hover :is([class^="layout_"], [class*=" layout_"]) { background-color: var(--n19-hover) !important; }
+
+/* ---- Post-2019 identity flourishes: server tags, decorations, nameplates, profile effects, Nitro badges ------ */
+:is([class*="clanTag"], [class*="chipletContainerInner_"], [class*="guildTagChip"], [class^="guildTag_"], [class*=" guildTag_"],
+  [class*="guildTagAccessory_"], [class*="guildTagPill_"], [class*="memberClanTag"]),
+:is([class^="avatarDecoration_"], [class*=" avatarDecoration_"], [class*="avatarDecorationContainer_"], [class*="avatarDecorationImage_"]),
+:is([class*="nameplated_"]) > :is([class*="container_"][class*="channel_"], [class*="videoContainer_"]),
+:is([class*="container_"][class*="account_"][aria-hidden="true"], [class*="fitInAccount_"]),
+:is([class^="profileEffects_"], [class*=" profileEffects_"], [class^="profileEffect_"], [class*=" profileEffect_"], [class*="profileEffectBackground_"]),
+:is([class*="premiumIcon_"], [class*="nitroWheel"], [class*="membersGroupNitroLabel_"], [class*="boosterBadge_"]),
+:is([class*="nameGlow_"], [class*="displayNameStyles"] [class*="glow"]) { display: none !important; }
+[class*="nameplated_"] { padding-inline-end: 8px !important; }
+[class*="nameplated_"]:hover, [class*="plated_"]:hover { backdrop-filter: none !important; }
+/* Display-name styles (2025 fonts, gradients and effects on names) go back to plain Whitney. */
+[class*="withDisplayNameStyles_"] :is([class*="username"], [class*="name_"]), [class*="dnsFont"], [class*="displayNameStyles"] {
+  font-family: var(--n19-font) !important; background-image: none !important;
+}
+/* Profile popouts and the DM profile panel: 2019 had a plain header (blurple in light, #202225 in dark) with no
+   banner art, profile effect, profile frame (2025) or theme gradient (2022). */
+:is(.user-profile-popout, .user-profile-sidebar, .user-profile-modal, .user-profile-modal-v2, .custom-user-profile-theme) {
+  --profile-gradient-primary-color: var(--n19-floating) !important; --profile-gradient-secondary-color: var(--n19-floating) !important;
+  --profile-gradient-overlay: transparent !important; --profile-gradient-overlay-synced-with-user-theme: transparent !important;
+  --profile-body-background-color: var(--n19-floating) !important; --profile-avatar-border-color: var(--n19-floating) !important;
+  --custom-user-profile-theme-padding: 0px !important;
+}
+.user-profile-popout { background: var(--n19-floating) !important; border-radius: 5px !important; box-shadow: var(--n19-popout) !important; border: 0 !important; }
+:is(.user-profile-popout, .user-profile-sidebar, .user-profile-modal, .user-profile-modal-v2) :is([class^="banner_"], [class*=" banner_"]) {
+  background-color: var(--n19-popout-head) !important; background-image: none !important;
+}
+:is(.user-profile-popout, .user-profile-sidebar, .user-profile-modal, .user-profile-modal-v2) :is([class^="banner_"], [class*=" banner_"]) :is(img, video) { display: none !important; }
+:is([class^="profileFrameContainer_"], [class*=" profileFrameContainer_"], [class^="profileFrameLayer_"], [class*=" profileFrameLayer_"]) { display: none !important; }
+
+/* ---- Post-2019 app features --------------------------------------------------------------------------------- */
+/* Guild rail: Discover (2020), the 2025 notification-centre and Quests entry points. */
+[data-list-id="guildsnav"] [class*="listItem_"]:has([data-list-item-id$="guild-discover-button"], [aria-label="Discover"], [aria-label="Explore Discoverable Servers"]),
+[class*="bottomRailNotifCenterButton_"], [class*="NotifCenterEntrypoint_"], [class*="discoveryIcon_"] { display: none !important; }
+/* App launcher / Quests bars in the user panel and above the composer; the Activities button in voice. */
+[class*="panels_"] > :is([class*="quest"], [class*="Quest"]),
+[class*="channelTextArea_"] ~ :is([class*="appLauncher"], [class*="AppLauncher"]),
+[class*="hiddenAppLauncherAnchor_"], [class*="appLauncherOnboarding"], [class*="questBar"], [class*="QuestBar"] { display: none !important; }
+button[aria-label="Activities"], [role="button"][aria-label="Activities"] { display: none !important; }
+/* Threads (2021), forums (2021), media channels (2023), polls (2024), AI summaries (2023). */
+[class*="threadMessageAccessory"], [class*="threadSuggestionBar_"], [class*="subtitleHasThreads_"] ~ ul,
+#channels :is([class*="typeThread_"], [class*="spine"]), #channels li:has(> * [class*="typeThread_"]),
+#channels :is(li, [role="listitem"]):has(a:is([aria-label*="(forum channel)"], [aria-label*="(media channel)"], [aria-label*="(thread)"])),
+[class*="pollBadge"], [id^="message-accessories-"] [class*="pollContainer"],
+[class*="summariesBetaTag"], [class*="topicsPill"] { display: none !important; }
+
+/* Friends page: the "Active Now" column (2020). New-member "wave" and onboarding bars above the composer (2022). */
+:is([class^="nowPlayingColumn_"], [class*=" nowPlayingColumn_"]), [class*="newMemberActionBar_"] { display: none !important; }
+
+/* ---- Menus, popouts, tooltips, modals ------------------------------------------------------------------------ */
+[class*="menu_"][role="menu"], [role="menu"]:is([class^="menu_"], [class*=" menu_"]) {
+  background: var(--n19-floating) !important; border: 0 !important; border-radius: 4px !important; box-shadow: var(--n19-popout) !important;
+}
+[role="menu"] [role="menuitem"]:is([class^="item_"], [class*=" item_"]), [role="menu"] [role="menuitemcheckbox"], [role="menu"] [role="menuitemradio"] {
+  border-radius: 2px !important; font-size: 14px !important; font-weight: 500; min-height: 32px; color: var(--n19-int);
+}
+[role="menu"] [role="menuitem"]:is([class^="focused_"], [class*=" focused_"], :hover):not([class*="colorDanger_"]) { background-color: var(--n19-brand) !important; color: #fff !important; }
+[role="menu"] [role="menuitem"][class*="colorDanger_"]:is([class^="focused_"], [class*=" focused_"], :hover) { background-color: var(--n19-red) !important; color: #fff !important; }
+[class*="tooltipPrimary_"], [class*="tooltip_"][role="tooltip"] {
+  --tooltip-pointer-bg: var(--n19-tooltip); background: var(--n19-tooltip) !important; color: var(--n19-tooltip-text) !important;
+  border-radius: 5px !important; font-size: 14px; font-weight: 500; border: 0 !important;
+}
+[class*="tooltipPrimary_"] [class*="tooltipPointer_"] { border-top-color: var(--n19-tooltip) !important; }
+[role="dialog"] :is([class^="root_"], [class*=" root_"]):has(> :is([class*="header_"], [class*="content_"])) { border-radius: 5px !important; }
+
+/* ---- Login, register and invite pages ------------------------------------------------------------------------- */
+:is(form, section):is([class^="authBox_"], [class*=" authBox_"]) {
+  background: var(--n19-primary) !important; border-radius: 5px !important; box-shadow: 0 2px 10px 0 rgba(0, 0, 0, .2) !important;
+  border: 0 !important; padding: 32px !important;
+}
+:is(form, section):is([class^="authBox_"], [class*=" authBox_"]) h1 { font-size: 24px !important; font-weight: 600 !important; color: var(--n19-header) !important; }
+:is(form, section):is([class^="authBox_"], [class*=" authBox_"]) h1 + div { color: var(--n19-header-2) !important; font-size: 16px; }
+:is(form, section):is([class^="authBox_"], [class*=" authBox_"]) label {
+  text-transform: uppercase; font-size: 12px !important; font-weight: 600 !important; letter-spacing: .02em; color: var(--n19-header-2) !important;
+}
+:is(form, section):is([class^="authBox_"], [class*=" authBox_"]) input {
+  background-color: var(--n19-field) !important; border-radius: 3px !important; font-size: 16px !important; color: var(--n19-text) !important;
+}
+:is(form, section):is([class^="authBox_"], [class*=" authBox_"]) :is([class^="inputWrapper_"], [class*=" inputWrapper_"], [class^="wrapper_"], [class*=" wrapper_"]):has(> input),
+:is(form, section):is([class^="authBox_"], [class*=" authBox_"]) :is([class^="input_"], [class*=" input_"]):has(input) {
+  border-radius: 3px !important; border: 1px solid var(--n19-input-border) !important; background-color: var(--n19-field) !important;
+}
+:is(form, section):is([class^="authBox_"], [class*=" authBox_"]) :is([class^="inputWrapper_"], [class*=" inputWrapper_"], [class^="input_"], [class*=" input_"]) :is([class^="inputWrapper_"], [class*=" inputWrapper_"]) { border: 0 !important; }
+:is(form, section):is([class^="authBox_"], [class*=" authBox_"]) :is(button[type="submit"], button[class*="primary_"]:not([class*="textButton_"])) {
+  border-radius: 3px !important; background-color: var(--n19-brand) !important; border-color: transparent !important; height: 44px; font-size: 16px; font-weight: 500;
+}
+:is(form, section):is([class^="authBox_"], [class*=" authBox_"]) :is(button[type="submit"], button[class*="primary_"]:not([class*="textButton_"])):hover { background-color: var(--n19-brand-hover) !important; }
+:is(form, section):is([class^="authBox_"], [class*=" authBox_"]) [class*="textButton_"] { color: var(--n19-link) !important; }
+:is(form, section):is([class^="authBox_"], [class*=" authBox_"]) [class*="needAccount_"] { color: var(--n19-muted) !important; }
+/* QR-code login (2020) and passkeys (2024): the box goes back to the single 480px column. */
+:is(form, section):is([class^="authBox_"], [class*=" authBox_"]) :is([class*="qrLogin_"], [class*="qrLoginInner_"]),
+:is(form, section):is([class^="authBox_"], [class*=" authBox_"]) :is([class^="verticalSeparator_"], [class*=" verticalSeparator_"]) { display: none !important; }
+:is(form, section):is([class^="authBoxExpanded_"], [class*=" authBoxExpanded_"]) { width: 480px !important; max-width: calc(100vw - 32px); box-sizing: border-box; }
+:is(form, section):is([class^="authBox_"], [class*=" authBox_"]) [class*="mainLoginContainer_"] { width: 100% !important; }
+
+/* ---- discord.com home and marketing pages (Webflow): 2019's flat blurple, white text, Whitney, 3px buttons ------ */
+html[data-wf-site] body, html[data-wf-site] body :is(p, a, span, div, li, h1, h2, h3, h4, h5, h6, button, label, input) {
+  font-family: var(--n19-font) !important; letter-spacing: normal !important;
+}
+html[data-wf-site] :is(h1, h2, [class*="heading--h1"], [class*="heading--h2"]) { text-transform: none !important; font-weight: 700 !important; }
+html[data-wf-site] :is(.nav_link, .nav_dd_trigger, .nav_dd_trigger .menu-title) { font-size: 16px !important; font-weight: 600 !important; }
+html[data-wf-site] :is(.hero-home, [class*="hero-home"], .section-hero, [class*="home--hero"]) { background: #7289da !important; background-image: none !important; }
+html[data-wf-site] [class*="star-hero-home"], html[data-wf-site] .nav_blur { display: none !important; }
+html[data-wf-site] :is(.nav_dd_list, .nav_dd_list_bg, .nav_dd_content-wr) { border-radius: 5px !important; }
+html[data-wf-site] :is(a, button):is([class*="button"], .hero_button-l, .hero_button-r) { border-radius: 3px !important; }
+html[data-wf-site] :is(a, button):is([class*="buttonBrand-"], [class*="TryDiscordButton"]):hover { background-color: #2c3034 !important; }
+/* The hero's two buttons: white "Download" with blurple text, and a dark #23272a "Open Discord in your browser". */
+html[data-wf-site] :is(a, button):is(.hero_button-r, .blue-button, [class*="buttonBrand-"], [class*="TryDiscordButton"]) {
+  background-color: #23272a !important; color: #fff !important; border-color: transparent !important;
+}
+html[data-wf-site] a.hero_button-l, html[data-wf-site] a.hero_button-l * { color: #7289da !important; }
+
+/* Below the hero, 2019 alternated white and #f6f6f7 bands with dark text, and closed on a #23272a footer. */
+html[data-wf-site] .main-wrapper { background: #fff !important; background-image: none !important; }
+html[data-wf-site] .main-wrapper > :is([class*="section"], [class*="discord_banner"]):not(.home--hero) { background: #fff !important; background-image: none !important; }
+html[data-wf-site] .main-wrapper > [class*="section"]:not(.home--hero):nth-child(odd) { background: #f6f6f7 !important; }
+html[data-wf-site] .main-wrapper [class*="home--block-group"] { background: transparent !important; background-image: none !important; border: 0 !important; box-shadow: none !important; }
+html[data-wf-site] .main-wrapper > [class*="section"]:not(.home--hero) :is(h1, h2, h3, h4) { color: #23272a !important; }
+html[data-wf-site] .main-wrapper > [class*="section"]:not(.home--hero) :is(p, [class*="paragraph"], [class*="text"]:not([class*="line_text"])) { color: #4f545c !important; }
+html[data-wf-site] .main-wrapper > .discord_banner:not(.home--hero) { background: #7289da !important; }
+html[data-wf-site] .main-wrapper > .discord_banner :is(h1, h2, h3, h4, p, div) { color: #fff !important; }
+html[data-wf-site] .main-wrapper :is([class*="line-images"], [class*="line_text-animation"]) { color: #7289da !important; }
+html[data-wf-site] .footer_new { background: #23272a !important; background-image: none !important; }
+
+/* ---- Scrollbars ------------------------------------------------------------------------------------------------ */
+[class*="scroller"]::-webkit-scrollbar-thumb { background-color: var(--n19-thumb) !important; border-radius: 4px; }
+[class*="auto_"]::-webkit-scrollbar-track, [class*="scrollerBase_"]::-webkit-scrollbar-track { background-color: var(--n19-track) !important; }

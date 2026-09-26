@@ -39,7 +39,23 @@
   };
 
   // ---- 2. Readability --------------------------------------------------------------------------------------------
-  const rgba = c => { const m = String(c).match(/[\d.]+/g); return m && m.length >= 3 ? [+m[0], +m[1], +m[2], m.length > 3 ? +m[3] : 1] : null; };
+  // Computed colors come back as rgb()/rgba() for sRGB, but as oklab(), oklch(), lab() or color() when a site writes
+  // them that way (Tailwind v4). Those are converted by painting one pixel, and cached.
+  const colorCache = new Map();
+  let pen = null;
+  const rgba = c => {
+    c = String(c);
+    if (/^rgba?\(/.test(c)) { const m = c.match(/[\d.]+/g); return m && m.length >= 3 ? [+m[0], +m[1], +m[2], m.length > 3 ? +m[3] : 1] : null; }
+    if (!/^(?:oklab|oklch|lab|lch|color|hsla?|hwb)\(/.test(c)) return null;
+    if (colorCache.has(c)) return colorCache.get(c);
+    try {
+      pen ||= new OffscreenCanvas(1, 1).getContext('2d', { willReadFrequently: true });
+      pen.clearRect(0, 0, 1, 1); pen.fillStyle = c; pen.fillRect(0, 0, 1, 1);
+      const d = pen.getImageData(0, 0, 1, 1).data;
+      const out = d[3] ? [Math.round(d[0] * 255 / d[3]), Math.round(d[1] * 255 / d[3]), Math.round(d[2] * 255 / d[3]), d[3] / 255] : [0, 0, 0, 0];
+      colorCache.set(c, out); return out;
+    } catch { return null; }
+  };
   const channel = v => { v /= 255; return v <= .03928 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4; };
   const lum = c => .2126 * channel(c[0]) + .7152 * channel(c[1]) + .0722 * channel(c[2]);
   const ratio = (a, b) => { const x = lum(a), y = lum(b); return (Math.max(x, y) + .05) / (Math.min(x, y) + .05); };

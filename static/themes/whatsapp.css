@@ -1,0 +1,236 @@
+/* net19 handmade theme: WhatsApp Web, 2019: a #dddbd1 page with a 127px teal (#009688) band across the top and the app
+   as a centered window (at most 1396px wide) with a soft shadow. The left panel has a #ededed header (40px avatar on the
+   left; status, new-chat and menu icons on the right), a #f6f6f6 search bar with a white rounded field, and white 72px
+   chat rows with 49px avatars, 17px names, gray 14px previews, 12px times and bright green unread badges. The
+   conversation sits on the #e5ddd5 beige doodle wallpaper with white incoming and #dcf8c6 outgoing bubbles (7.5px corners,
+   small tails, a hairline shadow) and a #f0f0f0 composer bar with a white rounded field. WhatsApp had no dark mode in
+   2019 (it came in 2020), so dark gets that first dark palette on the same layout. Everything added after 2019 is hidden:
+   the left navigation rail's Channels, Communities, Meta AI and media entries, chat filters, the "Ask Meta AI" entry
+   points, calls, reactions, pinned-message bars, polls, voice-note transcripts and the sticker maker. */
+html {
+  --n19-page: #dddbd1; --n19-band: #009688; --n19-app: #f7f7f7; --n19-shadow: 0 1px 1px 0 rgba(0,0,0,.06), 0 2px 5px 0 rgba(0,0,0,.2);
+  --n19-header: #ededed; --n19-icon: #919191; --n19-search-bar: #f6f6f6; --n19-field: #fff; --n19-placeholder: #999;
+  --n19-list: #fff; --n19-hover: #f5f5f5; --n19-active: #ebebeb; --n19-divider: #f2f2f2; --n19-title: #000; --n19-text: #4a4a4a;
+  --n19-secondary: rgba(0,0,0,.6); --n19-meta: rgba(0,0,0,.45); --n19-badge: #06d755; --n19-badge-text: #09b94c; --n19-accent: #009688; --n19-drawer: #00bfa5;
+  --n19-chat-bg: #e5ddd5; --n19-doodle: #d5cbbf; --n19-in: #fff; --n19-out: #dcf8c6; --n19-bubble-text: #262626;
+  --n19-bubble-shadow: 0 1px .5px rgba(0,0,0,.13); --n19-system: rgba(225,245,254,.92); --n19-compose: #f0f0f0; --n19-read: #4fc3f7;
+  --n19-link: #039be5; --n19-menu: #fff; --n19-menu-shadow: 0 2px 5px 0 rgba(0,0,0,.26), 0 2px 10px 0 rgba(0,0,0,.16);
+  --n19-landing-band: #1ebea5; --n19-page-2: #d2dbdc; --n19-card: #fff; --n19-landing-title: #55636b; --n19-landing-text: #4a4a4a;
+  --n19-card-shadow: 0 17px 50px 0 rgba(0,0,0,.19), 0 12px 15px 0 rgba(0,0,0,.24);
+  --n19-font: "Segoe UI", "Helvetica Neue", Helvetica, "Lucida Grande", Arial, Ubuntu, Cantarell, "Fira Sans", sans-serif;
+}
+html[data-net19-mode="dark"] {
+  --n19-page: #090e11; --n19-band: #054d44; --n19-app: #131c21; --n19-shadow: 0 1px 1px 0 rgba(0,0,0,.3), 0 2px 5px 0 rgba(0,0,0,.5);
+  --n19-header: #2a2f32; --n19-icon: #b1b3b5; --n19-search-bar: #131c21; --n19-field: #323739; --n19-placeholder: #8d8e90;
+  --n19-list: #131c21; --n19-hover: #2d3134; --n19-active: #323739; --n19-divider: #30383d; --n19-title: #e1e1e3; --n19-text: #d1d7db;
+  --n19-secondary: rgba(241,241,242,.63); --n19-meta: rgba(241,241,242,.45); --n19-badge: #06d755; --n19-badge-text: #06d755; --n19-accent: #00af9c; --n19-drawer: #2a2f32;
+  --n19-chat-bg: #0d1418; --n19-doodle: #22303a; --n19-in: #262d31; --n19-out: #056162; --n19-bubble-text: rgba(241,241,242,.92);
+  --n19-bubble-shadow: 0 1px .5px rgba(0,0,0,.13); --n19-system: #1e2a30; --n19-compose: #1e2428; --n19-read: #4fc3f7;
+  --n19-landing-band: #0b4d45; --n19-page-2: #0b1418; --n19-card: #1e2428; --n19-landing-title: #d1d7db; --n19-landing-text: #b1b3b5;
+  --n19-card-shadow: 0 17px 50px 0 rgba(0,0,0,.4), 0 12px 15px 0 rgba(0,0,0,.5);
+  --n19-link: #53bdeb; --n19-menu: #2a2f32; --n19-menu-shadow: 0 2px 5px 0 rgba(0,0,0,.5), 0 2px 10px 0 rgba(0,0,0,.3);
+}
+
+/* WhatsApp's own design variables (WDS), so every panel, drawer, menu and dialog follows the same palette. Chat themes
+   (2025) set these on #main too. */
+html:root, html body, html #app, html #main {
+  --WDS-surface-default: var(--n19-list) !important; --WDS-surface-elevated-default: var(--n19-menu) !important;
+  --WDS-surface-emphasized: var(--n19-header) !important; --WDS-surface-elevated-emphasized: var(--n19-header) !important;
+  --WDS-components-surface-nav-bar: var(--n19-header) !important; --WDS-background-wash-plain: var(--n19-app) !important;
+  --WDS-background-wash-inset: var(--n19-app) !important; --WDS-background-elevated-wash-plain: var(--n19-app) !important;
+  --WDS-background-elevated-wash-inset: var(--n19-app) !important; --WDS-surface-highlight: var(--n19-hover) !important;
+  --WDS-components-active-list-row: var(--n19-active) !important; --WDS-lines-divider: var(--n19-divider) !important;
+  --WDS-content-default: var(--n19-title) !important; --WDS-content-deemphasized: var(--n19-secondary) !important;
+  --WDS-content-action-default: var(--n19-icon) !important; --WDS-content-action-emphasized: var(--n19-accent) !important;
+  --WDS-content-external-link: var(--n19-link) !important; --WDS-content-read: var(--n19-read) !important;
+  --WDS-accent: var(--n19-accent) !important; --WDS-accent-deemphasized: var(--n19-out) !important; --WDS-accent-emphasized: var(--n19-accent) !important;
+  --WDS-persistent-always-branded: var(--n19-accent) !important; --WDS-components-filter-surface-selected: var(--n19-active) !important;
+  --WDS-systems-bubble-surface-incoming: var(--n19-in) !important; --WDS-systems-bubble-surface-outgoing: var(--n19-out) !important;
+  --WDS-systems-bubble-surface-system: var(--n19-system) !important; --WDS-systems-bubble-content-deemphasized: var(--n19-meta) !important;
+  --WDS-systems-chat-background-wallpaper: var(--n19-chat-bg) !important; --WDS-systems-chat-foreground-wallpaper: var(--n19-doodle) !important;
+  --WDS-systems-chat-surface-composer: var(--n19-field) !important; --WDS-systems-chat-surface-tray: var(--n19-compose) !important;
+}
+html body { font-family: var(--n19-font) !important; }
+
+/* ---- The page: #dddbd1 with the teal band, the app as a centered window ---- */
+html .app-wrapper-web { background: var(--n19-page) !important; }
+html .app-wrapper-web:has(#link-device-instructions-list)::before { display: none !important; }
+html .app-wrapper-web::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 127px; background: var(--n19-band); pointer-events: none; }
+html .app-wrapper-web :is(.two, .three) { background: var(--n19-app) !important; border-radius: 0 !important; }
+@media (min-width: 1441px) {
+  html .app-wrapper-web :is(.two, .three) { top: 19px !important; height: calc(100% - 38px) !important; max-width: 1396px !important; margin: 0 auto !important;
+    left: 0 !important; right: 0 !important; box-shadow: var(--n19-shadow) !important; }
+}
+
+/* ---- The left navigation rail (2023) folds into the 2019 panel header: the profile photo on the left, status and settings
+   next to the new-chat and menu icons. Chats, Channels, Communities, Meta AI and media entries go. ---- */
+html .two > header:has([data-navbar-item]), html .three > header:has([data-navbar-item]) {
+  position: absolute !important; top: 0 !important; left: 0 !important; z-index: 1000 !important; height: 59px !important; min-width: 0 !important;
+  width: var(--n19-side, 30%) !important; background: transparent !important; border: none !important; pointer-events: none !important;
+  padding: 0 116px 0 16px !important; box-sizing: border-box !important; display: flex !important; align-items: center !important;
+}
+html .two > header:has([data-navbar-item]) > div, html .three > header:has([data-navbar-item]) > div { display: contents !important; }
+html header:has([data-navbar-item]) [data-testid^="navbar-"][data-testid$="-section"] { display: contents !important; }
+html header:has([data-navbar-item]) [data-testid^="navbar-"][data-testid$="-section"] > div { display: flex !important; flex-direction: row !important; align-items: center !important; gap: 0 !important; padding: 0 !important; }
+html header:has([data-navbar-item]) [data-testid="navbar-primary-section"] > div { margin-left: auto !important; order: 2; }
+html header:has([data-navbar-item]) [data-testid="navbar-footer-section"][data-testid] > div { display: contents !important; }
+html header:has([data-navbar-item]) hr { display: none !important; }
+html header:has([data-navbar-item]) :is(button, a, [role="button"]) { pointer-events: auto !important; }
+html header:has([data-navbar-item]) div:has(> span > div > [data-navbar-item]),
+html header:has([data-navbar-item]) div:has(> span > div > div > [data-navbar-item]) { margin: 0 !important; }
+html header:has([data-navbar-item]) div:has(> span > div > [aria-label="Profile" i][data-navbar-item]) { order: 0; margin-right: auto !important; }
+html header:has([data-navbar-item]) div:has(> span > div > :is([aria-label="Status" i], [aria-label="Settings" i])[data-navbar-item]) { order: 3; }
+html header:has([data-navbar-item]) div:has(> span > div > :is([aria-label="Chats" i], [aria-label="Channels" i], [aria-label="Communities" i], [aria-label="Meta AI" i], [aria-label^="Media" i], [aria-label="Calls" i], [aria-label^="Tools" i], [aria-label^="Archived" i], [aria-label^="Locked" i], [aria-label="Beta" i], [aria-label^="Feedback" i])[data-navbar-item]) { display: none !important; }
+html header:has([data-navbar-item]) [data-navbar-item] { width: 40px !important; height: 40px !important; border-radius: 50% !important; background: transparent !important; color: var(--n19-icon) !important; }
+html header:has([data-navbar-item]) [data-navbar-item]:hover { background: rgba(0,0,0,.08) !important; }
+html header:has([data-navbar-item]) [role="status"] { display: none !important; }
+html header:has([data-navbar-item]) [aria-label="Profile" i][data-navbar-item] > div { width: 40px !important; height: 40px !important; }
+html .two > header:has([data-navbar-item]) ~ div:has(#side), html .three > header:has([data-navbar-item]) ~ div:has(#side) {
+  flex: 0 0 var(--n19-side, 30%) !important; max-width: var(--n19-side, 30%) !important; width: var(--n19-side, 30%) !important; min-width: 0 !important; }
+html .app-wrapper-web { --n19-side: 30%; }
+html :is(.two, .three) [data-testid="drawer-left"] { margin-left: 0 !important; flex-basis: var(--n19-side, 30%) !important; max-width: var(--n19-side, 30%) !important; border: none !important; }
+html :is(.two, .three) [data-testid="drawer-middle"] { border: none !important; }
+html :is(.two, .three) [data-testid="drawer-fullscreen"] { left: 0 !important; width: 100% !important; }
+@media (max-width: 1300px) { html .app-wrapper-web { --n19-side: 35%; } }
+@media (max-width: 900px) { html .app-wrapper-web { --n19-side: 40%; } }
+
+/* While a left drawer is open (new chat, profile, settings), the folded rail steps aside; for the rail's own pages
+   (settings, profile, status) only "Chats" stays, drawn as the drawer's back arrow. */
+html :is(.two, .three):has([data-testid="drawer-left"] header) > header:has([data-navbar-item]) { top: 49px !important; padding: 0 0 0 12px !important; }
+html :is(.two, .three):has([data-testid="drawer-left"] header) > header:has([data-navbar-item]) div:has(> span > div > [data-navbar-item]) { display: none !important; }
+html :is(.two, .three):has([data-testid="drawer-left"] header) > header:has([data-navbar-item]) [data-testid="navbar-primary-section"] > div { margin-left: 0 !important; }
+html :is(.two, .three):has([data-testid="drawer-left"] header) > header:has([data-navbar-item-selected="true"]:not([aria-label="Chats" i])) div:has(> span > div > [aria-label="Chats" i][data-navbar-item]) { display: block !important; order: 0; }
+html :is(.two, .three):has([data-testid="drawer-left"] header) > header [aria-label="Chats" i][data-navbar-item] { color: #fff !important; background: transparent !important; }
+html :is(.two, .three):has([data-testid="drawer-left"] header) > header [aria-label="Chats" i][data-navbar-item] svg { opacity: 0 !important; }
+html :is(.two, .three):has([data-testid="drawer-left"] header) > header [aria-label="Chats" i][data-navbar-item] > div {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23fff' d='M12 4l1.4 1.4L7.8 11H20v2H7.8l5.6 5.6L12 20l-8-8 8-8z'/%3E%3C/svg%3E") center / 24px no-repeat !important; }
+html :is(.two, .three):has(> header [data-navbar-item-selected="true"]:not([aria-label="Chats" i])) [data-testid="drawer-left"] header { padding-left: 64px !important; }
+/* 2019 drawers: a #00bfa5 header, 108px, with the white title on its bottom row */
+html [data-testid="drawer-left"] header, html [data-testid="drawer-right"] header:has([data-testid="drawer-title-body"]) {
+  background: var(--n19-drawer) !important; height: 108px !important; min-height: 108px !important; padding: 49px 20px 0 !important; box-sizing: border-box !important; color: #fff !important;
+  align-items: center !important; }
+html [data-testid="drawer-left"] header :is(h1, h2, span, button, [role="button"]), html [data-testid="drawer-right"] header:has([data-testid="drawer-title-body"]) :is(h1, h2, span, button, [role="button"]) { color: #fff !important; }
+html [data-testid="drawer-left"] header h2, html [data-testid="drawer-right"] header h2 { font-size: 19px !important; font-weight: 500 !important; }
+
+/* ---- Left panel header: #ededed, 59px; the WhatsApp wordmark title (2023) goes ---- */
+html .two div:has(#side) > header[data-testid="chatlist-header"], html div:has(> #side) > header[data-testid="chatlist-header"] { background: var(--n19-header) !important; }
+html header[data-testid="chatlist-header"] > header { height: 59px !important; min-height: 59px !important; padding: 10px 16px !important; background: var(--n19-header) !important; box-sizing: border-box !important; }
+html header[data-testid="chatlist-header"] [data-testid="drawer-title-body"] { visibility: hidden !important; }
+html header[data-testid="chatlist-header"] button { color: var(--n19-icon) !important; }
+html #side { background: var(--n19-list) !important; }
+/* Search: a #f6f6f6 bar with a white rounded field */
+html #side [data-testid="chat-list-search-container"] { background: var(--n19-search-bar) !important; padding: 7px 12px 7px !important; margin: 0 !important; height: 49px !important;
+  box-sizing: border-box !important; border-bottom: 1px solid rgba(0,0,0,.08) !important; }
+html #side [data-testid="chat-list-search-container"] div:has(> div > input) { background: var(--n19-field) !important; border-radius: 18px !important; height: 35px !important; min-height: 35px !important; box-shadow: none !important; border: none !important; }
+html #side [data-testid="chat-list-search-container"] input { font-size: 14px !important; color: var(--n19-title) !important; }
+html #side [data-testid="chat-list-search-container"] input::placeholder { color: var(--n19-placeholder) !important; }
+html #side [data-testid="chat-list-search-container"] svg { color: var(--n19-icon) !important; }
+/* The offline / notification butterbar, full width and square as in 2019 */
+html #side [data-testid="chat-butterbar"] > div, html #side [data-testid="chat-butterbar"] > div > div > div { border-radius: 0 !important; margin: 0 !important; }
+/* Chat filters (2024) and the encryption footnote under the list (2023) */
+html #side [role="tablist"][aria-label="chat-list-filters"], html #side [data-testid="chatlist-e2e-message"] { display: none !important; }
+
+/* ---- Chat rows: white, 72px, 49px avatars, a hairline between rows ---- */
+html #pane-side { background: var(--n19-list) !important; }
+html #pane-side [role="row"] [data-testid="cell-frame-container"] { border-radius: 0 !important; margin: 0 !important; height: 72px !important; background: var(--n19-list) !important; }
+html #pane-side [role="row"] [data-testid="cell-frame-container"]:hover { background: var(--n19-hover) !important; }
+html #pane-side [role="row"] [aria-selected="true"] [data-testid="cell-frame-container"],
+html #pane-side [role="row"]:has([aria-selected="true"]) [data-testid="cell-frame-container"] { background: var(--n19-active) !important; }
+html #pane-side [role="row"] [data-testid="cell-frame-container"] > div:last-child { border-top: 1px solid var(--n19-divider) !important; padding-right: 15px !important; height: 72px !important;
+  box-sizing: border-box !important; justify-content: center !important; }
+html #pane-side [role="row"]:first-child [data-testid="cell-frame-container"] > div:last-child { border-top-color: transparent !important; }
+html #pane-side [data-testid="cell-frame-title"] span[title] { font-size: 17px !important; font-weight: 400 !important; color: var(--n19-title) !important; line-height: 21px !important; }
+html #pane-side [data-testid="cell-frame-primary-detail"], html #pane-side [data-testid="cell-frame-primary-detail"] span { font-size: 12px !important; color: var(--n19-meta) !important; font-weight: 400 !important; }
+html #pane-side [role="row"]:has([data-testid="icon-unread-count"]) [data-testid="cell-frame-primary-detail"] span { color: var(--n19-badge-text) !important; }
+html #pane-side [data-testid="cell-frame-secondary"], html #pane-side [data-testid="cell-frame-secondary"] span { font-size: 14px !important; color: var(--n19-secondary) !important; }
+html #pane-side [data-testid="icon-unread-count"] { background: var(--n19-badge) !important; color: #fff !important; border-radius: 12px !important; min-width: 20px !important; height: 20px !important;
+  padding: 0 5px !important; font-size: 12px !important; font-weight: 600 !important; box-sizing: border-box !important; }
+html #pane-side [data-testid="icon-unread-count"] span { color: #fff !important; font-size: 12px !important; }
+/* The "Archived" row as the plain 2019 row */
+html #side [data-testid="chatlist-panel-archived-button"] { border-radius: 0 !important; margin: 0 !important; background: var(--n19-list) !important; height: 49px !important; min-height: 49px !important;
+  border-bottom: 1px solid var(--n19-divider) !important; box-shadow: none !important; }
+html #side [data-testid="chatlist-panel-archived-button"] :is(span, div) { color: var(--n19-accent) !important; font-size: 14px !important; }
+
+/* ---- Conversation header: #ededed, 59px, 40px avatar ---- */
+html #main header[data-testid="conversation-header"] { background: var(--n19-header) !important; height: 59px !important; min-height: 59px !important; padding: 10px 16px !important;
+  box-sizing: border-box !important; border: none !important; box-shadow: none !important; border-left: 1px solid rgba(0,0,0,.08) !important; }
+html #main header[data-testid="conversation-header"] [title="Profile details"] > div { width: 40px !important; height: 40px !important; }
+html #main header[data-testid="conversation-header"] [data-testid="conversation-info-header-chat-title"] { font-size: 16px !important; font-weight: 400 !important; color: var(--n19-title) !important; }
+html #main header[data-testid="conversation-header"] button { color: var(--n19-icon) !important; }
+/* Calls from the web app (2023) */
+html #main header[data-testid="conversation-header"] :is(button, div[role="button"]):is([aria-label="Video call" i], [aria-label="Voice call" i], [aria-label^="Call" i], [aria-label="Get the app for calling" i]) { display: none !important; }
+
+/* ---- Messages: the beige doodle wallpaper and 2019 bubbles ---- */
+html #main:has(> [data-testid^="conversation-background"]) { background-color: var(--n19-chat-bg) !important; }
+html #main [data-testid="msg-container"] { border-radius: 7.5px !important; box-shadow: var(--n19-bubble-shadow) !important; font-size: 14.2px !important; line-height: 19px !important;
+  color: var(--n19-bubble-text) !important; }
+html #main .focusable-list-item.x1cy8zhl [data-testid="msg-container"] { background-color: var(--n19-in) !important; }
+html #main .focusable-list-item.xuk3077 [data-testid="msg-container"] { background-color: var(--n19-out) !important; }
+html #main [data-testid="msg-container"]:has(> [data-icon="tail-in"]) { border-top-left-radius: 0 !important; }
+html #main [data-testid="msg-container"]:has(> [data-icon="tail-out"]) { border-top-right-radius: 0 !important; }
+html #main [data-icon="tail-in"] { color: var(--n19-in) !important; }
+html #main [data-icon="tail-out"] { color: var(--n19-out) !important; }
+html #main [data-testid="msg-container"] .selectable-text { font-size: 14.2px !important; line-height: 19px !important; color: var(--n19-bubble-text) !important; }
+html #main [data-testid="msg-meta"], html #main [data-testid="msg-meta"] span { font-size: 11px !important; color: var(--n19-meta) !important; }
+html #main [data-testid="msg-meta"] [aria-label*="Read" i] { color: var(--n19-read) !important; }
+html #main [data-testid="conversation-panel-messages"] [tabindex="-1"] > div > span:only-child { text-transform: uppercase !important; font-size: 12.5px !important; }
+
+/* ---- Composer: a #f0f0f0 bar with a white rounded field ---- */
+html #main footer { background: var(--n19-compose) !important; border: none !important; box-shadow: none !important; padding: 0 !important; }
+html #main footer .copyable-area { padding: 5px 10px !important; background: var(--n19-compose) !important; min-height: 62px !important; box-sizing: border-box !important; align-items: center !important; }
+html #main footer [data-testid="compose-box"] > span > div > div > div[tabindex="-1"] { background: transparent !important; box-shadow: none !important; border: none !important; border-radius: 0 !important; padding: 0 !important; }
+html #main footer div:has(> [data-testid="conversation-compose-box-input"]) { background: var(--n19-field) !important; border-radius: 21px !important; margin: 5px 10px !important;
+  min-height: 42px !important; box-sizing: border-box !important; display: flex !important; flex-direction: column !important; justify-content: center !important; }
+html #main footer [data-testid="conversation-compose-box-input"] { font-size: 15px !important; line-height: 20px !important; color: var(--n19-title) !important; padding: 9px 12px 11px !important; }
+html #main footer div:has(> [data-testid="conversation-compose-box-input"]) > [aria-hidden="true"] > div { color: var(--n19-placeholder) !important; font-size: 15px !important; line-height: 20px !important;
+  top: 11px !important; left: 12px !important; bottom: auto !important; }
+html #main footer button { color: var(--n19-icon) !important; background: transparent !important; }
+html #main footer button[aria-label="Send" i] { color: var(--n19-icon) !important; }
+
+/* ---- Menus: white panels with 3px corners, text-only 40px rows ---- */
+html div:has(> div > div > [role="menuitem"]) { border-radius: 3px !important; box-shadow: var(--n19-menu-shadow) !important; background: var(--n19-menu) !important; padding: 9px 0 !important; }
+html [role="menuitem"] { border-radius: 0 !important; min-height: 40px !important; padding: 0 58px 0 24px !important; margin: 0 !important; }
+html [role="menuitem"] > div > div:first-child:has(> span > svg) { display: none !important; }
+html [role="menuitem"] span { font-size: 14.5px !important; color: var(--n19-text) !important; }
+html [role="menuitem"]:hover, html [role="menuitem"]:focus { background: var(--n19-hover) !important; }
+
+/* ---- Post-2019 features ---- */
+/* Reactions (2022): the bubble under a message, the hover bar and its picker */
+html #main [data-testid="reaction-bubble"], html [data-testid="reaction-entry-point"], html [data-testid="reactions_hover_bar_content"],
+html [data-testid="reactions_hover_bar_bridge_zone"], html [data-testid="reaction_emoji_picker"], html [data-testid^="hover-bar-reaction-"],
+html [data-testid="send-reaction-btn"], html [data-testid="chat_thread_reaction_chip"], html [data-testid="chat_thread_add_reaction_chip"],
+html [role="menu"]:has(> button img[alt]) { display: none !important; }
+/* Pinned-message bar (2023) */
+html #main [data-testid="conversation-subheader"]:has([data-testid="pin-refreshed"]) { display: none !important; }
+/* Polls (2022) and events (2024), in the conversation and in the attach menu */
+html #main [role="row"]:has(:is([data-testid="poll-bubble"], [data-testid="poll-snapshot-bubble"], [data-testid="sharable_event_invite_msg_bubble"], [data-testid="event-creation-msg"])) { display: none !important; }
+/* Menu entries added after 2019 are hidden by label in whatsapp.js */
+/* Meta AI entry points (2024) */
+html [data-testid="ask-meta-ai-pill"], html [data-testid="meta-ai-tile"], html [data-testid="meta_ai_chat_imagine_image_button"] { display: none !important; }
+/* Status rings round avatars in the list and the 2025 text status bubble in the conversation header */
+html #pane-side [data-testid="chatlist-status-ring"], html #main [data-testid="chat-header-text-status-bubble"] { display: none !important; }
+/* The calling banner and list pills in the chat list */
+html #side [data-testid="chatlist_calling_activation_banner_wrapper"], html #side [data-testid="chatlist-tertiary-pills-row"] { display: none !important; }
+
+/* ---- Landing / QR page: the 2019 #1ebea5 band (222px) over the gray page, white "WHATSAPP WEB" branding, and the QR
+   in a white card with 3px corners and a deep shadow ---- */
+html .app-wrapper-web > div:has(#link-device-instructions-list) {
+  background: linear-gradient(var(--n19-landing-band) 0 222px, transparent 222px), linear-gradient(180deg, var(--n19-page), var(--n19-page-2)) !important; }
+html .app-wrapper-web > div:has(#link-device-instructions-list) :is([data-icon="wa-logo"], [data-icon="wa-wordmark"]) svg { filter: brightness(0) invert(1) !important; }
+html .app-wrapper-web div:has(> div > div > div > div > ol#link-device-instructions-list),
+html .app-wrapper-web div:has(> div > div > div > [data-testid="wa-web-landing-promo-get-started"]) {
+  border: none !important; border-radius: 3px !important; background: var(--n19-card) !important; box-shadow: var(--n19-card-shadow) !important; }
+html .app-wrapper-web div:has(> div > div > div > div > ol#link-device-instructions-list) { padding: 64px 60px 56px !important; }
+html .app-wrapper-web div:has(> div > div > div > [data-testid="wa-web-landing-promo-get-started"]) { box-shadow: 0 1px 1px 0 rgba(0,0,0,.06), 0 2px 5px 0 rgba(0,0,0,.2) !important; }
+html .app-wrapper-web div:has(> div > div > div > div > ol#link-device-instructions-list) div:has(> [data-testid="link_device_qr_phone_number_shortcut_link"]) > div:first-child {
+  font-size: 28px !important; font-weight: 300 !important; color: var(--n19-landing-title) !important; }
+html #link-device-instructions-list li { font-size: 18px !important; line-height: 28px !important; color: var(--n19-landing-text) !important; }
+html #link-device-instructions-list li > div:first-child { border: none !important; background: transparent !important; width: 20px !important; }
+html #link-device-instructions-list li > div:first-child > div { color: var(--n19-landing-text) !important; font-size: 18px !important; }
+html #link-device-instructions-list > div:last-child:empty, html #link-device-instructions-list > div[aria-hidden], html #link-device-instructions-list > div:not(:has(*)) { display: none !important; }
+html .app-wrapper-web :is([data-testid="link_device_qr_help_link"], [data-testid="link_device_qr_phone_number_link"]) div { color: var(--n19-accent) !important; text-decoration: none !important; border: none !important; }
+html .app-wrapper-web [data-testid="wa-web-landing-promo-get-started"] { border-radius: 3px !important; }
+html[data-net19-mode="dark"] [data-testid="link_device_phone_number_input_wrapper"] :is(input, span, label) { color: var(--n19-text) !important; }
+html[data-net19-mode="dark"] [data-testid="link_device_phone_number_input_wrapper"] label { background-color: var(--n19-card) !important; }
+/* The landing page itself only has light colours; on the dark palette its text is re-inked to match */
+html[data-net19-mode="dark"] .app-wrapper-web > div:has(#link-device-instructions-list) :is(div, span, label, strong, li):not([data-testid="link_device_phone_number_input_wrapper"] *):not([data-testid="wa-web-landing-promo-get-started"] *):not([role="button"] *) { color: var(--n19-text) !important; }

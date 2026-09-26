@@ -1,58 +1,216 @@
-/* net19 handmade theme: Reddit signed out (old.reddit.com needs an account), moved toward the list Reddit drew through
-   2021: white page, blue-gray header, blue titles, a flat list instead of cards; light, and dark when Reddit is dark. Reddit's own design variables
-   are pointed at the 2019 tokens, so every component (menus, dialogs, comments) follows. */
-html { --n19-page: #fff; --n19-card: #fff; --n19-card-2: #f5f5f5; --n19-text: #222; --n19-title: #0000ff; --n19-title-visited: #551a8b; --n19-meta: #888;
-  --n19-border: #e6e6e6; --n19-border-hover: #c6c6c6; --n19-divider: #eee; --n19-hover: rgba(0,0,0,.06); --n19-blue: #369; --n19-blue-hover: #2c5b8a;
-  --n19-on-blue: #fff; --n19-field: #fff; --n19-field-border: #ccc; --n19-header: #cee3f8; --n19-header-border: #5f99cf; }
-html[data-net19-mode="dark"] { --n19-page: #161617; --n19-card: #161617; --n19-card-2: #1f1f21; --n19-text: #d7dadc; --n19-title: #8fb6ff; --n19-title-visited: #b39ddb; --n19-meta: #8b8e91;
-  --n19-border: #38383b; --n19-border-hover: #4a4a4e; --n19-divider: #29292b; --n19-hover: rgba(215,218,220,.08); --n19-blue: #7eb0e6; --n19-blue-hover: #a9c7ea;
-  --n19-on-blue: #161617; --n19-field: #29292b; --n19-field-border: #4a4a4e; --n19-header: #1b2632; --n19-header-border: #33475c; }
+/* net19 handmade theme: Reddit signed out (www.reddit.com, the "shreddit" app), drawn as the 2019 redesign: a white 48px
+   header with the snoo and a dark "reddit" wordmark, a gray "Search Reddit" field and rectangular 4px-cornered uppercase
+   LOG IN / SIGN UP buttons in #0079d3; a #dae0e6 page; posts as white cards with a 1px #ccc border, a #f8f9fa vote column
+   on the left, "r/sub • Posted by u/user 5 hours ago" in 12px gray, 18px/500 titles and a gray bold "123 Comments Share
+   Save" row; comments with thread lines; right-rail cards with a blue #0079d3 header strip. Night mode as 2019 drew it:
+   #030303 page, #1a1a1b cards, #343536 lines. Reddit's own design variables are pointed at these tokens, so menus and
+   dialogs follow; the parts drawn inside shadow roots are styled from shreddit.js. */
+html { --n19-page: #dae0e6; --n19-card: #fff; --n19-card-2: #f6f7f8; --n19-vote: #f8f9fa; --n19-text: #1c1c1c; --n19-title: #222; --n19-meta: #787c7e;
+  --n19-action: #878a8c; --n19-border: #ccc; --n19-border-hover: #898989; --n19-line: #edeff1; --n19-hover: rgba(26,26,27,.1); --n19-blue: #0079d3;
+  --n19-blue-hover: #1484d6; --n19-on-blue: #fff; --n19-link: #0079d3; --n19-field: #f6f7f8; --n19-field-border: #edeff1; --n19-header: #fff;
+  --n19-wordmark: #1c1c1c; --n19-up: #ff4500; --n19-down: #7193ff; --n19-thread: #edeff1; --n19-thread-hover: #0079d3; --n19-flair: #edeff1; --n19-strip: #0079d3;
+  --n19-font: "IBM Plex Sans", IBMPlexSans, Arial, sans-serif; --n19-body-font: "Noto Sans", Arial, sans-serif; }
+html[data-net19-mode="dark"] { --n19-page: #030303; --n19-card: #1a1a1b; --n19-card-2: #272729; --n19-vote: #161617; --n19-text: #d7dadc; --n19-title: #d7dadc; --n19-meta: #818384;
+  --n19-action: #818384; --n19-border: #474748; --n19-border-hover: #818384; --n19-line: #343536; --n19-hover: rgba(215,218,220,.1); --n19-blue: #d7dadc;
+  --n19-blue-hover: #e8eaeb; --n19-on-blue: #1a1a1b; --n19-link: #4fbcff; --n19-field: #272729; --n19-field-border: #343536; --n19-header: #1a1a1b;
+  --n19-wordmark: #d7dadc; --n19-up: #ff4500; --n19-down: #7193ff; --n19-thread: #343536; --n19-thread-hover: #d7dadc; --n19-flair: #343536; --n19-strip: #0079d3; }
+
+/* Reddit's design variables, so every component (menus, dialogs, hover cards) takes the 2019 palette */
 html:root, html.theme-dark, html .theme-rpl {
   --color-neutral-background: var(--n19-card) !important; --color-neutral-background-strong: var(--n19-card) !important;
-  --color-neutral-background-weak: var(--n19-card-2) !important; --color-neutral-background-container: var(--n19-card-2) !important;
+  --color-neutral-background-weak: var(--n19-card) !important; --color-neutral-background-container: var(--n19-card-2) !important;
   --color-neutral-background-medium: var(--n19-card-2) !important; --color-neutral-background-canvas: var(--n19-page) !important;
-  --color-neutral-background-hover: var(--n19-card-2) !important; --color-neutral-content: var(--n19-text) !important;
-  --color-neutral-content-strong: var(--n19-title) !important; --color-neutral-content-weak: var(--n19-meta) !important;
-  --color-neutral-border: var(--n19-border) !important; --color-neutral-border-weak: var(--n19-divider) !important;
-  --color-secondary-background: transparent !important; --color-secondary-background-hover: var(--n19-hover) !important;
-  --color-secondary-plain: var(--n19-meta) !important; --color-secondary-weak: var(--n19-meta) !important;
+  --color-neutral-background-hover: var(--n19-card) !important; --color-neutral-background-selected: var(--n19-card-2) !important;
+  --color-neutral-content: var(--n19-text) !important; --color-neutral-content-strong: var(--n19-title) !important; --color-neutral-content-weak: var(--n19-meta) !important;
+  --color-neutral-border: var(--n19-border) !important; --color-neutral-border-weak: var(--n19-line) !important; --color-neutral-border-medium: var(--n19-border) !important;
+  --color-secondary-background: var(--n19-field) !important; --color-secondary-background-hover: var(--n19-hover) !important;
+  --color-secondary-background-selected: var(--n19-hover) !important; --color-secondary-plain: var(--n19-action) !important; --color-secondary-plain-weak: var(--n19-meta) !important;
+  --color-secondary-weak: var(--n19-meta) !important; --color-secondary: var(--n19-action) !important;
   --color-button-secondary-background: transparent !important; --color-button-secondary-background-hover: var(--n19-hover) !important;
-  --color-button-secondary-text: var(--n19-meta) !important; --color-primary-background: var(--n19-blue) !important;
-  --color-primary-background-hover: var(--n19-blue-hover) !important; --color-primary-plain: var(--n19-blue) !important;
-  --color-button-primary-background: var(--n19-blue) !important; --color-button-primary-background-hover: var(--n19-blue-hover) !important;
-  --color-action-primary: var(--n19-blue) !important; --color-input-secondary: var(--n19-field) !important;
+  --color-button-secondary-text: var(--n19-action) !important; --color-button-plain-background-hover: var(--n19-hover) !important;
+  --color-primary-background: var(--n19-blue) !important; --color-primary-background-hover: var(--n19-blue-hover) !important; --color-primary-plain: var(--n19-link) !important;
+  --color-primary: var(--n19-blue) !important; --color-button-primary-background: var(--n19-blue) !important; --color-button-primary-background-hover: var(--n19-blue-hover) !important;
+  --color-brand-background: var(--n19-blue) !important; --color-brand-background-hover: var(--n19-blue-hover) !important; --color-global-brand-orangered: var(--n19-up) !important;
+  --color-action-primary: var(--n19-blue) !important; --color-input-secondary: var(--n19-field) !important; --color-a-default: var(--n19-link) !important;
+  --color-upvote-background: var(--n19-up) !important; --color-downvote-background: var(--n19-down) !important;
+  --color-upvote-plain: var(--n19-up) !important; --color-downvote-plain: var(--n19-down) !important;
+  --shreddit-content-background: var(--n19-card) !important; --shreddit-color-wordmark: var(--n19-wordmark) !important; --shreddit-header-height: 48px !important;
 }
 body, shreddit-app { background: var(--n19-page) !important; }
-body, shreddit-app, button, input, textarea { font-family: verdana, arial, helvetica, sans-serif !important; }
+shreddit-app, shreddit-app button, shreddit-app input, shreddit-app textarea, reddit-header-large { font-family: var(--n19-font) !important; }
 
-/* Header */
-reddit-header-large header, header.v2 { background: var(--n19-header) !important; border-bottom: 1px solid var(--n19-header-border) !important; box-shadow: none !important; }
-a#login-button, a#signup-button { border-radius: 4px !important; text-transform: uppercase !important; font-weight: 700 !important; letter-spacing: .5px !important; }
-a#login-button { background: var(--n19-blue) !important; color: var(--n19-on-blue) !important; border: 1px solid var(--n19-blue) !important; }
-a#signup-button { background: transparent !important; color: var(--n19-blue) !important; border: 1px solid var(--n19-blue) !important; }
+/* ---- Header: white, 48px, snoo + dark wordmark, gray search, LOG IN outlined then SIGN UP filled ---------------------- */
+reddit-header-large header, header.v2 { background: var(--n19-header) !important; border-bottom: 1px solid var(--n19-line) !important; box-shadow: none !important; }
+reddit-header-large header nav.h-header-large { height: 48px !important; }
+reddit-header-large { height: 49px !important; }
+a#reddit-logo { gap: 8px !important; }
+a#reddit-logo > span { display: flex !important; }
+a#reddit-logo svg { height: 18px !important; width: auto !important; color: var(--n19-wordmark) !important; }
+a#reddit-logo::before { content: ''; width: 32px; height: 32px; flex: 0 0 32px; border-radius: 50%;
+  background: #ff4500 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='21.6' cy='8.4' r='1.6' fill='%23fff'/%3E%3Cpath d='M16 11.2l1.3-4.4 4.3 1' stroke='%23fff' stroke-width='1.1' fill='none'/%3E%3Cellipse cx='16' cy='18.6' rx='8.4' ry='5.8' fill='%23fff'/%3E%3Ccircle cx='8.6' cy='14.8' r='2' fill='%23fff'/%3E%3Ccircle cx='23.4' cy='14.8' r='2' fill='%23fff'/%3E%3Ccircle cx='12.9' cy='17.8' r='1.5' fill='%23ff4500'/%3E%3Ccircle cx='19.1' cy='17.8' r='1.5' fill='%23ff4500'/%3E%3Cpath d='M12.6 21.2q3.4 2.2 6.8 0' stroke='%23ff4500' stroke-width='.9' fill='none'/%3E%3C/svg%3E") center / 32px 32px no-repeat;
+  display: block; }
+reddit-header-large :is(#login-button, #signup-button) { min-width: 120px !important; height: 32px !important; min-height: 0 !important; padding: 0 16px !important; box-sizing: border-box !important;
+  border-radius: 4px !important; text-transform: uppercase !important; font-size: 12px !important; font-weight: 700 !important; letter-spacing: .5px !important;
+  justify-content: center !important; box-shadow: none !important; }
+reddit-header-large #login-button { background: transparent !important; color: var(--n19-blue) !important; border: 1px solid var(--n19-blue) !important; }
+reddit-header-large #login-button:hover { background: var(--n19-hover) !important; }
+reddit-header-large #signup-button { background: var(--n19-blue) !important; color: var(--n19-on-blue) !important; border: 1px solid var(--n19-blue) !important; }
+reddit-header-large #signup-button:hover { background: var(--n19-blue-hover) !important; }
+reddit-header-large :is(#login-button, #signup-button) * { color: inherit !important; font: inherit !important; letter-spacing: inherit !important; }
+/* 2019 order: LOG IN, then SIGN UP */
+reddit-header-large span[data-part="secondary"] > * { order: 2 !important; }
+reddit-header-large span[data-part="primary"] > * { order: 1 !important; }
+reddit-header-large div.ps-lg.justify-end { gap: 8px !important; }
+reddit-header-large div.ps-lg > div:last-child { order: 3 !important; }
+/* The search field: the page-level fallback drawn before the component upgrades */
+reddit-search-large > form.reddit-search-bar { background: var(--n19-field) !important; border: 1px solid var(--n19-field-border) !important; border-radius: 4px !important; height: 36px !important; }
+reddit-search-large input[name="q"] { text-align: left !important; }
+reddit-header-large div.h-\[40px\] reddit-search-large { max-width: 600px !important; }
+/* Signed-in header items that did not exist in 2019: Advertise (2022), Recap (2021), Chat (hidden by label in shreddit.js),
+   and the 2023 "+ Create" pill, which goes back to 2019's plain pencil icon. */
+reddit-header-large :is(#advertise-button, a#recap-entrypoint) { display: none !important; }
+reddit-header-large :is(faceplate-tracker, span, div):has(> #advertise-button) { display: none !important; }
+reddit-header-large a#create-post { background: transparent !important; border: 0 !important; border-radius: 2px !important; padding: 0 8px !important; min-width: 0 !important; gap: 0 !important; }
+reddit-header-large a#create-post :is(span.text-14, span:not(:has(svg)):not(:empty)) { font-size: 0 !important; }
+reddit-header-large a#create-post:hover { background: var(--n19-hover) !important; }
 
-/* No persistent left navigation in 2019 */
-#left-sidebar-container, flex-left-nav-container { display: none !important; }
+/* ---- Layout: no left rail (2023); a centered 640px column of cards and a 312px sidebar -------------------------------- */
+#left-sidebar-container, flex-left-nav-container, flex-left-nav, #flex-nav-buttons, #flex-left-nav-container { display: none !important; }
 .grid-container { grid-template-columns: 1fr !important; }
-#subgrid-container { grid-column: 1 / -1 !important; margin: 0 auto !important; max-width: 1024px !important; }
+.grid-container > #subgrid-container, #subgrid-container { grid-column: 1 / -1 !important; margin: 0 auto !important; width: 100% !important; max-width: 1000px !important; padding: 20px 24px 0 !important; box-sizing: border-box !important; }
+#subgrid-container .main-container { gap: 24px !important; justify-content: center !important; }
+#subgrid-container main#main-content { max-width: 640px !important; }
+#right-sidebar-container { width: 312px !important; max-width: 312px !important; }
 
-/* Posts: a flat list, one row per link */
-shreddit-post, shreddit-ad-post { background: var(--n19-card) !important; border: 0 !important; border-bottom: 1px solid var(--n19-divider) !important; border-radius: 0 !important; margin: 0 !important; padding-top: 6px !important; padding-bottom: 6px !important; }
-shreddit-post:hover { background: var(--n19-card) !important; }
-shreddit-feed hr { display: none !important; }
-a[id^="post-title-"] { color: var(--n19-title) !important; font-size: 16px !important; font-weight: 400 !important; line-height: 1.3 !important; }
-a[id^="post-title-"]:visited { color: var(--n19-title-visited) !important; }
-[slot="credit-bar"], [slot="credit-bar"] a, faceplate-timeago { color: var(--n19-meta) !important; font-size: 11px !important; }
-[slot="credit-bar"] a[data-testid="subreddit-name"] { color: var(--n19-blue) !important; font-weight: 400 !important; }
-shreddit-join-button button { background: var(--n19-blue) !important; color: var(--n19-on-blue) !important; border-radius: 3px !important; font-weight: 700 !important; }
-main#main-content > div.my-xs { background: var(--n19-card) !important; border: 0 !important; border-bottom: 1px solid var(--n19-divider) !important; border-radius: 0 !important; padding: 6px 12px !important; }
+/* ---- Feed: the sort bar and posts as cards ---------------------------------------------------------------------------- */
+main#main-content > div.my-xs, main#main-content > div.flex:has(> shreddit-sort-dropdown), main#main-content > div:has(> shreddit-async-loader[bundlename="shreddit_sort_dropdown"]) {
+  background: var(--n19-card) !important; border: 1px solid var(--n19-border) !important; border-radius: 4px !important; margin: 0 0 16px !important; padding: 10px 12px !important; }
+shreddit-feed > hr, main#main-content > hr, main#main-content shreddit-feed + hr { display: none !important; }
+shreddit-feed > article { margin: 0 0 10px !important; }
+shreddit-post[view-context="AggregateFeed"], shreddit-post[view-context="SubredditFeed"], shreddit-post[view-context="UserProfileFeed"], shreddit-feed shreddit-post, shreddit-feed shreddit-ad-post {
+  background: var(--n19-card) !important; border: 1px solid var(--n19-border) !important; border-radius: 4px !important; margin: 0 !important;
+  padding: 8px 8px 2px 48px !important; overflow: visible !important; }
+shreddit-feed :is(shreddit-post, shreddit-ad-post):hover, shreddit-feed :is(shreddit-post, shreddit-ad-post):focus-within { background: var(--n19-card) !important; border-color: var(--n19-border-hover) !important; }
+/* The vote column: its gray strip is the post's own background edge (the arrows are placed on it from shreddit.js) */
+shreddit-feed :is(shreddit-post, shreddit-ad-post) { background-image: linear-gradient(to right, var(--n19-vote) 40px, transparent 40px) !important; }
+/* Credit bar: "r/sub • Posted by u/user 5 hours ago" */
+:is(shreddit-post, shreddit-ad-post) [slot="credit-bar"] { font-size: 12px !important; min-height: 20px !important; margin: 0 0 8px !important; line-height: 16px !important; color: var(--n19-meta) !important; }
+:is(shreddit-post, shreddit-ad-post) [slot="credit-bar"] :is(faceplate-timeago, time, .created-separator, [data-n19-posted], [data-n19-posted] a) { color: var(--n19-meta) !important; font-size: 12px !important; font-weight: 400 !important; }
+:is(shreddit-post, shreddit-ad-post) [slot="credit-bar"] [data-n19-posted] a:hover { text-decoration: underline !important; }
+:is(shreddit-post, shreddit-ad-post) [slot="credit-bar"] a[data-testid="subreddit-name"], shreddit-post a.subreddit-name { color: var(--n19-text) !important; font-weight: 700 !important; font-size: 12px !important; }
+:is(shreddit-post, shreddit-ad-post) [slot="credit-bar"] a[data-testid="subreddit-name"] :is(span.w-lg, span[avatar]) { width: 20px !important; height: 20px !important; }
+shreddit-join-button { --color-button-primary-background: var(--n19-blue); }
+/* Titles: 18px/500 */
+shreddit-post a[id^="post-title-"], shreddit-post [slot="title"], shreddit-ad-post [slot="title"], shreddit-post h1[id^="post-title-"] {
+  color: var(--n19-title) !important; font-family: var(--n19-font) !important; font-size: 18px !important; font-weight: 500 !important; line-height: 22px !important; letter-spacing: 0 !important; }
+shreddit-post a[id^="post-title-"]:visited { color: var(--n19-meta) !important; }
+shreddit-post [slot="text-body"], shreddit-post .md, shreddit-comment .md { font-family: var(--n19-body-font) !important; font-size: 14px !important; line-height: 21px !important; color: var(--n19-text) !important; }
+shreddit-post .md a, shreddit-comment .md a { color: var(--n19-link) !important; }
+shreddit-post-flair .flair, shreddit-post [slot="post-flair"] .flair, .flair-content { border-radius: 2px !important; font-size: 12px !important; font-weight: 500 !important; }
+shreddit-post :is(img, video, shreddit-player, shreddit-player-2, gallery-carousel), shreddit-post [slot="post-media-container"] * { border-radius: 0 !important; }
+shreddit-post [slot="post-media-container"] { margin-left: -8px !important; margin-right: -8px !important; }
 
-/* Right column: plain boxes */
-#right-sidebar-container aside { background: var(--n19-card-2) !important; border: 1px solid var(--n19-border) !important; border-radius: 0 !important; }
-#right-sidebar-container h2 { color: var(--n19-text) !important; font-size: 12px !important; font-weight: 700 !important; text-transform: none !important; letter-spacing: 0 !important; }
+/* ---- Post page: the post and its comments in one white card ------------------------------------------------------------ */
+main#main-content:has(> shreddit-post[view-context="CommentsPage"]) { background: var(--n19-card) !important; border: 1px solid var(--n19-border) !important; border-radius: 4px !important;
+  padding: 0 16px 16px 0 !important; box-sizing: border-box !important; }
+shreddit-post[view-context="CommentsPage"] { position: relative !important; background: transparent !important; margin: 0 !important; padding: 8px 0 0 48px !important; border: 0 !important; }
+shreddit-post[view-context="CommentsPage"] h1[id^="post-title-"] { font-size: 20px !important; line-height: 24px !important; }
+shreddit-post #pdp-credit-bar { padding: 0 !important; margin: 0 0 8px !important; }
+shreddit-post #pdp-credit-bar > span { gap: 4px !important; }
+shreddit-post #pdp-credit-bar pdp-back-button { display: none !important; }
+shreddit-post #pdp-credit-bar span.avatar, shreddit-post #pdp-credit-bar span.avatar :is(div, span[avatar]) { width: 20px !important; height: 20px !important; font-size: 20px !important; }
+shreddit-post #pdp-credit-bar div[role="group"] { flex-direction: row !important; align-items: center !important; gap: 4px !important; }
+shreddit-post #pdp-credit-bar div[role="group"] a.author-name, shreddit-post #pdp-credit-bar div[role="group"] a.author-name * { color: var(--n19-meta) !important; font-weight: 400 !important; font-size: 12px !important; }
+/* One line, 2019 order: "r/sub • Posted by u/name 5 hours ago" */
+shreddit-post #pdp-credit-bar div[role="group"] > :is(span, div) { display: contents !important; }
+shreddit-post #pdp-credit-bar div[role="group"] .subreddit-name { order: 0; }
+shreddit-post #pdp-credit-bar div[role="group"] span[aria-hidden="true"] { order: 1; }
+shreddit-post #pdp-credit-bar div[role="group"] [slot="authorName"] { order: 2; }
+shreddit-post #pdp-credit-bar div[role="group"] [slot="authorName"] [data-n19-posted] { color: var(--n19-meta) !important; font-size: 12px !important; white-space: pre; }
+shreddit-post #pdp-credit-bar div[role="group"] faceplate-timeago { order: 3; }
+/* 2019 showed the whole self-text; no "Read more" fold */
+shreddit-post[view-context="CommentsPage"] [id$="-post-rtjson-content"] { max-height: none !important; overflow: visible !important; }
+shreddit-post[view-context="CommentsPage"] :is([id$="-overflow-cover"], .read-more-overflow-cover, button[id$="-read-more-button"]) { display: none !important; }
+/* Comment box and sort row */
+comment-body-header { background: transparent !important; margin-left: 48px !important; }
+comment-body-header faceplate-textarea-input, shreddit-composer, comment-composer-host { --color-neutral-border: var(--n19-field-border); border-radius: 4px !important; }
+main#main-content > div[id^="comment-tree-content-anchor"] { margin-left: 24px !important; }
+
+/* ---- Comments: thread lines (2019 had them), no avatars (2020), score in the header -------------------------------------- */
+shreddit-comment [slot="commentAvatar"] { visibility: hidden !important; }
+shreddit-comment details > summary { min-height: 24px !important; }
+shreddit-comment [slot="commentMeta"] { background: transparent !important; padding-left: 0 !important; }
+shreddit-comment [data-hl], shreddit-comment .bg-orangered-500 { background: transparent !important; }
+shreddit-comment [slot="commentMeta"] .author-name-meta a { color: var(--n19-text) !important; font-size: 12px !important; font-weight: 400 !important; }
+shreddit-comment [slot="commentMeta"] :is(faceplate-timeago, time, [data-n19-points]) { color: var(--n19-meta) !important; font-size: 12px !important; }
+shreddit-comment [data-n19-points] { margin: 0 0 0 4px; white-space: nowrap; }
+shreddit-comment .ssr-thread-line, shreddit-comment .threadline, shreddit-comment [data-testid="main-thread-line"], shreddit-comment [data-testid="branch-line"] { --color-neutral-border-weak: var(--n19-thread); --color-neutral-border: var(--n19-thread); }
+shreddit-comment .ssr-thread-line::before, shreddit-comment .ssr-thread-line { border-color: var(--n19-thread) !important; }
+shreddit-comment .ssr-thread-line:hover { --color-neutral-border-weak: var(--n19-thread-hover); }
+shreddit-comment [slot="comment"] { font-family: var(--n19-body-font) !important; }
+/* The comment action row's slotted buttons: gray bold 12px text buttons, as 2019's "Reply Give Award Share Report Save" */
+shreddit-comment-action-row :is(button.button, a.button, button[rpl]) { background: transparent !important; border: 0 !important; border-radius: 2px !important; box-shadow: none !important;
+  color: var(--n19-action) !important; font-size: 12px !important; font-weight: 700 !important; padding: 4px !important; }
+shreddit-comment-action-row :is(button.button, a.button, button[rpl]):hover { background: var(--n19-hover) !important; }
+shreddit-comment-action-row :is(button, a) .rpl-cab--content { color: inherit !important; font-weight: 700 !important; }
+/* Awards: 2019 showed small award icons only */
+award-button { --color-secondary-plain-weak: var(--n19-action); }
+/* Achievement flairs next to names ("Top 1% Commenter", 2023) */
+shreddit-comment-badges :is([data-testid*="achievement" i], [class*="achievement" i], faceplate-hovercard[data-id*="achievement" i]) { display: none !important; }
+/* "More replies" links: 2019's blue bold 12px */
+shreddit-comment faceplate-partial[slot="children"] button, shreddit-comment [slot="more-comments-permalink"] a { color: var(--n19-link) !important; font-weight: 700 !important; font-size: 12px !important; }
+
+/* ---- Right rail: cards with a blue header strip -------------------------------------------------------------------------- */
+#right-sidebar-contents > aside > aside, #right-sidebar-contents > aside > div:is(.bg-neutral-background-weak, .bg-neutral-background), #right-sidebar-container .right-rail-popular-communities {
+  background: var(--n19-card) !important; border: 1px solid var(--n19-border) !important; border-radius: 4px !important; overflow: hidden !important; }
+#right-sidebar-container aside.right-rail-popular-communities { padding-top: 0 !important; }
+#right-sidebar-container aside.right-rail-popular-communities > div { padding: 0 !important; }
+#right-sidebar-container aside.right-rail-popular-communities > div > div:first-child { background: var(--n19-strip) !important; margin: 0 0 8px !important; padding: 0 12px !important; height: 34px !important; align-items: center !important; }
+#right-sidebar-container aside.right-rail-popular-communities h2, #right-sidebar-container aside.right-rail-popular-communities h2 * {
+  color: #fff !important; font-size: 10px !important; font-weight: 700 !important; letter-spacing: .5px !important; text-transform: uppercase !important; }
+#right-sidebar-container aside.right-rail-popular-communities li[data-testid="listItem"] a { padding: 0 12px !important; min-height: 48px !important; border-bottom: 1px solid var(--n19-line) !important; }
+#right-sidebar-container aside.right-rail-popular-communities li[data-testid="listItem"] a:hover { background: var(--n19-card-2) !important; }
+#right-sidebar-container aside.right-rail-popular-communities li[data-testid="listItem"] span.h-xl, #right-sidebar-container aside.right-rail-popular-communities li[data-testid="listItem"] span.h-xl * { width: 32px !important; height: 32px !important; }
+#right-sidebar-container aside.right-rail-popular-communities li a :is(span.text-14, .text-14) { font-weight: 500 !important; color: var(--n19-text) !important; font-size: 14px !important; }
+#right-sidebar-container #popular-communities-list-see-more { margin: 12px !important; width: calc(100% - 24px) !important; height: 32px !important; border-radius: 4px !important; background: var(--n19-blue) !important;
+  color: var(--n19-on-blue) !important; text-transform: uppercase !important; font-size: 12px !important; font-weight: 700 !important; letter-spacing: .5px !important; justify-content: center !important; }
+#right-sidebar-container #popular-communities-list-see-more * { color: inherit !important; }
+#right-sidebar-container h2 { color: var(--n19-text) !important; }
+#right-sidebar-contents > aside { padding-top: 0 !important; background: transparent !important; border: 0 !important; }
+#right-sidebar-container .legal-links { background: var(--n19-card) !important; border: 1px solid var(--n19-border) !important; border-radius: 4px !important; padding: 12px !important; margin: 16px 0 0 !important; }
+/* The post page's "Related posts" as a 2019 sidebar widget */
+#right-sidebar-contents aside[aria-label="Related Posts Section"] { background: var(--n19-card) !important; border: 1px solid var(--n19-border) !important; border-radius: 4px !important; overflow: hidden !important; margin-top: 0 !important; padding: 0 0 4px !important; }
+[data-testid^="pdp-right-rail-related-posts"], #right-sidebar-contents [data-n19-strip] { background: var(--n19-strip) !important; color: #fff !important; font-size: 10px !important; font-weight: 700 !important; letter-spacing: .5px !important;
+  text-transform: uppercase !important; height: 34px !important; padding: 0 12px !important; display: flex !important; align-items: center !important; margin: 0 0 4px !important; }
+#right-sidebar-contents aside[aria-label="Related Posts Section"] li { padding: 0 12px !important; }
+#right-sidebar-contents aside[aria-label="Related Posts Section"] hr { border-color: var(--n19-line) !important; }
+reddit-pdp-right-rail-post h3.i18n-list-item-post-title, reddit-pdp-right-rail-post h3 { color: var(--n19-text) !important; font-weight: 500 !important; }
+/* A subreddit's rail: 2019's separate widgets, "About Community" first, each under a blue strip */
+#right-sidebar-contents aside.subreddit-right-rail-community-info { background: transparent !important; border: 0 !important; padding: 0 !important; overflow: visible !important; }
+#right-sidebar-contents aside.subreddit-right-rail-community-info > div { padding: 0 !important; }
+#right-sidebar-contents aside.subreddit-right-rail-community-info > div > :is(shreddit-subreddit-header, div.px-md) { display: block; background: var(--n19-card) !important; border: 1px solid var(--n19-border) !important;
+  border-radius: 4px !important; overflow: hidden !important; margin: 0 0 16px !important; padding: 0 12px 12px !important; }
+#right-sidebar-contents aside.subreddit-right-rail-community-info > div > shreddit-subreddit-header { padding: 0 0 12px !important; }
+#right-sidebar-contents aside.subreddit-right-rail-community-info > div > hr { display: none !important; }
+#right-sidebar-contents aside.subreddit-right-rail-community-info div.px-md > div.mb-sm:has(> h2) { background: var(--n19-strip) !important; margin: 0 -12px 12px !important; padding: 0 12px !important; height: 34px !important; }
+#right-sidebar-contents aside.subreddit-right-rail-community-info div.px-md > div.mb-sm > h2, #right-sidebar-contents aside.subreddit-right-rail-community-info div.px-md > div.mb-sm > h2 * {
+  color: #fff !important; font-size: 10px !important; font-weight: 700 !important; letter-spacing: .5px !important; }
+#right-sidebar-contents [data-n19-strip] { margin: 0 !important; border-radius: 4px 4px 0 0 !important; }
+#right-sidebar-contents [data-n19-strip] + shreddit-subreddit-header { border-top: 0 !important; border-radius: 0 0 4px 4px !important; padding-top: 12px !important; }
+/* The subreddit masthead: JOIN only; posts were created from the feed's "Create Post" box (the 2023 pill is hidden) */
+create-post-entry-point-wrapper { display: none !important; }
+shreddit-subreddit-header-buttons button, shreddit-join-button button { border-radius: 4px !important; text-transform: uppercase !important; font-size: 12px !important; font-weight: 700 !important; letter-spacing: .5px !important; }
+/* Action-bar counts Reddit sizes by variable: award counts and the 2024 Repost button off */
+.grid-container { --ab-award-count: none !important; --ab-repost-display: none !important; }
+/* Reddit Answers in the post page's rail ("People also ask about", 2025) */
+#answers-suggested-queries-pdp, aside[aria-label="People also ask about section"], #right-rail-experience-root { display: none !important; }
+/* Community highlights carousel (2021), achievements toasts, the floating translation switch (2024) */
+community-highlight-carousel, shreddit-community-highlights, [id="community-highlights"], achievements-progress-toast,
+[class*="floating-translation"], shreddit-translation-toggle, translation-toggle { display: none !important; }
 
 /* Tooltips draw their bubble inside a shadow root, so the page's readability check cannot see it behind the slotted
    label and would ink the label for the header underneath. The label carries the bubble's own color. */
 html { --n19-tip: #0e1113; }
 html[data-net19-mode="dark"] { --n19-tip: #fff; }
 rpl-tooltip > [slot="content"], rpl-tooltip > [slot="shortcut"] { background: var(--n19-tip) !important; }
+[data-net19-hidden] { display: none !important; }

@@ -1,37 +1,89 @@
-/* net19 handmade theme: LinkedIn, 2019. Signed out: a white 66px bar with the #0073b1 logo, a gray "Join now" text
-   link and a square-cornered outlined "Sign in" button; the headline "Welcome to your professional community" in
-   thin 56px #2977c9 type over three 80px lines; rectangular 2px-radius buttons; a warm off-white band below.
-   Signed in: dark blue-gray global navigation, rectangular #0073b1 buttons, shadowed 2px-radius cards. The dark
-   variant keeps the shapes on LinkedIn's dark surfaces. */
+/* net19 handmade theme: LinkedIn, 2019. Signed in: the near-black #283e4a global bar with white icons over 12px labels
+   (Home, My Network, Jobs, Messaging, Notifications, Me, Work) and a light search field; a #f3f6f8 page; white cards
+   with 2px corners and a thin shadow; #0073b1 blue for links and rectangular buttons; "Start a post" composer card; posts
+   with "Like Comment Share". Signed out: a white 66px bar with the #0073b1 logo, a gray "Join now" link and an outlined
+   "Sign in"; the headline "Welcome to your professional community" in thin 56px #2977c9 type; public posts, profiles and
+   company pages as white 2px cards on the #f3f6f8 page. LinkedIn's own dark theme gets the same shapes on dark surfaces. */
 html { --n19-canvas: #f3f6f8; --n19-card: #fff; --n19-text: rgba(0,0,0,.9); --n19-text-2: rgba(0,0,0,.6); --n19-blue: #0073b1; --n19-blue-hover: #006097;
-  --n19-nav: #283e4a; --n19-nav-text: rgba(255,255,255,.75); --n19-nav-active: #fff; --n19-nav-field: #e1e9ee; --n19-nav-field-text: rgba(0,0,0,.9);
-  --n19-card-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 2px 3px rgba(0,0,0,.2);
+  --n19-link: #0073b1; --n19-hover: rgba(0,0,0,.08); --n19-divider: #e6e9ec; --n19-nav: #283e4a; --n19-nav-text: #c7d1d8; --n19-nav-active: #fff;
+  --n19-nav-field: #e1e9ee; --n19-nav-field-text: rgba(0,0,0,.9); --n19-nav-placeholder: rgba(0,0,0,.6);
+  --n19-card-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 2px 3px rgba(0,0,0,.2); --n19-on-blue: #fff;
   --n19-guest-bar: #fff; --n19-headline: #2977c9; --n19-band: #faf9f7; --n19-line: rgba(0,0,0,.6); --n19-field-shadow: 0 4px 6px -2px rgba(0,0,0,.15); }
-html[data-net19-mode="dark"] { --n19-canvas: #1b1f23; --n19-card: #1d2226; --n19-text: rgba(255,255,255,.9); --n19-text-2: rgba(255,255,255,.6); --n19-blue: #70b5f9; --n19-blue-hover: #9ccbfa;
-  --n19-nav: #1d2226; --n19-nav-text: rgba(255,255,255,.6); --n19-nav-active: #fff; --n19-nav-field: #38434f; --n19-nav-field-text: rgba(255,255,255,.9);
-  --n19-card-shadow: 0 0 0 1px rgba(255,255,255,.12);
-  --n19-guest-bar: #1d2226; --n19-headline: #70b5f9; --n19-band: #1b1f23; --n19-line: rgba(255,255,255,.6); --n19-field-shadow: none; }
+html[data-net19-mode="dark"] { --n19-canvas: #1d2226; --n19-card: #283036; --n19-text: rgba(255,255,255,.9); --n19-text-2: rgba(255,255,255,.6); --n19-blue: #70b5f9; --n19-blue-hover: #9ccbfa;
+  --n19-link: #70b5f9; --n19-hover: rgba(255,255,255,.08); --n19-divider: #3d4449; --n19-nav: #1d2226; --n19-nav-text: #a8b3bb; --n19-nav-active: #fff;
+  --n19-nav-field: #38434f; --n19-nav-field-text: rgba(255,255,255,.9); --n19-nav-placeholder: rgba(255,255,255,.6);
+  --n19-card-shadow: 0 0 0 1px rgba(255,255,255,.12); --n19-on-blue: #1d2226;
+  --n19-guest-bar: #283036; --n19-headline: #70b5f9; --n19-band: #1d2226; --n19-line: rgba(255,255,255,.6); --n19-field-shadow: none; }
 html:root, html .theme--light, html .theme--dark {
   --color-background-canvas: var(--n19-canvas) !important; --color-background-container: var(--n19-card) !important;
   --color-text: var(--n19-text) !important; --color-text-low-emphasis: var(--n19-text-2) !important; --color-brand: var(--n19-blue) !important;
-  --color-action: var(--n19-blue) !important; --corner-radius-large: 2px !important; --corner-radius-medium: 2px !important; --corner-radius-small: 2px !important;
+  --color-action: var(--n19-blue) !important; --color-link: var(--n19-link) !important; --color-text-link: var(--n19-link) !important;
+  --corner-radius-large: 2px !important; --corner-radius-medium: 2px !important; --corner-radius-small: 2px !important; --corner-radius-xlarge: 2px !important;
+  --artdeco-reset-button-border-radius: 2px !important;
 }
-header.global-nav, #global-nav { background: var(--n19-nav) !important; border-bottom: none !important; }
-.global-nav__primary-link, .global-nav__primary-link-text, .global-nav__me-content, .global-nav li-icon, .global-nav svg { color: var(--n19-nav-text) !important; fill: currentColor !important; }
-.global-nav__primary-link--active, .global-nav__primary-link--active .global-nav__primary-link-text { color: var(--n19-nav-active) !important; }
-#global-nav-typeahead input, .search-global-typeahead__input { background: var(--n19-nav-field) !important; color: var(--n19-nav-field-text) !important; border-radius: 2px !important; }
-.artdeco-button { border-radius: 2px !important; }
-.artdeco-button--primary { background: var(--n19-blue) !important; }
-.artdeco-button--primary:hover { background: var(--n19-blue-hover) !important; }
-.artdeco-card, .feed-shared-update-v2 { border-radius: 2px !important; box-shadow: var(--n19-card-shadow) !important; border: none !important; }
 
-/* Signed-out pages: a plain white bar; the logo at its 2019 size; "Join now" as gray text, then an outlined "Sign in" */
-body > div.sticky:has(> nav.nav) { background: var(--n19-guest-bar) !important; }
+/* ---- Signed in: the dark global bar ------------------------------------------------------------------------------ */
+body:has(#global-nav, header.global-nav) { background: var(--n19-canvas) !important; }
+header.global-nav, #global-nav { background: var(--n19-nav) !important; border-bottom: none !important; box-shadow: none !important; height: 52px !important; }
+.global-nav__content { height: 52px !important; }
+.global-nav__primary-link, .global-nav__primary-link-text, .global-nav__me-content, .global-nav li-icon, .global-nav svg,
+.global-nav__primary-link .t-12, .global-nav__primary-link-me-menu-trigger { color: var(--n19-nav-text) !important; fill: currentColor !important; }
+.global-nav__primary-link-text { font-size: 12px !important; font-weight: 400 !important; }
+.global-nav__primary-link:hover, .global-nav__primary-link:hover .global-nav__primary-link-text,
+.global-nav__primary-link--active, .global-nav__primary-link--active .global-nav__primary-link-text, .global-nav__primary-link--active svg { color: var(--n19-nav-active) !important; }
+.global-nav__primary-link--active::after, .global-nav__primary-item--divider { border-color: var(--n19-nav-active) !important; background: var(--n19-nav-active) !important; }
+.global-nav__primary-link--active::after { height: 2px !important; }
+#global-nav-typeahead input, .search-global-typeahead__input { background: var(--n19-nav-field) !important; color: var(--n19-nav-field-text) !important;
+  border-radius: 2px !important; border: 0 !important; box-shadow: none !important; height: 34px !important; }
+#global-nav-typeahead input::placeholder, .search-global-typeahead__input::placeholder { color: var(--n19-nav-placeholder) !important; }
+.search-global-typeahead__collapsed-search-button, .search-global-typeahead__search-icon-container { color: var(--n19-nav-placeholder) !important; border-radius: 2px !important; }
+.global-nav__badge, .notification-badge { background: #e0245e !important; }
+/* The "Try Premium" upsell: 2019's plain text link, not the gold 2021 button */
+.global-nav :is(.premium-upsell-link, .premium-upsell-link--gold, .global-nav__spotlight a, a[href*="/premium/products"]) {
+  background: transparent !important; border: 0 !important; box-shadow: none !important; color: var(--n19-nav-text) !important; font-weight: 400 !important; font-size: 12px !important; }
+.premium-upsell-link--gold, .premium-upsell-link--gold * { color: inherit !important; background-image: none !important; }
+/* Games (2024), the video feed (2025) and "Top Content" (2023) are not part of the 2019 navigation */
+:is(.global-nav__primary-item, li):has(> a[href*="/games"]), .global-nav a[href*="/games"], :is(.global-nav__primary-item, li):has(> a[href*="/feed/video"]) { display: none !important; }
+
+/* ---- Signed in: cards, buttons, the feed ------------------------------------------------------------------------- */
+.artdeco-button { border-radius: 2px !important; }
+.artdeco-button--primary { background: var(--n19-blue) !important; color: var(--n19-on-blue) !important; }
+.artdeco-button--primary:hover { background: var(--n19-blue-hover) !important; }
+.artdeco-button--secondary { box-shadow: inset 0 0 0 1px var(--n19-blue) !important; color: var(--n19-blue) !important; }
+.artdeco-card, .feed-shared-update-v2, .scaffold-layout__sidebar .artdeco-card, .scaffold-layout__aside .artdeco-card, .share-box-feed-entry__wrapper, .feed-identity-module {
+  border-radius: 2px !important; box-shadow: var(--n19-card-shadow) !important; border: none !important; }
+.artdeco-dropdown__content, .artdeco-modal, .artdeco-hoverable-content, .artdeco-toasts_toasts .artdeco-toast-item { border-radius: 2px !important; }
+.artdeco-pill, .artdeco-pill--choice, .artdeco-pill--slate { border-radius: 2px !important; }
+.feed-shared-update-v2 .update-components-actor__title, .update-components-actor__name { font-weight: 600 !important; font-size: 14px !important; }
+.update-components-actor__description, .update-components-actor__sub-description { font-size: 12px !important; color: var(--n19-text-2) !important; }
+.feed-shared-update-v2 .update-components-actor__avatar-image, .feed-shared-update-v2 .update-components-actor__image .ivm-view-attr__img--centered { width: 48px !important; height: 48px !important; }
+/* The social bar: "Like  Comment  Share", left-aligned, 14px 600 gray */
+.feed-shared-social-action-bar { justify-content: flex-start !important; border-top: 1px solid var(--n19-divider) !important; padding: 0 8px !important; }
+.feed-shared-social-action-bar__action-button, .feed-shared-social-action-bar .social-actions-button, .feed-shared-social-action-bar .react-button__trigger, .feed-shared-social-action-bar .social-reshare-button {
+  flex: 0 0 auto !important; border-radius: 2px !important; color: var(--n19-text-2) !important; font-weight: 600 !important; font-size: 14px !important; }
+/* "Send" in a private message (2020) left the post bar; "Repost" (2023) is written "Share" again by linkedin.js */
+.feed-shared-social-action-bar :is(.send-privately-button, [class*="send-privately"]), .feed-shared-social-action-bar__action-button:has(.send-privately-button),
+.feed-shared-social-action-bar__action-button:has(> button[aria-label^="Send in a private message" i]) { display: none !important; }
+/* Reactions from after 2019: Support (2020) and Funny (2022), in counts and in the reaction menu */
+:is(img, li-icon)[data-reaction-type="APPRECIATION"], :is(img, li-icon)[data-reaction-type="ENTERTAINMENT"],
+img[data-test-reactions-icon-type="APPRECIATION"], img[data-test-reactions-icon-type="ENTERTAINMENT"],
+.reactions-menu :is(button, li):is([aria-label*="Support" i], [aria-label*="Funny" i]), .reactions-menu__reaction:is([aria-label*="Support" i], [aria-label*="Funny" i]),
+.reactions-menu__item:has(button:is([aria-label*="Support" i], [aria-label*="Funny" i])) { display: none !important; }
+/* Top Voice badges (2022), creator-mode profile chips (2021), Premium "AI insights" (2023), newsletter subscribe (2021) */
+[class*="top-voice-badge"], .pv-top-voice-badge, [class*="creator-mode"], .pv-profile-creator, [class*="ai-insights"], [class*="premium-ai"],
+.feed-shared-update-v2 [class*="newsletter-subscribe"], .newsletter-subscribe-button { display: none !important; }
+/* The composer card: "Start a post" as a plain 2019 field */
+.share-box-feed-entry__trigger { border-radius: 2px !important; border: 1px solid rgba(0,0,0,.15) !important; background: var(--n19-card) !important; color: var(--n19-text-2) !important;
+  font-weight: 600 !important; justify-content: flex-start !important; }
+.share-box-feed-entry__top-bar .share-box-feed-entry__avatar, .share-box-feed-entry__closed-share-box .share-box-feed-entry__avatar { width: 48px !important; height: 48px !important; }
+
+/* ---- Signed-out pages: a plain white bar; the logo at its 2019 size; "Join now" as gray text, then an outlined "Sign in" */
+body > div.sticky:has(> nav.nav), header:has(> nav.nav) { background: var(--n19-guest-bar) !important; }
 nav.nav { padding-top: 0 !important; padding-bottom: 0 !important; min-height: 66px !important; }
 nav.nav .nav__logo-link icon, nav.nav .nav__logo-link svg { width: 136px !important; height: 34px !important; }
 nav.nav .nav__logo-link svg { color: var(--n19-blue) !important; }
-nav.nav .top-nav-menu a[href*="/top-content"], nav.nav .top-nav-menu a[href*="/games"] { display: none !important; }
-nav.nav .top-nav-menu li:has(> a[href*="/top-content"]), nav.nav .top-nav-menu li:has(> a[href*="/games"]) { display: none !important; }
+nav.nav .top-nav-menu :is(a[href*="/top-content"], a[href*="/games"]) { display: none !important; }
+nav.nav .top-nav-menu li:has(> a:is([href*="/top-content"], [href*="/games"])) { display: none !important; }
 nav.nav .nav__cta-container { align-items: center !important; }
 nav.nav :is(.nav__button-secondary, .nav__button-tertiary) { border-radius: 2px !important; font-size: 16px !important; font-weight: 600 !important; min-height: 0 !important; height: 40px !important; line-height: 38px !important; padding: 0 23px !important; box-shadow: none !important; }
 nav.nav .nav__button-tertiary { order: -1 !important; background: transparent !important; color: var(--n19-text-2) !important; border: none !important; padding: 0 12px !important; font-weight: 400 !important; }
@@ -51,3 +103,27 @@ main#main-content .sign-in-form__join-cta-wrapper { text-align: left !important;
 main#main-content > :is(section, div)::after { background-color: var(--n19-band) !important; }
 main#main-content h2.header { font-weight: 300 !important; color: var(--n19-text) !important; }
 main#main-content :is(.pill, .btn-secondary-emphasis, [class*="pill"]) { border-radius: 2px !important; }
+
+/* ---- Signed-out content pages (posts, profiles, company pages, articles): white cards on the gray page --------------- */
+body:has(main .core-rail) { background: var(--n19-canvas) !important; }
+body:has(main .core-rail) main { padding-top: 24px !important; }
+main .core-rail :is(article.container-lined, section.top-card-layout), main .core-rail .details > :is(section.core-section-container, nav.tabs),
+main .right-rail > section.aside-section-container {
+  background: var(--n19-card) !important; border: 0 !important; border-radius: 2px !important; box-shadow: var(--n19-card-shadow) !important; }
+main .core-rail .details:has(> section.core-section-container) { margin: 16px 0 0 !important; }
+main .core-rail .details > section.core-section-container { padding: 16px 24px !important; margin: 0 0 16px !important; border-bottom: 0 !important; }
+main .core-rail .details > nav.tabs { margin: 0 0 16px !important; padding: 0 24px !important; }
+main .right-rail > section.aside-section-container { padding: 12px 16px !important; }
+main :is(.section-title, .core-section-container__title, .aside-section-container__title) { font-size: 16px !important; font-weight: 400 !important; line-height: 24px !important; color: var(--n19-text) !important; }
+main .core-rail h1.section-title { font-size: 20px !important; font-weight: 400 !important; }
+main .top-card-layout h1 { font-size: 24px !important; font-weight: 400 !important; }
+main :is(.btn-primary) { background: var(--n19-blue) !important; border-color: var(--n19-blue) !important; }
+main :is(.btn-secondary, .btn-secondary-emphasis) { color: var(--n19-blue) !important; box-shadow: inset 0 0 0 1px var(--n19-blue) !important; border: 0 !important; }
+main .social-action-bar { justify-content: flex-start !important; }
+main .social-action-bar :is(.social-action-bar__button, .social-share__button) { flex: 0 0 auto !important; padding: 0 16px !important; border-radius: 2px !important; color: var(--n19-text-2) !important; }
+main .social-action-bar__button-text { font-size: 14px !important; font-weight: 600 !important; }
+main .comment__body { border-radius: 0 8px 8px 8px !important; }
+main .hue-web-entity__image.rounded-\[50\%\] { border-radius: 50% !important; }
+/* "Explore content categories" (the 2023 collaborative-article hubs) */
+main .right-rail > section.top-content-categories { display: none !important; }
+[data-net19-hidden] { display: none !important; }

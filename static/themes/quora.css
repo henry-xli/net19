@@ -1,16 +1,60 @@
-/* net19 handmade theme: Quora, 2019: Helvetica Neue/Arial interface, bold question titles, the deep #b92b27 red for
-   primary "Ask" buttons and the classic #3e78bb blue for "Login"/"Follow" style buttons, 3px corners instead of pills;
-   on the logged-out page the white login card with 3px fields and square-cornered buttons. */
-html { --n19-red: #b92b27; --n19-red-hover: #a82400; --n19-blue: #3e78bb; --n19-blue-hover: #2b6dad; --n19-text: #282829; --n19-link: #2b6dad;
-  --n19-font: "Helvetica Neue", Helvetica, Arial, sans-serif; }
-html[data-net19-mode="dark"] { --n19-red: #b92b27; --n19-red-hover: #c9302c; --n19-blue: #3e78bb; --n19-blue-hover: #5a8fd0; --n19-text: #d5d6d6; --n19-link: #6f95ff; }
+/* net19 handmade theme: Quora, 2019 (before the 2020 card redesign): a white header with the red #b92b27 "Quora" wordmark,
+   Home / Answer / Spaces / Notifications as gray labelled items (the active one red and underlined), a "Search Quora"
+   field and a red "Add Question" button; content on a white page in two columns, answers as a flat list separated by
+   hairlines instead of shadowed cards; bold serif question titles, answer text in Georgia; the author row (avatar, name,
+   credential, date) and the blue "Upvote · 1.2K" / downvote / share row; 3px corners instead of pills. Quora's own dark
+   mode (2021) keeps the same shapes on dark surfaces. */
+html { --n19-page: #fff; --n19-card: #fff; --n19-red: #b92b27; --n19-red-hover: #a82400; --n19-blue: #2b6dad; --n19-blue-hover: #1a5794; --n19-text: #282829;
+  --n19-text-2: #636466; --n19-meta: #939598; --n19-line: #e6e7e8; --n19-field: #fff; --n19-field-border: #ccc; --n19-link: #2b6dad; --n19-header: #fff;
+  --n19-font: "Helvetica Neue", Helvetica, Arial, sans-serif; --n19-serif: q_serif, Georgia, Times, "Times New Roman", serif; }
+html[data-net19-mode="dark"] { --n19-page: #181818; --n19-card: #181818; --n19-red: #d0413c; --n19-red-hover: #e0524d; --n19-blue: #5a8fd0; --n19-blue-hover: #7aa7de; --n19-text: #d5d6d6;
+  --n19-text-2: #b1b3b6; --n19-meta: #8e9092; --n19-line: #303030; --n19-field: #202020; --n19-field-border: #393839; --n19-link: #6f9fe0; --n19-header: #181818; }
 body, .q-text, .q-box, .q-flex, .q-inlineFlex, .q-click-wrapper, input, textarea, button { font-family: var(--n19-font) !important; }
-/* Question titles: bold, as in 2019 */
-.puppeteer_test_question_title, .puppeteer_test_question_title span { font-weight: 700 !important; }
+body { background: var(--n19-page) !important; }
+body :is(.qu-bg--gray_ultralight, .qu-bg--gray_ultralight_wash) { background-color: var(--n19-page) !important; }
+
+/* ---- Header: white bar, red wordmark, labelled gray items, the active one red with a red underline ------------------ */
+.dom_annotate_site_header, .spacing_log_header_main { background: var(--n19-header) !important; border-bottom: 1px solid var(--n19-line) !important; box-shadow: 0 1px 2px rgba(0,0,0,.04) !important; }
+.dom_annotate_site_header svg[class*="Logo" i], .dom_annotate_site_header a[href="/"] svg { color: var(--n19-red) !important; }
+.spacing_log_header_nav { background: transparent !important; box-shadow: none !important; border: 0 !important; justify-content: flex-start !important; }
+.spacing_log_header_nav a[href] { color: var(--n19-text-2) !important; border-radius: 0 !important; }
+.spacing_log_header_nav a[href]:hover { background: transparent !important; color: var(--n19-red) !important; }
+.spacing_log_header_nav [data-n19-label] { margin-left: 6px; font-size: 13px; font-weight: 500; white-space: nowrap; }
+/* "Following" (2020) was not a separate tab in 2019 */
+.spacing_log_header_nav a[href="/following"], .spacing_log_header_nav a[href$="quora.com/following"] { display: none !important; }
+.dom_annotate_site_header input { background: var(--n19-field) !important; border: 1px solid var(--n19-field-border) !important; border-radius: 3px !important; box-shadow: none !important; }
+.puppeteer_test_add_question_button, .puppeteer_test_search_add_question { background: var(--n19-red) !important; border-color: var(--n19-red) !important; color: #fff !important; border-radius: 3px !important; }
+.puppeteer_test_add_question_button *, .puppeteer_test_search_add_question * { color: #fff !important; }
+
+/* ---- Questions and answers ----------------------------------------------------------------------------------------- */
+.puppeteer_test_question_title, .puppeteer_test_question_title span { font-family: var(--n19-serif) !important; font-weight: 700 !important; color: var(--n19-text) !important; }
+.dom_annotate_question_header .puppeteer_test_question_title, .dom_annotate_question_header .puppeteer_test_question_title span { font-size: 24px !important; line-height: 1.25 !important; }
+.dom_annotate_question_header { background: var(--n19-page) !important; border-radius: 0 !important; box-shadow: none !important; }
+/* Answers and feed items: a flat list with hairlines, not shadowed rounded cards */
+:is([class*="dom_annotate_question_answer_item"], [class*="dom_annotate_multifeed_bundle"], [class*="dom_annotate_multifeed_home_feed"] > div) {
+  background: var(--n19-card) !important; border: 0 !important; border-bottom: 1px solid var(--n19-line) !important; border-radius: 0 !important; box-shadow: none !important; margin-bottom: 0 !important; }
+:is([class*="dom_annotate_question_answer_item"], [class*="dom_annotate_multifeed_bundle"]) .q-text:not(.puppeteer_test_question_title) p,
+:is([class*="dom_annotate_question_answer_item"], [class*="dom_annotate_multifeed_bundle"]) .q-text .q-relative > span { font-family: var(--n19-serif) !important; font-size: 15px !important; line-height: 1.6 !important; }
+.spacing_log_answer_header a, .spacing_log_answer_header .q-text { font-size: 13px !important; }
+.spacing_log_answer_header a[href*="/profile/"] { color: var(--n19-text) !important; font-weight: 700 !important; }
+.spacing_log_originally_answered_banner, .spacing_log_originally_answered_banner * { color: var(--n19-meta) !important; font-size: 13px !important; }
+/* The action row: blue "Upvote · 1.2K", then the downvote and share icons, no pills */
+.puppeteer_test_votable_upvote_button, .puppeteer_test_votable_upvote_button + * { border-radius: 3px !important; }
+.puppeteer_test_votable_upvote_button, .puppeteer_test_votable_upvote_button .q-text { color: var(--n19-blue) !important; }
+.puppeteer_test_votable_upvote_button.puppeteer_test_pressed, .puppeteer_test_votable_upvote_button.puppeteer_test_pressed * { color: var(--n19-blue) !important; font-weight: 700 !important; }
+.puppeteer_test_read_more_button { color: var(--n19-blue) !important; background: transparent !important; border: 0 !important; box-shadow: none !important; }
 /* Buttons: 3px corners instead of pills; blue ones in the 2019 blue, the primary red one in 2019 red */
 button[class*="puppeteer_test_button"], a[class*="puppeteer_test_button"], [role="button"][class*="qu-borderRadius--pill"], .qu-borderRadius--pill { border-radius: 3px !important; }
-.q-click-wrapper.qu-bg--blue { background-color: var(--n19-blue) !important; }
+.q-click-wrapper.qu-bg--blue, .qu-bg--blue[role="button"] { background-color: var(--n19-blue) !important; }
 .q-click-wrapper.qu-bg--blue:hover { background-color: var(--n19-blue-hover) !important; }
 [class*="qu-bg--blue"][class*="puppeteer_test_button"], button.qu-bg--red, .qu-bg--red[role="button"] { background-color: var(--n19-red) !important; }
+.qu-color--blue_dark, .qu-color--blue { color: var(--n19-link) !important; }
+/* Topic chips above the question: 2019's plain gray topic links */
+.dom_annotate_question_header .qu-borderRadius--pill, .dom_annotate_question_header [class*="qu-borderRadius--pill"] { border-radius: 2px !important; }
 /* Links in the 2019 blue */
 a.q-box[href*="/about/tos"], a.q-box[href*="/about/privacy"] { color: var(--n19-link) !important; }
+
+/* ---- Post-2019: Poe and the AI "Assistant" answers (2023), Quora+ badges and upsells (2021) --------------------------- */
+a[href*="poe.com"], [data-n19-ai] { display: none !important; }
+:is(div, span):has(> svg[class*="BrandBundleBadge"]) { display: none !important; }
+[data-net19-hidden] { display: none !important; }

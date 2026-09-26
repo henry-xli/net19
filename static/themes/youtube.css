@@ -149,7 +149,7 @@ ytd-watch-metadata h1, ytd-watch-metadata h1 yt-formatted-string { font-size: 18
 ytd-watch-metadata #top-row { display: contents !important; }
 ytd-watch-metadata #actions { grid-column: 1 / -1 !important; grid-row: 2 !important; justify-self: stretch !important; display: flex !important; justify-content: flex-end !important;
   margin: 0 !important; padding: 0 0 4px !important; border-bottom: 1px solid var(--n19-divider) !important; min-width: 0 !important; }
-ytd-watch-metadata #actions-inner { margin-left: auto !important; }
+ytd-watch-metadata #actions ytd-menu-renderer { justify-content: flex-end !important; margin: 0 !important; }
 ytd-watch-metadata #owner { grid-column: 1 / -1 !important; grid-row: 3 !important; display: flex !important; align-items: flex-start !important; margin: 16px 0 0 !important; min-width: 0 !important; width: auto !important; }
 ytd-watch-metadata #owner #subscribe-button { margin-left: auto !important; }
 ytd-watch-metadata #owner ytd-video-owner-renderer { flex: 1 1 auto !important; min-width: 0 !important; margin-right: 12px !important; }

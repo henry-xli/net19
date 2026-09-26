@@ -1,25 +1,99 @@
-/* net19 handmade theme: Instagram, 2019: a #fafafa page; logged out, a centered 935px row with the pictures at the
-   left and, at the right, a 350px white box in a 1px #dbdbdb border holding a gray 17px heading, small #fafafa fields
-   with 3px corners, a narrow #3897f0 "Log in" button with 4px corners, a plain #385185 "Log in with Facebook" link and a
-   small "Forgot password?", then "Create new account" under a rule; no Meta logo or big headline; logged in,
-   white boxes with 1px #dbdbdb borders and 1px corners; #003569 links; system fonts; no Reels, Threads or Meta AI entry
-   points. The dark variant keeps the same shapes on black. */
-html { --n19-fb: 56,81,133; --n19-page: 250,250,250; --n19-card: 255,255,255; --n19-text: 38,38,38; --n19-text-2: 142,142,142; --n19-border: 219,219,219; --n19-blue: 56,151,240; --n19-link: 0,55,107; }
-html[data-net19-mode="dark"] { --n19-fb: 120,150,220; --n19-page: 0,0,0; --n19-card: 18,18,18; --n19-text: 250,250,250; --n19-text-2: 168,168,168; --n19-border: 38,38,38; --n19-blue: 0,149,246; --n19-link: 224,241,255; }
-html:root, html.__ig-light-mode, html.__ig-dark-mode, html.__fb-light-mode, html.__fb-dark-mode {
-  --ig-colors-button-primary-background: var(--n19-blue) !important; --ig-colors-button-primary-background--pressed: var(--n19-blue) !important;
+/* net19 handmade theme: Instagram, 2019. A #fafafa page under a white bar with a hairline; white boxes in 1px #dbdbdb
+   borders with 3px corners; the feed is a column of 614px posts (32px round avatar and 14px/600 username on top, then
+   outline heart/comment/share/bookmark icons, bold likes, "username caption", gray "View all N comments", a 10px
+   uppercase gray time and an "Add a comment…" row with a blue "Post"); profiles have a 150px picture, a 28px light
+   username, the counts row, uppercase POSTS / TAGGED tabs with 12px icons over a grid of 293px squares with 28px gaps;
+   #3897f0 buttons with 4px corners, #003569 links, system fonts. No Reels, Threads, Notes, Meta AI, Shop, "Create"
+   or broadcast channels. Logged out: the centered 935px row, pictures left, a 350px white login box right. Instagram
+   had no dark mode on the web in 2019: the dark variant is the same layout on black. */
+html { --n19-fb: 56,81,133; --n19-page: 250,250,250; --n19-card: 255,255,255; --n19-text: 38,38,38; --n19-text-2: 142,142,142; --n19-border: 219,219,219; --n19-line: 239,239,239;
+  --n19-blue: 56,151,240; --n19-blue-press: 26,119,210; --n19-link: 0,53,105; --n19-hover: 250,250,250; --n19-red: 237,73,86; --n19-disabled: 178,223,252; }
+html[data-net19-mode="dark"] { --n19-fb: 120,150,220; --n19-page: 0,0,0; --n19-card: 18,18,18; --n19-text: 250,250,250; --n19-text-2: 168,168,168; --n19-border: 54,54,54; --n19-line: 38,38,38;
+  --n19-blue: 0,149,246; --n19-blue-press: 24,119,242; --n19-link: 224,241,255; --n19-hover: 26,26,26; --n19-red: 237,73,86; --n19-disabled: 0,76,125; }
+/* Instagram draws its surfaces from these variables ("r, g, b" triplets for --ig-*) */
+html:root, html.__ig-light-mode, html.__ig-dark-mode, html.__fb-light-mode, html.__fb-dark-mode, html .__ig-light-mode, html .__ig-dark-mode {
+  --ig-colors-button-primary-background: var(--n19-blue) !important; --ig-colors-button-primary-background--hover: var(--n19-blue) !important;
+  --ig-colors-button-primary-background--pressed: var(--n19-blue-press) !important; --ig-colors-button-primary-background--disabled: var(--n19-disabled) !important;
   --ig-colors-button-primary-link-text: var(--n19-blue) !important; --ig-colors-button-primary-link-text--hover: var(--n19-link) !important;
-  --primary-button-background: rgb(var(--n19-blue)) !important; --secondary-button-text: rgb(var(--n19-blue)) !important; --mwp-header-button-color: rgb(var(--n19-blue)) !important;
+  --ig-colors-button-primary-link-text--pressed: var(--n19-link) !important; --ig-colors-button-borderless-text: var(--n19-blue) !important;
+  --ig-colors-button-borderless-text--hover: var(--n19-link) !important; --ig-colors-button-borderless-text--pressed: var(--n19-link) !important; --ig-colors-link-text: var(--n19-link) !important;
+  --ig-primary-button: var(--n19-blue) !important; --ig-primary-button-hover: var(--n19-blue-press) !important;
+  --primary-button-background: rgb(var(--n19-blue)) !important; --primary-button-pressed: rgb(var(--n19-blue-press)) !important;
+  --secondary-button-text: rgb(var(--n19-blue)) !important; --mwp-header-button-color: rgb(var(--n19-blue)) !important; --blue-link: rgb(var(--n19-link)) !important;
+  --ig-primary-background: var(--n19-card) !important; --ig-secondary-background: var(--n19-page) !important; --ig-banner-background: var(--n19-card) !important;
+  --ig-elevated-background: var(--n19-card) !important; --ig-highlight-background: var(--n19-line) !important; --ig-elevated-highlight-background: var(--n19-line) !important;
+  --ig-dropdown-background: var(--n19-card) !important; --ig-menu-background-color: var(--n19-card) !important; --ig-menu-text-color: var(--n19-text) !important;
+  --ig-primary-text: var(--n19-text) !important; --ig-secondary-text: var(--n19-text-2) !important; --ig-primary-icon: var(--n19-text) !important; --ig-secondary-icon: var(--n19-text-2) !important;
+  --ig-link: var(--n19-link) !important; --ig-separator: var(--n19-border) !important; --ig-elevated-separator: var(--n19-border) !important; --ig-stroke: var(--n19-border) !important;
+  --ig-tablist-border: var(--n19-border) !important; --ig-tab-underline-active: var(--n19-text) !important; --ig-input-border-secondary: var(--n19-border) !important;
+  --ig-input-text-and-icon-primary: var(--n19-text) !important; --ig-input-text-and-icon-secondary: var(--n19-text-2) !important; --ig-hover-overlay: var(--n19-text), .04 !important;
+  --ig-secondary-button-background: var(--n19-card) !important; --ig-secondary-button: var(--n19-text) !important; --ig-secondary-button-hover: var(--n19-line) !important;
+  --ig-colors-button-secondary-background: var(--n19-card) !important; --ig-colors-button-secondary-background--hover: var(--n19-hover) !important; --ig-colors-button-secondary-text: var(--n19-text) !important;
+  --ig-badge: var(--n19-red) !important; --ig-error-or-destructive: var(--n19-red) !important; --ig-text-input-border-prism: var(--n19-border) !important;
+  --web-wash: rgb(var(--n19-page)) !important; --surface-background: rgb(var(--n19-card)) !important; --card-background: rgb(var(--n19-card)) !important;
+  --primary-text: rgb(var(--n19-text)) !important; --secondary-text: rgb(var(--n19-text-2)) !important; --divider: rgb(var(--n19-border)) !important;
   --button-corner-radius-large: 4px !important; --button-corner-radius-medium: 4px !important; --button-corner-radius: 4px !important; --input-border-radius: 3px !important;
-  --modal-border-radius: 4px !important; --igds-dialog-border-radius: 12px !important; --card-corner-radius: 3px !important; --ig-text-input-border-prism: var(--n19-border) !important;
-  --ig-primary-background: var(--n19-card) !important; --ig-secondary-background: var(--n19-page) !important; --ig-primary-text: var(--n19-text) !important;
-  --ig-secondary-text: var(--n19-text-2) !important; --ig-primary-button: var(--n19-blue) !important; --ig-link: var(--n19-link) !important;
-  --ig-separator: var(--n19-border) !important; --ig-elevated-separator: var(--n19-border) !important; --ig-stroke: var(--n19-border) !important;
+  --ig-input-border-radius: 3px !important; --modal-border-radius: 12px !important; --igds-dialog-border-radius: 12px !important; --igds-menu-border-radius: 4px !important;
+  --card-corner-radius: 3px !important;
 }
 body, button, input, textarea { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important; }
 main[role="main"] { background: rgb(var(--n19-page)) !important; }
-main article { background: rgb(var(--n19-card)) !important; border: 1px solid rgb(var(--n19-border)) !important; border-radius: 3px !important; }
-a[href="/reels/"], a[href*="threads.net"], a[href*="threads.com"], a[href*="/meta_ai"], [aria-label="Meta AI" i] { display: none !important; }
+
+/* ---- Post-2019 entry points: Reels (2020), Threads (2023), Meta AI (2024), Shop (2020), Create (2021), broadcast
+   channels (2023), Notes (2022), audio pages and the "Also from Meta" menu; the rest are marked by instagram.js ---- */
+a:is([href="/reels/"], [href^="/reels/?"], [href*="threads.net"], [href*="threads.com"], [href*="/meta_ai"], [href*="/ai/"], [href="/shop/"], [href*="/channel/"], [href*="/reels/audio/"]),
+[aria-label="Meta AI" i], [aria-label="Ask Meta AI" i], [data-n19-ig="later"] { display: none !important; }
+
+/* ---- The left navigation (2022) that replaced the top bar, marked "rail": a plain white column with a hairline,
+   black outline glyphs and 14px labels; no rounded hover pills ---- */
+[data-n19-ig="rail"] { background: rgb(var(--n19-card)) !important; border-right: 1px solid rgb(var(--n19-border)) !important; }
+[data-n19-ig="rail"] a, [data-n19-ig="rail"] [role="link"], [data-n19-ig="rail"] [role="button"] { border-radius: 4px !important; }
+[data-n19-ig="rail"] span { font-size: 14px !important; font-weight: 400 !important; color: rgb(var(--n19-text)) !important; }
+[data-n19-ig="rail"] svg:not([aria-label="Instagram"]) { color: rgb(var(--n19-text)) !important; }
+
+/* ---- The logged-out top bar: white, a hairline, a blue 4px "Log In" ---- */
+[data-n19-ig="bar"] { background: rgb(var(--n19-card)) !important; border-bottom: 1px solid rgb(var(--n19-border)) !important; box-shadow: none !important; }
+[data-n19-ig="bar"] a[href^="/accounts/login"] { border-radius: 4px !important; background: rgb(var(--n19-blue)) !important; color: #fff !important; font-weight: 600 !important; padding: 5px 9px !important; height: auto !important; }
+[data-n19-ig="bar"] a[href^="/accounts/emailsignup"] { color: rgb(var(--n19-blue)) !important; font-weight: 600 !important; }
+
+/* ---- Feed: 614px posts in a 1px border with 3px corners ---- */
+main article { background: rgb(var(--n19-card)) !important; border: 1px solid rgb(var(--n19-border)) !important; border-radius: 3px !important; margin-bottom: 60px !important; box-sizing: border-box !important; }
+[data-n19-ig="feedcol"] { width: 614px !important; max-width: 614px !important; min-width: 0 !important; }
+[data-n19-ig="feedcol"] main article, [data-n19-ig="feedcol"] article { width: 100% !important; max-width: none !important; }
+main article span a[href^="/"][role="link"] :is(span, h2, div):not(:has(*)) { font-weight: 600 !important; }
+[data-n19-ig="pad"] { padding-left: 16px !important; padding-right: 16px !important; box-sizing: border-box !important; }
+/* The time under a post: 10px uppercase gray ("2 HOURS AGO") */
+[data-n19-ig="stamp"], [data-n19-ig="stamp"] * { text-transform: uppercase !important; font-size: 10px !important; letter-spacing: .2px !important; color: rgb(var(--n19-text-2)) !important; }
+/* "Add a comment…": a row under a hairline, with a blue "Post" */
+[data-n19-ig="addrow"] { border-top: 1px solid rgb(var(--n19-line)) !important; min-height: 56px !important; box-sizing: border-box !important; border-radius: 0 !important; background: transparent !important; }
+[data-n19-ig="addrow"] textarea { font-size: 14px !important; }
+[data-n19-ig="post-button"], [data-n19-ig="post-button"] * { color: rgb(var(--n19-blue)) !important; font-weight: 600 !important; font-size: 14px !important; background: transparent !important; }
+/* Verified (and Meta Verified, 2023) badges stay on profile headers, where 2019 showed them, and go elsewhere */
+main article svg[aria-label="Verified"], [role="dialog"] article svg[aria-label="Verified"] { display: none !important; }
+
+/* ---- Profile: 150px picture, 28px light username, 16px counts, uppercase tabs over a grid of squares ---- */
+main header h2, main header h2 span, main header h1:only-of-type { font-size: 28px !important; line-height: 32px !important; font-weight: 300 !important; }
+main header ul li:not(:has(a[href*="/stories/"])), main header ul li:not(:has(a[href*="/stories/"])) span { font-size: 16px !important; }
+main header ul li:not(:has(a[href*="/stories/"])) span span, main header ul li:not(:has(a[href*="/stories/"])) span > :is(b, strong) { font-weight: 600 !important; }
+main header [role="button"]:not([aria-label]) { border-radius: 4px !important; }
+main [role="tablist"] { border-bottom: none !important; border-top: 1px solid rgb(var(--n19-border)) !important; justify-content: center !important; gap: 60px !important; }
+main [role="tablist"] > * { flex: 0 0 auto !important; }
+main [role="tablist"] a { border-bottom: none !important; border-top: 1px solid transparent !important; margin-top: -1px !important; height: 52px !important; box-sizing: border-box !important;
+  color: rgb(var(--n19-text-2)) !important; align-items: center !important; }
+main [role="tablist"] a[aria-selected="true"] { border-top-color: rgb(var(--n19-text)) !important; color: rgb(var(--n19-text)) !important; }
+main [role="tablist"] a svg { width: 12px !important; height: 12px !important; }
+main [role="tablist"] a:not([aria-selected="true"]) svg { color: rgb(var(--n19-text-2)) !important; }
+[data-n19-ig="tablabel"] { font-size: 12px !important; font-weight: 600 !important; letter-spacing: 1px !important; text-transform: uppercase !important; margin-left: 6px !important; line-height: 12px !important; }
+/* The grid (marked by instagram.js): rows of three 293px squares, 28px apart */
+[data-n19-ig="row"] { gap: 28px !important; margin-bottom: 28px !important; }
+[data-n19-ig="row"] > * { margin: 0 !important; flex: 1 1 0 !important; min-width: 0 !important; }
+[data-n19-ig="grid"] { gap: 28px !important; }
+[data-n19-ig="ratio"] { padding-bottom: 100% !important; height: auto !important; }
+[data-n19-ig="ratio-box"] { aspect-ratio: 1 / 1 !important; height: auto !important; }
+
+/* ---- Menus and dialogs: white, 1px hairlines, 4px menu corners ---- */
+[role="menu"], [role="listbox"] { border-radius: 4px !important; }
+
 /* Login form (#loginForm): 2019's small fields and narrow blue button */
 #loginForm input[name="username"], #loginForm input[name="password"], #loginForm input[name="email"], #loginForm input[name="pass"] {
   background: rgb(var(--n19-page)) !important; font-size: 12px !important; border-radius: 3px !important; }
@@ -28,7 +102,7 @@ a[href="/reels/"], a[href*="threads.net"], a[href*="threads.com"], a[href*="/met
 
 /* Logged-out home: the centered 2019 row, pictures left, the white login box right */
 [data-n19-ig="page"], [data-n19-ig="right"] { background: rgb(var(--n19-page)) !important; }
-[data-n19-ig="row"] { max-width: 935px !important; margin: 0 auto !important; padding: 32px 0 !important; justify-content: center !important; align-items: center !important; gap: 32px !important; min-height: 0 !important; }
+[data-n19-ig="row-login"] { max-width: 935px !important; margin: 0 auto !important; padding: 32px 0 !important; justify-content: center !important; align-items: center !important; gap: 32px !important; min-height: 0 !important; }
 [data-n19-ig="left"] { flex: 0 1 454px !important; min-width: 0 !important; }
 [data-n19-ig="left"] i[role="img"], [data-n19-ig="headline"] { display: none !important; }
 [data-n19-ig="left"] img { width: 100% !important; height: auto !important; margin: 0 !important; }
@@ -65,3 +139,4 @@ form#login_form div:has(> input[name="email"]) > label, form#login_form div:has(
 /* The footer sits on the same gray page, without a rule above it */
 [data-n19-ig="page"] footer[role="contentinfo"] { background: rgb(var(--n19-page)) !important; }
 [data-n19-ig="page"] hr { display: none !important; }
+footer a:is([href*="meta.ai"], [href*="threads."], [href*="/meta_ai"]) { display: none !important; }

@@ -1,10 +1,16 @@
-/* net19 handmade theme: Pinterest, 2019: system Helvetica type (no Pin Sans), #333 text, bold 16px labels on 8px-rounded
-   rectangular buttons (red #e60023 "Log in", gray #efefef "Sign up"), a gray #efefef search field with small 8px corners,
-   round icon buttons, cool neutral grays (#efefef) instead of today's warm stone grays, and pins with 8px corners.
-   The layout of today's pages is kept. Pinterest's own dark theme is followed. */
-html { --n19-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; --n19-text: #333; --n19-text-2: #8e8e8e;
-  --n19-red: #e60023; --n19-gray: #efefef; --n19-gray-hover: #e2e2e2; --n19-page: #fff; --n19-band: #f5f5f5; }
-html[data-net19-mode="dark"] { --n19-text: #efefef; --n19-text-2: #a5a5a5; --n19-red: #e60023; --n19-gray: #333; --n19-gray-hover: #444; --n19-page: #111; --n19-band: #1c1c1c; }
+/* net19 handmade theme: Pinterest, 2019. One white top bar: the red "P" on the left, then (signed in) Home and the
+   gray notification and message icons, a big rounded #efefef "Search" field filling the middle, and red "Log in" /
+   gray "Sign up" pills (signed out) or the account avatar (signed in). Below it the masonry grid of 236px pins with
+   16px corners and 8px gaps, titles in 600 14px shown on hover only, and a red #e60023 "Save" pill in the top right
+   corner on hover. The pin close-up is a white card with 32px corners and a soft shadow, the picture on the left and
+   the details on the right, with the red Save and the gray board select. Neutral 2019 grays (#efefef, #767676,
+   #333), system Helvetica type. Pinterest's dark theme (2023) is followed with a faithful dark palette. The left rail
+   (2023) becomes part of the top bar; Explore/Today, Shop, Create, Shuffles, collages, AI chips and labels are hidden. */
+html { --n19-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, "ヒラギノ角ゴ Pro W3", Arial, sans-serif;
+  --n19-text: #333; --n19-text-2: #767676; --n19-icon: #767676; --n19-red: #e60023; --n19-red-hover: #ad081b; --n19-gray: #efefef; --n19-gray-hover: #e2e2e2;
+  --n19-page: #fff; --n19-band: #f5f5f5; --n19-card-shadow: 0 1px 20px 0 rgba(0,0,0,.1); --n19-rail: 0px; }
+html[data-net19-mode="dark"] { --n19-text: #efefef; --n19-text-2: #a5a5a5; --n19-icon: #a5a5a5; --n19-red: #e60023; --n19-red-hover: #ff2f4b; --n19-gray: #333; --n19-gray-hover: #444;
+  --n19-page: #111; --n19-band: #1c1c1c; --n19-card-shadow: 0 1px 20px 0 rgba(0,0,0,.6); }
 html:root {
   --base-font-family-default-latin: var(--n19-font) !important; --font-family-default-latin: var(--n19-font) !important;
   --sema-font-family-body-100: var(--n19-font) !important; --sema-font-family-body-200: var(--n19-font) !important;
@@ -16,24 +22,84 @@ html:root {
   --sema-font-family-heading-600: var(--n19-font) !important; --sema-font-family-heading-700: var(--n19-font) !important;
   --sema-font-family-display-700: var(--n19-font) !important; --sema-font-family-display-800: var(--n19-font) !important;
   --sema-font-family-display-900: var(--n19-font) !important; --sema-font-family-display-1000: var(--n19-font) !important;
-  /* 2019 Gestalt: 8px rectangles for buttons and fields, 8px pins, circles for icon buttons */
-  --comp-button-rounding-sm: 8px !important; --comp-button-rounding-md: 8px !important; --comp-button-rounding-lg: 8px !important;
-  --comp-buttontoggle-rounding-sm: 8px !important; --comp-buttontoggle-rounding-md: 8px !important; --comp-buttontoggle-rounding-lg: 8px !important;
+  /* 2019 Gestalt: pill buttons, 16px pins and 8px fields in menus, circles for icon buttons, 32px close-up card */
+  --comp-button-rounding-sm: 24px !important; --comp-button-rounding-md: 24px !important; --comp-button-rounding-lg: 24px !important;
+  --comp-buttontoggle-rounding-sm: 24px !important; --comp-buttontoggle-rounding-md: 24px !important; --comp-buttontoggle-rounding-lg: 24px !important;
   --comp-iconbutton-rounding-xs: 999px !important; --comp-iconbutton-rounding-sm: 999px !important; --comp-iconbutton-rounding-md: 999px !important;
   --comp-iconbutton-rounding-lg: 999px !important; --comp-iconbutton-rounding-xl: 999px !important;
-  --comp-searchguide-rounding-container: 8px !important; --comp-tag-rounding-md: 8px !important; --comp-tag-rounding-lg: 8px !important;
-  --sema-rounding-300: 8px !important; --sema-rounding-400: 8px !important; --sema-rounding-500: 8px !important; --sema-rounding-600: 8px !important;
-  --sema-rounding-700: 8px !important; --sema-rounding-800: 8px !important;
-  --comp-popover-rounding-container: 8px !important; --comp-modal-rounding-container-desktop: 8px !important; --comp-toast-rounding-container: 8px !important;
+  --comp-searchguide-rounding-container: 24px !important; --comp-tag-rounding-md: 24px !important; --comp-tag-rounding-lg: 24px !important;
+  --comp-popover-rounding-container: 16px !important; --comp-modal-rounding-container-desktop: 32px !important; --comp-toast-rounding-container: 24px !important;
 }
-body { font-family: var(--n19-font) !important; color: var(--n19-text); }
-/* Buttons: bold 16px labels, the red and gray 2019 fills */
-button.G0yGFD, a.G0yGFD, [data-test-id*="button" i] > button { border-radius: 8px !important; }
-button.G0yGFD div, a.G0yGFD div { font-size: 16px !important; font-weight: 700 !important; }
-/* Search: a gray field with small corners */
-#searchBoxContainer > div, #searchBoxContainer > div > div { border-radius: 8px !important; }
-#searchBoxContainer input { font-size: 16px !important; }
-/* Headings: 2019's #333 Helvetica bold */
-h1, h2, h3 { color: var(--n19-text); letter-spacing: -.01em; }
-/* Pins and landing pictures: 8px corners */
-[data-test-id="pin"] img, [data-test-id="pinWrapper"] > div, [data-test-id="pinrep-image"] { border-radius: 8px !important; }
+body { font-family: var(--n19-font) !important; }
+
+/* ---- The top bar: the rail's icons laid out in a row at its left, the search field and buttons after them -------- */
+#VerticalNavContent { top: 0 !important; left: 0 !important; bottom: auto !important; height: 80px !important; width: auto !important; min-width: 0 !important;
+  background: transparent !important; border: 0 !important; box-shadow: none !important; padding: 0 0 0 12px !important; overflow: visible !important; }
+#VerticalNavContent > div, #VerticalNavContent > div > div, #VerticalNavContent > div > div > div:has([data-test-id="vertical-nav-icon"], [data-test-id="pinterest-logo-home-button"]) {
+  flex-direction: row !important; height: 80px !important; width: auto !important; min-height: 0 !important; align-items: center !important; justify-content: flex-start !important;
+  gap: 0 !important; padding: 0 !important; margin: 0 !important; overflow: visible !important; }
+#VerticalNavContent [data-test-id="vertical-nav-icon"], #VerticalNavContent [data-test-id="pinterest-logo-home-button"] { margin: 0 !important; }
+#VerticalNavContent [data-test-id="vertical-nav-icon"] > div[aria-hidden="true"], #VerticalNavContent div:has(> [data-test-id="vertical-nav-icon"]) > div[aria-hidden="true"] { display: none !important; }
+#VerticalNavContent svg { color: var(--n19-icon) !important; fill: var(--n19-icon) !important; }
+#VerticalNavContent [data-test-id="pinterest-logo-home-button"] svg { color: var(--n19-red) !important; fill: var(--n19-red) !important; }
+#VerticalNavContent a:hover > div, #VerticalNavContent button:hover > div { background: var(--n19-gray) !important; }
+/* The bar itself spans the page from the left edge, white, with the search field after the rail's icons */
+[data-n19-pin="header"] { left: 0 !important; width: 100% !important; right: 0 !important; background: var(--n19-page) !important; padding-left: var(--n19-rail) !important; box-sizing: border-box !important; }
+[data-n19-pin="offset"] { padding-left: 0 !important; margin-left: 0 !important; }
+/* Search: a big #efefef pill, "Search", a gray magnifier */
+#searchBoxContainer > div, #searchBoxContainer > div > div { border-radius: 24px !important; }
+#searchBoxContainer > div:has(input), #searchBoxContainer > div > div:has(input) { background: var(--n19-gray) !important; }
+#searchBoxContainer input { font-size: 16px !important; color: var(--n19-text) !important; }
+#searchBoxContainer input::placeholder { color: var(--n19-text-2) !important; }
+#searchBoxContainer svg { color: var(--n19-icon) !important; fill: var(--n19-icon) !important; }
+/* Signed out: "Log in" red, "Sign up" gray (today's colors are the other way round) */
+[data-test-id="login-button"] button, [data-test-id="signup-button"] button { border-radius: 24px !important; min-height: 40px !important; }
+[data-test-id="login-button"] button { background: var(--n19-red) !important; }
+[data-test-id="login-button"] button * { color: #fff !important; }
+[data-test-id="signup-button"] button { background: var(--n19-gray) !important; }
+[data-test-id="signup-button"] button * { color: var(--n19-text) !important; }
+:is([data-test-id="login-button"], [data-test-id="signup-button"]) button div { font-size: 16px !important; font-weight: 700 !important; }
+
+/* ---- The grid: 236px pins with 16px corners; titles and the red Save only on hover ------------------------------ */
+[data-test-id="pinrep-image"], [data-test-id="pin"] [data-test-id="pin-visual-wrapper"], [data-test-id="pinWrapper"] img, [data-test-id="gated-pin-image"] img { border-radius: 16px !important; }
+[data-test-id="pin"] [data-test-id="pinrep-footer"], [data-test-id="pin"] [data-test-id="pin-card-title-container"] { opacity: 0 !important; transition: opacity .1s !important; }
+[data-test-id="pin"]:hover :is([data-test-id="pinrep-footer"], [data-test-id="pin-card-title-container"]), [data-test-id="pin"]:focus-within :is([data-test-id="pinrep-footer"], [data-test-id="pin-card-title-container"]) { opacity: 1 !important; }
+[data-test-id="pinrep-footer-organic-title"], [data-test-id="pinrep-footer-organic-title"] * { font-size: 14px !important; font-weight: 600 !important; color: var(--n19-text) !important; }
+[data-test-id="pin-card-hover-overlay"] { background: rgba(0,0,0,.2) !important; border-radius: 16px !important; }
+[data-test-id="pin-card-hover-overlay-gradient-full"], [data-test-id="pin-card-hover-overlay-top-wash"] { background: none !important; }
+:is([data-test-id="pin-save-button"], [data-test-id="better-save"], [data-test-id="one-tap-save"], [data-test-id="persistent-one-click-save"]) button,
+:is([data-test-id="pin-save-button"], [data-test-id="better-save"]) :is([role="button"], a) { background: var(--n19-red) !important; border-radius: 24px !important; }
+:is([data-test-id="pin-save-button"], [data-test-id="better-save"], [data-test-id="one-tap-save"]) :is(button, [role="button"]) :is(div, span) { color: #fff !important; font-weight: 700 !important; font-size: 16px !important; }
+:is([data-test-id="pin-save-button"], [data-test-id="better-save"]) :is(button, [role="button"]):hover { background: var(--n19-red-hover) !important; }
+[data-test-id="PinBetterSaveDropdown"] :is(button, [role="button"]) { border-radius: 24px !important; }
+[data-test-id="PinBetterSaveDropdown"] :is(div, span) { font-weight: 700 !important; }
+
+/* ---- The pin close-up: a white 32px card with a soft shadow, the picture left and the details right ------------- */
+[data-test-id="CloseupMainPin"] > div { border: 0 !important; border-radius: 32px !important; box-shadow: var(--n19-card-shadow) !important; background: var(--n19-page) !important; }
+[data-test-id="CloseupMainPin"] > div > div { border: 0 !important; border-radius: 32px !important; }
+[data-test-id="CloseupMainPin"] [data-test-id="pin-closeup-image"], [data-test-id="CloseupMainPin"] [data-test-id="closeup-image"] img { border-radius: 32px 0 0 32px !important; }
+[data-test-id="CloseupDetails"] [data-test-id="pin-title"], [data-test-id="CloseupDetails"] [data-test-id="pin-title"] * { font-size: 28px !important; line-height: 1.2 !important; font-weight: 700 !important; color: var(--n19-text) !important; letter-spacing: normal !important; }
+[data-test-id="CloseupDetails"] [data-test-id="pin-action-bar-container"] svg { color: var(--n19-icon) !important; fill: var(--n19-icon) !important; }
+[data-test-id="CloseupDetails"] [data-test-id="creator-profile-name"] :is(div, span) { font-weight: 600 !important; }
+[data-test-id="CloseupDetails"] [data-test-id="board-dropdown-select-button"], [data-test-id="CloseupDetails"] [data-test-id="PinBetterSaveDropdown"] :is(button, [role="button"]) { background: var(--n19-gray) !important; }
+
+/* ---- Text: 2019's #333 on neutral grays ---------------------------------------------------------------------------- */
+h1, h2, h3 { color: var(--n19-text); letter-spacing: normal; }
+
+/* ---- Not in 2019 ----------------------------------------------------------------------------------------------- */
+/* Rail entries: Explore / Today (2020), Shop (2022), Create (idea pins, 2021), Ask Pinterest (AI, 2025), the tuner,
+   the boards dock and recently viewed dock (2024), the floating navigation button */
+#VerticalNavContent [data-test-id="vertical-nav-icon"]:has(:is([data-test-id="ideas-tab"], [data-test-id="today-tab"], [data-test-id="shopping-tab"], [data-test-id="create-tab"],
+  [data-test-id="ask-pinterest-tab"], [data-test-id="tuner-tab"], [data-test-id="dock-tab"], [data-test-id="boards-tab"], [data-test-id="your-boards-tab"])),
+#VerticalNavContent div:has(> [data-test-id="vertical-nav-icon"] :is([data-test-id="ideas-tab"], [data-test-id="today-tab"], [data-test-id="shopping-tab"], [data-test-id="create-tab"], [data-test-id="ask-pinterest-tab"], [data-test-id="tuner-tab"], [data-test-id="dock-tab"])):not(:has(:is([data-test-id="home-tab"], [data-test-id="updates-tab"], [data-test-id="messages-tab"], [data-test-id="pinterest-logo-home-button"], [data-test-id="vertical-nav-more-options-button"]))),
+:is([data-test-id="ideas-tab"], [data-test-id="today-tab"], [data-test-id="shopping-tab"], [data-test-id="create-tab"], [data-test-id="ask-pinterest-tab"], [data-test-id="tuner-tab"], [data-test-id="dock-tab"]),
+[data-test-id="ask-pinterest-promo-card"], [data-test-id="header-create-button"], [data-test-id="header-business-button"], [data-test-id="floating-recently-viewed-pins"],
+[data-test-id="navigation-fab-container"], [data-test-id="navigation-fab"], [data-test-id="dock-scroll-container"], [data-test-id="dock-recently-viewed-row"],
+/* AI-generated pin borders and washes (2024), collages and Shuffles (2022/2023), idea-pin creation, trending "Predicts"
+   bubbles and Today suggestions in search (2020+), the "Less AI" and other AI refine chips (marked by pinterest.js) */
+[data-test-id="pinRepGenAiBorder"], [data-test-id="pinRepGenAiWash"], [data-test-id="stacked-collage-display-card"], [data-test-id="triple-preview-display-card"],
+[data-test-id="search-suggestion-today-bubble"], [data-test-id="search-story-suggestions-container"], [data-test-id="flashlight-story-action-pill"],
+a[href*="/shuffles"], a[href^="https://shuffles"], a[href*="/collage"], [data-test-id="one-bar-module-32"],
+/* Reactions on a pin (2021), the "Download image" upsell button is kept; the Unauth app upsell and QR banners */
+[data-test-id="react-button"], [data-test-id="reaction-count"], [data-test-id="UnauthAppUpsellButton"], [data-test-id="floating-app-upsell"], [data-test-id="qr-code-banner"],
+[data-n19-pin="later"] { display: none !important; }
